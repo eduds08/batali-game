@@ -5,6 +5,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <memory>
 
 class TexturesManager
 {
@@ -12,8 +13,8 @@ public:
 	TexturesManager();
 	~TexturesManager();
 
-	static sf::Texture& loadAndGetTexture(const std::string& textureName, const std::string& texturePath);
+	std::shared_ptr<sf::Texture> loadAndGetTexture(const std::string& textureName, const std::string& texturePath);
 
 private:
-	static std::map<std::string, sf::Texture*> texturesMap;
+	std::map<std::string, std::shared_ptr<sf::Texture>> texturesMap{};
 };

@@ -27,6 +27,7 @@ public:
 
 private:
 	sf::Sprite m_sprite{};
+	TexturesManager m_texturesManager{};
 
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };

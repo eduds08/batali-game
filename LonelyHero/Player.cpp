@@ -5,7 +5,7 @@ Player::Player()
 	, m_isRunning{ false }
 	, m_facingRight{ 1 }
 {
-	m_sprite.setTexture(TexturesManager::loadAndGetTexture("playerIdle", "./_Idle.png"));
+	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture("playerIdle", "./_Idle.png"));
 
 	m_sprite.setPosition(300.f, 0.f);
 	
@@ -46,18 +46,18 @@ void Player::update()
 
 	if (m_isRunning)
 	{
-		if (m_sprite.getTexture() == &TexturesManager::loadAndGetTexture("playerIdle", "./_Idle.png"))
+		if (m_sprite.getTexture() == m_texturesManager.loadAndGetTexture("playerIdle", "./_Idle.png").get())
 		{
 			textureFrameCount = 0;
-			m_sprite.setTexture(TexturesManager::loadAndGetTexture("playerRunning", "./_Run.png"));
+			m_sprite.setTexture(*m_texturesManager.loadAndGetTexture("playerRunning", "./_Run.png"));
 		}
 	}
 	else
 	{
-		if (m_sprite.getTexture() == &TexturesManager::loadAndGetTexture("playerRunning", "./_Run.png"))
+		if (m_sprite.getTexture() == m_texturesManager.loadAndGetTexture("playerRunning", "./_Run.png").get())
 		{
 			textureFrameCount = 0;
-			m_sprite.setTexture(TexturesManager::loadAndGetTexture("playerIdle", "./_Idle.png"));
+			m_sprite.setTexture(*m_texturesManager.loadAndGetTexture("playerIdle", "./_Idle.png"));
 		}
 	}
 
