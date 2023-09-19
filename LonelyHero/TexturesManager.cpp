@@ -1,13 +1,5 @@
 #include "TexturesManager.h"
 
-TexturesManager::TexturesManager()
-{
-}
-
-TexturesManager::~TexturesManager()
-{
-}
-
 std::shared_ptr<sf::Texture> TexturesManager::loadAndGetTexture(const std::string& textureName, const std::string& texturePath)
 {
 	std::map<std::string, std::shared_ptr<sf::Texture>>::iterator mapIterator;

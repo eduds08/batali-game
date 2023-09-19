@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include <iostream>
 #include <map>
 #include <string>
@@ -10,8 +9,8 @@
 class TexturesManager
 {
 public:
-	TexturesManager();
-	~TexturesManager();
+	TexturesManager() {};
+	~TexturesManager() {};
 
 	std::shared_ptr<sf::Texture> loadAndGetTexture(const std::string& textureName, const std::string& texturePath);
 

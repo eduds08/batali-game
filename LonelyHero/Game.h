@@ -12,6 +12,11 @@ public:
 	Game();
 	~Game();
 
+	void init();
+	void update();
+	void render();
+	void run();
+
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(600, 600), "Lonely Hero" };
 	
