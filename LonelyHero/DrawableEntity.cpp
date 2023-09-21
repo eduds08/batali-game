@@ -1,14 +1,11 @@
 #include "DrawableEntity.h"
 #include "Game.h"
 
-DrawableEntity::DrawableEntity(int frameWidth, int frameHeight, int frameAmount) 
+DrawableEntity::DrawableEntity(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime)
 	: m_frameWidth{ frameWidth }
 	, m_frameHeight{ frameHeight }
 	, m_frameAmount{ frameAmount }
-{
-}
-
-DrawableEntity::~DrawableEntity()
+	, m_switchAnimationTime{ switchAnimationTime }
 {
 }
 
@@ -29,14 +26,11 @@ void DrawableEntity::setSpriteSettings(float xCoord, float yCoord, float scaleX,
 
 void DrawableEntity::updateAnimation(float& deltaTime)
 {
-	float switchTime = 0.1f;
-	m_totalTime += deltaTime;
+	m_totalAnimationTime += deltaTime;
 
-	if (m_totalTime >= switchTime)
+	if (m_totalAnimationTime >= m_switchAnimationTime)
 	{
-		m_totalTime -= switchTime;
-		AnimationManager::animateSprite(m_sprite, m_frameAmount, m_frameWidth, m_frameHeight, m_textureFrameCount);
+		m_totalAnimationTime -= m_switchAnimationTime;
+		AnimationManager::animateSprite(m_sprite, m_frameAmount, m_frameWidth, m_frameHeight, m_frameCount);
 	}
-
-	//AnimationManager::animateSprite(m_sprite, m_frameAmount, m_frameWidth, m_frameHeight, m_textureFrameCount);
 }

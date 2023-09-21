@@ -15,7 +15,7 @@ void Game::init()
 
 	for (int i = 0; i < 600; i += 60)
 	{
-		Ground tmp_ground{ 60, 60, 1, float(i), 540.f };
+		Ground tmp_ground{ 60, 60, 1, 0.1f, float(i), 540.f };
 
 		grounds.push_back(tmp_ground);
 		groundsBound.push_back(tmp_ground.getBounds());
@@ -31,13 +31,7 @@ void Game::update()
 	for (auto const& groundBound : groundsBound)
 	{
 		m_player.checkCollisionWith(groundBound);
-		if (m_player.onFloor == true)
-		{
-			break;
-		}
 	}
-
-	//m_player.updateOnFloor(m_deltaTime);
 }
 
 void Game::render()
@@ -59,10 +53,10 @@ void Game::run()
 	while (m_window.isOpen())
 	{		
 		m_deltaTime = Game::clock.restart().asSeconds();
-		/*if (m_deltaTime > 1.f / 60.f)
+		if (m_deltaTime > 1.f / 60.f)
 		{
 			m_deltaTime = 1.f / 60.f;
-		}*/
+		}
 
 		while (m_window.pollEvent(m_event))
 		{

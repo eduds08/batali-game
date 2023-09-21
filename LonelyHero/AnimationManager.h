@@ -5,9 +5,8 @@
 class AnimationManager
 {
 public:
-	AnimationManager();
-	~AnimationManager();
+	AnimationManager() {}
+	~AnimationManager() {}
 
 	static void animateSprite(sf::Sprite& sprite, int framesAmount, int width, int height, int& count);
 };
-

@@ -1,13 +1,5 @@
 #include "AnimationManager.h"
 
-AnimationManager::AnimationManager()
-{
-}
-
-AnimationManager::~AnimationManager()
-{
-}
-
 void AnimationManager::animateSprite(sf::Sprite& sprite, int framesAmount, int width, int height, int& count)
 {
 	if (count == framesAmount)

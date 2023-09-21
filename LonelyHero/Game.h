@@ -27,5 +27,5 @@ private:
 
 	float m_deltaTime{};
 
-	Player m_player{ 120, 80, 10 };
+	Player m_player{ 120, 80, 10, 0.1f };
 };
