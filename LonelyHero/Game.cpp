@@ -58,11 +58,11 @@ void Game::run()
 {
 	while (m_window.isOpen())
 	{		
-		m_deltaTime = Game::clock.restart().asMilliseconds();
-		if (m_deltaTime > 1.f / 60.f)
+		m_deltaTime = Game::clock.restart().asSeconds();
+		/*if (m_deltaTime > 1.f / 60.f)
 		{
 			m_deltaTime = 1.f / 60.f;
-		}
+		}*/
 
 		while (m_window.pollEvent(m_event))
 		{

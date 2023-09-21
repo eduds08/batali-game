@@ -15,22 +15,17 @@ void Player::move(float& deltaTime)
 {
 	m_velocityX = 0.f;
 
-	if (onFloor)
-		m_velocityY = 0.f;
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
 	{
 		m_isRunning = true;
 		m_facingRight = -1;
-
-		m_velocityX = -240.f * deltaTime;
+		m_velocityX -= 240.f;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
 	{
 		m_isRunning = true;
 		m_facingRight = 1;
-
-		m_velocityX = 240.f * deltaTime;
+		m_velocityX += 240.f;
 	}
 	else
 	{
@@ -40,13 +35,13 @@ void Player::move(float& deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && onFloor == true)
 	{
 		m_isJumping = true;
+		m_velocityY =  -1*sqrt(2.f * 981.f * 200.f);
 	}
 
-	if(m_isJumping)
-		m_velocityY = m_velocityY - 981.f * 0.5f * deltaTime - 10.f;
+	//m_velocityY += 981.f;
 
 	if (!onFloor)
-		m_velocityY = m_velocityY + 981.f * 0.5f * deltaTime + 11.f;
+		m_velocityY += 981.f;
 
 	x = m_velocityX;
 	y = m_velocityY;
@@ -57,7 +52,7 @@ void Player::move(float& deltaTime)
 		y = 460.1f - m_sprite.getPosition().y;
 	}
 
-	m_sprite.setPosition(m_sprite.getPosition().x + x, m_sprite.getPosition().y + y);
+	m_sprite.setPosition(m_sprite.getPosition().x + x * deltaTime, m_sprite.getPosition().y + y * deltaTime);
 	//m_sprite.move(x, y);
 }
 
