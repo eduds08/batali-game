@@ -2,9 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <iostream>
 #include "Player.h"
-#include "AnimationManager.h"
+#include "Ground.h"
 
 class Game
 {
@@ -17,16 +16,16 @@ public:
 	void render();
 	void run();
 
+	std::vector<Ground> grounds{};
+	std::vector<sf::FloatRect> groundsBound{};
+
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(600, 600), "Lonely Hero" };
 	
+	sf::Clock clock{};
 	sf::Event m_event{};
-	
-	static sf::Clock clock;
-	
-	sf::Time m_elapsed{};
 
-	Player m_player{};
+	float m_deltaTime{};
 
-	
+	Player m_player{ 120, 80, 10 };
 };

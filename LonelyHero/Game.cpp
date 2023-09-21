@@ -1,9 +1,8 @@
 #include "Game.h"
 
-sf::Clock Game::clock{};
-
 Game::Game()
 {
+	m_window.setVerticalSyncEnabled(true);
 	init();
 }
 
@@ -13,48 +12,32 @@ Game::~Game()
 
 void Game::init()
 {
-	sf::Texture dirtTexture{};
-	dirtTexture.loadFromFile("./dirt.png");
-	sf::Sprite dirt{ dirtTexture };
-	std::vector<sf::Sprite> dirts{};
-	std::vector<sf::FloatRect> dirtsBound{};
-	std::vector<sf::Sprite>::iterator it;
-	std::vector<sf::FloatRect>::iterator it2;
 
-	for (int i = 0; i < 600; i += 10)
+	for (int i = 0; i < 600; i += 60)
 	{
-		dirt.setPosition(float(i), 540.f);
-		dirts.push_back(dirt);
-		dirtsBound.push_back(dirt.getGlobalBounds());
+		Ground tmp_ground{ 60, 60, 1, float(i), 540.f };
+
+		grounds.push_back(tmp_ground);
+		groundsBound.push_back(tmp_ground.getBounds());
 	}
+
 	run();
 }
 
 void Game::update()
 {
-	m_player.update();
+	m_player.update(m_deltaTime);
 
-	m_elapsed = Game::clock.getElapsedTime();
-
-	if (m_elapsed.asSeconds() > 0.15f)
+	for (auto const& groundBound : groundsBound)
 	{
-		AnimationManager::animateSprite(m_player.getSprite(), m_player.frameAmount, m_player.frameWidth, m_player.frameHeight, m_player.textureFrameCount);
-		Game::clock.restart();
-	}
-
-	m_player.onFloor = false;
-	/*for (it2 = dirtsBound.begin(); it2 != dirtsBound.end(); it2++)
-	{
-		if (m_player.getSprite().getGlobalBounds().intersects(*it2))
+		m_player.checkCollisionWith(groundBound);
+		if (m_player.onFloor == true)
 		{
-			m_player.onFloor = true;
+			break;
 		}
-	}*/
-
-	if (!m_player.onFloor)
-	{
-		m_player.getSprite().move(0.f, 9.81f * 0.07f);
 	}
+
+	//m_player.updateOnFloor(m_deltaTime);
 }
 
 void Game::render()
@@ -63,10 +46,10 @@ void Game::render()
 
 	m_window.draw(m_player.getSprite());
 
-	/*for (it = dirts.begin(); it != dirts.end(); it++)
+	for (auto const& ground : grounds)
 	{
-		m_window.draw(*it);
-	}*/
+		m_window.draw(ground.getSprite());
+	}
 
 	m_window.display();
 }
@@ -74,7 +57,13 @@ void Game::render()
 void Game::run()
 {
 	while (m_window.isOpen())
-	{
+	{		
+		m_deltaTime = Game::clock.restart().asMilliseconds();
+		if (m_deltaTime > 1.f / 60.f)
+		{
+			m_deltaTime = 1.f / 60.f;
+		}
+
 		while (m_window.pollEvent(m_event))
 		{
 			if (m_event.type == sf::Event::Closed)

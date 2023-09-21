@@ -1,19 +1,18 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <map>
 #include <string>
 #include <memory>
+#include <unordered_map>
 
-class TexturesManager
+class TextureManager
 {
 public:
-	TexturesManager() {};
-	~TexturesManager() {};
+	TextureManager() {};
+	~TextureManager() {};
 
 	std::shared_ptr<sf::Texture> loadAndGetTexture(const std::string& textureName, const std::string& texturePath);
 
 private:
-	std::map<std::string, std::shared_ptr<sf::Texture>> texturesMap{};
+	std::unordered_map<std::string, std::shared_ptr<sf::Texture>> texturesMap{};
 };
