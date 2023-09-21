@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime)
-	: DrawableEntity(frameWidth, frameHeight, frameAmount, switchAnimationTime)
+	: AnimatedEntity(frameWidth, frameHeight, frameAmount, switchAnimationTime)
 {
 	setSpriteTexture("playerIdle", "./_Idle.png");
 	setSpriteSettings(300.f, 0.f, 2.f, 2.f);

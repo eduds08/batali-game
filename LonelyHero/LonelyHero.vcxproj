@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedEntity.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedEntity.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="DrawableEntity.h" />
     <ClInclude Include="Game.h" />

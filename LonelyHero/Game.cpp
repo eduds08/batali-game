@@ -15,7 +15,7 @@ void Game::init()
 
 	for (int i = 0; i < 600; i += 60)
 	{
-		Ground tmp_ground{ 60, 60, 1, 0.1f, float(i), 540.f };
+		Ground tmp_ground{ 60, 60, float(i), 540.f };
 
 		grounds.push_back(tmp_ground);
 	}

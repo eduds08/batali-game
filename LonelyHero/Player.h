@@ -1,8 +1,8 @@
 #pragma once
 
-#include "DrawableEntity.h"
+#include "AnimatedEntity.h"
 
-class Player : public DrawableEntity
+class Player : public AnimatedEntity
 {
 public:
 	Player(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime);
