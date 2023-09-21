@@ -6,7 +6,7 @@ class AnimatedEntity : public DrawableEntity
 {
 public:
 	AnimatedEntity(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime);
-	~AnimatedEntity() {}
+	virtual ~AnimatedEntity() = default;
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
 

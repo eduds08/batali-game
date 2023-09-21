@@ -7,7 +7,7 @@ class DrawableEntity
 {
 public:
 	DrawableEntity(int frameWidth, int frameHeight);
-	~DrawableEntity() {}
+	virtual ~DrawableEntity() = default;
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
 	void setSpriteSettings(float xCoord, float yCoord, float scaleX = 1.f, float scaleY = 1.f);

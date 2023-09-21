@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game()
 {
@@ -13,9 +14,9 @@ Game::~Game()
 void Game::init()
 {
 
-	for (int i = 0; i < 600; i += 60)
+	for (int i = 30; i < 600; i += 60)
 	{
-		Ground tmp_ground{ 60, 60, float(i), 540.f };
+		Ground tmp_ground{ 60, 60, float(i), 570.f };
 
 		grounds.push_back(tmp_ground);
 	}
@@ -25,12 +26,15 @@ void Game::init()
 
 void Game::update()
 {
-	m_player.update(m_deltaTime);
-
 	for (auto const& ground : grounds)
 	{
-		m_player.checkCollisionWith(ground.getBounds());
+		if (isColliding(ground))
+		{
+			m_player.setCanJump(true);
+		}
 	}
+
+	m_player.update(m_deltaTime);
 }
 
 void Game::render()
@@ -64,4 +68,51 @@ void Game::run()
 		update();
 		render();
 	}
+}
+
+
+
+bool Game::isColliding(const Ground& ground)
+{
+	float groundHalfSizeX = ground.getBounds().getSize().x / 2.f;
+	float groundHalfSizeY = ground.getBounds().getSize().y / 2.f;
+	float groundPositionX = ground.getBounds().getPosition().x + groundHalfSizeX;
+	float groundPositionY = ground.getBounds().getPosition().y + groundHalfSizeY;
+
+	float playerHalfSizeX = m_player.getBounds().getSize().x / 2.f;
+	float playerHalfSizeY = m_player.getBounds().getSize().y / 2.f;
+	float playerPositionX = m_player.getBounds().getPosition().x + playerHalfSizeX;
+	float playerPositionY = m_player.getBounds().getPosition().y + playerHalfSizeY;
+
+	float deltaX = groundPositionX - playerPositionX;
+	float deltaY = groundPositionY - playerPositionY;
+
+	float intersectX = abs(deltaX) - (groundHalfSizeX + playerHalfSizeX);
+	float intersectY = abs(deltaY) - (groundHalfSizeY + playerHalfSizeY);
+
+	if (intersectX < 0.f && intersectY < 0.f) {
+
+		if (intersectX > intersectY) {
+			if (deltaX > 0.f) {
+				m_player.collisionDirectionX = 1.0f;
+			}
+			else {
+				m_player.collisionDirectionX = -1.0f;
+			}
+			m_player.collisionDirectionY = 0.f;
+		}
+		else {
+			if (deltaY > 0.f) {
+				m_player.collisionDirectionY = 1.0f;
+			}
+			else {
+				m_player.collisionDirectionY = -1.0f;
+			}
+			m_player.collisionDirectionX = 0.f;
+		}
+
+		return true;
+	}
+
+	return false;
 }

@@ -18,6 +18,8 @@ public:
 
 	std::vector<Ground> grounds{};
 
+	bool isColliding(const Ground& ground);
+
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(600, 600), "Lonely Hero" };
 	
