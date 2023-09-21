@@ -17,7 +17,6 @@ public:
 	void run();
 
 	std::vector<Ground> grounds{};
-	std::vector<sf::FloatRect> groundsBound{};
 
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(600, 600), "Lonely Hero" };
