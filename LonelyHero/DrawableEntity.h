@@ -16,8 +16,8 @@ public:
 	sf::RectangleShape& getShape() { return m_shape; }
 	const sf::Sprite& getSprite() const { return m_sprite; }
 
-	const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }
-	const sf::Vector2f& getSize() const { return m_shape.getSize(); }
+	//virtual const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }
+	//virtual const sf::Vector2f& getSize() const { return m_shape.getSize(); }
 
 protected:
 	sf::RectangleShape m_shape{};

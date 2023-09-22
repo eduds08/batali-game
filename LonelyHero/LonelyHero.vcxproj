@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedEntity.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="ColliderEntity.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -145,11 +146,16 @@
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.h" />
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="ColliderEntity.h" />
     <ClInclude Include="DrawableEntity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TextureManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LonelyHero.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -40,7 +40,11 @@ void Game::update()
 	{
 		if (m_player.isColliding(ground.getShape()))
 		{
-			m_player.onCollision();
+			m_player.onCollision(m_player.getVelocityX(), m_player.getVelocityY());
+			if (m_player.getCollisionDirection().y > 0.f)
+			{
+				m_player.setCanJump(true);
+			}
 		}
 	}
 }
