@@ -24,12 +24,12 @@ bool ColliderEntity::isColliding(sf::RectangleShape& shape)
 
 			if (deltaX > 0.f)
 			{
-				walk(intersectX, 0.f);
+				walk(sf::Vector2f{ intersectX, 0.f });
 				m_collisionDirection.x = 1.0f;
 			}
 			else
 			{
-				walk(-intersectX, 0.f);
+				walk(sf::Vector2f{ -intersectX, 0.f });
 				m_collisionDirection.x = -1.0f;
 			}
 			m_collisionDirection.y = 0.f;
@@ -38,12 +38,12 @@ bool ColliderEntity::isColliding(sf::RectangleShape& shape)
 		{
 			if (deltaY > 0.f)
 			{
-				walk(0.f, intersectY);
+				walk(sf::Vector2f{ 0.f, intersectY });
 				m_collisionDirection.y = 1.0f;
 			}
 			else
 			{
-				walk(0.f, -intersectY);
+				walk(sf::Vector2f{ 0.f, -intersectY });
 				m_collisionDirection.y = -1.0f;
 			}
 			m_collisionDirection.x = 0.f;
@@ -55,28 +55,28 @@ bool ColliderEntity::isColliding(sf::RectangleShape& shape)
 	return false;
 }
 
-//void ColliderEntity::onCollision(sf::Vector2f& velocity)
-//{
-//	if (m_collisionDirection.x != 0.f)
-//	{
-//		velocity.x = 0.f;
-//	}
-//	if (m_collisionDirection.y != 0.f)
-//	{
-//		velocity.y = 0.f;
-//		
-//	}
-//}
-
-void ColliderEntity::onCollision(float& velocityX, float& velocityY)
+void ColliderEntity::onCollision(sf::Vector2f& velocity)
 {
 	if (m_collisionDirection.x != 0.f)
 	{
-		velocityX = 0.f;
+		velocity.x = 0.f;
 	}
 	if (m_collisionDirection.y != 0.f)
 	{
-		velocityY = 0.f;
-
+		velocity.y = 0.f;
+		
 	}
 }
+
+//void ColliderEntity::onCollision(float& velocityX, float& velocityY)
+//{
+//	if (m_collisionDirection.x != 0.f)
+//	{
+//		velocityX = 0.f;
+//	}
+//	if (m_collisionDirection.y != 0.f)
+//	{
+//		velocityY = 0.f;
+//
+//	}
+//}

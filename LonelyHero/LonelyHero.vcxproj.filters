@@ -65,16 +65,8 @@
     <ClInclude Include="AnimatedEntity.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="ColliderEntity.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="LonelyHero.rc">
-      <Filter>Arquivos de Recurso</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -10,14 +10,11 @@ public:
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
 
-	void setShapeSettings(float positionX, float positionY);
+	void setShapeSettings(sf::Vector2f position);
 	void setSpriteSettings();
 
 	sf::RectangleShape& getShape() { return m_shape; }
 	const sf::Sprite& getSprite() const { return m_sprite; }
-
-	//virtual const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }
-	//virtual const sf::Vector2f& getSize() const { return m_shape.getSize(); }
 
 protected:
 	sf::RectangleShape m_shape{};
