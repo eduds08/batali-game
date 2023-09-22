@@ -57,19 +57,13 @@ void Player::updateTexture()
 	if (m_velocity.y < 0.f)
 	{
 		changeCurrentTexture(constants::playerJumpingAnimationFramesAmount, "playerJumping", "./_Jump.png");
-		m_isJumping = true;
-		m_isFalling = false;
 	}
 	else if (m_velocity.y > 0.f)
 	{
 		changeCurrentTexture(constants::playerFallingAnimationFramesAmount, "playerFalling", "./_Fall.png");
-		m_isJumping = false;
-		m_isFalling = true;
 	}
 	else
 	{
-		m_isJumping = false;
-		m_isFalling = false;
 		if (m_isRunning)
 		{
 			changeCurrentTexture(constants::playerRunningAnimationFramesAmount, "playerRunning", "./_Run.png");
