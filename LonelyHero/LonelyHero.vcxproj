@@ -147,6 +147,7 @@
     <ClInclude Include="AnimatedEntity.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="ColliderEntity.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="DrawableEntity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />

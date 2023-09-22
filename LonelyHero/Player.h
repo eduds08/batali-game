@@ -2,6 +2,7 @@
 
 #include "AnimatedEntity.h"
 #include "ColliderEntity.h"
+#include "Constants.h"
 
 class Player : public AnimatedEntity, public ColliderEntity
 {

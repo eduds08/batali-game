@@ -15,12 +15,12 @@ public:
 	void render();
 	void run();
 private:
-	sf::RenderWindow m_window{ sf::VideoMode(600, 600), "Lonely Hero" };
-	
+	sf::RenderWindow m_window{ sf::VideoMode(constants::screenWidth, constants::screenHeight), "Lonely Hero" };
+
 	sf::Clock m_clock{};
 	sf::Event m_event{};
 	float m_deltaTime{};
 
-	Player m_player{ 120, 80, 30.f, 80.f, 10, 0.1f };
+	Player m_player{ constants::playerSpriteWidth, constants::playerSpriteHeight, constants::playerShapeWidth, constants::playerShapeHeight, constants::playerIdleAnimationFramesAmount, constants::playerSwitchAnimationTime };
 	std::vector<Ground> grounds{};
 };

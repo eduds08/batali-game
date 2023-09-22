@@ -1,13 +1,13 @@
 #include "Player.h"
 
 Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime)
-	: AnimatedEntity{spriteWidth, spriteHeight, animationFramesAmount, animationSwitchTime}
-	, ColliderEntity{shapeWidth, shapeHeight}
+	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount, animationSwitchTime }
+	, ColliderEntity{ shapeWidth, shapeHeight }
 {
 	setSpriteTexture("playerIdle", "./_Idle.png");
-	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 120, 80 });
-	setShapeSettings(sf::Vector2f{ 300.f, 0.f });
-	setSpriteSettings(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f}, sf::Vector2f{ 2.f, 2.f });
+	m_sprite.setTextureRect(sf::IntRect{ 0, 0, constants::playerSpriteWidth, constants::playerSpriteHeight });
+	setShapeSettings(sf::Vector2f{ constants::playerFirstPositionX, constants::playerFirstPositionY });
+	setSpriteSettings(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f}, sf::Vector2f{ constants::playerSpriteScale, constants::playerSpriteScale });
 }
 
 void Player::update(float& deltaTime)
@@ -25,13 +25,13 @@ void Player::updateMovement(float& deltaTime)
 	{
 		m_isRunning = true;
 		m_facingRight = -1;
-		m_velocity.x -= 240.f;
+		m_velocity.x -= constants::playerSpeed;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
 	{
 		m_isRunning = true;
 		m_facingRight = 1;
-		m_velocity.x += 240.f;
+		m_velocity.x += constants::playerSpeed;
 	}
 	else
 	{
@@ -43,10 +43,10 @@ void Player::updateMovement(float& deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && m_canJump)
 	{
 		m_canJump = false;
-		m_velocity.y = -1 * sqrt(2.f * 981.f * 200.f);
+		m_velocity.y = -1 * sqrt(2.f * constants::gravity * constants::playerJumpSpeed);
 	}
 
-	m_velocity.y += 981.f * 1.5f * deltaTime;
+	m_velocity.y += constants::gravity * deltaTime;
 
 	m_shape.move(m_velocity * deltaTime);
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f});
