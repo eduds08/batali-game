@@ -21,4 +21,7 @@ private:
 	bool m_canJump{ false };
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };
+
+	bool m_isJumping{ false };
+	bool m_isFalling{ true };
 };
