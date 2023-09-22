@@ -1,13 +1,13 @@
 #include "Player.h"
 
 Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime)
-	: AnimatedEntity{spriteWidth, spriteHeight, shapeWidth, shapeHeight, animationFramesAmount, animationSwitchTime}
-	, ColliderEntity{}
+	: AnimatedEntity{spriteWidth, spriteHeight, animationFramesAmount, animationSwitchTime}
+	, ColliderEntity{shapeWidth, shapeHeight}
 {
 	setSpriteTexture("playerIdle", "./_Idle.png");
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 120, 80 });
 	setShapeSettings(sf::Vector2f{ 300.f, 0.f });
-	setSpriteSettings();
+	setSpriteSettings(m_shape.getPosition());
 }
 
 void Player::move(float& deltaTime)

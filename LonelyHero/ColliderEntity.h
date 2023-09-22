@@ -5,23 +5,28 @@
 class ColliderEntity
 {
 public:
-	ColliderEntity() {}
+	ColliderEntity(float shapeWidth, float shapeHeight);
 	virtual ~ColliderEntity() = default;
 
-	bool isColliding(sf::RectangleShape& shape);
+	bool isColliding(const sf::RectangleShape& shape);
+	bool isColliding(const sf::Sprite& sprite);
 
 	void onCollision(sf::Vector2f& velocity);
-	//void onCollision(float& velocityX, float& velocityY);
 
-	virtual const sf::Vector2f& getSize() const = 0;
-	virtual const sf::Vector2f& getPosition() const = 0;
+	const sf::RectangleShape& getShape() const { return m_shape; }
 
-	//virtual void walk(float offsetX, float offsetY) = 0;
+	const sf::Vector2f& getSize() const { return m_shape.getSize(); }
+	const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }
 
-	virtual void walk(sf::Vector2f offset) = 0;
+	void setShapeSettings(sf::Vector2f position);
 
 	const sf::Vector2f& getCollisionDirection() const { return m_collisionDirection; }
 
 protected:
+	sf::RectangleShape m_shape{};
+
+	float m_shapeWidth{};
+	float m_shapeHeight{};
+
 	sf::Vector2f m_collisionDirection{};
 };
