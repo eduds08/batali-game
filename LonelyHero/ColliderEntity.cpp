@@ -116,15 +116,15 @@ bool ColliderEntity::isColliding(const sf::Sprite& sprite)
 	return false;
 }
 
-void ColliderEntity::onCollision(sf::Vector2f& velocity)
+void ColliderEntity::onCollision()
 {
 	if (m_collisionDirection.x != 0.f)
 	{
-		velocity.x = 0.f;
+		m_velocity.x = 0.f;
 	}
 	if (m_collisionDirection.y != 0.f)
 	{
-		velocity.y = 0.f;
+		m_velocity.y = 0.f;
 
 	}
 }

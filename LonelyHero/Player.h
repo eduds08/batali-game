@@ -16,14 +16,8 @@ public:
 
 	void setCanJump(bool canJump) { m_canJump = canJump; }
 
-	sf::Vector2f& getVelocity() { return m_velocity; }
-
 private:
 	bool m_canJump{ false };
-
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };
-
-	sf::Vector2f m_velocity{};
-	
 };

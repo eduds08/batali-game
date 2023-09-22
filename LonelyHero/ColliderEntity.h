@@ -11,7 +11,7 @@ public:
 	bool isColliding(const sf::RectangleShape& shape);
 	bool isColliding(const sf::Sprite& sprite);
 
-	void onCollision(sf::Vector2f& velocity);
+	void onCollision();
 
 	const sf::RectangleShape& getShape() const { return m_shape; }
 
@@ -22,11 +22,14 @@ public:
 
 	const sf::Vector2f& getCollisionDirection() const { return m_collisionDirection; }
 
+	const sf::Vector2f& getVelocity() const { return m_velocity; }
+
 protected:
 	sf::RectangleShape m_shape{};
 
+	sf::Vector2f m_collisionDirection{};
+	sf::Vector2f m_velocity{};
+
 	float m_shapeWidth{};
 	float m_shapeHeight{};
-
-	sf::Vector2f m_collisionDirection{};
 };
