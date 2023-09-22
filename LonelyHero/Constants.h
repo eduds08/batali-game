@@ -14,6 +14,8 @@ namespace constants
 	constexpr float playerShapeHeight{ 80.f };
 
 	constexpr int playerIdleAnimationFramesAmount{ 10 };
+	constexpr int playerRunningAnimationFramesAmount{ 10 };
+
 	constexpr float playerSwitchAnimationTime{ 0.1f };
 
 	constexpr float playerFirstPositionX{ 300.f };
@@ -22,7 +24,7 @@ namespace constants
 	constexpr float playerSpriteScale = 2.f;
 
 	constexpr float playerSpeed{ 240.f };
-	constexpr float playerJumpSpeed{ 100.f };
+	constexpr float playerJumpSpeed{ 130.f };
 
 	constexpr float gravity{ 981.f };
 

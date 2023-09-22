@@ -15,7 +15,7 @@ public:
 	void updateMovement(float& deltaTime);
 	void updateTexture();
 
-	void setCanJump(bool canJump) { m_canJump = canJump; }
+	void checkIfCanJump();
 
 private:
 	bool m_canJump{ false };

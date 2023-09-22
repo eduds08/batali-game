@@ -16,7 +16,7 @@ public:
 protected:
 	std::string m_currentSprite{};
 
-	int m_animationFramesAmount{};
+	int m_currentAnimationFramesAmount{};
 	float m_animationSwitchTime{};
 
 	int m_frameCount{};

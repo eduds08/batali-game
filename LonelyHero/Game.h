@@ -14,6 +14,9 @@ public:
 	void update();
 	void render();
 	void run();
+
+	void updateCollision();
+
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(constants::screenWidth, constants::screenHeight), "Lonely Hero" };
 

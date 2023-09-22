@@ -116,7 +116,7 @@ bool ColliderEntity::isColliding(const sf::Sprite& sprite)
 	return false;
 }
 
-void ColliderEntity::onCollision()
+void ColliderEntity::handleCollision()
 {
 	if (m_collisionDirection.x != 0.f)
 	{

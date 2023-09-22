@@ -2,7 +2,7 @@
 
 AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float animationSwitchTime)
 	: DrawableEntity{spriteWidth, spriteHeight}
-	, m_animationFramesAmount{ animationFramesAmount }
+	, m_currentAnimationFramesAmount{ animationFramesAmount }
 	, m_animationSwitchTime{ animationSwitchTime }
 {
 }
@@ -20,6 +20,6 @@ void AnimatedEntity::updateAnimation(float& deltaTime)
 	if (m_animationTotalTime >= m_animationSwitchTime)
 	{
 		m_animationTotalTime -= m_animationSwitchTime;
-		AnimationManager::animateSprite(m_sprite, m_animationFramesAmount, m_spriteWidth, m_spriteHeight, m_frameCount);
+		AnimationManager::animateSprite(m_sprite, m_currentAnimationFramesAmount, m_spriteWidth, m_spriteHeight, m_frameCount);
 	}
 }

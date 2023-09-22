@@ -11,7 +11,7 @@ public:
 	bool isColliding(const sf::RectangleShape& shape);
 	bool isColliding(const sf::Sprite& sprite);
 
-	void onCollision();
+	void handleCollision();
 
 	const sf::RectangleShape& getShape() const { return m_shape; }
 

@@ -58,6 +58,7 @@ void Player::updateTexture()
 	{
 		if (m_currentSprite == "playerIdle")
 		{
+			m_currentAnimationFramesAmount = constants::playerIdleAnimationFramesAmount;
 			m_frameCount = 0;
 			setSpriteTexture("playerRunning", "./_Run.png");
 		}
@@ -66,8 +67,17 @@ void Player::updateTexture()
 	{
 		if (m_currentSprite == "playerRunning")
 		{
+			m_currentAnimationFramesAmount = constants::playerRunningAnimationFramesAmount;
 			m_frameCount = 0;
 			setSpriteTexture("playerIdle", "./_Idle.png");
 		}
+	}
+}
+
+void Player::checkIfCanJump()
+{
+	if (m_collisionDirection.y > 0.f)
+	{
+		m_canJump = true;
 	}
 }

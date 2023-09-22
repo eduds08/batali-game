@@ -27,19 +27,7 @@ void Game::init()
 void Game::update()
 {
 	m_player.update(m_deltaTime);
-	for (const auto& ground : grounds)
-	{
-		if (m_player.isColliding(ground.getSprite()))
-		{
-			m_player.onCollision();
-			if (m_player.getCollisionDirection().y > 0.f)
-			{
-				m_player.setCanJump(true);
-			}
-		}
-	}
-
-	
+	updateCollision();
 }
 
 void Game::render()
@@ -73,5 +61,17 @@ void Game::run()
 
 		update();
 		render();
+	}
+}
+
+void Game::updateCollision()
+{
+	for (const auto& ground : grounds)
+	{
+		if (m_player.isColliding(ground.getSprite()))
+		{
+			m_player.handleCollision();
+			m_player.checkIfCanJump();
+		}
 	}
 }
