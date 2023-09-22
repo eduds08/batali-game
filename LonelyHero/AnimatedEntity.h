@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DrawableEntity.h"
+#include "AnimationManager.h"
 
 class AnimatedEntity : public DrawableEntity
 {

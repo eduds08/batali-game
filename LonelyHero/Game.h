@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include "Player.h"
 #include "Ground.h"
@@ -17,8 +16,6 @@ public:
 	void run();
 
 	std::vector<Ground> grounds{};
-
-	bool isColliding(Ground& ground, float p);
 
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(600, 600), "Lonely Hero" };

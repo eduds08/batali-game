@@ -1,7 +1,6 @@
 #pragma once
 
 #include "TextureManager.h"
-#include "AnimationManager.h"
 
 class DrawableEntity
 {
@@ -11,14 +10,14 @@ public:
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
 
-	void setShapeSettings(float xCoord, float yCoord);
+	void setShapeSettings(float positionX, float positionY);
 	void setSpriteSettings();
 
-	const sf::RectangleShape& getShape() const { return m_shape; }
+	sf::RectangleShape& getShape() { return m_shape; }
 	const sf::Sprite& getSprite() const { return m_sprite; }
 
-	sf::Vector2f getPosition() { return m_shape.getPosition(); }
-	sf::Vector2f getSize() { return m_shape.getSize(); }
+	const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }
+	const sf::Vector2f& getSize() const { return m_shape.getSize(); }
 
 protected:
 	sf::RectangleShape m_shape{};

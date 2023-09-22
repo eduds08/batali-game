@@ -1,5 +1,4 @@
 #include "DrawableEntity.h"
-#include "Game.h"
 
 DrawableEntity::DrawableEntity(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight)
 	: m_spriteWidth{ spriteWidth }
@@ -14,11 +13,11 @@ void DrawableEntity::setSpriteTexture(const std::string& textureName, const std:
 	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
 }
 
-void DrawableEntity::setShapeSettings(float xCoord, float yCoord)
+void DrawableEntity::setShapeSettings(float positionX, float positionY)
 {
 	m_shape.setSize(sf::Vector2f{ m_shapeWidth, m_shapeHeight });
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
-	m_shape.setPosition(xCoord, yCoord);
+	m_shape.setPosition(positionX, positionY);
 
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);

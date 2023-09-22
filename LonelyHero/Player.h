@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AnimatedEntity.h"
-#include "Ground.h"
 
 class Player : public AnimatedEntity
 {
@@ -14,16 +13,12 @@ public:
 	void update(float& deltaTime);
 	void updateTexture();
 
+	bool isColliding(sf::RectangleShape& shape);
+
 
 	void setCanJump(bool canJump) { m_canJump = canJump; }
 
-	
-	void onCollision(float directionX, float directionY);
-
-	float collisionDirectionX{ 0.f };
-	float collisionDirectionY{ 0.f };
-
-	void moveTmp(float x, float y) { m_shape.move(x, y); }
+	void onCollision();
 
 private:
 	bool m_canJump{ false };
@@ -33,4 +28,6 @@ private:
 
 	float m_velocityX{ 0.f };
 	float m_velocityY{ 0.f };
+
+	sf::Vector2f m_collisionDirection{};
 };
