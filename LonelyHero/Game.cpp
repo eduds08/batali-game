@@ -13,21 +13,14 @@ Game::~Game()
 
 void Game::init()
 {
-
 	for (int i = 30; i < 600; i += 60)
 	{
-		Ground tmp_ground{ 60, 60, sf::Vector2f{ static_cast<float>(i), 570.f } };
-
-		grounds.push_back(tmp_ground);
+		grounds.emplace_back(Ground{ 60, 60, sf::Vector2f{ static_cast<float>(i), 570.f } });
 	}
 
-	Ground g1{ 60, 60, sf::Vector2f{ 90.f, 510.f } };
+	grounds.emplace_back(Ground{ 60, 60, sf::Vector2f{ 90.f, 510.f } });
 
-	grounds.push_back(g1);
-
-	Ground g2{ 60, 60, sf::Vector2f{ 150.f, 450.f } };
-
-	grounds.push_back(g2);
+	grounds.emplace_back(Ground{ 60, 60, sf::Vector2f{ 150.f, 450.f } });
 
 	run();
 }
@@ -68,7 +61,7 @@ void Game::run()
 {
 	while (m_window.isOpen())
 	{		
-		m_deltaTime = Game::clock.restart().asSeconds();
+		m_deltaTime = m_clock.restart().asSeconds();
 
 		while (m_window.pollEvent(m_event))
 		{

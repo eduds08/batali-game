@@ -7,10 +7,17 @@ Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeH
 	setSpriteTexture("playerIdle", "./_Idle.png");
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 120, 80 });
 	setShapeSettings(sf::Vector2f{ 300.f, 0.f });
-	setSpriteSettings(m_shape.getPosition());
+	setSpriteSettings(m_shape.getPosition(), sf::Vector2f{ 2.f, 2.f });
 }
 
-void Player::move(float& deltaTime)
+void Player::update(float& deltaTime)
+{
+	updateTexture();
+	updateAnimation(deltaTime);
+	updateMovement(deltaTime);
+}
+
+void Player::updateMovement(float& deltaTime)
 {
 	m_velocity.x = 0.f;
 
@@ -31,25 +38,18 @@ void Player::move(float& deltaTime)
 		m_isRunning = false;
 	}
 
-	m_sprite.setScale(2.f * m_facingRight, 2.f);
+	m_sprite.setScale(m_spriteScale.x * m_facingRight, m_spriteScale.y);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && m_canJump)
 	{
 		m_canJump = false;
-		m_velocity.y =  -1 * sqrt(2.f * 981.f * 200.f);
+		m_velocity.y = -1 * sqrt(2.f * 981.f * 200.f);
 	}
 
 	m_velocity.y += 981.f * 1.5f * deltaTime;
 
 	m_shape.move(m_velocity * deltaTime);
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f});
-}
-
-void Player::update(float& deltaTime)
-{
-	updateTexture();
-	updateAnimation(deltaTime);
-	move(deltaTime);
 }
 
 void Player::updateTexture()

@@ -9,7 +9,7 @@ public:
 	virtual ~DrawableEntity() = default;
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
-	void setSpriteSettings(sf::Vector2f position);
+	void setSpriteSettings(sf::Vector2f position, sf::Vector2f scaleFactor = { 1.f, 1.f });
 	
 	const sf::Sprite& getSprite() const { return m_sprite; }
 
@@ -20,4 +20,6 @@ protected:
 	
 	int m_spriteWidth{};
 	int m_spriteHeight{};
+
+	sf::Vector2f m_spriteScale{1.f, 1.f};
 };
