@@ -1,11 +1,14 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime)
-	: AnimatedEntity(frameWidth, frameHeight, frameAmount, switchAnimationTime)
+Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime)
+	: AnimatedEntity{spriteWidth, spriteHeight, shapeWidth, shapeHeight, animationFramesAmount, animationSwitchTime}
 {
 	setSpriteTexture("playerIdle", "./_Idle.png");
-	setSpriteSettings(300.f, 0.f, 2.f, 2.f);
+	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 120, 80 });
+
+	setShapeSettings(300.f, 0.f);
+	setSpriteSettings();
 }
 
 void Player::move(float& deltaTime)
@@ -39,19 +42,15 @@ void Player::move(float& deltaTime)
 
 	m_velocityY += 981.f * 1.5f * deltaTime;
 
-	if (collisionDirectionY != 0.f)
-	{
-		m_velocityY = 0.f;
-	}
-
-	m_sprite.move(m_velocityX * deltaTime, m_velocityY * deltaTime);
+	m_shape.move(m_velocityX * deltaTime, m_velocityY * deltaTime);
+	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f});
 }
 
 void Player::update(float& deltaTime)
 {
-	move(deltaTime);
 	updateTexture();
 	updateAnimation(deltaTime);
+	move(deltaTime);
 }
 
 void Player::updateTexture()
@@ -70,6 +69,22 @@ void Player::updateTexture()
 		{
 			m_frameCount = 0;
 			setSpriteTexture("playerIdle", "./_Idle.png");
+		}
+	}
+}
+
+void Player::onCollision(float directionX, float directionY)
+{
+	if (directionX != 0.f)
+	{
+		m_velocityX = 0.f;
+	}
+	if (directionY != 0.f)
+	{
+		m_velocityY = 0.f;
+		if (directionY > 0.f)
+		{
+			m_canJump = true;
 		}
 	}
 }

@@ -1,8 +1,9 @@
 #include "Ground.h"
 
-Ground::Ground(int frameWidth, int frameHeight, float xCoord, float yCoord)
-	: DrawableEntity{frameWidth, frameHeight}
+Ground::Ground(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, float positionX, float positionY)
+	: DrawableEntity{ spriteWidth, spriteHeight, shapeWidth, shapeHeight }
 {
 	setSpriteTexture("ground", "./dirt.png");
-	setSpriteSettings(xCoord, yCoord);
+	setShapeSettings(positionX, positionY);
+	setSpriteSettings();
 }

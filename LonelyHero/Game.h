@@ -18,15 +18,14 @@ public:
 
 	std::vector<Ground> grounds{};
 
-	bool isColliding(const Ground& ground);
+	bool isColliding(Ground& ground, float p);
 
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(600, 600), "Lonely Hero" };
 	
 	sf::Clock clock{};
 	sf::Event m_event{};
-
 	float m_deltaTime{};
 
-	Player m_player{ 120, 80, 10, 0.1f };
+	Player m_player{ 120, 80, 30.f, 80.f, 10, 0.1f };
 };

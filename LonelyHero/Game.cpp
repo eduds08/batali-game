@@ -16,31 +16,40 @@ void Game::init()
 
 	for (int i = 30; i < 600; i += 60)
 	{
-		Ground tmp_ground{ 60, 60, float(i), 570.f };
+		Ground tmp_ground{ 60, 60, 60, 60, static_cast<float>(i), 570.f };
 
 		grounds.push_back(tmp_ground);
 	}
+
+	Ground g1{ 60, 60, 60, 60, 90.f, 510.f };
+
+	grounds.push_back(g1);
+
+	Ground g2{ 60, 60, 60, 60, 150.f, 450.f };
+
+	grounds.push_back(g2);
 
 	run();
 }
 
 void Game::update()
 {
-	for (auto const& ground : grounds)
+	m_player.update(m_deltaTime);
+
+	for (auto& ground : grounds)
 	{
-		if (isColliding(ground))
+		if (isColliding(ground, 0.f))
 		{
-			m_player.setCanJump(true);
+			m_player.onCollision(m_player.collisionDirectionX, m_player.collisionDirectionY);
 		}
 	}
-
-	m_player.update(m_deltaTime);
 }
 
 void Game::render()
 {
 	m_window.clear();
 
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto const& ground : grounds)
@@ -72,17 +81,17 @@ void Game::run()
 
 
 
-bool Game::isColliding(const Ground& ground)
+bool Game::isColliding(Ground& ground, float p)
 {
-	float groundHalfSizeX = ground.getBounds().getSize().x / 2.f;
-	float groundHalfSizeY = ground.getBounds().getSize().y / 2.f;
-	float groundPositionX = ground.getBounds().getPosition().x + groundHalfSizeX;
-	float groundPositionY = ground.getBounds().getPosition().y + groundHalfSizeY;
+	float groundHalfSizeX = ground.getSize().x / 2.f;
+	float groundHalfSizeY = ground.getSize().y / 2.f;
+	float groundPositionX = ground.getPosition().x;
+	float groundPositionY = ground.getPosition().y;
 
-	float playerHalfSizeX = m_player.getBounds().getSize().x / 2.f;
-	float playerHalfSizeY = m_player.getBounds().getSize().y / 2.f;
-	float playerPositionX = m_player.getBounds().getPosition().x + playerHalfSizeX;
-	float playerPositionY = m_player.getBounds().getPosition().y + playerHalfSizeY;
+	float playerHalfSizeX = m_player.getSize().x / 2.f;
+	float playerHalfSizeY = m_player.getSize().y / 2.f;
+	float playerPositionX = m_player.getPosition().x;
+	float playerPositionY = m_player.getPosition().y;
 
 	float deltaX = groundPositionX - playerPositionX;
 	float deltaY = groundPositionY - playerPositionY;
@@ -90,22 +99,35 @@ bool Game::isColliding(const Ground& ground)
 	float intersectX = abs(deltaX) - (groundHalfSizeX + playerHalfSizeX);
 	float intersectY = abs(deltaY) - (groundHalfSizeY + playerHalfSizeY);
 
-	if (intersectX < 0.f && intersectY < 0.f) {
+	if (intersectX < 0.f && intersectY < 0.f) 
+	{
+
+		float push = std::min(std::max(p, 0.f), 1.f);
 
 		if (intersectX > intersectY) {
-			if (deltaX > 0.f) {
+
+			if (deltaX > 0.f) 
+			{
+				m_player.moveTmp(intersectX, 0.f);
 				m_player.collisionDirectionX = 1.0f;
 			}
-			else {
+			else 
+			{
+				m_player.moveTmp(-intersectX, 0.f);
 				m_player.collisionDirectionX = -1.0f;
 			}
 			m_player.collisionDirectionY = 0.f;
 		}
-		else {
-			if (deltaY > 0.f) {
+		else 
+		{
+			if (deltaY > 0.f) 
+			{
+				m_player.moveTmp(0.f, intersectY);
 				m_player.collisionDirectionY = 1.0f;
 			}
-			else {
+			else 
+			{
+				m_player.moveTmp(0.f, -intersectY);
 				m_player.collisionDirectionY = -1.0f;
 			}
 			m_player.collisionDirectionX = 0.f;

@@ -1,9 +1,9 @@
 #include "AnimatedEntity.h"
 
-AnimatedEntity::AnimatedEntity(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime)
-	: DrawableEntity{frameWidth, frameHeight}
-	, m_frameAmount{ frameAmount }
-	, m_switchAnimationTime{ switchAnimationTime }
+AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime)
+	: DrawableEntity{spriteWidth, spriteHeight, shapeWidth, shapeHeight}
+	, m_animationFramesAmount{ animationFramesAmount }
+	, m_animationSwitchTime{ animationSwitchTime }
 {
 }
 
@@ -15,11 +15,11 @@ void AnimatedEntity::setSpriteTexture(const std::string& textureName, const std:
 
 void AnimatedEntity::updateAnimation(float& deltaTime)
 {
-	m_totalAnimationTime += deltaTime;
+	m_animationTotalTime += deltaTime;
 
-	if (m_totalAnimationTime >= m_switchAnimationTime)
+	if (m_animationTotalTime >= m_animationSwitchTime)
 	{
-		m_totalAnimationTime -= m_switchAnimationTime;
-		AnimationManager::animateSprite(m_sprite, m_frameAmount, m_frameWidth, m_frameHeight, m_frameCount);
+		m_animationTotalTime -= m_animationSwitchTime;
+		AnimationManager::animateSprite(m_sprite, m_animationFramesAmount, m_spriteWidth, m_spriteHeight, m_frameCount);
 	}
 }

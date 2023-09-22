@@ -1,9 +1,11 @@
 #include "DrawableEntity.h"
 #include "Game.h"
 
-DrawableEntity::DrawableEntity(int frameWidth, int frameHeight)
-	: m_frameWidth{ frameWidth }
-	, m_frameHeight{ frameHeight }
+DrawableEntity::DrawableEntity(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight)
+	: m_spriteWidth{ spriteWidth }
+	, m_spriteHeight{ spriteHeight }
+	, m_shapeWidth{ shapeWidth }
+	, m_shapeHeight{ shapeHeight }
 {
 }
 
@@ -12,11 +14,18 @@ void DrawableEntity::setSpriteTexture(const std::string& textureName, const std:
 	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
 }
 
-void DrawableEntity::setSpriteSettings(float xCoord, float yCoord, float scaleX, float scaleY)
+void DrawableEntity::setShapeSettings(float xCoord, float yCoord)
 {
-	m_sprite.setPosition(xCoord, yCoord);
+	m_shape.setSize(sf::Vector2f{ m_shapeWidth, m_shapeHeight });
+	m_shape.setOrigin(m_shape.getSize() / 2.f);
+	m_shape.setPosition(xCoord, yCoord);
 
-	m_sprite.setOrigin(m_frameWidth / 2.f, m_frameHeight / 2.f);
+	m_shape.setOutlineColor(sf::Color::Red);
+	m_shape.setOutlineThickness(1.f);
+}
 
-	m_sprite.setScale(scaleX, scaleY);
+void DrawableEntity::setSpriteSettings()
+{
+	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
+	m_sprite.setPosition(m_shape.getPosition());
 }

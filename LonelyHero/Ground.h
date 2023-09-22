@@ -5,7 +5,7 @@
 class Ground : public DrawableEntity
 {
 public:
-	Ground(int frameWidth, int frameHeight, float xCoord, float yCoord);
+	Ground(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, float positionX, float positionY);
 	virtual ~Ground() = default;
 	
 private:

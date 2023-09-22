@@ -5,7 +5,7 @@
 class AnimatedEntity : public DrawableEntity
 {
 public:
-	AnimatedEntity(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime);
+	AnimatedEntity(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime);
 	virtual ~AnimatedEntity() = default;
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
@@ -15,9 +15,9 @@ public:
 protected:
 	std::string m_currentSprite{};
 
-	int m_frameAmount{};
-	float m_switchAnimationTime{};
+	int m_animationFramesAmount{};
+	float m_animationSwitchTime{};
 
-	int m_frameCount{ 0 };
-	float m_totalAnimationTime{ 0 };
+	int m_frameCount{};
+	float m_animationTotalTime{};
 };

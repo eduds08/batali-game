@@ -6,7 +6,7 @@
 class Player : public AnimatedEntity
 {
 public:
-	Player(int frameWidth, int frameHeight, int frameAmount, float switchAnimationTime);
+	Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime);
 	virtual ~Player() = default;
 
 	void move(float& deltaTime);
@@ -17,8 +17,13 @@ public:
 
 	void setCanJump(bool canJump) { m_canJump = canJump; }
 
+	
+	void onCollision(float directionX, float directionY);
+
 	float collisionDirectionX{ 0.f };
 	float collisionDirectionY{ 0.f };
+
+	void moveTmp(float x, float y) { m_shape.move(x, y); }
 
 private:
 	bool m_canJump{ false };
