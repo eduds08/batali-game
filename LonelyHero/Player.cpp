@@ -7,7 +7,7 @@ Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeH
 	setSpriteTexture("playerIdle", "./_Idle.png");
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 120, 80 });
 	setShapeSettings(sf::Vector2f{ 300.f, 0.f });
-	setSpriteSettings(m_shape.getPosition(), sf::Vector2f{ 2.f, 2.f });
+	setSpriteSettings(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f}, sf::Vector2f{ 2.f, 2.f });
 }
 
 void Player::update(float& deltaTime)

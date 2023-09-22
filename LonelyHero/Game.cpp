@@ -3,7 +3,6 @@
 
 Game::Game()
 {
-	m_window.setVerticalSyncEnabled(true);
 	init();
 }
 
@@ -28,8 +27,7 @@ void Game::init()
 void Game::update()
 {
 	m_player.update(m_deltaTime);
-
-	for (auto& ground : grounds)
+	for (const auto& ground : grounds)
 	{
 		if (m_player.isColliding(ground.getSprite()))
 		{
@@ -40,6 +38,8 @@ void Game::update()
 			}
 		}
 	}
+
+	
 }
 
 void Game::render()
