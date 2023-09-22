@@ -17,6 +17,8 @@ public:
 
 	void checkIfCanJump();
 
+	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
+
 private:
 	bool m_canJump{ false };
 	bool m_isRunning{ false };

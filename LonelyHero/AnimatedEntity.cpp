@@ -10,7 +10,7 @@ AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, int animationF
 void AnimatedEntity::setSpriteTexture(const std::string& textureName, const std::string& texturePath)
 {
 	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
-	m_currentSprite = textureName;
+	m_currentTexture = textureName;
 }
 
 void AnimatedEntity::updateAnimation(float& deltaTime)

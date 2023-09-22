@@ -12,26 +12,9 @@ Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeH
 
 void Player::update(float& deltaTime)
 {
-	if (m_velocity.y < 0.f)
-	{
-		m_isJumping = true;
-		m_isFalling = false;
-	}
-	else if (m_velocity.y > 0.f)
-	{
-		m_isJumping = false;
-		m_isFalling = true;
-	}
-	else
-	{
-		m_isJumping = false;
-		m_isFalling = false;
-	}
 	updateTexture();
 	updateAnimation(deltaTime);
 	updateMovement(deltaTime);
-
-	
 }
 
 void Player::updateMovement(float& deltaTime)
@@ -71,40 +54,29 @@ void Player::updateMovement(float& deltaTime)
 
 void Player::updateTexture()
 {
-	if (m_isRunning && !m_isJumping && !m_isFalling)
+	if (m_velocity.y < 0.f)
 	{
-		if (m_currentSprite != "playerRunning")
-		{
-			m_currentAnimationFramesAmount = constants::playerIdleAnimationFramesAmount;
-			m_frameCount = 0;
-			setSpriteTexture("playerRunning", "./_Run.png");
-		}
+		changeCurrentTexture(constants::playerJumpingAnimationFramesAmount, "playerJumping", "./_Jump.png");
+		m_isJumping = true;
+		m_isFalling = false;
 	}
-	else if (!m_isRunning && !m_isJumping && !m_isFalling)
+	else if (m_velocity.y > 0.f)
 	{
-		if (m_currentSprite != "playerIdle")
-		{
-			m_currentAnimationFramesAmount = constants::playerRunningAnimationFramesAmount;
-			m_frameCount = 0;
-			setSpriteTexture("playerIdle", "./_Idle.png");
-		}
+		changeCurrentTexture(constants::playerFallingAnimationFramesAmount, "playerFalling", "./_Fall.png");
+		m_isJumping = false;
+		m_isFalling = true;
 	}
-	else if (m_isJumping)
+	else
 	{
-		if (m_currentSprite != "playerJumping")
+		m_isJumping = false;
+		m_isFalling = false;
+		if (m_isRunning)
 		{
-			m_currentAnimationFramesAmount = constants::playerJumpingAnimationFramesAmount;
-			m_frameCount = 0;
-			setSpriteTexture("playerJumping", "./_Jump.png");
+			changeCurrentTexture(constants::playerRunningAnimationFramesAmount, "playerRunning", "./_Run.png");
 		}
-	}
-	else if (!m_isJumping && m_isFalling)
-	{
-		if (m_currentSprite != "playerFalling")
+		else
 		{
-			m_currentAnimationFramesAmount = constants::playerFallingAnimationFramesAmount;
-			m_frameCount = 0;
-			setSpriteTexture("playerFalling", "./_Fall.png");
+			changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "playerIdle", "./_Idle.png");
 		}
 	}
 }
@@ -114,5 +86,15 @@ void Player::checkIfCanJump()
 	if (m_collisionDirection.y > 0.f)
 	{
 		m_canJump = true;
+	}
+}
+
+void Player::changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath)
+{
+	if (m_currentTexture != textureName)
+	{
+		m_currentAnimationFramesAmount = animationFramesAmount;
+		m_frameCount = 0;
+		setSpriteTexture(textureName, texturePath);
 	}
 }

@@ -14,7 +14,7 @@ public:
 	void updateAnimation(float& deltaTime);
 
 protected:
-	std::string m_currentSprite{};
+	std::string m_currentTexture{};
 
 	int m_currentAnimationFramesAmount{};
 	float m_animationSwitchTime{};
