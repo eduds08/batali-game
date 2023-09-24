@@ -16,7 +16,7 @@ public:
 protected:
 	sf::Sprite m_sprite{};
 
-	TextureManager m_texturesManager{};
+	TextureManager* m_texturesManager;
 	
 	int m_spriteWidth{};
 	int m_spriteHeight{};

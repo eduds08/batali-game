@@ -1,14 +1,15 @@
 #include "DrawableEntity.h"
 
 DrawableEntity::DrawableEntity(int spriteWidth, int spriteHeight)
-	: m_spriteWidth{ spriteWidth }
+	: m_texturesManager(TextureManager::getInstance())
+	, m_spriteWidth{ spriteWidth }
 	, m_spriteHeight{ spriteHeight }
 {
 }
 
 void DrawableEntity::setSpriteTexture(const std::string& textureName, const std::string& texturePath)
 {
-	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
+	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(textureName, texturePath));
 }
 
 void DrawableEntity::setSpriteSettings(sf::Vector2f position, sf::Vector2f scaleFactor)

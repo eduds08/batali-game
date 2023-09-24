@@ -8,11 +8,16 @@
 class TextureManager
 {
 public:
-	TextureManager() {};
+	//TextureManager() {};
 	~TextureManager() {};
 
 	std::shared_ptr<sf::Texture> loadAndGetTexture(const std::string& textureName, const std::string& texturePath);
 
+	static TextureManager* getInstance();
+
 private:
 	std::unordered_map<std::string, std::shared_ptr<sf::Texture>> texturesMap{};
+
+	static TextureManager* instance;
+	TextureManager() {};
 };

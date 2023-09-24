@@ -1,5 +1,7 @@
 #include "TextureManager.h"
 
+TextureManager* TextureManager::instance = nullptr;
+
 std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string& textureName, const std::string& texturePath)
 {
 	for (const auto& texture : texturesMap)
@@ -19,4 +21,13 @@ std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string
 	texturesMap.emplace(textureName, newTexture);
 
 	return newTexture;
+}
+
+TextureManager* TextureManager::getInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new TextureManager();
+	}
+	return instance;
 }

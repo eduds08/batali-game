@@ -1,8 +1,8 @@
 #include "Ground.h"
 
-Ground::Ground(int spriteWidth, int spriteHeight, sf::Vector2f position)
+Ground::Ground(int spriteWidth, int spriteHeight, sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
 	: DrawableEntity{ spriteWidth, spriteHeight }
 {
-	setSpriteTexture("ground", "./dirt.png");
+	setSpriteTexture(textureName, texturePath);
 	setSpriteSettings(position);
 }

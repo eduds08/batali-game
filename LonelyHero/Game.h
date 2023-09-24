@@ -3,6 +3,8 @@
 #include <vector>
 #include "Player.h"
 #include "Ground.h"
+#include <fstream>
+#include <utility>
 
 class Game
 {
@@ -16,6 +18,8 @@ public:
 	void run();
 
 	void updateCollision();
+
+	void loadAndCreateMap(const std::string& mapFilePath);	
 
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(constants::screenWidth, constants::screenHeight), "Lonely Hero" };

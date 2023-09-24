@@ -4,14 +4,14 @@
 
 namespace constants
 {
-	constexpr int screenWidth{ 600 };
-	constexpr int screenHeight{ 600 };
+	constexpr int screenWidth{ 640 };
+	constexpr int screenHeight{ 640 };
 
 	constexpr int playerSpriteWidth{ 120 };
 	constexpr int playerSpriteHeight{ 80 };
 
 	constexpr float playerShapeWidth{ 30.f };
-	constexpr float playerShapeHeight{ 80.f };
+	constexpr float playerShapeHeight{ 70.f };
 
 	constexpr int playerIdleAnimationFramesAmount{ 10 };
 	constexpr int playerRunningAnimationFramesAmount{ 10 };
@@ -21,8 +21,8 @@ namespace constants
 
 	constexpr float playerSwitchAnimationTime{ 0.1f };
 
-	constexpr float playerFirstPositionX{ 300.f };
-	constexpr float playerFirstPositionY{ 0.f };
+	constexpr float playerFirstPositionX{ 232.f };
+	constexpr float playerFirstPositionY{ 300.f };
 	
 	constexpr float playerSpriteScale = 2.f;
 
