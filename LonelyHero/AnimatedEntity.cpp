@@ -11,6 +11,7 @@ void AnimatedEntity::setSpriteTexture(const std::string& textureName, const std:
 {
 	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(textureName, texturePath));
 	m_currentTexture = textureName;
+	m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
 }
 
 void AnimatedEntity::updateAnimation(float& deltaTime)

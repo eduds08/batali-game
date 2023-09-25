@@ -11,6 +11,7 @@ Game::~Game()
 
 void Game::init()
 {
+	m_window.setView(m_view);
 	loadAndCreateMap("./teste2.txt");
 	run();
 }
@@ -19,6 +20,8 @@ void Game::update()
 {
 	m_player.update(m_deltaTime);
 	updateCollision();
+	m_view.setCenter(m_player.getPosition());
+	m_window.setView(m_view);
 }
 
 void Game::render()

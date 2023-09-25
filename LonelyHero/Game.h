@@ -30,4 +30,6 @@ private:
 
 	Player m_player{ constants::playerSpriteWidth, constants::playerSpriteHeight, constants::playerShapeWidth, constants::playerShapeHeight, constants::playerIdleAnimationFramesAmount, constants::playerSwitchAnimationTime };
 	std::vector<Ground> grounds{};
+	
+	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{450.f, 450.f}};
 };
