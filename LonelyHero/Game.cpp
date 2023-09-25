@@ -18,6 +18,7 @@ void Game::init()
 
 void Game::update()
 {
+	sf::sleep(sf::milliseconds(1));
 	m_player.update(m_deltaTime);
 	updateCollision();
 	m_view.setCenter(m_player.getPosition());
@@ -44,6 +45,11 @@ void Game::run()
 	while (m_window.isOpen())
 	{
 		m_deltaTime = m_clock.restart().asSeconds();
+
+		if (m_deltaTime > 1.f / 20.f)
+		{
+			m_deltaTime = { 1.f / 20.f };
+		}
 
 		while (m_window.pollEvent(m_event))
 		{
