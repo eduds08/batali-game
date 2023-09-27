@@ -2,6 +2,7 @@
 
 #include "DrawableEntity.h"
 #include "AnimationManager.h"
+#include <thread>
 
 class AnimatedEntity : public DrawableEntity
 {
@@ -11,7 +12,7 @@ public:
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
 
-	void updateAnimation(float& deltaTime);
+	void updateAnimation();
 
 protected:
 	std::string m_currentTexture{};

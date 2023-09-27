@@ -14,13 +14,7 @@ void AnimatedEntity::setSpriteTexture(const std::string& textureName, const std:
 	m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
 }
 
-void AnimatedEntity::updateAnimation(float& deltaTime)
+void AnimatedEntity::updateAnimation()
 {
-	m_animationTotalTime += deltaTime;
-
-	if (m_animationTotalTime >= m_animationSwitchTime)
-	{
-		m_animationTotalTime -= m_animationSwitchTime;
-		AnimationManager::animateSprite(m_sprite, m_currentAnimationFramesAmount, m_spriteWidth, m_spriteHeight, m_frameCount);
-	}
+	AnimationManager::animateSprite(m_sprite, m_currentAnimationFramesAmount, m_spriteWidth, m_spriteHeight, m_frameCount);
 }

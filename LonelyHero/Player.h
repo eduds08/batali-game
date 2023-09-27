@@ -15,9 +15,13 @@ public:
 	void updateMovement(float& deltaTime);
 	void updateTexture();
 
+	void updateTextureAndAnimation();
+
 	void checkIfCanJump();
 
 	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
+
+	bool isRunning = true;
 
 private:
 	bool m_canJump{ false };

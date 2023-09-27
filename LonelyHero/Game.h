@@ -6,6 +6,8 @@
 #include <fstream>
 #include <utility>
 
+#include <thread>
+
 class Game
 {
 public:
@@ -21,6 +23,9 @@ public:
 
 	void loadAndCreateMap(const std::string& mapFilePath);	
 
+
+	std::thread t;
+
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(constants::screenWidth, constants::screenHeight), "Lonely Hero" };
 
@@ -32,4 +37,6 @@ private:
 	std::vector<Ground> grounds{};
 	
 	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{450.f, 450.f}};
+
+	
 };

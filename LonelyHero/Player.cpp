@@ -12,8 +12,8 @@ Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeH
 
 void Player::update(float& deltaTime)
 {
-	updateTexture();
-	updateAnimation(deltaTime);
+	//updateTexture();
+	//updateAnimation(deltaTime);
 	updateMovement(deltaTime);
 }
 
@@ -73,6 +73,17 @@ void Player::updateTexture()
 			changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "playerIdle", "./_Idle.png");
 		}
 	}
+}
+
+void Player::updateTextureAndAnimation()
+{
+	while (isRunning)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		updateTexture();
+		updateAnimation();
+	}
+	
 }
 
 void Player::checkIfCanJump()

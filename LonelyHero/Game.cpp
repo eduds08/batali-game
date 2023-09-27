@@ -13,13 +13,14 @@ void Game::init()
 {
 	m_window.setView(m_view);
 	loadAndCreateMap("./teste2.txt");
+	t = std::thread(&Player::updateTextureAndAnimation, std::ref(m_player));
 	run();
 }
 
 void Game::update()
 {
-	sf::sleep(sf::milliseconds(1));
 	m_player.update(m_deltaTime);
+	
 	updateCollision();
 	m_view.setCenter(m_player.getPosition());
 	m_window.setView(m_view);
@@ -55,6 +56,7 @@ void Game::run()
 		{
 			if (m_event.type == sf::Event::Closed)
 			{
+				m_player.isRunning = false;
 				m_window.close();
 			}
 		}
@@ -62,6 +64,8 @@ void Game::run()
 		update();
 		render();
 	}
+
+	t.join();
 }
 
 void Game::updateCollision()
