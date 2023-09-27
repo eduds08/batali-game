@@ -29,4 +29,6 @@ private:
 	int m_facingRight{ 1 };
 
 	bool m_isAttacking{ false };
+
+	std::string previousAttackingAnimation{};
 };

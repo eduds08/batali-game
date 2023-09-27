@@ -21,8 +21,9 @@ void Player::update(float& deltaTime)
 		m_velocity.x = 0.f;
 	}
 
-	if (m_currentTexture == "playerAttacking" && m_frameCount >= 5)
+	if ((m_currentTexture == "playerAttacking2" && m_frameCount >= 5) || (m_currentTexture == "playerAttacking1" && m_frameCount >= 3))
 	{
+		previousAttackingAnimation = m_currentTexture;
 		m_isAttacking = false;
 	}
 
@@ -92,7 +93,14 @@ void Player::updateTexture()
 	}
 	else 
 	{
-		changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking", "./_Attack2NoMovement.png");
+		if (previousAttackingAnimation == "playerAttacking1")
+		{
+			changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking2", "./_Attack2NoMovement.png");
+		}
+		else
+		{
+			changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking1", "./_AttackNoMovement.png");
+		}
 	}
 }
 
