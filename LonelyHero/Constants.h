@@ -19,7 +19,7 @@ namespace constants
 	constexpr int playerJumpingAnimationFramesAmount{ 3 };
 	constexpr int playerFallingAnimationFramesAmount{ 3 };
 
-	constexpr float playerSwitchAnimationTime{ 0.1f };
+	constexpr int playerAttacking2AnimationFramesAmount{ 6 };
 
 	constexpr float playerFirstPositionX{ 232.f };
 	constexpr float playerFirstPositionY{ 300.f };

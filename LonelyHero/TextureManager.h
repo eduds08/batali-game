@@ -8,7 +8,6 @@
 class TextureManager
 {
 public:
-	//TextureManager() {};
 	~TextureManager() {};
 
 	std::shared_ptr<sf::Texture> loadAndGetTexture(const std::string& textureName, const std::string& texturePath);

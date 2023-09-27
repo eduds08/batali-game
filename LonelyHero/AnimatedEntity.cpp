@@ -1,9 +1,8 @@
 #include "AnimatedEntity.h"
 
-AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float animationSwitchTime)
+AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount)
 	: DrawableEntity{spriteWidth, spriteHeight}
 	, m_currentAnimationFramesAmount{ animationFramesAmount }
-	, m_animationSwitchTime{ animationSwitchTime }
 {
 }
 

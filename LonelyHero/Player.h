@@ -7,7 +7,7 @@
 class Player : public AnimatedEntity, public ColliderEntity
 {
 public:
-	Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime);
+	Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount);
 	virtual ~Player() = default;
 
 	void update(float& deltaTime);
@@ -15,16 +15,18 @@ public:
 	void updateMovement(float& deltaTime);
 	void updateTexture();
 
+	void updateAttack();
+
 	void updateTextureAndAnimation();
 
 	void checkIfCanJump();
 
 	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
 
-	bool isRunning = true;
-
 private:
 	bool m_canJump{ false };
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };
+
+	bool m_isAttacking{ false };
 };

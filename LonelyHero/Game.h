@@ -21,10 +21,9 @@ public:
 
 	void updateCollision();
 
-	void loadAndCreateMap(const std::string& mapFilePath);	
+	void loadAndCreateMap(const std::string& mapFilePath);
 
-
-	std::thread t;
+	static bool isRunning;
 
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(constants::screenWidth, constants::screenHeight), "Lonely Hero" };
@@ -33,10 +32,10 @@ private:
 	sf::Event m_event{};
 	float m_deltaTime{};
 
-	Player m_player{ constants::playerSpriteWidth, constants::playerSpriteHeight, constants::playerShapeWidth, constants::playerShapeHeight, constants::playerIdleAnimationFramesAmount, constants::playerSwitchAnimationTime };
+	Player m_player{ constants::playerSpriteWidth, constants::playerSpriteHeight, constants::playerShapeWidth, constants::playerShapeHeight, constants::playerIdleAnimationFramesAmount };
 	std::vector<Ground> grounds{};
 	
 	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{450.f, 450.f}};
 
-	
+	std::thread playerAnimationThread;
 };

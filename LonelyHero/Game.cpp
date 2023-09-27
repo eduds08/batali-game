@@ -1,5 +1,7 @@
 #include "Game.h"
 
+bool Game::isRunning = true;
+
 Game::Game()
 {
 	init();
@@ -12,8 +14,8 @@ Game::~Game()
 void Game::init()
 {
 	m_window.setView(m_view);
-	loadAndCreateMap("./teste2.txt");
-	t = std::thread(&Player::updateTextureAndAnimation, std::ref(m_player));
+	loadAndCreateMap("./map.txt");
+	playerAnimationThread = std::thread(&Player::updateTextureAndAnimation, std::ref(m_player));
 	run();
 }
 
@@ -30,7 +32,7 @@ void Game::render()
 {
 	m_window.clear();
 
-	m_window.draw(m_player.getShape());
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto const& ground : grounds)
@@ -56,7 +58,7 @@ void Game::run()
 		{
 			if (m_event.type == sf::Event::Closed)
 			{
-				m_player.isRunning = false;
+				Game::isRunning = false;
 				m_window.close();
 			}
 		}
@@ -65,7 +67,7 @@ void Game::run()
 		render();
 	}
 
-	t.join();
+	playerAnimationThread.join();
 }
 
 void Game::updateCollision()

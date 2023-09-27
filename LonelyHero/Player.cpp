@@ -1,7 +1,8 @@
 #include "Player.h"
+#include "Game.h"
 
-Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount, float animationSwitchTime)
-	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount, animationSwitchTime }
+Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount)
+	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount }
 	, ColliderEntity{ shapeWidth, shapeHeight }
 {
 	setSpriteTexture("playerIdle", "./_Idle.png");
@@ -12,9 +13,21 @@ Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeH
 
 void Player::update(float& deltaTime)
 {
-	//updateTexture();
-	//updateAnimation(deltaTime);
 	updateMovement(deltaTime);
+	updateAttack();
+
+	if (m_isAttacking)
+	{
+		m_velocity.x = 0.f;
+	}
+
+	if (m_currentTexture == "playerAttacking" && m_frameCount >= 5)
+	{
+		m_isAttacking = false;
+	}
+
+	m_shape.move(m_velocity * deltaTime);
+	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 10.f});
 }
 
 void Player::updateMovement(float& deltaTime)
@@ -46,10 +59,14 @@ void Player::updateMovement(float& deltaTime)
 		m_velocity.y = -1 * sqrt(2.f * constants::gravity * constants::playerJumpSpeed);
 	}
 
-	m_velocity.y += constants::gravity * deltaTime;
+	if (!m_canJump)
+	{
+		m_velocity.y += constants::gravity * deltaTime;
+	}
+	
 
-	m_shape.move(m_velocity * deltaTime);
-	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 10.f});
+	/*m_shape.move(m_velocity * deltaTime);
+	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 10.f});*/
 }
 
 void Player::updateTexture()
@@ -62,7 +79,7 @@ void Player::updateTexture()
 	{
 		changeCurrentTexture(constants::playerFallingAnimationFramesAmount, "playerFalling", "./_Fall.png");
 	}
-	else
+	else if (!m_isAttacking)
 	{
 		if (m_isRunning)
 		{
@@ -73,11 +90,23 @@ void Player::updateTexture()
 			changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "playerIdle", "./_Idle.png");
 		}
 	}
+	else 
+	{
+		changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking", "./_Attack2NoMovement.png");
+	}
+}
+
+void Player::updateAttack()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_velocity.y == 0.f)
+	{
+		m_isAttacking = true;
+	}
 }
 
 void Player::updateTextureAndAnimation()
 {
-	while (isRunning)
+	while (Game::isRunning)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		updateTexture();
