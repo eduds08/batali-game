@@ -4,6 +4,8 @@
 #include "ColliderEntity.h"
 #include "Constants.h"
 
+#include "SwordHitbox.h"
+
 class Enemy : public AnimatedEntity, public ColliderEntity
 {
 public:
@@ -14,6 +16,8 @@ public:
 
 	void updateMovement(float& deltaTime);
 	virtual void updateTexture();
+
+	SwordHitbox* m_hitbox{};
 private:
 	
 	sf::Clock clock{};
