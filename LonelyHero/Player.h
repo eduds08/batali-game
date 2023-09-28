@@ -7,7 +7,7 @@
 class Player : public AnimatedEntity, public ColliderEntity
 {
 public:
-	Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount);
+	Player(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, float spriteScale, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath);
 	virtual ~Player() = default;
 
 	void update(float& deltaTime);

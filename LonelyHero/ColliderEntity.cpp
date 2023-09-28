@@ -1,9 +1,10 @@
 #include "ColliderEntity.h"
 
-ColliderEntity::ColliderEntity(float shapeWidth, float shapeHeight)
+ColliderEntity::ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
 	: m_shapeWidth{ shapeWidth }
 	, m_shapeHeight{ shapeHeight }
 {
+	setShapeSettings(firstPosition);
 }
 
 bool ColliderEntity::isColliding(const sf::RectangleShape& shape)

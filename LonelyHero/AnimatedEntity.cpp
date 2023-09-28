@@ -1,7 +1,7 @@
 #include "AnimatedEntity.h"
 
-AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount)
-	: DrawableEntity{spriteWidth, spriteHeight}
+AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float spriteScale)
+	: DrawableEntity{spriteWidth, spriteHeight, spriteScale}
 	, m_currentAnimationFramesAmount{ animationFramesAmount }
 {
 }

@@ -4,5 +4,5 @@ Ground::Ground(int spriteWidth, int spriteHeight, sf::Vector2f position, const s
 	: DrawableEntity{ spriteWidth, spriteHeight }
 {
 	setSpriteTexture(textureName, texturePath);
-	setSpriteSettings(position);
+	m_sprite.setPosition(position);
 }

@@ -1,14 +1,11 @@
 #include "Enemy.h"
 #include "Game.h"
 
-Enemy::Enemy(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount)
-	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount }
-	, ColliderEntity{ shapeWidth, shapeHeight }
+Enemy::Enemy(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, float spriteScale, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath)
+	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount, spriteScale }
+	, ColliderEntity{ shapeWidth, shapeHeight, firstPosition }
 {
-	setSpriteTexture("skeletonIdle", "./SkeletonIdle.png");
-	m_sprite.setTextureRect(sf::IntRect{ 0, 0, constants::skeletonSpriteWidth, constants::skeletonSpriteHeight });
-	setShapeSettings(sf::Vector2f{ constants::skeletonFirstPositionX, constants::skeletonFirstPositionY });
-	setSpriteSettings(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f}, sf::Vector2f{ constants::skeletonSpriteScale, constants::skeletonSpriteScale });
+	setSpriteTexture(textureName, texturePath);
 }
 
 void Enemy::update(float& deltaTime)
@@ -40,7 +37,7 @@ void Enemy::updateMovement(float& deltaTime)
 		m_isRunning = false;
 	}*/
 
-	m_sprite.setScale(m_spriteScale.x * m_facingRight, m_spriteScale.y);
+	m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale);
 
 	m_velocity.y += constants::gravity * deltaTime;
 

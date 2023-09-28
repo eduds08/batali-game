@@ -1,14 +1,11 @@
 #include "Player.h"
 #include "Game.h"
 
-Player::Player(int spriteWidth, int spriteHeight, float shapeWidth, float shapeHeight, int animationFramesAmount)
-	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount }
-	, ColliderEntity{ shapeWidth, shapeHeight }
+Player::Player(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, float spriteScale, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath)
+	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount, spriteScale }
+	, ColliderEntity{ shapeWidth, shapeHeight, firstPosition }
 {
-	setSpriteTexture("playerIdle", "./_Idle.png");
-	m_sprite.setTextureRect(sf::IntRect{ 0, 0, constants::playerSpriteWidth, constants::playerSpriteHeight });
-	setShapeSettings(sf::Vector2f{ constants::playerFirstPositionX, constants::playerFirstPositionY });
-	setSpriteSettings(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f}, sf::Vector2f{ constants::playerSpriteScale, constants::playerSpriteScale });
+	setSpriteTexture(textureName, texturePath);
 }
 
 void Player::update(float& deltaTime)
@@ -52,7 +49,7 @@ void Player::updateMovement(float& deltaTime)
 		m_isRunning = false;
 	}
 
-	m_sprite.setScale(m_spriteScale.x * m_facingRight, m_spriteScale.y);
+	m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && m_canJump)
 	{

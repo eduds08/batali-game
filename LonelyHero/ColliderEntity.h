@@ -5,7 +5,7 @@
 class ColliderEntity
 {
 public:
-	ColliderEntity(float shapeWidth, float shapeHeight);
+	ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
 	virtual ~ColliderEntity() = default;
 
 	bool isColliding(const sf::RectangleShape& shape);

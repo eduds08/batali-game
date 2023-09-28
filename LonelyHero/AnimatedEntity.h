@@ -7,7 +7,7 @@
 class AnimatedEntity : public DrawableEntity
 {
 public:
-	AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount);
+	AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float spriteScale);
 	virtual ~AnimatedEntity() = default;
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
@@ -19,5 +19,5 @@ protected:
 
 	int m_currentAnimationFramesAmount{};
 
-	int m_frameCount{};
+	int m_frameCount{ 0 };
 };
