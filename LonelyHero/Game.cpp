@@ -15,14 +15,14 @@ void Game::init()
 {
 	m_window.setView(m_view);
 	loadAndCreateMap("./map.txt");
-	playerAnimationThread = std::thread(&Player::updateTextureAndAnimation, std::ref(m_player));
+	playerAnimationThread = std::thread(&Game::updateTexturesAndAnimations, this);
 	run();
 }
 
 void Game::update()
 {
 	m_player.update(m_deltaTime);
-	
+	m_enemy.update(m_deltaTime);
 	updateCollision();
 	m_view.setCenter(m_player.getPosition());
 	m_window.setView(m_view);
@@ -32,8 +32,11 @@ void Game::render()
 {
 	m_window.clear();
 
-	//m_window.draw(m_player.getShape());
+	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
+
+	m_window.draw(m_enemy.getShape());
+	m_window.draw(m_enemy.getSprite());
 
 	for (auto const& ground : grounds)
 	{
@@ -79,6 +82,10 @@ void Game::updateCollision()
 			m_player.handleCollision();
 			m_player.checkIfCanJump();
 		}
+		if (m_enemy.isColliding(ground.getSprite()))
+		{
+			m_enemy.handleCollision();
+		}
 	}
 }
 
@@ -109,4 +116,15 @@ void Game::loadAndCreateMap(const std::string& mapFilePath)
 	}
 
 	mapFile.close();
+}
+
+void Game::updateTexturesAndAnimations()
+{
+	while (Game::isRunning)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		m_player.updateTextureAndAnimation();
+		m_enemy.updateTextureAndAnimation();
+	}
+	
 }

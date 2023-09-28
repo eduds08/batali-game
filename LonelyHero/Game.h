@@ -5,7 +5,7 @@
 #include "Ground.h"
 #include <fstream>
 #include <utility>
-
+#include "Enemy.h"
 #include <thread>
 
 class Game
@@ -23,6 +23,8 @@ public:
 
 	void loadAndCreateMap(const std::string& mapFilePath);
 
+	void updateTexturesAndAnimations();
+
 	static bool isRunning;
 
 private:
@@ -38,4 +40,6 @@ private:
 	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{450.f, 450.f}};
 
 	std::thread playerAnimationThread;
+
+	Enemy m_enemy{ constants::skeletonSpriteWidth, constants::skeletonSpriteHeight, constants::skeletonShapeWidth, constants::skeletonShapeHeight, constants::skeletonIdleAnimationFramesAmount };
 };

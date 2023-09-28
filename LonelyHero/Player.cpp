@@ -23,11 +23,11 @@ void Player::update(float& deltaTime)
 
 	if ((m_currentTexture == "playerAttacking2" && m_frameCount >= 5) || (m_currentTexture == "playerAttacking1" && m_frameCount >= 3))
 	{
-		previousAttackingAnimation = m_currentTexture;
+		m_previousAttackingAnimation = m_currentTexture;
 		m_isAttacking = false;
 	}
 
-	m_shape.move(m_velocity * deltaTime);
+	m_shape.move(m_velocity* deltaTime);
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 10.f});
 }
 
@@ -64,7 +64,7 @@ void Player::updateMovement(float& deltaTime)
 	{
 		m_velocity.y += constants::gravity * deltaTime;
 	}
-	
+
 
 	/*m_shape.move(m_velocity * deltaTime);
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 10.f});*/
@@ -91,9 +91,9 @@ void Player::updateTexture()
 			changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "playerIdle", "./_Idle.png");
 		}
 	}
-	else 
+	else
 	{
-		if (previousAttackingAnimation == "playerAttacking1")
+		if (m_previousAttackingAnimation == "playerAttacking1")
 		{
 			changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking2", "./_Attack2NoMovement.png");
 		}
@@ -114,13 +114,8 @@ void Player::updateAttack()
 
 void Player::updateTextureAndAnimation()
 {
-	while (Game::isRunning)
-	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		updateTexture();
-		updateAnimation();
-	}
-	
+	updateTexture();
+	updateAnimation();
 }
 
 void Player::checkIfCanJump()
