@@ -39,6 +39,11 @@ void Game::render()
 	m_window.draw(m_enemy.getShape());
 	m_window.draw(m_enemy.getSprite());
 
+	if (m_player.m_hitbox)
+	{
+		m_window.draw(m_player.m_hitbox->getShape());
+	}
+
 	for (auto& ground : grounds)
 	{
 		m_window.draw(ground.getSprite());

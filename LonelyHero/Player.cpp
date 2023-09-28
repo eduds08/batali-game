@@ -12,6 +12,23 @@ void Player::update(float& deltaTime)
 	updateMovement(deltaTime);
 	updateAttack();
 
+	if (m_isAttacking)
+	{
+		if (!m_hitbox)
+		{
+			m_hitbox = new SwordHitbox();
+			m_hitbox->setPosition(getPosition() + sf::Vector2f((30.f + getSize().x) * m_facingRight, 0.f));
+		}
+	}
+	else
+	{
+		if (m_hitbox)
+		{
+			delete m_hitbox;
+			m_hitbox = nullptr;
+		}
+	}
+
 	m_shape.move(m_velocity* deltaTime);
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 18.f});
 }
