@@ -10,9 +10,6 @@ public:
 
 	void setShapeSettings(sf::Vector2f position);
 
-	/*bool isColliding(const sf::RectangleShape& shape);
-	bool isColliding(const sf::Sprite& sprite);*/
-
 	bool isColliding(sf::Transformable& body);
 
 	void handleCollision();

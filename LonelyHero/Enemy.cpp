@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include "Game.h"
 
 Enemy::Enemy(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, float spriteScale, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath)
 	: AnimatedEntity{ spriteWidth, spriteHeight, spriteScale, animationFramesAmount }
