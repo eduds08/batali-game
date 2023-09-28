@@ -7,7 +7,7 @@ ColliderEntity::ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f
 	setShapeSettings(firstPosition);
 }
 
-bool ColliderEntity::isColliding(sf::Transformable& body)
+bool ColliderEntity::isCollidingWith(sf::Transformable& body)
 {
 	float groundHalfSizeX{};
 	float groundHalfSizeY{};

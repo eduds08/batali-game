@@ -17,3 +17,19 @@ void AnimatedEntity::updateAnimation()
 {
 	AnimationManager::animateSprite(m_sprite, m_currentAnimationFramesAmount, m_spriteWidth, m_spriteHeight, m_frameCount);
 }
+
+void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath)
+{
+	if (m_currentTexture != textureName)
+	{
+		m_currentAnimationFramesAmount = animationFramesAmount;
+		m_frameCount = 0;
+		setSpriteTexture(textureName, texturePath);
+	}
+}
+
+void AnimatedEntity::updateTextureAndAnimation()
+{
+	updateTexture();
+	updateAnimation();
+}

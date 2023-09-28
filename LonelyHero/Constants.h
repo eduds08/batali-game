@@ -13,13 +13,14 @@ namespace constants
 	constexpr float playerShapeWidth{ 30.f };
 	constexpr float playerShapeHeight{ 70.f };
 
-	constexpr int skeletonSpriteWidth{ 24 };
-	constexpr int skeletonSpriteHeight{ 32 };
+	constexpr int enemySpriteWidth{ 120 };
+	constexpr int enemySpriteHeight{ 80 };
 
-	constexpr float skeletonShapeWidth{ 20.f };
-	constexpr float skeletonShapeHeight{ 42.f };
+	constexpr float enemyShapeWidth{ 30.f };
+	constexpr float enemyShapeHeight{ 70.f };
 
-	constexpr int skeletonIdleAnimationFramesAmount{ 11 };
+	constexpr int enemyIdleAnimationFramesAmount{ 10 };
+	constexpr int enemyRunningAnimationFramesAmount{ 10 };
 
 	constexpr int playerIdleAnimationFramesAmount{ 10 };
 	constexpr int playerRunningAnimationFramesAmount{ 10 };
@@ -35,13 +36,15 @@ namespace constants
 	
 	constexpr float playerSpriteScale = 2.f;
 
-	constexpr float skeletonFirstPositionX{ 432.f };
-	constexpr float skeletonFirstPositionY{ 300.f };
+	constexpr float enemyFirstPositionX{ 432.f };
+	constexpr float enemyFirstPositionY{ 300.f };
 
-	constexpr float skeletonSpriteScale = 2.f;
+	constexpr float enemySpriteScale = 2.f;
 
 	constexpr float playerSpeed{ 240.f };
 	constexpr float playerJumpSpeed{ 130.f };
+
+	constexpr float enemySpeed{ 150.f };
 
 	constexpr float gravity{ 981.f };
 

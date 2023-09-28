@@ -3,6 +3,7 @@
 bool Game::isRunning = true;
 
 Game::Game()
+	: m_enemy{ constants::enemySpriteWidth, constants::enemySpriteHeight, constants::enemyIdleAnimationFramesAmount, constants::enemyShapeWidth, constants::enemyShapeHeight, constants::enemySpriteScale, sf::Vector2f{ constants::enemyFirstPositionX, constants::enemyFirstPositionY }, "enemyIdle", "./_Idle2.png", m_player.getPosition() }
 {
 	init();
 }
@@ -77,12 +78,12 @@ void Game::updateCollision()
 {
 	for (auto& ground : grounds)
 	{
-		if (m_player.isColliding(ground.getSprite()))
+		if (m_player.isCollidingWith(ground.getSprite()))
 		{
 			m_player.handleCollision();
 			m_player.checkIfCanJump();
 		}
-		if (m_enemy.isColliding(ground.getSprite()))
+		if (m_enemy.isCollidingWith(ground.getSprite()))
 		{
 			m_enemy.handleCollision();
 		}

@@ -41,5 +41,5 @@ private:
 
 	std::thread playerAnimationThread;
 
-	Enemy m_enemy{ constants::skeletonSpriteWidth, constants::skeletonSpriteHeight, constants::skeletonIdleAnimationFramesAmount, constants::skeletonShapeWidth, constants::skeletonShapeHeight, constants::skeletonSpriteScale, sf::Vector2f{constants::skeletonFirstPositionX, constants::skeletonFirstPositionY}, "skeletonIdle", "./SkeletonIdle.png" };
+	Enemy m_enemy;
 };

@@ -13,22 +13,21 @@ public:
 	void update(float& deltaTime);
 
 	void updateMovement(float& deltaTime);
-	void updateTexture();
+	
 
 	void updateAttack();
 
-	void updateTextureAndAnimation();
+	
 
 	void checkIfCanJump();
 
-	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
+	virtual void updateTexture();
 
 private:
 	bool m_canJump{ false };
-	bool m_isRunning{ false };
-	int m_facingRight{ 1 };
+	/*int m_facingRight{ 1 };*/
 
-	bool m_isAttacking{ false };
+	/*bool m_isAttacking{ false };*/
 
-	std::string m_previousAttackingAnimation{};
+	/*std::string m_previousAttackingAnimation{};*/
 };

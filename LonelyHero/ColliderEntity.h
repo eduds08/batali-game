@@ -10,8 +10,7 @@ public:
 
 	void setShapeSettings(sf::Vector2f position);
 
-	bool isColliding(sf::Transformable& body);
-
+	bool isCollidingWith(sf::Transformable& body);
 	void handleCollision();
 
 	const sf::RectangleShape& getShape() const { return m_shape; }
@@ -25,9 +24,9 @@ public:
 protected:
 	sf::RectangleShape m_shape{};
 
-	sf::Vector2f m_collisionDirection{};
-	sf::Vector2f m_velocity{};
-
 	float m_shapeWidth{};
 	float m_shapeHeight{};
+
+	sf::Vector2f m_collisionDirection{};
+	sf::Vector2f m_velocity{};
 };
