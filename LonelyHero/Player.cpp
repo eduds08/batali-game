@@ -17,7 +17,6 @@ void Player::update(float& deltaTime)
 		if (!m_hitbox)
 		{
 			m_hitbox = new SwordHitbox();
-			m_hitbox->setPosition(getPosition() + sf::Vector2f((30.f + getSize().x) * m_facingRight, 0.f));
 		}
 	}
 	else
@@ -27,6 +26,11 @@ void Player::update(float& deltaTime)
 			delete m_hitbox;
 			m_hitbox = nullptr;
 		}
+	}
+
+	if (m_hitbox)
+	{
+		m_hitbox->setPosition(getPosition() + sf::Vector2f((30.f + getSize().x) * m_facingRight, 0.f));
 	}
 
 	m_shape.move(m_velocity* deltaTime);
@@ -56,7 +60,7 @@ void Player::updateMovement(float& deltaTime)
 
 	m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && m_canJump)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && m_canJump && !m_isAttacking)
 	{
 		m_canJump = false;
 		m_velocity.y = -1 * sqrt(2.f * constants::gravity * constants::playerJumpSpeed);
@@ -70,7 +74,7 @@ void Player::updateMovement(float& deltaTime)
 
 void Player::updateAttack()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_velocity.y == 0.f)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_velocity.y == 0.f && !m_isAttacking)
 	{
 		m_isAttacking = true;
 	}

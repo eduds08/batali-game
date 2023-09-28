@@ -13,7 +13,7 @@ public:
 	bool isCollidingWith(sf::Transformable& body);
 	void handleCollision();
 
-	const sf::RectangleShape& getShape() const { return m_shape; }
+	sf::RectangleShape& getShape() { return m_shape; }
 
 	const sf::Vector2f& getSize() const { return m_shape.getSize(); }
 	const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }

@@ -1,18 +1,16 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"]
+#include "ColliderEntity.h"
+#include "Constants.h"
 
-class SwordHitbox
+class SwordHitbox : public ColliderEntity
 {
 public:
-	SwordHitbox();
+	SwordHitbox(float shapeWidth = constants::swordHitboxWidth, float shapeHeight = constants::swordHitboxHeight, sf::Vector2f firstPosition = sf::Vector2f(0.f, 0.f));
 	~SwordHitbox();
 
 	void setPosition(const sf::Vector2f& entityPosition) { m_shape.setPosition(entityPosition); }
 
-	const sf::RectangleShape& const getShape() { return m_shape; }
-
 private:
-	sf::RectangleShape m_shape{};
 };
 

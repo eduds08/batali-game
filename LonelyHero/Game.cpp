@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <iostream>
+
 bool Game::isRunning = true;
 
 Game::Game()
@@ -33,19 +35,19 @@ void Game::render()
 {
 	m_window.clear();
 
-	m_window.draw(m_player.getShape());
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
-	m_window.draw(m_enemy.getShape());
+	//m_window.draw(m_enemy.getShape());
 	m_window.draw(m_enemy.getSprite());
 
 	if (m_player.m_hitbox)
 	{
-		m_window.draw(m_player.m_hitbox->getShape());
+		//m_window.draw(m_player.m_hitbox->getShape());
 	}
 	if (m_enemy.m_hitbox)
 	{
-		m_window.draw(m_enemy.m_hitbox->getShape());
+		//m_window.draw(m_enemy.m_hitbox->getShape());
 	}
 
 	for (auto& ground : grounds)
@@ -95,6 +97,15 @@ void Game::updateCollision()
 		if (m_enemy.isCollidingWith(ground.getSprite()))
 		{
 			m_enemy.handleCollision();
+		}
+	}
+
+	if (m_player.m_hitbox)
+	{
+		if (m_player.m_hitbox->isCollidingWith(m_enemy.getShape()) && !m_enemy.hitted)
+		{
+			m_enemy.hitted = true;
+			std::cout << "ataque\n";
 		}
 	}
 }

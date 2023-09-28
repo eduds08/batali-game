@@ -48,6 +48,9 @@ namespace constants
 
 	constexpr float gravity{ 981.f };
 
+	constexpr float swordHitboxWidth{ 70.f };
+	constexpr float swordHitboxHeight{ 30.f };
+
 
 
 }

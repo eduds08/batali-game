@@ -18,6 +18,9 @@ public:
 	virtual void updateTexture();
 
 	SwordHitbox* m_hitbox{};
+
+	bool hitted{ false };
+
 private:
 	
 	sf::Clock clock{};
