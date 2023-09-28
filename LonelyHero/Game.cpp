@@ -38,7 +38,7 @@ void Game::render()
 	m_window.draw(m_enemy.getShape());
 	m_window.draw(m_enemy.getSprite());
 
-	for (auto const& ground : grounds)
+	for (auto& ground : grounds)
 	{
 		m_window.draw(ground.getSprite());
 	}
@@ -75,7 +75,7 @@ void Game::run()
 
 void Game::updateCollision()
 {
-	for (const auto& ground : grounds)
+	for (auto& ground : grounds)
 	{
 		if (m_player.isColliding(ground.getSprite()))
 		{

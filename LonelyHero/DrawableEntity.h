@@ -10,7 +10,7 @@ public:
 
 	virtual void setSpriteTexture(const std::string& textureName, const std::string& texturePath);
 	
-	const sf::Sprite& getSprite() const { return m_sprite; }
+	sf::Sprite& getSprite() { return m_sprite; }
 
 protected:
 	sf::Sprite m_sprite{};
@@ -19,6 +19,5 @@ protected:
 	
 	int m_spriteWidth{};
 	int m_spriteHeight{};
-
 	float m_spriteScale{ 1.f };
 };

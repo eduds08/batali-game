@@ -8,8 +8,12 @@ public:
 	ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
 	virtual ~ColliderEntity() = default;
 
-	bool isColliding(const sf::RectangleShape& shape);
-	bool isColliding(const sf::Sprite& sprite);
+	void setShapeSettings(sf::Vector2f position);
+
+	/*bool isColliding(const sf::RectangleShape& shape);
+	bool isColliding(const sf::Sprite& sprite);*/
+
+	bool isColliding(sf::Transformable& body);
 
 	void handleCollision();
 
@@ -18,10 +22,7 @@ public:
 	const sf::Vector2f& getSize() const { return m_shape.getSize(); }
 	const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }
 
-	void setShapeSettings(sf::Vector2f position);
-
 	const sf::Vector2f& getCollisionDirection() const { return m_collisionDirection; }
-
 	const sf::Vector2f& getVelocity() const { return m_velocity; }
 
 protected:

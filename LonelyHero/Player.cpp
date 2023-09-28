@@ -2,7 +2,7 @@
 #include "Game.h"
 
 Player::Player(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, float spriteScale, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath)
-	: AnimatedEntity{ spriteWidth, spriteHeight, animationFramesAmount, spriteScale }
+	: AnimatedEntity{ spriteWidth, spriteHeight, spriteScale, animationFramesAmount }
 	, ColliderEntity{ shapeWidth, shapeHeight, firstPosition }
 {
 	setSpriteTexture(textureName, texturePath);
@@ -25,7 +25,7 @@ void Player::update(float& deltaTime)
 	}
 
 	m_shape.move(m_velocity* deltaTime);
-	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 10.f});
+	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 18.f});
 }
 
 void Player::updateMovement(float& deltaTime)
