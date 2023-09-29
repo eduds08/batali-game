@@ -1,7 +1,7 @@
 #include "SwordHitbox.h"
 
-SwordHitbox::SwordHitbox(float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
-	: ColliderEntity{shapeWidth, shapeHeight, firstPosition}
+SwordHitbox::SwordHitbox()
+	: ColliderEntity{ constants::swordHitboxWidth, constants::swordHitboxHeight, sf::Vector2f(0.f, 0.f) }
 {
 }
 

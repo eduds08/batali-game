@@ -1,9 +1,8 @@
 #include "Player.h"
 
-Player::Player(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath, float spriteScale)
-	: AttackEntity{spriteWidth, spriteHeight, animationFramesAmount, shapeWidth, shapeHeight, firstPosition, spriteScale}
+Player::Player(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
+	: AttackEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount, shapeWidth, shapeHeight, firstPosition }
 {
-	setSpriteTexture(textureName, texturePath);
 }
 
 void Player::update(float& deltaTime)
@@ -59,42 +58,21 @@ void Player::updateMovement(float& deltaTime)
 
 void Player::checkIfCanJump()
 {
-	if (m_collisionDirection.y > 0.f)
-	{
-		m_canJump = true;
-	}
+	m_canJump = m_collisionDirection.y > 0.f;
 }
 
 void Player::updateTexture()
 {
-	if (m_velocity.y < 0.f)
+	if (m_velocity.y != 0.f)
 	{
-		changeCurrentTexture(constants::playerJumpingAnimationFramesAmount, "playerJumping", "./_Jump.png");
-	}
-	else if (m_velocity.y > 0.f)
-	{
-		changeCurrentTexture(constants::playerFallingAnimationFramesAmount, "playerFalling", "./_Fall.png");
+		m_velocity.y > 0.f ? changeCurrentTexture(constants::playerFallingAnimationFramesAmount, "playerFalling", "./_Fall.png") : changeCurrentTexture(constants::playerJumpingAnimationFramesAmount, "playerJumping", "./_Jump.png");;
 	}
 	else if (!m_isAttacking)
 	{
-		if (m_isRunning)
-		{
-			changeCurrentTexture(constants::playerRunningAnimationFramesAmount, "playerRunning", "./_Run.png");
-		}
-		else
-		{
-			changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "playerIdle", "./_Idle.png");
-		}
+		m_isRunning ? changeCurrentTexture(constants::playerRunningAnimationFramesAmount, "playerRunning", "./_Run.png") : changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "playerIdle", "./_Idle.png");
 	}
-	else
+	else if (m_isAttacking)
 	{
-		if (m_previousAttackingAnimation == "playerAttacking1")
-		{
-			changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking2", "./_Attack2NoMovement.png");
-		}
-		else
-		{
-			changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking1", "./_AttackNoMovement.png");
-		}
+		m_previousAttackingAnimation == "playerAttacking1" ? changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking2", "./_Attack2NoMovement.png") : changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking1", "./_AttackNoMovement.png");
 	}
 }

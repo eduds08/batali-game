@@ -1,7 +1,7 @@
 #include "MovableEntity.h"
 
-MovableEntity::MovableEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition, float spriteScale)
-	: AnimatedEntity{spriteWidth, spriteHeight, animationFramesAmount, spriteScale}
+MovableEntity::MovableEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
+	: AnimatedEntity{spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount}
 	, ColliderEntity{shapeWidth, shapeHeight, firstPosition}
 {
 }

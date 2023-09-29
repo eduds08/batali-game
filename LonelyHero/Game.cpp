@@ -5,7 +5,6 @@
 bool Game::isRunning = true;
 
 Game::Game()
-	: m_enemy{ constants::enemySpriteWidth, constants::enemySpriteHeight, constants::enemyIdleAnimationFramesAmount, constants::enemyShapeWidth, constants::enemyShapeHeight, sf::Vector2f{ constants::enemyFirstPositionX, constants::enemyFirstPositionY }, "enemyIdle", "./_Idle2.png", m_player.getPosition(), constants::enemySpriteScale }
 {
 	init();
 }

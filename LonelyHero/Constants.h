@@ -31,13 +31,11 @@ namespace constants
 	constexpr int playerAttackingAnimationFramesAmount{ 4 };
 	constexpr int playerAttacking2AnimationFramesAmount{ 6 };
 
-	constexpr float playerFirstPositionX{ 232.f };
-	constexpr float playerFirstPositionY{ 300.f };
-	
+	const sf::Vector2f playerFirstPosition{sf::Vector2f{232.f, 300.f}};
+
 	constexpr float playerSpriteScale = 2.f;
 
-	constexpr float enemyFirstPositionX{ 432.f };
-	constexpr float enemyFirstPositionY{ 300.f };
+	const sf::Vector2f enemyFirstPosition{sf::Vector2f{432.f, 300.f}};
 
 	constexpr float enemySpriteScale = 2.f;
 

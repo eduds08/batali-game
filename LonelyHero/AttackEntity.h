@@ -6,7 +6,7 @@
 class AttackEntity : public MovableEntity
 {
 public:
-	AttackEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition, float spriteScale = 1.f);
+	AttackEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
 	virtual ~AttackEntity() = default;
 
 	void updateAttack(const std::string& entity);

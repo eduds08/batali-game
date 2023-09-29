@@ -1,7 +1,7 @@
 #include "AttackEntity.h"
 
-AttackEntity::AttackEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition, float spriteScale)
-	: MovableEntity{spriteWidth, spriteHeight, animationFramesAmount, shapeWidth, shapeHeight, firstPosition, spriteScale}
+AttackEntity::AttackEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
+	: MovableEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount, shapeWidth, shapeHeight, firstPosition }
 {
 }
 
