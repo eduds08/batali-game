@@ -1,7 +1,7 @@
 #include "DrawableEntity.h"
 
 DrawableEntity::DrawableEntity(int spriteWidth, int spriteHeight, float spriteScale)
-	: m_texturesManager(TextureManager::getInstance())
+	: m_texturesManager(&TextureManager::getInstance())
 	, m_spriteWidth{ spriteWidth }
 	, m_spriteHeight{ spriteHeight }
 	, m_spriteScale{ spriteScale }
