@@ -15,7 +15,7 @@ void AnimatedEntity::setSpriteTexture(const std::string& textureName, const std:
 
 void AnimatedEntity::updateAnimation()
 {
-	AnimationManager::animateSprite(m_sprite, m_currentAnimationFramesAmount, m_spriteWidth, m_spriteHeight, m_frameCount);
+	animateSprite();
 }
 
 void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath)
@@ -32,4 +32,12 @@ void AnimatedEntity::updateTextureAndAnimation()
 {
 	updateTexture();
 	updateAnimation();
+}
+
+void AnimatedEntity::animateSprite()
+{
+	if (m_frameCount == m_currentAnimationFramesAmount)
+		m_frameCount = 0;
+	m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
+	++m_frameCount;
 }

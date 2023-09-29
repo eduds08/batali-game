@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DrawableEntity.h"
-#include "AnimationManager.h"
 #include <thread>
 
 class AnimatedEntity : public DrawableEntity
@@ -17,6 +16,9 @@ public:
 	virtual void updateTexture() = 0;
 	void updateTextureAndAnimation();
 	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
+
+
+	void animateSprite();
 
 protected:
 	std::string m_currentTexture{};
