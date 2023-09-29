@@ -5,7 +5,7 @@
 bool Game::isRunning = true;
 
 Game::Game()
-	: m_enemy{ constants::enemySpriteWidth, constants::enemySpriteHeight, constants::enemyIdleAnimationFramesAmount, constants::enemyShapeWidth, constants::enemyShapeHeight, constants::enemySpriteScale, sf::Vector2f{ constants::enemyFirstPositionX, constants::enemyFirstPositionY }, "enemyIdle", "./_Idle2.png", m_player.getPosition() }
+	: m_enemy{ constants::enemySpriteWidth, constants::enemySpriteHeight, constants::enemyIdleAnimationFramesAmount, constants::enemyShapeWidth, constants::enemyShapeHeight, sf::Vector2f{ constants::enemyFirstPositionX, constants::enemyFirstPositionY }, "enemyIdle", "./_Idle2.png", m_player.getPosition(), constants::enemySpriteScale }
 {
 	init();
 }
@@ -35,19 +35,19 @@ void Game::render()
 {
 	m_window.clear();
 
-	//m_window.draw(m_player.getShape());
+	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
-	//m_window.draw(m_enemy.getShape());
+	m_window.draw(m_enemy.getShape());
 	m_window.draw(m_enemy.getSprite());
 
 	if (m_player.m_hitbox)
 	{
-		//m_window.draw(m_player.m_hitbox->getShape());
+		m_window.draw(m_player.m_hitbox->getShape());
 	}
 	if (m_enemy.m_hitbox)
 	{
-		//m_window.draw(m_enemy.m_hitbox->getShape());
+		m_window.draw(m_enemy.m_hitbox->getShape());
 	}
 
 	for (auto& ground : grounds)
@@ -99,15 +99,6 @@ void Game::updateCollision()
 			m_enemy.handleCollision();
 		}
 	}
-
-	if (m_player.m_hitbox)
-	{
-		if (m_player.m_hitbox->isCollidingWith(m_enemy.getShape()) && !m_enemy.hitted)
-		{
-			m_enemy.hitted = true;
-			std::cout << "ataque\n";
-		}
-	}
 }
 
 void Game::loadAndCreateMap(const std::string& mapFilePath)
@@ -144,8 +135,8 @@ void Game::updateTexturesAndAnimations()
 	while (Game::isRunning)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		m_player.updateTextureAndAnimation();
-		m_enemy.updateTextureAndAnimation();
+		m_player.updateAnimation();
+		m_enemy.updateAnimation();
 	}
 	
 }

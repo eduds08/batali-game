@@ -1,25 +1,18 @@
 #pragma once
 
-#include "AnimatedEntity.h"
-#include "ColliderEntity.h"
+#include "AttackEntity.h"
 #include "Constants.h"
 
-#include "SwordHitbox.h"
-
-class Enemy : public AnimatedEntity, public ColliderEntity
+class Enemy : public AttackEntity
 {
 public:
-	Enemy(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, float spriteScale, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath, const sf::Vector2f& playerPosition);
+	Enemy(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath, const sf::Vector2f& playerPosition, float spriteScale = 1.f);
 	virtual ~Enemy() = default;
 
 	void update(float& deltaTime);
 
 	void updateMovement(float& deltaTime);
 	virtual void updateTexture();
-
-	SwordHitbox* m_hitbox{};
-
-	bool hitted{ false };
 
 private:
 	

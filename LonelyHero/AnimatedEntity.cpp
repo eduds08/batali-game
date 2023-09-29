@@ -1,6 +1,6 @@
 #include "AnimatedEntity.h"
 
-AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, float spriteScale, int animationFramesAmount)
+AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, int animationFramesAmount, float spriteScale)
 	: DrawableEntity{spriteWidth, spriteHeight, spriteScale}
 	, m_currentAnimationFramesAmount{ animationFramesAmount }
 {
@@ -15,6 +15,7 @@ void AnimatedEntity::setSpriteTexture(const std::string& textureName, const std:
 
 void AnimatedEntity::updateAnimation()
 {
+	updateTexture();
 	animateSprite();
 }
 
@@ -26,12 +27,6 @@ void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::
 		m_frameCount = 0;
 		setSpriteTexture(textureName, texturePath);
 	}
-}
-
-void AnimatedEntity::updateTextureAndAnimation()
-{
-	updateTexture();
-	updateAnimation();
 }
 
 void AnimatedEntity::animateSprite()

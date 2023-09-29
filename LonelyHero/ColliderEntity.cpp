@@ -1,10 +1,13 @@
 #include "ColliderEntity.h"
 
 ColliderEntity::ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
-	: m_shapeWidth{ shapeWidth }
-	, m_shapeHeight{ shapeHeight }
 {
-	setShapeSettings(firstPosition);
+	m_shape.setSize(sf::Vector2f{ shapeWidth, shapeHeight });
+	m_shape.setOrigin(m_shape.getSize() / 2.f);
+	m_shape.setPosition(firstPosition.x, firstPosition.y);
+
+	m_shape.setOutlineColor(sf::Color::Red);
+	m_shape.setOutlineThickness(1.f);
 }
 
 bool ColliderEntity::isCollidingWith(sf::Transformable& body)
@@ -73,27 +76,4 @@ bool ColliderEntity::isCollidingWith(sf::Transformable& body)
 	}
 
 	return false;
-}
-
-void ColliderEntity::handleCollision()
-{
-	if (m_collisionDirection.x != 0.f)
-	{
-		m_velocity.x = 0.f;
-	}
-	if (m_collisionDirection.y != 0.f)
-	{
-		m_velocity.y = 0.f;
-
-	}
-}
-
-void ColliderEntity::setShapeSettings(sf::Vector2f position)
-{
-	m_shape.setSize(sf::Vector2f{ m_shapeWidth, m_shapeHeight });
-	m_shape.setOrigin(m_shape.getSize() / 2.f);
-	m_shape.setPosition(position.x, position.y);
-
-	m_shape.setOutlineColor(sf::Color::Red);
-	m_shape.setOutlineThickness(1.f);
 }

@@ -34,7 +34,7 @@ private:
 	sf::Event m_event{};
 	float m_deltaTime{};
 
-	Player m_player{ constants::playerSpriteWidth, constants::playerSpriteHeight, constants::playerIdleAnimationFramesAmount, constants::playerShapeWidth, constants::playerShapeHeight, constants::playerSpriteScale, sf::Vector2f{constants::playerFirstPositionX, constants::playerFirstPositionY}, "playerIdle", "./_Idle.png"};
+	Player m_player{ constants::playerSpriteWidth, constants::playerSpriteHeight, constants::playerIdleAnimationFramesAmount, constants::playerShapeWidth, constants::playerShapeHeight, sf::Vector2f{constants::playerFirstPositionX, constants::playerFirstPositionY}, "playerIdle", "./_Idle.png", constants::playerSpriteScale };
 	std::vector<Ground> grounds{};
 	
 	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{450.f, 450.f}};

@@ -13,11 +13,10 @@ public:
 	sf::Sprite& getSprite() { return m_sprite; }
 
 protected:
-	sf::Sprite m_sprite{};
-
 	TextureManager* m_texturesManager;
-	
+
+	sf::Sprite m_sprite{};
 	int m_spriteWidth{};
 	int m_spriteHeight{};
-	float m_spriteScale{ 1.f };
+	float m_spriteScale{};
 };

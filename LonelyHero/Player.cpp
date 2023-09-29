@@ -1,8 +1,7 @@
 #include "Player.h"
 
-Player::Player(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, float spriteScale, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath)
-	: AnimatedEntity{ spriteWidth, spriteHeight, spriteScale, animationFramesAmount }
-	, ColliderEntity{ shapeWidth, shapeHeight, firstPosition }
+Player::Player(int spriteWidth, int spriteHeight, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition, const std::string& textureName, const std::string& texturePath, float spriteScale)
+	: AttackEntity{spriteWidth, spriteHeight, animationFramesAmount, shapeWidth, shapeHeight, firstPosition, spriteScale}
 {
 	setSpriteTexture(textureName, texturePath);
 }
@@ -10,31 +9,17 @@ Player::Player(int spriteWidth, int spriteHeight, int animationFramesAmount, flo
 void Player::update(float& deltaTime)
 {
 	updateMovement(deltaTime);
-	updateAttack();
-
-	if (m_isAttacking)
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_velocity.y == 0.f && !m_isAttacking)
 	{
-		if (!m_hitbox)
-		{
-			m_hitbox = new SwordHitbox();
-		}
-	}
-	else
-	{
-		if (m_hitbox)
-		{
-			delete m_hitbox;
-			m_hitbox = nullptr;
-		}
+		m_isAttacking = true;
 	}
 
-	if (m_hitbox)
-	{
-		m_hitbox->setPosition(getPosition() + sf::Vector2f((30.f + getSize().x) * m_facingRight, 0.f));
-	}
+	updateAttack("player");
 
-	m_shape.move(m_velocity* deltaTime);
-	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - 18.f});
+	updateHitbox();
+
+	move(18.f, deltaTime);
 }
 
 void Player::updateMovement(float& deltaTime)
@@ -69,25 +54,6 @@ void Player::updateMovement(float& deltaTime)
 	if (!m_canJump)
 	{
 		m_velocity.y += constants::gravity * deltaTime;
-	}
-}
-
-void Player::updateAttack()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_velocity.y == 0.f && !m_isAttacking)
-	{
-		m_isAttacking = true;
-	}
-
-	if (m_isAttacking)
-	{
-		m_velocity.x = 0.f;
-	}
-
-	if ((m_currentTexture == "playerAttacking2" && m_frameCount >= 5) || (m_currentTexture == "playerAttacking1" && m_frameCount >= 3))
-	{
-		m_previousAttackingAnimation = m_currentTexture;
-		m_isAttacking = false;
 	}
 }
 
