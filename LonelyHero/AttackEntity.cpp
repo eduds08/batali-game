@@ -25,7 +25,10 @@ void AttackEntity::updateHitbox()
 	{
 		if (!m_hitbox)
 		{
-			m_hitbox = new SwordHitbox();
+			m_hitbox = { new sf::RectangleShape{sf::Vector2f{constants::swordHitboxWidth, constants::swordHitboxHeight}} };
+			m_hitbox->setOrigin(m_hitbox->getSize() / 2.f);
+			m_hitbox->setOutlineColor(sf::Color::Red);
+			m_hitbox->setOutlineThickness(1.f);
 		}
 	}
 	else
@@ -39,6 +42,11 @@ void AttackEntity::updateHitbox()
 
 	if (m_hitbox)
 	{
-		m_hitbox->setPosition( getPosition() + sf::Vector2f(getSize().x * m_facingRight, 0.f));
+		m_hitbox->setPosition(getPosition() + sf::Vector2f((20.f + getSize().x) * m_facingRight, 0.f));
 	}
+}
+
+sf::RectangleShape* AttackEntity::getHitbox()
+{
+	return m_hitbox ? m_hitbox : nullptr;
 }

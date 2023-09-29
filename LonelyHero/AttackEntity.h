@@ -1,7 +1,6 @@
 #pragma once
 
 #include "MovableEntity.h"
-#include "SwordHitbox.h"
 
 class AttackEntity : public MovableEntity
 {
@@ -13,11 +12,11 @@ public:
 
 	void updateHitbox();
 
-	SwordHitbox* m_hitbox{};
+	sf::RectangleShape* getHitbox();
 
 protected:
 	bool m_isAttacking{ false };
 	std::string m_previousAttackingAnimation{};
 
-	
+	sf::RectangleShape* m_hitbox{};
 };

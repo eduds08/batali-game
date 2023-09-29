@@ -143,7 +143,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SwordHitbox.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +156,6 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="MovableEntity.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="SwordHitbox.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
