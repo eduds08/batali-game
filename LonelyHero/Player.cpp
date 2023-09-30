@@ -7,18 +7,32 @@ Player::Player(int spriteWidth, int spriteHeight, float spriteScale, const std::
 
 void Player::update(float& deltaTime)
 {
-	updateMovement(deltaTime);
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_velocity.y == 0.f && !m_isAttacking)
+	if (m_currentTexture == "enemyHitted" && m_frameCount >= 9)
 	{
-		m_isAttacking = true;
+		justHitted = false;
+		dead = true;
+		m_hitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_hitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+		m_velocity.x = 0.f;
+		m_velocity.y = 0.f;
 	}
 
-	updateAttack("player");
+	if (!dead)
+	{
+		updateMovement(deltaTime);
 
-	updateHitbox();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_canJump && !m_isAttacking)
+		{
+			m_isAttacking = true;
+		}
 
-	move(18.f, deltaTime);
+		updateAttack("player");
+
+		updateHitbox();
+
+		move(18.f, deltaTime);
+	}
+	
 }
 
 void Player::updateMovement(float& deltaTime)
@@ -50,10 +64,9 @@ void Player::updateMovement(float& deltaTime)
 		m_velocity.y = -1 * sqrt(2.f * constants::gravity * constants::playerJumpSpeed);
 	}
 
-	if (!m_canJump)
-	{
-		m_velocity.y += constants::gravity * deltaTime;
-	}
+
+	m_velocity.y += constants::gravity * deltaTime;
+	
 }
 
 void Player::checkIfCanJump()
@@ -63,7 +76,11 @@ void Player::checkIfCanJump()
 
 void Player::updateTexture()
 {
-	if (m_velocity.y != 0.f)
+	if (justHitted)
+	{
+		changeCurrentTexture(10, "enemyHitted", "./_DeathNoMovement2.png");
+	}
+	else if (m_velocity.y != 0.f && !m_canJump)
 	{
 		m_velocity.y > 0.f ? changeCurrentTexture(constants::playerFallingAnimationFramesAmount, "playerFalling", "./_Fall.png") : changeCurrentTexture(constants::playerJumpingAnimationFramesAmount, "playerJumping", "./_Jump.png");;
 	}

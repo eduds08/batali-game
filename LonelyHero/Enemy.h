@@ -14,6 +14,8 @@ public:
 	void updateMovement(float& deltaTime);
 	virtual void updateTexture();
 
+	int hp{ 1000 };
+
 private:
 	
 	sf::Clock clock{};

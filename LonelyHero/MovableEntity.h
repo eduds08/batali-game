@@ -21,4 +21,3 @@ protected:
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };
 };
-

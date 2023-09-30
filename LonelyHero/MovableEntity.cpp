@@ -15,7 +15,6 @@ void MovableEntity::handleCollision()
 	if (m_collisionDirection.y != 0.f)
 	{
 		m_velocity.y = 0.f;
-		
 	}
 }
 

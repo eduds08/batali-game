@@ -6,6 +6,7 @@ DrawableEntity::DrawableEntity(int spriteWidth, int spriteHeight, float spriteSc
 	, m_spriteHeight{ spriteHeight }
 	, m_spriteScale{ spriteScale }
 {
-	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(textureName, texturePath));
+	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
+	
 }

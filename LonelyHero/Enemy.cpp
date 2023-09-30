@@ -8,18 +8,40 @@ Enemy::Enemy(int spriteWidth, int spriteHeight, float spriteScale, const std::st
 
 void Enemy::update(float& deltaTime)
 {
-	updateMovement(deltaTime);
-
-	timeBetweenAttacks = clock.getElapsedTime().asSeconds();
-	if (m_velocity.x == 0.f && timeBetweenAttacks > 1.f)
+	if (m_currentTexture == "enemyDead" && m_frameCount >= 9)
 	{
-		m_isAttacking = true;
+		dead = true;
+		m_hitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_hitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+		m_velocity.x = 0.f;
+		m_velocity.y = 0.f;
 	}
 
-	updateAttack("enemy");
-	updateHitbox();
+	if (m_currentTexture == "enemyHitted")
+	{
+		m_hitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_hitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+		m_velocity.x = 0.f;
+		m_velocity.y = 0.f;
+	}
 
-	move(18.f, deltaTime);
+	if (m_currentTexture != "enemyHitted" && !dead && m_currentTexture != "enemyDead")
+	{
+
+		updateMovement(deltaTime);
+
+		timeBetweenAttacks = clock.getElapsedTime().asSeconds();
+		if (m_velocity.x == 0.f && timeBetweenAttacks > 1.f)
+		{
+			m_isAttacking = true;
+		}
+
+		updateAttack("enemy");
+		updateHitbox();
+
+		move(18.f, deltaTime);
+	}
+	
 }
 
 void Enemy::updateMovement(float& deltaTime)
@@ -50,8 +72,15 @@ void Enemy::updateMovement(float& deltaTime)
 
 void Enemy::updateTexture()
 {
-
-	if (!m_isAttacking)
+	if (hp <= 0)
+	{
+		changeCurrentTexture(10, "enemyDead", "./_DeathNoMovement2.png");
+	}
+	else if (justHitted)
+	{
+		changeCurrentTexture(1, "enemyHitted", "./_Hit2.png");
+	}
+	else if (!m_isAttacking)
 	{
 		m_isRunning ? changeCurrentTexture(constants::playerRunningAnimationFramesAmount, "enemyRunning", "./_Run2.png") : changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "enemyIdle", "./_Idle2.png");
 	}

@@ -10,9 +10,9 @@ ColliderEntity::ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f
 	m_shape.setOutlineThickness(1.f);
 }
 
-bool ColliderEntity::isCollidingWith(sf::Transformable& body)
+bool ColliderEntity::isCollidingWith(sf::Sprite& body)
 {
-	float groundHalfSizeX{};
+	/*float groundHalfSizeX{};
 	float groundHalfSizeY{};
 
 	if (auto derived = dynamic_cast<sf::Sprite*>(&body))
@@ -25,8 +25,10 @@ bool ColliderEntity::isCollidingWith(sf::Transformable& body)
 	{
 		float groundHalfSizeX = derived->getSize().x / 2.f;
 		float groundHalfSizeY = derived->getSize().y / 2.f;
-	}
+	}*/
 
+	float groundHalfSizeX = body.getTexture()->getSize().x / 2.f;
+	float groundHalfSizeY = body.getTexture()->getSize().y / 2.f;
 	float groundPositionX = body.getPosition().x;
 	float groundPositionY = body.getPosition().y;
 

@@ -17,7 +17,8 @@ void Game::init()
 {
 	m_window.setView(m_view);
 	loadAndCreateMap("./map.txt");
-	playerAnimationThread = std::thread(&Game::updateTexturesAndAnimations, this);
+	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
+	//collisionThread = std::thread(&Game::updateCollision, this);
 	run();
 }
 
@@ -25,7 +26,15 @@ void Game::update()
 {
 	m_player.update(m_deltaTime);
 	m_enemy.update(m_deltaTime);
+
+	clock2Time = clock2.getElapsedTime().asSeconds();
+	if (clock2Time > 0.55f && m_enemy.justHitted)
+	{
+		m_enemy.justHitted = false;
+	}
+
 	updateCollision();
+
 	m_view.setCenter(m_player.getPosition());
 	m_window.setView(m_view);
 }
@@ -40,18 +49,22 @@ void Game::render()
 	m_window.draw(m_enemy.getShape());
 	m_window.draw(m_enemy.getSprite());
 
-	if (m_player.getHitbox())
-	{
-		m_window.draw(*m_player.getHitbox());
-	}
-	if (m_enemy.getHitbox())
-	{
-		m_window.draw(*m_enemy.getHitbox());
-	}
+	m_window.draw(m_player.getHitbox());
+	m_window.draw(m_enemy.getHitbox());
+
+	float horizontalLimitRight = m_view.getCenter().x + m_view.getSize().x / 2.f + 16.f * 3.f;
+	float horizontalLimitLeft = m_view.getCenter().x - m_view.getSize().x / 2.f - 16.f * 3.f;
+
+	float verticalLimitTop = m_view.getCenter().y - m_view.getSize().y / 2.f - 16.f * 3.f;
+	float verticalLimitBottom = m_view.getCenter().y + m_view.getSize().y / 2.f + 16.f * 3.f;
 
 	for (auto& ground : grounds)
 	{
-		m_window.draw(ground.getSprite());
+		if (ground.getSprite().getPosition().x <= horizontalLimitRight && ground.getSprite().getPosition().x >= horizontalLimitLeft
+			&& ground.getSprite().getPosition().y >= verticalLimitTop && ground.getSprite().getPosition().y <= verticalLimitBottom)
+		{
+			m_window.draw(ground.getSprite());
+		}
 	}
 
 	m_window.display();
@@ -81,23 +94,42 @@ void Game::run()
 		render();
 	}
 
-	playerAnimationThread.join();
+	animationThread.join();
+	//collisionThread.join();
 }
 
 void Game::updateCollision()
 {
-	for (auto& ground : grounds)
-	{
-		if (m_player.isCollidingWith(ground.getSprite()))
+	//while (Game::isRunning)
+	//{
+		for (auto& ground : grounds)
 		{
-			m_player.handleCollision();
-			m_player.checkIfCanJump();
+			if (m_player.isCollidingWith(ground.getSprite()))
+			{
+				m_player.handleCollision();
+				m_player.checkIfCanJump();
+			}
+			
+			
+			if (m_enemy.isCollidingWith(ground.getSprite()))
+			{
+				m_enemy.handleCollision();
+			}
 		}
-		if (m_enemy.isCollidingWith(ground.getSprite()))
+
+		if (m_enemy.getShape().getGlobalBounds().intersects((m_player.getHitbox().getGlobalBounds())) && !m_enemy.justHitted)
 		{
-			m_enemy.handleCollision();
+			clock2.restart();
+			m_enemy.justHitted = true;
+			m_enemy.hp -= 25;
+			m_enemy.getShape().move(70000.f * m_deltaTime, 0.f);
 		}
-	}
+		//if (m_player.getShape().getGlobalBounds().intersects((m_enemy.getHitbox().getGlobalBounds())) && !m_player.justHitted)
+		//{
+		// 
+		//	m_player.justHitted = true;
+		//}
+	//}
 }
 
 void Game::loadAndCreateMap(const std::string& mapFilePath)
@@ -112,7 +144,7 @@ void Game::loadAndCreateMap(const std::string& mapFilePath)
 
 	while (std::getline(mapFile, row))
 	{
-		for (int i = 0; i < 40; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			mapFile >> a;
 			if (a != "0")
@@ -121,7 +153,7 @@ void Game::loadAndCreateMap(const std::string& mapFilePath)
 			}
 			++x;
 		}
-		
+
 		x = 0;
 		y++;
 	}
@@ -134,8 +166,17 @@ void Game::updateTexturesAndAnimations()
 	while (Game::isRunning)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		m_player.updateAnimation();
-		m_enemy.updateAnimation();
+		animationMutex.lock();
+		if (!m_player.dead)
+		{
+			m_player.updateAnimation();
+		}
+
+		if (!m_enemy.dead)
+		{
+			m_enemy.updateAnimation();
+		}
+		animationMutex.unlock();
 	}
-	
+
 }

@@ -7,6 +7,7 @@
 #include <utility>
 #include "Enemy.h"
 #include <thread>
+#include <mutex>
 
 using namespace constants;
 
@@ -33,6 +34,10 @@ private:
 	sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
 
 	sf::Clock m_clock{};
+
+	sf::Clock clock2{};
+	float clock2Time{2.f};
+
 	sf::Event m_event{};
 	float m_deltaTime{};
 
@@ -41,7 +46,9 @@ private:
 	
 	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{450.f, 450.f}};
 
-	std::thread playerAnimationThread;
+	std::thread animationThread;
+	std::mutex animationMutex;
+	std::thread collisionThread;
 
 	Enemy m_enemy{ enemySpriteWidth, enemySpriteHeight, enemySpriteScale, "enemyIdle", "./_Idle2.png", enemyIdleAnimationFramesAmount, enemyShapeWidth, enemyShapeHeight, enemyFirstPosition, m_player.getPosition() };
 };

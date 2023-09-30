@@ -12,11 +12,14 @@ public:
 
 	void updateHitbox();
 
-	sf::RectangleShape* getHitbox();
+	const sf::RectangleShape& getHitbox() const { return m_hitbox; }
+
+	bool justHitted{ false };
+	bool dead{ false };
 
 protected:
 	bool m_isAttacking{ false };
 	std::string m_previousAttackingAnimation{};
 
-	sf::RectangleShape* m_hitbox{};
+	sf::RectangleShape m_hitbox{};
 };
