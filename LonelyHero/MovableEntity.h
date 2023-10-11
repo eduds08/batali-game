@@ -10,9 +10,12 @@ public:
 	MovableEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
 	virtual ~MovableEntity() = default;
 
+	// Called after ifCollidingWith()
 	void handleCollision();
 
 	void move(float yAxisAdjustment, float& deltaTime);
+
+	void flipSprite() { m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale); }
 
 protected:
 

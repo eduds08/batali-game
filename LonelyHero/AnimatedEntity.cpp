@@ -8,12 +8,16 @@ AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, float spriteSc
 	m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth* m_frameCount, 0, m_spriteWidth, m_spriteHeight });
 }
 
+// inside animation Thread
 void AnimatedEntity::updateAnimation()
 {
 	updateTexture();
 	animateSprite();
 }
 
+/*
+Called when the object changes its animation. Eg.: from running animation to jumping.
+*/
 void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath)
 {
 	if (m_currentTexture != textureName)
@@ -26,6 +30,7 @@ void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::
 	}
 }
 
+// Update each frame of the animation texture
 void AnimatedEntity::animateSprite()
 {
 	if (m_frameCount == m_currentAnimationFramesAmount)

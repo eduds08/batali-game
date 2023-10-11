@@ -7,47 +7,27 @@ Player::Player(int spriteWidth, int spriteHeight, float spriteScale, const std::
 
 void Player::update(float& deltaTime)
 {
-	if (m_currentTexture == "enemyHitted" && m_frameCount >= 9)
-	{
-		justHitted = false;
-		dead = true;
-		m_hitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-		m_hitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
-		m_velocity.x = 0.f;
-		m_velocity.y = 0.f;
-	}
-
 	if (!dead)
 	{
 		updateMovement(deltaTime);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_canJump && !m_isAttacking)
-		{
-			m_isAttacking = true;
-		}
-
-		updateAttack("player");
-
-		updateHitbox();
-
-		move(18.f, deltaTime);
+		updateAttack();
+		
+		move(m_spriteHeight - m_shape.getSize().y, deltaTime);
 	}
-	
 }
 
 void Player::updateMovement(float& deltaTime)
 {
 	m_velocity.x = 0.f;
+	m_isRunning = true;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
 	{
-		m_isRunning = true;
 		m_facingRight = -1;
 		m_velocity.x -= constants::playerSpeed;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
 	{
-		m_isRunning = true;
 		m_facingRight = 1;
 		m_velocity.x += constants::playerSpeed;
 	}
@@ -56,7 +36,7 @@ void Player::updateMovement(float& deltaTime)
 		m_isRunning = false;
 	}
 
-	m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale);
+	flipSprite();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && m_canJump && !m_isAttacking)
 	{
@@ -64,32 +44,36 @@ void Player::updateMovement(float& deltaTime)
 		m_velocity.y = -1 * sqrt(2.f * constants::gravity * constants::playerJumpSpeed);
 	}
 
-
 	m_velocity.y += constants::gravity * deltaTime;
-	
 }
 
-void Player::checkIfCanJump()
+void Player::updateAttack()
 {
-	m_canJump = m_collisionDirection.y > 0.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z) && m_canJump && !m_isAttacking)
+	{
+		m_isAttacking = true;
+	}
+
+	if (m_isAttacking)
+	{
+		handleAttack("knight");
+	}
+
+	updateHitbox("knight");
 }
 
 void Player::updateTexture()
 {
-	if (justHitted)
+	if (m_velocity.y != 0.f && !m_canJump)
 	{
-		changeCurrentTexture(10, "enemyHitted", "./_DeathNoMovement2.png");
-	}
-	else if (m_velocity.y != 0.f && !m_canJump)
-	{
-		m_velocity.y > 0.f ? changeCurrentTexture(constants::playerFallingAnimationFramesAmount, "playerFalling", "./_Fall.png") : changeCurrentTexture(constants::playerJumpingAnimationFramesAmount, "playerJumping", "./_Jump.png");;
+		m_velocity.y > 0.f ? changeCurrentTexture(constants::knightFallingAnimationFramesAmount, "knightFalling", "./_Fall.png") : changeCurrentTexture(constants::knightJumpingAnimationFramesAmount, "knightJumping", "./_Jump.png");;
 	}
 	else if (!m_isAttacking)
 	{
-		m_isRunning ? changeCurrentTexture(constants::playerRunningAnimationFramesAmount, "playerRunning", "./_Run.png") : changeCurrentTexture(constants::playerIdleAnimationFramesAmount, "playerIdle", "./_Idle.png");
+		m_isRunning ? changeCurrentTexture(constants::knightRunningAnimationFramesAmount, "knightRunning", "./_Run.png") : changeCurrentTexture(constants::knightIdleAnimationFramesAmount, "knightIdle", "./_Idle.png");
 	}
 	else if (m_isAttacking)
 	{
-		m_previousAttackingAnimation == "playerAttacking1" ? changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking2", "./_Attack2NoMovement.png") : changeCurrentTexture(constants::playerAttacking2AnimationFramesAmount, "playerAttacking1", "./_AttackNoMovement.png");
+		m_previousAttackingAnimation == "knightAttacking1" ? changeCurrentTexture(constants::knightAttacking2AnimationFramesAmount, "knightAttacking2", "./_Attack2NoMovement.png") : changeCurrentTexture(constants::knightAttacking2AnimationFramesAmount, "knightAttacking1", "./_AttackNoMovement.png");
 	}
 }

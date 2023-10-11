@@ -12,10 +12,12 @@ public:
 	void update(float& deltaTime);
 
 	void updateMovement(float& deltaTime);
+	void updateAttack();
 
-	void checkIfCanJump();
-
+	// inherited from AnimatedEntity class
 	virtual void updateTexture();
+
+	void updateCanJump() { m_canJump = m_collisionDirection.y > 0.f; }
 
 private:
 	bool m_canJump{ false };

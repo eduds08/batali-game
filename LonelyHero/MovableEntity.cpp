@@ -6,6 +6,7 @@ MovableEntity::MovableEntity(int spriteWidth, int spriteHeight, float spriteScal
 {
 }
 
+// Set velocity to 0 according to the collision direction
 void MovableEntity::handleCollision()
 {
 	if (m_collisionDirection.x != 0.f)
@@ -18,6 +19,7 @@ void MovableEntity::handleCollision()
 	}
 }
 
+// Move the shape and update the sprite position to the same place
 void MovableEntity::move(float yAxisAdjustment, float& deltaTime)
 {
 	m_shape.move(m_velocity * deltaTime);

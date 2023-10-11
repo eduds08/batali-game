@@ -11,6 +11,7 @@ public:
 	sf::Sprite& getSprite() { return m_sprite; }
 
 protected:
+	// m_texturesManager -> singleton
 	TextureManager* m_texturesManager;
 
 	sf::Sprite m_sprite{};

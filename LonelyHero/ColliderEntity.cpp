@@ -10,23 +10,11 @@ ColliderEntity::ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f
 	m_shape.setOutlineThickness(1.f);
 }
 
+/*
+Returns true if colliding with body, false if not. Also set the collision directions (if is colliding in the right, left, bottom or top)
+*/
 bool ColliderEntity::isCollidingWith(sf::Sprite& body)
 {
-	/*float groundHalfSizeX{};
-	float groundHalfSizeY{};
-
-	if (auto derived = dynamic_cast<sf::Sprite*>(&body))
-	{
-		float groundHalfSizeX = derived->getTexture()->getSize().x / 2.f;
-		float groundHalfSizeY = derived->getTexture()->getSize().y / 2.f;
-	}
-
-	else if (auto derived = dynamic_cast<sf::RectangleShape*>(&body))
-	{
-		float groundHalfSizeX = derived->getSize().x / 2.f;
-		float groundHalfSizeY = derived->getSize().y / 2.f;
-	}*/
-
 	float groundHalfSizeX = body.getTexture()->getSize().x / 2.f;
 	float groundHalfSizeY = body.getTexture()->getSize().y / 2.f;
 	float groundPositionX = body.getPosition().x;

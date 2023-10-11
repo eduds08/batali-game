@@ -8,18 +8,19 @@ public:
 	AttackEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
 	virtual ~AttackEntity() = default;
 
-	void updateAttack(const std::string& entity);
+	void handleAttack(const std::string& entity);
 
-	void updateHitbox();
+	void updateHitbox(const std::string& entity);
 
-	const sf::RectangleShape& getHitbox() const { return m_hitbox; }
+	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
 
-	bool justHitted{ false };
 	bool dead{ false };
 
 protected:
 	bool m_isAttacking{ false };
+
+	// Useful when entity has more than one attack animation. So it alters between one another
 	std::string m_previousAttackingAnimation{};
 
-	sf::RectangleShape m_hitbox{};
+	sf::RectangleShape m_attackHitbox{};
 };
