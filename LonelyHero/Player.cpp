@@ -12,7 +12,7 @@ void Player::update(float& deltaTime)
 		updateMovement(deltaTime);
 		updateAttack();
 		
-		move(m_spriteHeight - m_shape.getSize().y, deltaTime);
+		move(deltaTime);
 	}
 }
 

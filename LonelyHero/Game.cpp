@@ -65,14 +65,14 @@ void Game::render()
 {
 	m_window.clear();
 
-	m_window.draw(m_player.getShape());
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
-	m_window.draw(m_enemy.getShape());
+	//m_window.draw(m_enemy.getShape());
 	m_window.draw(m_enemy.getSprite());
 
-	m_window.draw(m_player.getAttackHitbox());
-	m_window.draw(m_enemy.getAttackHitbox());
+	//m_window.draw(m_player.getAttackHitbox());
+	//m_window.draw(m_enemy.getAttackHitbox());
 
 	float horizontalLimitRight = m_view.getCenter().x + m_view.getSize().x / 2.f + 16.f * 3.f;
 	float horizontalLimitLeft = m_view.getCenter().x - m_view.getSize().x / 2.f - 16.f * 3.f;
@@ -110,12 +110,14 @@ void Game::updateCollision()
 		if (m_enemy.isCollidingWith(ground.getSprite()))
 		{
 			m_enemy.handleCollision();
+			m_enemy.updateCanJump();
 		}
 	}
 
 	if (m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
 	{
-		m_enemy.hp = 0;
+		m_enemy.takeDamage(m_player.getAttackHitbox().getGlobalBounds(), m_deltaTime);
+		std::cout << m_enemy.hp << '\n';
 	}
 }
 

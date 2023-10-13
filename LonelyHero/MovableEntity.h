@@ -13,7 +13,8 @@ public:
 	// Called after ifCollidingWith()
 	void handleCollision();
 
-	void move(float yAxisAdjustment, float& deltaTime);
+	void move(float& deltaTime);
+	void move(sf::Vector2f velocity, float& deltaTime);
 
 	void flipSprite() { m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale); }
 

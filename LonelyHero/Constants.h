@@ -24,6 +24,8 @@ namespace constants
 	constexpr int knightAttackingAnimationFramesAmount{ 4 };
 	constexpr int knightAttacking2AnimationFramesAmount{ 6 };
 
+	constexpr int knightHitAnimationFramesAmount{ 5 };
+
 	constexpr float knightSpriteScale = 2.f;
 
 	const sf::Vector2f playerFirstPosition{sf::Vector2f{232.f, 300.f}};
