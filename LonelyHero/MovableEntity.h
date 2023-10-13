@@ -14,13 +14,17 @@ public:
 	void handleCollision();
 
 	void move(float& deltaTime);
-	void move(sf::Vector2f velocity, float& deltaTime);
+	void knockbackMove(float& deltaTime);
 
 	void flipSprite() { m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale); }
+
+	float knockbackVelocity{ 10000.f };
 
 protected:
 
 	sf::Vector2f m_velocity{};
+
+	
 
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };

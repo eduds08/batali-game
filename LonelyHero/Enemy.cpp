@@ -30,6 +30,8 @@ void Enemy::update(float& deltaTime)
 		}
 
 		move(deltaTime);
+
+		knockbackVelocity = 10000.f;
 	}
 
 	if (m_currentTexture == "knightHit" && m_frameCount >= 2)
@@ -101,14 +103,7 @@ void Enemy::takeDamage(const sf::FloatRect& hitbox, float& deltaTime)
 		justHitted = true;
 		hp -= 100;
 
-		while (m_shape.getGlobalBounds().intersects(hitbox) && m_collisionDirection.x == 0.f)
-		{
-			move(sf::Vector2f{100.f * -1.f * m_facingRight, 0.f}, deltaTime);
-		}
-		if (m_collisionDirection.x == 0.f)
-		{
-			move(sf::Vector2f{300.f * -1.f * m_facingRight, 0.f}, deltaTime);
-		}
+		knockbackMove(deltaTime);
 		
 		m_cooldownDamageClock.restart();
 		m_cooldownDamage = 0.f;
