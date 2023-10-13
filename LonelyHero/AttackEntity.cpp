@@ -56,3 +56,39 @@ void AttackEntity::updateHitbox(const std::string& entity)
 		m_attackHitbox.setPosition(getPosition() + sf::Vector2f((20.f + getSize().x) * m_facingRight, 0.f));
 	}
 }
+
+void AttackEntity::updateTakeDamage(const std::string& entity)
+{
+	knockbackVelocity = constants::knockbackSpeed;
+
+	if (m_currentTexture == entity + "Hitted" && m_frameCount >= 2)
+	{
+		hitAltTemp = false;
+	}
+
+	m_cooldownDamage = m_cooldownDamageClock.getElapsedTime().asSeconds();
+	if (m_cooldownDamage > 0.4f)
+	{
+		justHitted = false;
+	}
+
+	if (justHitted)
+	{
+		m_isRunning = false;
+	}
+}
+
+void AttackEntity::takeDamage(float& deltaTime)
+{
+	if (!justHitted && !dead)
+	{
+		hitAltTemp = true;
+		justHitted = true;
+		hp -= 100;
+
+		knockbackMove(deltaTime);
+
+		m_cooldownDamageClock.restart();
+		m_cooldownDamage = 0.f;
+	}
+}

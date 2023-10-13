@@ -114,14 +114,19 @@ void Game::updateCollision()
 		}
 	}
 
-	if (m_enemy.justHitted && m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
+	if (m_enemy.getJustHitted() && m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !m_enemy.isDead())
 	{
 		m_enemy.knockbackMove(m_deltaTime);
 	}
 
 	if (m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
 	{
-		m_enemy.takeDamage(m_player.getAttackHitbox().getGlobalBounds(), m_deltaTime);
+		m_enemy.takeDamage(m_deltaTime);
+	}
+
+	if (m_player.getShape().getGlobalBounds().intersects((m_enemy.getAttackHitbox().getGlobalBounds())))
+	{
+		m_player.takeDamage(m_deltaTime);
 	}
 }
 
@@ -159,12 +164,12 @@ void Game::updateTexturesAndAnimations()
 	while (Game::isRunning)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		if (!m_player.dead)
+		if (!m_player.isDead())
 		{
 			m_player.updateAnimation();
 		}
 
-		if (!m_enemy.dead)
+		if (!m_enemy.isDead())
 		{
 			m_enemy.updateAnimation();
 		}

@@ -40,8 +40,8 @@ private:
 
 	sf::Event m_event{};
 	
-	Player m_player{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "knightIdle", "./_Idle.png", knightIdleAnimationFramesAmount, knightShapeWidth, knightShapeHeight, playerFirstPosition };
-	Enemy m_enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "knightIdle", "./_Idle2.png", knightIdleAnimationFramesAmount, knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition() };
+	Player m_player{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "playerIdle", "./assets/player/_Idle.png", knightIdleAnimationFramesAmount, knightShapeWidth, knightShapeHeight, playerFirstPosition };
+	Enemy m_enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle2.png", knightIdleAnimationFramesAmount, knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition() };
 	std::vector<Ground> grounds{};
 	
 	std::thread animationThread;
