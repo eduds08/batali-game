@@ -65,14 +65,14 @@ void Game::render()
 {
 	m_window.clear();
 
-	m_window.draw(m_player.getShape());
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
-	m_window.draw(m_enemy.getShape());
+	//m_window.draw(m_enemy.getShape());
 	m_window.draw(m_enemy.getSprite());
 
-	m_window.draw(m_player.getAttackHitbox());
-	m_window.draw(m_enemy.getAttackHitbox());
+	//m_window.draw(m_player.getAttackHitbox());
+	//m_window.draw(m_enemy.getAttackHitbox());
 
 	float horizontalLimitRight = m_view.getCenter().x + m_view.getSize().x / 2.f + 16.f * 3.f;
 	float horizontalLimitLeft = m_view.getCenter().x - m_view.getSize().x / 2.f - 16.f * 3.f;
@@ -112,6 +112,11 @@ void Game::updateCollision()
 			m_enemy.handleCollision();
 			m_enemy.updateCanJump();
 		}
+	}
+
+	if (m_enemy.justHitted && m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
+	{
+		m_enemy.knockbackMove(m_deltaTime);
 	}
 
 	if (m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))

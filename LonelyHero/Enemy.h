@@ -18,7 +18,7 @@ public:
 
 	void takeDamage(const sf::FloatRect& hitbox, float& deltaTime);
 
-	int hp{ 1000 };
+	int hp{ 5000 };
 
 	bool justHitted{ false };
 	bool hitAltTemp{ false };

@@ -31,19 +31,26 @@ void Enemy::update(float& deltaTime)
 
 		move(deltaTime);
 
-		knockbackVelocity = 10000.f;
+		knockbackVelocity = constants::knockbackSpeed;
+
+		if (m_currentTexture == "knightHit" && m_frameCount >= 2)
+		{
+			hitAltTemp = false;
+		}
+
+		m_cooldownDamage = m_cooldownDamageClock.getElapsedTime().asSeconds();
+		if (m_cooldownDamage > 0.8f)
+		{
+			justHitted = false;
+		}
+
+		if (justHitted)
+		{
+			m_isRunning = false;
+		}
 	}
 
-	if (m_currentTexture == "knightHit" && m_frameCount >= 2)
-	{
-		hitAltTemp = false;
-	}
-
-	m_cooldownDamage = m_cooldownDamageClock.getElapsedTime().asSeconds();
-	if (m_cooldownDamage > 0.8f)
-	{
-		justHitted = false;
-	}
+	
 }
 
 void Enemy::updateMovement(float& deltaTime)

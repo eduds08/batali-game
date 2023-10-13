@@ -12,6 +12,7 @@ void MovableEntity::handleCollision()
 	
 	if (m_collisionDirection.x != 0.f)
 	{
+		m_velocity.x = 0.f;
 		knockbackVelocity = 0.f;
 	}
 	if (m_collisionDirection.y != 0.f)
@@ -29,6 +30,6 @@ void MovableEntity::move(float& deltaTime)
 
 void MovableEntity::knockbackMove(float& deltaTime)
 {
-	m_shape.move(sf::Vector2f{knockbackVelocity, 0.f} * deltaTime);
+	m_shape.move(sf::Vector2f{knockbackVelocity * -1.f * m_facingRight, 0.f} * deltaTime);
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - (m_spriteHeight - m_shape.getSize().y)});
 }

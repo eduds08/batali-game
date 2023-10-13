@@ -18,7 +18,7 @@ public:
 
 	void flipSprite() { m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale); }
 
-	float knockbackVelocity{ 10000.f };
+	float knockbackVelocity{ constants::knockbackSpeed };
 
 protected:
 

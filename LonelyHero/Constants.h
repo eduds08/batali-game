@@ -36,6 +36,8 @@ namespace constants
 
 	constexpr float enemySpeed{ 150.f };
 
+	constexpr float knockbackSpeed{ 300.f };
+
 	constexpr float swordHitboxWidth{ 70.f };
 	constexpr float swordHitboxHeight{ 30.f };
 }
