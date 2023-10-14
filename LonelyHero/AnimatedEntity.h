@@ -5,7 +5,7 @@
 class AnimatedEntity : public DrawableEntity
 {
 public:
-	AnimatedEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount);
+	AnimatedEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName);
 	virtual ~AnimatedEntity() = default;
 
 	void updateAnimation();
@@ -13,7 +13,7 @@ public:
 	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
 	void animateSprite();
 
-	// VOID INIT MAP AQUI
+	void initTexturesMap();
 
 	// pure virtual method, defined in derived classes
 	virtual void updateTexture() = 0;
@@ -28,5 +28,7 @@ protected:
 
 	std::unordered_map<std::string, std::string> m_texturesActionName{};
 	std::unordered_map<std::string, std::string> m_texturesNamePath{};
+
+	std::string m_entityName;
 	
 };

@@ -52,10 +52,10 @@ void Game::run()
 
 void Game::update()
 {
+	updateCollision();
+
 	m_player.update(m_deltaTime);
 	m_enemy.update(m_deltaTime);
-
-	updateCollision();
 
 	m_view.setCenter(m_player.getPosition());
 	m_window.setView(m_view);
@@ -114,11 +114,6 @@ void Game::updateCollision()
 		}
 	}
 
-	if (m_enemy.getJustHitted() && m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !m_enemy.isDead())
-	{
-		m_enemy.knockbackMove(m_deltaTime);
-	}
-
 	if (m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
 	{
 		m_enemy.takeDamage(m_deltaTime);
@@ -127,6 +122,16 @@ void Game::updateCollision()
 	if (m_player.getShape().getGlobalBounds().intersects((m_enemy.getAttackHitbox().getGlobalBounds())))
 	{
 		m_player.takeDamage(m_deltaTime);
+	}
+
+	if (m_enemy.getJustHitted() && m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !m_enemy.isDead())
+	{
+		m_enemy.knockbackMove(m_deltaTime);
+	}
+
+	if (m_player.getJustHitted() && m_player.getShape().getGlobalBounds().intersects((m_enemy.getAttackHitbox().getGlobalBounds())) && !m_player.isDead())
+	{
+		m_player.knockbackMove(m_deltaTime);
 	}
 }
 

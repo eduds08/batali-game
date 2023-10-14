@@ -1,20 +1,18 @@
 #include "MovableEntity.h"
-#include "AttackEntity.h"
 
-MovableEntity::MovableEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
-	: AnimatedEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount }
+MovableEntity::MovableEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
+	: AnimatedEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount, entityName }
 	, ColliderEntity{ shapeWidth, shapeHeight, firstPosition }
 {
 }
 
 // Set velocity to 0 according to the collision direction
 void MovableEntity::handleCollision()
-{	
-	
+{
 	if (m_collisionDirection.x != 0.f)
 	{
 		m_velocity.x = 0.f;
-		knockbackVelocity = 0.f;
+		m_knockbackVelocity = 0.f;
 	}
 	if (m_collisionDirection.y != 0.f)
 	{
@@ -31,7 +29,7 @@ void MovableEntity::move(float& deltaTime)
 
 void MovableEntity::knockbackMove(float& deltaTime)
 {
-	m_shape.move(sf::Vector2f{knockbackVelocity * -1.f * m_facingRight, 0.f} * deltaTime);
+	m_shape.move(sf::Vector2f{m_knockbackVelocity * -1.f * m_facingRight, 0.f} * deltaTime);
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - (m_spriteHeight - m_shape.getSize().y)});
 }
 

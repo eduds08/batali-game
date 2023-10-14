@@ -24,7 +24,7 @@ namespace constants
 	constexpr int knightAttackingAnimationFramesAmount{ 4 };
 	constexpr int knightAttacking2AnimationFramesAmount{ 6 };
 
-	constexpr int knightHitAnimationFramesAmount{ 5 };
+	constexpr int knightHitAnimationFramesAmount{ 1 };
 
 	constexpr float knightSpriteScale = 2.f;
 
