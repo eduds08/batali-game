@@ -42,7 +42,7 @@ private:
 	sf::Event m_event{};
 	
 	Player m_player{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "playerIdle", "./assets/player/_Idle.png", knightIdleAnimationFramesAmount, "player", knightShapeWidth, knightShapeHeight, playerFirstPosition};
-	Enemy m_enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition()};
+	std::vector<Enemy> enemies{};
 	std::vector<Ground> grounds{};
 	
 	std::thread animationThread;

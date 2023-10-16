@@ -9,6 +9,9 @@ Game::Game()
 
 void Game::init()
 {
+	enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition() });
+	enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, sf::Vector2f{700.f, 500.f}, m_player.getPosition() });
+	
 	loadAndCreateMap("./map.txt");
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
 	run();
@@ -48,7 +51,11 @@ void Game::update()
 	updateCollision();
 
 	m_player.update(m_deltaTime);
-	m_enemy.update(m_deltaTime);
+
+	for (auto& enemy : enemies)
+	{
+		enemy.update(m_deltaTime);
+	}
 
 	updateView();
 }
@@ -61,7 +68,12 @@ void Game::render()
 	m_window.draw(m_player.getSprite());
 
 	//m_window.draw(m_enemy.getShape());
-	m_window.draw(m_enemy.getSprite());
+
+	for (auto& enemy : enemies)
+	{
+		//m_window.draw(enemy.getShape());
+		m_window.draw(enemy.getSprite());
+	}
 
 	//m_window.draw(m_player.getAttackHitbox());
 	//m_window.draw(m_enemy.getAttackHitbox());
@@ -80,7 +92,11 @@ void Game::render()
 
 void Game::updateCollision()
 {
-	m_enemy.resetCollidingHorizontally();
+	for (auto& enemy : enemies)
+	{
+		enemy.resetCollidingHorizontally();
+	}
+
 	m_player.resetCollidingHorizontally();
 
 	for (auto& ground : grounds)
@@ -92,30 +108,35 @@ void Game::updateCollision()
 			m_player.updateCanJump();
 		}
 
-		
-		if (m_enemy.isCollidingWith(ground.getSprite()))
+		for (auto& enemy : enemies)
 		{
-			m_enemy.handleCollision();
-			m_enemy.handleKnockbackVelocity();
-			m_enemy.updateCanJump();
+			if (enemy.isCollidingWith(ground.getSprite()))
+			{
+				enemy.handleCollision();
+				enemy.handleKnockbackVelocity();
+				enemy.updateCanJump();
+			}
 		}
 	}
 
-	if (m_enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
+	for (auto& enemy : enemies)
 	{
-		m_enemy.takeDamage(m_deltaTime);
-		if (m_enemy.getJustHitted() && !m_enemy.isDead())
+		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
 		{
-			m_enemy.knockbackMove(m_deltaTime);
+			enemy.takeDamage(m_deltaTime);
+			if (enemy.getJustHitted() && !enemy.isDead())
+			{
+				enemy.knockbackMove(m_deltaTime);
+			}
 		}
-	}
 
-	if (m_player.getShape().getGlobalBounds().intersects((m_enemy.getAttackHitbox().getGlobalBounds())))
-	{
-		m_player.takeDamage(m_deltaTime);
-		if (m_player.getJustHitted() && !m_player.isDead())
+		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())))
 		{
-			m_player.knockbackMove(m_deltaTime);
+			m_player.takeDamage(m_deltaTime);
+			if (m_player.getJustHitted() && !m_player.isDead())
+			{
+				m_player.knockbackMove(m_deltaTime);
+			}
 		}
 	}
 }
@@ -171,9 +192,12 @@ void Game::updateTexturesAndAnimations()
 			m_player.updateAnimation();
 		}
 
-		if (!m_enemy.isDead())
+		for (auto& enemy : enemies)
 		{
-			m_enemy.updateAnimation();
+			if (!enemy.isDead())
+			{
+				enemy.updateAnimation();
+			}
 		}
 	}
 }
