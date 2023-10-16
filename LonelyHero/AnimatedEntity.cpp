@@ -10,7 +10,7 @@ AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, float spriteSc
 	initTexturesMap();
 }
 
-// inside animation Thread
+// inside animationThread
 void AnimatedEntity::updateAnimation()
 {
 	updateTexture();

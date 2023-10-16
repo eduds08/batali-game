@@ -10,11 +10,9 @@ public:
 	MovableEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
 	virtual ~MovableEntity() = default;
 
-	// Called after ifCollidingWith()
 	void handleCollision();
 
 	void move(float& deltaTime);
-	void knockbackMove(float& deltaTime);
 
 	void updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime);
 
@@ -31,6 +29,4 @@ protected:
 
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };
-
-	float m_knockbackVelocity{ constants::knockbackSpeed };
 };

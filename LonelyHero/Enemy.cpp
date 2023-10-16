@@ -11,11 +11,7 @@ void Enemy::update(float& deltaTime)
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
 	if (m_dying && m_frameCount >= 9)
 	{
-		m_dead = true;
-		m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-		m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
-		m_velocity.x = 0.f;
-		m_velocity.y = 0.f;
+		die();
 	}
 
 	// Only called if hp > 0
@@ -24,7 +20,7 @@ void Enemy::update(float& deltaTime)
 		updateMovement(m_playerPosition.x < getPosition().x - 50.f, m_playerPosition.x > getPosition().x + 50.f, (m_playerPosition.y - constants::knightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f), deltaTime);
 
 		m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-		updateAttack((m_velocity.x == 0.f && m_timeBetweenAttacks > 0.2f));
+		updateAttack((m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks));
 
 		if (m_isAttacking)
 		{
@@ -34,6 +30,13 @@ void Enemy::update(float& deltaTime)
 
 		move(deltaTime);
 
-		updateTakeDamage();
+		updateCooldownDamage();
+	}
+
+	if (m_dying && !m_dead)
+	{
+		m_velocity.x = 0.f;
+		m_velocity.y += constants::gravity * deltaTime;
+		move(deltaTime);
 	}
 }

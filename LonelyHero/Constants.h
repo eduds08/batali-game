@@ -40,4 +40,9 @@ namespace constants
 
 	constexpr float swordHitboxWidth{ 70.f };
 	constexpr float swordHitboxHeight{ 30.f };
+
+	constexpr float timeBetweenEnemyAttacks{ 0.6f };
+	constexpr float cooldownDamageTime{ 0.4f };
+
+	constexpr float tileSize{ 16.f };
 }

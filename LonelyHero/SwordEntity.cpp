@@ -10,38 +10,6 @@ SwordEntity::SwordEntity(int spriteWidth, int spriteHeight, float spriteScale, c
 	m_attackHitbox.setOutlineThickness(1.f);
 }
 
-void SwordEntity::updateHitbox()
-{
-	/*
-	Quick note about the hitbox: it is just a shape rectangle. To spawn it, I only set a size and a position relative to the entity for it. In this state, it "exists".
-	When is not attacking, I just set its size to 0 and the position to negative coords so it kinda "vanishes" and "doesn't exist".
-	*/
-
-	// "spawn" the hitbox only when the animation reaches a specific frame
-	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > 1) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > 2))
-	{
-		if (m_attackHitbox.getSize() == sf::Vector2f{ 0.f, 0.f })
-		{
-			m_attackHitbox.setSize(sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight });
-			m_attackHitbox.setPosition(getPosition() + sf::Vector2f((20.f + getSize().x) * m_facingRight, 0.f));
-		}
-	}
-	else
-	{
-		if (m_attackHitbox.getSize() == sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight })
-		{
-			m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-			m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
-		}
-	}
-
-	// If the hitbox "exists", update its position relative to the entity that is attacking
-	if (m_attackHitbox.getSize() == sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight })
-	{
-		m_attackHitbox.setPosition(getPosition() + sf::Vector2f((20.f + getSize().x) * m_facingRight, 0.f));
-	}
-}
-
 void SwordEntity::updateAttack(bool condition)
 {
 	if (condition && m_canJump && !m_isAttacking)
@@ -66,6 +34,27 @@ void SwordEntity::updateAttack(bool condition)
 	updateHitbox();
 }
 
+// Called inside updateAttack()
+void SwordEntity::updateHitbox()
+{
+	/*
+	Quick note about the hitbox: it is just a shape rectangle. To spawn it, I only set a size and a position relative to the entity for it. In this state, it "exists".
+	When is not attacking, I just set its size to 0 and the position to negative coords so it kinda "vanishes" and "doesn't exist".
+	*/
+
+	// "spawn" the hitbox only when the animation reaches a specific frame
+	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > 1) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > 2))
+	{
+		m_attackHitbox.setSize(sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight });
+		m_attackHitbox.setPosition(getPosition() + sf::Vector2f((20.f + getSize().x) * m_facingRight, 0.f));
+	}
+	else
+	{
+		m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+	}
+}
+
 void SwordEntity::updateTexture()
 {
 	if (m_dying)
@@ -88,4 +77,13 @@ void SwordEntity::updateTexture()
 	{
 		m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::knightAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::knightAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
 	}
+}
+
+void SwordEntity::die()
+{
+	m_dead = true;
+	m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+	m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+	m_velocity.x = 0.f;
+	m_velocity.y = 0.f;
 }
