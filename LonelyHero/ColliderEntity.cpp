@@ -45,6 +45,7 @@ bool ColliderEntity::isCollidingWith(sf::Sprite& body)
 				m_shape.move(sf::Vector2f{ -intersectX, 0.f });
 				m_collisionDirection.x = -1.0f;
 			}
+			setCollidingHorizontallyToTrue();
 			m_collisionDirection.y = 0.f;
 		}
 		else

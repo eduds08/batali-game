@@ -80,6 +80,9 @@ void Game::render()
 
 void Game::updateCollision()
 {
+	m_enemy.resetCollidingHorizontally();
+	m_player.resetCollidingHorizontally();
+
 	for (auto& ground : grounds)
 	{
 		if (m_player.isCollidingWith(ground.getSprite()))
@@ -89,6 +92,7 @@ void Game::updateCollision()
 			m_player.updateCanJump();
 		}
 
+		
 		if (m_enemy.isCollidingWith(ground.getSprite()))
 		{
 			m_enemy.handleCollision();

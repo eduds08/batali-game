@@ -46,7 +46,7 @@ void DamageEntity::knockbackMove(float& deltaTime)
 
 void DamageEntity::handleKnockbackVelocity()
 {
-	if (m_collisionDirection.x != 0.f)
+	if (m_isCollidingHorizontally)
 	{
 		m_knockbackVelocity = 0.f;
 	}

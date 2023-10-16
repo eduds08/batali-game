@@ -17,10 +17,15 @@ void Enemy::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		updateMovement(m_playerPosition.x < getPosition().x - 50.f, m_playerPosition.x > getPosition().x + 50.f, (m_playerPosition.y - constants::knightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f), deltaTime);
+		bool conditionRunLeft = m_playerPosition.x < getPosition().x - 50.f;
+		bool conditionRunRight = m_playerPosition.x > getPosition().x + 50.f;
+		bool conditionJump = (((m_playerPosition.y - constants::knightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
+
+		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
 
 		m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-		updateAttack((m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks));
+		bool conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks);
+		updateAttack(conditionAttack);
 
 		if (m_isAttacking)
 		{
