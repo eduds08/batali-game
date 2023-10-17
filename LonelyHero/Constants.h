@@ -28,8 +28,8 @@ namespace constants
 
 	constexpr float knightSpriteScale = 2.f;
 
-	const sf::Vector2f playerFirstPosition{sf::Vector2f{232.f, 300.f}};
-	const sf::Vector2f enemyFirstPosition{sf::Vector2f{432.f, 300.f}};
+	const sf::Vector2f playerFirstPosition{sf::Vector2f{400.f, 200.f}};
+	const sf::Vector2f enemyFirstPosition{sf::Vector2f{432.f, 200.f}};
 
 	constexpr float playerSpeed{ 240.f };
 	constexpr float playerJumpSpeed{ 130.f };
@@ -45,4 +45,5 @@ namespace constants
 	constexpr float cooldownDamageTime{ 0.4f };
 
 	constexpr float tileSize{ 16.f };
+	constexpr int tilesAmountPerRow{ 50 };
 }

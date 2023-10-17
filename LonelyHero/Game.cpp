@@ -10,7 +10,7 @@ Game::Game()
 void Game::init()
 {
 	enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition() });
-	enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, sf::Vector2f{700.f, 500.f}, m_player.getPosition() });
+	enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, sf::Vector2f{400.f, 200.f}, m_player.getPosition() });
 	
 	loadAndCreateMap("./map.txt");
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
@@ -165,7 +165,7 @@ void Game::loadAndCreateMap(const std::string& mapFilePath)
 
 	while (std::getline(mapFile, row))
 	{
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < tilesAmountPerRow; i++)
 		{
 			mapFile >> tileId;
 			if (tileId != "0")
