@@ -57,26 +57,53 @@ void SwordEntity::updateHitbox()
 
 void SwordEntity::updateTexture()
 {
-	if (m_dying)
+	if (m_entityName == "player")
 	{
-		changeCurrentTexture(constants::knightDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
+		if (m_dying)
+		{
+			changeCurrentTexture(constants::knightDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
+		}
+		else if (m_hitted)
+		{
+			changeCurrentTexture(constants::knightHitAnimationFramesAmount, m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")));
+		}
+		else if (m_velocity.y != 0.f && !m_canJump)
+		{
+			m_velocity.y > 0.f ? changeCurrentTexture(constants::knightFallingAnimationFramesAmount, m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling"))) : changeCurrentTexture(constants::knightJumpingAnimationFramesAmount, m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")));;
+		}
+		else if (!m_isAttacking)
+		{
+			m_isRunning ? changeCurrentTexture(constants::knightRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::knightIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+		}
+		else if (m_isAttacking)
+		{
+			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::knightAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::knightAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
+		}
 	}
-	else if (m_hitted)
+	else if (m_entityName == "enemy")
 	{
-		changeCurrentTexture(constants::knightHitAnimationFramesAmount, m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")));
+		if (m_dying)
+		{
+			changeCurrentTexture(constants::martialDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
+		}
+		else if (m_hitted)
+		{
+			changeCurrentTexture(constants::martialHitAnimationFramesAmount, m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")));
+		}
+		else if (m_velocity.y != 0.f && !m_canJump)
+		{
+			m_velocity.y > 0.f ? changeCurrentTexture(constants::martialFallingAnimationFramesAmount, m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling"))) : changeCurrentTexture(constants::martialJumpingAnimationFramesAmount, m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")));;
+		}
+		else if (!m_isAttacking)
+		{
+			m_isRunning ? changeCurrentTexture(constants::martialRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::martialIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+		}
+		else if (m_isAttacking)
+		{
+			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::martialAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::martialAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
+		}
 	}
-	else if (m_velocity.y != 0.f && !m_canJump)
-	{
-		m_velocity.y > 0.f ? changeCurrentTexture(constants::knightFallingAnimationFramesAmount, m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling"))) : changeCurrentTexture(constants::knightJumpingAnimationFramesAmount, m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")));;
-	}
-	else if (!m_isAttacking)
-	{
-		m_isRunning ? changeCurrentTexture(constants::knightRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::knightIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
-	}
-	else if (m_isAttacking)
-	{
-		m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::knightAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::knightAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
-	}
+	
 }
 
 void SwordEntity::die()

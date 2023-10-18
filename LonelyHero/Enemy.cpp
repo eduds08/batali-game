@@ -4,9 +4,9 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	: SwordEntity{ firstPosition }
 	, m_playerPosition{ playerPosition }
 {
-	m_spriteWidth = constants::knightSpriteWidth;
-	m_spriteHeight = constants::knightSpriteHeight;
-	m_spriteScale = constants::knightSpriteScale;
+	m_spriteWidth = constants::martialSpriteWidth;
+	m_spriteHeight = constants::martialSpriteHeight;
+	m_spriteScale = constants::martialSpriteScale;
 
 	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture("enemyIdle", "./assets/enemy/_Idle.png"));
 
@@ -16,7 +16,7 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 
 	initTexturesMap();
 
-	m_shape.setSize(sf::Vector2f{ constants::knightShapeWidth, constants::knightShapeHeight});
+	m_shape.setSize(sf::Vector2f{ constants::martialShapeWidth, constants::martialShapeHeight});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 
 	m_shape.setPosition(firstPosition.x, firstPosition.y);

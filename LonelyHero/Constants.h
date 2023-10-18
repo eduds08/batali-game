@@ -53,4 +53,24 @@ namespace constants
 	constexpr int tilesAmountPerRow{ 50 };
 
 	constexpr float enemyDistanceFromPlayer{ 30.f };
+
+	constexpr int martialSpriteWidth{ 200 };
+	constexpr int martialSpriteHeight{ 200 };
+
+	constexpr float martialShapeWidth{ 30.f };
+	constexpr float martialShapeHeight{ 50.f };
+
+	constexpr int martialIdleAnimationFramesAmount{ 8 };
+	constexpr int martialRunningAnimationFramesAmount{ 8 };
+
+	constexpr int martialJumpingAnimationFramesAmount{ 2 };
+	constexpr int martialFallingAnimationFramesAmount{ 2 };
+
+	constexpr int martialAttackingAnimationFramesAmount{ 6 };
+	constexpr int martialAttacking2AnimationFramesAmount{ 6 };
+
+	constexpr int martialDeathAnimationFramesAmount{ 6 };
+	constexpr int martialHitAnimationFramesAmount{ 4 };
+
+	constexpr float martialSpriteScale{ 1.f };
 }
