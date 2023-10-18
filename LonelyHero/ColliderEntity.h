@@ -5,7 +5,7 @@
 class ColliderEntity
 {
 public:
-	ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
+	ColliderEntity(sf::Vector2f firstPosition);
 	virtual ~ColliderEntity() = default;
 
 	bool isCollidingWith(sf::Sprite& body);

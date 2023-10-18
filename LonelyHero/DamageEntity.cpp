@@ -1,7 +1,7 @@
 #include "DamageEntity.h"
 
-DamageEntity::DamageEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
-	: MovableEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount, entityName, shapeWidth, shapeHeight, firstPosition }
+DamageEntity::DamageEntity(sf::Vector2f firstPosition)
+	: MovableEntity{ firstPosition }
 {
 }
 
@@ -19,14 +19,14 @@ void DamageEntity::updateCooldownDamage()
 	}
 }
 
-void DamageEntity::takeDamage(float& deltaTime)
+void DamageEntity::takeDamage(float& deltaTime, float direction)
 {
 	if (!m_hitted && !m_dying)
 	{
 		m_hitted = true;
 		m_hp -= 100;
 
-		knockbackMove(deltaTime);
+		knockbackMove(deltaTime, direction);
 
 		if (m_hp <= 0)
 		{
@@ -38,10 +38,18 @@ void DamageEntity::takeDamage(float& deltaTime)
 	}
 }
 
-void DamageEntity::knockbackMove(float& deltaTime)
+void DamageEntity::knockbackMove(float& deltaTime, float direction)
 {
-	m_shape.move(sf::Vector2f{m_knockbackVelocity * -1.f * m_facingRight, 0.f} * deltaTime);
-	m_sprite.setPosition(sf::Vector2f{ getPosition().x + m_facingRight * (getSize().x / 2.f), getPosition().y - getSize().y / 2.f - (m_spriteHeight - m_shape.getSize().y)});
+	if (direction < 0.f)
+	{
+		m_shape.move(sf::Vector2f{m_knockbackVelocity, 0.f} *deltaTime);
+	}
+	else
+	{
+		m_shape.move(sf::Vector2f{m_knockbackVelocity * -1.f, 0.f} *deltaTime);
+	}
+
+	m_sprite.setPosition(sf::Vector2f{ getPosition().x, getPosition().y - (m_spriteHeight - getSize().y) / 2.f});
 }
 
 void DamageEntity::handleKnockbackVelocity()

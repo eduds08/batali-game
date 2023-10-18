@@ -1,13 +1,7 @@
 #include "ColliderEntity.h"
 
-ColliderEntity::ColliderEntity(float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
+ColliderEntity::ColliderEntity(sf::Vector2f firstPosition)
 {
-	m_shape.setSize(sf::Vector2f{ shapeWidth, shapeHeight });
-	m_shape.setOrigin(m_shape.getSize() / 2.f);
-	m_shape.setPosition(firstPosition.x, firstPosition.y);
-
-	m_shape.setOutlineColor(sf::Color::Red);
-	m_shape.setOutlineThickness(1.f);
 }
 
 /*

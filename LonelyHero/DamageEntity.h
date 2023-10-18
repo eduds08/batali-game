@@ -5,13 +5,13 @@
 class DamageEntity : public MovableEntity
 {
 public:
-	DamageEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
+	DamageEntity(sf::Vector2f firstPosition);
 	virtual ~DamageEntity() = default;
 
 	void updateCooldownDamage();
-	void takeDamage(float& deltaTime);
+	void takeDamage(float& deltaTime, float direction);
 
-	void knockbackMove(float& deltaTime);
+	void knockbackMove(float& deltaTime, float direction);
 
 	virtual bool getJustHitted() { return m_hitted; }
 	bool isDead() { return m_dead; }

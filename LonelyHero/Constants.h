@@ -7,6 +7,9 @@ namespace constants
 	constexpr int screenWidth{ 640 };
 	constexpr int screenHeight{ 640 };
 
+	constexpr float viewWidth{ 300.f };
+	constexpr float viewHeight{ 300.f };
+
 	constexpr float gravity{ 981.f };
 
 	constexpr int knightSpriteWidth{ 120 };
@@ -29,8 +32,8 @@ namespace constants
 
 	constexpr float knightSpriteScale{ 1.f };
 
-	const sf::Vector2f playerFirstPosition{sf::Vector2f{400.f, 240.f}};
-	const sf::Vector2f enemyFirstPosition{sf::Vector2f{432.f, 200.f}};
+	const sf::Vector2f playerFirstPosition{sf::Vector2f{480.f, 240.f}};
+	const sf::Vector2f enemyFirstPosition{sf::Vector2f{432.f, 240.f}};
 
 	constexpr float playerSpeed{ 240.f };
 	constexpr float playerJumpSpeed{ 80.f };
@@ -42,9 +45,12 @@ namespace constants
 	constexpr float swordHitboxWidth{ 35.f };
 	constexpr float swordHitboxHeight{ 15.f };
 
-	constexpr float timeBetweenEnemyAttacks{ 0.6f };
+	constexpr float timeBetweenEnemyAttacks{ 0.8f };
 	constexpr float cooldownDamageTime{ 0.4f };
 
-	constexpr float tileSize{ 16.f };
+	constexpr int tileSizeI{ 16 };
+	constexpr float tileSizeF{ 16.f };
 	constexpr int tilesAmountPerRow{ 50 };
+
+	constexpr float enemyDistanceFromPlayer{ 30.f };
 }

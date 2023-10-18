@@ -1,9 +1,30 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
-	: SwordEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount, entityName, shapeWidth, shapeHeight, firstPosition }
+Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
+	: SwordEntity{ firstPosition }
 	, m_playerPosition{ playerPosition }
 {
+	m_spriteWidth = constants::knightSpriteWidth;
+	m_spriteHeight = constants::knightSpriteHeight;
+	m_spriteScale = constants::knightSpriteScale;
+
+	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture("enemyIdle", "./assets/enemy/_Idle.png"));
+
+	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
+
+	m_entityName = "enemy";
+
+	initTexturesMap();
+
+	m_shape.setSize(sf::Vector2f{ constants::knightShapeWidth, constants::knightShapeHeight});
+	m_shape.setOrigin(m_shape.getSize() / 2.f);
+
+	m_shape.setPosition(firstPosition.x, firstPosition.y);
+
+	m_shape.setOutlineColor(sf::Color::Red);
+	m_shape.setOutlineThickness(1.f);
+
+	m_speed = constants::enemySpeed;
 }
 
 void Enemy::update(float& deltaTime)
@@ -17,8 +38,8 @@ void Enemy::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		bool conditionRunLeft = m_playerPosition.x < getPosition().x - 50.f;
-		bool conditionRunRight = m_playerPosition.x > getPosition().x + 50.f;
+		bool conditionRunLeft = m_playerPosition.x < getPosition().x - constants::enemyDistanceFromPlayer;
+		bool conditionRunRight = m_playerPosition.x > getPosition().x + constants::enemyDistanceFromPlayer;
 		bool conditionJump = (((m_playerPosition.y - constants::knightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
 
 		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);

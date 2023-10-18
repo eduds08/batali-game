@@ -34,14 +34,14 @@ public:
 
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
-	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{450.f, 450.f}};
+	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{viewWidth, viewHeight}};
 
 	sf::Clock m_deltaTimeClock{};
 	float m_deltaTime{};
 
 	sf::Event m_event{};
 	
-	Player m_player{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "playerIdle", "./assets/player/_Idle.png", knightIdleAnimationFramesAmount, "player", knightShapeWidth, knightShapeHeight, playerFirstPosition};
+	Player m_player{ playerFirstPosition };
 	std::vector<Enemy> enemies{};
 	std::vector<Ground> grounds{};
 	

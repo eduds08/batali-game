@@ -1,7 +1,14 @@
 #include "Ground.h"
 
-Ground::Ground(int spriteWidth, int spriteHeight, sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
-	: DrawableEntity{spriteWidth, spriteHeight, 1.f, textureName, texturePath}
+Ground::Ground(sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
+	: DrawableEntity{}
 {
+	m_spriteWidth = constants::tileSizeI;
+	m_spriteHeight = constants::tileSizeI;
+	m_spriteScale = 1.f;
+
+	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(textureName, texturePath));
+
+	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 	m_sprite.setPosition(position);
 }

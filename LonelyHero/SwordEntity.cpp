@@ -1,7 +1,7 @@
 #include "SwordEntity.h"
 
-SwordEntity::SwordEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition)
-	: DamageEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath, animationFramesAmount, entityName, shapeWidth, shapeHeight, firstPosition }
+SwordEntity::SwordEntity(sf::Vector2f firstPosition)
+	: DamageEntity{ firstPosition }
 {
 	m_attackHitbox = { sf::RectangleShape{sf::Vector2f{0.f, 0.f}} };
 	m_attackHitbox.setOrigin(sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight } / 2.f);
@@ -46,7 +46,7 @@ void SwordEntity::updateHitbox()
 	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > 1) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > 2))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight });
-		m_attackHitbox.setPosition(getPosition() + sf::Vector2f(2 * getSize().x * m_facingRight, 0.f));
+		m_attackHitbox.setPosition(getPosition() + sf::Vector2f(getSize().x * m_facingRight, 0.f));
 	}
 	else
 	{

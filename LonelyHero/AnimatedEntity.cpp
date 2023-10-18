@@ -1,13 +1,8 @@
 #include "AnimatedEntity.h"
 
-AnimatedEntity::AnimatedEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName)
-	: DrawableEntity{ spriteWidth, spriteHeight, spriteScale, textureName, texturePath }
-	, m_currentAnimationFramesAmount{ animationFramesAmount }
-	, m_entityName{ entityName }
+AnimatedEntity::AnimatedEntity()
+	: DrawableEntity{}
 {
-	m_currentTexture = textureName;
-	m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
-	initTexturesMap();
 }
 
 // inside animationThread
@@ -16,7 +11,6 @@ void AnimatedEntity::updateAnimation()
 	updateTexture();
 	animateSprite();
 }
-
 
 // Called when the object changes its animation. Eg.: from running animation to jumping.
 void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath)

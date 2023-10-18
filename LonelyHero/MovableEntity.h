@@ -7,7 +7,7 @@
 class MovableEntity : public AnimatedEntity, public ColliderEntity
 {
 public:
-	MovableEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath, int animationFramesAmount, const std::string& entityName, float shapeWidth, float shapeHeight, sf::Vector2f firstPosition);
+	MovableEntity(sf::Vector2f firstPosition);
 	virtual ~MovableEntity() = default;
 
 	void handleCollision();
@@ -29,4 +29,6 @@ protected:
 
 	bool m_isRunning{ false };
 	int m_facingRight{ 1 };
+
+	float m_speed{};
 };

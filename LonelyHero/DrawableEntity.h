@@ -5,13 +5,13 @@
 class DrawableEntity
 {
 public:
-	DrawableEntity(int spriteWidth, int spriteHeight, float spriteScale, const std::string& textureName, const std::string& texturePath);
+	DrawableEntity();
 	virtual ~DrawableEntity() = default;
 	
 	sf::Sprite& getSprite() { return m_sprite; }
 
 protected:
-	// m_texturesManager -> singleton
+	// Singleton
 	TextureManager* m_texturesManager;
 
 	sf::Sprite m_sprite{};

@@ -9,8 +9,8 @@ Game::Game()
 
 void Game::init()
 {
-	//enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition() });
-	//enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, sf::Vector2f{400.f, 200.f}, m_player.getPosition() });
+	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
+	//enemies.emplace_back(Enemy{ sf::Vector2f{400.f, 240.f}, m_player.getPosition() });
 	
 	loadAndCreateMap("./map.txt");
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
@@ -67,16 +67,15 @@ void Game::render()
 	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
-	//m_window.draw(m_enemy.getShape());
-
 	for (auto& enemy : enemies)
 	{
-		//m_window.draw(enemy.getShape());
+		m_window.draw(enemy.getShape());
 		m_window.draw(enemy.getSprite());
+		m_window.draw(enemy.getAttackHitbox());
 	}
 
 	m_window.draw(m_player.getAttackHitbox());
-	//m_window.draw(m_enemy.getAttackHitbox());
+	
 
 	for (auto& ground : grounds)
 	{
@@ -123,19 +122,21 @@ void Game::updateCollision()
 	{
 		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
 		{
-			enemy.takeDamage(m_deltaTime);
+			float attackDirection = m_player.getPosition().x - enemy.getPosition().x;
+			enemy.takeDamage(m_deltaTime, attackDirection);
 			if (enemy.getJustHitted() && !enemy.isDead())
 			{
-				enemy.knockbackMove(m_deltaTime);
+				enemy.knockbackMove(m_deltaTime, attackDirection);
 			}
 		}
 
 		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())))
 		{
-			m_player.takeDamage(m_deltaTime);
+			float attackDirection = enemy.getPosition().x - m_player.getPosition().x;
+			m_player.takeDamage(m_deltaTime, attackDirection);
 			if (m_player.getJustHitted() && !m_player.isDead())
 			{
-				m_player.knockbackMove(m_deltaTime);
+				m_player.knockbackMove(m_deltaTime, attackDirection);
 			}
 		}
 	}
@@ -146,11 +147,11 @@ void Game::updateView()
 	m_view.setCenter(m_player.getPosition());
 	m_window.setView(m_view);
 
-	m_horizontalViewLimitRight = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSize;
-	m_horizontalViewLimitLeft = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSize;
+	m_horizontalViewLimitRight = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSizeF;
+	m_horizontalViewLimitLeft = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSizeF;
 
-	m_verticalViewLimitTop = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSize;
-	m_verticalViewLimitBottom = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSize;
+	m_verticalViewLimitTop = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSizeF;
+	m_verticalViewLimitBottom = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
 }
 
 void Game::loadAndCreateMap(const std::string& mapFilePath)
@@ -170,7 +171,7 @@ void Game::loadAndCreateMap(const std::string& mapFilePath)
 			mapFile >> tileId;
 			if (tileId != "0")
 			{
-				grounds.emplace_back(Ground{ static_cast<int>(tileSize), static_cast<int>(tileSize), sf::Vector2f{x * tileSize + tileSize / 2.f, y * tileSize + tileSize / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
+				grounds.emplace_back(Ground{ sf::Vector2f{x * tileSizeF + tileSizeF / 2.f, y * tileSizeF + tileSizeF / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
 			}
 			++x;
 		}
