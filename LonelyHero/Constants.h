@@ -12,8 +12,8 @@ namespace constants
 	constexpr int knightSpriteWidth{ 120 };
 	constexpr int knightSpriteHeight{ 80 };
 
-	constexpr float knightShapeWidth{ 30.f };
-	constexpr float knightShapeHeight{ 70.f };
+	constexpr float knightShapeWidth{ 15.f };
+	constexpr float knightShapeHeight{ 30.f };
 
 	constexpr int knightIdleAnimationFramesAmount{ 10 };
 	constexpr int knightRunningAnimationFramesAmount{ 10 };
@@ -24,22 +24,23 @@ namespace constants
 	constexpr int knightAttackingAnimationFramesAmount{ 4 };
 	constexpr int knightAttacking2AnimationFramesAmount{ 6 };
 
+	constexpr int knightDeathAnimationFramesAmount{ 10 };
 	constexpr int knightHitAnimationFramesAmount{ 1 };
 
-	constexpr float knightSpriteScale = 2.f;
+	constexpr float knightSpriteScale{ 1.f };
 
-	const sf::Vector2f playerFirstPosition{sf::Vector2f{400.f, 200.f}};
+	const sf::Vector2f playerFirstPosition{sf::Vector2f{400.f, 240.f}};
 	const sf::Vector2f enemyFirstPosition{sf::Vector2f{432.f, 200.f}};
 
 	constexpr float playerSpeed{ 240.f };
-	constexpr float playerJumpSpeed{ 130.f };
+	constexpr float playerJumpSpeed{ 80.f };
 
 	constexpr float enemySpeed{ 150.f };
 
 	constexpr float knockbackSpeed{ 300.f };
 
-	constexpr float swordHitboxWidth{ 70.f };
-	constexpr float swordHitboxHeight{ 30.f };
+	constexpr float swordHitboxWidth{ 35.f };
+	constexpr float swordHitboxHeight{ 15.f };
 
 	constexpr float timeBetweenEnemyAttacks{ 0.6f };
 	constexpr float cooldownDamageTime{ 0.4f };

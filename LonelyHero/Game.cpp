@@ -9,8 +9,8 @@ Game::Game()
 
 void Game::init()
 {
-	enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition() });
-	enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, sf::Vector2f{400.f, 200.f}, m_player.getPosition() });
+	//enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, enemyFirstPosition, m_player.getPosition() });
+	//enemies.emplace_back(Enemy{ knightSpriteWidth, knightSpriteHeight, knightSpriteScale, "enemyIdle", "./assets/enemy/_Idle.png", knightIdleAnimationFramesAmount, "enemy" , knightShapeWidth, knightShapeHeight, sf::Vector2f{400.f, 200.f}, m_player.getPosition() });
 	
 	loadAndCreateMap("./map.txt");
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
@@ -64,7 +64,7 @@ void Game::render()
 {
 	m_window.clear();
 
-	//m_window.draw(m_player.getShape());
+	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	//m_window.draw(m_enemy.getShape());
@@ -75,7 +75,7 @@ void Game::render()
 		m_window.draw(enemy.getSprite());
 	}
 
-	//m_window.draw(m_player.getAttackHitbox());
+	m_window.draw(m_player.getAttackHitbox());
 	//m_window.draw(m_enemy.getAttackHitbox());
 
 	for (auto& ground : grounds)

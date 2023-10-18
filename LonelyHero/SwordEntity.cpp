@@ -46,7 +46,7 @@ void SwordEntity::updateHitbox()
 	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > 1) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > 2))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight });
-		m_attackHitbox.setPosition(getPosition() + sf::Vector2f((20.f + getSize().x) * m_facingRight, 0.f));
+		m_attackHitbox.setPosition(getPosition() + sf::Vector2f(2 * getSize().x * m_facingRight, 0.f));
 	}
 	else
 	{
@@ -59,7 +59,7 @@ void SwordEntity::updateTexture()
 {
 	if (m_dying)
 	{
-		changeCurrentTexture(10, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
+		changeCurrentTexture(constants::knightDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
 	}
 	else if (m_hitted)
 	{
