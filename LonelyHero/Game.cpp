@@ -64,7 +64,7 @@ void Game::render()
 {
 	m_window.clear();
 
-	m_window.draw(m_player.getShape());
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto& enemy : enemies)
@@ -74,7 +74,7 @@ void Game::render()
 		//m_window.draw(enemy.getAttackHitbox());
 	}
 
-	m_window.draw(m_player.getAttackHitbox());
+	//m_window.draw(m_player.getAttackHitbox());
 	
 
 	for (auto& ground : grounds)

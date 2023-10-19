@@ -33,7 +33,7 @@ void Enemy::update(float& deltaTime)
 {
 	std::cout << m_hp << '\n';
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	if (m_dying && m_frameCount >= m_currentAnimationFramesAmount - 1)
+	if (m_dying && m_frameCount > m_currentAnimationFramesAmount - 1 && !m_dead)
 	{
 		die();
 	}

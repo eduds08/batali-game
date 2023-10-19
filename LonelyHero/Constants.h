@@ -42,35 +42,15 @@ namespace constants
 
 	constexpr float knockbackSpeed{ 300.f };
 
-	constexpr float swordHitboxWidth{ 70.f };
+	constexpr float swordHitboxWidth{ 60.f };
 	constexpr float swordHitboxHeight{ 20.f };
 
 	constexpr float timeBetweenEnemyAttacks{ 0.8f };
-	constexpr float cooldownDamageTime{ 0.8f };
+	constexpr float cooldownDamageTime{ 0.6f };
 
 	constexpr int tileSizeI{ 16 };
 	constexpr float tileSizeF{ 16.f };
 	constexpr int tilesAmountPerRow{ 50 };
 
-	constexpr float enemyDistanceFromPlayer{ 30.f };
-
-	constexpr int martialSpriteWidth{ 200 };
-	constexpr int martialSpriteHeight{ 200 };
-
-	constexpr float martialShapeWidth{ 30.f };
-	constexpr float martialShapeHeight{ 50.f };
-
-	constexpr int martialIdleAnimationFramesAmount{ 8 };
-	constexpr int martialRunningAnimationFramesAmount{ 8 };
-
-	constexpr int martialJumpingAnimationFramesAmount{ 2 };
-	constexpr int martialFallingAnimationFramesAmount{ 2 };
-
-	constexpr int martialAttackingAnimationFramesAmount{ 6 };
-	constexpr int martialAttacking2AnimationFramesAmount{ 6 };
-
-	constexpr int martialDeathAnimationFramesAmount{ 6 };
-	constexpr int martialHitAnimationFramesAmount{ 4 };
-
-	constexpr float martialSpriteScale{ 1.f };
+	constexpr float enemyDistanceFromPlayer{ 50.f };
 }
