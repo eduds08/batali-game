@@ -45,12 +45,12 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesActionName.emplace("Attacking1", m_entityName + "Attacking1");
 	m_texturesActionName.emplace("Attacking2", m_entityName + "Attacking2");
 
-	m_texturesNamePath.emplace(m_texturesActionName.at("Death"), "./assets/" + m_entityName + "/_DeathNoMovement.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Death"), "./assets/" + m_entityName + "/_Death.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Hitted"), "./assets/" + m_entityName + "/_Hit.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Falling"), "./assets/" + m_entityName + "/_Fall.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Jumping"), "./assets/" + m_entityName + "/_Jump.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Running"), "./assets/" + m_entityName + "/_Run.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Idle"), "./assets/" + m_entityName + "/_Idle.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("Attacking1"), "./assets/" + m_entityName + "/_AttackNoMovement.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("Attacking2"), "./assets/" + m_entityName + "/_Attack2NoMovement.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Attacking1"), "./assets/" + m_entityName + "/_Attack1.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Attacking2"), "./assets/" + m_entityName + "/_Attack2.png");
 }

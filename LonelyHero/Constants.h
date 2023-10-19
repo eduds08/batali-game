@@ -12,23 +12,23 @@ namespace constants
 
 	constexpr float gravity{ 981.f };
 
-	constexpr int knightSpriteWidth{ 120 };
-	constexpr int knightSpriteHeight{ 80 };
+	constexpr int knightSpriteWidth{ 288 };
+	constexpr int knightSpriteHeight{ 128 };
 
 	constexpr float knightShapeWidth{ 15.f };
 	constexpr float knightShapeHeight{ 30.f };
 
-	constexpr int knightIdleAnimationFramesAmount{ 10 };
-	constexpr int knightRunningAnimationFramesAmount{ 10 };
+	constexpr int knightIdleAnimationFramesAmount{ 8 };
+	constexpr int knightRunningAnimationFramesAmount{ 8 };
 
 	constexpr int knightJumpingAnimationFramesAmount{ 3 };
 	constexpr int knightFallingAnimationFramesAmount{ 3 };
 
-	constexpr int knightAttackingAnimationFramesAmount{ 4 };
-	constexpr int knightAttacking2AnimationFramesAmount{ 6 };
+	constexpr int knightAttackingAnimationFramesAmount{ 11 };
+	constexpr int knightAttacking2AnimationFramesAmount{ 10 };
 
-	constexpr int knightDeathAnimationFramesAmount{ 10 };
-	constexpr int knightHitAnimationFramesAmount{ 1 };
+	constexpr int knightDeathAnimationFramesAmount{ 13 };
+	constexpr int knightHitAnimationFramesAmount{ 6 };
 
 	constexpr float knightSpriteScale{ 1.f };
 

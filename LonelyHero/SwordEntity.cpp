@@ -24,7 +24,7 @@ void SwordEntity::updateAttack(bool condition)
 		m_velocity.y = 0.f;
 
 		// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when it gets hitted
-		if (((m_currentTexture == m_entityName + "Attacking2" && m_frameCount >= 5) || (m_currentTexture == m_entityName + "Attacking1" && m_frameCount >= 3)) || m_hitted == true)
+		if (((m_currentTexture == m_entityName + "Attacking2" || m_currentTexture == m_entityName + "Attacking1") && m_frameCount >= m_currentAnimationFramesAmount - 1) || m_hitted == true)
 		{
 			m_previousAttackingAnimation = m_currentTexture;
 			m_isAttacking = false;

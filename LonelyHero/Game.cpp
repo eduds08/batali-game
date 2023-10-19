@@ -64,17 +64,17 @@ void Game::render()
 {
 	m_window.clear();
 
-	m_window.draw(m_player.getShape());
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto& enemy : enemies)
 	{
-		m_window.draw(enemy.getShape());
+		//m_window.draw(enemy.getShape());
 		m_window.draw(enemy.getSprite());
-		m_window.draw(enemy.getAttackHitbox());
+		//m_window.draw(enemy.getAttackHitbox());
 	}
 
-	m_window.draw(m_player.getAttackHitbox());
+	//m_window.draw(m_player.getAttackHitbox());
 	
 
 	for (auto& ground : grounds)

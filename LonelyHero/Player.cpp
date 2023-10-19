@@ -30,7 +30,7 @@ Player::Player(sf::Vector2f firstPosition)
 void Player::update(float& deltaTime)
 {
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	if (m_dying && m_frameCount >= 9)
+	if (m_dying && m_frameCount >= m_currentAnimationFramesAmount - 1)
 	{
 		die();
 	}
