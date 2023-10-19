@@ -41,11 +41,11 @@ namespace constants
 
 	constexpr float playerSpeed{ 240.f };
 	constexpr float playerJumpHeight{ 80.f };
-	constexpr float playerHp{ 10000.f };
+	constexpr int playerHp{ 10000 };
 	
 	constexpr float enemySpeed{ 150.f };
 	constexpr float enemyJumpHeight{ 80.f };
-	constexpr float enemyHp{ 1000.f };
+	constexpr int enemyHp{ 1000 };
 	constexpr float enemyDistanceFromPlayer{ 50.f };
 
 	constexpr float knockbackSpeed{ 300.f };
