@@ -43,7 +43,7 @@ void SwordEntity::updateHitbox()
 	*/
 
 	// "spawn" the hitbox only when the animation reaches a specific frame
-	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > 4 && m_frameCount < 7) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > 3 && m_frameCount < 7))
+	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight });
 		m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));

@@ -5,16 +5,17 @@ AnimatedEntity::AnimatedEntity()
 {
 }
 
-// inside animationThread
+// Called inside the animationThread. It's here where all animation happens.
 void AnimatedEntity::updateAnimation()
 {
 	updateTexture();
 	animateSprite();
 }
 
-// Called when the object changes its animation. Eg.: from running animation to jumping.
+// Called when the entity changes its sprite. Eg.: from running sprite to jumping sprite.
 void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath)
 {
+	// Checks if the texture isn't already set, so it doesn't set the same sprite more than once
 	if (m_currentTexture != textureName)
 	{
 		m_currentAnimationFramesAmount = animationFramesAmount;
@@ -25,7 +26,7 @@ void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::
 	}
 }
 
-// Update each frame of the animation texture
+// Set the next frame of the sprite and when it hits the last frame, it starts from beginning again.
 void AnimatedEntity::animateSprite()
 {
 	if (m_frameCount == m_currentAnimationFramesAmount)
@@ -36,6 +37,8 @@ void AnimatedEntity::animateSprite()
 
 void AnimatedEntity::initTexturesMap()
 {
+	// QUICK NOTE: the game folder has to have a folder with the same name of m_entityName (as you can see in the code below).
+
 	m_texturesActionName.emplace("Death", m_entityName + "Death");
 	m_texturesActionName.emplace("Hitted", m_entityName + "Hitted");
 	m_texturesActionName.emplace("Falling", m_entityName + "Falling");

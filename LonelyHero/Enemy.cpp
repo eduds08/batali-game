@@ -1,11 +1,14 @@
 #include "Enemy.h"
 
-#include <iostream>
-
 Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	: SwordEntity{ firstPosition }
 	, m_playerPosition{ playerPosition }
 {
+	m_attack1StartingFrame = 4;
+	m_attack1EndingFrame = 7;
+	m_attack2StartingFrame = 3;
+	m_attack2EndingFrame = 7;
+
 	m_spriteWidth = constants::knightSpriteWidth;
 	m_spriteHeight = constants::knightSpriteHeight;
 	m_spriteScale = constants::knightSpriteScale;
@@ -27,11 +30,11 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	m_shape.setOutlineThickness(1.f);
 
 	m_speed = constants::enemySpeed;
+	m_hp = 1000;
 }
 
 void Enemy::update(float& deltaTime)
 {
-	std::cout << m_hp << '\n';
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
 	if (m_dying && m_frameCount > m_currentAnimationFramesAmount - 1 && !m_dead)
 	{

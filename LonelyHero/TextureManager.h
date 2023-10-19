@@ -12,7 +12,7 @@ public:
 
 	std::shared_ptr<sf::Texture> loadAndGetTexture(const std::string& textureName, const std::string& texturePath);
 
-	// singleton
+	// Singleton Pattern
 	static TextureManager& getInstance();
 
 private:

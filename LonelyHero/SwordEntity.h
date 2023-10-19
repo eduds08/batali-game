@@ -25,4 +25,10 @@ protected:
 	sf::RectangleShape m_attackHitbox{};
 
 	bool m_isAttacking{ false };
+
+	// These attributes store the starting and ending point of the attack animation where the hitbox should spawn
+	int m_attack1StartingFrame{};
+	int m_attack1EndingFrame{};
+	int m_attack2StartingFrame{};
+	int m_attack2EndingFrame{};
 };

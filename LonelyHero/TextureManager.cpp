@@ -23,7 +23,7 @@ std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string
 	return newTexture;
 }
 
-// singleton -> makes sures that only one instance of this class exists in the entire program
+// Singleton Pattern -> makes sures that only one instance of this class exists in the entire program
 TextureManager& TextureManager::getInstance()
 {
 	static TextureManager* instance = new TextureManager();

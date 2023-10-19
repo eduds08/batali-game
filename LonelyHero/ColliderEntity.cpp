@@ -1,29 +1,23 @@
 #include "ColliderEntity.h"
 
-ColliderEntity::ColliderEntity(sf::Vector2f firstPosition)
+//Returns true if colliding with other, false if not. Also set the collision directions (if is colliding in the right, left, bottom or top)
+bool ColliderEntity::isCollidingWith(sf::Sprite& other)
 {
-}
+	float otherHalfSizeX = other.getTexture()->getSize().x / 2.f;
+	float otherHalfSizeY = other.getTexture()->getSize().y / 2.f;
+	float otherPositionX = other.getPosition().x;
+	float otherPositionY = other.getPosition().y;
 
-/*
-Returns true if colliding with body, false if not. Also set the collision directions (if is colliding in the right, left, bottom or top)
-*/
-bool ColliderEntity::isCollidingWith(sf::Sprite& body)
-{
-	float groundHalfSizeX = body.getTexture()->getSize().x / 2.f;
-	float groundHalfSizeY = body.getTexture()->getSize().y / 2.f;
-	float groundPositionX = body.getPosition().x;
-	float groundPositionY = body.getPosition().y;
+	float thisHalfSizeX = getSize().x / 2.f;
+	float thisHalfSizeY = getSize().y / 2.f;
+	float thisPositionX = getPosition().x;
+	float thisPositionY = getPosition().y;
 
-	float entityHalfSizeX = getSize().x / 2.f;
-	float entityHalfSizeY = getSize().y / 2.f;
-	float entityPositionX = getPosition().x;
-	float entityPositionY = getPosition().y;
+	float deltaX = otherPositionX - thisPositionX;
+	float deltaY = otherPositionY - thisPositionY;
 
-	float deltaX = groundPositionX - entityPositionX;
-	float deltaY = groundPositionY - entityPositionY;
-
-	float intersectX = abs(deltaX) - (groundHalfSizeX + entityHalfSizeX);
-	float intersectY = abs(deltaY) - (groundHalfSizeY + entityHalfSizeY);
+	float intersectX = abs(deltaX) - (otherHalfSizeX + thisHalfSizeX);
+	float intersectY = abs(deltaY) - (otherHalfSizeY + thisHalfSizeY);
 
 	if (intersectX < 0.f && intersectY < 0.f)
 	{
@@ -39,7 +33,7 @@ bool ColliderEntity::isCollidingWith(sf::Sprite& body)
 				m_shape.move(sf::Vector2f{ -intersectX, 0.f });
 				m_collisionDirection.x = -1.0f;
 			}
-			setCollidingHorizontallyToTrue();
+			setIsCollidingHorizontally(true);
 			m_collisionDirection.y = 0.f;
 		}
 		else

@@ -12,7 +12,7 @@ void Game::init()
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
 	//enemies.emplace_back(Enemy{ sf::Vector2f{400.f, 240.f}, m_player.getPosition() });
 	
-	loadAndCreateMap("./map.txt");
+	loadAndCreateMap("./map/map.txt");
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
 	run();
 }
@@ -93,18 +93,16 @@ void Game::updateCollision()
 {
 	for (auto& enemy : enemies)
 	{
-		enemy.resetCollidingHorizontally();
+		enemy.setIsCollidingHorizontally(false);
 	}
 
-	m_player.resetCollidingHorizontally();
+	m_player.setIsCollidingHorizontally(false);
 
 	for (auto& ground : grounds)
 	{
 		if (m_player.isCollidingWith(ground.getSprite()))
 		{
 			m_player.handleCollision();
-			m_player.handleKnockbackVelocity();
-			m_player.updateCanJump();
 		}
 
 		for (auto& enemy : enemies)
@@ -112,8 +110,6 @@ void Game::updateCollision()
 			if (enemy.isCollidingWith(ground.getSprite()))
 			{
 				enemy.handleCollision();
-				enemy.handleKnockbackVelocity();
-				enemy.updateCanJump();
 			}
 		}
 	}
@@ -123,21 +119,21 @@ void Game::updateCollision()
 		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
 		{
 			float attackDirection = m_player.getPosition().x - enemy.getPosition().x;
-			enemy.takeDamage(m_deltaTime, attackDirection);
-			if (enemy.getInDamageCooldown() && !enemy.isDead())
+			enemy.takeDamage(m_deltaTime, attackDirection, m_player.getAttackHitbox().getGlobalBounds());
+			/*if (enemy.getInDamageCooldown() && !enemy.isDead())
 			{
 				enemy.knockbackMove(m_deltaTime, attackDirection);
-			}
+			}*/
 		}
 
 		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())))
 		{
 			float attackDirection = enemy.getPosition().x - m_player.getPosition().x;
-			m_player.takeDamage(m_deltaTime, attackDirection);
-			if (m_player.getInDamageCooldown() && !m_player.isDead())
+			m_player.takeDamage(m_deltaTime, attackDirection, enemy.getAttackHitbox().getGlobalBounds());
+			/*if (m_player.getInDamageCooldown() && !m_player.isDead())
 			{
 				m_player.knockbackMove(m_deltaTime, attackDirection);
-			}
+			}*/
 		}
 	}
 }
