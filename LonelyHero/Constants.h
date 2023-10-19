@@ -15,8 +15,8 @@ namespace constants
 	constexpr int knightSpriteWidth{ 288 };
 	constexpr int knightSpriteHeight{ 128 };
 
-	constexpr float knightShapeWidth{ 15.f };
-	constexpr float knightShapeHeight{ 30.f };
+	constexpr float knightShapeWidth{ 20.f };
+	constexpr float knightShapeHeight{ 40.f };
 
 	constexpr int knightIdleAnimationFramesAmount{ 8 };
 	constexpr int knightRunningAnimationFramesAmount{ 8 };
@@ -42,11 +42,11 @@ namespace constants
 
 	constexpr float knockbackSpeed{ 300.f };
 
-	constexpr float swordHitboxWidth{ 35.f };
-	constexpr float swordHitboxHeight{ 15.f };
+	constexpr float swordHitboxWidth{ 70.f };
+	constexpr float swordHitboxHeight{ 20.f };
 
 	constexpr float timeBetweenEnemyAttacks{ 0.8f };
-	constexpr float cooldownDamageTime{ 0.4f };
+	constexpr float cooldownDamageTime{ 0.8f };
 
 	constexpr int tileSizeI{ 16 };
 	constexpr float tileSizeF{ 16.f };

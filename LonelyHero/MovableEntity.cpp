@@ -52,7 +52,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 
 	m_velocity.y += constants::gravity * deltaTime;
 
-	if (getJustHitted())
+	if (getInDamageCooldown())
 	{
 		m_velocity.x = 0.f;
 	}

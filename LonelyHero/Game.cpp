@@ -64,7 +64,7 @@ void Game::render()
 {
 	m_window.clear();
 
-	//m_window.draw(m_player.getShape());
+	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto& enemy : enemies)
@@ -74,7 +74,7 @@ void Game::render()
 		//m_window.draw(enemy.getAttackHitbox());
 	}
 
-	//m_window.draw(m_player.getAttackHitbox());
+	m_window.draw(m_player.getAttackHitbox());
 	
 
 	for (auto& ground : grounds)
@@ -124,7 +124,7 @@ void Game::updateCollision()
 		{
 			float attackDirection = m_player.getPosition().x - enemy.getPosition().x;
 			enemy.takeDamage(m_deltaTime, attackDirection);
-			if (enemy.getJustHitted() && !enemy.isDead())
+			if (enemy.getInDamageCooldown() && !enemy.isDead())
 			{
 				enemy.knockbackMove(m_deltaTime, attackDirection);
 			}
@@ -134,7 +134,7 @@ void Game::updateCollision()
 		{
 			float attackDirection = enemy.getPosition().x - m_player.getPosition().x;
 			m_player.takeDamage(m_deltaTime, attackDirection);
-			if (m_player.getJustHitted() && !m_player.isDead())
+			if (m_player.getInDamageCooldown() && !m_player.isDead())
 			{
 				m_player.knockbackMove(m_deltaTime, attackDirection);
 			}

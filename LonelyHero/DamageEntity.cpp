@@ -9,20 +9,25 @@ void DamageEntity::updateCooldownDamage()
 {
 	m_knockbackVelocity = constants::knockbackSpeed;
 
-	if (m_hitted)
+	if (m_inDamageCooldown)
 	{
+		if (m_frameCount > m_currentAnimationFramesAmount - 1)
+		{
+			m_hitted = false;
+		}
 		m_cooldownDamage = m_cooldownDamageClock.getElapsedTime().asSeconds();
 		if (m_cooldownDamage > constants::cooldownDamageTime)
 		{
-			m_hitted = false;
+			m_inDamageCooldown = false;
 		}
 	}
 }
 
 void DamageEntity::takeDamage(float& deltaTime, float direction)
 {
-	if (!m_hitted && !m_dying)
+	if (!m_inDamageCooldown && !m_dying)
 	{
+		m_inDamageCooldown = true;
 		m_hitted = true;
 		m_hp -= 100;
 

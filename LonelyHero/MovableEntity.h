@@ -20,7 +20,7 @@ public:
 
 	void updateCanJump() { m_canJump = m_collisionDirection.y > 0.f; }
 
-	virtual bool getJustHitted() = 0;
+	virtual bool getInDamageCooldown() = 0;
 	virtual bool getIsAttacking() = 0;
 protected:
 	sf::Vector2f m_velocity{};

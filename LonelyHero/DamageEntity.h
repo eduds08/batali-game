@@ -13,7 +13,7 @@ public:
 
 	void knockbackMove(float& deltaTime, float direction);
 
-	virtual bool getJustHitted() { return m_hitted; }
+	virtual bool getInDamageCooldown() { return m_inDamageCooldown; }
 	bool isDead() { return m_dead; }
 
 	void handleKnockbackVelocity();
@@ -24,6 +24,8 @@ protected:
 
 	bool m_dead{ false };
 	bool m_dying{ false };
+	bool m_inDamageCooldown{ false };
+
 	bool m_hitted{ false };
 
 	float m_knockbackVelocity{ constants::knockbackSpeed };

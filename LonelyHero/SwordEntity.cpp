@@ -24,7 +24,7 @@ void SwordEntity::updateAttack(bool condition)
 		m_velocity.y = 0.f;
 
 		// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when it gets hitted
-		if (((m_currentTexture == m_entityName + "Attacking2" || m_currentTexture == m_entityName + "Attacking1") && m_frameCount >= m_currentAnimationFramesAmount - 1) || m_hitted == true)
+		if (((m_currentTexture == m_entityName + "Attacking2" || m_currentTexture == m_entityName + "Attacking1") && m_frameCount >= m_currentAnimationFramesAmount - 1) || m_inDamageCooldown == true)
 		{
 			m_previousAttackingAnimation = m_currentTexture;
 			m_isAttacking = false;
@@ -43,10 +43,10 @@ void SwordEntity::updateHitbox()
 	*/
 
 	// "spawn" the hitbox only when the animation reaches a specific frame
-	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > 1) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > 2))
+	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > 3 && m_frameCount < 7) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > 2 && m_frameCount < 7))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ constants::swordHitboxWidth, constants::swordHitboxHeight });
-		m_attackHitbox.setPosition(getPosition() + sf::Vector2f(getSize().x * m_facingRight, 0.f));
+		m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
 	}
 	else
 	{
@@ -84,23 +84,23 @@ void SwordEntity::updateTexture()
 	{
 		if (m_dying)
 		{
-			changeCurrentTexture(constants::martialDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
+			changeCurrentTexture(constants::knightDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
 		}
 		else if (m_hitted)
 		{
-			changeCurrentTexture(constants::martialHitAnimationFramesAmount, m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")));
+			changeCurrentTexture(constants::knightHitAnimationFramesAmount, m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")));
 		}
 		else if (m_velocity.y != 0.f && !m_canJump)
 		{
-			m_velocity.y > 0.f ? changeCurrentTexture(constants::martialFallingAnimationFramesAmount, m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling"))) : changeCurrentTexture(constants::martialJumpingAnimationFramesAmount, m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")));;
+			m_velocity.y > 0.f ? changeCurrentTexture(constants::knightFallingAnimationFramesAmount, m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling"))) : changeCurrentTexture(constants::knightJumpingAnimationFramesAmount, m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")));;
 		}
 		else if (!m_isAttacking)
 		{
-			m_isRunning ? changeCurrentTexture(constants::martialRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::martialIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+			m_isRunning ? changeCurrentTexture(constants::knightRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::knightIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
 		}
 		else if (m_isAttacking)
 		{
-			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::martialAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::martialAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
+			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::knightAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::knightAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
 		}
 	}
 	
