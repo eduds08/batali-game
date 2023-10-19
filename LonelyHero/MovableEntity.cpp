@@ -58,7 +58,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	if (conditionJump && m_canJump && !getIsAttacking())
 	{
 		m_canJump = false;
-		m_velocity.y = -1 * sqrt(2.f * constants::gravity * constants::playerJumpSpeed);
+		m_velocity.y = -1 * sqrt(2.f * constants::gravity * m_jumpHeight);
 	}
 
 	m_velocity.y += constants::gravity * deltaTime;

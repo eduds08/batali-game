@@ -2,7 +2,6 @@
 
 #include "AnimatedEntity.h"
 #include "ColliderEntity.h"
-#include "Constants.h"
 
 class MovableEntity : public AnimatedEntity, public ColliderEntity
 {
@@ -32,4 +31,5 @@ protected:
 	int m_facingRight{ 1 };
 
 	float m_speed{};
+	float m_jumpHeight{};
 };

@@ -8,12 +8,12 @@ public:
 	SwordEntity(sf::Vector2f firstPosition);
 	virtual ~SwordEntity() = default;
 
-	void updateAttack(bool condition);
+	void updateAttack(bool attackCondition);
 	void updateHitbox();
 
 	virtual void updateTexture();
 
-	void die();
+	virtual void die();
 
 	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
 	virtual bool getIsAttacking() { return m_isAttacking; }
@@ -22,11 +22,11 @@ protected:
 	// Useful when entity has more than one attack animation. So it alters between one another
 	std::string m_previousAttackingAnimation{};
 
-	sf::RectangleShape m_attackHitbox{};
+	sf::RectangleShape m_attackHitbox{sf::Vector2f{0.f, 0.f}};
 
 	bool m_isAttacking{ false };
 
-	// These attributes store the starting and ending point of the attack animation where the hitbox should spawn
+	// These attributes store the starting and ending frame of the attack sprite where the hitbox should spawn
 	int m_attack1StartingFrame{};
 	int m_attack1EndingFrame{};
 	int m_attack2StartingFrame{};

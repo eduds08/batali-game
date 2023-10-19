@@ -9,12 +9,18 @@ public:
 	virtual ~DamageEntity() = default;
 
 	void updateCooldownDamage();
-	void takeDamage(float& deltaTime, float attackDirection, const sf::FloatRect& attackHitbox);
+	void takeDamage(float& deltaTime, float attackDirection);
 
 	void knockbackMove(float& deltaTime, float attackDirection);
 
+	void updateDeath();
+
+	void updateGravityWhenDying(float& deltaTime);
+
 	virtual bool getInDamageCooldown() { return m_inDamageCooldown; }
 	bool isDead() { return m_dead; }
+
+	virtual void die() = 0;
 
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 

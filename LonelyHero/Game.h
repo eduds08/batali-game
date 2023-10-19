@@ -4,10 +4,8 @@
 #include "Enemy.h"
 #include "Ground.h"
 #include <fstream>
-#include <utility>
 #include <vector>
 #include <thread>
-#include <mutex>
 
 using namespace constants;
 
@@ -23,6 +21,7 @@ public:
 	void render();
 
 	void updateCollision();
+	void updateCollisionWithGrounds();
 
 	void updateView();
 
@@ -47,8 +46,8 @@ private:
 	
 	std::thread animationThread;
 
-	float m_horizontalViewLimitRight{};
-	float m_horizontalViewLimitLeft{};
-	float m_verticalViewLimitTop{};
-	float m_verticalViewLimitBottom{};
+	float m_rightViewLimit{};
+	float m_leftViewLimit{};
+	float m_topViewLimit{};
+	float m_bottomViewLimit{};
 };

@@ -3,6 +3,7 @@
 Player::Player(sf::Vector2f firstPosition)
 	: SwordEntity{ firstPosition }
 {
+	// Initialize starting/ending attackings' frames
 	m_attack1StartingFrame = 4;
 	m_attack1EndingFrame = 7;
 	m_attack2StartingFrame = 3;
@@ -15,9 +16,6 @@ Player::Player(sf::Vector2f firstPosition)
 	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture("playerIdle", "./assets/player/_Idle.png"));
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
-	m_entityName = "player";
-	initTexturesMap();
-
 	// Initialize shape
 	m_shape.setSize(sf::Vector2f{ constants::knightShapeWidth, constants::knightShapeHeight});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
@@ -25,32 +23,38 @@ Player::Player(sf::Vector2f firstPosition)
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
+	// Initialize other attributes
+	m_entityName = "player";
+	initTexturesMap();
 	m_speed = constants::playerSpeed;
-	m_hp = 10000;
+	m_jumpHeight = constants::playerJumpHeight;
+	m_hp = constants::playerHp;
 }
 
 void Player::update(float& deltaTime)
 {
-	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	if (m_dying && m_frameCount >= m_currentAnimationFramesAmount - 1 && !m_dead)
-	{
-		die();
-	}
+	// Checks if entity is dead
+	updateDeath();
 
 	if (!m_dying)
 	{
-		updateMovement(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left), sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right), sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up), deltaTime);
-		updateAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
+		bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
+		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
+		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
+
+		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
+
+		bool conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z);
+
+		updateAttack(conditionAttack);
 
 		move(deltaTime);
 
 		updateCooldownDamage();
 	}
 
-	if (m_dying && !m_dead)
-	{
-		m_velocity.x = 0.f;
-		m_velocity.y += constants::gravity * deltaTime;
-		move(deltaTime);
-	}
+	// Add gravity when on dying state
+	updateGravityWhenDying(deltaTime);
+
+	updateLimits();
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SwordEntity.h"
-#include "Constants.h"
 
 class Enemy : public SwordEntity
 {
@@ -14,6 +13,7 @@ public:
 private:
 	const sf::Vector2f& m_playerPosition;
 
+	// Timer used to create a interval between the enemy's attacks
 	sf::Clock m_timeBetweenAttacksClock{};
 	float m_timeBetweenAttacks{};
 };

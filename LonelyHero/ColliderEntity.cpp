@@ -56,3 +56,16 @@ bool ColliderEntity::isCollidingWith(sf::Sprite& other)
 
 	return false;
 }
+
+// Sets the values of the imaginary view of an entity. Useful to call isCollidingWith() with less tiles (only the ones inside the limits)
+void ColliderEntity::updateLimits()
+{
+	// Limit is set to 5 tiles in each direction (top, right, bottom left) from the center of entity's shape
+	int tilesAmount = 5;
+
+	m_rightLimit = m_shape.getPosition().x + tilesAmount * constants::tileSizeF;
+	m_leftLimit = m_shape.getPosition().x - tilesAmount * constants::tileSizeF;
+
+	m_topLimit = m_shape.getPosition().y - tilesAmount * constants::tileSizeF;
+	m_bottomLimit = m_shape.getPosition().y + tilesAmount * constants::tileSizeF;
+}

@@ -79,8 +79,8 @@ void Game::render()
 
 	for (auto& ground : grounds)
 	{
-		if (ground.getSprite().getPosition().x <= m_horizontalViewLimitRight && ground.getSprite().getPosition().x >= m_horizontalViewLimitLeft
-			&& ground.getSprite().getPosition().y >= m_verticalViewLimitTop && ground.getSprite().getPosition().y <= m_verticalViewLimitBottom)
+		if (ground.getSprite().getPosition().x <= m_rightViewLimit && ground.getSprite().getPosition().x >= m_leftViewLimit
+			&& ground.getSprite().getPosition().y >= m_topViewLimit && ground.getSprite().getPosition().y <= m_bottomViewLimit)
 		{
 			m_window.draw(ground.getSprite());
 		}
@@ -98,42 +98,79 @@ void Game::updateCollision()
 
 	m_player.setIsCollidingHorizontally(false);
 
-	for (auto& ground : grounds)
-	{
-		if (m_player.isCollidingWith(ground.getSprite()))
-		{
-			m_player.handleCollision();
-		}
 
-		for (auto& enemy : enemies)
-		{
-			if (enemy.isCollidingWith(ground.getSprite()))
-			{
-				enemy.handleCollision();
-			}
-		}
-	}
+	updateCollisionWithGrounds();
+
 
 	for (auto& enemy : enemies)
 	{
 		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
 		{
 			float attackDirection = m_player.getPosition().x - enemy.getPosition().x;
-			enemy.takeDamage(m_deltaTime, attackDirection, m_player.getAttackHitbox().getGlobalBounds());
-			/*if (enemy.getInDamageCooldown() && !enemy.isDead())
+			enemy.takeDamage(m_deltaTime, attackDirection);
+			while (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !enemy.getIsCollidingHorizontally())
 			{
+				for (auto& ground : grounds)
+				{
+					if (ground.getSprite().getPosition().x <= enemy.m_rightLimit && ground.getSprite().getPosition().x >= enemy.m_leftLimit
+						&& ground.getSprite().getPosition().y >= enemy.m_topLimit && ground.getSprite().getPosition().y <= enemy.m_bottomLimit)
+					{
+						if (enemy.isCollidingWith(ground.getSprite()))
+						{
+							enemy.handleCollision();
+						}
+					}
+				}
 				enemy.knockbackMove(m_deltaTime, attackDirection);
-			}*/
+			}
 		}
 
 		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())))
 		{
 			float attackDirection = enemy.getPosition().x - m_player.getPosition().x;
-			m_player.takeDamage(m_deltaTime, attackDirection, enemy.getAttackHitbox().getGlobalBounds());
-			/*if (m_player.getInDamageCooldown() && !m_player.isDead())
+			m_player.takeDamage(m_deltaTime, attackDirection);
+			while (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !m_player.getIsCollidingHorizontally())
 			{
+				for (auto& ground : grounds)
+				{
+					if (ground.getSprite().getPosition().x <= m_player.m_rightLimit && ground.getSprite().getPosition().x >= m_player.m_leftLimit
+						&& ground.getSprite().getPosition().y >= m_player.m_topLimit && ground.getSprite().getPosition().y <= m_player.m_bottomLimit)
+					{
+						if (m_player.isCollidingWith(ground.getSprite()))
+						{
+							m_player.handleCollision();
+						}
+					}
+				}
 				m_player.knockbackMove(m_deltaTime, attackDirection);
-			}*/
+			}
+		}
+	}
+}
+
+void Game::updateCollisionWithGrounds()
+{
+	for (auto& ground : grounds)
+	{
+		if (ground.getSprite().getPosition().x <= m_player.m_rightLimit && ground.getSprite().getPosition().x >= m_player.m_leftLimit
+			&& ground.getSprite().getPosition().y >= m_player.m_topLimit && ground.getSprite().getPosition().y <= m_player.m_bottomLimit)
+		{
+			if (m_player.isCollidingWith(ground.getSprite()))
+			{
+				m_player.handleCollision();
+			}
+		}
+
+		for (auto& enemy : enemies)
+		{
+			if (ground.getSprite().getPosition().x <= enemy.m_rightLimit && ground.getSprite().getPosition().x >= enemy.m_leftLimit
+				&& ground.getSprite().getPosition().y >= enemy.m_topLimit && ground.getSprite().getPosition().y <= enemy.m_bottomLimit)
+			{
+				if (enemy.isCollidingWith(ground.getSprite()))
+				{
+					enemy.handleCollision();
+				}
+			}
 		}
 	}
 }
@@ -143,11 +180,11 @@ void Game::updateView()
 	m_view.setCenter(m_player.getPosition());
 	m_window.setView(m_view);
 
-	m_horizontalViewLimitRight = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSizeF;
-	m_horizontalViewLimitLeft = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSizeF;
+	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSizeF;
+	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSizeF;
 
-	m_verticalViewLimitTop = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSizeF;
-	m_verticalViewLimitBottom = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
+	m_topViewLimit = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSizeF;
+	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
 }
 
 void Game::loadAndCreateMap(const std::string& mapFilePath)

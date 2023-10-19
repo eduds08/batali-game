@@ -32,7 +32,7 @@ void DamageEntity::updateCooldownDamage()
 }
 
 // Called when hitted.
-void DamageEntity::takeDamage(float& deltaTime, float attackDirection, const sf::FloatRect& attackHitbox)
+void DamageEntity::takeDamage(float& deltaTime, float attackDirection)
 {
 	// Only executed if not already dead and when not immune (on cooldownDamage)
 	if (!m_inDamageCooldown && !m_dying)
@@ -41,11 +41,6 @@ void DamageEntity::takeDamage(float& deltaTime, float attackDirection, const sf:
 		m_hitted = true;
 
 		m_hp -= 100;
-
-		while (m_shape.getGlobalBounds().intersects(attackHitbox))
-		{
-			knockbackMove(deltaTime, attackDirection);
-		}
 
 		if (m_hp <= 0)
 		{
@@ -72,4 +67,25 @@ void DamageEntity::knockbackMove(float& deltaTime, float attackDirection)
 	}
 
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x, getPosition().y - (m_spriteHeight - getSize().y) / 2.f});
+}
+
+// Check if the entity died. If yes, calls method die()
+void DamageEntity::updateDeath()
+{
+	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
+	if (m_dying && m_frameCount >= m_currentAnimationFramesAmount && !m_dead)
+	{
+		die();
+	}
+}
+
+// If the entity is dying (not dead yet), it doesn't move anymore, so we call this method to move it in y-direction and avoids it floating in the air after death
+void DamageEntity::updateGravityWhenDying(float& deltaTime)
+{
+	if (m_dying && !m_dead)
+	{
+		m_velocity.x = 0.f;
+		m_velocity.y += constants::gravity * deltaTime;
+		move(deltaTime);
+	}
 }

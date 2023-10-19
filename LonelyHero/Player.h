@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SwordEntity.h"
-#include "Constants.h"
 
 class Player : public SwordEntity
 {
