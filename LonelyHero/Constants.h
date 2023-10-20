@@ -16,32 +16,32 @@ namespace constants
 
 	constexpr float gravity{ 981.f };
 
-	constexpr int knightSpriteWidth{ 288 };
-	constexpr int knightSpriteHeight{ 128 };
+	constexpr int fireKnightSpriteWidth{ 288 };
+	constexpr int fireKnightSpriteHeight{ 128 };
 
-	constexpr float knightShapeWidth{ 20.f };
-	constexpr float knightShapeHeight{ 40.f };
+	constexpr float fireKnightShapeWidth{ 20.f };
+	constexpr float fireKnightShapeHeight{ 40.f };
 
-	constexpr int knightIdleAnimationFramesAmount{ 8 };
-	constexpr int knightRunningAnimationFramesAmount{ 8 };
+	constexpr int fireKnightIdleAnimationFramesAmount{ 8 };
+	constexpr int fireKnightRunningAnimationFramesAmount{ 8 };
 
-	constexpr int knightJumpingAnimationFramesAmount{ 3 };
-	constexpr int knightFallingAnimationFramesAmount{ 3 };
+	constexpr int fireKnightJumpingAnimationFramesAmount{ 3 };
+	constexpr int fireKnightFallingAnimationFramesAmount{ 3 };
 
-	constexpr int knightAttackingAnimationFramesAmount{ 11 };
-	constexpr int knightAttacking2AnimationFramesAmount{ 10 };
+	constexpr int fireKnightAttackingAnimationFramesAmount{ 11 };
+	constexpr int fireKnightAttacking2AnimationFramesAmount{ 10 };
 
-	constexpr int knightDeathAnimationFramesAmount{ 13 };
-	constexpr int knightHitAnimationFramesAmount{ 6 };
+	constexpr int fireKnightDeathAnimationFramesAmount{ 13 };
+	constexpr int fireKnightHitAnimationFramesAmount{ 6 };
 
-	constexpr float knightSpriteScale{ 1.f };
+	constexpr float fireKnightSpriteScale{ 1.f };
 
 	const sf::Vector2f playerFirstPosition{sf::Vector2f{480.f, 240.f}};
 	const sf::Vector2f enemyFirstPosition{sf::Vector2f{432.f, 240.f}};
 
 	constexpr float playerSpeed{ 240.f };
 	constexpr float playerJumpHeight{ 80.f };
-	constexpr int playerHp{ 10000 };
+	constexpr int playerHp{ 1000 };
 	
 	constexpr float minEnemySpeed{ 130.f };
 	constexpr float maxEnemySpeed{ 200.f };
@@ -53,9 +53,34 @@ namespace constants
 
 	constexpr float knockbackSpeed{ 300.f };
 
-	constexpr float swordHitboxWidth{ 60.f };
-	constexpr float swordHitboxHeight{ 20.f };
+	constexpr float fireKnightSwordHitboxWidth{ 65.f };
+	constexpr float fireKnightSwordHitboxHeight{ 20.f };
+
+	constexpr float windHashashinSwordHitboxWidthAttack1{ 30.f };
+	constexpr float windHashashinSwordHitboxWidthAttack2{ 50.f };
+
+	constexpr float windHashashinSwordHitboxHeight{ 20.f };
 
 	constexpr float timeBetweenEnemyAttacks{ 0.8f };
 	constexpr float cooldownDamageTime{ 0.6f };
+
+	constexpr int windHashashinSpriteWidth{ 288 };
+	constexpr int windHashashinSpriteHeight{ 128 };
+
+	constexpr float windHashashinShapeWidth{ 20.f };
+	constexpr float windHashashinShapeHeight{ 40.f };
+
+	constexpr int windHashashinIdleAnimationFramesAmount{ 8 };
+	constexpr int windHashashinRunningAnimationFramesAmount{ 8 };
+
+	constexpr int windHashashinJumpingAnimationFramesAmount{ 3 };
+	constexpr int windHashashinFallingAnimationFramesAmount{ 3 };
+
+	constexpr int windHashashinAttackingAnimationFramesAmount{ 8 };
+	constexpr int windHashashinAttacking2AnimationFramesAmount{ 12 };
+
+	constexpr int windHashashinDeathAnimationFramesAmount{ 19 };
+	constexpr int windHashashinHitAnimationFramesAmount{ 6 };
+
+	constexpr float windHashashinSpriteScale{ 1.f };
 }

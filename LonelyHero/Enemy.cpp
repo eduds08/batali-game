@@ -4,30 +4,37 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	: SwordEntity{ firstPosition }
 	, m_playerPosition{ playerPosition }
 {
+	m_hitboxWidth = constants::windHashashinSwordHitboxWidthAttack1;
+	m_hitboxHeight = constants::windHashashinSwordHitboxHeight;
+	m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+
+	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
+	m_attackHitbox.setOutlineThickness(1.f);
+
 	// Initialize starting/ending attackings' frames
-	m_attack1StartingFrame = 4;
-	m_attack1EndingFrame = 7;
-	m_attack2StartingFrame = 3;
+	m_attack1StartingFrame = 0;
+	m_attack1EndingFrame = 4;
+	m_attack2StartingFrame = 1;
 	m_attack2EndingFrame = 7;
 
+	m_entityName = "enemy";
+	initTexturesMap();
+
 	// Initialize sprite
-	m_spriteWidth = constants::knightSpriteWidth;
-	m_spriteHeight = constants::knightSpriteHeight;
-	m_spriteScale = constants::knightSpriteScale;
-	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture("enemyIdle", "./assets/enemy/_Idle.png"));
+	m_spriteWidth = constants::windHashashinSpriteWidth;
+	m_spriteHeight = constants::windHashashinSpriteHeight;
+	m_spriteScale = constants::windHashashinSpriteScale;
+	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle"))));
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
 	// Initialize shape
-	m_shape.setSize(sf::Vector2f{ constants::knightShapeWidth, constants::knightShapeHeight});
+	m_shape.setSize(sf::Vector2f{ constants::windHashashinShapeWidth, constants::windHashashinShapeHeight});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
 	// Initialize other attributes
-	m_entityName = "enemy";
-	initTexturesMap();
-	
 	m_jumpHeight = constants::enemyJumpHeight;
 	m_hp = constants::enemyHp;
 
@@ -52,12 +59,23 @@ void Enemy::update(float& deltaTime)
 	{
 		bool conditionRunLeft = m_playerPosition.x < getPosition().x - m_distanceFromPlayer;
 		bool conditionRunRight = m_playerPosition.x > getPosition().x + m_distanceFromPlayer;
-		bool conditionJump = (((m_playerPosition.y - constants::knightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
+		bool conditionJump = (((m_playerPosition.y - constants::fireKnightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
 
 		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
 
 		m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
 		bool conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks);
+
+		if (m_currentTexture == "enemyAttacking1")
+		{
+			m_hitboxWidth = constants::windHashashinSwordHitboxWidthAttack1;
+			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+		}
+		else if (m_currentTexture == "enemyAttacking2")
+		{
+			m_hitboxWidth = constants::windHashashinSwordHitboxWidthAttack2;
+			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+		}
 
 		updateAttack(conditionAttack);
 

@@ -30,6 +30,9 @@ protected:
 
 	sf::RectangleShape m_attackHitbox{sf::Vector2f{0.f, 0.f}};
 
+	float m_hitboxWidth{};
+	float m_hitboxHeight{};
+
 	bool m_isAttacking{ false };
 
 	// These attributes store the starting and ending frame of the attack sprite where the hitbox should spawn
