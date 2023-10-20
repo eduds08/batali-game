@@ -36,9 +36,11 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	// Mersenne Twister random number generator
 	std::mt19937 gen(rd());
 	// Generates uniform distributed random number in a specific interval
-	std::uniform_real_distribution<> dis(constants::minEnemySpeed, constants::maxEnemySpeed);
-	// The random number
-	m_speed = static_cast<float>(dis(gen));
+	std::uniform_real_distribution<> distribution1(constants::minEnemySpeed, constants::maxEnemySpeed);
+	std::uniform_real_distribution<> distribution2(constants::minEnemyDistanceFromPlayer, constants::maxEnemyDistanceFromPlayer);
+
+	m_speed = static_cast<float>(distribution1(gen));
+	m_distanceFromPlayer = static_cast<float>(distribution2(gen));
 }
 
 void Enemy::update(float& deltaTime)
@@ -48,8 +50,8 @@ void Enemy::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		bool conditionRunLeft = m_playerPosition.x < getPosition().x - constants::enemyDistanceFromPlayer;
-		bool conditionRunRight = m_playerPosition.x > getPosition().x + constants::enemyDistanceFromPlayer;
+		bool conditionRunLeft = m_playerPosition.x < getPosition().x - m_distanceFromPlayer;
+		bool conditionRunRight = m_playerPosition.x > getPosition().x + m_distanceFromPlayer;
 		bool conditionJump = (((m_playerPosition.y - constants::knightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
 
 		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);

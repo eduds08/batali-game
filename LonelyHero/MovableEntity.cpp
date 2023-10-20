@@ -60,8 +60,8 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 
 	m_velocity.y += constants::gravity * deltaTime;
 
-	// If entity was attacked and it is still in damageCooldown, sets x-velocity to 0 so it can't move
-	if (getInDamageCooldown())
+	// If m_hitted is true (hitted sprite set), sets x-velocity to 0 so it can't move
+	if (getHitted())
 	{
 		m_velocity.x = 0.f;
 	}

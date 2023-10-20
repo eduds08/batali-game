@@ -14,6 +14,12 @@ void DamageEntity::updateDamage()
 	if (m_currentTexture == m_texturesActionName.at("Hitted") && m_frameCount >= m_currentAnimationFramesAmount)
 	{
 		m_hitted = false;
+
+
+		if (m_hp <= 0)
+		{
+			m_dying = true;
+		}
 	}
 
 	// While on damageCooldown, the entity is immune to attacks. Useful to make the entity being hit only once per attack
@@ -21,12 +27,6 @@ void DamageEntity::updateDamage()
 	if (m_damageCooldown > constants::cooldownDamageTime)
 	{
 		m_inDamageCooldown = false;
-	}
-
-	// Makes sure the running sprite won't be played if entity gets attacked
-	if (m_inDamageCooldown)
-	{
-		m_isRunning = false;
 	}
 }
 
@@ -39,11 +39,6 @@ void DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 		m_hitted = true;
 
 		m_hp -= damage;
-
-		if (m_hp <= 0)
-		{
-			m_dying = true;
-		}
 
 		m_damageCooldownClock.restart();
 		m_damageCooldown = 0.f;
@@ -69,7 +64,7 @@ void DamageEntity::knockbackMove(float& deltaTime, float attackDirection)
 void DamageEntity::updateDeath()
 {
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	if (m_dying && m_frameCount >= m_currentAnimationFramesAmount && !m_dead)
+	if (m_currentTexture == m_texturesActionName.at("Death") && m_frameCount >= m_currentAnimationFramesAmount && !m_dead)
 	{
 		die();
 	}

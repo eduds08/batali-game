@@ -14,6 +14,8 @@ public:
 private:
 	const sf::Vector2f& m_playerPosition;
 
+	float m_distanceFromPlayer{};
+
 	// Timer used to create a interval between the enemy's attacks
 	sf::Clock m_timeBetweenAttacksClock{};
 	float m_timeBetweenAttacks{};

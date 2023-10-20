@@ -20,7 +20,7 @@ public:
 
 	void flipSprite() { m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale); }
 
-	virtual bool getInDamageCooldown() = 0;
+	virtual bool getHitted() = 0;
 	virtual bool getIsAttacking() = 0;
 	virtual void setKnockbackVelocity(float knockbackVelocity) = 0;
 protected:

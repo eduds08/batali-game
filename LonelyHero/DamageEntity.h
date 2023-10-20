@@ -23,7 +23,7 @@ public:
 	// If the entity is dying (not dead yet), it doesn't move anymore, so we call this method to move it in y-direction and avoids it floating in the air after death
 	void updateGravityWhenDying(float& deltaTime);
 
-	virtual bool getInDamageCooldown() { return m_inDamageCooldown; }
+	virtual bool getHitted() { return m_hitted; }
 	bool isDead() { return m_dead; }
 
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }

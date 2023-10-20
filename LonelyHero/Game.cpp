@@ -9,13 +9,11 @@ Game::Game()
 
 void Game::init()
 {
-	// Init enemies
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
-	//enemies.emplace_back(Enemy{ enemyFirstPosition + sf::Vector2f{40.f, 0.f}, m_player.getPosition() });
-	
+	//enemies.emplace_back(Enemy{ sf::Vector2f{520.f, 240.f}, m_player.getPosition() });
+
 	loadAndCreateMap("./map/map.txt");
 
-	// "Create" thread
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
 
 	run();
@@ -211,7 +209,7 @@ void Game::updateTexturesAndAnimations()
 	while (Game::isGameRunning)
 	{
 		// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
-		std::this_thread::sleep_for(std::chrono::milliseconds(60));
+		std::this_thread::sleep_for(std::chrono::milliseconds(65));
 		if (!m_player.isDead())
 		{
 			m_player.updateAnimation();
