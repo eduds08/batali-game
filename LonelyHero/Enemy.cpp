@@ -27,14 +27,22 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	// Initialize other attributes
 	m_entityName = "enemy";
 	initTexturesMap();
-	m_speed = constants::enemySpeed;
+	
 	m_jumpHeight = constants::enemyJumpHeight;
 	m_hp = constants::enemyHp;
+
+	// Generates a random seed
+	std::random_device rd;
+	// Mersenne Twister random number generator
+	std::mt19937 gen(rd());
+	// Generates uniform distributed random number in a specific interval
+	std::uniform_real_distribution<> dis(constants::minEnemySpeed, constants::maxEnemySpeed);
+	// The random number
+	m_speed = static_cast<float>(dis(gen));
 }
 
 void Enemy::update(float& deltaTime)
 {
-	// Checks if entity is dead
 	updateDeath();
 
 	// Only called if hp > 0
@@ -51,19 +59,29 @@ void Enemy::update(float& deltaTime)
 
 		updateAttack(conditionAttack);
 
+		if (m_currentTexture == "enemyAttacking1")
+		{
+			m_damage = 100;
+		}
+		else if (m_currentTexture == "enemyAttacking2")
+		{
+			m_damage = 50;
+		}
+
 		if (m_isAttacking)
 		{
 			m_timeBetweenAttacksClock.restart();
 			m_timeBetweenAttacks = 0.f;
 		}
 
-		move(deltaTime);
+		updateDamage();
 
-		updateCooldownDamage();
+		move(deltaTime);
 	}
 
-	// Add gravity when on dying state
-	updateGravityWhenDying(deltaTime);
-
-	updateLimits();
+	if (!m_dead)
+	{
+		updateGravityWhenDying(deltaTime);
+		updateLimits();
+	}
 }

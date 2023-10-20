@@ -9,11 +9,15 @@ Game::Game()
 
 void Game::init()
 {
+	// Init enemies
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
-	//enemies.emplace_back(Enemy{ sf::Vector2f{400.f, 240.f}, m_player.getPosition() });
+	//enemies.emplace_back(Enemy{ enemyFirstPosition + sf::Vector2f{40.f, 0.f}, m_player.getPosition() });
 	
 	loadAndCreateMap("./map/map.txt");
+
+	// "Create" thread
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
+
 	run();
 }
 
@@ -42,7 +46,7 @@ void Game::run()
 		render();
 	}
 
-	// Quit thread
+	// Quit animation thread
 	animationThread.join();
 }
 
@@ -79,6 +83,7 @@ void Game::render()
 
 	for (auto& ground : grounds)
 	{
+		// Only draw the tiles that are inside the view
 		if (ground.getSprite().getPosition().x <= m_rightViewLimit && ground.getSprite().getPosition().x >= m_leftViewLimit
 			&& ground.getSprite().getPosition().y >= m_topViewLimit && ground.getSprite().getPosition().y <= m_bottomViewLimit)
 		{
@@ -91,87 +96,72 @@ void Game::render()
 
 void Game::updateCollision()
 {
+	// We reset isCollidingHorizontally to false for all entities, so when isColliding() is called, if the entity collides in the x-direction, it will be true.
+	// If doesn't collide, it remains false.
+	m_player.setIsCollidingHorizontally(false);
+	
 	for (auto& enemy : enemies)
 	{
 		enemy.setIsCollidingHorizontally(false);
 	}
 
-	m_player.setIsCollidingHorizontally(false);
+	// Entities' collision with tiles
+	for (auto& ground : grounds)
+	{
+		// Player's collision
+		updateEntityCollisionWithGrounds(m_player, ground);
 
+		// Enemies' collision
+		for (auto& enemy : enemies)
+		{
+			updateEntityCollisionWithGrounds(enemy, ground);
+		}
+	}
 
-	updateCollisionWithGrounds();
-
-
+	// Checks if the an entity was attacked by another entity
 	for (auto& enemy : enemies)
 	{
-		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())))
+		// Enemy attacked by player
+		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !enemy.isDead())
 		{
-			float attackDirection = m_player.getPosition().x - enemy.getPosition().x;
-			enemy.takeDamage(m_deltaTime, attackDirection);
-			while (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !enemy.getIsCollidingHorizontally())
-			{
-				for (auto& ground : grounds)
-				{
-					if (ground.getSprite().getPosition().x <= enemy.m_rightLimit && ground.getSprite().getPosition().x >= enemy.m_leftLimit
-						&& ground.getSprite().getPosition().y >= enemy.m_topLimit && ground.getSprite().getPosition().y <= enemy.m_bottomLimit)
-					{
-						if (enemy.isCollidingWith(ground.getSprite()))
-						{
-							enemy.handleCollision();
-						}
-					}
-				}
-				enemy.knockbackMove(m_deltaTime, attackDirection);
-			}
+			handleEntityAttacked(m_player, enemy);
 		}
 
-		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())))
+		// Player attacked by an enemy
+		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !m_player.isDead())
 		{
-			float attackDirection = enemy.getPosition().x - m_player.getPosition().x;
-			m_player.takeDamage(m_deltaTime, attackDirection);
-			while (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !m_player.getIsCollidingHorizontally())
-			{
-				for (auto& ground : grounds)
-				{
-					if (ground.getSprite().getPosition().x <= m_player.m_rightLimit && ground.getSprite().getPosition().x >= m_player.m_leftLimit
-						&& ground.getSprite().getPosition().y >= m_player.m_topLimit && ground.getSprite().getPosition().y <= m_player.m_bottomLimit)
-					{
-						if (m_player.isCollidingWith(ground.getSprite()))
-						{
-							m_player.handleCollision();
-						}
-					}
-				}
-				m_player.knockbackMove(m_deltaTime, attackDirection);
-			}
+			handleEntityAttacked(enemy, m_player);
 		}
 	}
 }
 
-void Game::updateCollisionWithGrounds()
+void Game::updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground)
 {
-	for (auto& ground : grounds)
+	if (ground.getSprite().getPosition().x <= entity.m_rightLimit && ground.getSprite().getPosition().x >= entity.m_leftLimit
+		&& ground.getSprite().getPosition().y >= entity.m_topLimit && ground.getSprite().getPosition().y <= entity.m_bottomLimit)
 	{
-		if (ground.getSprite().getPosition().x <= m_player.m_rightLimit && ground.getSprite().getPosition().x >= m_player.m_leftLimit
-			&& ground.getSprite().getPosition().y >= m_player.m_topLimit && ground.getSprite().getPosition().y <= m_player.m_bottomLimit)
+		if (entity.isCollidingWith(ground.getSprite()))
 		{
-			if (m_player.isCollidingWith(ground.getSprite()))
-			{
-				m_player.handleCollision();
-			}
+			entity.handleCollision();
 		}
+	}
+}
 
-		for (auto& enemy : enemies)
+void Game::handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity)
+{
+	// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
+	float attackDirection = attackingEntity.getPosition().x - attackedEntity.getPosition().x;
+
+	attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
+
+	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or when it doesn't collide with a wall.
+	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally())
+	{
+		for (auto& ground : grounds)
 		{
-			if (ground.getSprite().getPosition().x <= enemy.m_rightLimit && ground.getSprite().getPosition().x >= enemy.m_leftLimit
-				&& ground.getSprite().getPosition().y >= enemy.m_topLimit && ground.getSprite().getPosition().y <= enemy.m_bottomLimit)
-			{
-				if (enemy.isCollidingWith(ground.getSprite()))
-				{
-					enemy.handleCollision();
-				}
-			}
+			updateEntityCollisionWithGrounds(attackedEntity, ground);
 		}
+		attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 	}
 }
 
@@ -220,7 +210,8 @@ void Game::updateTexturesAndAnimations()
 {
 	while (Game::isGameRunning)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
+		std::this_thread::sleep_for(std::chrono::milliseconds(60));
 		if (!m_player.isDead())
 		{
 			m_player.updateAnimation();

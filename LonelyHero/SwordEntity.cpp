@@ -9,7 +9,6 @@ SwordEntity::SwordEntity(sf::Vector2f firstPosition)
 	m_attackHitbox.setOutlineThickness(1.f);
 }
 
-// Updates the state of m_isAttacking and also calls updateHitbox()
 void SwordEntity::updateAttack(bool attackCondition)
 {
 	if (attackCondition && m_canJump && !m_isAttacking)
@@ -34,7 +33,6 @@ void SwordEntity::updateAttack(bool attackCondition)
 	updateHitbox();
 }
 
-// Called inside updateAttack()
 void SwordEntity::updateHitbox()
 {
 	/*
@@ -55,7 +53,6 @@ void SwordEntity::updateHitbox()
 	}
 }
 
-// Changes the entity's texture according to its action (running, jumping, attacking, etc...)
 void SwordEntity::updateTexture()
 {
 	if (m_entityName == "player")
@@ -107,7 +104,6 @@ void SwordEntity::updateTexture()
 	
 }
 
-// Sets m_dead to true and "zeroes" some attributes
 void SwordEntity::die()
 {
 	m_dead = true;

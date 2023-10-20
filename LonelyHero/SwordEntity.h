@@ -8,15 +8,21 @@ public:
 	SwordEntity(sf::Vector2f firstPosition);
 	virtual ~SwordEntity() = default;
 
+	// Updates the state of m_isAttacking and also calls updateHitbox()
 	void updateAttack(bool attackCondition);
+
 	void updateHitbox();
 
+	// Changes the entity's texture according to its action (running, jumping, attacking, etc...)
 	virtual void updateTexture();
 
+	// Sets m_dead to true and "zeroes" some attributes
 	virtual void die();
 
 	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
 	virtual bool getIsAttacking() { return m_isAttacking; }
+
+	int getDamage() { return m_damage; }
 
 protected:
 	// Useful when entity has more than one attack animation. So it alters between one another
@@ -31,4 +37,6 @@ protected:
 	int m_attack1EndingFrame{};
 	int m_attack2StartingFrame{};
 	int m_attack2EndingFrame{};
+
+	int m_damage{};
 };

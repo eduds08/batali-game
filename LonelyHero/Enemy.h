@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SwordEntity.h"
+#include <random>
 
 class Enemy : public SwordEntity
 {

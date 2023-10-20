@@ -8,14 +8,17 @@ public:
 	AnimatedEntity();
 	virtual ~AnimatedEntity() = default;
 
+	// Called inside the animationThread. It's here where all animation happens.
 	void updateAnimation();
 
+	// Called when the entity changes its sprite. Eg.: from running sprite to jumping sprite.
 	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
+	
+	// Set the next frame of the sprite and when it hits the last frame, it starts from beginning again.
 	void animateSprite();
 
 	void initTexturesMap();
 
-	// pure virtual method, defined in derived classes
 	virtual void updateTexture() = 0;
 protected:
 	// Name of the current texture set in the entity

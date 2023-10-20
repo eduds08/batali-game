@@ -33,9 +33,9 @@ Player::Player(sf::Vector2f firstPosition)
 
 void Player::update(float& deltaTime)
 {
-	// Checks if entity is dead
 	updateDeath();
 
+	// Only called if hp > 0
 	if (!m_dying)
 	{
 		bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
@@ -48,13 +48,23 @@ void Player::update(float& deltaTime)
 
 		updateAttack(conditionAttack);
 
-		move(deltaTime);
+		if (m_currentTexture == "playerAttacking1")
+		{
+			m_damage = 100;
+		}
+		else if (m_currentTexture == "playerAttacking2")
+		{
+			m_damage = 50;
+		}
 
-		updateCooldownDamage();
+		updateDamage();
+
+		move(deltaTime);
 	}
 
-	// Add gravity when on dying state
-	updateGravityWhenDying(deltaTime);
-
-	updateLimits();
+	if (!m_dead)
+	{
+		updateGravityWhenDying(deltaTime);
+		updateLimits();
+	}
 }

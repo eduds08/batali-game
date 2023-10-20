@@ -1,6 +1,5 @@
 #include "ColliderEntity.h"
 
-//Returns true if colliding with other, false if not. Also set the collision directions (if is colliding in the right, left, bottom or top)
 bool ColliderEntity::isCollidingWith(sf::Sprite& other)
 {
 	float otherHalfSizeX = other.getTexture()->getSize().x / 2.f;
@@ -57,7 +56,6 @@ bool ColliderEntity::isCollidingWith(sf::Sprite& other)
 	return false;
 }
 
-// Sets the values of the imaginary view of an entity. Useful to call isCollidingWith() with less tiles (only the ones inside the limits)
 void ColliderEntity::updateLimits()
 {
 	// Limit is set to 5 tiles in each direction (top, right, bottom left) from the center of entity's shape
