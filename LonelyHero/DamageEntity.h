@@ -25,6 +25,7 @@ public:
 
 	virtual bool getHitted() { return m_hitted; }
 	bool isDead() { return m_dead; }
+	bool isDying() { return m_dying; }
 
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 

@@ -66,17 +66,17 @@ void Game::render()
 {
 	m_window.clear();
 
-	//m_window.draw(m_player.getShape());
+	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto& enemy : enemies)
 	{
-		//m_window.draw(enemy.getShape());
+		m_window.draw(enemy.getShape());
 		m_window.draw(enemy.getSprite());
-		//m_window.draw(enemy.getAttackHitbox());
+		m_window.draw(enemy.getAttackHitbox());
 	}
 
-	//m_window.draw(m_player.getAttackHitbox());
+	m_window.draw(m_player.getAttackHitbox());
 	
 
 	for (auto& ground : grounds)
@@ -120,13 +120,13 @@ void Game::updateCollision()
 	for (auto& enemy : enemies)
 	{
 		// Enemy attacked by player
-		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !enemy.isDead())
+		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !enemy.isDying())
 		{
 			handleEntityAttacked(m_player, enemy);
 		}
 
 		// Player attacked by an enemy
-		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !m_player.isDead())
+		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !m_player.isDying())
 		{
 			handleEntityAttacked(enemy, m_player);
 		}
