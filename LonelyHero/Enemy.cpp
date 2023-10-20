@@ -57,14 +57,20 @@ void Enemy::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		bool conditionRunLeft = m_playerPosition.x < getPosition().x - m_distanceFromPlayer;
+		bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A);
+		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D);
+		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W);
+
+		/*bool conditionRunLeft = m_playerPosition.x < getPosition().x - m_distanceFromPlayer;
 		bool conditionRunRight = m_playerPosition.x > getPosition().x + m_distanceFromPlayer;
-		bool conditionJump = (((m_playerPosition.y - constants::fireKnightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
+		bool conditionJump = (((m_playerPosition.y - constants::fireKnightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);*/
 
 		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
 
-		m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-		bool conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks);
+		/*m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
+		bool conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks);*/
+
+		bool conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V);
 
 		if (m_currentTexture == "enemyAttacking1")
 		{
@@ -88,11 +94,11 @@ void Enemy::update(float& deltaTime)
 			m_damage = 50;
 		}
 
-		if (m_isAttacking)
+		/*if (m_isAttacking)
 		{
 			m_timeBetweenAttacksClock.restart();
 			m_timeBetweenAttacks = 0.f;
-		}
+		}*/
 
 		updateDamage();
 

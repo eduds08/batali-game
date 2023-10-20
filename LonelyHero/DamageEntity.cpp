@@ -40,6 +40,25 @@ void DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 
 		m_hp -= damage;
 
+		if (attackDirection < 0.f)
+		{
+			// attack coming from left
+			if (m_facingRight == 1)
+			{
+				m_facingRight = -1;
+				flipSprite();
+			}
+		}
+		else
+		{
+			// attack coming from right
+			if (m_facingRight == -1)
+			{
+				m_facingRight = 1;
+				flipSprite();
+			}
+		}
+		
 		m_damageCooldownClock.restart();
 		m_damageCooldown = 0.f;
 	}
