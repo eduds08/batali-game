@@ -18,6 +18,4 @@ protected:
 
 	int m_spriteWidth{};
 	int m_spriteHeight{};
-
-	float m_spriteScale{};
 };

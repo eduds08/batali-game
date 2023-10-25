@@ -2,7 +2,7 @@
 
 #include "Player.h"
 #include "Enemy.h"
-#include "UI.h"
+#include "HealthBarUI.h"
 #include "Ground.h"
 #include <fstream>
 #include <vector>
@@ -42,8 +42,8 @@ public:
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
 
-	UI playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png"};
-	UI enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
+	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png" };
+	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
 
 	sf::Event m_event{};
 

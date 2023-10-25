@@ -18,7 +18,7 @@ public:
 	// Updates velocity components of the entity according to some conditions
 	void updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime);
 
-	void flipSprite() { m_sprite.setScale(m_spriteScale * m_facingRight, m_spriteScale); }
+	void flipSprite() { m_sprite.setScale(m_facingRight, 1.f); }
 
 	virtual bool getHitted() = 0;
 	virtual bool getIsAttacking() = 0;

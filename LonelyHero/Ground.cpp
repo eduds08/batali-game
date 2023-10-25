@@ -5,7 +5,6 @@ Ground::Ground(sf::Vector2f position, const std::string& textureName, const std:
 {
 	m_spriteWidth = constants::tileSizeI;
 	m_spriteHeight = constants::tileSizeI;
-	m_spriteScale = 1.f;
 
 	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(textureName, texturePath));
 

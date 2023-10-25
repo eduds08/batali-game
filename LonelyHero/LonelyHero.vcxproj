@@ -140,6 +140,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="HealthBarUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="HealthBarUI.h" />
     <ClInclude Include="MovableEntity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SwordEntity.h" />

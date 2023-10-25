@@ -13,6 +13,9 @@ void Game::init()
 {
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
 
+	m_playerHealthBar.setEntityHp(&m_player.getHp());
+	m_enemyHealthBar.setEntityHp(&enemies[0].getHp());
+
 	loadAndCreateMap("./map/map.txt");
 
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
@@ -53,6 +56,9 @@ void Game::update()
 {
 	updateCollision();
 
+	m_playerHealthBar.updateHealthBar();
+	m_enemyHealthBar.updateHealthBar();
+
 	m_player.update(m_deltaTime);
 
 	for (auto& enemy : enemies)
@@ -90,8 +96,8 @@ void Game::render()
 		}
 	}
 
-	m_window.draw(playerHealthBar.getSprite());
-	m_window.draw(enemyHealthBar.getSprite());
+	m_window.draw(m_playerHealthBar.getSprite());
+	m_window.draw(m_enemyHealthBar.getSprite());
 
 	m_window.display();
 }
@@ -134,38 +140,6 @@ void Game::updateCollision()
 		{
 			handleEntityAttacked(enemy, m_player);
 		}
-
-		if (enemy.getHp() <= 0) {
-			enemyHealthBar.setRectTemp(240);
-		}
-		else if (enemy.getHp() < enemyHpDivided5 * 1) {
-			enemyHealthBar.setRectTemp(192);
-		}
-		else if (enemy.getHp() < enemyHpDivided5 * 2) {
-			enemyHealthBar.setRectTemp(144);
-		}
-		else if (enemy.getHp() < enemyHpDivided5 * 3) {
-			enemyHealthBar.setRectTemp(96);
-		}
-		else if (enemy.getHp() < enemyHpDivided5 * 4) {
-			enemyHealthBar.setRectTemp(48);
-		}
-	}
-
-	if (m_player.getHp() <= 0) {
-		playerHealthBar.setRectTemp(240);
-	}
-	else if (m_player.getHp() < playerHpDivided5 * 1) {
-		playerHealthBar.setRectTemp(192);
-	}
-	else if (m_player.getHp() < playerHpDivided5 * 2) {
-		playerHealthBar.setRectTemp(144);
-	}
-	else if (m_player.getHp() < playerHpDivided5 * 3) {
-		playerHealthBar.setRectTemp(96);
-	}
-	else if (m_player.getHp() < playerHpDivided5 * 4) {
-		playerHealthBar.setRectTemp(48);
 	}
 }
 
@@ -211,8 +185,8 @@ void Game::updateView()
 	m_topViewLimit = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSizeF;
 	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
 
-	playerHealthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
-	enemyHealthBar.setPosition(sf::Vector2f{ m_view.getCenter().x + m_view.getSize().x / 2.f, m_view.getCenter().y - m_view.getSize().y / 2.f } - sf::Vector2f{48.f * 2.f, 0.f});
+	m_playerHealthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
+	m_enemyHealthBar.setPosition(sf::Vector2f{ m_view.getCenter().x + m_view.getSize().x / 2.f, m_view.getCenter().y - m_view.getSize().y / 2.f } - sf::Vector2f{48.f * 2.f, 0.f});
 }
 
 void Game::loadAndCreateMap(const std::string& mapFilePath)
