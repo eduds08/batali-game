@@ -1,7 +1,5 @@
 #include "HealthBarUI.h"
 
-#include <iostream>
-
 HealthBarUI::HealthBarUI(sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
 	: UI{position, textureName, texturePath}
 {
