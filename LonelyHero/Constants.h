@@ -7,8 +7,8 @@ namespace constants
 	constexpr int screenWidth{ 640 };
 	constexpr int screenHeight{ 640 };
 
-	constexpr float viewWidth{ 300.f };
-	constexpr float viewHeight{ 300.f };
+	constexpr float viewWidth{ 350.f };
+	constexpr float viewHeight{ 350.f };
 
 	constexpr int tileSizeI{ 16 };
 	constexpr float tileSizeF{ 16.f };
@@ -41,7 +41,7 @@ namespace constants
 
 	constexpr float playerSpeed{ 240.f };
 	constexpr float playerJumpHeight{ 80.f };
-	constexpr int playerHp{ 1000 };
+	constexpr int playerHp{ 1500 };
 	
 	constexpr float minEnemySpeed{ 130.f };
 	constexpr float maxEnemySpeed{ 200.f };
@@ -49,16 +49,16 @@ namespace constants
 	constexpr float maxEnemyDistanceFromPlayer{ 40.f };
 
 	constexpr float enemyJumpHeight{ 80.f };
-	constexpr int enemyHp{ 1000 };
+	constexpr int enemyHp{ 1300 };
 
 	constexpr float knockbackSpeed{ 300.f };
 
-	constexpr float fireKnightSwordHitboxWidth{ 65.f };
+	constexpr float fireKnightSwordHitboxWidthAttack1{ 65.f };
+	constexpr float fireKnightSwordHitboxWidthAttack2{ 130.f };
 	constexpr float fireKnightSwordHitboxHeight{ 20.f };
 
 	constexpr float windHashashinSwordHitboxWidthAttack1{ 30.f };
 	constexpr float windHashashinSwordHitboxWidthAttack2{ 50.f };
-
 	constexpr float windHashashinSwordHitboxHeight{ 20.f };
 
 	constexpr float timeBetweenEnemyAttacks{ 0.8f };

@@ -3,9 +3,9 @@
 Player::Player(sf::Vector2f firstPosition)
 	: SwordEntity{ firstPosition }
 {
-	m_hitboxWidth = constants::fireKnightSwordHitboxWidth;
+	//m_hitboxWidth = constants::fireKnightSwordHitboxWidthAttack1;
 	m_hitboxHeight = constants::fireKnightSwordHitboxHeight;
-	m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+	//m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
@@ -13,7 +13,7 @@ Player::Player(sf::Vector2f firstPosition)
 	// Initialize starting/ending attackings' frames
 	m_attack1StartingFrame = 4;
 	m_attack1EndingFrame = 7;
-	m_attack2StartingFrame = 3;
+	m_attack2StartingFrame = 1;
 	m_attack2EndingFrame = 7;
 
 	m_entityName = "player";
@@ -54,15 +54,26 @@ void Player::update(float& deltaTime)
 
 		bool conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z);
 
+		if (m_currentTexture == "playerAttacking1")
+		{
+			m_hitboxWidth = constants::fireKnightSwordHitboxWidthAttack1;
+			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+		}
+		else if (m_currentTexture == "playerAttacking2")
+		{
+			m_hitboxWidth = constants::fireKnightSwordHitboxWidthAttack2;
+			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+		}
+
 		updateAttack(conditionAttack);
 
 		if (m_currentTexture == "playerAttacking1")
 		{
-			m_damage = 100;
+			m_damage = 75;
 		}
 		else if (m_currentTexture == "playerAttacking2")
 		{
-			m_damage = 50;
+			m_damage = 30;
 		}
 
 		updateDamage();
@@ -74,5 +85,26 @@ void Player::update(float& deltaTime)
 	{
 		updateGravityWhenDying(deltaTime);
 		updateLimits();
+	}
+}
+
+void Player::updateHitbox()
+{
+	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame))
+	{
+		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
+		if (m_currentTexture == "playerAttacking2")
+		{
+			m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * 10.f / 2.f, 0.f));
+		}
+		else
+		{
+			m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
+		}
+	}
+	else
+	{
+		m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
 	}
 }

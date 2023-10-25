@@ -4,9 +4,9 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	: SwordEntity{ firstPosition }
 	, m_playerPosition{ playerPosition }
 {
-	m_hitboxWidth = constants::windHashashinSwordHitboxWidthAttack1;
+	//m_hitboxWidth = constants::windHashashinSwordHitboxWidthAttack1;
 	m_hitboxHeight = constants::windHashashinSwordHitboxHeight;
-	m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+	//m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
@@ -47,6 +47,7 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	std::uniform_real_distribution<> distribution2(constants::minEnemyDistanceFromPlayer, constants::maxEnemyDistanceFromPlayer);
 
 	m_speed = static_cast<float>(distribution1(gen));
+	//m_speed = constants::playerSpeed + 40.f;
 	m_distanceFromPlayer = static_cast<float>(distribution2(gen));
 }
 
@@ -57,20 +58,14 @@ void Enemy::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A);
-		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D);
-		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W);
-
-		/*bool conditionRunLeft = m_playerPosition.x < getPosition().x - m_distanceFromPlayer;
+		bool conditionRunLeft = m_playerPosition.x < getPosition().x - m_distanceFromPlayer;
 		bool conditionRunRight = m_playerPosition.x > getPosition().x + m_distanceFromPlayer;
-		bool conditionJump = (((m_playerPosition.y - constants::fireKnightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);*/
+		bool conditionJump = (((m_playerPosition.y - constants::fireKnightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
 
 		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
 
-		/*m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-		bool conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks);*/
-
-		bool conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V);
+		m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
+		bool conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks);
 
 		if (m_currentTexture == "enemyAttacking1")
 		{
@@ -91,14 +86,14 @@ void Enemy::update(float& deltaTime)
 		}
 		else if (m_currentTexture == "enemyAttacking2")
 		{
-			m_damage = 50;
+			m_damage = 60;
 		}
 
-		/*if (m_isAttacking)
+		if (m_isAttacking)
 		{
 			m_timeBetweenAttacksClock.restart();
 			m_timeBetweenAttacks = 0.f;
-		}*/
+		}
 
 		updateDamage();
 

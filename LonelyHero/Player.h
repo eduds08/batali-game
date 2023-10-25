@@ -10,6 +10,8 @@ public:
 
 	void update(float& deltaTime);
 
+	virtual void updateHitbox();
+
 private:
 	
 };

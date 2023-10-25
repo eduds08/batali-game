@@ -10,7 +10,6 @@ Game::Game()
 void Game::init()
 {
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
-	//enemies.emplace_back(Enemy{ sf::Vector2f{520.f, 240.f}, m_player.getPosition() });
 
 	loadAndCreateMap("./map/map.txt");
 
@@ -66,17 +65,17 @@ void Game::render()
 {
 	m_window.clear();
 
-	//m_window.draw(m_player.getShape());
+	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto& enemy : enemies)
 	{
 		m_window.draw(enemy.getShape());
 		m_window.draw(enemy.getSprite());
-		//m_window.draw(enemy.getAttackHitbox());
+		m_window.draw(enemy.getAttackHitbox());
 	}
 
-	//m_window.draw(m_player.getAttackHitbox());
+	m_window.draw(m_player.getAttackHitbox());
 	
 
 	for (auto& ground : grounds)
@@ -165,21 +164,7 @@ void Game::handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& atta
 
 void Game::updateView()
 {
-	// SINGLE PLAYER:
-	//m_view.setCenter(m_player.getPosition());
-
-	// UNCOMMENT WHEN PVP MULTIPLAYER:
-	for (auto& enemy : enemies)
-	{
-		if (m_player.getPosition().x < enemy.getPosition().x)
-		{
-			m_view.setCenter(sf::Vector2f{ m_player.getPosition().x + ((enemy.getPosition().x - m_player.getPosition().x) / 2.f), 380.f});
-		}
-		else
-		{
-			m_view.setCenter(sf::Vector2f{ enemy.getPosition().x + ((m_player.getPosition().x - enemy.getPosition().x) / 2.f), 380.f });
-		}
-	}
+	m_view.setCenter(m_player.getPosition());
 
 	m_window.setView(m_view);
 
