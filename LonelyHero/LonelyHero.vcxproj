@@ -145,6 +145,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SwordEntity.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="SwordEntity.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

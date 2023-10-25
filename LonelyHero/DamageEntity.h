@@ -27,6 +27,8 @@ public:
 	bool isDead() { return m_dead; }
 	bool isDying() { return m_dying; }
 
+	int getHp() { return m_hp; }
+
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 
 	virtual void die() = 0;
