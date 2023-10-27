@@ -14,6 +14,6 @@ public:
 	void setEntityHp(const int* entityHp);
 
 private:
-	int m_entityTotalHp{};
+	int m_entityTotalHpFraction{};
 	const int* m_entityHp{ nullptr };
 };

@@ -44,8 +44,6 @@ private:
 
 	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png" };
 	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
-	sf::Font font;
-	sf::Text text;
 
 	sf::Event m_event{};
 

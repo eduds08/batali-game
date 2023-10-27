@@ -13,17 +13,6 @@ void Game::init()
 {
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
 
-	if (!font.loadFromFile("./fonts/Minecraft.ttf"))
-	{
-		std::cout << "ERRO FONTE\n";
-	}
-
-	text.setFont(font);
-	text.setString("1000");
-	text.setCharacterSize(8);
-	text.setFillColor(sf::Color{255, 255, 255});
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
 	m_playerHealthBar.setEntityHp(&m_player.getHp());
 	m_enemyHealthBar.setEntityHp(&enemies[0].getHp());
 
@@ -109,8 +98,6 @@ void Game::render()
 
 	m_window.draw(m_playerHealthBar.getSprite());
 	m_window.draw(m_enemyHealthBar.getSprite());
-
-	m_window.draw(text);
 
 	m_window.display();
 }
@@ -199,10 +186,7 @@ void Game::updateView()
 	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
 
 	m_playerHealthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
-	m_enemyHealthBar.setPosition(sf::Vector2f{ m_view.getCenter().x + m_view.getSize().x / 2.f, m_view.getCenter().y - m_view.getSize().y / 2.f } - sf::Vector2f{48.f * 2.f, 0.f});
-
-	//text.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
-	text.setPosition(m_playerHealthBar.getSprite().getPosition());
+	m_enemyHealthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
 }
 
 void Game::loadAndCreateMap(const std::string& mapFilePath)
