@@ -1,8 +1,9 @@
-#include "Game.h"
+#include "PrincipalTemporario.h"
 
 int main()
 {
-    Game LonelyHero{};
+    PrincipalTemporario pT{};
+    //Game LonelyHero{};
 
     return 0;
 }

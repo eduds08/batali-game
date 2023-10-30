@@ -1,14 +1,24 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include <map>
+#include <vector>
 #include <string>
 
 class MainMenu
 {
 public:
 	MainMenu();
-	virtual ~MainMenu() = default;
+	~MainMenu() {};
+
+	/*sf::RectangleShape temp1;
+	sf::Text temp2;*/
+
+	std::vector<sf::RectangleShape> buttonsRectangle{};
+	std::vector<sf::Text> buttonsText{};
+
+	sf::View viewTemp{ sf::Vector2f{320.f, 320.f}, sf::Vector2f{640.f, 640.f} };
+
+	//std::map <sf::RectangleShape, sf::Text> m_buttonsMap{};
 
 protected:
 
@@ -18,7 +28,8 @@ protected:
 
 	sf::Font m_font{}; // vai ir para a classe base
 
-	std::map <sf::IntRect, sf::Text> m_buttonsMap{};
+	
+	
 
 	/*sf::Text m_text{};
 	sf::IntRect button{};*/

@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-bool Game::isGameRunning = true;
+//bool Game::isGameRunning = true;
 
-Game::Game()
+Game::Game(float& deltaTime)
+	: m_deltaTime{deltaTime}
 {
 	init();
 }
@@ -20,37 +21,37 @@ void Game::init()
 
 	animationThread = std::thread(&Game::updateTexturesAndAnimations, this);
 
-	run();
+	//run();
 }
 
-void Game::run()
-{
-	while (m_window.isOpen())
-	{
-		m_deltaTime = m_deltaTimeClock.restart().asSeconds();
-
-		// Fix bug where FPS increases a lot when dragging the window
-		if (m_deltaTime > 1.f / 20.f)
-		{
-			m_deltaTime = { 1.f / 20.f };
-		}
-
-		while (m_window.pollEvent(m_event))
-		{
-			if (m_event.type == sf::Event::Closed)
-			{
-				Game::isGameRunning = false;
-				m_window.close();
-			}
-		}
-
-		update();
-		render();
-	}
-
-	// Quit animation thread
-	animationThread.join();
-}
+//void Game::run()
+//{
+//	while (m_window.isOpen())
+//	{
+//		m_deltaTime = m_deltaTimeClock.restart().asSeconds();
+//
+//		// Fix bug where FPS increases a lot when dragging the window
+//		if (m_deltaTime > 1.f / 20.f)
+//		{
+//			m_deltaTime = { 1.f / 20.f };
+//		}
+//
+//		while (m_window.pollEvent(m_event))
+//		{
+//			if (m_event.type == sf::Event::Closed)
+//			{
+//				Game::isGameRunning = false;
+//				m_window.close();
+//			}
+//		}
+//
+//		update();
+//		render();
+//	}
+//
+//	// Quit animation thread
+//	animationThread.join();
+//}
 
 void Game::update()
 {
@@ -69,38 +70,41 @@ void Game::update()
 	updateView();
 }
 
-void Game::render()
-{
-	m_window.clear();
-
-	m_window.draw(m_player.getShape());
-	m_window.draw(m_player.getSprite());
-
-	for (auto& enemy : enemies)
-	{
-		m_window.draw(enemy.getShape());
-		m_window.draw(enemy.getSprite());
-		m_window.draw(enemy.getAttackHitbox());
-	}
-
-	m_window.draw(m_player.getAttackHitbox());
-	
-
-	for (auto& ground : grounds)
-	{
-		// Only draw the tiles that are inside the view
-		if (ground.getSprite().getPosition().x <= m_rightViewLimit && ground.getSprite().getPosition().x >= m_leftViewLimit
-			&& ground.getSprite().getPosition().y >= m_topViewLimit && ground.getSprite().getPosition().y <= m_bottomViewLimit)
-		{
-			m_window.draw(ground.getSprite());
-		}
-	}
-
-	m_window.draw(m_playerHealthBar.getSprite());
-	m_window.draw(m_enemyHealthBar.getSprite());
-
-	m_window.display();
-}
+//void Game::render()
+//{
+//	m_window.clear();
+//
+//	//m_window.draw(m_player.getShape());
+//	//m_window.draw(m_player.getSprite());
+//
+//	//for (auto& enemy : enemies)
+//	//{
+//	//	m_window.draw(enemy.getShape());
+//	//	m_window.draw(enemy.getSprite());
+//	//	m_window.draw(enemy.getAttackHitbox());
+//	//}
+//
+//	//m_window.draw(m_player.getAttackHitbox());
+//	//
+//
+//	//for (auto& ground : grounds)
+//	//{
+//	//	// Only draw the tiles that are inside the view
+//	//	if (ground.getSprite().getPosition().x <= m_rightViewLimit && ground.getSprite().getPosition().x >= m_leftViewLimit
+//	//		&& ground.getSprite().getPosition().y >= m_topViewLimit && ground.getSprite().getPosition().y <= m_bottomViewLimit)
+//	//	{
+//	//		m_window.draw(ground.getSprite());
+//	//	}
+//	//}
+//
+//	//m_window.draw(m_playerHealthBar.getSprite());
+//	//m_window.draw(m_enemyHealthBar.getSprite());
+//
+//	m_window.draw(temporario.buttonsRectangle[0]);
+//	m_window.draw(temporario.buttonsText[0]);
+//
+//	m_window.display();
+//}
 
 void Game::updateCollision()
 {
@@ -177,7 +181,7 @@ void Game::updateView()
 {
 	m_view.setCenter(m_player.getPosition());
 
-	m_window.setView(m_view);
+	//m_window.setView(m_view);
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSizeF;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSizeF;
@@ -220,7 +224,7 @@ void Game::loadAndCreateMap(const std::string& mapFilePath)
 
 void Game::updateTexturesAndAnimations()
 {
-	while (Game::isGameRunning)
+	while (isGameRunning)
 	{
 		// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
 		std::this_thread::sleep_for(std::chrono::milliseconds(75));

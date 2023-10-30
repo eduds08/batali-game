@@ -8,13 +8,15 @@
 #include <vector>
 #include <thread>
 
+#include "MainMenu.h"
+
 using namespace constants;
 
 class Game
 {
 public:
-	Game();
-	~Game() {};
+	Game(float& deltaTime);
+	~Game() { animationThread.join(); };
 
 	void init();
 	void run();
@@ -37,18 +39,18 @@ public:
 	// Thread method to run all animations
 	void updateTexturesAndAnimations();
 
-	static bool isGameRunning;
+	bool isGameRunning{ true };
 
-private:
-	sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
+//private:
+	//sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
 
 	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png" };
 	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
 
-	sf::Event m_event{};
+	//sf::Event m_event{};
 
-	sf::Clock m_deltaTimeClock{};
-	float m_deltaTime{};
+	//sf::Clock m_deltaTimeClock{};
+	float& m_deltaTime;
 
 	Player m_player{ playerFirstPosition };
 	std::vector<Enemy> enemies{};
@@ -61,4 +63,7 @@ private:
 	float m_leftViewLimit{};
 	float m_topViewLimit{};
 	float m_bottomViewLimit{};
+
+
+	MainMenu temporario{};
 };
