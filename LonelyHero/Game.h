@@ -9,10 +9,9 @@ public:
 	Game();
 	~Game();
 
-	void init();
 	void run();
-	//void update();
-	//void render();
+	void update();
+	void render();
 
 private:
 	sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
@@ -22,8 +21,5 @@ private:
 	sf::Clock m_deltaTimeClock{};
 	float m_deltaTime{};
 
-	std::string m_currentState{"main"};
-
 	MenuContext* m_menuContext;
 };
-

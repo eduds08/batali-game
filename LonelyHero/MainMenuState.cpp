@@ -3,44 +3,109 @@
 MainMenuState::MainMenuState(sf::RenderWindow& window, float& deltaTime) :
 	MenuContext{ window, deltaTime }
 {
-	init();
-}
+	m_currentState = "main";
 
-void MainMenuState::init()
-{
-	if (!m_font.loadFromFile("./fonts/Minecraft.ttf"))
-	{
-		std::cout << "Error loading font\n";
-	}
+	// DIVIDER
 
-	sf::RectangleShape temp1{ sf::Vector2f{50.f, 50.f} };
+	sf::RectangleShape buttonShape{ sf::Vector2f{300.f, 50.f} };
+	buttonShape.setOrigin(buttonShape.getSize() / 2.f);
+	buttonShape.setPosition(sf::Vector2f{screenWidth / 2.f, screenHeight / 2.f});
+	buttonShape.setOutlineColor(sf::Color::Red);
+	buttonShape.setOutlineThickness(1.f);
 
-	temp1.setPosition(30.f, 30.f);
+	sf::Text buttonText{ "Player", m_font };
+	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
 
-	temp1.setOutlineColor(sf::Color::Red);
-	temp1.setOutlineThickness(1.f);
+	buttonText.setFillColor(sf::Color::Blue);
+	buttonText.setPosition(buttonShape.getPosition());
 
-	sf::Text temp2{ "Player", m_font };
-	temp2.setCharacterSize(24);
-	temp2.setFillColor(sf::Color::Blue);
+	buttonsRectangle.emplace_back(buttonShape);
+	buttonsText.emplace_back(buttonText);
 
-	temp2.setPosition(temp1.getPosition());
+	// DIVIDER
 
-	buttonsRectangle.emplace_back(temp1);
-	buttonsText.emplace_back(temp2);
+	buttonShape = sf::RectangleShape{ sf::Vector2f{300.f, 50.f} };
+	buttonShape.setOrigin(buttonShape.getSize() / 2.f);
+	buttonShape.setPosition(sf::Vector2f{screenWidth / 2.f, screenHeight / 2.f + 100.f});
+	buttonShape.setOutlineColor(sf::Color::Red);
+	buttonShape.setOutlineThickness(1.f);
 
-	m_window.setView(viewTemp);
+	buttonText = sf::Text{ "Player", m_font };
+	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
+
+	buttonText.setFillColor(sf::Color::Blue);
+	buttonText.setPosition(buttonShape.getPosition());
+
+	buttonsRectangle.emplace_back(buttonShape);
+	buttonsText.emplace_back(buttonText);
+
+	// DIVIDER
+
+	buttonShape = sf::RectangleShape{ sf::Vector2f{300.f, 50.f} };
+	buttonShape.setOrigin(buttonShape.getSize() / 2.f);
+	buttonShape.setPosition(sf::Vector2f{screenWidth / 2.f, screenHeight / 2.f + 200.f});
+	buttonShape.setOutlineColor(sf::Color::Red);
+	buttonShape.setOutlineThickness(1.f);
+
+	buttonText = sf::Text{ "Player", m_font };
+	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
+
+	buttonText.setFillColor(sf::Color::Blue);
+	buttonText.setPosition(buttonShape.getPosition());
+
+	buttonsRectangle.emplace_back(buttonShape);
+	buttonsText.emplace_back(buttonText);
+
+	// DIVIDER
+
+	m_view.setSize(sf::Vector2f{screenWidth, screenHeight});
+	m_view.setCenter(m_view.getSize() / 2.f);
+
+	m_window.setView(m_view);
 }
 
 void MainMenuState::update()
 {
-	//m_window.setView(viewTemp);
+	delayTime = delayClock.getElapsedTime().asSeconds();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down) && delayTime > 0.15f)
+	{
+		++m_onHoverButton;
+		if (m_onHoverButton >= buttonsRectangle.size())
+		{
+			m_onHoverButton = 0;
+		}
+		delayClock.restart();
+	}
+
+	for (int i = 0; i < buttonsRectangle.size(); ++i)
+	{
+		if (i == m_onHoverButton)
+		{
+			buttonsRectangle[i].setOutlineColor(sf::Color::Green);
+			buttonsRectangle[i].setFillColor(sf::Color::Magenta);
+		}
+		else 
+		{
+			buttonsRectangle[i].setOutlineColor(sf::Color::Red);
+			buttonsRectangle[i].setFillColor(sf::Color::Yellow);
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && m_onHoverButton == 0)
+	{
+		m_currentState = "playing";
+	}
+	
 }
 
 void MainMenuState::render()
 {
-	m_window.clear();
-	m_window.draw(dynamic_cast<MainMenuState*>(this)->buttonsRectangle[0]);
-	m_window.draw(dynamic_cast<MainMenuState*>(this)->buttonsText[0]);
-	m_window.display();
+	for (const auto& buttonShape : buttonsRectangle)
+	{
+		m_window.draw(buttonShape);
+	}
+	for (const auto& buttonText : buttonsText)
+	{
+		m_window.draw(buttonText);
+	}
 }

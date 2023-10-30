@@ -17,14 +17,19 @@ public:
 	MenuContext(sf::RenderWindow& window, float& deltaTime);
 	virtual ~MenuContext() = default;
 
-	virtual void init() = 0;
-	//void run();
 	virtual void update() = 0;
 	virtual void render() = 0;
 
+	const std::string& getCurrentState() { return m_currentState; }
+
 protected:
 	sf::RenderWindow& m_window;
-
 	float& m_deltaTime;
+
+	std::string m_currentState{};
+
+	sf::Font m_font{};
+
+	sf::View m_view{};
 };
 

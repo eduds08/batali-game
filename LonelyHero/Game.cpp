@@ -2,7 +2,8 @@
 
 Game::Game()
 {
-	init();
+	m_menuContext = new MainMenuState(m_window, m_deltaTime);
+	run();
 }
 
 Game::~Game()
@@ -12,12 +13,6 @@ Game::~Game()
 		delete m_menuContext;
 		m_menuContext = nullptr;
 	}
-}
-
-void Game::init()
-{
-	m_menuContext = new MainMenuState(m_window, m_deltaTime);
-	run();
 }
 
 void Game::run()
@@ -36,43 +31,45 @@ void Game::run()
 		{
 			if (m_event.type == sf::Event::Closed)
 			{
-				if (m_currentState == "playing")
+				if (m_menuContext->getCurrentState() == "playing")
 				{
-					dynamic_cast<PlayingState*>(m_menuContext)->isGameRunning = false;
+					dynamic_cast<PlayingState*>(m_menuContext)->setOnPlayingState(false);
 				}
 				m_window.close();
 			}
 		}
 
-		if (m_currentState == "main")
-		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
-			{
-				m_currentState = "playing";
-				delete m_menuContext;
-				m_menuContext = new PlayingState(m_window, m_deltaTime);
-			}
-		}
-		if (m_currentState == "playing")
-		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
-			{
-				m_currentState = "main";
-				dynamic_cast<PlayingState*>(m_menuContext)->isGameRunning = false;
-				delete m_menuContext;
-				m_menuContext = new MainMenuState(m_window, m_deltaTime);
-			}
-		}
-
-		m_menuContext->update();
-		m_menuContext->render();
+		update();
+		render();
 	}
 }
 
-//void Game::update()
-//{
-//}
-//
-//void Game::render()
-//{
-//}
+void Game::update()
+{
+	if (m_menuContext->getCurrentState() == "main")
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
+		{
+			delete m_menuContext;
+			m_menuContext = new PlayingState(m_window, m_deltaTime);
+		}
+	}
+	if (m_menuContext->getCurrentState() == "playing")
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
+		{
+			dynamic_cast<PlayingState*>(m_menuContext)->setOnPlayingState(false);
+			delete m_menuContext;
+			m_menuContext = new MainMenuState(m_window, m_deltaTime);
+		}
+	}
+
+	m_menuContext->update();
+}
+
+void Game::render()
+{
+	m_window.clear();
+	m_menuContext->render();
+	m_window.display();
+}

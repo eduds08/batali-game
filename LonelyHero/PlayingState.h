@@ -6,10 +6,8 @@ class PlayingState : public MenuContext
 {
 public:
 	PlayingState(sf::RenderWindow& window, float& deltaTime);
-	virtual ~PlayingState() { animationThread.join(); };
+	virtual ~PlayingState();
 
-	virtual void init();
-	//virtual void run();
 	virtual void update();
 	virtual void render();
 
@@ -29,11 +27,9 @@ public:
 	// Thread method to run all animations
 	void updateTexturesAndAnimations();
 
-	bool isGameRunning{ true };
+	void setOnPlayingState(bool onPlayingState) { m_onPlayingState = onPlayingState; }
 
-//private:
-	//sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
-
+private:
 	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png" };
 	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
 
@@ -43,9 +39,10 @@ public:
 	
 	std::thread animationThread;
 
-	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{viewWidth, viewHeight}};
 	float m_rightViewLimit{};
 	float m_leftViewLimit{};
 	float m_topViewLimit{};
 	float m_bottomViewLimit{};
+
+	bool m_onPlayingState{ true }; // pode ser removido e usar o nome do state instead
 };

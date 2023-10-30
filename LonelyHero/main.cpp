@@ -2,8 +2,7 @@
 
 int main()
 {
-    Game pT{};
-    //Game LonelyHero{};
+    Game LonelyHero{};
 
     return 0;
 }

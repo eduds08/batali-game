@@ -3,11 +3,8 @@
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 	: MenuContext{ window, deltaTime }
 {
-	init();
-}
+	m_currentState = "playing";
 
-void PlayingState::init()
-{
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
 
 	m_playerHealthBar.setEntityHp(&m_player.getHp());
@@ -17,37 +14,13 @@ void PlayingState::init()
 
 	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
 
-	//run();
+	m_view.setSize(sf::Vector2f{viewWidth, viewHeight});
 }
 
-//void PlayingState::run()
-//{
-//	while (m_window.isOpen())
-//	{
-//		m_deltaTime = m_deltaTimeClock.restart().asSeconds();
-//
-//		// Fix bug where FPS increases a lot when dragging the window
-//		if (m_deltaTime > 1.f / 20.f)
-//		{
-//			m_deltaTime = { 1.f / 20.f };
-//		}
-//
-//		while (m_window.pollEvent(m_event))
-//		{
-//			if (m_event.type == sf::Event::Closed)
-//			{
-//				isGameRunning = false;
-//				m_window.close();
-//			}
-//		}
-//
-//		update();
-//		render();
-//	}
-//
-//	// Quit animation thread
-//	animationThread.join();
-//}
+PlayingState::~PlayingState()
+{
+	animationThread.join();
+}
 
 void PlayingState::update()
 {
@@ -68,8 +41,6 @@ void PlayingState::update()
 
 void PlayingState::render()
 {
-	m_window.clear();
-
 	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
@@ -95,8 +66,6 @@ void PlayingState::render()
 
 	m_window.draw(m_playerHealthBar.getSprite());
 	m_window.draw(m_enemyHealthBar.getSprite());
-
-	m_window.display();
 }
 
 void PlayingState::updateCollision()
@@ -217,7 +186,7 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 
 void PlayingState::updateTexturesAndAnimations()
 {
-	while (isGameRunning)
+	while (m_onPlayingState)
 	{
 		// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
 		std::this_thread::sleep_for(std::chrono::milliseconds(75));
