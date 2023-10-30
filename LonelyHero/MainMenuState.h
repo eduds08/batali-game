@@ -1,24 +1,23 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
-#include <vector>
-#include <string>
 
-class MainMenu
+#include "MenuContext.h"
+
+class MainMenuState : public MenuContext
 {
 public:
-	MainMenu();
-	~MainMenu() {};
+	MainMenuState(sf::RenderWindow& window, float& deltaTime);
+	virtual ~MainMenuState() = default;
 
-	/*sf::RectangleShape temp1;
-	sf::Text temp2;*/
+	virtual void init();
+	//virtual void run();
+	virtual void update();
+	virtual void render();
 
 	std::vector<sf::RectangleShape> buttonsRectangle{};
 	std::vector<sf::Text> buttonsText{};
 
 	sf::View viewTemp{ sf::Vector2f{320.f, 320.f}, sf::Vector2f{640.f, 640.f} };
-
-	//std::map <sf::RectangleShape, sf::Text> m_buttonsMap{};
 
 protected:
 
@@ -27,12 +26,6 @@ protected:
 	std::string m_stateName{"main"};
 
 	sf::Font m_font{}; // vai ir para a classe base
-
-	
-	
-
-	/*sf::Text m_text{};
-	sf::IntRect button{};*/
 
 	int m_onHoverButton{};
 };

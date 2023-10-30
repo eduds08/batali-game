@@ -18,7 +18,7 @@ void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::
 	{
 		m_currentAnimationFramesAmount = animationFramesAmount;
 		m_frameCount = 0;
-		m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(textureName, texturePath));
+		m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
 		m_currentTexture = textureName;
 		m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
 	}

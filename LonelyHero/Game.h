@@ -1,69 +1,29 @@
 #pragma once
 
-#include "Player.h"
-#include "Enemy.h"
-#include "HealthBarUI.h"
-#include "Ground.h"
-#include <fstream>
-#include <vector>
-#include <thread>
-
-#include "MainMenu.h"
-
-using namespace constants;
+#include "PlayingState.h"
+#include "MainMenuState.h"
 
 class Game
 {
 public:
-	Game(float& deltaTime);
-	~Game() { animationThread.join(); };
+	Game();
+	~Game();
 
 	void init();
 	void run();
-	void update();
-	void render();
+	//void update();
+	//void render();
 
-	void updateCollision();
+private:
+	sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
 
-	// Checks the collision of entity with the tiles that are inside its imaginary view.
-	void updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground);
+	sf::Event m_event{};
 
-	// Calls takeDamage and also knockbackMove for the attacked entity
-	void handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity);
-	
-	void updateView();
+	sf::Clock m_deltaTimeClock{};
+	float m_deltaTime{};
 
-	// Reads a .txt file to generate the tiles
-	void loadAndCreateMap(const std::string& mapFilePath);
+	std::string m_currentState{"main"};
 
-	// Thread method to run all animations
-	void updateTexturesAndAnimations();
-
-	bool isGameRunning{ true };
-
-//private:
-	//sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
-
-	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png" };
-	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
-
-	//sf::Event m_event{};
-
-	//sf::Clock m_deltaTimeClock{};
-	float& m_deltaTime;
-
-	Player m_player{ playerFirstPosition };
-	std::vector<Enemy> enemies{};
-	std::vector<Ground> grounds{};
-	
-	std::thread animationThread;
-
-	sf::View m_view{sf::Vector2f{0.f, 0.f}, sf::Vector2f{viewWidth, viewHeight}};
-	float m_rightViewLimit{};
-	float m_leftViewLimit{};
-	float m_topViewLimit{};
-	float m_bottomViewLimit{};
-
-
-	MainMenu temporario{};
+	MenuContext* m_menuContext;
 };
+

@@ -37,6 +37,6 @@ void HealthBarUI::updateHealthBar()
 void HealthBarUI::setEntityHp(const int* entityHp)
 {
 	//5.f -> healthBar frames amount
-	m_entityTotalHpFraction = (*entityHp) / 5.f;
+	m_entityTotalHpFraction = static_cast<int>((*entityHp) / 5.f);
 	m_entityHp = entityHp;
 }

@@ -15,7 +15,7 @@ std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string
 	std::shared_ptr<sf::Texture> newTexture{ std::make_shared<sf::Texture>() };
 	if (!newTexture->loadFromFile(texturePath))
 	{
-		throw "ERRO AO CARREGAR TEXTURA";
+		throw "ERROR LOADING TEXTURE";
 	}
 
 	texturesMap.emplace(textureName, newTexture);

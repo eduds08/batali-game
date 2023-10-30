@@ -1,6 +1,12 @@
-#include "MainMenu.h"
+#include "MainMenuState.h"
 #include <iostream>
-MainMenu::MainMenu()
+MainMenuState::MainMenuState(sf::RenderWindow& window, float& deltaTime) :
+	MenuContext{ window, deltaTime }
+{
+	init();
+}
+
+void MainMenuState::init()
 {
 	if (!m_font.loadFromFile("./fonts/Minecraft.ttf"))
 	{
@@ -22,4 +28,19 @@ MainMenu::MainMenu()
 
 	buttonsRectangle.emplace_back(temp1);
 	buttonsText.emplace_back(temp2);
+
+	m_window.setView(viewTemp);
+}
+
+void MainMenuState::update()
+{
+	//m_window.setView(viewTemp);
+}
+
+void MainMenuState::render()
+{
+	m_window.clear();
+	m_window.draw(dynamic_cast<MainMenuState*>(this)->buttonsRectangle[0]);
+	m_window.draw(dynamic_cast<MainMenuState*>(this)->buttonsText[0]);
+	m_window.display();
 }

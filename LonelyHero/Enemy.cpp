@@ -23,7 +23,7 @@ Enemy::Enemy(sf::Vector2f firstPosition, const sf::Vector2f& playerPosition)
 	// Initialize sprite
 	m_spriteWidth = constants::windHashashinSpriteWidth;
 	m_spriteHeight = constants::windHashashinSpriteHeight;
-	m_sprite.setTexture(*m_texturesManager->loadAndGetTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle"))));
+	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle"))));
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
 	// Initialize shape

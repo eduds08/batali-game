@@ -12,7 +12,7 @@ public:
 
 protected:
 	// Singleton Pattern
-	TextureManager* m_texturesManager;
+	TextureManager& m_texturesManager;
 
 	sf::Sprite m_sprite{};
 
