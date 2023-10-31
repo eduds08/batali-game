@@ -90,12 +90,6 @@ void MainMenuState::update()
 			buttonsRectangle[i].setFillColor(sf::Color::Yellow);
 		}
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && m_onHoverButton == 0)
-	{
-		m_currentState = "playing";
-	}
-	
 }
 
 void MainMenuState::render()
@@ -107,5 +101,13 @@ void MainMenuState::render()
 	for (const auto& buttonText : buttonsText)
 	{
 		m_window.draw(buttonText);
+	}
+}
+
+void MainMenuState::pressButton()
+{
+	if (m_onHoverButton == 0)
+	{
+		m_currentState = "playing";
 	}
 }

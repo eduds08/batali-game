@@ -13,6 +13,8 @@ public:
 	virtual void update();
 	virtual void render();
 
+	void pressButton();
+
 protected:
 
 	std::vector<sf::RectangleShape> buttonsRectangle{};

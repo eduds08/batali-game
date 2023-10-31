@@ -48,7 +48,11 @@ void Game::update()
 {
 	if (m_menuContext->getCurrentState() == "main")
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter))
+		{
+			dynamic_cast<MainMenuState*>(m_menuContext)->pressButton();
+		}
+		if (m_menuContext->getCurrentState() == "playing")
 		{
 			delete m_menuContext;
 			m_menuContext = new PlayingState(m_window, m_deltaTime);
