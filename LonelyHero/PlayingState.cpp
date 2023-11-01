@@ -1,7 +1,8 @@
 #include "PlayingState.h"
 
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
-	: MenuContext{ window, deltaTime }
+	: MenuContext{ window }
+	, m_deltaTime{ deltaTime }
 {
 	m_currentState = "playing";
 

@@ -1,13 +1,14 @@
 #pragma once
 
-
 #include "MenuContext.h"
 
 class MainMenuState : public MenuContext
 {
 public:
-	MainMenuState(sf::RenderWindow& window, float& deltaTime);
+	MainMenuState(sf::RenderWindow& window);
 	virtual ~MainMenuState() = default;
+
+	void initButton(const std::string& text, int position);
 
 	//virtual void run();
 	virtual void update();
@@ -15,7 +16,7 @@ public:
 
 	void pressButton();
 
-protected:
+private:
 
 	std::vector<sf::RectangleShape> buttonsRectangle{};
 	std::vector<sf::Text> buttonsText{};

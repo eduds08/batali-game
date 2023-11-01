@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-	m_menuContext = new MainMenuState(m_window, m_deltaTime);
+	m_menuContext = new MainMenuState(m_window);
 	run();
 }
 
@@ -40,6 +40,12 @@ void Game::run()
 		}
 
 		update();
+		if (m_menuContext->getCurrentState() == "exiting")
+		{
+			delete m_menuContext;
+			m_menuContext = nullptr;
+			m_window.close();
+		}
 		render();
 	}
 }
@@ -60,11 +66,11 @@ void Game::update()
 	}
 	if (m_menuContext->getCurrentState() == "playing")
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
 		{
 			dynamic_cast<PlayingState*>(m_menuContext)->setOnPlayingState(false);
 			delete m_menuContext;
-			m_menuContext = new MainMenuState(m_window, m_deltaTime);
+			m_menuContext = new MainMenuState(m_window);
 		}
 	}
 
@@ -74,6 +80,9 @@ void Game::update()
 void Game::render()
 {
 	m_window.clear();
-	m_menuContext->render();
+	if (m_menuContext)
+	{
+		m_menuContext->render();
+	}
 	m_window.display();
 }

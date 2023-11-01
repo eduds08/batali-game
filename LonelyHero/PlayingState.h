@@ -45,4 +45,6 @@ private:
 	float m_bottomViewLimit{};
 
 	bool m_onPlayingState{ true }; // pode ser removido e usar o nome do state instead
+
+	float& m_deltaTime;
 };

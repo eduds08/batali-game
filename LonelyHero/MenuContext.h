@@ -14,7 +14,7 @@ using namespace constants;
 class MenuContext
 {
 public:
-	MenuContext(sf::RenderWindow& window, float& deltaTime);
+	MenuContext(sf::RenderWindow& window);
 	virtual ~MenuContext() = default;
 
 	virtual void update() = 0;
@@ -24,7 +24,6 @@ public:
 
 protected:
 	sf::RenderWindow& m_window;
-	float& m_deltaTime;
 
 	std::string m_currentState{};
 

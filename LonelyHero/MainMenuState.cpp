@@ -1,67 +1,36 @@
 #include "MainMenuState.h"
 #include <iostream>
-MainMenuState::MainMenuState(sf::RenderWindow& window, float& deltaTime) :
-	MenuContext{ window, deltaTime }
+MainMenuState::MainMenuState(sf::RenderWindow& window) :
+	MenuContext{ window }
 {
 	m_currentState = "main";
 
-	// DIVIDER
-
-	sf::RectangleShape buttonShape{ sf::Vector2f{300.f, 50.f} };
-	buttonShape.setOrigin(buttonShape.getSize() / 2.f);
-	buttonShape.setPosition(sf::Vector2f{screenWidth / 2.f, screenHeight / 2.f});
-	buttonShape.setOutlineColor(sf::Color::Red);
-	buttonShape.setOutlineThickness(1.f);
-
-	sf::Text buttonText{ "Player", m_font };
-	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
-
-	buttonText.setFillColor(sf::Color::Blue);
-	buttonText.setPosition(buttonShape.getPosition());
-
-	buttonsRectangle.emplace_back(buttonShape);
-	buttonsText.emplace_back(buttonText);
-
-	// DIVIDER
-
-	buttonShape = sf::RectangleShape{ sf::Vector2f{300.f, 50.f} };
-	buttonShape.setOrigin(buttonShape.getSize() / 2.f);
-	buttonShape.setPosition(sf::Vector2f{screenWidth / 2.f, screenHeight / 2.f + 100.f});
-	buttonShape.setOutlineColor(sf::Color::Red);
-	buttonShape.setOutlineThickness(1.f);
-
-	buttonText = sf::Text{ "Player", m_font };
-	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
-
-	buttonText.setFillColor(sf::Color::Blue);
-	buttonText.setPosition(buttonShape.getPosition());
-
-	buttonsRectangle.emplace_back(buttonShape);
-	buttonsText.emplace_back(buttonText);
-
-	// DIVIDER
-
-	buttonShape = sf::RectangleShape{ sf::Vector2f{300.f, 50.f} };
-	buttonShape.setOrigin(buttonShape.getSize() / 2.f);
-	buttonShape.setPosition(sf::Vector2f{screenWidth / 2.f, screenHeight / 2.f + 200.f});
-	buttonShape.setOutlineColor(sf::Color::Red);
-	buttonShape.setOutlineThickness(1.f);
-
-	buttonText = sf::Text{ "Player", m_font };
-	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
-
-	buttonText.setFillColor(sf::Color::Blue);
-	buttonText.setPosition(buttonShape.getPosition());
-
-	buttonsRectangle.emplace_back(buttonShape);
-	buttonsText.emplace_back(buttonText);
-
-	// DIVIDER
+	initButton("Play", 0);
+	initButton("Options", 1);
+	initButton("Exit", 2);
 
 	m_view.setSize(sf::Vector2f{screenWidth, screenHeight});
 	m_view.setCenter(m_view.getSize() / 2.f);
 
 	m_window.setView(m_view);
+}
+
+void MainMenuState::initButton(const std::string& text, int position)
+{
+	sf::RectangleShape buttonShape{ sf::Vector2f{300.f, 50.f} };
+	buttonShape.setOrigin(buttonShape.getSize() / 2.f);
+	buttonShape.setPosition(sf::Vector2f{ screenWidth / 2.f, screenHeight / 2.f + position * 100.f });
+	buttonShape.setOutlineColor(sf::Color::Red);
+	buttonShape.setOutlineThickness(1.f);
+
+	sf::Text buttonText{ text, m_font };
+	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
+
+	buttonText.setFillColor(sf::Color::Blue);
+	buttonText.setPosition(buttonShape.getPosition());
+
+	buttonsRectangle.emplace_back(buttonShape);
+	buttonsText.emplace_back(buttonText);
 }
 
 void MainMenuState::update()
@@ -71,6 +40,15 @@ void MainMenuState::update()
 	{
 		++m_onHoverButton;
 		if (m_onHoverButton >= buttonsRectangle.size())
+		{
+			m_onHoverButton = buttonsRectangle.size() - 1;
+		}
+		delayClock.restart();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && delayTime > 0.15f)
+	{
+		--m_onHoverButton;
+		if (m_onHoverButton < 0)
 		{
 			m_onHoverButton = 0;
 		}
@@ -109,5 +87,9 @@ void MainMenuState::pressButton()
 	if (m_onHoverButton == 0)
 	{
 		m_currentState = "playing";
+	}
+	else if (m_onHoverButton == 2)
+	{
+		m_currentState = "exiting";
 	}
 }
