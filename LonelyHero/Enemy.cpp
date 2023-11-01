@@ -81,11 +81,11 @@ void Enemy::update(float& deltaTime)
 
 		if (m_currentTexture == "enemyAttacking1")
 		{
-			m_damage = 100;
+			m_damage = 150;
 		}
 		else if (m_currentTexture == "enemyAttacking2")
 		{
-			m_damage = 60;
+			m_damage = 90;
 		}
 
 		if (m_isAttacking)

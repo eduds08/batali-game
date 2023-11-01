@@ -31,4 +31,3 @@ protected:
 
 	sf::View m_view{};
 };
-

@@ -42,8 +42,8 @@ namespace constants
 	constexpr float playerSpeed{ 240.f };
 	constexpr float playerJumpHeight{ 80.f };
 
-	constexpr int playerHp{ 1500 };
-	constexpr int playerHpDivided5{ 300 };
+	constexpr int playerHp{ 1250 };
+	constexpr int playerHpDivided5{ 250 };
 
 	constexpr float minEnemySpeed{ 130.f };
 	constexpr float maxEnemySpeed{ 200.f };
@@ -52,8 +52,8 @@ namespace constants
 
 	constexpr float enemyJumpHeight{ 80.f };
 
-	constexpr int enemyHp{ 1300 };
-	constexpr int enemyHpDivided5{ 260 };
+	constexpr int enemyHp{ 1000 };
+	constexpr int enemyHpDivided5{ 200 };
 
 	constexpr float knockbackSpeed{ 300.f };
 
@@ -65,7 +65,7 @@ namespace constants
 	constexpr float windHashashinSwordHitboxWidthAttack2{ 50.f };
 	constexpr float windHashashinSwordHitboxHeight{ 20.f };
 
-	constexpr float timeBetweenEnemyAttacks{ 0.8f };
+	constexpr float timeBetweenEnemyAttacks{ 1.f };
 	constexpr float cooldownDamageTime{ 0.6f };
 
 	constexpr int windHashashinSpriteWidth{ 288 };

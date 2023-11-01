@@ -1,8 +1,8 @@
 #include "Game.h"
 
 Game::Game()
+	: m_menuContext{new MainMenuState{m_window}}
 {
-	m_menuContext = new MainMenuState(m_window);
 	run();
 }
 
@@ -40,30 +40,12 @@ void Game::run()
 		}
 
 		update();
-		if (m_menuContext->getCurrentState() == "exiting")
-		{
-			delete m_menuContext;
-			m_menuContext = nullptr;
-			m_window.close();
-		}
 		render();
 	}
 }
 
 void Game::update()
 {
-	if (m_menuContext->getCurrentState() == "main")
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter))
-		{
-			dynamic_cast<MainMenuState*>(m_menuContext)->pressButton();
-		}
-		if (m_menuContext->getCurrentState() == "playing")
-		{
-			delete m_menuContext;
-			m_menuContext = new PlayingState(m_window, m_deltaTime);
-		}
-	}
 	if (m_menuContext->getCurrentState() == "playing")
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
@@ -75,6 +57,19 @@ void Game::update()
 	}
 
 	m_menuContext->update();
+
+	if (m_menuContext->getCurrentState() == "transitionToPlaying")
+	{
+		delete m_menuContext;
+		m_menuContext = new PlayingState(m_window, m_deltaTime);
+	}
+
+	if (m_menuContext->getCurrentState() == "exiting")
+	{
+		delete m_menuContext;
+		m_menuContext = nullptr;
+		m_window.close();
+	}
 }
 
 void Game::render()

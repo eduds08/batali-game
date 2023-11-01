@@ -6,7 +6,7 @@ MainMenuState::MainMenuState(sf::RenderWindow& window) :
 	m_currentState = "main";
 
 	initButton("Play", 0);
-	initButton("Options", 1);
+	initButton("Settings", 1);
 	initButton("Exit", 2);
 
 	m_view.setSize(sf::Vector2f{screenWidth, screenHeight});
@@ -25,23 +25,23 @@ void MainMenuState::initButton(const std::string& text, int position)
 
 	sf::Text buttonText{ text, m_font };
 	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
-
 	buttonText.setFillColor(sf::Color::Blue);
 	buttonText.setPosition(buttonShape.getPosition());
 
-	buttonsRectangle.emplace_back(buttonShape);
-	buttonsText.emplace_back(buttonText);
+	buttonsShapes.emplace_back(buttonShape);
+	buttonsTexts.emplace_back(buttonText);
 }
 
 void MainMenuState::update()
 {
 	delayTime = delayClock.getElapsedTime().asSeconds();
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down) && delayTime > 0.15f)
 	{
 		++m_onHoverButton;
-		if (m_onHoverButton >= buttonsRectangle.size())
+		if (m_onHoverButton >= buttonsShapes.size())
 		{
-			m_onHoverButton = buttonsRectangle.size() - 1;
+			m_onHoverButton = buttonsShapes.size() - 1;
 		}
 		delayClock.restart();
 	}
@@ -55,28 +55,28 @@ void MainMenuState::update()
 		delayClock.restart();
 	}
 
-	for (int i = 0; i < buttonsRectangle.size(); ++i)
+	for (int i = 0; i < buttonsShapes.size(); ++i)
 	{
-		if (i == m_onHoverButton)
-		{
-			buttonsRectangle[i].setOutlineColor(sf::Color::Green);
-			buttonsRectangle[i].setFillColor(sf::Color::Magenta);
-		}
-		else 
-		{
-			buttonsRectangle[i].setOutlineColor(sf::Color::Red);
-			buttonsRectangle[i].setFillColor(sf::Color::Yellow);
-		}
+		buttonsShapes[i].setOutlineColor(sf::Color::Red);
+		buttonsShapes[i].setFillColor(sf::Color::Yellow);
+	}
+
+	buttonsShapes[m_onHoverButton].setOutlineColor(sf::Color::Green);
+	buttonsShapes[m_onHoverButton].setFillColor(sf::Color::Magenta);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter))
+	{
+		pressButton();
 	}
 }
 
 void MainMenuState::render()
 {
-	for (const auto& buttonShape : buttonsRectangle)
+	for (const auto& buttonShape : buttonsShapes)
 	{
 		m_window.draw(buttonShape);
 	}
-	for (const auto& buttonText : buttonsText)
+	for (const auto& buttonText : buttonsTexts)
 	{
 		m_window.draw(buttonText);
 	}
@@ -86,7 +86,7 @@ void MainMenuState::pressButton()
 {
 	if (m_onHoverButton == 0)
 	{
-		m_currentState = "playing";
+		m_currentState = "transitionToPlaying";
 	}
 	else if (m_onHoverButton == 2)
 	{

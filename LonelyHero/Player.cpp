@@ -68,11 +68,11 @@ void Player::update(float& deltaTime)
 
 		if (m_currentTexture == "playerAttacking1")
 		{
-			m_damage = 75;
+			m_damage = 100;
 		}
 		else if (m_currentTexture == "playerAttacking2")
 		{
-			m_damage = 30;
+			m_damage = 70;
 		}
 
 		updateDamage();

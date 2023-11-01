@@ -10,7 +10,6 @@ public:
 
 	void initButton(const std::string& text, int position);
 
-	//virtual void run();
 	virtual void update();
 	virtual void render();
 
@@ -18,13 +17,13 @@ public:
 
 private:
 
-	std::vector<sf::RectangleShape> buttonsRectangle{};
-	std::vector<sf::Text> buttonsText{};
+	std::vector<sf::RectangleShape> buttonsShapes{};
+	std::vector<sf::Text> buttonsTexts{};
 
 	sf::Clock delayClock{};
 	float delayTime{};
 
 	// Talvez um ENUM aqui para os botões (0, 1, 2...)
 
-	int m_onHoverButton{0};
+	int m_onHoverButton{ 0 };
 };

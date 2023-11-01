@@ -179,7 +179,7 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 		}
 
 		x = 0;
-		y++;
+		++y;
 	}
 
 	mapFile.close();
