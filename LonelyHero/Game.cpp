@@ -1,17 +1,17 @@
 #include "Game.h"
 
 Game::Game()
-	: m_menuContext{new MainMenuState{m_window}}
+	: m_stateContext{new MainMenuState{m_window}}
 {
 	run();
 }
 
 Game::~Game()
 {
-	if (m_menuContext)
+	if (m_stateContext)
 	{
-		delete m_menuContext;
-		m_menuContext = nullptr;
+		delete m_stateContext;
+		m_stateContext = nullptr;
 	}
 }
 
@@ -31,9 +31,9 @@ void Game::run()
 		{
 			if (m_event.type == sf::Event::Closed)
 			{
-				if (m_menuContext->getCurrentState() == "playing")
+				if (m_stateContext->getCurrentState() == "playing")
 				{
-					dynamic_cast<PlayingState*>(m_menuContext)->setOnPlayingState(false);
+					dynamic_cast<PlayingState*>(m_stateContext)->setOnPlayingState(false);
 				}
 				m_window.close();
 			}
@@ -46,28 +46,33 @@ void Game::run()
 
 void Game::update()
 {
-	if (m_menuContext->getCurrentState() == "playing")
+	// If on playing state and the user press Escape button, it changes to MainMenuState
+	if (m_stateContext->getCurrentState() == "playing")
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
 		{
-			dynamic_cast<PlayingState*>(m_menuContext)->setOnPlayingState(false);
-			delete m_menuContext;
-			m_menuContext = new MainMenuState(m_window);
+			// To quit animation thread
+			dynamic_cast<PlayingState*>(m_stateContext)->setOnPlayingState(false);
+
+			delete m_stateContext;
+			m_stateContext = new MainMenuState(m_window);
 		}
 	}
 
-	m_menuContext->update();
+	m_stateContext->update();
 
-	if (m_menuContext->getCurrentState() == "transitionToPlaying")
+	// The user pressed button "Play"
+	if (m_stateContext->getCurrentState() == "transitionToPlaying")
 	{
-		delete m_menuContext;
-		m_menuContext = new PlayingState(m_window, m_deltaTime);
+		delete m_stateContext;
+		m_stateContext = new PlayingState(m_window, m_deltaTime);
 	}
 
-	if (m_menuContext->getCurrentState() == "exiting")
+	// Press the button to close the game
+	if (m_stateContext->getCurrentState() == "exiting")
 	{
-		delete m_menuContext;
-		m_menuContext = nullptr;
+		delete m_stateContext;
+		m_stateContext = nullptr;
 		m_window.close();
 	}
 }
@@ -75,9 +80,9 @@ void Game::update()
 void Game::render()
 {
 	m_window.clear();
-	if (m_menuContext)
+	if (m_stateContext)
 	{
-		m_menuContext->render();
+		m_stateContext->render();
 	}
 	m_window.display();
 }

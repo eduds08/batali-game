@@ -17,7 +17,7 @@ namespace constants
 	constexpr float gravity{ 981.f };
 
 	constexpr int fireKnightSpriteWidth{ 288 };
-	constexpr int fireKnightSpriteHeight{ 128 };
+	constexpr int fireKnightSpriteHeight{ 127 };
 
 	constexpr float fireKnightShapeWidth{ 20.f };
 	constexpr float fireKnightShapeHeight{ 40.f };
@@ -43,7 +43,6 @@ namespace constants
 	constexpr float playerJumpHeight{ 80.f };
 
 	constexpr int playerHp{ 1250 };
-	constexpr int playerHpDivided5{ 250 };
 
 	constexpr float minEnemySpeed{ 130.f };
 	constexpr float maxEnemySpeed{ 200.f };
@@ -69,7 +68,7 @@ namespace constants
 	constexpr float cooldownDamageTime{ 0.6f };
 
 	constexpr int windHashashinSpriteWidth{ 288 };
-	constexpr int windHashashinSpriteHeight{ 128 };
+	constexpr int windHashashinSpriteHeight{ 127 };
 
 	constexpr float windHashashinShapeWidth{ 20.f };
 	constexpr float windHashashinShapeHeight{ 40.f };
@@ -87,4 +86,11 @@ namespace constants
 	constexpr int windHashashinHitAnimationFramesAmount{ 6 };
 
 	constexpr float windHashashinSpriteScale{ 1.f };
+
+	constexpr int healthBarSpriteWidth{ 48 };
+	constexpr int healthBarSpriteHeight{ 16 };
+	constexpr int healthBarFramesAmount{ 6 };
+
+	constexpr int buttonSpriteWidth{ 46 };
+	constexpr int buttonSpriteHeight{ 14 };
 }

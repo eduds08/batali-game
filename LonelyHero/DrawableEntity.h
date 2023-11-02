@@ -7,8 +7,8 @@ class DrawableEntity
 public:
 	DrawableEntity();
 	virtual ~DrawableEntity() = default;
-	
-	sf::Sprite& getSprite() { return m_sprite; }
+
+	const sf::Sprite& getSprite() const { return m_sprite; }
 
 protected:
 	// Singleton Pattern

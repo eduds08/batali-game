@@ -1,6 +1,6 @@
 #include "ColliderEntity.h"
 
-bool ColliderEntity::isCollidingWith(sf::Sprite& other)
+bool ColliderEntity::isCollidingWith(const sf::Sprite& other)
 {
 	float otherHalfSizeX = other.getTexture()->getSize().x / 2.f;
 	float otherHalfSizeY = other.getTexture()->getSize().y / 2.f;

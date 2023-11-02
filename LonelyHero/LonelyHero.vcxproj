@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedEntity.cpp" />
+    <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="DamageEntity.cpp" />
     <ClCompile Include="ColliderEntity.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
@@ -146,13 +147,14 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="MenuContext.cpp" />
+    <ClCompile Include="StateContext.cpp" />
     <ClCompile Include="SwordEntity.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.h" />
+    <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="DamageEntity.h" />
     <ClInclude Include="ColliderEntity.h" />
     <ClInclude Include="Constants.h" />
@@ -165,7 +167,7 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MovableEntity.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="MenuContext.h" />
+    <ClInclude Include="StateContext.h" />
     <ClInclude Include="SwordEntity.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UI.h" />

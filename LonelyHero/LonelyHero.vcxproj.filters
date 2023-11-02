@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{8866d1ab-2a1c-41c9-909c-03a4e1941c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{fdc425b7-dff9-4ca9-8d68-1fc9ffa722e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{a634de15-d5d9-4fe7-ac66-976a73e78129}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,109 +30,109 @@
     <ClCompile Include="Game.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="DrawableEntity.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimatedEntity.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderEntity.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="MovableEntity.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageEntity.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="SwordEntity.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Arquivos de Origem</Filter>
+    <ClCompile Include="ButtonUI.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="HealthBarUI.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="PlayingState.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateContext.cpp">
+      <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="MenuContext.cpp">
-      <Filter>Arquivos de Origem</Filter>
+    <ClCompile Include="AnimatedEntity.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="SettingsMenuState.cpp">
-      <Filter>Arquivos de Origem</Filter>
+    <ClCompile Include="ColliderEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawableEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="MovableEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordEntity.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawableEntity.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedEntity.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderEntity.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="MovableEntity.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageEntity.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="SwordEntity.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+    <ClInclude Include="ButtonUI.h">
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="HealthBarUI.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="PlayingState.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateContext.h">
+      <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuState.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="MenuContext.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+    <ClInclude Include="AnimatedEntity.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="SettingsMenuState.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+    <ClInclude Include="ColliderEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="MovableEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordEntity.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

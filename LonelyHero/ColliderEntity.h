@@ -10,7 +10,7 @@ public:
 	virtual ~ColliderEntity() = default;
 
 	//Returns true if colliding with other, false if not. Also set the collision directions (if is colliding in the right, left, bottom or top)
-	bool isCollidingWith(sf::Sprite& other);
+	bool isCollidingWith(const sf::Sprite& other);
 
 	// Sets the values of the imaginary view of an entity. Useful to call isCollidingWith() with less tiles (only the ones inside the limits)
 	void updateLimits();

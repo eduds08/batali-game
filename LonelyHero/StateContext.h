@@ -1,21 +1,17 @@
 #pragma once
 
-#include "Player.h"
-#include "Enemy.h"
-#include "HealthBarUI.h"
-#include "Ground.h"
-#include <fstream>
-#include <vector>
-#include <thread>
+#include "SFML/Graphics.hpp"
+#include "Constants.h"
 #include <string>
+#include <vector>
 
 using namespace constants;
 
-class MenuContext
+class StateContext
 {
 public:
-	MenuContext(sf::RenderWindow& window);
-	virtual ~MenuContext() = default;
+	StateContext(sf::RenderWindow& window);
+	virtual ~StateContext() = default;
 
 	virtual void update() = 0;
 	virtual void render() = 0;

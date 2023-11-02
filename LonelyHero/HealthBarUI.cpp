@@ -3,6 +3,9 @@
 HealthBarUI::HealthBarUI(sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
 	: UI{position, textureName, texturePath}
 {
+	m_spriteWidth = constants::healthBarSpriteWidth;
+	m_spriteHeight = constants::healthBarSpriteHeight;
+
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, m_spriteWidth, m_spriteHeight });
 
 	if (textureName == "enemyHealthBar")
@@ -11,32 +14,23 @@ HealthBarUI::HealthBarUI(sf::Vector2f position, const std::string& textureName, 
 	}
 
 	m_sprite.setScale(2.f, 2.f);
-
-	
 }
 
-void HealthBarUI::updateHealthBar()
+void HealthBarUI::update()
 {
-	if (*m_entityHp <= 0) {
-		m_sprite.setTextureRect(sf::IntRect{ 240, 0, m_spriteWidth, m_spriteHeight });
-	}
-	else if (*m_entityHp < m_entityTotalHpFraction * 1) {
-		m_sprite.setTextureRect(sf::IntRect{ 192, 0, m_spriteWidth, m_spriteHeight });
-	}
-	else if (*m_entityHp < m_entityTotalHpFraction * 2) {
-		m_sprite.setTextureRect(sf::IntRect{ 144, 0, m_spriteWidth, m_spriteHeight });
-	}
-	else if (*m_entityHp < m_entityTotalHpFraction * 3) {
-		m_sprite.setTextureRect(sf::IntRect{ 96, 0, m_spriteWidth, m_spriteHeight });
-	}
-	else if (*m_entityHp < m_entityTotalHpFraction * 4) {
-		m_sprite.setTextureRect(sf::IntRect{ 48, 0, m_spriteWidth, m_spriteHeight });
+	for (int i = 0; i < constants::healthBarFramesAmount - 1; ++i)
+	{
+		if (*m_entityHp <= m_entityTotalHpFraction * i)
+		{
+			m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * (constants::healthBarFramesAmount - 1 - i), 0, m_spriteWidth, m_spriteHeight });
+			break;
+		}
 	}
 }
 
 void HealthBarUI::setEntityHp(const int* entityHp)
 {
 	//5.f -> healthBar frames amount
-	m_entityTotalHpFraction = static_cast<int>((*entityHp) / 5.f);
+	m_entityTotalHpFraction = static_cast<int>((*entityHp) / static_cast<float>(constants::healthBarFramesAmount - 1));
 	m_entityHp = entityHp;
 }

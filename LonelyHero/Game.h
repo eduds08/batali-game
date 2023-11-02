@@ -21,5 +21,5 @@ private:
 	sf::Clock m_deltaTimeClock{};
 	float m_deltaTime{};
 
-	MenuContext* m_menuContext;
+	StateContext* m_stateContext;
 };

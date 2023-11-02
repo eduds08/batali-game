@@ -1,8 +1,14 @@
 #pragma once
 
-#include "MenuContext.h"
+#include "StateContext.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Ground.h"
+#include "HealthBarUI.h"
+#include <thread>
+#include <fstream>
 
-class PlayingState : public MenuContext
+class PlayingState : public StateContext
 {
 public:
 	PlayingState(sf::RenderWindow& window, float& deltaTime);

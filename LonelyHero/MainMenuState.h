@@ -1,8 +1,10 @@
 #pragma once
 
-#include "MenuContext.h"
+#include "StateContext.h"
+#include "ButtonUI.h"
+#include <map>
 
-class MainMenuState : public MenuContext
+class MainMenuState : public StateContext
 {
 public:
 	MainMenuState(sf::RenderWindow& window);
@@ -16,14 +18,11 @@ public:
 	void pressButton();
 
 private:
-
-	std::vector<sf::RectangleShape> buttonsShapes{};
+	std::vector<ButtonUI> buttons{};
 	std::vector<sf::Text> buttonsTexts{};
 
 	sf::Clock delayClock{};
 	float delayTime{};
 
-	// Talvez um ENUM aqui para os botões (0, 1, 2...)
-
-	int m_onHoverButton{ 0 };
+	size_t m_onHoverButton{ 0 };
 };

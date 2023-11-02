@@ -1,7 +1,7 @@
 #include "PlayingState.h"
 
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
-	: MenuContext{ window }
+	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
 {
 	m_currentState = "playing";
@@ -27,8 +27,8 @@ void PlayingState::update()
 {
 	updateCollision();
 
-	m_playerHealthBar.updateHealthBar();
-	m_enemyHealthBar.updateHealthBar();
+	m_playerHealthBar.update();
+	m_enemyHealthBar.update();
 
 	m_player.update(m_deltaTime);
 
