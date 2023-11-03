@@ -16,9 +16,11 @@ public:
 	void move(float& deltaTime);
 
 	// Updates velocity components of the entity according to some conditions
-	void updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime);
+	void updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll=false);
 
 	void flipSprite() { m_sprite.setScale(static_cast<float>(m_facingRight), 1.f); }
+
+	bool getOnRoll() { return m_onRoll; }
 
 	virtual bool getHitted() = 0;
 	virtual bool getIsAttacking() = 0;
@@ -34,4 +36,6 @@ protected:
 
 	float m_speed{};
 	float m_jumpHeight{};
+
+	bool m_onRoll{ false };
 };

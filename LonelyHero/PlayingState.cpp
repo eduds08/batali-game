@@ -140,7 +140,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
 
 	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or when it doesn't collide with a wall.
-	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally())
+	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
 	{
 		for (auto& ground : grounds)
 		{

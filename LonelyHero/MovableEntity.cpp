@@ -30,7 +30,7 @@ void MovableEntity::move(float& deltaTime)
 	m_sprite.setPosition(sf::Vector2f{ getPosition().x, getPosition().y - (m_spriteHeight - getSize().y) / 2.f});
 }
 
-void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime)
+void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll)
 {
 	m_velocity.x = 0.f;
 	m_isRunning = true;
@@ -48,6 +48,21 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	else
 	{
 		m_isRunning = false;
+	}
+
+	if (conditionRoll && m_canJump && !getHitted())
+	{
+		m_onRoll = true;
+	}
+
+	if (m_onRoll)
+	{
+		m_velocity.x += (m_facingRight * m_speed);
+	}
+
+	if (m_onRoll && m_frameCount >= 7)
+	{
+		m_onRoll = false;
 	}
 
 	flipSprite();

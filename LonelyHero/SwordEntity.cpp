@@ -70,7 +70,14 @@ void SwordEntity::updateTexture()
 		}
 		else if (!m_isAttacking)
 		{
-			m_isRunning ? changeCurrentTexture(constants::windHashashinRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::windHashashinIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+			if (m_onRoll)
+			{
+				changeCurrentTexture(constants::fireKnightRollAnimationFramesAmount, m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")));
+			}
+			else 
+			{
+				m_isRunning ? changeCurrentTexture(constants::windHashashinRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::windHashashinIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+			}
 		}
 		else if (m_isAttacking)
 		{
@@ -93,7 +100,14 @@ void SwordEntity::updateTexture()
 		}
 		else if (!m_isAttacking)
 		{
-			m_isRunning ? changeCurrentTexture(constants::fireKnightRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::fireKnightIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+			if (m_onRoll)
+			{
+				changeCurrentTexture(constants::fireKnightRollAnimationFramesAmount, m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")));
+			}
+			else
+			{
+				m_isRunning ? changeCurrentTexture(constants::windHashashinRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::windHashashinIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+			}
 		}
 		else if (m_isAttacking)
 		{

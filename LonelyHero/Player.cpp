@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player(sf::Vector2f firstPosition)
 	: SwordEntity{ firstPosition }
@@ -49,7 +50,9 @@ void Player::update(float& deltaTime)
 		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
 		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
 
-		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
+		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::G));
+
+		std::cout << m_onRoll << '\n';
 
 		bool conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z);
 
