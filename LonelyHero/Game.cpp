@@ -49,7 +49,7 @@ void Game::update()
 	// If on playing state and the user press Escape button, it changes to MainMenuState
 	if (m_stateContext->getCurrentState() == "playing")
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape) || sf::Joystick::isButtonPressed(0, 12))
 		{
 			// To quit animation thread
 			dynamic_cast<PlayingState*>(m_stateContext)->setOnPlayingState(false);

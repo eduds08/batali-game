@@ -72,7 +72,7 @@ void SwordEntity::updateTexture()
 		{
 			if (m_onRoll)
 			{
-				changeCurrentTexture(constants::fireKnightRollAnimationFramesAmount, m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")));
+				changeCurrentTexture(constants::windHashashinRollAnimationFramesAmount, m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")));
 			}
 			else 
 			{

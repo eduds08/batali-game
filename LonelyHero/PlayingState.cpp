@@ -26,7 +26,7 @@ PlayingState::~PlayingState()
 void PlayingState::update()
 {
 	m_pauseDelay = m_pauseClock.getElapsedTime().asSeconds();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::P) && m_pauseDelay > 0.3f)
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::P) || sf::Joystick::isButtonPressed(0, 9)) && m_pauseDelay > 0.3f)
 	{
 		m_onPause = !m_onPause;
 		m_pauseClock.restart();
@@ -52,17 +52,17 @@ void PlayingState::update()
 
 void PlayingState::render()
 {
-	m_window.draw(m_player.getShape());
+	//m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto& enemy : enemies)
 	{
-		m_window.draw(enemy.getShape());
+		//m_window.draw(enemy.getShape());
 		m_window.draw(enemy.getSprite());
-		m_window.draw(enemy.getAttackHitbox());
+		//m_window.draw(enemy.getAttackHitbox());
 	}
 
-	m_window.draw(m_player.getAttackHitbox());
+	//m_window.draw(m_player.getAttackHitbox());
 	
 
 	for (auto& ground : grounds)

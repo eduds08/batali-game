@@ -21,7 +21,7 @@ void MainMenuState::initButton(const std::string& text, int position)
 
 	sf::Text buttonText{ text, m_font };
 	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
-	buttonText.setFillColor(sf::Color::White);
+	buttonText.setFillColor(sf::Color::Black);
 	buttonText.setPosition(buttons.back().getPosition());
 
 	buttonsTexts.emplace_back(buttonText);
@@ -31,7 +31,7 @@ void MainMenuState::update()
 {
 	delayTime = delayClock.getElapsedTime().asSeconds();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down) && delayTime > 0.18f)
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down) || sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) == -100) && delayTime > 0.18f)
 	{
 		if (m_onHoverButton < buttons.size() - 1)
 		{
@@ -40,7 +40,7 @@ void MainMenuState::update()
 			delayClock.restart();
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) && delayTime > 0.18f)
+	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) || sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) == 100) && delayTime > 0.18f)
 	{
 		if (m_onHoverButton > 0)
 		{
@@ -54,14 +54,16 @@ void MainMenuState::update()
 	{
 		buttons[i].update(i == m_onHoverButton);
 		buttonsTexts[i].setPosition(buttons[i].getPosition());
+		buttonsTexts[i].setFillColor(sf::Color::Black);
 
 		if (i == m_onHoverButton)
 		{
 			buttonsTexts[i].setPosition(buttons[i].getPosition() + sf::Vector2f{0.f, 2.f});
+			buttonsTexts[i].setFillColor(sf::Color::White);
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) || sf::Joystick::isButtonPressed(0, 1))
 	{
 		pressButton();
 	}

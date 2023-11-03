@@ -88,6 +88,8 @@ namespace constants
 	constexpr int windHashashinDeathAnimationFramesAmount{ 19 };
 	constexpr int windHashashinHitAnimationFramesAmount{ 6 };
 
+	constexpr int windHashashinRollAnimationFramesAmount{ 6 };
+
 	constexpr float windHashashinSpriteScale{ 1.f };
 
 	constexpr int healthBarSpriteWidth{ 48 };
