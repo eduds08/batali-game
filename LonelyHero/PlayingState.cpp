@@ -25,19 +25,29 @@ PlayingState::~PlayingState()
 
 void PlayingState::update()
 {
-	updateCollision();
-
-	m_playerHealthBar.update();
-	m_enemyHealthBar.update();
-
-	m_player.update(m_deltaTime);
-
-	for (auto& enemy : enemies)
+	m_pauseDelay = m_pauseClock.getElapsedTime().asSeconds();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::P) && m_pauseDelay > 0.3f)
 	{
-		enemy.update(m_deltaTime);
+		m_onPause = !m_onPause;
+		m_pauseClock.restart();
 	}
+	
+	if (!m_onPause)
+	{
+		updateCollision();
 
-	updateView();
+		m_playerHealthBar.update();
+		m_enemyHealthBar.update();
+
+		m_player.update(m_deltaTime);
+
+		for (auto& enemy : enemies)
+		{
+			enemy.update(m_deltaTime);
+		}
+
+		updateView();
+	}
 }
 
 void PlayingState::render()
@@ -189,18 +199,21 @@ void PlayingState::updateTexturesAndAnimations()
 {
 	while (m_onPlayingState)
 	{
-		// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
-		std::this_thread::sleep_for(std::chrono::milliseconds(75));
-		if (!m_player.isDead())
+		if (!m_onPause)
 		{
-			m_player.updateAnimation();
-		}
-
-		for (auto& enemy : enemies)
-		{
-			if (!enemy.isDead())
+			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
+			std::this_thread::sleep_for(std::chrono::milliseconds(75));
+			if (!m_player.isDead())
 			{
-				enemy.updateAnimation();
+				m_player.updateAnimation();
+			}
+
+			for (auto& enemy : enemies)
+			{
+				if (!enemy.isDead())
+				{
+					enemy.updateAnimation();
+				}
 			}
 		}
 	}

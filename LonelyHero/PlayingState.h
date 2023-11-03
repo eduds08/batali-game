@@ -35,9 +35,15 @@ public:
 
 	void setOnPlayingState(bool onPlayingState) { m_onPlayingState = onPlayingState; }
 
+	void setOnPause(bool onPause) { m_onPause = onPause; }
+	bool getOnPause() { return m_onPause; }
+
 private:
 	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png" };
 	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
+
+	sf::Clock m_pauseClock{};
+	float m_pauseDelay{};
 
 	Player m_player{ playerFirstPosition };
 	std::vector<Enemy> enemies{};
@@ -53,4 +59,6 @@ private:
 	bool m_onPlayingState{ true };
 
 	float& m_deltaTime;
+
+	bool m_onPause{ false };
 };

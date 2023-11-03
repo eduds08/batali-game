@@ -34,6 +34,9 @@ namespace constants
 	constexpr int fireKnightDeathAnimationFramesAmount{ 13 };
 	constexpr int fireKnightHitAnimationFramesAmount{ 6 };
 
+	constexpr int fireKnightRollAnimationFramesAmount{ 8 };
+	constexpr int fireKnightAirAttackingAnimationFramesAmount{ 8 };
+
 	constexpr float fireKnightSpriteScale{ 1.f };
 
 	const sf::Vector2f playerFirstPosition{sf::Vector2f{480.f, 240.f}};
