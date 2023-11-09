@@ -6,7 +6,9 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 {
 	m_currentState = "playing";
 
-	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
+	//enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
+
+	//m_enemyHealthBar = HealthBarUI{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png", &enemies[0].getHp() };
 
 	loadAndCreateMap("./map/map.txt");
 

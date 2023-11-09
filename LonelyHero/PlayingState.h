@@ -24,7 +24,7 @@ public:
 
 	// Calls takeDamage and also knockbackMove for the attacked entity
 	void handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity);
-	
+
 	void updateView();
 
 	// Reads a .txt file to generate the tiles
@@ -40,19 +40,19 @@ public:
 	bool getOnPause() { return m_onPause; }
 
 private:
-	
+
 
 	// fix bug where one press of the input pause and unpause many times in a row
 	sf::Clock m_pauseClock{};
 	float m_pauseDelay{};
 
 	Player m_player{ playerFirstPosition };
-	std::vector<Enemy> enemies{};
+	std::vector<Enemy> enemies{ Enemy{ enemyFirstPosition, m_player.getPosition() } };
 	std::vector<Ground> grounds{};
 
 	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png", &m_player.getHp() };
 	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png", &enemies[0].getHp() };
-	
+
 	std::thread animationThread;
 
 	float m_rightViewLimit{};
