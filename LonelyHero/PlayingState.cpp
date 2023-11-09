@@ -8,9 +8,6 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 
 	enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
 
-	m_playerHealthBar.setEntityHp(&m_player.getHp());
-	m_enemyHealthBar.setEntityHp(&enemies[0].getHp());
-
 	loadAndCreateMap("./map/map.txt");
 
 	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
@@ -52,17 +49,17 @@ void PlayingState::update()
 
 void PlayingState::render()
 {
-	//m_window.draw(m_player.getShape());
+	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
 	for (auto& enemy : enemies)
 	{
-		//m_window.draw(enemy.getShape());
+		m_window.draw(enemy.getShape());
 		m_window.draw(enemy.getSprite());
-		//m_window.draw(enemy.getAttackHitbox());
+		m_window.draw(enemy.getAttackHitbox());
 	}
 
-	//m_window.draw(m_player.getAttackHitbox());
+	m_window.draw(m_player.getAttackHitbox());
 	
 
 	for (auto& ground : grounds)
@@ -139,7 +136,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 	attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
 
-	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or when it doesn't collide with a wall.
+	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
 	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
 	{
 		for (auto& ground : grounds)

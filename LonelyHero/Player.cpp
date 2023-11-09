@@ -46,17 +46,11 @@ void Player::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		/*bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
-		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
-		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);*/
-
 		bool conditionRunLeft = ((sf::Joystick::getAxisPosition(0, sf::Joystick::X) <= -60) && (sf::Joystick::getAxisPosition(0, sf::Joystick::X) >= -100)) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
 		bool conditionRunRight = ((sf::Joystick::getAxisPosition(0, sf::Joystick::X) >= 60) && (sf::Joystick::getAxisPosition(0, sf::Joystick::X) <= 100)) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
 		bool conditionJump = sf::Joystick::isButtonPressed(0, 1) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
 
 		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Joystick::isButtonPressed(0, 2) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-
-		/*bool conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z);*/
 
 		bool conditionAttack = sf::Joystick::isButtonPressed(0, 0) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z);
 

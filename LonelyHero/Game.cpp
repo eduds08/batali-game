@@ -31,6 +31,7 @@ void Game::run()
 		{
 			if (m_event.type == sf::Event::Closed)
 			{
+				// Quit animation thread
 				if (m_stateContext->getCurrentState() == "playing")
 				{
 					dynamic_cast<PlayingState*>(m_stateContext)->setOnPlayingState(false);
@@ -54,6 +55,7 @@ void Game::update()
 			// To quit animation thread
 			dynamic_cast<PlayingState*>(m_stateContext)->setOnPlayingState(false);
 
+			// Changes to MainMenuState
 			delete m_stateContext;
 			m_stateContext = new MainMenuState(m_window);
 		}

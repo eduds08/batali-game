@@ -32,7 +32,7 @@ void DamageEntity::updateDamage()
 
 void DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damage)
 {
-	// Only executed if not already dead and when not immune (on damageCooldown)
+	// Only executed if not already dead and when not immune (on damageCooldown or onRoll)
 	if (!m_inDamageCooldown && !m_dying && !m_onRoll)
 	{
 		m_inDamageCooldown = true;

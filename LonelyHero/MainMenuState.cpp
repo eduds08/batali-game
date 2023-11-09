@@ -31,6 +31,7 @@ void MainMenuState::update()
 {
 	delayTime = delayClock.getElapsedTime().asSeconds();
 
+	// Move down the "button cursor"
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down) || sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) == -100) && delayTime > 0.18f)
 	{
 		if (m_onHoverButton < buttons.size() - 1)
@@ -40,6 +41,7 @@ void MainMenuState::update()
 			delayClock.restart();
 		}
 	}
+	// Move up the "button cursor"
 	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up) || sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) == 100) && delayTime > 0.18f)
 	{
 		if (m_onHoverButton > 0)
@@ -50,6 +52,7 @@ void MainMenuState::update()
 		}
 	}
 
+	// Upate the visual design of the buttons (according to its state -> onHover OR not onHover)
 	for (size_t i = 0; i < buttons.size(); ++i)
 	{
 		buttons[i].update(i == m_onHoverButton);
@@ -63,6 +66,7 @@ void MainMenuState::update()
 		}
 	}
 
+	// Button pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) || sf::Joystick::isButtonPressed(0, 1))
 	{
 		pressButton();

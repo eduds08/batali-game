@@ -10,11 +10,13 @@ public:
 	MainMenuState(sf::RenderWindow& window);
 	virtual ~MainMenuState() = default;
 
+	// Used once on constructor to create the menu buttons
 	void initButton(const std::string& text, int position);
 
 	virtual void update();
 	virtual void render();
 
+	// Called when user press enter on a button. It checks which button was pressed and then changes the current state according to it
 	void pressButton();
 
 private:

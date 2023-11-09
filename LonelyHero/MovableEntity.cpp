@@ -35,6 +35,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	m_velocity.x = 0.f;
 	m_isRunning = true;
 
+	// Only runs when not on roll
 	if (conditionRunLeft && !m_onRoll)
 	{
 		m_facingRight = -1;
@@ -50,6 +51,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 		m_isRunning = false;
 	}
 
+	// Only can roll when on ground and hot on Hitted animation
 	if (conditionRoll && m_canJump && !getHitted())
 	{
 		m_onRoll = true;
@@ -60,6 +62,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 		m_velocity.x += (m_facingRight * m_speed);
 	}
 
+	// End onRoll animation
 	if (m_onRoll && m_frameCount >= m_currentAnimationFramesAmount - 1)
 	{
 		m_onRoll = false;

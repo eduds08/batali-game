@@ -1,12 +1,17 @@
 #include "HealthBarUI.h"
 
-HealthBarUI::HealthBarUI(sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
+HealthBarUI::HealthBarUI(sf::Vector2f position, const std::string& textureName, const std::string& texturePath, const int* entityHp)
 	: UI{position, textureName, texturePath}
 {
 	m_spriteWidth = constants::healthBarSpriteWidth;
 	m_spriteHeight = constants::healthBarSpriteHeight;
 
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, m_spriteWidth, m_spriteHeight });
+
+	m_entityTotalHpFraction = static_cast<int>((*entityHp) / static_cast<float>(constants::healthBarFramesAmount - 1));
+	m_entityHp = entityHp;
+	
+	// The code below (from line 16 - 21) will be removed later:
 
 	if (textureName == "enemyHealthBar")
 	{
@@ -26,11 +31,4 @@ void HealthBarUI::update()
 			break;
 		}
 	}
-}
-
-void HealthBarUI::setEntityHp(const int* entityHp)
-{
-	//5.f -> healthBar frames amount
-	m_entityTotalHpFraction = static_cast<int>((*entityHp) / static_cast<float>(constants::healthBarFramesAmount - 1));
-	m_entityHp = entityHp;
 }
