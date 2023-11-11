@@ -11,14 +11,16 @@ void AnimatedEntity::updateAnimation()
 	animateSprite();
 }
 
-void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath)
+void AnimatedEntity::changeCurrentTexture(const std::string& textureName, const std::string& texturePath, bool loopAnimation)
 {
 	// Checks if the texture isn't already set, so it doesn't set the same sprite more than once
 	if (m_currentTexture != textureName)
 	{
-		m_currentAnimationFramesAmount = animationFramesAmount;
+		m_loopAnimation = loopAnimation;
+		m_animationEnd = false;
 		m_frameCount = 0;
 		m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
+		m_currentAnimationFramesAmount = m_sprite.getTexture()->getSize().x / m_spriteWidth;
 		m_currentTexture = textureName;
 		m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
 	}
@@ -26,10 +28,19 @@ void AnimatedEntity::changeCurrentTexture(int animationFramesAmount, const std::
 
 void AnimatedEntity::animateSprite()
 {
+	if (!m_animationEnd)
+	{
+		m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
+		++m_frameCount;
+	}
 	if (m_frameCount == m_currentAnimationFramesAmount)
+	{
 		m_frameCount = 0;
-	m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
-	++m_frameCount;
+		if (!m_loopAnimation)
+		{
+			m_animationEnd = true;
+		}
+	}
 }
 
 void AnimatedEntity::initTexturesMap()
@@ -44,7 +55,6 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesActionName.emplace("Idle", m_entityName + "Idle");
 	m_texturesActionName.emplace("Attacking1", m_entityName + "Attacking1");
 	m_texturesActionName.emplace("Attacking2", m_entityName + "Attacking2");
-
 	m_texturesActionName.emplace("Roll", m_entityName + "Roll");
 	m_texturesActionName.emplace("AirAttacking", m_entityName + "AirAttacking");
 
@@ -56,7 +66,6 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesNamePath.emplace(m_texturesActionName.at("Idle"), "./assets/" + m_entityName + "/_Idle.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Attacking1"), "./assets/" + m_entityName + "/_Attack1.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Attacking2"), "./assets/" + m_entityName + "/_Attack2.png");
-
 	m_texturesNamePath.emplace(m_texturesActionName.at("Roll"), "./assets/" + m_entityName + "/_Roll.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("AirAttacking"), "./assets/" + m_entityName + "/_AirAttack.png");
 }

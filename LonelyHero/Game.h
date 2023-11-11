@@ -14,7 +14,7 @@ public:
 	void render();
 
 private:
-	sf::RenderWindow m_window{ sf::VideoMode(screenWidth, screenHeight), "Lonely Hero" };
+	sf::RenderWindow m_window{ sf::VideoMode().getDesktopMode(), "Lonely Hero" };
 
 	sf::Event m_event{};
 

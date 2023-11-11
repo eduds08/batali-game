@@ -63,7 +63,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	}
 
 	// End onRoll animation
-	if (m_onRoll && m_frameCount >= m_currentAnimationFramesAmount - 1)
+	if (m_onRoll && m_animationEnd)
 	{
 		m_onRoll = false;
 	}
@@ -73,6 +73,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	if (conditionJump && m_canJump && !getIsAttacking())
 	{
 		m_canJump = false;
+		m_onRoll = false;
 		m_velocity.y = -1 * sqrt(2.f * constants::gravity * m_jumpHeight);
 	}
 

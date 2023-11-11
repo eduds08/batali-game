@@ -39,9 +39,10 @@ public:
 	void setOnPause(bool onPause) { m_onPause = onPause; }
 	bool getOnPause() { return m_onPause; }
 
+	sf::Texture temp{};
+	sf::Sprite wallpaper{};
+
 private:
-
-
 	// fix bug where one press of the input pause and unpause many times in a row
 	sf::Clock m_pauseClock{};
 	float m_pauseDelay{};

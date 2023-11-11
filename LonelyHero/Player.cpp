@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <iostream>
 
 Player::Player(sf::Vector2f firstPosition)
 	: SwordEntity{ firstPosition }

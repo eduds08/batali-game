@@ -11,7 +11,7 @@ void DamageEntity::updateDamage()
 	m_knockbackVelocity = constants::knockbackSpeed;
 
 	// Makes sure the Hitted animation is only played once per attack
-	if (m_currentTexture == m_texturesActionName.at("Hitted") && m_frameCount >= m_currentAnimationFramesAmount)
+	if (m_hitted && m_animationEnd)
 	{
 		m_hitted = false;
 
@@ -83,7 +83,7 @@ void DamageEntity::knockbackMove(float& deltaTime, float attackDirection)
 void DamageEntity::updateDeath()
 {
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	if (m_currentTexture == m_texturesActionName.at("Death") && m_frameCount >= m_currentAnimationFramesAmount && !m_dead)
+	if (m_currentTexture == m_texturesActionName.at("Death") && !m_dead && m_animationEnd)
 	{
 		die();
 	}

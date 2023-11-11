@@ -19,7 +19,7 @@ void SwordEntity::updateAttack(bool attackCondition)
 		m_velocity.y = 0.f;
 
 		// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
-		if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2") && m_frameCount >= m_currentAnimationFramesAmount) || m_inDamageCooldown == true)
+		if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2") && m_animationEnd) || m_inDamageCooldown == true)
 		{
 			if (m_inDamageCooldown == false)
 			{
@@ -58,60 +58,60 @@ void SwordEntity::updateTexture()
 	{
 		if (m_dying)
 		{
-			changeCurrentTexture(constants::windHashashinDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
+			changeCurrentTexture(m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")), false);
 		}
 		else if (m_hitted)
 		{
-			changeCurrentTexture(constants::windHashashinHitAnimationFramesAmount, m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")));
+			changeCurrentTexture(m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")), false);
 		}
 		else if (m_velocity.y != 0.f && !m_canJump)
 		{
-			m_velocity.y > 0.f ? changeCurrentTexture(constants::windHashashinFallingAnimationFramesAmount, m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling"))) : changeCurrentTexture(constants::windHashashinJumpingAnimationFramesAmount, m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")));;
+			m_velocity.y > 0.f ? changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true) : changeCurrentTexture(m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")), true);;
 		}
 		else if (!m_isAttacking)
 		{
 			if (m_onRoll)
 			{
-				changeCurrentTexture(constants::windHashashinRollAnimationFramesAmount, m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")));
+				changeCurrentTexture(m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")), false);
 			}
 			else 
 			{
-				m_isRunning ? changeCurrentTexture(constants::windHashashinRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::windHashashinIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+				m_isRunning ? changeCurrentTexture(m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running")), true) : changeCurrentTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")), true);
 			}
 		}
 		else if (m_isAttacking)
 		{
-			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::windHashashinAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::windHashashinAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
+			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
 		}
 	}
 	else if (m_entityName == "player")
 	{
 		if (m_dying)
 		{
-			changeCurrentTexture(constants::fireKnightDeathAnimationFramesAmount, m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")));
+			changeCurrentTexture(m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")), false);
 		}
 		else if (m_hitted)
 		{
-			changeCurrentTexture(constants::fireKnightHitAnimationFramesAmount, m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")));
+			changeCurrentTexture(m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")), false);
 		}
 		else if (m_velocity.y != 0.f && !m_canJump)
 		{
-			m_velocity.y > 0.f ? changeCurrentTexture(constants::fireKnightFallingAnimationFramesAmount, m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling"))) : changeCurrentTexture(constants::fireKnightJumpingAnimationFramesAmount, m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")));;
+			m_velocity.y > 0.f ? changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true) : changeCurrentTexture(m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")), true);;
 		}
 		else if (!m_isAttacking)
 		{
 			if (m_onRoll)
 			{
-				changeCurrentTexture(constants::fireKnightRollAnimationFramesAmount, m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")));
+				changeCurrentTexture(m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")), false);
 			}
 			else
 			{
-				m_isRunning ? changeCurrentTexture(constants::windHashashinRunningAnimationFramesAmount, m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running"))) : changeCurrentTexture(constants::windHashashinIdleAnimationFramesAmount, m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")));
+				m_isRunning ? changeCurrentTexture(m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running")), true) : changeCurrentTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")), true);
 			}
 		}
 		else if (m_isAttacking)
 		{
-			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(constants::fireKnightAttacking2AnimationFramesAmount, m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2"))) : changeCurrentTexture(constants::fireKnightAttackingAnimationFramesAmount, m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")));
+			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
 		}
 	}
 	

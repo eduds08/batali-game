@@ -9,15 +9,12 @@ MainMenuState::MainMenuState(sf::RenderWindow& window) :
 	initButton("Settings", 1);
 	initButton("Exit", 2);
 
-	m_view.setSize(sf::Vector2f{ screenWidth, screenHeight });
-	m_view.setCenter(m_view.getSize() / 2.f);
-
-	m_window.setView(m_view);
+	m_window.setView(m_window.getDefaultView());
 }
 
 void MainMenuState::initButton(const std::string& text, int position)
 {
-	buttons.emplace_back(ButtonUI{ sf::Vector2f{ screenWidth / 2.f, screenHeight / 2.f + position * 100.f }, "button", "./assets/ui/button.png" });
+	buttons.emplace_back(ButtonUI{ sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + position * 100.f}, "button", "./assets/ui/button.png"});
 
 	sf::Text buttonText{ text, m_font };
 	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);

@@ -12,7 +12,7 @@ public:
 	void updateAnimation();
 
 	// Called when the entity changes its sprite. Eg.: from running sprite to jumping sprite.
-	void changeCurrentTexture(int animationFramesAmount, const std::string& textureName, const std::string& texturePath);
+	void changeCurrentTexture(const std::string& textureName, const std::string& texturePath, bool loopAnimation);
 	
 	// Set the next frame of the sprite and when it hits the last frame, it starts from beginning again.
 	void animateSprite();
@@ -36,4 +36,8 @@ protected:
 
 	// Useful to identify if the entity is player, enemy, etc...
 	std::string m_entityName;
+
+	// Useful for animation that are played onde per execution (eg.: roll, attack, hitted, die)
+	bool m_loopAnimation{ false };
+	bool m_animationEnd{ false };
 };

@@ -6,15 +6,16 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 {
 	m_currentState = "playing";
 
-	//enemies.emplace_back(Enemy{ enemyFirstPosition, m_player.getPosition() });
-
-	//m_enemyHealthBar = HealthBarUI{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png", &enemies[0].getHp() };
+	temp.loadFromFile("./assets/landmark.png");
+	wallpaper.setTexture(temp);
 
 	loadAndCreateMap("./map/map.txt");
 
 	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
 
-	m_view.setSize(sf::Vector2f{viewWidth, viewHeight});
+	m_view = m_window.getDefaultView();
+	m_view.zoom(0.5f);
+	m_window.setView(m_view);
 }
 
 PlayingState::~PlayingState()
@@ -51,6 +52,7 @@ void PlayingState::update()
 
 void PlayingState::render()
 {
+	m_window.draw(wallpaper);
 	m_window.draw(m_player.getShape());
 	m_window.draw(m_player.getSprite());
 
