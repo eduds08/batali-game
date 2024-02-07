@@ -38,6 +38,7 @@ namespace constants
 
 	constexpr float fireKnightSwordHitboxWidthAttack1{ 65.f };
 	constexpr float fireKnightSwordHitboxWidthAttack2{ 130.f };
+	constexpr float fireKnightSwordHitboxWidthAirAttacking{ 90.f };
 	constexpr float fireKnightSwordHitboxHeight{ 20.f };
 
 	constexpr float windHashashinSwordHitboxWidthAttack1{ 30.f };

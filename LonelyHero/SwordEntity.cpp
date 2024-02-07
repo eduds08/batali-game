@@ -10,22 +10,41 @@ void SwordEntity::updateAttack(bool attackCondition)
 	if (attackCondition && m_canJump && !m_isAttacking)
 	{
 		m_isAttacking = true;
+		m_isAirAttacking = false;
+	}
+	else if (attackCondition && !m_canJump && !m_isAttacking) 
+	{
+		m_isAttacking = true;
+		m_isAirAttacking = true;
 	}
 
 	if (m_isAttacking)
 	{
-		// Don't let the entity move if it is attacking
-		m_velocity.x = 0.f;
-		m_velocity.y = 0.f;
-
-		// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
-		if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2") && m_animationEnd) || m_inDamageCooldown == true)
+		if (!m_isAirAttacking)
 		{
-			if (m_inDamageCooldown == false)
+			// Don't let the entity move if it is attacking on ground
+			m_velocity.x = 0.f;
+			m_velocity.y = 0.f;
+
+			// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
+			if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2") && m_animationEnd) || m_inDamageCooldown == true)
 			{
-				m_previousAttackingAnimation = m_currentTexture;
+				if (m_inDamageCooldown == false)
+				{
+					m_previousAttackingAnimation = m_currentTexture;
+				}
+				m_isAttacking = false;
 			}
-			m_isAttacking = false;
+		}
+		else
+		{
+			m_velocity.x = 0.f;
+
+			if ((m_currentTexture == m_entityName + "AirAttacking" && m_animationEnd) || m_inDamageCooldown == true)
+			{
+				m_isAttacking = false;
+				m_isAirAttacking = false;
+			}
 		}
 	}
 
@@ -40,7 +59,8 @@ void SwordEntity::updateHitbox()
 	*/
 
 	// "spawn" the hitbox only between certain frames of the attacking sprite
-	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame))
+	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) || 
+		(m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
 		m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
@@ -96,7 +116,14 @@ void SwordEntity::updateTexture()
 		}
 		else if (m_velocity.y != 0.f && !m_canJump)
 		{
-			m_velocity.y > 0.f ? changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true) : changeCurrentTexture(m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")), true);;
+			if (m_isAirAttacking)
+			{
+				changeCurrentTexture(m_texturesActionName.at("AirAttacking"), m_texturesNamePath.at(m_texturesActionName.at("AirAttacking")), false);
+			}
+			else
+			{
+				m_velocity.y > 0.f ? changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true) : changeCurrentTexture(m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")), true);;
+			}
 		}
 		else if (!m_isAttacking)
 		{
@@ -111,7 +138,10 @@ void SwordEntity::updateTexture()
 		}
 		else if (m_isAttacking)
 		{
-			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
+			if (!m_isAirAttacking)
+			{
+				m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
+			}
 		}
 	}
 	

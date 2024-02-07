@@ -15,6 +15,8 @@ Player::Player(sf::Vector2f firstPosition)
 	m_attack1EndingFrame = 7;
 	m_attack2StartingFrame = 1;
 	m_attack2EndingFrame = 7;
+	m_airAttackingStartingFrame = 3;
+	m_airAttackingEndingFrame = 5;
 
 	m_entityName = "player";
 	initTexturesMap();
@@ -45,13 +47,13 @@ void Player::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		bool conditionRunLeft = ((sf::Joystick::getAxisPosition(0, sf::Joystick::X) <= -60) && (sf::Joystick::getAxisPosition(0, sf::Joystick::X) >= -100)) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
-		bool conditionRunRight = ((sf::Joystick::getAxisPosition(0, sf::Joystick::X) >= 60) && (sf::Joystick::getAxisPosition(0, sf::Joystick::X) <= 100)) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
-		bool conditionJump = sf::Joystick::isButtonPressed(0, 1) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
+		bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
+		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
+		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
 
-		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Joystick::isButtonPressed(0, 2) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
 
-		bool conditionAttack = sf::Joystick::isButtonPressed(0, 0) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z);
+		bool conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z);
 
 		if (m_currentTexture == "playerAttacking1")
 		{
@@ -63,6 +65,11 @@ void Player::update(float& deltaTime)
 			m_hitboxWidth = constants::fireKnightSwordHitboxWidthAttack2;
 			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 		}
+		else if (m_currentTexture == "playerAirAttacking")
+		{
+			m_hitboxWidth = constants::fireKnightSwordHitboxWidthAirAttacking;
+			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f);
+		}
 
 		updateAttack(conditionAttack);
 
@@ -73,6 +80,10 @@ void Player::update(float& deltaTime)
 		else if (m_currentTexture == "playerAttacking2")
 		{
 			m_damage = 70;
+		}
+		else if (m_currentTexture == "playerAirAttacking")
+		{
+			m_damage = 80;
 		}
 
 		updateDamage();
@@ -89,7 +100,9 @@ void Player::update(float& deltaTime)
 
 void Player::updateHitbox()
 {
-	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) || (m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame))
+	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
+		(m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
+		(m_currentTexture == m_entityName + "AirAttacking" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
 		if (m_currentTexture == "playerAttacking2")

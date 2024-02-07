@@ -34,12 +34,15 @@ protected:
 	float m_hitboxHeight{};
 
 	bool m_isAttacking{ false };
+	bool m_isAirAttacking{ false };
 
 	// These attributes store the starting and ending frame of the attack sprite where the hitbox should spawn
 	int m_attack1StartingFrame{};
 	int m_attack1EndingFrame{};
 	int m_attack2StartingFrame{};
 	int m_attack2EndingFrame{};
+	int m_airAttackingStartingFrame{};
+	int m_airAttackingEndingFrame{};
 
 	int m_damage{};
 };
