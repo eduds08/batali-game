@@ -6,6 +6,15 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 {
 	m_currentState = "playing";
 
+	if (!twoPlayers)
+	{
+		players.pop_back();
+	}
+	else
+	{
+		enemies.clear();
+	}
+
 	temp.loadFromFile("./assets/landmark.png");
 	wallpaper.setTexture(temp);
 
@@ -37,9 +46,20 @@ void PlayingState::update()
 		updateCollision();
 
 		m_playerHealthBar.update();
-		m_enemyHealthBar.update();
 
-		m_player.update(m_deltaTime);
+		if (twoPlayers)
+		{
+			m_player2HealthBar.update();
+		}
+		else
+		{
+			m_enemyHealthBar.update();
+		}
+
+		for (auto& player : players)
+		{
+			player.update(m_deltaTime);
+		}
 
 		for (auto& enemy : enemies)
 		{
@@ -53,8 +73,12 @@ void PlayingState::update()
 void PlayingState::render()
 {
 	m_window.draw(wallpaper);
-	m_window.draw(m_player.getShape());
-	m_window.draw(m_player.getSprite());
+
+	for (auto& player : players)
+	{
+		m_window.draw(player.getShape());
+		m_window.draw(player.getSprite());
+	}
 
 	for (auto& enemy : enemies)
 	{
@@ -63,7 +87,10 @@ void PlayingState::render()
 		m_window.draw(enemy.getAttackHitbox());
 	}
 
-	m_window.draw(m_player.getAttackHitbox());
+	for (auto& player : players)
+	{
+		m_window.draw(player.getAttackHitbox());
+	}
 	
 
 	for (auto& ground : grounds)
@@ -77,14 +104,26 @@ void PlayingState::render()
 	}
 
 	m_window.draw(m_playerHealthBar.getSprite());
-	m_window.draw(m_enemyHealthBar.getSprite());
+	if (twoPlayers)
+	{
+		m_window.draw(m_player2HealthBar.getSprite());
+	}
+	else
+	{
+		m_window.draw(m_enemyHealthBar.getSprite());
+	}
+	
 }
 
 void PlayingState::updateCollision()
 {
 	// We reset isCollidingHorizontally to false for all entities, so when isColliding() is called, if the entity collides in the x-direction, it will be true.
 	// If doesn't collide, it remains false.
-	m_player.setIsCollidingHorizontally(false);
+
+	for (auto& player : players)
+	{
+		player.setIsCollidingHorizontally(false);
+	}
 	
 	for (auto& enemy : enemies)
 	{
@@ -95,7 +134,10 @@ void PlayingState::updateCollision()
 	for (auto& ground : grounds)
 	{
 		// Player's collision
-		updateEntityCollisionWithGrounds(m_player, ground);
+		for (auto& player : players)
+		{
+			updateEntityCollisionWithGrounds(player, ground);
+		}
 
 		// Enemies' collision
 		for (auto& enemy : enemies)
@@ -104,21 +146,36 @@ void PlayingState::updateCollision()
 		}
 	}
 
+	if (twoPlayers)
+	{
+		if (players[1].getShape().getGlobalBounds().intersects((players[0].getAttackHitbox().getGlobalBounds())) && !players[1].isDying())
+		{
+			handleEntityAttacked(players[0], players[1]);
+		}
+
+		if (players[0].getShape().getGlobalBounds().intersects((players[1].getAttackHitbox().getGlobalBounds())) && !players[0].isDying())
+		{
+			handleEntityAttacked(players[1], players[0]);
+		}
+	}
+
 	// Checks if the an entity was attacked by another entity
 	for (auto& enemy : enemies)
 	{
 		// Enemy attacked by player
-		if (enemy.getShape().getGlobalBounds().intersects((m_player.getAttackHitbox().getGlobalBounds())) && !enemy.isDying())
+		if (enemy.getShape().getGlobalBounds().intersects((players[0].getAttackHitbox().getGlobalBounds())) && !enemy.isDying())
 		{
-			handleEntityAttacked(m_player, enemy);
+			handleEntityAttacked(players[0], enemy);
 		}
 
 		// Player attacked by an enemy
-		if (m_player.getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !m_player.isDying())
+		if (players[0].getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !players[0].isDying())
 		{
-			handleEntityAttacked(enemy, m_player);
+			handleEntityAttacked(enemy, players[0]);
 		}
 	}
+
+
 }
 
 void PlayingState::updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground)
@@ -153,7 +210,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	m_view.setCenter(m_player.getPosition());
+	m_view.setCenter(players[0].getPosition());
 
 	m_window.setView(m_view);
 
@@ -164,7 +221,15 @@ void PlayingState::updateView()
 	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
 
 	m_playerHealthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
-	m_enemyHealthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
+
+	if (twoPlayers)
+	{
+		m_player2HealthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
+	}
+	else
+	{
+		m_enemyHealthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
+	}
 }
 
 void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
@@ -204,9 +269,13 @@ void PlayingState::updateTexturesAndAnimations()
 		{
 			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
 			std::this_thread::sleep_for(std::chrono::milliseconds(75));
-			if (!m_player.isDead())
+
+			for (auto& player : players)
 			{
-				m_player.updateAnimation();
+				if (!player.isDead())
+				{
+					player.updateAnimation();
+				}
 			}
 
 			for (auto& enemy : enemies)
