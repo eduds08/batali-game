@@ -6,8 +6,13 @@
 class Character : public SwordEntity
 {
 public:
-	Character(sf::Vector2f firstPosition, int playerNumber = 1, bool isBot=false, sf::Vector2f* playerPosition=nullptr);
+	Character(sf::Vector2f firstPosition, int playerNumber=1, bool isBot = false, Character* player = nullptr);
 	virtual ~Character() = default;
+
+	void update(float& deltaTime);
+
+	// Changes the entity's texture according to its action (running, jumping, attacking, etc...)
+	virtual void updateTexture();
 
 protected:
 	bool m_isBot{};
@@ -16,7 +21,7 @@ protected:
 	int m_playerNumber{};
 
 	// BOT ATTRIBUTES:
-	const sf::Vector2f* m_playerPosition{};
+	const Character* m_player{};
 	float m_distanceFromPlayer{};
 
 	// Timer used to create a interval between the bot's attacks

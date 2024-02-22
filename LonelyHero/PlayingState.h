@@ -7,6 +7,7 @@
 #include <fstream>
 #include "WindHashashin.h"
 #include "FireKnight.h"
+#include <memory>
 
 class PlayingState : public StateContext
 {
@@ -47,23 +48,14 @@ private:
 	sf::Clock m_pauseClock{};
 	float m_pauseDelay{};
 
-	/*std::vector<Player> players{Player{ playerFirstPosition, "FIRE_KNIGHT", 1 }, Player{ playerFirstPosition, "WIND_HASHASHIN", 2 }};
-	std::vector<Enemy> enemies{ Enemy{ enemyFirstPosition, players[0].getPosition() } };*/
-
-
-	std::vector<FireKnight> players{FireKnight{ playerFirstPosition}, FireKnight{ playerFirstPosition, 2 }};
-
-	std::vector<WindHashashin> enemies{WindHashashin{ playerFirstPosition}, WindHashashin{ playerFirstPosition, 2 }};
-
+	std::vector<std::unique_ptr<Character>> players{};
+	std::vector<std::unique_ptr<Character>> bots{};
 
 	std::vector<Ground> grounds{};
 
-	//sf::Vector2f firstPosition, bool isBot=false, int playerNumber=0, sf::Vector2f* playerPosition=nullptr
-
-	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png", &players[0].getHp()};
-
-	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png", &enemies[0].getHp() };
-	HealthBarUI m_player2HealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png", &players[1].getHp() };
+	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png"};
+	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png"};
+	HealthBarUI m_player2HealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png"};
 
 	std::thread animationThread;
 

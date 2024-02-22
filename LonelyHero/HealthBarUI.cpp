@@ -8,8 +8,11 @@ HealthBarUI::HealthBarUI(sf::Vector2f position, const std::string& textureName, 
 
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, m_spriteWidth, m_spriteHeight });
 
-	m_entityTotalHpFraction = static_cast<int>((*entityHp) / static_cast<float>(constants::healthBarFramesAmount - 1));
-	m_entityHp = entityHp;
+	if (entityHp != nullptr)
+	{
+		m_entityTotalHpFraction = static_cast<int>((*entityHp) / static_cast<float>(constants::healthBarFramesAmount - 1));
+		m_entityHp = entityHp;
+	}
 	
 	// The code below (from line 16 - 21) will be removed later:
 
@@ -31,4 +34,10 @@ void HealthBarUI::update()
 			break;
 		}
 	}
+}
+
+void HealthBarUI::setEntityHp(const int* entityHp)
+{
+	m_entityTotalHpFraction = static_cast<int>((*entityHp) / static_cast<float>(constants::healthBarFramesAmount - 1));
+	m_entityHp = entityHp;
 }

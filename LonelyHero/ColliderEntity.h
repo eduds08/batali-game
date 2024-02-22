@@ -17,8 +17,8 @@ public:
 
 	sf::RectangleShape& getShape() { return m_shape; }
 
-	const sf::Vector2f& getSize() { return m_shape.getSize(); }
-	const sf::Vector2f& getPosition() { return m_shape.getPosition(); }
+	const sf::Vector2f& getSize() const { return m_shape.getSize(); }
+	const sf::Vector2f& getPosition() const { return m_shape.getPosition(); }
 
 	void setIsCollidingHorizontally(bool isCollildingHorizontally) { m_isCollidingHorizontally = isCollildingHorizontally; }
 	bool getIsCollidingHorizontally() { return m_isCollidingHorizontally; }

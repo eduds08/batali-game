@@ -6,13 +6,20 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 {
 	m_currentState = "playing";
 
+	players.emplace_back(std::make_unique<FireKnight>(fireKnightFirstPosition));
+	players.emplace_back(std::make_unique<WindHashashin>(windHashashinFirstPosition, 2));
+
+	m_playerHealthBar.setEntityHp(&players[0]->getHp());
+	m_player2HealthBar.setEntityHp(&players[1]->getHp());
+	m_enemyHealthBar.setEntityHp(&players[0]->getHp());
+
 	if (!twoPlayers)
 	{
 		players.pop_back();
 	}
 	else
 	{
-		enemies.clear();
+		bots.clear();
 	}
 
 	temp.loadFromFile("./assets/landmark.png");
@@ -58,12 +65,12 @@ void PlayingState::update()
 
 		for (auto& player : players)
 		{
-			player.update(m_deltaTime);
+			player->update(m_deltaTime);
 		}
 
-		for (auto& enemy : enemies)
+		for (auto& bot : bots)
 		{
-			enemy.update(m_deltaTime);
+			bot->update(m_deltaTime);
 		}
 
 		updateView();
@@ -76,20 +83,20 @@ void PlayingState::render()
 
 	for (auto& player : players)
 	{
-		m_window.draw(player.getShape());
-		m_window.draw(player.getSprite());
+		m_window.draw(player->getShape());
+		m_window.draw(player->getSprite());
 	}
 
-	for (auto& enemy : enemies)
+	for (auto& bot : bots)
 	{
-		m_window.draw(enemy.getShape());
-		m_window.draw(enemy.getSprite());
-		m_window.draw(enemy.getAttackHitbox());
+		m_window.draw(bot->getShape());
+		m_window.draw(bot->getSprite());
+		m_window.draw(bot->getAttackHitbox());
 	}
 
 	for (auto& player : players)
 	{
-		m_window.draw(player.getAttackHitbox());
+		m_window.draw(player->getAttackHitbox());
 	}
 	
 
@@ -122,12 +129,12 @@ void PlayingState::updateCollision()
 
 	for (auto& player : players)
 	{
-		player.setIsCollidingHorizontally(false);
+		player->setIsCollidingHorizontally(false);
 	}
 	
-	for (auto& enemy : enemies)
+	for (auto& bot : bots)
 	{
-		enemy.setIsCollidingHorizontally(false);
+		bot->setIsCollidingHorizontally(false);
 	}
 
 	// Entities' collision with tiles
@@ -136,46 +143,44 @@ void PlayingState::updateCollision()
 		// Player's collision
 		for (auto& player : players)
 		{
-			updateEntityCollisionWithGrounds(player, ground);
+			updateEntityCollisionWithGrounds(*player, ground);
 		}
 
-		// Enemies' collision
-		for (auto& enemy : enemies)
+		// Bots' collision
+		for (auto& bot : bots)
 		{
-			updateEntityCollisionWithGrounds(enemy, ground);
+			updateEntityCollisionWithGrounds(*bot, ground);
 		}
 	}
 
 	if (twoPlayers)
 	{
-		if (players[1].getShape().getGlobalBounds().intersects((players[0].getAttackHitbox().getGlobalBounds())) && !players[1].isDying())
+		if (players[1]->getShape().getGlobalBounds().intersects((players[0]->getAttackHitbox().getGlobalBounds())) && !players[1]->isDying())
 		{
-			handleEntityAttacked(players[0], players[1]);
+			handleEntityAttacked(*(players[0]), *(players[1]));
 		}
 
-		if (players[0].getShape().getGlobalBounds().intersects((players[1].getAttackHitbox().getGlobalBounds())) && !players[0].isDying())
+		if (players[0]->getShape().getGlobalBounds().intersects((players[1]->getAttackHitbox().getGlobalBounds())) && !players[0]->isDying())
 		{
-			handleEntityAttacked(players[1], players[0]);
+			handleEntityAttacked(*(players[1]), *(players[0]));
 		}
 	}
 
 	// Checks if the an entity was attacked by another entity
-	for (auto& enemy : enemies)
+	for (auto& bot : bots)
 	{
-		// Enemy attacked by player
-		if (enemy.getShape().getGlobalBounds().intersects((players[0].getAttackHitbox().getGlobalBounds())) && !enemy.isDying())
+		// Bot attacked by player
+		if (bot->getShape().getGlobalBounds().intersects((players[0]->getAttackHitbox().getGlobalBounds())) && !bot->isDying())
 		{
-			handleEntityAttacked(players[0], enemy);
+			handleEntityAttacked(*(players[0]), *(bot));
 		}
 
-		// Player attacked by an enemy
-		if (players[0].getShape().getGlobalBounds().intersects((enemy.getAttackHitbox().getGlobalBounds())) && !players[0].isDying())
+		// Player attacked by an bot
+		if (players[0]->getShape().getGlobalBounds().intersects((bot->getAttackHitbox().getGlobalBounds())) && !players[0]->isDying())
 		{
-			handleEntityAttacked(enemy, players[0]);
+			handleEntityAttacked(*(bot), *(players[0]));
 		}
 	}
-
-
 }
 
 void PlayingState::updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground)
@@ -210,7 +215,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	m_view.setCenter(players[0].getPosition());
+	m_view.setCenter(players[0]->getPosition());
 
 	m_window.setView(m_view);
 
@@ -272,17 +277,17 @@ void PlayingState::updateTexturesAndAnimations()
 
 			for (auto& player : players)
 			{
-				if (!player.isDead())
+				if (!player->isDead())
 				{
-					player.updateAnimation();
+					player->updateAnimation();
 				}
 			}
 
-			for (auto& enemy : enemies)
+			for (auto& bot : bots)
 			{
-				if (!enemy.isDead())
+				if (!bot->isDead())
 				{
-					enemy.updateAnimation();
+					bot->updateAnimation();
 				}
 			}
 		}

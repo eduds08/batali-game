@@ -73,13 +73,13 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="FireKnight.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="WindHashashin.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,13 +132,13 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="FireKnight.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="WindHashashin.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

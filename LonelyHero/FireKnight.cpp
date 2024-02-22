@@ -1,11 +1,9 @@
 #include "FireKnight.h"
 
-FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, sf::Vector2f* playerPosition)
-	: Character{ firstPosition, playerNumber, isBot, playerPosition }
+FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, Character* player)
+	: Character{ firstPosition, playerNumber, isBot, player }
 {
-	//m_hitboxWidth = constants::fireKnightSwordHitboxWidthAttack1;
 	m_hitboxHeight = constants::fireKnightSwordHitboxHeight;
-	//m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
@@ -18,7 +16,7 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	m_airAttackingStartingFrame = 3;
 	m_airAttackingEndingFrame = 5;
 
-	m_entityName = "player";
+	m_entityName = "fire_knight";
 	initTexturesMap();
 
 	// Initialize sprite
@@ -35,8 +33,8 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	m_shape.setOutlineThickness(1.f);
 
 	// Initialize other attributes
-	m_jumpHeight = constants::playerJumpHeight;
-	m_hp = constants::playerHp;
+	m_jumpHeight = constants::fireKnightJumpHeight;
+	m_hp = constants::fireKnightHp;
 
 	if (m_isBot)
 	{
@@ -45,8 +43,8 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 		// Mersenne Twister random number generator
 		std::mt19937 gen(rd());
 		// Generates uniform distributed random number in a specific interval
-		std::uniform_real_distribution<> distribution1(constants::minEnemySpeed, constants::maxEnemySpeed);
-		std::uniform_real_distribution<> distribution2(constants::minEnemyDistanceFromPlayer, constants::maxEnemyDistanceFromPlayer);
+		std::uniform_real_distribution<> distribution1(constants::minBotSpeed, constants::maxBotSpeed);
+		std::uniform_real_distribution<> distribution2(constants::minBotDistanceFromPlayer, constants::maxBotDistanceFromPlayer);
 
 		m_speed = static_cast<float>(distribution1(gen));
 		//m_speed = constants::playerSpeed + 40.f;
@@ -54,153 +52,16 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	}
 	else
 	{
-		m_speed = constants::playerSpeed;
+		m_speed = constants::fireKnightSpeed;
 	}
 }
 
 FireKnight::~FireKnight()
 {
-	if (m_playerPosition != nullptr)
+	if (m_player != nullptr)
 	{
-		delete m_playerPosition;
-		m_playerPosition = nullptr;
-	}
-}
-
-void FireKnight::update(float& deltaTime)
-{
-	updateDeath();
-
-	// Only called if hp > 0
-	if (!m_dying)
-	{
-		bool conditionAttack = false;
-
-		if (!m_isBot)
-		{
-			if (m_playerNumber == 1)
-			{
-				bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
-				bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
-				bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
-
-				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::NumpadEnter));
-
-				conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad0);
-			}
-			else if (m_playerNumber == 2)
-			{
-				bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A);
-				bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D);
-				bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W);
-
-				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
-
-				conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift);
-			}
-		}
-		else
-		{
-			bool conditionRunLeft = m_playerPosition->x < getPosition().x - m_distanceFromPlayer;
-			bool conditionRunRight = m_playerPosition->x > getPosition().x + m_distanceFromPlayer;
-			bool conditionJump = (((m_playerPosition->y - constants::fireKnightShapeHeight / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
-
-			updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
-
-			m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-			conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenEnemyAttacks);
-		}
-
-		if (m_currentTexture == "playerAttacking1")
-		{
-			m_hitboxWidth = constants::fireKnightSwordHitboxWidthAttack1;
-			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
-		}
-		else if (m_currentTexture == "playerAttacking2")
-		{
-			m_hitboxWidth = constants::fireKnightSwordHitboxWidthAttack2;
-			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
-		}
-		else if (m_currentTexture == "playerAirAttacking")
-		{
-			m_hitboxWidth = constants::fireKnightSwordHitboxWidthAirAttacking;
-			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f);
-		}
-
-		updateAttack(conditionAttack);
-
-		if (m_currentTexture == "playerAttacking1")
-		{
-			m_damage = 100;
-		}
-		else if (m_currentTexture == "playerAttacking2")
-		{
-			m_damage = 70;
-		}
-		else if (m_currentTexture == "playerAirAttacking")
-		{
-			m_damage = 80;
-		}
-
-		if (m_isBot)
-		{
-			if (m_isAttacking)
-			{
-				m_timeBetweenAttacksClock.restart();
-				m_timeBetweenAttacks = 0.f;
-			}
-		}
-
-		updateDamage();
-
-		move(deltaTime);
-	}
-
-	if (!m_dead)
-	{
-		updateGravityWhenDying(deltaTime);
-		updateLimits();
-	}
-}
-
-void FireKnight::updateTexture()
-{
-	if (m_dying)
-	{
-		changeCurrentTexture(m_texturesActionName.at("Death"), m_texturesNamePath.at(m_texturesActionName.at("Death")), false);
-	}
-	else if (m_hitted)
-	{
-		changeCurrentTexture(m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")), false);
-	}
-	else if (m_velocity.y != 0.f && !m_canJump)
-	{
-		if (m_isAirAttacking)
-		{
-			changeCurrentTexture(m_texturesActionName.at("AirAttacking"), m_texturesNamePath.at(m_texturesActionName.at("AirAttacking")), false);
-		}
-		else
-		{
-			m_velocity.y > 0.f ? changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true) : changeCurrentTexture(m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")), true);;
-		}
-	}
-	else if (!m_isAttacking)
-	{
-		if (m_onRoll)
-		{
-			changeCurrentTexture(m_texturesActionName.at("Roll"), m_texturesNamePath.at(m_texturesActionName.at("Roll")), false);
-		}
-		else
-		{
-			m_isRunning ? changeCurrentTexture(m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running")), true) : changeCurrentTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")), true);
-		}
-	}
-	else if (m_isAttacking)
-	{
-		if (!m_isAirAttacking)
-		{
-			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
-		}
+		delete m_player;
+		m_player = nullptr;
 	}
 }
 
@@ -211,7 +72,7 @@ void FireKnight::updateHitbox()
 		(m_currentTexture == m_entityName + "AirAttacking" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
-		if (m_currentTexture == "playerAttacking2")
+		if (m_currentTexture == m_entityName + "Attacking2")
 		{
 			m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * 10.f / 2.f, 0.f));
 		}
