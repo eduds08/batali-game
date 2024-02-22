@@ -6,20 +6,20 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 {
 	m_currentState = "playing";
 
-	players.emplace_back(std::make_unique<FireKnight>(fireKnightFirstPosition));
-	players.emplace_back(std::make_unique<WindHashashin>(windHashashinFirstPosition, 2));
+	m_players.emplace_back(std::make_unique<FireKnight>(fireKnightFirstPosition));
+	m_players.emplace_back(std::make_unique<WindHashashin>(windHashashinFirstPosition, 2));
 
-	m_playerHealthBar.setEntityHp(&players[0]->getHp());
-	m_player2HealthBar.setEntityHp(&players[1]->getHp());
-	m_enemyHealthBar.setEntityHp(&players[0]->getHp());
+	m_playerHealthBar.setEntityHp(&m_players[0]->getHp());
+	m_player2HealthBar.setEntityHp(&m_players[1]->getHp());
+	m_enemyHealthBar.setEntityHp(&m_players[0]->getHp());
 
-	if (!twoPlayers)
+	if (!m_twoPlayers)
 	{
-		players.pop_back();
+		m_players.pop_back();
 	}
 	else
 	{
-		bots.clear();
+		m_bots.clear();
 	}
 
 	temp.loadFromFile("./assets/landmark.png");
@@ -54,7 +54,7 @@ void PlayingState::update()
 
 		m_playerHealthBar.update();
 
-		if (twoPlayers)
+		if (m_twoPlayers)
 		{
 			m_player2HealthBar.update();
 		}
@@ -63,12 +63,12 @@ void PlayingState::update()
 			m_enemyHealthBar.update();
 		}
 
-		for (auto& player : players)
+		for (auto& player : m_players)
 		{
 			player->update(m_deltaTime);
 		}
 
-		for (auto& bot : bots)
+		for (auto& bot : m_bots)
 		{
 			bot->update(m_deltaTime);
 		}
@@ -81,26 +81,26 @@ void PlayingState::render()
 {
 	m_window.draw(wallpaper);
 
-	for (auto& player : players)
+	for (auto& player : m_players)
 	{
 		m_window.draw(player->getShape());
 		m_window.draw(player->getSprite());
 	}
 
-	for (auto& bot : bots)
+	for (auto& bot : m_bots)
 	{
 		m_window.draw(bot->getShape());
 		m_window.draw(bot->getSprite());
 		m_window.draw(bot->getAttackHitbox());
 	}
 
-	for (auto& player : players)
+	for (auto& player : m_players)
 	{
 		m_window.draw(player->getAttackHitbox());
 	}
 	
 
-	for (auto& ground : grounds)
+	for (auto& ground : m_grounds)
 	{
 		// Only draw the tiles that are inside the view
 		if (ground.getSprite().getPosition().x <= m_rightViewLimit && ground.getSprite().getPosition().x >= m_leftViewLimit
@@ -111,7 +111,7 @@ void PlayingState::render()
 	}
 
 	m_window.draw(m_playerHealthBar.getSprite());
-	if (twoPlayers)
+	if (m_twoPlayers)
 	{
 		m_window.draw(m_player2HealthBar.getSprite());
 	}
@@ -127,58 +127,58 @@ void PlayingState::updateCollision()
 	// We reset isCollidingHorizontally to false for all entities, so when isColliding() is called, if the entity collides in the x-direction, it will be true.
 	// If doesn't collide, it remains false.
 
-	for (auto& player : players)
+	for (auto& player : m_players)
 	{
 		player->setIsCollidingHorizontally(false);
 	}
 	
-	for (auto& bot : bots)
+	for (auto& bot : m_bots)
 	{
 		bot->setIsCollidingHorizontally(false);
 	}
 
 	// Entities' collision with tiles
-	for (auto& ground : grounds)
+	for (auto& ground : m_grounds)
 	{
 		// Player's collision
-		for (auto& player : players)
+		for (auto& player : m_players)
 		{
 			updateEntityCollisionWithGrounds(*player, ground);
 		}
 
 		// Bots' collision
-		for (auto& bot : bots)
+		for (auto& bot : m_bots)
 		{
 			updateEntityCollisionWithGrounds(*bot, ground);
 		}
 	}
 
-	if (twoPlayers)
+	if (m_twoPlayers)
 	{
-		if (players[1]->getShape().getGlobalBounds().intersects((players[0]->getAttackHitbox().getGlobalBounds())) && !players[1]->isDying())
+		if (m_players[1]->getShape().getGlobalBounds().intersects((m_players[0]->getAttackHitbox().getGlobalBounds())) && !m_players[1]->isDying())
 		{
-			handleEntityAttacked(*(players[0]), *(players[1]));
+			handleEntityAttacked(*(m_players[0]), *(m_players[1]));
 		}
 
-		if (players[0]->getShape().getGlobalBounds().intersects((players[1]->getAttackHitbox().getGlobalBounds())) && !players[0]->isDying())
+		if (m_players[0]->getShape().getGlobalBounds().intersects((m_players[1]->getAttackHitbox().getGlobalBounds())) && !m_players[0]->isDying())
 		{
-			handleEntityAttacked(*(players[1]), *(players[0]));
+			handleEntityAttacked(*(m_players[1]), *(m_players[0]));
 		}
 	}
 
 	// Checks if the an entity was attacked by another entity
-	for (auto& bot : bots)
+	for (auto& bot : m_bots)
 	{
 		// Bot attacked by player
-		if (bot->getShape().getGlobalBounds().intersects((players[0]->getAttackHitbox().getGlobalBounds())) && !bot->isDying())
+		if (bot->getShape().getGlobalBounds().intersects((m_players[0]->getAttackHitbox().getGlobalBounds())) && !bot->isDying())
 		{
-			handleEntityAttacked(*(players[0]), *(bot));
+			handleEntityAttacked(*(m_players[0]), *(bot));
 		}
 
 		// Player attacked by an bot
-		if (players[0]->getShape().getGlobalBounds().intersects((bot->getAttackHitbox().getGlobalBounds())) && !players[0]->isDying())
+		if (m_players[0]->getShape().getGlobalBounds().intersects((bot->getAttackHitbox().getGlobalBounds())) && !m_players[0]->isDying())
 		{
-			handleEntityAttacked(*(bot), *(players[0]));
+			handleEntityAttacked(*(bot), *(m_players[0]));
 		}
 	}
 }
@@ -205,7 +205,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
 	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
 	{
-		for (auto& ground : grounds)
+		for (auto& ground : m_grounds)
 		{
 			updateEntityCollisionWithGrounds(attackedEntity, ground);
 		}
@@ -215,7 +215,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	m_view.setCenter(players[0]->getPosition());
+	m_view.setCenter(m_players[0]->getPosition());
 
 	m_window.setView(m_view);
 
@@ -227,7 +227,7 @@ void PlayingState::updateView()
 
 	m_playerHealthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
 
-	if (twoPlayers)
+	if (m_twoPlayers)
 	{
 		m_player2HealthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
 	}
@@ -254,7 +254,7 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 			mapFile >> tileId;
 			if (tileId != "0")
 			{
-				grounds.emplace_back(Ground{ sf::Vector2f{x * tileSizeF + tileSizeF / 2.f, y * tileSizeF + tileSizeF / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
+				m_grounds.emplace_back(Ground{ sf::Vector2f{x * tileSizeF + tileSizeF / 2.f, y * tileSizeF + tileSizeF / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
 			}
 			++x;
 		}
@@ -275,7 +275,7 @@ void PlayingState::updateTexturesAndAnimations()
 			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
 			std::this_thread::sleep_for(std::chrono::milliseconds(75));
 
-			for (auto& player : players)
+			for (auto& player : m_players)
 			{
 				if (!player->isDead())
 				{
@@ -283,7 +283,7 @@ void PlayingState::updateTexturesAndAnimations()
 				}
 			}
 
-			for (auto& bot : bots)
+			for (auto& bot : m_bots)
 			{
 				if (!bot->isDead())
 				{

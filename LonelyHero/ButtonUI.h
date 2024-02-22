@@ -5,7 +5,7 @@
 class ButtonUI : public UI
 {
 public:
-	ButtonUI(sf::Vector2f position, const std::string& textureName, const std::string& texturePath);
+	ButtonUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position);
 	virtual ~ButtonUI() = default;
 
 	// Updates the frame of button sprite according to its "onHover state"

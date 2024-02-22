@@ -14,7 +14,7 @@ MainMenuState::MainMenuState(sf::RenderWindow& window) :
 
 void MainMenuState::initButton(const std::string& text, int position)
 {
-	buttons.emplace_back(ButtonUI{ sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + position * 100.f}, "button", "./assets/ui/button.png"});
+	buttons.emplace_back(ButtonUI{ "button", "./assets/ui/button.png", sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + position * 100.f} });
 
 	sf::Text buttonText{ text, m_font };
 	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);

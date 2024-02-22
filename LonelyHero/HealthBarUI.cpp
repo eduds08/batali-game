@@ -1,7 +1,7 @@
 #include "HealthBarUI.h"
 
-HealthBarUI::HealthBarUI(sf::Vector2f position, const std::string& textureName, const std::string& texturePath, const int* entityHp)
-	: UI{position, textureName, texturePath}
+HealthBarUI::HealthBarUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, const int* entityHp)
+	: UI{ textureName, texturePath, position }
 {
 	m_spriteWidth = constants::healthBarSpriteWidth;
 	m_spriteHeight = constants::healthBarSpriteHeight;

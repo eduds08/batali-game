@@ -48,14 +48,14 @@ private:
 	sf::Clock m_pauseClock{};
 	float m_pauseDelay{};
 
-	std::vector<std::unique_ptr<Character>> players{};
-	std::vector<std::unique_ptr<Character>> bots{};
+	std::vector<std::unique_ptr<Character>> m_players{};
+	std::vector<std::unique_ptr<Character>> m_bots{};
 
-	std::vector<Ground> grounds{};
+	std::vector<Ground> m_grounds{};
 
-	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png"};
-	HealthBarUI m_enemyHealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png"};
-	HealthBarUI m_player2HealthBar{ sf::Vector2f{0.f, 0.f}, "enemyHealthBar", "./assets/ui/enemyHealthBar.png"};
+	HealthBarUI m_playerHealthBar{ "playerHealthBar", "./assets/ui/playerHealthBar.png" };
+	HealthBarUI m_enemyHealthBar{ "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
+	HealthBarUI m_player2HealthBar{ "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
 
 	std::thread animationThread;
 
@@ -70,5 +70,5 @@ private:
 
 	bool m_onPause{ false };
 
-	bool twoPlayers{ true };
+	bool m_twoPlayers{ true };
 };

@@ -5,7 +5,7 @@
 class HealthBarUI : public UI
 {
 public:
-	HealthBarUI(sf::Vector2f position, const std::string& textureName, const std::string& texturePath, const int* entityHp=nullptr);
+	HealthBarUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position = sf::Vector2f{ 0.f, 0.f }, const int* entityHp = nullptr);
 	virtual ~HealthBarUI() = default;
 
 	// Update the frame of the health bar sprite according to current entity's hp
