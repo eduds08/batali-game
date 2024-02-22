@@ -11,10 +11,7 @@ public:
 	// Updates the state of m_isAttacking and also calls updateHitbox()
 	void updateAttack(bool attackCondition);
 
-	virtual void updateHitbox();
-
-	// Changes the entity's texture according to its action (running, jumping, attacking, etc...)
-	virtual void updateTexture();
+	virtual void updateHitbox() = 0;
 
 	// Sets m_dead to true and "zeroes" some attributes
 	virtual void die();

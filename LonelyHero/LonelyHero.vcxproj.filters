@@ -63,20 +63,23 @@
     <ClCompile Include="DrawableEntity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="MovableEntity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="SwordEntity.cpp">
       <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnight.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="WindHashashin.cpp">
+      <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,20 +122,23 @@
     <ClInclude Include="DrawableEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="MovableEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="SwordEntity.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="FireKnight.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="WindHashashin.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

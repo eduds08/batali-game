@@ -13,10 +13,18 @@ std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string
 
 	// If it wasn't load previously, then it loads and inserts into the map
 	std::shared_ptr<sf::Texture> newTexture{ std::make_shared<sf::Texture>() };
-	if (!newTexture->loadFromFile(texturePath))
+	try 
 	{
-		throw "ERROR LOADING TEXTURE";
+		if (!newTexture->loadFromFile(texturePath))
+		{
+			throw "ERROR LOADING TEXTURE";
+		}
 	}
+	catch (char const* error)
+	{
+		std::cerr << error << '\n';
+	}
+	
 
 	texturesMap.emplace(textureName, newTexture);
 

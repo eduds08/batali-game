@@ -1,12 +1,12 @@
 #pragma once
 
 #include "StateContext.h"
-#include "Player.h"
-#include "Enemy.h"
 #include "Ground.h"
 #include "HealthBarUI.h"
 #include <thread>
 #include <fstream>
+#include "WindHashashin.h"
+#include "FireKnight.h"
 
 class PlayingState : public StateContext
 {
@@ -47,9 +47,18 @@ private:
 	sf::Clock m_pauseClock{};
 	float m_pauseDelay{};
 
-	std::vector<Player> players{Player{ playerFirstPosition, "FIRE_KNIGHT", 1 }, Player{ playerFirstPosition, "WIND_HASHASHIN", 2 }};
-	std::vector<Enemy> enemies{ Enemy{ enemyFirstPosition, players[0].getPosition() } };
+	/*std::vector<Player> players{Player{ playerFirstPosition, "FIRE_KNIGHT", 1 }, Player{ playerFirstPosition, "WIND_HASHASHIN", 2 }};
+	std::vector<Enemy> enemies{ Enemy{ enemyFirstPosition, players[0].getPosition() } };*/
+
+
+	std::vector<FireKnight> players{FireKnight{ playerFirstPosition}, FireKnight{ playerFirstPosition, 2 }};
+
+	std::vector<WindHashashin> enemies{WindHashashin{ playerFirstPosition}, WindHashashin{ playerFirstPosition, 2 }};
+
+
 	std::vector<Ground> grounds{};
+
+	//sf::Vector2f firstPosition, bool isBot=false, int playerNumber=0, sf::Vector2f* playerPosition=nullptr
 
 	HealthBarUI m_playerHealthBar{ sf::Vector2f{0.f, 0.f}, "playerHealthBar", "./assets/ui/playerHealthBar.png", &players[0].getHp()};
 
