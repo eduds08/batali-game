@@ -2,6 +2,7 @@
 
 #include "PlayingState.h"
 #include "MainMenuState.h"
+#include "CharacterSelectionState.h"
 #include <windows.h>
 
 class Game

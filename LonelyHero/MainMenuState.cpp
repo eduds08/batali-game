@@ -1,7 +1,7 @@
 #include "MainMenuState.h"
 #include <iostream>
-MainMenuState::MainMenuState(sf::RenderWindow& window) :
-	StateContext{ window }
+MainMenuState::MainMenuState(sf::RenderWindow& window) 
+	: StateContext{ window }
 {
 	m_currentState = constants::mainMenuState;
 
@@ -67,6 +67,11 @@ void MainMenuState::update()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter))
 	{
 		pressButton();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::T))
+	{
+		m_currentState = constants::characterSelectionTransition;
 	}
 }
 

@@ -136,6 +136,8 @@
     <ClCompile Include="AnimatedEntity.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterPortraitUI.cpp" />
+    <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="DamageEntity.cpp" />
     <ClCompile Include="ColliderEntity.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
@@ -157,6 +159,8 @@
     <ClInclude Include="AnimatedEntity.h" />
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterPortraitUI.h" />
+    <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="DamageEntity.h" />
     <ClInclude Include="ColliderEntity.h" />
     <ClInclude Include="Constants.h" />

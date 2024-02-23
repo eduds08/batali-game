@@ -107,6 +107,11 @@ void PlayingState::render()
 	{
 		m_window.draw(healthBar.getSprite());
 	}
+
+	sf::RectangleShape tempooo{sf::Vector2f(1.f, 1.f)};
+	tempooo.setPosition(0.f, 0.f);
+	tempooo.setFillColor(sf::Color::Green);
+	m_window.draw(tempooo);
 }
 
 void PlayingState::updateCollision()
@@ -208,7 +213,7 @@ void PlayingState::updateView()
 	}
 	else
 	{
-		m_view.setCenter(350.f, 350.f);
+		m_view.setCenter(m_view.getSize().x / 2.f, 350.f);
 	}
 
 	m_window.setView(m_view);

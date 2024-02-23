@@ -79,6 +79,25 @@ void Game::update()
 		}
 	}
 
+	if (m_stateContext->getCurrentState() == constants::characterSelectionTransition)
+	{
+		delete m_stateContext;
+		m_stateContext = new CharacterSelectionState(m_window);
+	}
+
+	if (m_stateContext->getCurrentState() == constants::characterSelectionState)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
+		{
+			// Quit animation thread
+			m_stateContext->setCurrentState(constants::quittingPlaying);
+
+			// Changes to MainMenuState
+			delete m_stateContext;
+			m_stateContext = new MainMenuState(m_window);
+		}
+	}
+
 	// Press the button to close the game
 	if (m_stateContext->getCurrentState() == constants::exitingState)
 	{

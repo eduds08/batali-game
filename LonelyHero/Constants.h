@@ -18,6 +18,9 @@ namespace constants
 	constexpr int buttonSpriteWidth{ 46 };
 	constexpr int buttonSpriteHeight{ 14 };
 
+	constexpr int characterPortraitSpriteWidth{ 64 };
+	constexpr int characterPortraitSpriteHeight{ 64 };
+
 	const sf::Vector2f leftCharacterFirstPosition{sf::Vector2f{300.f, 240.f}};
 
 	const sf::Vector2f rightCharacterFirstPosition{sf::Vector2f{500.f, 240.f}};
@@ -80,4 +83,7 @@ namespace constants
 	const std::string playingState{"playing"};
 
 	const std::string quittingPlaying{"quittingPlaying"};
+
+	const std::string characterSelectionTransition{"transitionToCharacterSelection"};
+	const std::string characterSelectionState{"characterSelection"};
 }
