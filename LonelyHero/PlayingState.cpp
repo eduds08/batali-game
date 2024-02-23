@@ -7,17 +7,17 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 	m_currentState = "playing";
 
 	m_players.emplace_back(std::make_shared<FireKnight>(fireKnightFirstPosition));
-	m_playerHealthBar.setEntityHp(&m_players[0]->getHp());
+	m_healthBars.emplace_back(HealthBarUI("leftHealthBar", "./assets/ui/leftHealthBar.png", &m_players[0]->getHp()));
 
 	if (m_twoPlayers)
 	{
 		m_players.emplace_back(std::make_shared<WindHashashin>(windHashashinFirstPosition, 2));
-		m_player2HealthBar.setEntityHp(&m_players[1]->getHp());
+		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_players[1]->getHp()));
 	}
 	else
 	{
 		m_bots.emplace_back(std::make_unique<WindHashashin>(windHashashinFirstPosition, 0, true, m_players[0]));
-		m_enemyHealthBar.setEntityHp(&m_bots[0]->getHp());
+		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_bots[0]->getHp()));
 	}
 
 	temp.loadFromFile("./assets/landmark.png");
@@ -50,15 +50,9 @@ void PlayingState::update()
 	{
 		updateCollision();
 
-		m_playerHealthBar.update();
-
-		if (m_twoPlayers)
+		for (auto& healthBar : m_healthBars)
 		{
-			m_player2HealthBar.update();
-		}
-		else
-		{
-			m_enemyHealthBar.update();
+			healthBar.update();
 		}
 
 		for (auto& player : m_players)
@@ -108,16 +102,10 @@ void PlayingState::render()
 		}
 	}
 
-	m_window.draw(m_playerHealthBar.getSprite());
-	if (m_twoPlayers)
+	for (auto& healthBar : m_healthBars)
 	{
-		m_window.draw(m_player2HealthBar.getSprite());
+		m_window.draw(healthBar.getSprite());
 	}
-	else
-	{
-		m_window.draw(m_enemyHealthBar.getSprite());
-	}
-	
 }
 
 void PlayingState::updateCollision()
@@ -223,15 +211,16 @@ void PlayingState::updateView()
 	m_topViewLimit = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSizeF;
 	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
 
-	m_playerHealthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
-
-	if (m_twoPlayers)
+	for (auto& healthBar : m_healthBars)
 	{
-		m_player2HealthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
-	}
-	else
-	{
-		m_enemyHealthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
+		if (healthBar.getDirection() == "left")
+		{
+			healthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
+		}
+		else
+		{
+			healthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
+		}
 	}
 }
 

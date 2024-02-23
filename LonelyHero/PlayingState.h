@@ -51,11 +51,9 @@ private:
 	std::vector<std::shared_ptr<Character>> m_players{};
 	std::vector<std::unique_ptr<Character>> m_bots{};
 
-	std::vector<Ground> m_grounds{};
+	std::vector<HealthBarUI> m_healthBars{};
 
-	HealthBarUI m_playerHealthBar{ "playerHealthBar", "./assets/ui/playerHealthBar.png" };
-	HealthBarUI m_enemyHealthBar{ "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
-	HealthBarUI m_player2HealthBar{ "enemyHealthBar", "./assets/ui/enemyHealthBar.png" };
+	std::vector<Ground> m_grounds{};
 
 	std::thread animationThread;
 

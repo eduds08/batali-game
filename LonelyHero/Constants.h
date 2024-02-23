@@ -14,7 +14,6 @@ namespace constants
 
 	constexpr int healthBarSpriteWidth{ 48 };
 	constexpr int healthBarSpriteHeight{ 16 };
-	constexpr int healthBarFramesAmount{ 6 };
 
 	constexpr int buttonSpriteWidth{ 46 };
 	constexpr int buttonSpriteHeight{ 14 };
