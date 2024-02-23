@@ -3,6 +3,8 @@
 Game::Game()
 	: m_stateContext{new MainMenuState{m_window}}
 {
+	//m_window.setKeyRepeatEnabled(false);
+	::ShowWindow(m_window.getSystemHandle(), SW_MAXIMIZE);
 	run();
 }
 

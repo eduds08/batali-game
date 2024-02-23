@@ -22,7 +22,7 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	// Initialize sprite
 	m_spriteWidth = constants::fireKnightSpriteWidth;
 	m_spriteHeight = constants::fireKnightSpriteHeight;
-	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle"))));
+	changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true);
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
 	// Initialize shape
@@ -47,7 +47,6 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 		std::uniform_real_distribution<> distribution2(constants::minBotDistanceFromPlayer, constants::maxBotDistanceFromPlayer);
 
 		m_speed = static_cast<float>(distribution1(gen));
-		//m_speed = constants::playerSpeed + 40.f;
 		m_distanceFromPlayer = static_cast<float>(distribution2(gen));
 	}
 	else

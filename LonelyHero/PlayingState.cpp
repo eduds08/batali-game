@@ -202,7 +202,14 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	m_view.setCenter(m_players[0]->getPosition());
+	if (!m_twoPlayers)
+	{
+		m_view.setCenter(m_players[0]->getPosition());
+	}
+	else
+	{
+		m_view.setCenter(350.f, 350.f);
+	}
 
 	m_window.setView(m_view);
 
