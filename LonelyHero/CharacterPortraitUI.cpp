@@ -21,14 +21,14 @@ CharacterPortraitUI::CharacterPortraitUI(const std::string& textureName, const s
 	m_portraitBorder.setFillColor(sf::Color::Transparent);
 }
 
-void CharacterPortraitUI::update(bool onHover)
+void CharacterPortraitUI::update(bool onHover, sf::Color color)
 {
 	if (onHover)
 	{
-		m_portraitBorder.setOutlineColor(sf::Color::Green);
+		m_portraitBorder.setOutlineColor(color);
 	}
 	else
 	{
-		m_portraitBorder.setOutlineColor(sf::Color::Red);
+		m_portraitBorder.setOutlineColor(sf::Color::White);
 	}
 }

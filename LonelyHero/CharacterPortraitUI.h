@@ -10,7 +10,7 @@ public:
 
 	sf::RectangleShape m_portraitBorder{};
 
-	void update(bool onHover);
+	void update(bool onHover, sf::Color color);
 private:
 	
 };
