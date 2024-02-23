@@ -12,7 +12,7 @@
 class PlayingState : public StateContext
 {
 public:
-	PlayingState(sf::RenderWindow& window, float& deltaTime);
+	PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoPlayers);
 	virtual ~PlayingState();
 
 	virtual void update();
@@ -33,9 +33,6 @@ public:
 
 	// Thread method to run all animations
 	void updateTexturesAndAnimations();
-
-	// Flag to control the animation thread
-	void setOnPlayingState(bool onPlayingState) { m_onPlayingState = onPlayingState; }
 
 	void setOnPause(bool onPause) { m_onPause = onPause; }
 	bool getOnPause() { return m_onPause; }
@@ -62,11 +59,9 @@ private:
 	float m_topViewLimit{};
 	float m_bottomViewLimit{};
 
-	bool m_onPlayingState{ true };
-
 	float& m_deltaTime;
 
 	bool m_onPause{ false };
 
-	bool m_twoPlayers{ false };
+	bool m_twoPlayers{};
 };

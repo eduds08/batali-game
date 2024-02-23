@@ -32,10 +32,8 @@ void Game::run()
 			if (m_event.type == sf::Event::Closed)
 			{
 				// Quit animation thread
-				if (m_stateContext->getCurrentState() == "playing")
-				{
-					dynamic_cast<PlayingState*>(m_stateContext)->setOnPlayingState(false);
-				}
+				m_stateContext->setCurrentState(constants::quittingPlaying);
+
 				m_window.close();
 			}
 		}
@@ -48,12 +46,12 @@ void Game::run()
 void Game::update()
 {
 	// If on playing state and the user press Escape button, it changes to MainMenuState
-	if (m_stateContext->getCurrentState() == "playing")
+	if (m_stateContext->getCurrentState() == constants::playingState)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
 		{
-			// To quit animation thread
-			dynamic_cast<PlayingState*>(m_stateContext)->setOnPlayingState(false);
+			// Quit animation thread
+			m_stateContext->setCurrentState(constants::quittingPlaying);
 
 			// Changes to MainMenuState
 			delete m_stateContext;
@@ -63,15 +61,24 @@ void Game::update()
 
 	m_stateContext->update();
 
-	// The user pressed button "Play"
-	if (m_stateContext->getCurrentState() == "transitionToPlaying")
+	// The user pressed button "Singleplayer" or "Multiplayer"
+	if (m_stateContext->getCurrentState() == constants::singleplayerTransition || m_stateContext->getCurrentState() == constants::multiplayerTransition)
 	{
-		delete m_stateContext;
-		m_stateContext = new PlayingState(m_window, m_deltaTime);
+		// Singleplayer or multiplayer
+		if (m_stateContext->getCurrentState() == constants::singleplayerTransition)
+		{
+			delete m_stateContext;
+			m_stateContext = new PlayingState(m_window, m_deltaTime, false);
+		}
+		else
+		{
+			delete m_stateContext;
+			m_stateContext = new PlayingState(m_window, m_deltaTime, true);
+		}
 	}
 
 	// Press the button to close the game
-	if (m_stateContext->getCurrentState() == "exiting")
+	if (m_stateContext->getCurrentState() == constants::exitingState)
 	{
 		delete m_stateContext;
 		m_stateContext = nullptr;

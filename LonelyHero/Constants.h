@@ -18,6 +18,10 @@ namespace constants
 	constexpr int buttonSpriteWidth{ 46 };
 	constexpr int buttonSpriteHeight{ 14 };
 
+	const sf::Vector2f leftCharacterFirstPosition{sf::Vector2f{300.f, 240.f}};
+
+	const sf::Vector2f rightCharacterFirstPosition{sf::Vector2f{500.f, 240.f}};
+
 	/* FIRE KNIGHT CONSTANTS: */
 
 	constexpr int fireKnightSpriteWidth{ 288 };
@@ -25,8 +29,6 @@ namespace constants
 
 	constexpr float fireKnightShapeWidth{ 20.f };
 	constexpr float fireKnightShapeHeight{ 40.f };
-
-	const sf::Vector2f fireKnightFirstPosition{sf::Vector2f{480.f, 240.f}};
 
 	constexpr float fireKnightSpeed{ 240.f };
 	constexpr float fireKnightJumpHeight{ 80.f };
@@ -45,8 +47,6 @@ namespace constants
 
 	constexpr float windHashashinShapeWidth{ 20.f };
 	constexpr float windHashashinShapeHeight{ 40.f };
-
-	const sf::Vector2f windHashashinFirstPosition{sf::Vector2f{432.f, 240.f}};
 
 	constexpr float windHashashinSpeed{ 260.f };
 	constexpr float windHashashinJumpHeight{ 80.f };
@@ -69,4 +69,15 @@ namespace constants
 
 	constexpr float timeBetweenBotAttacks{ 1.f };
 	constexpr float cooldownDamageTime{ 0.6f };
+
+	/* STATE CONSTANTS: */
+
+	const std::string singleplayerTransition{"transitionToSingleplayer"};
+	const std::string multiplayerTransition{"transitionToMultiplayer"};
+	const std::string exitingState{"exiting"};
+
+	const std::string mainMenuState{"main"};
+	const std::string playingState{"playing"};
+
+	const std::string quittingPlaying{"quittingPlaying"};
 }

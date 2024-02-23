@@ -17,6 +17,7 @@ public:
 	virtual void render() = 0;
 
 	const std::string& getCurrentState() { return m_currentState; }
+	void setCurrentState(const std::string& stateName) { m_currentState = stateName; }
 
 protected:
 	sf::RenderWindow& m_window;

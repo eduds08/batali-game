@@ -6,6 +6,11 @@ Character::Character(sf::Vector2f firstPosition, int playerNumber, bool isBot, s
 	, m_isBot{ isBot }
 	, m_player{ player }
 {
+	if (isBot || playerNumber == 2)
+	{
+		m_facingRight = -1;
+		flipSprite();
+	}
 }
 
 void Character::update(float& deltaTime)

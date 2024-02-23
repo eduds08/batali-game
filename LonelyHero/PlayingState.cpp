@@ -1,22 +1,23 @@
 #include "PlayingState.h"
 
-PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
+PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoPlayers)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
+	, m_twoPlayers{ twoPlayers }
 {
-	m_currentState = "playing";
+	m_currentState = constants::playingState;
 
-	m_players.emplace_back(std::make_shared<FireKnight>(fireKnightFirstPosition));
+	m_players.emplace_back(std::make_shared<FireKnight>(leftCharacterFirstPosition));
 	m_healthBars.emplace_back(HealthBarUI("leftHealthBar", "./assets/ui/leftHealthBar.png", &m_players[0]->getHp()));
 
 	if (m_twoPlayers)
 	{
-		m_players.emplace_back(std::make_shared<WindHashashin>(windHashashinFirstPosition, 2));
+		m_players.emplace_back(std::make_shared<WindHashashin>(rightCharacterFirstPosition, 2));
 		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_players[1]->getHp()));
 	}
 	else
 	{
-		m_bots.emplace_back(std::make_unique<WindHashashin>(windHashashinFirstPosition, 0, true, m_players[0]));
+		m_bots.emplace_back(std::make_unique<WindHashashin>(rightCharacterFirstPosition, 0, true, m_players[0]));
 		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_bots[0]->getHp()));
 	}
 
@@ -255,7 +256,7 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 
 void PlayingState::updateTexturesAndAnimations()
 {
-	while (m_onPlayingState)
+	while (m_currentState == constants::playingState)
 	{
 		if (!m_onPause)
 		{

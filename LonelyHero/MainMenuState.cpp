@@ -3,10 +3,10 @@
 MainMenuState::MainMenuState(sf::RenderWindow& window) :
 	StateContext{ window }
 {
-	m_currentState = "main";
+	m_currentState = constants::mainMenuState;
 
-	initButton("Play", 0);
-	initButton("Settings", 1);
+	initButton("Singleplayer", 0);
+	initButton("Multiplayer", 1);
 	initButton("Exit", 2);
 
 	m_window.setView(m_window.getDefaultView());
@@ -86,10 +86,14 @@ void MainMenuState::pressButton()
 {
 	if (m_onHoverButton == 0)
 	{
-		m_currentState = "transitionToPlaying";
+		m_currentState = constants::singleplayerTransition;
+	}
+	else if (m_onHoverButton == 1)
+	{
+		m_currentState = constants::multiplayerTransition;
 	}
 	else if (m_onHoverButton == 2)
 	{
-		m_currentState = "exiting";
+		m_currentState = constants::exitingState;
 	}
 }
