@@ -48,7 +48,7 @@ private:
 	sf::Clock m_pauseClock{};
 	float m_pauseDelay{};
 
-	std::vector<std::unique_ptr<Character>> m_players{};
+	std::vector<std::shared_ptr<Character>> m_players{};
 	std::vector<std::unique_ptr<Character>> m_bots{};
 
 	std::vector<Ground> m_grounds{};
@@ -70,5 +70,5 @@ private:
 
 	bool m_onPause{ false };
 
-	bool m_twoPlayers{ true };
+	bool m_twoPlayers{ false };
 };

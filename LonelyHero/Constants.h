@@ -56,7 +56,7 @@ namespace constants
 
 	constexpr float windHashashinSwordHitboxWidthAttack1{ 30.f };
 	constexpr float windHashashinSwordHitboxWidthAttack2{ 50.f };
-	constexpr float windHashashinSwordHitboxWidthAirAttacking{ 90.f };
+	constexpr float windHashashinSwordHitboxWidthAirAttacking{ 53.f };
 	constexpr float windHashashinSwordHitboxHeight{ 20.f };
 
 	constexpr int windHashashinHpDivided5{ 200 };

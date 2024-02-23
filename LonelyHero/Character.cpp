@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(sf::Vector2f firstPosition, int playerNumber, bool isBot, Character* player)
+Character::Character(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: SwordEntity{ firstPosition }
 	, m_playerNumber{ playerNumber }
 	, m_isBot{ isBot }
@@ -65,7 +65,7 @@ void Character::update(float& deltaTime)
 		else if (m_currentTexture == m_entityName + "AirAttacking")
 		{
 			m_hitboxWidth = m_entityName == "fire_knight" ? constants::fireKnightSwordHitboxWidthAirAttacking : constants::windHashashinSwordHitboxWidthAirAttacking;
-			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f);
+			m_entityName == "fire_knight" ? m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f) : m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 		}
 
 		updateAttack(conditionAttack);

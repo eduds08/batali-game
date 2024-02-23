@@ -6,20 +6,18 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime)
 {
 	m_currentState = "playing";
 
-	m_players.emplace_back(std::make_unique<FireKnight>(fireKnightFirstPosition));
-	m_players.emplace_back(std::make_unique<WindHashashin>(windHashashinFirstPosition, 2));
-
+	m_players.emplace_back(std::make_shared<FireKnight>(fireKnightFirstPosition));
 	m_playerHealthBar.setEntityHp(&m_players[0]->getHp());
-	m_player2HealthBar.setEntityHp(&m_players[1]->getHp());
-	m_enemyHealthBar.setEntityHp(&m_players[0]->getHp());
 
-	if (!m_twoPlayers)
+	if (m_twoPlayers)
 	{
-		m_players.pop_back();
+		m_players.emplace_back(std::make_shared<WindHashashin>(windHashashinFirstPosition, 2));
+		m_player2HealthBar.setEntityHp(&m_players[1]->getHp());
 	}
 	else
 	{
-		m_bots.clear();
+		m_bots.emplace_back(std::make_unique<WindHashashin>(windHashashinFirstPosition, 0, true, m_players[0]));
+		m_enemyHealthBar.setEntityHp(&m_bots[0]->getHp());
 	}
 
 	temp.loadFromFile("./assets/landmark.png");

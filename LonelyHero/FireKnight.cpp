@@ -1,6 +1,6 @@
 #include "FireKnight.h"
 
-FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, Character* player)
+FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: Character{ firstPosition, playerNumber, isBot, player }
 {
 	m_hitboxHeight = constants::fireKnightSwordHitboxHeight;
@@ -58,11 +58,6 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 
 FireKnight::~FireKnight()
 {
-	if (m_player != nullptr)
-	{
-		delete m_player;
-		m_player = nullptr;
-	}
 }
 
 void FireKnight::updateHitbox()

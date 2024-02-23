@@ -1,6 +1,6 @@
 #include "WindHashashin.h"
 
-WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool isBot, Character* player)
+WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: Character{ firstPosition, playerNumber, isBot, player }
 {
 	m_hitboxHeight = constants::windHashashinSwordHitboxHeight;
@@ -13,7 +13,7 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	m_attack1EndingFrame = 4;
 	m_attack2StartingFrame = 1;
 	m_attack2EndingFrame = 7;
-	m_airAttackingStartingFrame = 3;
+	m_airAttackingStartingFrame = 2;
 	m_airAttackingEndingFrame = 5;
 
 	m_entityName = "wind_hashashin";
@@ -58,11 +58,6 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 
 WindHashashin::~WindHashashin()
 {
-	if (m_player != nullptr)
-	{
-		delete m_player;
-		m_player = nullptr;
-	}
 }
 
 void WindHashashin::updateHitbox()

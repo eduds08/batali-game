@@ -1,12 +1,13 @@
 #pragma once
 
 #include "SwordEntity.h"
+#include <memory>
 #include <random>
 
 class Character : public SwordEntity
 {
 public:
-	Character(sf::Vector2f firstPosition, int playerNumber=1, bool isBot = false, Character* player = nullptr);
+	Character(sf::Vector2f firstPosition, int playerNumber=1, bool isBot = false, std::shared_ptr<Character> player = nullptr);
 	virtual ~Character() = default;
 
 	void update(float& deltaTime);
@@ -21,7 +22,7 @@ protected:
 	int m_playerNumber{};
 
 	// BOT ATTRIBUTES:
-	const Character* m_player{};
+	std::shared_ptr<Character> m_player{};
 	float m_distanceFromPlayer{};
 
 	// Timer used to create a interval between the bot's attacks
