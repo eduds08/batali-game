@@ -75,8 +75,8 @@ namespace constants
 
 	/* STATE CONSTANTS: */
 
-	const std::string singleplayerTransition{"transitionToSingleplayer"};
-	const std::string multiplayerTransition{"transitionToMultiplayer"};
+	const std::string menuToSingleplayerTransition{"transitionToSingleplayerCharacterSelection"};
+	const std::string menuToMultiplayerTransition{"transitionToMultiplayerCharacterSelection"};
 	const std::string exitingState{"exiting"};
 
 	const std::string mainMenuState{"main"};
@@ -84,6 +84,8 @@ namespace constants
 
 	const std::string quittingPlaying{"quittingPlaying"};
 
-	const std::string characterSelectionTransition{"transitionToCharacterSelection"};
 	const std::string characterSelectionState{"characterSelection"};
+
+	const std::string characterSelectionToSingleplayerTransition{ "transitionToSingleplayer" };
+	const std::string characterSelectionToMultiplayerTransition{ "transitionToMultiplayer" };
 }

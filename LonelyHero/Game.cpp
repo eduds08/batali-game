@@ -64,25 +64,39 @@ void Game::update()
 	m_stateContext->update();
 
 	// The user pressed button "Singleplayer" or "Multiplayer"
-	if (m_stateContext->getCurrentState() == constants::singleplayerTransition || m_stateContext->getCurrentState() == constants::multiplayerTransition)
+	if (m_stateContext->getCurrentState() == constants::menuToSingleplayerTransition || m_stateContext->getCurrentState() == constants::menuToMultiplayerTransition)
 	{
 		// Singleplayer or multiplayer
-		if (m_stateContext->getCurrentState() == constants::singleplayerTransition)
+		if (m_stateContext->getCurrentState() == constants::menuToSingleplayerTransition)
 		{
 			delete m_stateContext;
-			m_stateContext = new PlayingState(m_window, m_deltaTime, false);
+			//m_stateContext = new PlayingState(m_window, m_deltaTime, false);
+			m_stateContext = new CharacterSelectionState(m_window, "singleplayer");
 		}
 		else
 		{
 			delete m_stateContext;
-			m_stateContext = new PlayingState(m_window, m_deltaTime, true);
+			//m_stateContext = new PlayingState(m_window, m_deltaTime, true);
+			m_stateContext = new CharacterSelectionState(m_window, "multiplayer");
 		}
 	}
 
-	if (m_stateContext->getCurrentState() == constants::characterSelectionTransition)
+	if (m_stateContext->getCurrentState() == constants::characterSelectionToSingleplayerTransition)
 	{
+		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[0];
+		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[1];
+
 		delete m_stateContext;
-		m_stateContext = new CharacterSelectionState(m_window);
+		m_stateContext = new PlayingState(m_window, m_deltaTime, false, firstCharacter, secondCharacter);
+	}
+
+	if (m_stateContext->getCurrentState() == constants::characterSelectionToMultiplayerTransition)
+	{
+		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[0];
+		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[1];
+
+		delete m_stateContext;
+		m_stateContext = new PlayingState(m_window, m_deltaTime, true, firstCharacter, secondCharacter);
 	}
 
 	if (m_stateContext->getCurrentState() == constants::characterSelectionState)

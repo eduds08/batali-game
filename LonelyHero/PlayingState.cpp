@@ -1,23 +1,47 @@
 #include "PlayingState.h"
 
-PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoPlayers)
+PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoPlayers, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
 	, m_twoPlayers{ twoPlayers }
 {
 	m_currentState = constants::playingState;
 
-	m_players.emplace_back(std::make_shared<FireKnight>(leftCharacterFirstPosition));
+	if (firstCharacter == "fire_knight")
+	{
+		m_players.emplace_back(std::make_shared<FireKnight>(leftCharacterFirstPosition));
+	}
+	else
+	{
+		m_players.emplace_back(std::make_shared<WindHashashin>(leftCharacterFirstPosition));
+	}
+
 	m_healthBars.emplace_back(HealthBarUI("leftHealthBar", "./assets/ui/leftHealthBar.png", &m_players[0]->getHp()));
 
 	if (m_twoPlayers)
 	{
-		m_players.emplace_back(std::make_shared<WindHashashin>(rightCharacterFirstPosition, 2));
+		if (secondCharacter == "fire_knight")
+		{
+			m_players.emplace_back(std::make_shared<FireKnight>(rightCharacterFirstPosition, 2));
+		}
+		else
+		{
+			m_players.emplace_back(std::make_shared<WindHashashin>(rightCharacterFirstPosition, 2));
+		}
+		
 		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_players[1]->getHp()));
 	}
 	else
 	{
-		m_bots.emplace_back(std::make_unique<WindHashashin>(rightCharacterFirstPosition, 0, true, m_players[0]));
+		if (secondCharacter == "fire_knight")
+		{
+			m_bots.emplace_back(std::make_unique<FireKnight>(rightCharacterFirstPosition, 0, true, m_players[0]));
+		}
+		else
+		{
+			m_bots.emplace_back(std::make_unique<WindHashashin>(rightCharacterFirstPosition, 0, true, m_players[0]));
+		}
+
 		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_bots[0]->getHp()));
 	}
 

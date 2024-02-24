@@ -68,11 +68,6 @@ void MainMenuState::update()
 	{
 		pressButton();
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::T))
-	{
-		m_currentState = constants::characterSelectionTransition;
-	}
 }
 
 void MainMenuState::render()
@@ -91,11 +86,11 @@ void MainMenuState::pressButton()
 {
 	if (m_onHoverButton == 0)
 	{
-		m_currentState = constants::singleplayerTransition;
+		m_currentState = constants::menuToSingleplayerTransition;
 	}
 	else if (m_onHoverButton == 1)
 	{
-		m_currentState = constants::multiplayerTransition;
+		m_currentState = constants::menuToMultiplayerTransition;
 	}
 	else if (m_onHoverButton == 2)
 	{

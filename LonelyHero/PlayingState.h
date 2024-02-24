@@ -12,7 +12,7 @@
 class PlayingState : public StateContext
 {
 public:
-	PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoPlayers);
+	PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoPlayers, const std::string& firstCharacter, const std::string& secondCharacter);
 	virtual ~PlayingState();
 
 	virtual void update();
