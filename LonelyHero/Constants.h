@@ -6,7 +6,8 @@ namespace constants
 {
 	constexpr int tileSizeI{ 16 };
 	constexpr float tileSizeF{ 16.f };
-	constexpr int tilesAmountPerRow{ 50 };
+	constexpr int tilesAmountPerRow{ 60 };
+	constexpr int tilesAmountPerCol{ 34 };
 
 	constexpr float gravity{ 981.f };
 
@@ -21,9 +22,11 @@ namespace constants
 	constexpr int characterPortraitSpriteWidth{ 64 };
 	constexpr int characterPortraitSpriteHeight{ 64 };
 
-	const sf::Vector2f leftCharacterFirstPosition{sf::Vector2f{300.f, 240.f}};
+	//const sf::Vector2f leftCharacterFirstPosition{sf::Vector2f{300.f, 240.f}};
+	const sf::Vector2f leftCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF - 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
 
-	const sf::Vector2f rightCharacterFirstPosition{sf::Vector2f{500.f, 240.f}};
+	//const sf::Vector2f rightCharacterFirstPosition{sf::Vector2f{500.f, 240.f}};
+	const sf::Vector2f rightCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF + 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
 
 	/* FIRE KNIGHT CONSTANTS: */
 
@@ -88,4 +91,6 @@ namespace constants
 
 	const std::string characterSelectionToSingleplayerTransition{ "transitionToSingleplayer" };
 	const std::string characterSelectionToMultiplayerTransition{ "transitionToMultiplayer" };
+
+	const std::string characterSelectionReset{ "characterSelectionReset" };
 }

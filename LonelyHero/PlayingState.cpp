@@ -231,14 +231,17 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	if (!m_twoPlayers)
-	{
-		m_view.setCenter(m_players[0]->getPosition());
-	}
-	else
-	{
-		m_view.setCenter(m_view.getSize().x / 2.f, 350.f);
-	}
+	//if (!m_twoPlayers)
+	//{
+	//	m_view.setCenter(m_players[0]->getPosition());
+	//}
+	//else
+	//{
+	//	//m_view.setCenter(m_view.getSize().x / 2.f, 350.f);
+	//	m_view.setCenter((tilesAmountPerRow / 2.f) * tileSizeF, (tilesAmountPerCol / 2.f) * tileSizeF);
+	//}
+	m_view.setCenter((tilesAmountPerRow / 2.f) * tileSizeF, (tilesAmountPerCol / 2.f) * tileSizeF);
+	//std::cout << m_view.getSize().y << " - " << m_view.getSize().x << '\n';
 
 	m_window.setView(m_view);
 
@@ -278,11 +281,12 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 			mapFile >> tileId;
 			if (tileId != "0")
 			{
+				std::cout << tileId << " ";
 				m_grounds.emplace_back(Ground{ sf::Vector2f{x * tileSizeF + tileSizeF / 2.f, y * tileSizeF + tileSizeF / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
 			}
 			++x;
 		}
-
+		std::cout << '\n';
 		x = 0;
 		++y;
 	}

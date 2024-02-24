@@ -55,10 +55,6 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	}
 }
 
-FireKnight::~FireKnight()
-{
-}
-
 void FireKnight::updateHitbox()
 {
 	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||

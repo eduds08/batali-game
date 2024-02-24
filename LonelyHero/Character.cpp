@@ -30,9 +30,9 @@ void Character::update(float& deltaTime)
 				bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
 				bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
 
-				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::NumpadEnter));
+				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
 
-				conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad0);
+				conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L);
 			}
 			else if (m_playerNumber == 2)
 			{
@@ -40,7 +40,7 @@ void Character::update(float& deltaTime)
 				bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D);
 				bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W);
 
-				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
 
 				conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift);
 			}

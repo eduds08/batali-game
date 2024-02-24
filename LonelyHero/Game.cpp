@@ -112,6 +112,14 @@ void Game::update()
 		}
 	}
 
+	if (m_stateContext->getCurrentState() == constants::characterSelectionReset)
+	{
+		std::string chosenGamemode = dynamic_cast<CharacterSelectionState*>(m_stateContext)->getChosenGamemode();
+
+		delete m_stateContext;
+		m_stateContext = new CharacterSelectionState(m_window, chosenGamemode);
+	}
+
 	// Press the button to close the game
 	if (m_stateContext->getCurrentState() == constants::exitingState)
 	{

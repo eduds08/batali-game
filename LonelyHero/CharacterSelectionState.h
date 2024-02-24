@@ -24,6 +24,8 @@ public:
 
 	std::vector<std::string> chosenCharacters{};
 
+	std::string getChosenGamemode() { return m_chosenGamemode; }
+
 private:
 	std::vector<CharacterPortraitUI> m_bigCharacterPortraits{};
 	std::vector<CharacterPortraitUI> m_smallCharacterPortraits{};

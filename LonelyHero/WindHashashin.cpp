@@ -55,10 +55,6 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	}
 }
 
-WindHashashin::~WindHashashin()
-{
-}
-
 void WindHashashin::updateHitbox()
 {
 	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||

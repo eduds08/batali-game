@@ -237,6 +237,7 @@ void CharacterSelectionState::pressButton()
 	else if (m_onHoverButton == 1)
 	{
 		// back to character selection
+		m_currentState = constants::characterSelectionReset;
 	}
 }
 
