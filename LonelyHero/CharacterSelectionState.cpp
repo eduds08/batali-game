@@ -1,24 +1,26 @@
 #include "CharacterSelectionState.h"
 
 CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const std::string& chosenGamemode)
-	: StateContext{ window }
+	: ButtonAuxState{ window }
 	, m_chosenGamemode{ chosenGamemode }
 {
 	m_currentState = constants::characterSelectionState;
 
+	// Initialize view
 	m_view = m_window.getDefaultView();
 	m_view.setCenter(0.f, 0.f);
 	m_window.setView(m_view);
 
-	m_playerPortraitsText[1].setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
-
+	// Initialize small portraits
 	m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() - sf::Vector2f{50.f, -400.f}, false });
 	m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ "windHashashinPortrait", "./assets/portrait_wind_hashashin.png", m_view.getCenter() + sf::Vector2f{50.f, 400.f}, false });
 
+	// Initialize PlayerTurn for Player 1
 	m_playerTurn.setOrigin(m_playerTurn.getLocalBounds().width / 2.f, m_playerTurn.getLocalBounds().height / 2.f);
 	m_playerTurn.setFillColor(sf::Color::Magenta);
 	m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ 170.f, -400.f });
 
+	// Update text above big portraits
 	for (auto& playerPortraitText : m_playerPortraitsText)
 	{
 		playerPortraitText.setOrigin(playerPortraitText.getLocalBounds().width / 2.f, playerPortraitText.getLocalBounds().height / 2.f);
@@ -30,6 +32,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 		}
 		else
 		{
+			playerPortraitText.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
 			playerPortraitText.setFillColor(sf::Color::Yellow);
 			playerPortraitText.setPosition(m_view.getCenter() + sf::Vector2f{ 250.f, -180.f });
 		}
@@ -53,42 +56,38 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	m_portraitsBorder.emplace_back(portraitBorderPlayer1);
 	m_portraitsBorder.emplace_back(portraitBorderPlayer2);
 
-	initButton("Play", m_view.getCenter() + sf::Vector2f{ -150.f, 270.f });
-	initButton("Back", m_view.getCenter() + sf::Vector2f{ 150.f, 270.f });
+	// Initialize "play" and "back" buttons
+	initButton("Play", m_view.getCenter() + sf::Vector2f{ -150.f, 270.f }, m_chosenGamemode == "singleplayer" ? constants::characterSelectionToSingleplayerTransition : constants::characterSelectionToMultiplayerTransition);
+	initButton("Back", m_view.getCenter() + sf::Vector2f{ 150.f, 270.f }, constants::characterSelectionReset);
 }
 
 void CharacterSelectionState::update()
 {
 	if (m_playerChoice == 1 || m_playerChoice == 2)
 	{
-		delayTime = delayClock.getElapsedTime().asSeconds();
-		updateCharacterSelectionButtons(delayTime);
+		updateCharacterSelectionButtons();
 	}
 	else
 	{
-		delayTime = delayClock.getElapsedTime().asSeconds();
-		updateButtonsAfterSelection(delayTime);
-	}
-
-	delayTime = delayClock.getElapsedTime().asSeconds();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Y) && delayTime > 0.7f)
-	{
-		m_playerTurn.move(sf::Vector2f{ 5.f, 0.f });
-		std::cout << m_playerTurn.getPosition().x << '\n';
-		delayClock.restart();
+		updateButtons(false);
 	}
 }
 
 void CharacterSelectionState::render()
 {
-	for (auto& characterPortrait : m_bigCharacterPortraits)
+	if (m_playerChoice == 1 || m_playerChoice == 2)
 	{
-		m_window.draw(characterPortrait.getSprite());
+		for (auto& characterPortrait : m_smallCharacterPortraits)
+		{
+			m_window.draw(characterPortrait.m_portraitBorder);
+			m_window.draw(characterPortrait.getSprite());
+		}
+
+		m_window.draw(m_playerTurn);
 	}
 
-	for (auto& characterPortrait : m_smallCharacterPortraits)
+	for (auto& characterPortrait : m_bigCharacterPortraits)
 	{
-		m_window.draw(characterPortrait.m_portraitBorder);
 		m_window.draw(characterPortrait.getSprite());
 	}
 
@@ -101,28 +100,17 @@ void CharacterSelectionState::render()
 	{
 		m_window.draw(portraitBorder);
 	}
-	
-	if (m_playerChoice == 1 || m_playerChoice == 2)
-	{
-		m_window.draw(m_playerTurn);
-	}
 
 	if (m_playerChoice > 2)
 	{
-		for (auto& button : m_buttons)
-		{
-			m_window.draw(button.getSprite());
-		}
-		
-		for (auto& buttonText : m_buttonsTexts)
-		{
-			m_window.draw(buttonText);
-		}
+		renderButtons();
 	}
 }
 
-void CharacterSelectionState::updateCharacterSelectionButtons(float& delayTime)
+void CharacterSelectionState::updateCharacterSelectionButtons()
 {
+	delayTime = delayClock.getElapsedTime().asSeconds();
+
 	// Move right
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right) && delayTime > 0.18f)
 	{
@@ -144,20 +132,13 @@ void CharacterSelectionState::updateCharacterSelectionButtons(float& delayTime)
 		}
 	}
 
-	// Upate the visual design of the buttons (according to its state -> onHover OR not onHover)
+	// Upate the visual design of the characterPortrait (according to its state -> onHover OR not onHover)
 	for (size_t i = 0; i < m_smallCharacterPortraits.size(); ++i)
 	{
-		if (m_playerChoice == 1)
-		{
-			m_smallCharacterPortraits[i].update(i == m_onHoverCharacterButton, sf::Color::Magenta);
-		}
-		else if (m_playerChoice == 2)
-		{
-			m_smallCharacterPortraits[i].update(i == m_onHoverCharacterButton, sf::Color::Yellow);
-		}
+		m_smallCharacterPortraits[i].update(i == m_onHoverCharacterButton, m_playerChoice == 1 ? sf::Color::Magenta : sf::Color::Yellow);
 	}
 
-	// Button pressed
+	// Select character
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && delayTime > 0.18f)
 	{
 		selectCharacter();
@@ -165,117 +146,30 @@ void CharacterSelectionState::updateCharacterSelectionButtons(float& delayTime)
 	}
 }
 
-void CharacterSelectionState::updateButtonsAfterSelection(float& delayTime)
-{
-	// Move right
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right) && delayTime > 0.18f)
-	{
-		if (m_onHoverButton < m_buttons.size() - 1)
-		{
-			++m_onHoverButton;
-
-			delayClock.restart();
-		}
-	}
-	// Move left
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left) && delayTime > 0.18f)
-	{
-		if (m_onHoverButton > 0)
-		{
-			--m_onHoverButton;
-
-			delayClock.restart();
-		}
-	}
-
-	// Upate the visual design of the buttons (according to its state -> onHover OR not onHover)
-	for (size_t i = 0; i < m_buttons.size(); ++i)
-	{
-		m_buttons[i].update(i == m_onHoverButton);
-		m_buttonsTexts[i].setPosition(m_buttons[i].getPosition());
-		m_buttonsTexts[i].setFillColor(sf::Color::Black);
-
-		if (i == m_onHoverButton)
-		{
-			m_buttonsTexts[i].setPosition(m_buttons[i].getPosition() + sf::Vector2f{ 0.f, 2.f });
-			m_buttonsTexts[i].setFillColor(sf::Color::White);
-		}
-	}
-
-	// Button pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && delayTime > 0.18f)
-	{
-		pressButton();
-	}
-}
-
-void CharacterSelectionState::initButton(const std::string& text, sf::Vector2f position)
-{
-	m_buttons.emplace_back(ButtonUI{ "button", "./assets/ui/button.png", position });
-
-	sf::Text buttonText{ text, m_font };
-	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
-	buttonText.setFillColor(sf::Color::Black);
-	buttonText.setPosition(m_buttons.back().getPosition());
-
-	m_buttonsTexts.emplace_back(buttonText);
-}
-
-void CharacterSelectionState::pressButton()
-{
-	if (m_onHoverButton == 0)
-	{
-		if (m_chosenGamemode == "singleplayer")
-		{
-			m_currentState = constants::characterSelectionToSingleplayerTransition;
-		}
-		else if (m_chosenGamemode == "multiplayer")
-		{
-			m_currentState = constants::characterSelectionToMultiplayerTransition;
-		}
-	}
-	else if (m_onHoverButton == 1)
-	{
-		// back to character selection
-		m_currentState = constants::characterSelectionReset;
-	}
-}
-
 void CharacterSelectionState::selectCharacter()
 {
+	sf::Vector2f portraitPosition = m_view.getCenter() + (m_playerChoice == 1 ? sf::Vector2f{ -250.f, 0.f } : sf::Vector2f{ 250.f, 0.f });
+
+	// Select fireKnight
 	if (m_onHoverCharacterButton == 0)
 	{
-		if (m_playerChoice == 1)
-		{
-			m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() - sf::Vector2f{250.f, 0.f}, true });
-			m_playerTurn.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
-			m_playerTurn.setFillColor(sf::Color::Yellow);
-			m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ m_chosenGamemode == "singleplayer" ? 140.f : 170.f, -400.f });
-
-			chosenCharacters.emplace_back("fire_knight");
-		}
-		else if (m_playerChoice == 2)
-		{
-			m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{250.f, 0.f}, true });
-			chosenCharacters.emplace_back("fire_knight");
-		}
+		m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", portraitPosition, true });
+		m_chosenCharacters.emplace_back("fire_knight");
 	}
+	// Select windHashashin
 	else if (m_onHoverCharacterButton == 1)
 	{
-		if (m_playerChoice == 1)
-		{
-			m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "windHashashinPortrait", "./assets/portrait_wind_hashashin.png", m_view.getCenter() - sf::Vector2f{250.f, 0.f}, true });
-			m_playerTurn.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
-			m_playerTurn.setFillColor(sf::Color::Yellow);
-			m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ m_chosenGamemode == "singleplayer" ? 140.f : 170.f, -400.f });
-
-			chosenCharacters.emplace_back("wind_hashashin");
-		}
-		else if (m_playerChoice == 2)
-		{
-			m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "windHashashinPortrait", "./assets/portrait_wind_hashashin.png", m_view.getCenter() + sf::Vector2f{250.f, 0.f}, true });
-			chosenCharacters.emplace_back("wind_hashashin");
-		}
+		m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "windHashashinPortrait", "./assets/portrait_wind_hashashin.png", portraitPosition, true });
+		m_chosenCharacters.emplace_back("wind_hashashin");
 	}
+
+	// Updates the display to indicates that Player 2 (or Enemy) is selecting character
+	if (m_playerChoice == 1)
+	{
+		m_playerTurn.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
+		m_playerTurn.setFillColor(sf::Color::Yellow);
+		m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ m_chosenGamemode == "singleplayer" ? 140.f : 170.f, -400.f });
+	}
+
 	++m_playerChoice;
 }

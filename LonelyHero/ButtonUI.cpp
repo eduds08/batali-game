@@ -1,7 +1,8 @@
 #include "ButtonUI.h"
 
-ButtonUI::ButtonUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position)
+ButtonUI::ButtonUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, const std::string& stateRelated)
 	: UI{ textureName, texturePath, position }
+	, m_stateRelated{ stateRelated }
 {
 	m_spriteWidth = constants::buttonSpriteWidth;
 	m_spriteHeight = constants::buttonSpriteHeight;

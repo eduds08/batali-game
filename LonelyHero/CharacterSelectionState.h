@@ -1,10 +1,10 @@
 #pragma once
 
-#include "StateContext.h"
+#include "ButtonAuxState.h"
 #include "CharacterPortraitUI.h"
 #include "ButtonUI.h"
 
-class CharacterSelectionState : public StateContext
+class CharacterSelectionState : public ButtonAuxState
 {
 public:
 	CharacterSelectionState(sf::RenderWindow& window, const std::string& chosenGamemode);
@@ -13,16 +13,12 @@ public:
 	virtual void update();
 	virtual void render();
 
-	void updateCharacterSelectionButtons(float& delayTime);
-	void updateButtonsAfterSelection(float& delayTime);
+	// Same logic of updateButtons()
+	void updateCharacterSelectionButtons();
 
-	void initButton(const std::string& text, sf::Vector2f position);
-
-	// Called when user press enter on a button. It checks which button was pressed and then changes the current state according to it
-	void pressButton();
 	void selectCharacter();
 
-	std::vector<std::string> chosenCharacters{};
+	std::vector<std::string> m_chosenCharacters{};
 
 	std::string getChosenGamemode() { return m_chosenGamemode; }
 
@@ -30,22 +26,20 @@ private:
 	std::vector<CharacterPortraitUI> m_bigCharacterPortraits{};
 	std::vector<CharacterPortraitUI> m_smallCharacterPortraits{};
 
+	// Indicates which player is selecting the character
 	sf::Text m_playerTurn{ "Player 1:", m_font };
 
-	std::vector<ButtonUI> m_buttons{};
-	std::vector<sf::Text> m_buttonsTexts{};
-
+	// Text above the big player portrait
 	std::vector<sf::Text> m_playerPortraitsText{ sf::Text{"Player 1", m_font}, sf::Text{"Player 2", m_font} };
 
-	sf::Clock delayClock{};
-	float delayTime{};
-
 	size_t m_onHoverCharacterButton{ 0 };
-	size_t m_onHoverButton{ 0 };
 
+	// Player 1 or player 2
 	int m_playerChoice{ 1 };
 
+	// Outline border of the big portrait
 	std::vector<sf::RectangleShape> m_portraitsBorder{};
 
-	std::string m_chosenGamemode{};
+	// Singleplayer or multiplayer
+	const std::string m_chosenGamemode{};
 };

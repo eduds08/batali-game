@@ -83,8 +83,8 @@ void Game::update()
 
 	if (m_stateContext->getCurrentState() == constants::characterSelectionToSingleplayerTransition)
 	{
-		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[0];
-		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[1];
+		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[0];
+		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[1];
 
 		delete m_stateContext;
 		m_stateContext = new PlayingState(m_window, m_deltaTime, false, firstCharacter, secondCharacter);
@@ -92,8 +92,8 @@ void Game::update()
 
 	if (m_stateContext->getCurrentState() == constants::characterSelectionToMultiplayerTransition)
 	{
-		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[0];
-		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->chosenCharacters[1];
+		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[0];
+		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[1];
 
 		delete m_stateContext;
 		m_stateContext = new PlayingState(m_window, m_deltaTime, true, firstCharacter, secondCharacter);
