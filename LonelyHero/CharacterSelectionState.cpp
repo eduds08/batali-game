@@ -38,23 +38,9 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 		}
 	}
 
-	sf::RectangleShape portraitBorderPlayer1{ sf::Vector2f{constants::characterPortraitSpriteWidth * 5.f, constants::characterPortraitSpriteHeight * 5.f} };
-	sf::RectangleShape portraitBorderPlayer2{ sf::Vector2f{constants::characterPortraitSpriteWidth * 5.f, constants::characterPortraitSpriteHeight * 5.f} };
-
-	portraitBorderPlayer1.setOutlineThickness(1.f);
-	portraitBorderPlayer1.setOutlineColor(sf::Color::Magenta);
-	portraitBorderPlayer1.setOrigin(portraitBorderPlayer1.getSize() / 2.f);
-	portraitBorderPlayer1.setPosition(m_view.getCenter() - sf::Vector2f{ 250.f, 0.f });
-	portraitBorderPlayer1.setFillColor(sf::Color::Transparent);
-
-	portraitBorderPlayer2.setOutlineThickness(1.f);
-	portraitBorderPlayer2.setOutlineColor(sf::Color::Yellow);
-	portraitBorderPlayer2.setOrigin(portraitBorderPlayer2.getSize() / 2.f);
-	portraitBorderPlayer2.setPosition(m_view.getCenter() + sf::Vector2f{ 250.f, 0.f });
-	portraitBorderPlayer2.setFillColor(sf::Color::Transparent);
-
-	m_portraitsBorder.emplace_back(portraitBorderPlayer1);
-	m_portraitsBorder.emplace_back(portraitBorderPlayer2);
+	// Initialize big portrait borders
+	initBigPortraitBorders(1);
+	initBigPortraitBorders(2);
 
 	// Initialize "play" and "back" buttons
 	initButton("Play", m_view.getCenter() + sf::Vector2f{ -150.f, 270.f }, m_chosenGamemode == "singleplayer" ? constants::characterSelectionToSingleplayerTransition : constants::characterSelectionToMultiplayerTransition);
@@ -96,7 +82,7 @@ void CharacterSelectionState::render()
 		m_window.draw(playerPortraitText);
 	}
 
-	for (auto& portraitBorder : m_portraitsBorder)
+	for (auto& portraitBorder : m_bigPortraitsBorder)
 	{
 		m_window.draw(portraitBorder);
 	}
@@ -172,4 +158,17 @@ void CharacterSelectionState::selectCharacter()
 	}
 
 	++m_playerChoice;
+}
+
+void CharacterSelectionState::initBigPortraitBorders(int playerNumber)
+{
+	sf::RectangleShape portraitBorder{ sf::Vector2f{constants::characterPortraitSpriteWidth * 5.f, constants::characterPortraitSpriteHeight * 5.f} };
+
+	portraitBorder.setOutlineThickness(1.f);
+	portraitBorder.setOrigin(portraitBorder.getSize() / 2.f);
+	portraitBorder.setOutlineColor(playerNumber == 1 ? sf::Color::Magenta : sf::Color::Yellow);
+	portraitBorder.setPosition(m_view.getCenter() - (playerNumber == 1 ? sf::Vector2f{ 250.f, 0.f } : sf::Vector2f{ -250.f, 0.f }) );
+	portraitBorder.setFillColor(sf::Color::Transparent);
+
+	m_bigPortraitsBorder.emplace_back(portraitBorder);
 }

@@ -18,6 +18,8 @@ public:
 
 	void selectCharacter();
 
+	void initBigPortraitBorders(int playerNumber);
+
 	std::vector<std::string> m_chosenCharacters{};
 
 	std::string getChosenGamemode() { return m_chosenGamemode; }
@@ -38,7 +40,7 @@ private:
 	int m_playerChoice{ 1 };
 
 	// Outline border of the big portrait
-	std::vector<sf::RectangleShape> m_portraitsBorder{};
+	std::vector<sf::RectangleShape> m_bigPortraitsBorder{};
 
 	// Singleplayer or multiplayer
 	const std::string m_chosenGamemode{};
