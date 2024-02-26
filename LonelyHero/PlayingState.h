@@ -40,6 +40,8 @@ public:
 	sf::Texture temp{};
 	sf::Sprite wallpaper{};
 
+	void updatePlayerInput();
+
 private:
 	// fix bug where one press of the input pause and unpause many times in a row
 	sf::Clock m_pauseClock{};
@@ -53,6 +55,8 @@ private:
 	std::vector<Ground> m_grounds{};
 
 	std::thread animationThread;
+
+	std::thread playerInputThread;
 
 	float m_rightViewLimit{};
 	float m_leftViewLimit{};

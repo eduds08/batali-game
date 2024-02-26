@@ -20,42 +20,44 @@ void Character::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		bool conditionAttack = false;
+		//bool conditionAttack = false;
 
-		if (!m_isBot)
+		//if (!m_isBot)
+		//{
+		//	if (m_playerNumber == 1)
+		//	{
+		//		/*bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
+		//		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
+		//		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
+
+		//		conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L);*/
+
+		//		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
+		//	}
+		//	else if (m_playerNumber == 2)
+		//	{
+		//		/*bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A);
+		//		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D);
+		//		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W);
+
+		//		conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift);*/
+
+		//		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
+		//	}
+		//}
+		if (m_isBot)
 		{
-			if (m_playerNumber == 1)
-			{
-				bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
-				bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
-				bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
-
-				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
-
-				conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L);
-			}
-			else if (m_playerNumber == 2)
-			{
-				bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A);
-				bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D);
-				bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W);
-
-				updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
-
-				conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift);
-			}
-		}
-		else
-		{
-			bool conditionRunLeft = m_player->getPosition().x < getPosition().x - m_distanceFromPlayer;
-			bool conditionRunRight = m_player->getPosition().x > getPosition().x + m_distanceFromPlayer;
-			bool conditionJump = (((m_player->getPosition().y - m_player->getSize().y / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
-
-			updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
+			m_conditionRunLeft = m_player->getPosition().x < getPosition().x - m_distanceFromPlayer;
+			m_conditionRunRight = m_player->getPosition().x > getPosition().x + m_distanceFromPlayer;
+			m_conditionJump = (((m_player->getPosition().y - m_player->getSize().y / 2.f) < (getPosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
 
 			m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-			conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenBotAttacks);
+			m_conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenBotAttacks);
+
+			//updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
 		}
+
+		updateMovement(m_conditionRunLeft, m_conditionRunRight, m_conditionJump, deltaTime, m_conditionRoll);
 
 		if (m_currentTexture == m_entityName + "Attacking1")
 		{
@@ -73,7 +75,7 @@ void Character::update(float& deltaTime)
 			m_entityName == "fire_knight" ? m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f) : m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 		}
 
-		updateAttack(conditionAttack);
+		updateAttack(m_conditionAttack);
 
 		if (m_currentTexture == m_entityName + "Attacking1")
 		{

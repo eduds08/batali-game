@@ -52,6 +52,8 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 
 	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
 
+	playerInputThread = std::thread(&PlayingState::updatePlayerInput, this);
+
 	m_view = m_window.getDefaultView();
 	m_view.zoom(0.5f);
 	m_window.setView(m_view);
@@ -60,6 +62,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 PlayingState::~PlayingState()
 {
 	animationThread.join();
+	playerInputThread.join();
 }
 
 void PlayingState::update()
@@ -316,6 +319,39 @@ void PlayingState::updateTexturesAndAnimations()
 				if (!bot->isDead())
 				{
 					bot->updateAnimation();
+				}
+			}
+		}
+	}
+}
+
+void PlayingState::updatePlayerInput()
+{
+	while (m_currentState == constants::playingState)
+	{
+		if (!m_onPause)
+		{
+			for (auto& player : m_players)
+			{
+				if (player->getPlayerNumber() == 1)
+				{
+					player->setRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+					player->setRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+					player->setJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+
+					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L));
+
+					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
+				}
+				else if (player->getPlayerNumber() == 2)
+				{
+					player->setRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
+					player->setRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
+					player->setJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
+
+					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift));
+
+					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
 				}
 			}
 		}
