@@ -20,31 +20,6 @@ void Character::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!m_dying)
 	{
-		//bool conditionAttack = false;
-
-		//if (!m_isBot)
-		//{
-		//	if (m_playerNumber == 1)
-		//	{
-		//		/*bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left);
-		//		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right);
-		//		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up);
-
-		//		conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L);*/
-
-		//		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
-		//	}
-		//	else if (m_playerNumber == 2)
-		//	{
-		//		/*bool conditionRunLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A);
-		//		bool conditionRunRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D);
-		//		bool conditionJump = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W);
-
-		//		conditionAttack = sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift);*/
-
-		//		updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime, sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
-		//	}
-		//}
 		if (m_isBot)
 		{
 			m_conditionRunLeft = m_player->getPosition().x < getPosition().x - m_distanceFromPlayer;
@@ -54,7 +29,7 @@ void Character::update(float& deltaTime)
 			m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
 			m_conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenBotAttacks);
 
-			//updateMovement(conditionRunLeft, conditionRunRight, conditionJump, deltaTime);
+			m_conditionRoll = false;
 		}
 
 		updateMovement(m_conditionRunLeft, m_conditionRunRight, m_conditionJump, deltaTime, m_conditionRoll);

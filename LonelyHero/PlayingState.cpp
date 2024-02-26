@@ -7,6 +7,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 {
 	m_currentState = constants::playingState;
 
+	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
 		m_players.emplace_back(std::make_shared<FireKnight>(leftCharacterFirstPosition));
@@ -15,9 +16,9 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	{
 		m_players.emplace_back(std::make_shared<WindHashashin>(leftCharacterFirstPosition));
 	}
-
 	m_healthBars.emplace_back(HealthBarUI("leftHealthBar", "./assets/ui/leftHealthBar.png", &m_players[0]->getHp()));
 
+	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
 	{
 		if (secondCharacter == "fire_knight")
@@ -45,15 +46,14 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_bots[0]->getHp()));
 	}
 
-	temp.loadFromFile("./assets/landmark.png");
-	wallpaper.setTexture(temp);
-
+	// Initialize map
 	loadAndCreateMap("./map/map.txt");
 
+	// Initialize Threads
 	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
-
 	playerInputThread = std::thread(&PlayingState::updatePlayerInput, this);
 
+	// Initialize View
 	m_view = m_window.getDefaultView();
 	m_view.zoom(0.5f);
 	m_window.setView(m_view);
@@ -99,8 +99,6 @@ void PlayingState::update()
 
 void PlayingState::render()
 {
-	m_window.draw(wallpaper);
-
 	for (auto& player : m_players)
 	{
 		m_window.draw(player->getShape());
@@ -118,7 +116,6 @@ void PlayingState::render()
 	{
 		m_window.draw(player->getAttackHitbox());
 	}
-	
 
 	for (auto& ground : m_grounds)
 	{
@@ -134,11 +131,6 @@ void PlayingState::render()
 	{
 		m_window.draw(healthBar.getSprite());
 	}
-
-	sf::RectangleShape tempooo{sf::Vector2f(1.f, 1.f)};
-	tempooo.setPosition(0.f, 0.f);
-	tempooo.setFillColor(sf::Color::Green);
-	m_window.draw(tempooo);
 }
 
 void PlayingState::updateCollision()
@@ -234,17 +226,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	//if (!m_twoPlayers)
-	//{
-	//	m_view.setCenter(m_players[0]->getPosition());
-	//}
-	//else
-	//{
-	//	//m_view.setCenter(m_view.getSize().x / 2.f, 350.f);
-	//	m_view.setCenter((tilesAmountPerRow / 2.f) * tileSizeF, (tilesAmountPerCol / 2.f) * tileSizeF);
-	//}
 	m_view.setCenter((tilesAmountPerRow / 2.f) * tileSizeF, (tilesAmountPerCol / 2.f) * tileSizeF);
-	//std::cout << m_view.getSize().y << " - " << m_view.getSize().x << '\n';
 
 	m_window.setView(m_view);
 
@@ -284,12 +266,10 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 			mapFile >> tileId;
 			if (tileId != "0")
 			{
-				std::cout << tileId << " ";
 				m_grounds.emplace_back(Ground{ sf::Vector2f{x * tileSizeF + tileSizeF / 2.f, y * tileSizeF + tileSizeF / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
 			}
 			++x;
 		}
-		std::cout << '\n';
 		x = 0;
 		++y;
 	}

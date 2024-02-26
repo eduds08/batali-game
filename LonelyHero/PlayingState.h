@@ -37,9 +37,7 @@ public:
 	void setOnPause(bool onPause) { m_onPause = onPause; }
 	bool getOnPause() { return m_onPause; }
 
-	sf::Texture temp{};
-	sf::Sprite wallpaper{};
-
+	// Thread method to capture player's inputs
 	void updatePlayerInput();
 
 private:

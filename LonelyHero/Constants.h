@@ -68,8 +68,8 @@ namespace constants
 
 	/* BOT CONSTANTS: */
 
-	constexpr float minBotSpeed{ 130.f };
-	constexpr float maxBotSpeed{ 200.f };
+	constexpr float minBotSpeed{ 200.f };
+	constexpr float maxBotSpeed{ 230.f };
 	constexpr float minBotDistanceFromPlayer{ 30.f };
 	constexpr float maxBotDistanceFromPlayer{ 40.f };
 

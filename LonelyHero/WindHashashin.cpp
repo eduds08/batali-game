@@ -53,6 +53,8 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	{
 		m_speed = constants::windHashashinSpeed;
 	}
+
+	std::cout << "wind hashashin: " << m_speed << '\n';
 }
 
 void WindHashashin::updateHitbox()
