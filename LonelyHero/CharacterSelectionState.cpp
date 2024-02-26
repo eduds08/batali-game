@@ -125,7 +125,7 @@ void CharacterSelectionState::updateCharacterSelectionButtons()
 	}
 
 	// Select character
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && delayTime > 0.18f)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && delayTime > 0.25f)
 	{
 		selectCharacter();
 		delayClock.restart();

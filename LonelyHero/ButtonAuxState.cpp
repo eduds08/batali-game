@@ -41,7 +41,7 @@ void ButtonAuxState::updateButtons(bool isUpDown)
 		}
 	}
 	// Move back
-	else if (sf::Keyboard::isKeyPressed(backKey) && delayTime > 0.18f)
+	else if (sf::Keyboard::isKeyPressed(backKey) && delayTime > 0.25f)
 	{
 		if (m_onHoverButton > 0)
 		{

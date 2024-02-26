@@ -53,8 +53,6 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	{
 		m_speed = constants::fireKnightSpeed;
 	}
-
-	std::cout << "fire knight: " << m_speed << '\n';
 }
 
 void FireKnight::updateHitbox()
