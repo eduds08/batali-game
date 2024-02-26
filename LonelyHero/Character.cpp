@@ -32,6 +32,11 @@ void Character::update(float& deltaTime)
 			m_conditionRoll = false;
 		}
 
+		if (m_conditionAttack)
+		{
+			m_onRoll = false;
+		}
+
 		updateMovement(m_conditionRunLeft, m_conditionRunRight, m_conditionJump, deltaTime, m_conditionRoll);
 
 		if (m_currentTexture == m_entityName + "Attacking1")
