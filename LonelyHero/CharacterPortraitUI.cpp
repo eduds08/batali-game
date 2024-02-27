@@ -18,7 +18,7 @@ CharacterPortraitUI::CharacterPortraitUI(const std::string& textureName, const s
 	m_portraitBorder.setOutlineThickness(isBig ? 1.f : 3.f);
 	m_portraitBorder.setOrigin(m_portraitBorder.getSize() / 2.f);
 	m_portraitBorder.setPosition(m_sprite.getPosition());
-	m_portraitBorder.setFillColor(sf::Color::Transparent);
+	m_portraitBorder.setFillColor(sf::Color::Black);
 
 	m_portraitBorder.setOutlineColor(borderColor);
 }

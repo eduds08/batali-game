@@ -28,7 +28,7 @@ private:
 	std::vector<CharacterPortraitUI> m_smallCharacterPortraits{};
 
 	BackgroundUI m_background{ "menuBackground", "./assets/menuBackground.png", m_window.getDefaultView().getSize() / 2.f, sf::Vector2i{576, 324}, 4.f };
-	BackgroundUI m_buttonsBackground{ "characterSelectionButtonsBackground", "./assets/characterSelectionButtonsBackground.png", m_view.getCenter(), sf::Vector2i{500, 307} };
+	BackgroundUI m_buttonsBackground{ "characterSelectionButtonsBackground", "./assets/characterSelectionButtonsBackground.png", m_view.getCenter(), sf::Vector2i{600, 228} };
 
 	// Indicates which player is selecting the character
 	sf::Text m_playerTurn{ "Player 1:", m_font };
