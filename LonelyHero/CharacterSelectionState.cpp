@@ -16,7 +16,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 	// Initialize PlayerTurn for Player 1
 	m_playerTurn.setOrigin(m_playerTurn.getLocalBounds().width / 2.f, m_playerTurn.getLocalBounds().height / 2.f);
-	m_playerTurn.setFillColor(sf::Color::Blue);
+	m_playerTurn.setFillColor(sf::Color{179, 245, 188});
 	m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ 170.f, -400.f });
 
 	// Update text above big portraits
@@ -26,13 +26,13 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 		if (playerPortraitText.getString() == "Player 1")
 		{
-			playerPortraitText.setFillColor(sf::Color::Blue);
+			playerPortraitText.setFillColor(sf::Color{179, 245, 188});
 			playerPortraitText.setPosition(m_view.getCenter() - sf::Vector2f{ 250.f, 180.f });
 		}
 		else
 		{
 			playerPortraitText.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
-			playerPortraitText.setFillColor(sf::Color::Red);
+			playerPortraitText.setFillColor(sf::Color{250, 145, 137});
 			playerPortraitText.setPosition(m_view.getCenter() + sf::Vector2f{ 250.f, -180.f });
 		}
 	}
@@ -43,8 +43,8 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 	m_buttonsBackground.setPosition(m_view.getCenter() + sf::Vector2f{ 0.f, 300.f });
 
-	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ -250.f, 0.f } , true, sf::Color::Blue });
-	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ 250.f, 0.f } , true, sf::Color::Red });
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ -250.f, 0.f } , true, sf::Color{179, 245, 188} });
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ 250.f, 0.f } , true, sf::Color{250, 145, 137} });
 }
 
 void CharacterSelectionState::update()
@@ -129,7 +129,7 @@ void CharacterSelectionState::updateCharacterSelectionButtons()
 	// Upate the visual design of the characterPortrait (according to its state -> onHover OR not onHover)
 	for (size_t i = 0; i < m_smallCharacterPortraits.size(); ++i)
 	{
-		m_smallCharacterPortraits[i].update(i == m_onHoverCharacterButton, m_playerChoice == 1 ? sf::Color::Blue : sf::Color::Red);
+		m_smallCharacterPortraits[i].update(i == m_onHoverCharacterButton, m_playerChoice == 1 ? sf::Color{179, 245, 188} : sf::Color{ 250, 145, 137 });
 	}
 
 	// Select character
@@ -157,7 +157,7 @@ void CharacterSelectionState::selectCharacter()
 	if (m_playerChoice == 1)
 	{
 		m_playerTurn.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
-		m_playerTurn.setFillColor(sf::Color::Red);
+		m_playerTurn.setFillColor(sf::Color{250, 145, 137});
 		m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ m_chosenGamemode == "singleplayer" ? 140.f : 170.f, -400.f });
 	}
 
