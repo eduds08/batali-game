@@ -90,6 +90,9 @@
     <ClCompile Include="ButtonAuxState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="ButtonAuxState.h">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundUI.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

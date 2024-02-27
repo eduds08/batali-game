@@ -11,7 +11,7 @@ void ButtonAuxState::initButton(const std::string& text, sf::Vector2f position, 
 
 	sf::Text buttonText{ text, m_font };
 	buttonText.setOrigin(buttonText.getLocalBounds().width / 2.f, buttonText.getLocalBounds().height / 2.f);
-	buttonText.setFillColor(sf::Color::Black);
+	buttonText.setFillColor(sf::Color{231, 210, 124});
 	buttonText.setPosition(m_buttons.back().getPosition());
 
 	m_buttonsTexts.emplace_back(buttonText);
@@ -56,12 +56,12 @@ void ButtonAuxState::updateButtons(bool isUpDown)
 	{
 		m_buttons[i].update(i == m_onHoverButton);
 		m_buttonsTexts[i].setPosition(m_buttons[i].getPosition());
-		m_buttonsTexts[i].setFillColor(sf::Color::Black);
+		//m_buttonsTexts[i].setFillColor(sf::Color{231, 210, 124});
 
 		if (i == m_onHoverButton)
 		{
 			m_buttonsTexts[i].setPosition(m_buttons[i].getPosition() + sf::Vector2f{ 0.f, 2.f });
-			m_buttonsTexts[i].setFillColor(sf::Color::White);
+			//m_buttonsTexts[i].setFillColor(sf::Color::White);
 		}
 	}
 

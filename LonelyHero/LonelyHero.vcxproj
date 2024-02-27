@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedEntity.cpp" />
+    <ClCompile Include="BackgroundUI.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.h" />
+    <ClInclude Include="BackgroundUI.h" />
     <ClInclude Include="ButtonAuxState.h" />
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Character.h" />

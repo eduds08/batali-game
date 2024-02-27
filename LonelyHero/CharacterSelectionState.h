@@ -3,6 +3,7 @@
 #include "ButtonAuxState.h"
 #include "CharacterPortraitUI.h"
 #include "ButtonUI.h"
+#include "BackgroundUI.h"
 
 class CharacterSelectionState : public ButtonAuxState
 {
@@ -18,8 +19,6 @@ public:
 
 	void selectCharacter();
 
-	void initBigPortraitBorders(int playerNumber);
-
 	std::vector<std::string> m_chosenCharacters{};
 
 	std::string getChosenGamemode() { return m_chosenGamemode; }
@@ -27,6 +26,9 @@ public:
 private:
 	std::vector<CharacterPortraitUI> m_bigCharacterPortraits{};
 	std::vector<CharacterPortraitUI> m_smallCharacterPortraits{};
+
+	BackgroundUI m_background{ "menuBackground", "./assets/menuBackground.png", m_window.getDefaultView().getSize() / 2.f, sf::Vector2i{576, 324}, 4.f };
+	BackgroundUI m_buttonsBackground{ "characterSelectionButtonsBackground", "./assets/characterSelectionButtonsBackground.png", m_view.getCenter(), sf::Vector2i{500, 307} };
 
 	// Indicates which player is selecting the character
 	sf::Text m_playerTurn{ "Player 1:", m_font };
@@ -38,9 +40,6 @@ private:
 
 	// Player 1 or player 2
 	int m_playerChoice{ 1 };
-
-	// Outline border of the big portrait
-	std::vector<sf::RectangleShape> m_bigPortraitsBorder{};
 
 	// Singleplayer or multiplayer
 	const std::string m_chosenGamemode{};

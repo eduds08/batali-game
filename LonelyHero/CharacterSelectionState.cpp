@@ -8,7 +8,6 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 	// Initialize view
 	m_view = m_window.getDefaultView();
-	m_view.setCenter(0.f, 0.f);
 	m_window.setView(m_view);
 
 	// Initialize small portraits
@@ -38,19 +37,27 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 		}
 	}
 
-	// Initialize big portrait borders
-	initBigPortraitBorders(1);
-	initBigPortraitBorders(2);
-
 	// Initialize "play" and "back" buttons
 	initButton("Play", m_view.getCenter() + sf::Vector2f{ -150.f, 270.f }, m_chosenGamemode == "singleplayer" ? constants::characterSelectionToSingleplayerTransition : constants::characterSelectionToMultiplayerTransition);
 	initButton("Back", m_view.getCenter() + sf::Vector2f{ 150.f, 270.f }, constants::characterSelectionReset);
+
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ -250.f, 0.f } , true, sf::Color::Magenta });
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ 250.f, 0.f } , true, sf::Color::Yellow });
 }
 
 void CharacterSelectionState::update()
 {
 	if (m_playerChoice == 1 || m_playerChoice == 2)
 	{
+		if (m_onHoverCharacterButton == 0)
+		{
+			m_bigCharacterPortraits[m_playerChoice - 1].setSpriteTexture("fireKnightPortrait", "./assets/portrait_fire_knight.png");
+		}
+		else if (m_onHoverCharacterButton == 1)
+		{
+			m_bigCharacterPortraits[m_playerChoice - 1].setSpriteTexture("windHashashinPortrait", "./assets/portrait_wind_hashashin.png");
+		}
+
 		updateCharacterSelectionButtons();
 	}
 	else
@@ -61,6 +68,8 @@ void CharacterSelectionState::update()
 
 void CharacterSelectionState::render()
 {
+	m_window.draw(m_background.getSprite());
+
 	if (m_playerChoice == 1 || m_playerChoice == 2)
 	{
 		for (auto& characterPortrait : m_smallCharacterPortraits)
@@ -74,6 +83,7 @@ void CharacterSelectionState::render()
 
 	for (auto& characterPortrait : m_bigCharacterPortraits)
 	{
+		m_window.draw(characterPortrait.m_portraitBorder);
 		m_window.draw(characterPortrait.getSprite());
 	}
 
@@ -82,13 +92,9 @@ void CharacterSelectionState::render()
 		m_window.draw(playerPortraitText);
 	}
 
-	for (auto& portraitBorder : m_bigPortraitsBorder)
-	{
-		m_window.draw(portraitBorder);
-	}
-
 	if (m_playerChoice > 2)
 	{
+		m_window.draw(m_buttonsBackground.getSprite());
 		renderButtons();
 	}
 }
@@ -134,18 +140,14 @@ void CharacterSelectionState::updateCharacterSelectionButtons()
 
 void CharacterSelectionState::selectCharacter()
 {
-	sf::Vector2f portraitPosition = m_view.getCenter() + (m_playerChoice == 1 ? sf::Vector2f{ -250.f, 0.f } : sf::Vector2f{ 250.f, 0.f });
-
 	// Select fireKnight
 	if (m_onHoverCharacterButton == 0)
 	{
-		m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", portraitPosition, true });
 		m_chosenCharacters.emplace_back("fire_knight");
 	}
 	// Select windHashashin
 	else if (m_onHoverCharacterButton == 1)
 	{
-		m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "windHashashinPortrait", "./assets/portrait_wind_hashashin.png", portraitPosition, true });
 		m_chosenCharacters.emplace_back("wind_hashashin");
 	}
 
@@ -158,17 +160,5 @@ void CharacterSelectionState::selectCharacter()
 	}
 
 	++m_playerChoice;
-}
-
-void CharacterSelectionState::initBigPortraitBorders(int playerNumber)
-{
-	sf::RectangleShape portraitBorder{ sf::Vector2f{constants::characterPortraitSpriteWidth * 5.f, constants::characterPortraitSpriteHeight * 5.f} };
-
-	portraitBorder.setOutlineThickness(1.f);
-	portraitBorder.setOrigin(portraitBorder.getSize() / 2.f);
-	portraitBorder.setOutlineColor(playerNumber == 1 ? sf::Color::Magenta : sf::Color::Yellow);
-	portraitBorder.setPosition(m_view.getCenter() - (playerNumber == 1 ? sf::Vector2f{ 250.f, 0.f } : sf::Vector2f{ -250.f, 0.f }) );
-	portraitBorder.setFillColor(sf::Color::Transparent);
-
-	m_bigPortraitsBorder.emplace_back(portraitBorder);
+	m_onHoverCharacterButton = 0;
 }

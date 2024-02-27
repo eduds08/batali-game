@@ -1,6 +1,6 @@
 #include "CharacterPortraitUI.h"
 
-CharacterPortraitUI::CharacterPortraitUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, bool isBig)
+CharacterPortraitUI::CharacterPortraitUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, bool isBig, sf::Color borderColor)
 	: UI{ textureName, texturePath, position }
 	, m_isBig{isBig}
 {
@@ -19,6 +19,8 @@ CharacterPortraitUI::CharacterPortraitUI(const std::string& textureName, const s
 	m_portraitBorder.setOrigin(m_portraitBorder.getSize() / 2.f);
 	m_portraitBorder.setPosition(m_sprite.getPosition());
 	m_portraitBorder.setFillColor(sf::Color::Transparent);
+
+	m_portraitBorder.setOutlineColor(borderColor);
 }
 
 void CharacterPortraitUI::update(bool onHover, sf::Color color)
@@ -31,4 +33,9 @@ void CharacterPortraitUI::update(bool onHover, sf::Color color)
 	{
 		m_portraitBorder.setOutlineColor(sf::Color::White);
 	}
+}
+
+void CharacterPortraitUI::setSpriteTexture(const std::string& textureName, const std::string& texturePath)
+{
+	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
 }
