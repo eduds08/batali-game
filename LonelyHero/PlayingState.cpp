@@ -315,9 +315,9 @@ void PlayingState::updatePlayerInput()
 			{
 				if (player->getPlayerNumber() == 1)
 				{
-					player->setRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-					player->setRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-					player->setJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
 
 					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L));
 
@@ -325,9 +325,9 @@ void PlayingState::updatePlayerInput()
 				}
 				else if (player->getPlayerNumber() == 2)
 				{
-					player->setRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
-					player->setRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
-					player->setJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
+					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
+					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
+					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
 
 					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift));
 

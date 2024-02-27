@@ -5,6 +5,7 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 {
 	m_hitboxHeight = constants::windHashashinSwordHitboxHeight;
 
+	// DEBUG
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
 
@@ -29,6 +30,8 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	m_shape.setSize(sf::Vector2f{ constants::windHashashinShapeWidth, constants::windHashashinShapeHeight});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
+
+	// DEBUG
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
@@ -53,6 +56,14 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	{
 		m_speed = constants::windHashashinSpeed;
 	}
+
+	m_hitboxWidthAttack1 = constants::windHashashinSwordHitboxWidthAttack1;
+	m_hitboxWidthAttack2 = constants::windHashashinSwordHitboxWidthAttack2;
+	m_hitboxWidthAirAttack = constants::windHashashinSwordHitboxWidthAirAttacking;
+
+	m_attack1Damage = constants::windHashashinAttack1Damage;
+	m_attack2Damage = constants::windHashashinAttack2Damage;
+	m_airAttackDamage = constants::windHashashinAirAttackDamage;
 }
 
 void WindHashashin::updateHitbox()

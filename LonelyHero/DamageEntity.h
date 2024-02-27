@@ -24,10 +24,10 @@ public:
 	void updateGravityWhenDying(float& deltaTime);
 
 	virtual bool getHitted() { return m_hitted; }
-	bool isDead() { return m_dead; }
-	bool isDying() { return m_dying; }
+	const bool isDead() const { return m_dead; }
+	const bool isDying() const { return m_dying; }
 
-	const int& getHp() { return m_hp; }
+	const int& getHp() const { return m_hp; }
 
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 

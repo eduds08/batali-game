@@ -5,6 +5,7 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 {
 	m_hitboxHeight = constants::fireKnightSwordHitboxHeight;
 
+	// DEBUG
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
 
@@ -29,6 +30,8 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	m_shape.setSize(sf::Vector2f{ constants::fireKnightShapeWidth, constants::fireKnightShapeHeight});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
+
+	// DEBUG
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
@@ -53,6 +56,14 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	{
 		m_speed = constants::fireKnightSpeed;
 	}
+
+	m_hitboxWidthAttack1 = constants::fireKnightSwordHitboxWidthAttack1;
+	m_hitboxWidthAttack2 = constants::fireKnightSwordHitboxWidthAttack2;
+	m_hitboxWidthAirAttack = constants::fireKnightSwordHitboxWidthAirAttacking;
+
+	m_attack1Damage = constants::fireKnightAttack1Damage;
+	m_attack2Damage = constants::fireKnightAttack2Damage;
+	m_airAttackDamage = constants::fireKnightAirAttackDamage;
 }
 
 void FireKnight::updateHitbox()

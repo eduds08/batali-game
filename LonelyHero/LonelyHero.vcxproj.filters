@@ -88,7 +88,7 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="ButtonAuxState.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +156,7 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="ButtonAuxState.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,12 +7,12 @@ SwordEntity::SwordEntity(sf::Vector2f firstPosition)
 
 void SwordEntity::updateAttack(bool attackCondition)
 {
-	if (attackCondition && m_canJump && !m_isAttacking)
+	if (attackCondition && m_canJump && !m_isAttacking && !m_onRoll)
 	{
 		m_isAttacking = true;
 		m_isAirAttacking = false;
 	}
-	else if (attackCondition && !m_canJump && !m_isAttacking) 
+	else if (attackCondition && !m_canJump && !m_isAttacking && !m_onRoll)
 	{
 		m_isAttacking = true;
 		m_isAirAttacking = true;
@@ -24,7 +24,7 @@ void SwordEntity::updateAttack(bool attackCondition)
 		{
 			// Don't let the entity move if it is attacking on ground
 			m_velocity.x = 0.f;
-			//m_velocity.y = 0.f;
+			m_velocity.y = 0.f;
 
 			// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
 			if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2") && m_animationEnd) || m_inDamageCooldown == true)
@@ -40,7 +40,7 @@ void SwordEntity::updateAttack(bool attackCondition)
 		{
 			m_velocity.x = 0.f;
 
-			if ((m_currentTexture == m_entityName + "AirAttacking" && m_animationEnd) || m_inDamageCooldown == true || m_currentTexture == m_entityName + "Falling")
+			if ((m_currentTexture == m_entityName + "AirAttacking" && m_animationEnd) || m_inDamageCooldown == true || (m_canJump && m_currentTexture == m_entityName + "Falling"))
 			{
 				m_isAttacking = false;
 				m_isAirAttacking = false;

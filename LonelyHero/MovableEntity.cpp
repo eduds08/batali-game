@@ -51,7 +51,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 		m_isRunning = false;
 	}
 
-	// Only can roll when on ground and hot on Hitted animation
+	// Only can roll when on ground and not on Hitted animation
 	if (conditionRoll && m_canJump && !getHitted())
 	{
 		m_onRoll = true;
@@ -70,10 +70,9 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 
 	flipSprite();
 
-	if (conditionJump && m_canJump && !getIsAttacking())
+	if (conditionJump && m_canJump && !getIsAttacking() && !m_onRoll)
 	{
 		m_canJump = false;
-		m_onRoll = false;
 		m_velocity.y = -1 * sqrt(2.f * constants::gravity * m_jumpHeight);
 	}
 

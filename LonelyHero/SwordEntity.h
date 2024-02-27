@@ -19,7 +19,7 @@ public:
 	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
 	virtual bool getIsAttacking() { return m_isAttacking; }
 
-	int getDamage() { return m_damage; }
+	const int getDamage() const { return m_damage; }
 
 protected:
 	// Useful when entity has more than one attack animation. So it alters between one another

@@ -6,6 +6,7 @@ Character::Character(sf::Vector2f firstPosition, int playerNumber, bool isBot, s
 	, m_isBot{ isBot }
 	, m_player{ player }
 {
+	// Second player or bot starts facing left
 	if (isBot || playerNumber == 2)
 	{
 		m_facingRight = -1;
@@ -32,43 +33,28 @@ void Character::update(float& deltaTime)
 			m_conditionRoll = false;
 		}
 
-		if (m_conditionAttack)
-		{
-			m_onRoll = false;
-		}
-
 		updateMovement(m_conditionRunLeft, m_conditionRunRight, m_conditionJump, deltaTime, m_conditionRoll);
 
 		if (m_currentTexture == m_entityName + "Attacking1")
 		{
-			m_hitboxWidth = m_entityName == "fire_knight" ? constants::fireKnightSwordHitboxWidthAttack1 : constants::windHashashinSwordHitboxWidthAttack1;
+			m_hitboxWidth = m_hitboxWidthAttack1;
 			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+			m_damage = m_attack1Damage;
 		}
 		else if (m_currentTexture == m_entityName + "Attacking2")
 		{
-			m_hitboxWidth = m_entityName == "fire_knight" ? constants::fireKnightSwordHitboxWidthAttack2 : constants::windHashashinSwordHitboxWidthAttack2;
+			m_hitboxWidth = m_hitboxWidthAttack2;
 			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+			m_damage = m_attack2Damage;
 		}
 		else if (m_currentTexture == m_entityName + "AirAttacking")
 		{
-			m_hitboxWidth = m_entityName == "fire_knight" ? constants::fireKnightSwordHitboxWidthAirAttacking : constants::windHashashinSwordHitboxWidthAirAttacking;
+			m_hitboxWidth = m_hitboxWidthAirAttack;
 			m_entityName == "fire_knight" ? m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f) : m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+			m_damage = m_airAttackDamage;
 		}
 
 		updateAttack(m_conditionAttack);
-
-		if (m_currentTexture == m_entityName + "Attacking1")
-		{
-			m_damage = m_entityName == "fire_knight" ? 100 : 150;
-		}
-		else if (m_currentTexture == m_entityName + "Attacking2")
-		{
-			m_damage = m_entityName == "fire_knight" ? 70 : 90;
-		}
-		else if (m_currentTexture == m_entityName + "AirAttacking")
-		{
-			m_damage = m_entityName == "fire_knight" ? 80 : 100;
-		}
 
 		if (m_isBot)
 		{
@@ -84,6 +70,7 @@ void Character::update(float& deltaTime)
 		move(deltaTime);
 	}
 
+	// Entity is dying (still playing dying animation)
 	if (!m_dead)
 	{
 		updateGravityWhenDying(deltaTime);

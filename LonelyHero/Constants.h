@@ -22,10 +22,7 @@ namespace constants
 	constexpr int characterPortraitSpriteWidth{ 64 };
 	constexpr int characterPortraitSpriteHeight{ 64 };
 
-	//const sf::Vector2f leftCharacterFirstPosition{sf::Vector2f{300.f, 240.f}};
 	const sf::Vector2f leftCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF - 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
-
-	//const sf::Vector2f rightCharacterFirstPosition{sf::Vector2f{500.f, 240.f}};
 	const sf::Vector2f rightCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF + 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
 
 	/* FIRE KNIGHT CONSTANTS: */
@@ -36,7 +33,7 @@ namespace constants
 	constexpr float fireKnightShapeWidth{ 20.f };
 	constexpr float fireKnightShapeHeight{ 40.f };
 
-	constexpr float fireKnightSpeed{ 240.f };
+	constexpr float fireKnightSpeed{ 230.f };
 	constexpr float fireKnightJumpHeight{ 80.f };
 	 
 	constexpr int fireKnightHp{ 1250 };
@@ -46,6 +43,10 @@ namespace constants
 	constexpr float fireKnightSwordHitboxWidthAirAttacking{ 90.f };
 	constexpr float fireKnightSwordHitboxHeight{ 20.f };
 
+	constexpr int fireKnightAttack1Damage{100};
+	constexpr int fireKnightAttack2Damage{80};
+	constexpr int fireKnightAirAttackDamage{70};
+
 	/* WIND HASHASHIN CONSTANTS: */
 
 	constexpr int windHashashinSpriteWidth{ 288 };
@@ -54,7 +55,7 @@ namespace constants
 	constexpr float windHashashinShapeWidth{ 20.f };
 	constexpr float windHashashinShapeHeight{ 40.f };
 
-	constexpr float windHashashinSpeed{ 260.f };
+	constexpr float windHashashinSpeed{ 240.f };
 	constexpr float windHashashinJumpHeight{ 80.f };
 
 	constexpr int windHashashinHp{ 1000 };
@@ -64,7 +65,9 @@ namespace constants
 	constexpr float windHashashinSwordHitboxWidthAirAttacking{ 53.f };
 	constexpr float windHashashinSwordHitboxHeight{ 20.f };
 
-	constexpr int windHashashinHpDivided5{ 200 };
+	constexpr int windHashashinAttack1Damage{80};
+	constexpr int windHashashinAttack2Damage{75};
+	constexpr int windHashashinAirAttackDamage{65};
 
 	/* BOT CONSTANTS: */
 

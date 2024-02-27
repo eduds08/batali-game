@@ -15,7 +15,6 @@ void DamageEntity::updateDamage()
 	{
 		m_hitted = false;
 
-
 		if (m_hp <= 0)
 		{
 			m_dying = true;
@@ -69,15 +68,15 @@ void DamageEntity::knockbackMove(float& deltaTime, float attackDirection)
 	if (attackDirection < 0.f)
 	{
 		// attack coming from left
-		m_shape.move(sf::Vector2f{m_knockbackVelocity, 0.f} *deltaTime);
+		m_shape.move(sf::Vector2f{ m_knockbackVelocity, 0.f } *deltaTime);
 	}
 	else
 	{
 		// attack coming from right
-		m_shape.move(sf::Vector2f{m_knockbackVelocity * -1.f, 0.f} *deltaTime);
+		m_shape.move(sf::Vector2f{ m_knockbackVelocity * -1.f, 0.f } *deltaTime);
 	}
 
-	m_sprite.setPosition(sf::Vector2f{ getPosition().x, getPosition().y - (m_spriteHeight - getSize().y) / 2.f});
+	m_sprite.setPosition(sf::Vector2f{ getPosition().x, getPosition().y - (m_spriteHeight - getSize().y) / 2.f });
 }
 
 void DamageEntity::updateDeath()

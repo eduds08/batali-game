@@ -3,8 +3,9 @@
 Game::Game()
 	: m_stateContext{new MainMenuState{m_window}}
 {
-	//m_window.setKeyRepeatEnabled(false);
+	// Open maximized window
 	::ShowWindow(m_window.getSystemHandle(), SW_MAXIMIZE);
+
 	run();
 }
 
@@ -70,13 +71,11 @@ void Game::update()
 		if (m_stateContext->getCurrentState() == constants::menuToSingleplayerTransition)
 		{
 			delete m_stateContext;
-			//m_stateContext = new PlayingState(m_window, m_deltaTime, false);
 			m_stateContext = new CharacterSelectionState(m_window, "singleplayer");
 		}
 		else
 		{
 			delete m_stateContext;
-			//m_stateContext = new PlayingState(m_window, m_deltaTime, true);
 			m_stateContext = new CharacterSelectionState(m_window, "multiplayer");
 		}
 	}

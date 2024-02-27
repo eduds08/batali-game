@@ -12,16 +12,16 @@ public:
 
 	void update(float& deltaTime);
 
-	int getPlayerNumber() { return m_playerNumber; }
+	const int getPlayerNumber() const { return m_playerNumber; }
 
 	// Changes the entity's texture according to its action (running, jumping, attacking, etc...)
 	virtual void updateTexture();
 
-	void setRunLeft(bool a) { m_conditionRunLeft = a; }
-	void setRunRight(bool a) { m_conditionRunRight = a; }
-	void setJump(bool a) { m_conditionJump = a; }
-	void setConditionAttack(bool a) { m_conditionAttack = a; }
-	void setConditionRoll(bool a) { m_conditionRoll = a; }
+	void setConditionRunLeft(bool conditionRunLeft) { m_conditionRunLeft = conditionRunLeft; }
+	void setConditionRunRight(bool conditionRunRight) { m_conditionRunRight = conditionRunRight; }
+	void setConditionJump(bool conditionJump) { m_conditionJump = conditionJump; }
+	void setConditionAttack(bool conditionAttack) { m_conditionAttack = conditionAttack; }
+	void setConditionRoll(bool conditionRoll) { m_conditionRoll = conditionRoll; }
 
 protected:
 	bool m_isBot{};
@@ -44,4 +44,12 @@ protected:
 	bool m_conditionAttack{ false };
 
 	bool m_conditionRoll{ false };
+
+	float m_hitboxWidthAttack1{};
+	float m_hitboxWidthAttack2{};
+	float m_hitboxWidthAirAttack{};
+
+	int m_attack1Damage{};
+	int m_attack2Damage{};
+	int m_airAttackDamage{};
 };
