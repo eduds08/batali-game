@@ -24,6 +24,7 @@
     <ProjectGuid>{eb581004-9344-43a7-b455-1c082bc80f6a}</ProjectGuid>
     <RootNamespace>LonelyHero</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Batali</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
