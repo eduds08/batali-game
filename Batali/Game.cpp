@@ -35,7 +35,7 @@ void Game::run()
 			if (m_event.type == sf::Event::Closed)
 			{
 				// Quit animation thread
-				m_stateContext->setCurrentState(constants::quittingPlaying);
+				m_stateContext->setCurrentState(EXIT_PLAYING);
 
 				m_window.close();
 			}
@@ -49,12 +49,12 @@ void Game::run()
 void Game::update()
 {
 	// If on playing state and the user press Escape button, it changes to MainMenuState
-	if (m_stateContext->getCurrentState() == constants::playingState)
+	if (m_stateContext->getCurrentState() == PLAYING_STATE)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
 		{
 			// Quit animation thread
-			m_stateContext->setCurrentState(constants::quittingPlaying);
+			m_stateContext->setCurrentState(EXIT_PLAYING);
 
 			// Changes to MainMenuState
 			delete m_stateContext;
@@ -65,10 +65,10 @@ void Game::update()
 	m_stateContext->update();
 
 	// The user pressed button "Singleplayer" or "Multiplayer"
-	if (m_stateContext->getCurrentState() == constants::menuToSingleplayerTransition || m_stateContext->getCurrentState() == constants::menuToMultiplayerTransition)
+	if (m_stateContext->getCurrentState() == MENU_TO_SINGLEPLAYER || m_stateContext->getCurrentState() == MENU_TO_MULTIPLAYER)
 	{
 		// Singleplayer or multiplayer
-		if (m_stateContext->getCurrentState() == constants::menuToSingleplayerTransition)
+		if (m_stateContext->getCurrentState() == MENU_TO_SINGLEPLAYER)
 		{
 			delete m_stateContext;
 			m_stateContext = new CharacterSelectionState(m_window, "singleplayer");
@@ -80,7 +80,7 @@ void Game::update()
 		}
 	}
 
-	if (m_stateContext->getCurrentState() == constants::characterSelectionToSingleplayerTransition)
+	if (m_stateContext->getCurrentState() == CHARACTER_SELECTION_TO_SINGLEPLAYER)
 	{
 		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[0];
 		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[1];
@@ -89,7 +89,7 @@ void Game::update()
 		m_stateContext = new PlayingState(m_window, m_deltaTime, false, firstCharacter, secondCharacter);
 	}
 
-	if (m_stateContext->getCurrentState() == constants::characterSelectionToMultiplayerTransition)
+	if (m_stateContext->getCurrentState() == CHARACTER_SELECTION_TO_MULTIPLAYER)
 	{
 		std::string firstCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[0];
 		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[1];
@@ -98,12 +98,12 @@ void Game::update()
 		m_stateContext = new PlayingState(m_window, m_deltaTime, true, firstCharacter, secondCharacter);
 	}
 
-	if (m_stateContext->getCurrentState() == constants::characterSelectionState)
+	if (m_stateContext->getCurrentState() == CHARACTER_SELECTION_STATE)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape))
 		{
 			// Quit animation thread
-			m_stateContext->setCurrentState(constants::quittingPlaying);
+			m_stateContext->setCurrentState(EXIT_PLAYING);
 
 			// Changes to MainMenuState
 			delete m_stateContext;
@@ -111,7 +111,7 @@ void Game::update()
 		}
 	}
 
-	if (m_stateContext->getCurrentState() == constants::characterSelectionReset)
+	if (m_stateContext->getCurrentState() == CHARACTER_SELECTION_RESET)
 	{
 		std::string chosenGamemode = dynamic_cast<CharacterSelectionState*>(m_stateContext)->getChosenGamemode();
 
@@ -120,7 +120,7 @@ void Game::update()
 	}
 
 	// Press the button to close the game
-	if (m_stateContext->getCurrentState() == constants::exitingState)
+	if (m_stateContext->getCurrentState() == EXIT_GAME)
 	{
 		delete m_stateContext;
 		m_stateContext = nullptr;

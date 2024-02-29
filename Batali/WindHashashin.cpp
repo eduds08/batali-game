@@ -3,7 +3,7 @@
 WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: Character{ firstPosition, playerNumber, isBot, player }
 {
-	m_hitboxHeight = constants::windHashashinSwordHitboxHeight;
+	m_hitboxHeight = WIND_HASHASHIN_ATTACK_HEIGHT;
 
 	// DEBUG
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
@@ -21,13 +21,13 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	initTexturesMap();
 
 	// Initialize sprite
-	m_spriteWidth = constants::windHashashinSpriteWidth;
-	m_spriteHeight = constants::windHashashinSpriteHeight;
+	m_spriteWidth = WIND_HASHASHIN_SPRITE_WIDTH;
+	m_spriteHeight = WIND_HASHASHIN_SPRITE_HEIGHT;
 	changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true);
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
 	// Initialize shape
-	m_shape.setSize(sf::Vector2f{ constants::windHashashinShapeWidth, constants::windHashashinShapeHeight});
+	m_shape.setSize(sf::Vector2f{ WIND_HASHASHIN_SHAPE_WIDTH, WIND_HASHASHIN_SHAPE_HEIGHT});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
 
@@ -36,8 +36,8 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	m_shape.setOutlineThickness(1.f);
 
 	// Initialize other attributes
-	m_jumpHeight = constants::windHashashinJumpHeight;
-	m_hp = constants::windHashashinHp;
+	m_jumpHeight = WIND_HASHASHIN_JUMP_HEIGHT;
+	m_hp = WIND_HASHASHIN_HP;
 
 	if (m_isBot)
 	{
@@ -46,24 +46,24 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 		// Mersenne Twister random number generator
 		std::mt19937 gen(rd());
 		// Generates uniform distributed random number in a specific interval
-		std::uniform_real_distribution<> distribution1(constants::minBotSpeed, constants::maxBotSpeed);
-		std::uniform_real_distribution<> distribution2(constants::minBotDistanceFromPlayer, constants::maxBotDistanceFromPlayer);
+		std::uniform_real_distribution<> distribution1(MIN_ENEMY_SPEED, MAX_ENEMY_SPEED);
+		std::uniform_real_distribution<> distribution2(MIN_ENEMY_DISTANCE_FROM_PLAYER, MAX_ENEMY_DISTANCE_FROM_PLAYER);
 
 		m_speed = static_cast<float>(distribution1(gen));
 		m_distanceFromPlayer = static_cast<float>(distribution2(gen));
 	}
 	else
 	{
-		m_speed = constants::windHashashinSpeed;
+		m_speed = WIND_HASHASHIN_SPEED;
 	}
 
-	m_hitboxWidthAttack1 = constants::windHashashinSwordHitboxWidthAttack1;
-	m_hitboxWidthAttack2 = constants::windHashashinSwordHitboxWidthAttack2;
-	m_hitboxWidthAirAttack = constants::windHashashinSwordHitboxWidthAirAttacking;
+	m_hitboxWidthAttack1 = WIND_HASHASHIN_ATTACK_1_WIDTH;
+	m_hitboxWidthAttack2 = WIND_HASHASHIN_ATTACK_2_WIDTH;
+	m_hitboxWidthAirAttack = WIND_HASHASHIN_AIR_ATTACK_WIDTH;
 
-	m_attack1Damage = constants::windHashashinAttack1Damage;
-	m_attack2Damage = constants::windHashashinAttack2Damage;
-	m_airAttackDamage = constants::windHashashinAirAttackDamage;
+	m_attack1Damage = WIND_HASHASHIN_ATTACK_1_DAMAGE;
+	m_attack2Damage = WIND_HASHASHIN_ATTACK_2_DAMAGE;
+	m_airAttackDamage = WIND_HASHASHIN_AIR_ATTACK_DAMAGE;
 }
 
 void WindHashashin::updateHitbox()

@@ -80,10 +80,10 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	if (conditionJump && m_canJump && !getIsAttacking() && !m_onRoll)
 	{
 		m_canJump = false;
-		m_velocity.y = -1 * sqrt(2.f * constants::gravity * m_jumpHeight);
+		m_velocity.y = -1 * sqrt(2.f * GRAVITY * m_jumpHeight);
 	}
 
-	m_velocity.y += constants::gravity * deltaTime;
+	m_velocity.y += GRAVITY * deltaTime;
 
 	// If m_hitted is true (hitted sprite set), sets x-velocity to 0 so it can't move
 	if (getHitted())

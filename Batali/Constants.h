@@ -4,99 +4,99 @@
 
 namespace constants
 {
-	constexpr int tileSizeI{ 16 };
-	constexpr float tileSizeF{ 16.f };
-	constexpr int tilesAmountPerRow{ 60 };
-	constexpr int tilesAmountPerCol{ 34 };
+	constexpr int TILE_SIZE_INT{ 16 };
+	constexpr float TILE_SIZE_FLOAT{ 16.f };
+	constexpr int TILES_AMOUNT_PER_ROW{ 60 };
+	constexpr int TILES_AMOUNT_PER_COL{ 34 };
 
-	constexpr float gravity{ 981.f };
+	constexpr float GRAVITY{ 981.f };
 
-	constexpr float knockbackSpeed{ 300.f };
+	constexpr float KNOCKBACK_SPEED{ 300.f };
 
-	constexpr int healthBarSpriteWidth{ 48 };
-	constexpr int healthBarSpriteHeight{ 16 };
+	constexpr int HEALTH_BAR_WIDTH{ 48 };
+	constexpr int HEALTH_BAR_HEIGHT{ 16 };
 
-	constexpr int buttonSpriteWidth{ 46 };
-	constexpr int buttonSpriteHeight{ 14 };
+	constexpr int BUTTON_WIDTH{ 46 };
+	constexpr int BUTTON_HEIGHT{ 14 };
 
-	constexpr int characterPortraitSpriteWidth{ 64 };
-	constexpr int characterPortraitSpriteHeight{ 64 };
+	constexpr int CHARACTER_PORTRAIT_WIDTH{ 64 };
+	constexpr int CHARACTER_PORTRAIT_HEIGHT{ 64 };
 
-	const sf::Vector2f leftCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF - 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
-	const sf::Vector2f rightCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF + 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
+	const sf::Vector2f LEFT_CHARACTER_FIRST_POSITION{ sf::Vector2f{(TILES_AMOUNT_PER_ROW / 2.f) * TILE_SIZE_FLOAT - 50.f, (TILES_AMOUNT_PER_COL / 2.f) * TILE_SIZE_FLOAT} };
+	const sf::Vector2f RIGHT_CHARACTER_FIRST_POSITION{ sf::Vector2f{(TILES_AMOUNT_PER_ROW / 2.f) * TILE_SIZE_FLOAT + 50.f, (TILES_AMOUNT_PER_COL / 2.f) * TILE_SIZE_FLOAT} };
 
 	constexpr int CHARACTER_LOGO_STATUS_WIDTH{ 78 };
 	constexpr int CHARACTER_LOGO_STATUS_HEIGHT{ 72 };
 
 	/* FIRE KNIGHT CONSTANTS: */
 
-	constexpr int fireKnightSpriteWidth{ 288 };
-	constexpr int fireKnightSpriteHeight{ 127 };
+	constexpr int FIRE_KNIGHT_SPRITE_WIDTH{ 288 };
+	constexpr int FIRE_KNIGHT_SPRITE_HEIGHT{ 127 };
 
-	constexpr float fireKnightShapeWidth{ 20.f };
-	constexpr float fireKnightShapeHeight{ 40.f };
+	constexpr float FIRE_KNIGHT_SHAPE_WIDTH{ 20.f };
+	constexpr float FIRE_KNIGHT_SHAPE_HEIGHT{ 40.f };
 
-	constexpr float fireKnightSpeed{ 230.f };
-	constexpr float fireKnightJumpHeight{ 80.f };
+	constexpr float FIRE_KNIGHT_SPEED{ 230.f };
+	constexpr float FIRE_KNIGHT_JUMP_HEIGHT{ 80.f };
 	 
-	constexpr int fireKnightHp{ 1250 };
+	constexpr int FIRE_KNIGHT_HP{ 1250 };
 
-	constexpr float fireKnightSwordHitboxWidthAttack1{ 65.f };
-	constexpr float fireKnightSwordHitboxWidthAttack2{ 130.f };
-	constexpr float fireKnightSwordHitboxWidthAirAttacking{ 90.f };
-	constexpr float fireKnightSwordHitboxHeight{ 20.f };
+	constexpr float FIRE_KNIGHT_ATTACK_1_WIDTH{ 65.f };
+	constexpr float FIRE_KNIGHT_ATTACK_2_WIDTH{ 130.f };
+	constexpr float FIRE_KNIGHT_AIR_ATTACK_WIDTH{ 90.f };
+	constexpr float FIRE_KNIGHT_ATTACK_HEIGHT{ 20.f };
 
-	constexpr int fireKnightAttack1Damage{100};
-	constexpr int fireKnightAttack2Damage{80};
-	constexpr int fireKnightAirAttackDamage{70};
+	constexpr int FIRE_KNIGHT_ATTACK_1_DAMAGE{100};
+	constexpr int FIRE_KNIGHT_ATTACK_2_DAMAGE{80};
+	constexpr int FIRE_KNIGHT_AIR_ATTACK_DAMAGE{70};
 
 	/* WIND HASHASHIN CONSTANTS: */
 
-	constexpr int windHashashinSpriteWidth{ 288 };
-	constexpr int windHashashinSpriteHeight{ 127 };
+	constexpr int WIND_HASHASHIN_SPRITE_WIDTH{ 288 };
+	constexpr int WIND_HASHASHIN_SPRITE_HEIGHT{ 127 };
 
-	constexpr float windHashashinShapeWidth{ 20.f };
-	constexpr float windHashashinShapeHeight{ 40.f };
+	constexpr float WIND_HASHASHIN_SHAPE_WIDTH{ 20.f };
+	constexpr float WIND_HASHASHIN_SHAPE_HEIGHT{ 40.f };
 
-	constexpr float windHashashinSpeed{ 240.f };
-	constexpr float windHashashinJumpHeight{ 80.f };
+	constexpr float WIND_HASHASHIN_SPEED{ 240.f };
+	constexpr float WIND_HASHASHIN_JUMP_HEIGHT{ 80.f };
 
-	constexpr int windHashashinHp{ 1000 };
+	constexpr int WIND_HASHASHIN_HP{ 1000 };
 
-	constexpr float windHashashinSwordHitboxWidthAttack1{ 30.f };
-	constexpr float windHashashinSwordHitboxWidthAttack2{ 50.f };
-	constexpr float windHashashinSwordHitboxWidthAirAttacking{ 53.f };
-	constexpr float windHashashinSwordHitboxHeight{ 20.f };
+	constexpr float WIND_HASHASHIN_ATTACK_1_WIDTH{ 30.f };
+	constexpr float WIND_HASHASHIN_ATTACK_2_WIDTH{ 50.f };
+	constexpr float WIND_HASHASHIN_AIR_ATTACK_WIDTH{ 53.f };
+	constexpr float WIND_HASHASHIN_ATTACK_HEIGHT{ 20.f };
 
-	constexpr int windHashashinAttack1Damage{80};
-	constexpr int windHashashinAttack2Damage{75};
-	constexpr int windHashashinAirAttackDamage{65};
+	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{80};
+	constexpr int WIND_HASHASHIN_ATTACK_2_DAMAGE{75};
+	constexpr int WIND_HASHASHIN_AIR_ATTACK_DAMAGE{65};
 
 	/* BOT CONSTANTS: */
 
-	constexpr float minBotSpeed{ 200.f };
-	constexpr float maxBotSpeed{ 230.f };
-	constexpr float minBotDistanceFromPlayer{ 30.f };
-	constexpr float maxBotDistanceFromPlayer{ 40.f };
+	constexpr float MIN_ENEMY_SPEED{ 200.f };
+	constexpr float MAX_ENEMY_SPEED{ 230.f };
+	constexpr float MIN_ENEMY_DISTANCE_FROM_PLAYER{ 30.f };
+	constexpr float MAX_ENEMY_DISTANCE_FROM_PLAYER{ 40.f };
 
-	constexpr float timeBetweenBotAttacks{ 1.f };
-	constexpr float cooldownDamageTime{ 0.6f };
+	constexpr float TIME_BETWEEN_ENEMY_ATTACKS{ 1.f };
+	constexpr float COOLDOWN_IMMUNE_TIME{ 0.6f };
 
 	/* STATE CONSTANTS: */
 
-	const std::string menuToSingleplayerTransition{"transitionToSingleplayerCharacterSelection"};
-	const std::string menuToMultiplayerTransition{"transitionToMultiplayerCharacterSelection"};
-	const std::string exitingState{"exiting"};
+	const std::string MENU_TO_SINGLEPLAYER{"transitionToSingleplayerCharacterSelection"};
+	const std::string MENU_TO_MULTIPLAYER{"transitionToMultiplayerCharacterSelection"};
+	const std::string EXIT_GAME{"exiting"};
 
-	const std::string mainMenuState{"main"};
-	const std::string playingState{"playing"};
+	const std::string MAIN_MENU_STATE{"main"};
+	const std::string PLAYING_STATE{"playing"};
 
-	const std::string quittingPlaying{"quittingPlaying"};
+	const std::string EXIT_PLAYING{"quittingPlaying"};
 
-	const std::string characterSelectionState{"characterSelection"};
+	const std::string CHARACTER_SELECTION_STATE{"characterSelection"};
 
-	const std::string characterSelectionToSingleplayerTransition{ "transitionToSingleplayer" };
-	const std::string characterSelectionToMultiplayerTransition{ "transitionToMultiplayer" };
+	const std::string CHARACTER_SELECTION_TO_SINGLEPLAYER{ "transitionToSingleplayer" };
+	const std::string CHARACTER_SELECTION_TO_MULTIPLAYER{ "transitionToMultiplayer" };
 
-	const std::string characterSelectionReset{ "characterSelectionReset" };
+	const std::string CHARACTER_SELECTION_RESET{ "characterSelectionReset" };
 }

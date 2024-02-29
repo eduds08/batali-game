@@ -28,7 +28,7 @@ void Character::update(float& deltaTime)
 			m_conditionJump = (((m_player->getShapePosition().y - m_player->getSize().y / 2.f) < (getShapePosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
 
 			m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-			m_conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > constants::timeBetweenBotAttacks);
+			m_conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS);
 
 			m_conditionRoll = false;
 		}

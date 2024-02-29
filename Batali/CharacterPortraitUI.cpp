@@ -10,8 +10,8 @@ void CharacterPortraitUI::init(const std::string& textureName, const std::string
 {
 	setTexture(textureName, texturePath);
 
-	m_spriteWidth = constants::characterPortraitSpriteWidth;
-	m_spriteHeight = constants::characterPortraitSpriteHeight;
+	m_spriteWidth = CHARACTER_PORTRAIT_WIDTH;
+	m_spriteHeight = CHARACTER_PORTRAIT_HEIGHT;
 
 	setOrigin(m_spriteWidth / 2.f, m_spriteHeight / 2.f);
 

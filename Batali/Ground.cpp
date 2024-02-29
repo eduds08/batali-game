@@ -3,8 +3,8 @@
 Ground::Ground(sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
 	: DrawableEntity{}
 {
-	m_spriteWidth = constants::tileSizeI;
-	m_spriteHeight = constants::tileSizeI;
+	m_spriteWidth = TILE_SIZE_INT;
+	m_spriteHeight = TILE_SIZE_INT;
 
 	m_sprite.setTexture(*m_texturesManager.loadAndGetTexture(textureName, texturePath));
 

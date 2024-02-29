@@ -3,7 +3,7 @@
 FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: Character{ firstPosition, playerNumber, isBot, player }
 {
-	m_hitboxHeight = constants::fireKnightSwordHitboxHeight;
+	m_hitboxHeight = FIRE_KNIGHT_ATTACK_HEIGHT;
 
 	// DEBUG
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
@@ -21,13 +21,13 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	initTexturesMap();
 
 	// Initialize sprite
-	m_spriteWidth = constants::fireKnightSpriteWidth;
-	m_spriteHeight = constants::fireKnightSpriteHeight;
+	m_spriteWidth = FIRE_KNIGHT_SPRITE_WIDTH;
+	m_spriteHeight = FIRE_KNIGHT_SPRITE_HEIGHT;
 	changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true);
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
 	// Initialize shape
-	m_shape.setSize(sf::Vector2f{ constants::fireKnightShapeWidth, constants::fireKnightShapeHeight});
+	m_shape.setSize(sf::Vector2f{ FIRE_KNIGHT_SHAPE_WIDTH, FIRE_KNIGHT_SHAPE_HEIGHT});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
 
@@ -36,8 +36,8 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	m_shape.setOutlineThickness(1.f);
 
 	// Initialize other attributes
-	m_jumpHeight = constants::fireKnightJumpHeight;
-	m_hp = constants::fireKnightHp;
+	m_jumpHeight = FIRE_KNIGHT_JUMP_HEIGHT;
+	m_hp = FIRE_KNIGHT_HP;
 
 	if (m_isBot)
 	{
@@ -46,24 +46,24 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 		// Mersenne Twister random number generator
 		std::mt19937 gen(rd());
 		// Generates uniform distributed random number in a specific interval
-		std::uniform_real_distribution<> distribution1(constants::minBotSpeed, constants::maxBotSpeed);
-		std::uniform_real_distribution<> distribution2(constants::minBotDistanceFromPlayer, constants::maxBotDistanceFromPlayer);
+		std::uniform_real_distribution<> distribution1(MIN_ENEMY_SPEED, MAX_ENEMY_SPEED);
+		std::uniform_real_distribution<> distribution2(MIN_ENEMY_DISTANCE_FROM_PLAYER, MAX_ENEMY_DISTANCE_FROM_PLAYER);
 
 		m_speed = static_cast<float>(distribution1(gen));
 		m_distanceFromPlayer = static_cast<float>(distribution2(gen));
 	}
 	else
 	{
-		m_speed = constants::fireKnightSpeed;
+		m_speed = FIRE_KNIGHT_SPEED;
 	}
 
-	m_hitboxWidthAttack1 = constants::fireKnightSwordHitboxWidthAttack1;
-	m_hitboxWidthAttack2 = constants::fireKnightSwordHitboxWidthAttack2;
-	m_hitboxWidthAirAttack = constants::fireKnightSwordHitboxWidthAirAttacking;
+	m_hitboxWidthAttack1 = FIRE_KNIGHT_ATTACK_1_WIDTH;
+	m_hitboxWidthAttack2 = FIRE_KNIGHT_ATTACK_2_WIDTH;
+	m_hitboxWidthAirAttack = FIRE_KNIGHT_AIR_ATTACK_WIDTH;
 
-	m_attack1Damage = constants::fireKnightAttack1Damage;
-	m_attack2Damage = constants::fireKnightAttack2Damage;
-	m_airAttackDamage = constants::fireKnightAirAttackDamage;
+	m_attack1Damage = FIRE_KNIGHT_ATTACK_1_DAMAGE;
+	m_attack2Damage = FIRE_KNIGHT_ATTACK_2_DAMAGE;
+	m_airAttackDamage = FIRE_KNIGHT_AIR_ATTACK_DAMAGE;
 }
 
 void FireKnight::updateHitbox()

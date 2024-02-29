@@ -45,7 +45,7 @@ protected:
 	// When m_hitted is true, the hitted sprite is set
 	bool m_hitted{ false };
 
-	float m_knockbackVelocity{ constants::knockbackSpeed };
+	float m_knockbackVelocity{ KNOCKBACK_SPEED };
 
 	int m_hp{};
 };

@@ -4,7 +4,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	: ButtonAuxState{ window }
 	, m_chosenGamemode{ chosenGamemode }
 {
-	m_currentState = constants::characterSelectionState;
+	m_currentState = CHARACTER_SELECTION_STATE;
 
 	// Initialize view
 	m_view = m_window.getDefaultView();
@@ -38,8 +38,8 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	}
 
 	// Initialize "play" and "back" buttons
-	initButton("Play", m_view.getCenter() + sf::Vector2f{ -130.f, 300.f }, m_chosenGamemode == "singleplayer" ? constants::characterSelectionToSingleplayerTransition : constants::characterSelectionToMultiplayerTransition);
-	initButton("Back", m_view.getCenter() + sf::Vector2f{ 130.f, 300.f }, constants::characterSelectionReset);
+	initButton("Play", m_view.getCenter() + sf::Vector2f{ -130.f, 300.f }, m_chosenGamemode == "singleplayer" ? CHARACTER_SELECTION_TO_SINGLEPLAYER : CHARACTER_SELECTION_TO_MULTIPLAYER);
+	initButton("Back", m_view.getCenter() + sf::Vector2f{ 130.f, 300.f }, CHARACTER_SELECTION_RESET);
 
 	m_buttonsBackground.setPosition(m_view.getCenter() + sf::Vector2f{ 0.f, 300.f });
 

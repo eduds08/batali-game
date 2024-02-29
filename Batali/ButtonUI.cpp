@@ -12,8 +12,8 @@ void ButtonUI::init(const std::string& textureName, const std::string& texturePa
 
 	setTexture(textureName, texturePath);
 
-	m_spriteWidth = constants::buttonSpriteWidth;
-	m_spriteHeight = constants::buttonSpriteHeight;
+	m_spriteWidth = BUTTON_WIDTH;
+	m_spriteHeight = BUTTON_HEIGHT;
 
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, m_spriteWidth, m_spriteHeight });
 

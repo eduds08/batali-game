@@ -3,6 +3,8 @@
 #include "SFML/Graphics.hpp"
 #include "Constants.h"
 
+using namespace constants;
+
 class ColliderEntity
 {
 public:

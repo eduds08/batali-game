@@ -5,17 +5,17 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	, m_deltaTime{ deltaTime }
 	, m_twoPlayers{ twoPlayers }
 {
-	m_currentState = constants::playingState;
+	m_currentState = PLAYING_STATE;
 
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
-		m_players.emplace_back(std::make_shared<FireKnight>(leftCharacterFirstPosition));
+		m_players.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
 		characterStatus1.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
 	}
 	else
 	{
-		m_players.emplace_back(std::make_shared<WindHashashin>(leftCharacterFirstPosition));
+		m_players.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
 		characterStatus1.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
 	}
 
@@ -28,12 +28,12 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	{
 		if (secondCharacter == "fire_knight")
 		{
-			m_players.emplace_back(std::make_shared<FireKnight>(rightCharacterFirstPosition, 2));
+			m_players.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 		else
 		{
-			m_players.emplace_back(std::make_shared<WindHashashin>(rightCharacterFirstPosition, 2));
+			m_players.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 
@@ -45,12 +45,12 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	{
 		if (secondCharacter == "fire_knight")
 		{
-			m_bots.emplace_back(std::make_unique<FireKnight>(rightCharacterFirstPosition, 0, true, m_players[0]));
+			m_bots.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_players[0]));
 			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 		else
 		{
-			m_bots.emplace_back(std::make_unique<WindHashashin>(rightCharacterFirstPosition, 0, true, m_players[0]));
+			m_bots.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_players[0]));
 			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 
@@ -242,20 +242,20 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	m_view.setCenter((tilesAmountPerRow / 2.f) * tileSizeF, (tilesAmountPerCol / 2.f) * tileSizeF);
+	m_view.setCenter((TILES_AMOUNT_PER_ROW / 2.f) * TILE_SIZE_FLOAT, (TILES_AMOUNT_PER_COL / 2.f) * TILE_SIZE_FLOAT);
 	m_window.setView(m_view);
 
 	characterStatus2.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f });
 
-	characterStatus2.m_healthBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 3.f / 4.f, 0.f });
-	characterStatus2.m_staminaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 3.f / 4.f, -18.f * 3.f / 4.f });
-	characterStatus2.m_manaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 3.f / 4.f, -36.f * 3.f / 4.f });
+	characterStatus2.m_healthBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 0.75f, 0.f });
+	characterStatus2.m_staminaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 0.75f, -18.f * 0.75f });
+	characterStatus2.m_manaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 0.75f, -36.f * 0.75f });
 
-	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSizeF;
-	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSizeF;
+	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
+	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;
 
-	m_topViewLimit = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSizeF;
-	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
+	m_topViewLimit = m_view.getCenter().y - m_view.getSize().y / 2.f - TILE_SIZE_FLOAT;
+	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + TILE_SIZE_FLOAT;
 }
 
 void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
@@ -270,12 +270,12 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 
 	while (std::getline(mapFile, row))
 	{
-		for (int i = 0; i < tilesAmountPerRow; i++)
+		for (int i = 0; i < TILES_AMOUNT_PER_ROW; i++)
 		{
 			mapFile >> tileId;
 			if (tileId != "0")
 			{
-				m_grounds.emplace_back(Ground{ sf::Vector2f{x * tileSizeF + tileSizeF / 2.f, y * tileSizeF + tileSizeF / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
+				m_grounds.emplace_back(Ground{ sf::Vector2f{x * TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f, y * TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
 			}
 			++x;
 		}
@@ -288,7 +288,7 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 
 void PlayingState::updateTexturesAndAnimations()
 {
-	while (m_currentState == constants::playingState)
+	while (m_currentState == PLAYING_STATE)
 	{
 		if (!m_onPause)
 		{
@@ -316,7 +316,7 @@ void PlayingState::updateTexturesAndAnimations()
 
 void PlayingState::updatePlayerInput()
 {
-	while (m_currentState == constants::playingState)
+	while (m_currentState == PLAYING_STATE)
 	{
 		if (!m_onPause)
 		{

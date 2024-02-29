@@ -8,7 +8,7 @@ DamageEntity::DamageEntity(sf::Vector2f firstPosition)
 void DamageEntity::updateDamage()
 {
 	// handleCollision() is called after this, so if the entity collides with a wall, knockback is set to 0
-	m_knockbackVelocity = constants::knockbackSpeed;
+	m_knockbackVelocity = KNOCKBACK_SPEED;
 
 	// Makes sure the Hitted animation is only played once per attack
 	if (m_hitted && m_animationEnd)
@@ -23,7 +23,7 @@ void DamageEntity::updateDamage()
 
 	// While on damageCooldown, the entity is immune to attacks. Useful to make the entity being hit only once per attack
 	m_damageCooldown = m_damageCooldownClock.getElapsedTime().asSeconds();
-	if (m_damageCooldown > constants::cooldownDamageTime)
+	if (m_damageCooldown > COOLDOWN_IMMUNE_TIME)
 	{
 		m_inDamageCooldown = false;
 	}
@@ -98,7 +98,7 @@ void DamageEntity::updateGravityWhenDying(float& deltaTime)
 	if (m_dying)
 	{
 		m_velocity.x = 0.f;
-		m_velocity.y += constants::gravity * deltaTime;
+		m_velocity.y += GRAVITY * deltaTime;
 		move(deltaTime);
 	}
 }
