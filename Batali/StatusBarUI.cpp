@@ -3,14 +3,7 @@
 StatusBarUI::StatusBarUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size)
 	: UI{}
 {
-	setTexture(textureName, texturePath);
-	
-	setPosition(position);
-
-	m_spriteWidth = size.x;
-	m_spriteHeight = size.y;
-
-	m_sprite.setTextureRect(sf::IntRect{ 0, 0, m_spriteWidth, m_spriteHeight });
+	init(textureName, texturePath, position, size);
 }
 
 void StatusBarUI::init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size)

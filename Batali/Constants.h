@@ -25,6 +25,9 @@ namespace constants
 	const sf::Vector2f leftCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF - 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
 	const sf::Vector2f rightCharacterFirstPosition{ sf::Vector2f{(tilesAmountPerRow / 2.f) * tileSizeF + 50.f, (tilesAmountPerCol / 2.f) * tileSizeF} };
 
+	constexpr int CHARACTER_LOGO_STATUS_WIDTH{ 78 };
+	constexpr int CHARACTER_LOGO_STATUS_HEIGHT{ 72 };
+
 	/* FIRE KNIGHT CONSTANTS: */
 
 	constexpr int fireKnightSpriteWidth{ 288 };

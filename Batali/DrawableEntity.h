@@ -1,6 +1,9 @@
 #pragma once
 
 #include "TextureManager.h"
+#include "Constants.h"
+
+using namespace constants;
 
 class DrawableEntity
 {

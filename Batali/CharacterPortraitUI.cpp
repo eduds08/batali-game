@@ -3,27 +3,7 @@
 CharacterPortraitUI::CharacterPortraitUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, bool isBig, sf::Color borderColor)
 	: UI{}
 {
-	setTexture(textureName, texturePath);
-
-	m_spriteWidth = constants::characterPortraitSpriteWidth;
-	m_spriteHeight = constants::characterPortraitSpriteHeight;
-
-	setOrigin(sf::Vector2f{m_spriteWidth / 2.f, m_spriteHeight / 2.f});
-
-	float spriteScale = isBig ? 5.f : 1.f;
-
-	setScale(spriteScale);
-
-	setPosition(position);
-
-	m_portraitBorder = sf::RectangleShape{sf::Vector2f{m_spriteWidth * spriteScale, m_spriteHeight * spriteScale}};
-
-	m_portraitBorder.setOutlineThickness(isBig ? 1.f : 3.f);
-	m_portraitBorder.setOrigin(m_portraitBorder.getSize() / 2.f);
-	m_portraitBorder.setPosition(m_sprite.getPosition());
-	m_portraitBorder.setFillColor(sf::Color::Black);
-
-	m_portraitBorder.setOutlineColor(borderColor);
+	init(textureName, texturePath, position, isBig, borderColor);
 }
 
 void CharacterPortraitUI::init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, bool isBig, sf::Color borderColor)

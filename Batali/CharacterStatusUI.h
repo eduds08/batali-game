@@ -13,9 +13,9 @@ public:
 
 	void update();
 
-	StatusBarUI m_healthBar;
-	StatusBarUI m_staminaBar;
-	StatusBarUI m_manaBar;
+	StatusBarUI m_healthBar{};
+	StatusBarUI m_staminaBar{};
+	StatusBarUI m_manaBar{};
 private:
 	
 };
