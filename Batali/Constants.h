@@ -13,9 +13,6 @@ namespace constants
 
 	constexpr float KNOCKBACK_SPEED{ 300.f };
 
-	constexpr int HEALTH_BAR_WIDTH{ 48 };
-	constexpr int HEALTH_BAR_HEIGHT{ 16 };
-
 	constexpr int BUTTON_WIDTH{ 46 };
 	constexpr int BUTTON_HEIGHT{ 14 };
 
@@ -27,6 +24,15 @@ namespace constants
 
 	constexpr int CHARACTER_LOGO_STATUS_WIDTH{ 78 };
 	constexpr int CHARACTER_LOGO_STATUS_HEIGHT{ 72 };
+
+	constexpr int HEALTH_BAR_WIDTH{ 153 };
+	constexpr int HEALTH_BAR_HEIGHT{ 18 };
+
+	constexpr int STAMINA_BAR_WIDTH{ 141 };
+	constexpr int STAMINA_BAR_HEIGHT{ 18 };
+
+	constexpr int MANA_BAR_WIDTH{ 120 };
+	constexpr int MANA_BAR_HEIGHT{ 36 };
 
 	/* FIRE KNIGHT CONSTANTS: */
 

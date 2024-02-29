@@ -14,25 +14,17 @@ void CharacterStatusUI::init(const std::string& textureName, const std::string& 
 	m_spriteWidth = CHARACTER_LOGO_STATUS_WIDTH;
 	m_spriteHeight = CHARACTER_LOGO_STATUS_HEIGHT;
 
-	m_healthBar.init("healthBar", "./assets/ui/leftHealthBar.png", position + sf::Vector2f{ static_cast<float>(m_spriteWidth) * 0.75f, 0.f }, sf::Vector2i{153, 18});
-	m_staminaBar.init("staminaBar", "./assets/ui/leftStaminaBar.png", position + sf::Vector2f{ static_cast<float>(m_spriteWidth) * 0.75f, 18.f * 0.75f }, sf::Vector2i{141, 18});
-	m_manaBar.init("manaBar", "./assets/ui/leftManaBar.png", position + sf::Vector2f{ static_cast<float>(m_spriteWidth) * 0.75f, 36.f * 0.75f }, sf::Vector2i{120, 36});
+	m_healthBar.init("healthBar", "./assets/ui/leftHealthBar.png", position + sf::Vector2f{ static_cast<float>(m_spriteWidth), 0.f }, sf::Vector2i{ HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT });
+	m_staminaBar.init("staminaBar", "./assets/ui/leftStaminaBar.png", position + sf::Vector2f{ static_cast<float>(m_spriteWidth), 18.f }, sf::Vector2i{ STAMINA_BAR_WIDTH, STAMINA_BAR_HEIGHT });
+	m_manaBar.init("manaBar", "./assets/ui/leftManaBar.png", position + sf::Vector2f{ static_cast<float>(m_spriteWidth), 36.f }, sf::Vector2i{ MANA_BAR_WIDTH, MANA_BAR_HEIGHT });
 
 	if (!onRight)
 	{
-		flipSprite(0.75f);
+		flipSprite();
 
-		m_healthBar.flipSprite(0.75f);
-		m_staminaBar.flipSprite(0.75f);
-		m_manaBar.flipSprite(0.75f);
-	}
-	else
-	{
-		setScale(0.75f);
-
-		m_healthBar.setScale(0.75f);
-		m_staminaBar.setScale(0.75f);
-		m_manaBar.setScale(0.75f);
+		m_healthBar.flipSprite();
+		m_staminaBar.flipSprite();
+		m_manaBar.flipSprite();
 	}
 
 	setPosition(position);
