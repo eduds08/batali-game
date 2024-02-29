@@ -41,4 +41,7 @@ protected:
 	float m_jumpHeight{};
 
 	bool m_onRoll{ false };
+
+	sf::Clock m_staminaRecoverClock{};
+	float m_staminaRecoverTime{};
 };

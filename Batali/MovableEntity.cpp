@@ -32,6 +32,11 @@ void MovableEntity::move(float& deltaTime)
 
 void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll)
 {
+	if (m_stamina == 100)
+	{
+		m_staminaRecoverClock.restart();
+	}
+
 	m_velocity.x = 0.f;
 	m_isRunning = true;
 
@@ -52,15 +57,9 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	}
 
 	// Only can roll when on ground and not on Hitted animation
-	if (conditionRoll && m_canJump && !getHitted() && m_stamina > 0)
+	if (conditionRoll && m_canJump && !getHitted() && !m_onRoll && m_stamina > 0 && m_currentTexture != m_entityName + "Roll")
 	{
-		if (!m_onRoll)
-		{
-			if (m_stamina >= 0)
-			{
-				m_stamina -= 50;
-			}
-		}
+		m_stamina -= 50;
 		m_onRoll = true;
 	}
 
@@ -70,7 +69,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	}
 
 	// End onRoll animation
-	if (m_onRoll && m_animationEnd)
+	if (m_onRoll && m_animationEnd && m_currentTexture == m_entityName + "Roll")
 	{
 		m_onRoll = false;
 	}
@@ -89,5 +88,15 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	if (getHitted())
 	{
 		m_velocity.x = 0.f;
+	}
+
+	m_staminaRecoverTime = m_staminaRecoverClock.getElapsedTime().asSeconds();
+	if (m_staminaRecoverTime > 2.f)
+	{
+		if (m_stamina < 100)
+		{
+			m_stamina += 50;
+		}
+		m_staminaRecoverClock.restart();
 	}
 }

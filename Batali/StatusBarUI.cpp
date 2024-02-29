@@ -19,7 +19,7 @@ void StatusBarUI::init(const std::string& textureName, const std::string& textur
 
 void StatusBarUI::update()
 {
-	for (int i = 0; i < static_cast<int>(m_sprite.getTexture()->getSize().x / m_spriteWidth) - 1; ++i)
+	for (int i = 0; i <= static_cast<int>(m_sprite.getTexture()->getSize().x / m_spriteWidth) - 1; ++i)
 	{
 		if (*m_entityStatus <= m_entityTotalStatusFraction * i)
 		{

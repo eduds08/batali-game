@@ -17,13 +17,11 @@ public:
 	// Changes the entity's texture according to its action (running, jumping, attacking, etc...)
 	virtual void updateTexture();
 
-	void setConditionRunLeft(bool conditionRunLeft) { m_conditionRunLeft = conditionRunLeft; }
-	void setConditionRunRight(bool conditionRunRight) { m_conditionRunRight = conditionRunRight; }
-	void setConditionJump(bool conditionJump) { m_conditionJump = conditionJump; }
-	void setConditionAttack(bool conditionAttack) { m_conditionAttack = conditionAttack; }
-	void setConditionRoll(bool conditionRoll) { m_conditionRoll = conditionRoll; }
-
-	
+	void setConditionRunLeft(bool conditionRunLeft, bool& resetClock) { m_conditionRunLeft = conditionRunLeft; if (conditionRunLeft) { resetClock = true; } }
+	void setConditionRunRight(bool conditionRunRight, bool& resetClock) { m_conditionRunRight = conditionRunRight; if (conditionRunRight) { resetClock = true; }}
+	void setConditionJump(bool conditionJump, bool& resetClock) { m_conditionJump = conditionJump; if (conditionJump) { resetClock = true; } }
+	void setConditionAttack(bool conditionAttack, bool& resetClock) { m_conditionAttack = conditionAttack; if (conditionAttack) { resetClock = true; } }
+	void setConditionRoll(bool conditionRoll, bool& resetClock) { m_conditionRoll = conditionRoll; if (conditionRoll) { resetClock = true; } }
 
 protected:
 	bool m_isBot{};
@@ -54,6 +52,4 @@ protected:
 	int m_attack1Damage{};
 	int m_attack2Damage{};
 	int m_airAttackDamage{};
-
-	
 };

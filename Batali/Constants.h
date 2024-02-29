@@ -80,8 +80,8 @@ namespace constants
 
 	/* BOT CONSTANTS: */
 
-	constexpr float MIN_ENEMY_SPEED{ 200.f };
-	constexpr float MAX_ENEMY_SPEED{ 230.f };
+	constexpr float MIN_ENEMY_SPEED{ 170.f };
+	constexpr float MAX_ENEMY_SPEED{ 180.f };
 	constexpr float MIN_ENEMY_DISTANCE_FROM_PLAYER{ 30.f };
 	constexpr float MAX_ENEMY_DISTANCE_FROM_PLAYER{ 40.f };
 
