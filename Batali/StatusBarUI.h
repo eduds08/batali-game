@@ -14,6 +14,8 @@ public:
 	void setEntityStatus(const int* entityStatus);
 
 	const std::string& getDirection() { return m_direction; }
+	
+	void flipSprite() { m_sprite.setScale(-1.f, 1.f); }
 
 private:
 	int m_entityTotalStatusFraction{};

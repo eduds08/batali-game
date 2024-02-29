@@ -12,8 +12,15 @@ CharacterStatusUI::CharacterStatusUI(const std::string& textureName, const std::
 
 	if (!onRight)
 	{
-		m_sprite.setOrigin(sf::Vector2f{ static_cast<float>(m_spriteWidth), 0.f});
-		m_sprite.setPosition(position);
+		m_sprite.setScale(-1.f, 1.f);
+
+		m_healthBar.flipSprite();
+		m_staminaBar.flipSprite();
+		m_manaBar.flipSprite();
+
+		m_healthBar.setPosition(position - sf::Vector2f{ 78.f, 0.f });
+		m_staminaBar.setPosition(position - sf::Vector2f{ 78.f, -18.f });
+		m_manaBar.setPosition(position - sf::Vector2f{ 78.f, -36.f });
 	}
 }
 

@@ -66,5 +66,5 @@ private:
 	bool m_twoPlayers{};
 
 	CharacterStatusUI fireKnightStatus{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() - m_view.getSize() / 2.f };
-	CharacterStatusUI fireKnightStatus2{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ m_view.getSize().x / 2.f, -m_view.getSize().y / 2.f }, false};
+	CharacterStatusUI fireKnightStatus2{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false };
 };

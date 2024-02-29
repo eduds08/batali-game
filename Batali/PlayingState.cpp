@@ -58,7 +58,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 
 	// Initialize View
 	m_view = m_window.getDefaultView();
-	//m_view.zoom(0.5f);
+	m_view.zoom(0.5f);
 	m_window.setView(m_view);
 }
 
@@ -233,8 +233,13 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 void PlayingState::updateView()
 {
 	m_view.setCenter((tilesAmountPerRow / 2.f) * tileSizeF, (tilesAmountPerCol / 2.f) * tileSizeF);
-
 	m_window.setView(m_view);
+
+	fireKnightStatus2.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f });
+
+	fireKnightStatus2.m_healthBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f, 0.f });
+	fireKnightStatus2.m_staminaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f, -18.f });
+	fireKnightStatus2.m_manaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f, -36.f });
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSizeF;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSizeF;
