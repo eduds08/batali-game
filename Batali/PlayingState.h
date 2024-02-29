@@ -63,4 +63,6 @@ private:
 
 	CharacterStatusUI characterStatus1{};
 	CharacterStatusUI characterStatus2{};
+
+	bool m_debugMode{ false };
 };

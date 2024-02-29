@@ -84,6 +84,11 @@ void PlayingState::update()
 	{
 		m_onPause = !m_onPause;
 	}
+
+	if (m_pressedKey == sf::Keyboard::Scancode::T)
+	{
+		m_debugMode = !m_debugMode;
+	}
 	
 	if (!m_onPause)
 	{
@@ -112,21 +117,25 @@ void PlayingState::render()
 {
 	for (auto& player : m_players)
 	{
-		m_window.draw(player->getShape());
+		if (m_debugMode)
+			m_window.draw(player->getShape());
 		m_window.draw(player->getSprite());
 	}
 
 	for (auto& bot : m_bots)
 	{
-		m_window.draw(bot->getShape());
+		if (m_debugMode)
+			m_window.draw(bot->getShape());
 		m_window.draw(bot->getSprite());
-		m_window.draw(bot->getAttackHitbox());
+		if (m_debugMode)
+			m_window.draw(bot->getAttackHitbox());
 	}
 
-	for (auto& player : m_players)
-	{
-		m_window.draw(player->getAttackHitbox());
-	}
+	if (m_debugMode)
+		for (auto& player : m_players)
+		{
+			m_window.draw(player->getAttackHitbox());
+		}
 
 	for (auto& ground : m_grounds)
 	{
@@ -230,13 +239,16 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
 
 	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
+	if (attackingEntity.getDamage() != FIRE_KNIGHT_ATTACK_2_DAMAGE)
 	{
-		for (auto& ground : m_grounds)
+		while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
 		{
-			updateEntityCollisionWithGrounds(attackedEntity, ground);
+			for (auto& ground : m_grounds)
+			{
+				updateEntityCollisionWithGrounds(attackedEntity, ground);
+			}
+			attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 		}
-		attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 	}
 }
 

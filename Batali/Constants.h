@@ -74,7 +74,7 @@ namespace constants
 	constexpr float WIND_HASHASHIN_AIR_ATTACK_WIDTH{ 53.f };
 	constexpr float WIND_HASHASHIN_ATTACK_HEIGHT{ 20.f };
 
-	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{80};
+	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{90};
 	constexpr int WIND_HASHASHIN_ATTACK_2_DAMAGE{75};
 	constexpr int WIND_HASHASHIN_AIR_ATTACK_DAMAGE{65};
 
