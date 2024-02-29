@@ -316,49 +316,32 @@ void PlayingState::updateTexturesAndAnimations()
 
 void PlayingState::updatePlayerInput()
 {
-	sf::Clock inputDelayClock{};
-	float inputDelayTime{};
-
-	bool resetClock = false;
-
 	while (m_currentState == PLAYING_STATE)
 	{
 		if (!m_onPause)
 		{
 			for (auto& player : m_players)
 			{
-				inputDelayTime = inputDelayClock.getElapsedTime().asSeconds();
 				if (player->getPlayerNumber() == 1)
 				{
-					if (inputDelayTime > 0.07f)
-					{
-						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left), resetClock);
-						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right), resetClock);
-						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up), resetClock);
+					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
 
-						player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L), resetClock);
+					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L));
 
-						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K), resetClock);
-					}
+					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
 				}
 				else if (player->getPlayerNumber() == 2)
 				{
-					if (inputDelayTime > 0.07f)
-					{
-						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A), resetClock);
-						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D), resetClock);
-						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W), resetClock);
+					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
+					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
+					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
 
-						player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift), resetClock);
+					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift));
 
-						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space), resetClock);
-					}
+					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
 				}
-				if (resetClock)
-				{
-					inputDelayClock.restart();
-				}
-				resetClock = false;
 			}
 		}
 	}
