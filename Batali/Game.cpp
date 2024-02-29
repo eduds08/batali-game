@@ -39,6 +39,14 @@ void Game::run()
 
 				m_window.close();
 			}
+
+			if (m_event.type == sf::Event::KeyPressed)
+			{
+				if (m_stateContext != nullptr)
+				{
+					m_stateContext->setPressedKey(m_event.key.scancode);
+				}
+			}
 		}
 
 		update();

@@ -80,11 +80,9 @@ PlayingState::~PlayingState()
 
 void PlayingState::update()
 {
-	m_pauseDelay = m_pauseClock.getElapsedTime().asSeconds();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::P) && m_pauseDelay > 0.3f)
+	if (m_pressedKey == sf::Keyboard::Scancode::P)
 	{
 		m_onPause = !m_onPause;
-		m_pauseClock.restart();
 	}
 	
 	if (!m_onPause)
@@ -106,6 +104,8 @@ void PlayingState::update()
 
 		updateView();
 	}
+
+	m_pressedKey = sf::Keyboard::Scancode::Unknown;
 }
 
 void PlayingState::render()

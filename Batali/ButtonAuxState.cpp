@@ -19,8 +19,6 @@ void ButtonAuxState::initButton(const std::string& text, sf::Vector2f position, 
 
 void ButtonAuxState::updateButtons(bool isUpDown)
 {
-	delayTime = delayClock.getElapsedTime().asSeconds();
-
 	sf::Keyboard::Scancode aheadKey = sf::Keyboard::Scancode::Down;
 	sf::Keyboard::Scancode backKey = sf::Keyboard::Scancode::Up;
 
@@ -31,23 +29,19 @@ void ButtonAuxState::updateButtons(bool isUpDown)
 	}
 
 	// Move ahead
-	if (sf::Keyboard::isKeyPressed(aheadKey) && delayTime > 0.18f)
+	if (m_pressedKey == aheadKey)
 	{
 		if (m_onHoverButton < m_buttons.size() - 1)
 		{
 			++m_onHoverButton;
-
-			delayClock.restart();
 		}
 	}
 	// Move back
-	else if (sf::Keyboard::isKeyPressed(backKey) && delayTime > 0.25f)
+	else if (m_pressedKey == backKey)
 	{
 		if (m_onHoverButton > 0)
 		{
 			--m_onHoverButton;
-
-			delayClock.restart();
 		}
 	}
 
@@ -56,20 +50,20 @@ void ButtonAuxState::updateButtons(bool isUpDown)
 	{
 		m_buttons[i].update(i == m_onHoverButton);
 		m_buttonsTexts[i].setPosition(m_buttons[i].getPosition());
-		//m_buttonsTexts[i].setFillColor(sf::Color{231, 210, 124});
 
 		if (i == m_onHoverButton)
 		{
 			m_buttonsTexts[i].setPosition(m_buttons[i].getPosition() + sf::Vector2f{ 0.f, 2.f });
-			//m_buttonsTexts[i].setFillColor(sf::Color::White);
 		}
 	}
 
 	// Button pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && delayTime > 0.18f)
+	if (m_pressedKey == sf::Keyboard::Scancode::Enter)
 	{
 		pressButton(m_buttons[m_onHoverButton]);
 	}
+
+	m_pressedKey = sf::Keyboard::Scancode::Unknown;
 }
 
 void ButtonAuxState::renderButtons()

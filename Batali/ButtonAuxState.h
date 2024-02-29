@@ -23,8 +23,5 @@ protected:
 	std::vector<ButtonUI> m_buttons{};
 	std::vector<sf::Text> m_buttonsTexts{};
 
-	sf::Clock delayClock{};
-	float delayTime{};
-
 	size_t m_onHoverButton{ 0 };
 };

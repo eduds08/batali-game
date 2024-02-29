@@ -103,26 +103,20 @@ void CharacterSelectionState::render()
 
 void CharacterSelectionState::updateCharacterSelectionButtons()
 {
-	delayTime = delayClock.getElapsedTime().asSeconds();
-
 	// Move right
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right) && delayTime > 0.18f)
+	if (m_pressedKey == sf::Keyboard::Scancode::Right)
 	{
 		if (m_onHoverCharacterButton < m_smallCharacterPortraits.size() - 1)
 		{
 			++m_onHoverCharacterButton;
-
-			delayClock.restart();
 		}
 	}
 	// Move left
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left) && delayTime > 0.18f)
+	else if (m_pressedKey == sf::Keyboard::Scancode::Left)
 	{
 		if (m_onHoverCharacterButton > 0)
 		{
 			--m_onHoverCharacterButton;
-
-			delayClock.restart();
 		}
 	}
 
@@ -133,11 +127,12 @@ void CharacterSelectionState::updateCharacterSelectionButtons()
 	}
 
 	// Select character
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter) && delayTime > 0.25f)
+	if (m_pressedKey == sf::Keyboard::Scancode::Enter)
 	{
 		selectCharacter();
-		delayClock.restart();
 	}
+
+	m_pressedKey = sf::Keyboard::Scancode::Unknown;
 }
 
 void CharacterSelectionState::selectCharacter()

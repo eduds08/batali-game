@@ -41,10 +41,6 @@ public:
 	void updatePlayerInput();
 
 private:
-	// fix bug where one press of the input pause and unpause many times in a row
-	sf::Clock m_pauseClock{};
-	float m_pauseDelay{};
-
 	std::vector<std::shared_ptr<Character>> m_players{};
 	std::vector<std::unique_ptr<Character>> m_bots{};
 
