@@ -2,12 +2,12 @@
 
 #include "StateContext.h"
 #include "Ground.h"
-#include "HealthBarUI.h"
 #include <thread>
 #include <fstream>
 #include "WindHashashin.h"
 #include "FireKnight.h"
 #include <memory>
+#include "CharacterStatusUI.h"
 
 class PlayingState : public StateContext
 {
@@ -48,8 +48,6 @@ private:
 	std::vector<std::shared_ptr<Character>> m_players{};
 	std::vector<std::unique_ptr<Character>> m_bots{};
 
-	std::vector<HealthBarUI> m_healthBars{};
-
 	std::vector<Ground> m_grounds{};
 
 	std::thread animationThread;
@@ -66,4 +64,7 @@ private:
 	bool m_onPause{ false };
 
 	bool m_twoPlayers{};
+
+	CharacterStatusUI fireKnightStatus{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() - m_view.getSize() / 2.f };
+	CharacterStatusUI fireKnightStatus2{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ m_view.getSize().x / 2.f, -m_view.getSize().y / 2.f }, false};
 };

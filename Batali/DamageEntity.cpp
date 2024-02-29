@@ -39,6 +39,11 @@ void DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 
 		m_hp -= damage;
 
+		if (m_remainingManaToUltimate > 0)
+		{
+			--m_remainingManaToUltimate;
+		}
+
 		if (attackDirection < 0.f)
 		{
 			// attack coming from left

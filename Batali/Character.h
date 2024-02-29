@@ -23,6 +23,8 @@ public:
 	void setConditionAttack(bool conditionAttack) { m_conditionAttack = conditionAttack; }
 	void setConditionRoll(bool conditionRoll) { m_conditionRoll = conditionRoll; }
 
+	
+
 protected:
 	bool m_isBot{};
 
@@ -52,4 +54,6 @@ protected:
 	int m_attack1Damage{};
 	int m_attack2Damage{};
 	int m_airAttackDamage{};
+
+	
 };

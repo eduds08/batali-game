@@ -16,7 +16,14 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	{
 		m_players.emplace_back(std::make_shared<WindHashashin>(leftCharacterFirstPosition));
 	}
-	m_healthBars.emplace_back(HealthBarUI("leftHealthBar", "./assets/ui/leftHealthBar.png", &m_players[0]->getHp()));
+
+	fireKnightStatus.m_healthBar.setEntityStatus(&m_players[0]->getHp());
+	fireKnightStatus.m_staminaBar.setEntityStatus(&m_players[0]->m_stamina);
+	fireKnightStatus.m_manaBar.setEntityStatus(&m_players[0]->m_remainingManaToUltimate);
+
+	fireKnightStatus2.m_healthBar.setEntityStatus(&m_players[0]->getHp());
+	fireKnightStatus2.m_staminaBar.setEntityStatus(&m_players[0]->m_stamina);
+	fireKnightStatus2.m_manaBar.setEntityStatus(&m_players[0]->m_remainingManaToUltimate);
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -29,8 +36,6 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		{
 			m_players.emplace_back(std::make_shared<WindHashashin>(rightCharacterFirstPosition, 2));
 		}
-		
-		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_players[1]->getHp()));
 	}
 	else
 	{
@@ -42,8 +47,6 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		{
 			m_bots.emplace_back(std::make_unique<WindHashashin>(rightCharacterFirstPosition, 0, true, m_players[0]));
 		}
-
-		m_healthBars.emplace_back(HealthBarUI("rightHealthBar", "./assets/ui/rightHealthBar.png", &m_bots[0]->getHp()));
 	}
 
 	// Initialize map
@@ -55,7 +58,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 
 	// Initialize View
 	m_view = m_window.getDefaultView();
-	m_view.zoom(0.5f);
+	//m_view.zoom(0.5f);
 	m_window.setView(m_view);
 }
 
@@ -78,10 +81,8 @@ void PlayingState::update()
 	{
 		updateCollision();
 
-		for (auto& healthBar : m_healthBars)
-		{
-			healthBar.update();
-		}
+		fireKnightStatus.update();
+		fireKnightStatus2.update();
 
 		for (auto& player : m_players)
 		{
@@ -127,10 +128,15 @@ void PlayingState::render()
 		}
 	}
 
-	for (auto& healthBar : m_healthBars)
-	{
-		m_window.draw(healthBar.getSprite());
-	}
+	m_window.draw(fireKnightStatus.getSprite());
+	m_window.draw(fireKnightStatus.m_healthBar.getSprite());
+	m_window.draw(fireKnightStatus.m_staminaBar.getSprite());
+	m_window.draw(fireKnightStatus.m_manaBar.getSprite());
+
+	m_window.draw(fireKnightStatus2.getSprite());
+	m_window.draw(fireKnightStatus2.m_healthBar.getSprite());
+	m_window.draw(fireKnightStatus2.m_staminaBar.getSprite());
+	m_window.draw(fireKnightStatus2.m_manaBar.getSprite());
 }
 
 void PlayingState::updateCollision()
@@ -235,18 +241,6 @@ void PlayingState::updateView()
 
 	m_topViewLimit = m_view.getCenter().y - m_view.getSize().y / 2.f - tileSizeF;
 	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + tileSizeF;
-
-	for (auto& healthBar : m_healthBars)
-	{
-		if (healthBar.getDirection() == "left")
-		{
-			healthBar.setPosition(m_view.getCenter() - m_view.getSize() / 2.f);
-		}
-		else
-		{
-			healthBar.setPosition(m_view.getCenter() + sf::Vector2f{m_view.getSize().x / 2.f, -1.f * m_view.getSize().y / 2.f});
-		}
-	}
 }
 
 void PlayingState::loadAndCreateMap(const std::string& mapFilePath)

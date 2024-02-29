@@ -25,6 +25,9 @@ public:
 	virtual bool getHitted() = 0;
 	virtual bool getIsAttacking() = 0;
 	virtual void setKnockbackVelocity(float knockbackVelocity) = 0;
+
+	int m_stamina{ 100 };
+	int m_remainingManaToUltimate{ 5 };
 protected:
 	sf::Vector2f m_velocity{};
 
