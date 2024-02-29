@@ -16,7 +16,7 @@ public:
 
 	void setScale(float scale) { m_sprite.setScale(scale, scale); }
 
-	void setOrigin(sf::Vector2f origin) { m_sprite.setOrigin(origin); }
+	void setOrigin(float originX, float originY) { m_sprite.setOrigin(originX, originY); }
 
 	void setTexture(const std::string& textureName, const std::string& texturePath);
 

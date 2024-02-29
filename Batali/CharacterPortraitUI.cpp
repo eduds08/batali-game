@@ -13,7 +13,7 @@ void CharacterPortraitUI::init(const std::string& textureName, const std::string
 	m_spriteWidth = constants::characterPortraitSpriteWidth;
 	m_spriteHeight = constants::characterPortraitSpriteHeight;
 
-	setOrigin(sf::Vector2f{m_spriteWidth / 2.f, m_spriteHeight / 2.f});
+	setOrigin(m_spriteWidth / 2.f, m_spriteHeight / 2.f);
 
 	float spriteScale = isBig ? 5.f : 1.f;
 

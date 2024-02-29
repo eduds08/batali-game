@@ -13,7 +13,7 @@ void BackgroundUI::init(const std::string& textureName, const std::string& textu
 	m_spriteWidth = size.x;
 	m_spriteHeight = size.y;
 
-	setOrigin(sf::Vector2f{static_cast<float>(m_spriteWidth) / 2.f, static_cast<float>(m_spriteHeight) / 2.f});
+	setOrigin(static_cast<float>(m_spriteWidth) / 2.f, static_cast<float>(m_spriteHeight) / 2.f);
 
 	setScale(scale);
 
