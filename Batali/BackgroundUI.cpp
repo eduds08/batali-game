@@ -1,14 +1,30 @@
 #include "BackgroundUI.h"
 
-BackgroundUI::BackgroundUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i spriteSize, float scale)
-	: UI{ textureName, texturePath, position }
+BackgroundUI::BackgroundUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size, float scale)
+	: UI{}
 {
-	m_spriteWidth = spriteSize.x;
-	m_spriteHeight = spriteSize.y;
+	setTexture(textureName, texturePath);
 
-	m_sprite.setOrigin(m_spriteWidth / 2.f, m_spriteHeight / 2.f);
+	m_spriteWidth = size.x;
+	m_spriteHeight = size.y;
 
-	m_sprite.setScale(scale, scale);
+	setOrigin(sf::Vector2f{static_cast<float>(m_spriteWidth) / 2.f, static_cast<float>(m_spriteHeight) / 2.f});
 
-	m_sprite.setPosition(position);
+	setScale(scale);
+
+	setPosition(position);
+}
+
+void BackgroundUI::init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size, float scale)
+{
+	setTexture(textureName, texturePath);
+
+	m_spriteWidth = size.x;
+	m_spriteHeight = size.y;
+
+	setOrigin(sf::Vector2f{static_cast<float>(m_spriteWidth) / 2.f, static_cast<float>(m_spriteHeight) / 2.f});
+
+	setScale(scale);
+
+	setPosition(position);
 }

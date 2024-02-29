@@ -6,11 +6,6 @@
 class UI : public DrawableEntity
 {
 public:
-	UI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position);
+	UI() = default;
 	virtual ~UI() = default;
-
-	void setPosition(sf::Vector2f position) { m_sprite.setPosition(position); }
-	sf::Vector2f getPosition() { return m_sprite.getPosition(); }
-protected:
-
 };

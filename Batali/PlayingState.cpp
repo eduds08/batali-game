@@ -11,19 +11,17 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	if (firstCharacter == "fire_knight")
 	{
 		m_players.emplace_back(std::make_shared<FireKnight>(leftCharacterFirstPosition));
+		characterStatus1.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
 	}
 	else
 	{
 		m_players.emplace_back(std::make_shared<WindHashashin>(leftCharacterFirstPosition));
+		characterStatus1.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
 	}
 
-	fireKnightStatus.m_healthBar.setEntityStatus(&m_players[0]->getHp());
-	fireKnightStatus.m_staminaBar.setEntityStatus(&m_players[0]->m_stamina);
-	fireKnightStatus.m_manaBar.setEntityStatus(&m_players[0]->m_remainingManaToUltimate);
-
-	fireKnightStatus2.m_healthBar.setEntityStatus(&m_players[0]->getHp());
-	fireKnightStatus2.m_staminaBar.setEntityStatus(&m_players[0]->m_stamina);
-	fireKnightStatus2.m_manaBar.setEntityStatus(&m_players[0]->m_remainingManaToUltimate);
+	characterStatus1.m_healthBar.setEntityStatus(&m_players[0]->getHp());
+	characterStatus1.m_staminaBar.setEntityStatus(&m_players[0]->m_stamina);
+	characterStatus1.m_manaBar.setEntityStatus(&m_players[0]->m_remainingManaToUltimate);
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -31,22 +29,34 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_players.emplace_back(std::make_shared<FireKnight>(rightCharacterFirstPosition, 2));
+			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 		else
 		{
 			m_players.emplace_back(std::make_shared<WindHashashin>(rightCharacterFirstPosition, 2));
+			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
+
+		characterStatus2.m_healthBar.setEntityStatus(&m_players[1]->getHp());
+		characterStatus2.m_staminaBar.setEntityStatus(&m_players[1]->m_stamina);
+		characterStatus2.m_manaBar.setEntityStatus(&m_players[1]->m_remainingManaToUltimate);
 	}
 	else
 	{
 		if (secondCharacter == "fire_knight")
 		{
 			m_bots.emplace_back(std::make_unique<FireKnight>(rightCharacterFirstPosition, 0, true, m_players[0]));
+			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 		else
 		{
 			m_bots.emplace_back(std::make_unique<WindHashashin>(rightCharacterFirstPosition, 0, true, m_players[0]));
+			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
+
+		characterStatus2.m_healthBar.setEntityStatus(&m_bots[0]->getHp());
+		characterStatus2.m_staminaBar.setEntityStatus(&m_bots[0]->m_stamina);
+		characterStatus2.m_manaBar.setEntityStatus(&m_bots[0]->m_remainingManaToUltimate);
 	}
 
 	// Initialize map
@@ -81,8 +91,8 @@ void PlayingState::update()
 	{
 		updateCollision();
 
-		fireKnightStatus.update();
-		fireKnightStatus2.update();
+		characterStatus1.update();
+		characterStatus2.update();
 
 		for (auto& player : m_players)
 		{
@@ -128,15 +138,15 @@ void PlayingState::render()
 		}
 	}
 
-	m_window.draw(fireKnightStatus.getSprite());
-	m_window.draw(fireKnightStatus.m_healthBar.getSprite());
-	m_window.draw(fireKnightStatus.m_staminaBar.getSprite());
-	m_window.draw(fireKnightStatus.m_manaBar.getSprite());
+	m_window.draw(characterStatus1.getSprite());
+	m_window.draw(characterStatus1.m_healthBar.getSprite());
+	m_window.draw(characterStatus1.m_staminaBar.getSprite());
+	m_window.draw(characterStatus1.m_manaBar.getSprite());
 
-	m_window.draw(fireKnightStatus2.getSprite());
-	m_window.draw(fireKnightStatus2.m_healthBar.getSprite());
-	m_window.draw(fireKnightStatus2.m_staminaBar.getSprite());
-	m_window.draw(fireKnightStatus2.m_manaBar.getSprite());
+	m_window.draw(characterStatus2.getSprite());
+	m_window.draw(characterStatus2.m_healthBar.getSprite());
+	m_window.draw(characterStatus2.m_staminaBar.getSprite());
+	m_window.draw(characterStatus2.m_manaBar.getSprite());
 }
 
 void PlayingState::updateCollision()
@@ -215,7 +225,7 @@ void PlayingState::updateEntityCollisionWithGrounds(MovableEntity& entity, Groun
 void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity)
 {
 	// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
-	float attackDirection = attackingEntity.getPosition().x - attackedEntity.getPosition().x;
+	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
 
 	attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
 
@@ -235,11 +245,11 @@ void PlayingState::updateView()
 	m_view.setCenter((tilesAmountPerRow / 2.f) * tileSizeF, (tilesAmountPerCol / 2.f) * tileSizeF);
 	m_window.setView(m_view);
 
-	fireKnightStatus2.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f });
+	characterStatus2.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f });
 
-	fireKnightStatus2.m_healthBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f, 0.f });
-	fireKnightStatus2.m_staminaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f, -18.f });
-	fireKnightStatus2.m_manaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f, -36.f });
+	characterStatus2.m_healthBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 3.f / 4.f, 0.f });
+	characterStatus2.m_staminaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 3.f / 4.f, -18.f * 3.f / 4.f });
+	characterStatus2.m_manaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ 78.f * 3.f / 4.f, -36.f * 3.f / 4.f });
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + tileSizeF;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - tileSizeF;

@@ -75,11 +75,11 @@ void FireKnight::updateHitbox()
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
 		if (m_currentTexture == m_entityName + "Attacking2")
 		{
-			m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * 10.f / 2.f, 0.f));
+			m_attackHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * 10.f / 2.f, 0.f));
 		}
 		else
 		{
-			m_attackHitbox.setPosition(getPosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
+			m_attackHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
 		}
 	}
 	else

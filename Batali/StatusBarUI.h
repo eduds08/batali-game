@@ -5,8 +5,10 @@
 class StatusBarUI : public UI
 {
 public:
-	StatusBarUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size);
+	StatusBarUI(const std::string& textureName = "", const std::string& texturePath = "", sf::Vector2f position = sf::Vector2f{ 0.f, 0.f }, sf::Vector2i size = sf::Vector2i{ 0, 0 });
 	virtual ~StatusBarUI() = default;
+
+	void init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size);
 
 	// Update the frame of the health bar sprite according to current entity's hp
 	void update();
@@ -14,8 +16,6 @@ public:
 	void setEntityStatus(const int* entityStatus);
 
 	const std::string& getDirection() { return m_direction; }
-	
-	void flipSprite() { m_sprite.setScale(-1.f, 1.f); }
 
 private:
 	int m_entityTotalStatusFraction{};

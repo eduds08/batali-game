@@ -53,11 +53,11 @@ void CharacterSelectionState::update()
 	{
 		if (m_onHoverCharacterButton == 0)
 		{
-			m_bigCharacterPortraits[m_playerChoice - 1].setSpriteTexture("fireKnightPortrait", "./assets/portrait_fire_knight.png");
+			m_bigCharacterPortraits[m_playerChoice - 1].setTexture("fireKnightPortrait", "./assets/portrait_fire_knight.png");
 		}
 		else if (m_onHoverCharacterButton == 1)
 		{
-			m_bigCharacterPortraits[m_playerChoice - 1].setSpriteTexture("windHashashinPortrait", "./assets/portrait_wind_hashashin.png");
+			m_bigCharacterPortraits[m_playerChoice - 1].setTexture("windHashashinPortrait", "./assets/portrait_wind_hashashin.png");
 		}
 
 		updateCharacterSelectionButtons();
