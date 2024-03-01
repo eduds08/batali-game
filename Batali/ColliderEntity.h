@@ -22,6 +22,7 @@ public:
 	// Shape's size
 	const sf::Vector2f& getSize() const { return m_shape.getSize(); }
 
+	void setShapePosition(sf::Vector2f position) { m_shape.setPosition(position); }
 	// Shape's position
 	const sf::Vector2f& getShapePosition() const { return m_shape.getPosition(); }
 

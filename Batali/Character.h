@@ -23,6 +23,8 @@ public:
 	void setConditionAttack(bool conditionAttack) { m_conditionAttack = conditionAttack; }
 	void setConditionRoll(bool conditionRoll) { m_conditionRoll = conditionRoll; }
 
+	void setConditionUltimate(bool conditionUltimate) { m_conditionUltimate = conditionUltimate; }
+
 protected:
 	bool m_isBot{};
 
@@ -45,11 +47,15 @@ protected:
 
 	bool m_conditionRoll{ false };
 
+	bool m_conditionUltimate{ false };
+
 	float m_hitboxWidthAttack1{};
 	float m_hitboxWidthAttack2{};
 	float m_hitboxWidthAirAttack{};
+	float m_hitboxWidthUltimate{};
 
 	int m_attack1Damage{};
 	int m_attack2Damage{};
 	int m_airAttackDamage{};
+	int m_ultimateDamage{};
 };

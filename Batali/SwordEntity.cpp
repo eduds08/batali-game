@@ -5,17 +5,25 @@ SwordEntity::SwordEntity(sf::Vector2f firstPosition)
 {
 }
 
-void SwordEntity::updateAttack(bool attackCondition)
+void SwordEntity::updateAttack(bool attackCondition, bool ultimateCondition)
 {
-	if (attackCondition && m_canJump && !m_isAttacking && !m_onRoll)
+	if (attackCondition && m_canJump && !m_isAttacking && !m_onRoll && !ultimateCondition)
 	{
 		m_isAttacking = true;
 		m_isAirAttacking = false;
+		m_onUltimate = false;
 	}
-	else if (attackCondition && !m_canJump && !m_isAttacking && !m_onRoll)
+	else if (attackCondition && !m_canJump && !m_isAttacking && !m_onRoll && !ultimateCondition)
 	{
 		m_isAttacking = true;
 		m_isAirAttacking = true;
+		m_onUltimate = false;
+	}
+	else if (ultimateCondition && m_canJump && !m_isAttacking && !m_onRoll)
+	{
+		m_onUltimate = true;
+		m_isAttacking = true;
+		m_isAirAttacking = false;
 	}
 
 	if (m_isAttacking)
@@ -27,13 +35,14 @@ void SwordEntity::updateAttack(bool attackCondition)
 			m_velocity.y = 0.f;
 
 			// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
-			if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2") && m_animationEnd) || m_inDamageCooldown == true)
+			if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2" || m_currentTexture == m_entityName + "Ultimate") && m_animationEnd) || m_inDamageCooldown == true)
 			{
 				if (m_inDamageCooldown == false)
 				{
 					m_previousAttackingAnimation = m_currentTexture;
 				}
 				m_isAttacking = false;
+				m_onUltimate = false;
 			}
 		}
 		else

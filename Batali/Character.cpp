@@ -53,8 +53,14 @@ void Character::update(float& deltaTime)
 			m_entityName == "fire_knight" ? m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f) : m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 			m_damage = m_airAttackDamage;
 		}
+		else if (m_currentTexture == m_entityName + "Ultimate")
+		{
+			m_hitboxWidth = m_hitboxWidthUltimate;
+			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+			m_damage = m_ultimateDamage;
+		}
 
-		updateAttack(m_conditionAttack);
+		updateAttack(m_conditionAttack, m_conditionUltimate);
 
 		if (m_isBot)
 		{
@@ -112,7 +118,11 @@ void Character::updateTexture()
 	}
 	else if (m_isAttacking)
 	{
-		if (!m_isAirAttacking)
+		if (m_onUltimate)
+		{
+			changeCurrentTexture(m_texturesActionName.at("Ultimate"), m_texturesNamePath.at(m_texturesActionName.at("Ultimate")), false);
+		}
+		else if (!m_isAirAttacking)
 		{
 			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
 		}

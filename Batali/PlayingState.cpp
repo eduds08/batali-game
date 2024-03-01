@@ -239,7 +239,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
 
 	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-	if (attackingEntity.getDamage() != FIRE_KNIGHT_ATTACK_2_DAMAGE)
+	if (attackingEntity.getDamage() != FIRE_KNIGHT_ATTACK_2_DAMAGE && attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 	{
 		while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
 		{
@@ -249,6 +249,11 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 			}
 			attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 		}
+	}
+	else if (attackingEntity.getDamage() == WIND_HASHASHIN_ULTIMATE_DAMAGE)
+	{
+		attackedEntity.setShapePosition(attackingEntity.getShapePosition());
+		attackedEntity.setPosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getSize().y) / 2.f });
 	}
 }
 
@@ -305,7 +310,7 @@ void PlayingState::updateTexturesAndAnimations()
 		if (!m_onPause)
 		{
 			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
-			std::this_thread::sleep_for(std::chrono::milliseconds(75));
+			std::this_thread::sleep_for(std::chrono::milliseconds(600));
 
 			for (auto& player : m_players)
 			{
@@ -343,6 +348,8 @@ void PlayingState::updatePlayerInput()
 					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L));
 
 					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
+
+					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
 				}
 				else if (player->getPlayerNumber() == 2)
 				{
@@ -350,9 +357,11 @@ void PlayingState::updatePlayerInput()
 					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
 					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
 
-					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LShift));
+					player->setConditionAttack(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
 
 					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
+
+					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
 				}
 			}
 		}

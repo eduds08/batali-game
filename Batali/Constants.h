@@ -56,6 +56,11 @@ namespace constants
 	constexpr int FIRE_KNIGHT_ATTACK_2_DAMAGE{80};
 	constexpr int FIRE_KNIGHT_AIR_ATTACK_DAMAGE{70};
 
+	constexpr float FIRE_KNIGHT_ULTIMATE_WIDTH{ 110.f };
+	constexpr int FIRE_KNIGHT_ULTIMATE_DAMAGE{ 130 };
+
+	// 18 ultimate
+
 	/* WIND HASHASHIN CONSTANTS: */
 
 	constexpr int WIND_HASHASHIN_SPRITE_WIDTH{ 288 };
@@ -77,6 +82,9 @@ namespace constants
 	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{90};
 	constexpr int WIND_HASHASHIN_ATTACK_2_DAMAGE{75};
 	constexpr int WIND_HASHASHIN_AIR_ATTACK_DAMAGE{65};
+
+	constexpr float WIND_HASHASHIN_ULTIMATE_WIDTH{ 80.f };
+	constexpr int WIND_HASHASHIN_ULTIMATE_DAMAGE{ 200 };
 
 	/* BOT CONSTANTS: */
 

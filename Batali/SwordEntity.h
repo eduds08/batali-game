@@ -9,7 +9,7 @@ public:
 	virtual ~SwordEntity() = default;
 
 	// Updates the state of m_isAttacking and also calls updateHitbox()
-	void updateAttack(bool attackCondition);
+	void updateAttack(bool attackCondition, bool ultimateCondition);
 
 	virtual void updateHitbox() = 0;
 
@@ -32,6 +32,7 @@ protected:
 
 	bool m_isAttacking{ false };
 	bool m_isAirAttacking{ false };
+	bool m_onUltimate{ false };
 
 	// These attributes store the starting and ending frame of the attack sprite where the hitbox should spawn
 	int m_attack1StartingFrame{};
@@ -40,6 +41,8 @@ protected:
 	int m_attack2EndingFrame{};
 	int m_airAttackingStartingFrame{};
 	int m_airAttackingEndingFrame{};
+	int m_ultimateStartingFrame{};
+	int m_ultimateEndingFrame{};
 
 	int m_damage{};
 };

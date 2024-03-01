@@ -14,8 +14,11 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	m_attack1EndingFrame = 4;
 	m_attack2StartingFrame = 1;
 	m_attack2EndingFrame = 7;
-	m_airAttackingStartingFrame = 2;
-	m_airAttackingEndingFrame = 5;
+	m_airAttackingStartingFrame = 12;
+	m_airAttackingEndingFrame = 14;
+
+	m_ultimateStartingFrame = 5;
+	m_ultimateEndingFrame = 10;
 
 	m_entityName = "wind_hashashin";
 	initTexturesMap();
@@ -60,16 +63,19 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	m_hitboxWidthAttack1 = WIND_HASHASHIN_ATTACK_1_WIDTH;
 	m_hitboxWidthAttack2 = WIND_HASHASHIN_ATTACK_2_WIDTH;
 	m_hitboxWidthAirAttack = WIND_HASHASHIN_AIR_ATTACK_WIDTH;
+	m_hitboxWidthUltimate = WIND_HASHASHIN_ULTIMATE_WIDTH;
 
 	m_attack1Damage = WIND_HASHASHIN_ATTACK_1_DAMAGE;
 	m_attack2Damage = WIND_HASHASHIN_ATTACK_2_DAMAGE;
 	m_airAttackDamage = WIND_HASHASHIN_AIR_ATTACK_DAMAGE;
+	m_ultimateDamage = WIND_HASHASHIN_ULTIMATE_DAMAGE;
 }
 
 void WindHashashin::updateHitbox()
 {
 	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
 		(m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
+		(m_currentTexture == m_entityName + "Ultimate" && m_frameCount > m_ultimateStartingFrame && m_frameCount < m_ultimateEndingFrame) ||
 		(m_currentTexture == m_entityName + "AirAttacking" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });

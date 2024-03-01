@@ -24,6 +24,8 @@ public:
 
 	const sf::Sprite& getSprite() const { return m_sprite; }
 
+	const sf::Vector2f getSpriteSize() const { return sf::Vector2f{static_cast<float>(m_spriteWidth), static_cast<float>(m_spriteHeight)}; }
+
 protected:
 	// Singleton Pattern
 	TextureManager& m_texturesManager;

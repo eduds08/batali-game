@@ -57,6 +57,7 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesActionName.emplace("Attacking2", m_entityName + "Attacking2");
 	m_texturesActionName.emplace("Roll", m_entityName + "Roll");
 	m_texturesActionName.emplace("AirAttacking", m_entityName + "AirAttacking");
+	m_texturesActionName.emplace("Ultimate", m_entityName + "Ultimate");
 
 	m_texturesNamePath.emplace(m_texturesActionName.at("Death"), "./assets/" + m_entityName + "/_Death.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Hitted"), "./assets/" + m_entityName + "/_Hit.png");
@@ -68,4 +69,5 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesNamePath.emplace(m_texturesActionName.at("Attacking2"), "./assets/" + m_entityName + "/_Attack2.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Roll"), "./assets/" + m_entityName + "/_Roll.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("AirAttacking"), "./assets/" + m_entityName + "/_AirAttack.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Ultimate"), "./assets/" + m_entityName + "/_Ultimate.png");
 }

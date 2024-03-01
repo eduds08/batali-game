@@ -17,6 +17,9 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	m_airAttackingStartingFrame = 3;
 	m_airAttackingEndingFrame = 5;
 
+	m_ultimateStartingFrame = 12;
+	m_ultimateEndingFrame = 15;
+
 	m_entityName = "fire_knight";
 	initTexturesMap();
 
@@ -60,16 +63,19 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	m_hitboxWidthAttack1 = FIRE_KNIGHT_ATTACK_1_WIDTH;
 	m_hitboxWidthAttack2 = FIRE_KNIGHT_ATTACK_2_WIDTH;
 	m_hitboxWidthAirAttack = FIRE_KNIGHT_AIR_ATTACK_WIDTH;
+	m_hitboxWidthUltimate = FIRE_KNIGHT_ULTIMATE_WIDTH;
 
 	m_attack1Damage = FIRE_KNIGHT_ATTACK_1_DAMAGE;
 	m_attack2Damage = FIRE_KNIGHT_ATTACK_2_DAMAGE;
 	m_airAttackDamage = FIRE_KNIGHT_AIR_ATTACK_DAMAGE;
+	m_ultimateDamage = FIRE_KNIGHT_ULTIMATE_DAMAGE;
 }
 
 void FireKnight::updateHitbox()
 {
 	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
 		(m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
+		(m_currentTexture == m_entityName + "Ultimate" && m_frameCount > m_ultimateStartingFrame && m_frameCount < m_ultimateEndingFrame) ||
 		(m_currentTexture == m_entityName + "AirAttacking" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
