@@ -56,10 +56,8 @@ namespace constants
 	constexpr int FIRE_KNIGHT_ATTACK_2_DAMAGE{80};
 	constexpr int FIRE_KNIGHT_AIR_ATTACK_DAMAGE{70};
 
-	constexpr float FIRE_KNIGHT_ULTIMATE_WIDTH{ 110.f };
+	constexpr float FIRE_KNIGHT_ULTIMATE_WIDTH{ 100.f };
 	constexpr int FIRE_KNIGHT_ULTIMATE_DAMAGE{ 130 };
-
-	// 18 ultimate
 
 	/* WIND HASHASHIN CONSTANTS: */
 

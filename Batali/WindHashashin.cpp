@@ -17,8 +17,8 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	m_airAttackingStartingFrame = 12;
 	m_airAttackingEndingFrame = 14;
 
-	m_ultimateStartingFrame = 5;
-	m_ultimateEndingFrame = 10;
+	m_ultimateStartingFrame = 4;
+	m_ultimateEndingFrame = 7;
 
 	m_entityName = "wind_hashashin";
 	initTexturesMap();

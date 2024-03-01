@@ -310,7 +310,7 @@ void PlayingState::updateTexturesAndAnimations()
 		if (!m_onPause)
 		{
 			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
-			std::this_thread::sleep_for(std::chrono::milliseconds(600));
+			std::this_thread::sleep_for(std::chrono::milliseconds(75));
 
 			for (auto& player : m_players)
 			{
