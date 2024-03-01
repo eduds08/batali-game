@@ -17,8 +17,8 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	m_airAttackingStartingFrame = 3;
 	m_airAttackingEndingFrame = 5;
 
-	m_ultimateStartingFrame = 12;
-	m_ultimateEndingFrame = 15;
+	m_ultimateStartingFrame = 4;
+	m_ultimateEndingFrame = 7;
 
 	m_entityName = "fire_knight";
 	initTexturesMap();
