@@ -9,7 +9,7 @@ StatusBarUI::StatusBarUI(const std::string& textureName, const std::string& text
 void StatusBarUI::init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size)
 {
 	setTexture(textureName, texturePath);
-	setPosition(position);
+	setSpritePosition(position);
 
 	m_spriteWidth = size.x;
 	m_spriteHeight = size.y;

@@ -1,11 +1,12 @@
 #include "Character.h"
 
-Character::Character(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
-	: SwordEntity{ firstPosition }
+Character::Character(int playerNumber, bool isBot, std::shared_ptr<Character> player)
+	: SwordEntity{}
 	, m_playerNumber{ playerNumber }
 	, m_player{ player }
 {
 	m_isBot = isBot;
+
 	// Second player or bot starts facing left
 	if (isBot || playerNumber == 2)
 	{
@@ -25,7 +26,7 @@ void Character::update(float& deltaTime)
 		{
 			m_conditionRunLeft = m_player->getShapePosition().x < getShapePosition().x - m_distanceFromPlayer;
 			m_conditionRunRight = m_player->getShapePosition().x > getShapePosition().x + m_distanceFromPlayer;
-			m_conditionJump = (((m_player->getShapePosition().y - m_player->getSize().y / 2.f) < (getShapePosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
+			m_conditionJump = (((m_player->getShapePosition().y - m_player->getShapeSize().y / 2.f) < (getShapePosition().y - getShapeSize().y / 2.f)) && m_isCollidingHorizontally);
 
 			m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
 			m_conditionAttack1 = (m_velocity.x == 0.f && m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS);
@@ -35,19 +36,19 @@ void Character::update(float& deltaTime)
 
 		updateMovement(m_conditionRunLeft, m_conditionRunRight, m_conditionJump, deltaTime, m_conditionRoll);
 
-		if (m_currentTexture == m_entityName + "Attacking1")
+		if (m_currentTexture == m_entityName + "Attack1")
 		{
 			m_hitboxWidth = m_hitboxWidthAttack1;
 			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 			m_damage = m_attack1Damage;
 		}
-		else if (m_currentTexture == m_entityName + "Attacking2")
+		else if (m_currentTexture == m_entityName + "Attack2")
 		{
 			m_hitboxWidth = m_hitboxWidthAttack2;
 			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
 			m_damage = m_attack2Damage;
 		}
-		else if (m_currentTexture == m_entityName + "AirAttacking")
+		else if (m_currentTexture == m_entityName + "AirAttack")
 		{
 			m_hitboxWidth = m_hitboxWidthAirAttack;
 			m_entityName == "fire_knight" ? m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f) : m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
@@ -98,7 +99,7 @@ void Character::updateTexture()
 	{
 		if (m_onAirAttack)
 		{
-			changeCurrentTexture(m_texturesActionName.at("AirAttacking"), m_texturesNamePath.at(m_texturesActionName.at("AirAttacking")), false);
+			changeCurrentTexture(m_texturesActionName.at("AirAttack"), m_texturesNamePath.at(m_texturesActionName.at("AirAttack")), false);
 		}
 		else
 		{
@@ -126,17 +127,17 @@ void Character::updateTexture()
 		{
 			if (m_isBot)
 			{
-				m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
+				m_previousAttackingAnimation == m_entityName + "Attack1" ? changeCurrentTexture(m_texturesActionName.at("Attack2"), m_texturesNamePath.at(m_texturesActionName.at("Attack2")), false) : changeCurrentTexture(m_texturesActionName.at("Attack1"), m_texturesNamePath.at(m_texturesActionName.at("Attack1")), false);
 			}
 			else
 			{
 				if (m_onAttack1)
 				{
-					changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
+					changeCurrentTexture(m_texturesActionName.at("Attack1"), m_texturesNamePath.at(m_texturesActionName.at("Attack1")), false);
 				}
 				else if (m_onAttack2)
 				{
-					changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false);
+					changeCurrentTexture(m_texturesActionName.at("Attack2"), m_texturesNamePath.at(m_texturesActionName.at("Attack2")), false);
 				}
 			}
 		}

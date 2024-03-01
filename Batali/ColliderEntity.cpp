@@ -7,8 +7,8 @@ bool ColliderEntity::isCollidingWith(const sf::Sprite& other)
 	float otherPositionX = other.getPosition().x;
 	float otherPositionY = other.getPosition().y;
 
-	float thisHalfSizeX = getSize().x / 2.f;
-	float thisHalfSizeY = getSize().y / 2.f;
+	float thisHalfSizeX = getShapeSize().x / 2.f;
+	float thisHalfSizeY = getShapeSize().y / 2.f;
 	float thisPositionX = getShapePosition().x;
 	float thisPositionY = getShapePosition().y;
 

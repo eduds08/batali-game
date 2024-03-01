@@ -41,7 +41,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	initButton("Play", m_view.getCenter() + sf::Vector2f{ -130.f, 300.f }, m_chosenGamemode == "singleplayer" ? CHARACTER_SELECTION_TO_SINGLEPLAYER : CHARACTER_SELECTION_TO_MULTIPLAYER);
 	initButton("Back", m_view.getCenter() + sf::Vector2f{ 130.f, 300.f }, CHARACTER_SELECTION_RESET);
 
-	m_buttonsBackground.setPosition(m_view.getCenter() + sf::Vector2f{ 0.f, 300.f });
+	m_buttonsBackground.setSpritePosition(m_view.getCenter() + sf::Vector2f{ 0.f, 300.f });
 
 	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ -250.f, 0.f } , true, sf::Color{179, 245, 188} });
 	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ 250.f, 0.f } , true, sf::Color{250, 145, 137} });

@@ -5,7 +5,7 @@
 class DamageEntity : public MovableEntity
 {
 public:
-	DamageEntity(sf::Vector2f firstPosition);
+	DamageEntity();
 	virtual ~DamageEntity() = default;
 
 	// Updates attributes related to being attacked (Checks hitted animation, damage cooldown and knockback)
@@ -23,11 +23,13 @@ public:
 	// If the entity is dying (not dead yet), it doesn't move anymore, so we call this method to move it in y-direction and avoids it floating in the air after death
 	void updateGravityWhenDying(float& deltaTime);
 
-	virtual bool getHitted() { return m_hitted; }
+	virtual const bool getHitted() const { return m_hitted; }
 	const bool isDead() const { return m_dead; }
 	const bool isDying() const { return m_dying; }
 
 	const int& getHp() const { return m_hp; }
+
+	const int& getRemainingManaToUltimate() const { return m_remainingManaToUltimate; }
 
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 
@@ -48,4 +50,6 @@ protected:
 	float m_knockbackVelocity{ KNOCKBACK_SPEED };
 
 	int m_hp{};
+
+	int m_remainingManaToUltimate{ 5 };
 };

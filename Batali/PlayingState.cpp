@@ -20,8 +20,8 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	}
 
 	characterStatus1.m_healthBar.setEntityStatus(&m_players[0]->getHp());
-	characterStatus1.m_staminaBar.setEntityStatus(&m_players[0]->m_stamina);
-	characterStatus1.m_manaBar.setEntityStatus(&m_players[0]->m_remainingManaToUltimate);
+	characterStatus1.m_staminaBar.setEntityStatus(&m_players[0]->getStamina());
+	characterStatus1.m_manaBar.setEntityStatus(&m_players[0]->getRemainingManaToUltimate());
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -38,8 +38,8 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		}
 
 		characterStatus2.m_healthBar.setEntityStatus(&m_players[1]->getHp());
-		characterStatus2.m_staminaBar.setEntityStatus(&m_players[1]->m_stamina);
-		characterStatus2.m_manaBar.setEntityStatus(&m_players[1]->m_remainingManaToUltimate);
+		characterStatus2.m_staminaBar.setEntityStatus(&m_players[1]->getStamina());
+		characterStatus2.m_manaBar.setEntityStatus(&m_players[1]->getRemainingManaToUltimate());
 	}
 	else
 	{
@@ -55,8 +55,8 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		}
 
 		characterStatus2.m_healthBar.setEntityStatus(&m_bots[0]->getHp());
-		characterStatus2.m_staminaBar.setEntityStatus(&m_bots[0]->m_stamina);
-		characterStatus2.m_manaBar.setEntityStatus(&m_bots[0]->m_remainingManaToUltimate);
+		characterStatus2.m_staminaBar.setEntityStatus(&m_bots[0]->getStamina());
+		characterStatus2.m_manaBar.setEntityStatus(&m_bots[0]->getRemainingManaToUltimate());
 	}
 
 	// Initialize map
@@ -253,7 +253,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	else if (attackingEntity.getDamage() == WIND_HASHASHIN_ULTIMATE_DAMAGE)
 	{
 		attackedEntity.setShapePosition(attackingEntity.getShapePosition());
-		attackedEntity.setPosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getSize().y) / 2.f });
+		attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
 	}
 }
 
@@ -262,11 +262,11 @@ void PlayingState::updateView()
 	m_view.setCenter((TILES_AMOUNT_PER_ROW / 2.f) * TILE_SIZE_FLOAT, (TILES_AMOUNT_PER_COL / 2.f) * TILE_SIZE_FLOAT);
 	m_window.setView(m_view);
 
-	characterStatus2.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f });
+	characterStatus2.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f });
 
-	characterStatus2.m_healthBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, 0.f });
-	characterStatus2.m_staminaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, -1.f * HEALTH_BAR_HEIGHT });
-	characterStatus2.m_manaBar.setPosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, -1.f * (HEALTH_BAR_HEIGHT + STAMINA_BAR_HEIGHT)});
+	characterStatus2.m_healthBar.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, 0.f });
+	characterStatus2.m_staminaBar.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, -1.f * HEALTH_BAR_HEIGHT });
+	characterStatus2.m_manaBar.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, -1.f * (HEALTH_BAR_HEIGHT + STAMINA_BAR_HEIGHT)});
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;
@@ -341,16 +341,30 @@ void PlayingState::updatePlayerInput()
 			{
 				if (player->getPlayerNumber() == 1)
 				{
-					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+					if (m_twoPlayers)
+					{
+						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
 
-					player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::L));
-					player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::H));
+						player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad1));
+						player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad2));
+						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad3));
 
-					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
+						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad4));
+					}
+					else
+					{
+						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
 
-					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
+						player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
+						player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+
+						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+					}
 				}
 				else if (player->getPlayerNumber() == 2)
 				{
@@ -358,12 +372,12 @@ void PlayingState::updatePlayerInput()
 					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
 					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
 
-					player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
-					player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+					player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+					player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
 
-					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space));
+					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
 
-					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
 				}
 			}
 		}

@@ -5,7 +5,7 @@
 class SwordEntity : public DamageEntity
 {
 public:
-	SwordEntity(sf::Vector2f firstPosition);
+	SwordEntity();
 	virtual ~SwordEntity() = default;
 
 	// Updates the state of m_isAttacking and also calls updateHitbox()
@@ -17,9 +17,13 @@ public:
 	virtual void die();
 
 	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
-	virtual bool getIsAttacking() { return m_isAttacking; }
+	virtual const bool getIsAttacking() const { return m_isAttacking; }
 
 	const int getDamage() const { return m_damage; }
+
+	void setConditionAttack1(bool conditionAttack1) { m_conditionAttack1 = conditionAttack1; }
+	void setConditionAttack2(bool conditionAttack2) { m_conditionAttack2 = conditionAttack2; }
+	void setConditionUltimate(bool conditionUltimate) { m_conditionUltimate = conditionUltimate; }
 
 protected:
 	// Useful when entity has more than one attack animation. So it alters between one another
@@ -36,6 +40,24 @@ protected:
 	bool m_onUltimate{ false };
 	bool m_onAttack1{ false };
 	bool m_onAttack2{ false };
+
+	float m_hitboxWidthAttack1{};
+	float m_hitboxWidthAttack2{};
+	float m_hitboxWidthAirAttack{};
+	float m_hitboxWidthUltimate{};
+
+	int m_attack1Damage{};
+	int m_attack2Damage{};
+	int m_airAttackDamage{};
+	int m_ultimateDamage{};
+
+	// Timer used to create a interval between the bot's attacks
+	sf::Clock m_timeBetweenAttacksClock{};
+	float m_timeBetweenAttacks{};
+
+	bool m_conditionAttack1{ false };
+	bool m_conditionAttack2{ false };
+	bool m_conditionUltimate{ false };
 
 	// These attributes store the starting and ending frame of the attack sprite where the hitbox should spawn
 	int m_attack1StartingFrame{};

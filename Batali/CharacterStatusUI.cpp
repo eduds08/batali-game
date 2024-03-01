@@ -27,7 +27,7 @@ void CharacterStatusUI::init(const std::string& textureName, const std::string& 
 		m_manaBar.flipSprite();
 	}
 
-	setPosition(position);
+	setSpritePosition(position);
 }
 
 void CharacterStatusUI::update()

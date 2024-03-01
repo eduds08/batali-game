@@ -21,7 +21,7 @@ void ButtonUI::init(const std::string& textureName, const std::string& texturePa
 
 	setScale(5.f);
 
-	setPosition(position);
+	setSpritePosition(position);
 }
 
 void ButtonUI::update(bool onHover)

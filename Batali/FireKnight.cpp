@@ -1,7 +1,7 @@
 #include "FireKnight.h"
 
 FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
-	: Character{ firstPosition, playerNumber, isBot, player }
+	: Character{ playerNumber, isBot, player }
 {
 	m_hitboxHeight = FIRE_KNIGHT_ATTACK_HEIGHT;
 
@@ -73,13 +73,13 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 
 void FireKnight::updateHitbox()
 {
-	if ((m_currentTexture == m_entityName + "Attacking1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
-		(m_currentTexture == m_entityName + "Attacking2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
+	if ((m_currentTexture == m_entityName + "Attack1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
+		(m_currentTexture == m_entityName + "Attack2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
 		(m_currentTexture == m_entityName + "Ultimate" && m_frameCount > m_ultimateStartingFrame && m_frameCount < m_ultimateEndingFrame) ||
-		(m_currentTexture == m_entityName + "AirAttacking" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
+		(m_currentTexture == m_entityName + "AirAttack" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
-		if (m_currentTexture == m_entityName + "Attacking2")
+		if (m_currentTexture == m_entityName + "Attack2")
 		{
 			m_attackHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * 10.f / 2.f, 0.f));
 		}

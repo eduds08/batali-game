@@ -17,5 +17,5 @@ void BackgroundUI::init(const std::string& textureName, const std::string& textu
 
 	setScale(scale);
 
-	setPosition(position);
+	setSpritePosition(position);
 }

@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ENTITY">
+      <UniqueIdentifier>{730e9c71-ba96-4042-b945-3047dbd9fe64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AnimatedEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BackgroundUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -27,31 +27,13 @@
     <ClCompile Include="ButtonUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterPortraitUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSelectionState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ColliderEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawableEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FireKnight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -60,16 +42,10 @@
     <ClCompile Include="MainMenuState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MovableEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StateContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SwordEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
@@ -78,20 +54,44 @@
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WindHashashin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterStatusUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StatusBarUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WindHashashin.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="MovableEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnight.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawableEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimatedEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BackgroundUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,40 +101,19 @@
     <ClInclude Include="ButtonUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterPortraitUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CharacterSelectionState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ColliderEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawableEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FireKnight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MainMenuState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MovableEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayingState.h">
@@ -143,16 +122,10 @@
     <ClInclude Include="StateContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SwordEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WindHashashin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CharacterStatusUI.h">
@@ -160,6 +133,36 @@
     </ClInclude>
     <ClInclude Include="StatusBarUI.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindHashashin.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="MovableEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="FireKnight.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedEntity.h">
+      <Filter>ENTITY</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

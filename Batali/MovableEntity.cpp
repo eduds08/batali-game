@@ -1,8 +1,8 @@
 #include "MovableEntity.h"
 
-MovableEntity::MovableEntity(sf::Vector2f firstPosition)
+MovableEntity::MovableEntity()
 	: AnimatedEntity{}
-	, ColliderEntity{ firstPosition }
+	, ColliderEntity{}
 {
 }
 
@@ -27,7 +27,7 @@ void MovableEntity::handleCollision()
 void MovableEntity::move(float& deltaTime)
 {
 	m_shape.move(m_velocity * deltaTime);
-	m_sprite.setPosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (m_spriteHeight - getSize().y) / 2.f});
+	m_sprite.setPosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (m_spriteHeight - getShapeSize().y) / 2.f});
 }
 
 void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll)

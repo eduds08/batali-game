@@ -1,7 +1,7 @@
 #include "SwordEntity.h"
 
-SwordEntity::SwordEntity(sf::Vector2f firstPosition)
-	: DamageEntity{ firstPosition }
+SwordEntity::SwordEntity()
+	: DamageEntity{}
 {
 }
 
@@ -49,7 +49,7 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 			m_velocity.y = 0.f;
 
 			// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
-			if (((m_currentTexture == m_entityName + "Attacking1" || m_currentTexture == m_entityName + "Attacking2" || m_currentTexture == m_entityName + "Ultimate") && m_animationEnd) || m_inDamageCooldown == true)
+			if (((m_currentTexture == m_entityName + "Attack1" || m_currentTexture == m_entityName + "Attack2" || m_currentTexture == m_entityName + "Ultimate") && m_animationEnd) || m_inDamageCooldown == true)
 			{
 				if (m_isBot && m_inDamageCooldown == false)
 				{
@@ -66,7 +66,7 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 		{
 			m_velocity.x = 0.f;
 
-			if ((m_currentTexture == m_entityName + "AirAttacking" && m_animationEnd) || m_inDamageCooldown == true || (m_canJump && m_currentTexture == m_entityName + "Falling"))
+			if ((m_currentTexture == m_entityName + "AirAttack" && m_animationEnd) || m_inDamageCooldown == true || (m_canJump && m_currentTexture == m_entityName + "Falling"))
 			{
 				m_onUltimate = false;
 				m_isAttacking = false;

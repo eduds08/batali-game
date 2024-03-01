@@ -19,7 +19,7 @@ void CharacterPortraitUI::init(const std::string& textureName, const std::string
 
 	setScale(spriteScale);
 
-	setPosition(position);
+	setSpritePosition(position);
 
 	m_portraitBorder = sf::RectangleShape{ sf::Vector2f{m_spriteWidth* spriteScale, m_spriteHeight* spriteScale} };
 
