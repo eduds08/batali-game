@@ -3,9 +3,9 @@
 Character::Character(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: SwordEntity{ firstPosition }
 	, m_playerNumber{ playerNumber }
-	, m_isBot{ isBot }
 	, m_player{ player }
 {
+	m_isBot = isBot;
 	// Second player or bot starts facing left
 	if (isBot || playerNumber == 2)
 	{
@@ -28,7 +28,7 @@ void Character::update(float& deltaTime)
 			m_conditionJump = (((m_player->getShapePosition().y - m_player->getSize().y / 2.f) < (getShapePosition().y - getSize().y / 2.f)) && m_isCollidingHorizontally);
 
 			m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-			m_conditionAttack = (m_velocity.x == 0.f && m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS);
+			m_conditionAttack1 = (m_velocity.x == 0.f && m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS);
 
 			m_conditionRoll = false;
 		}
@@ -60,7 +60,7 @@ void Character::update(float& deltaTime)
 			m_damage = m_ultimateDamage;
 		}
 
-		updateAttack(m_conditionAttack, m_conditionUltimate);
+		updateAttack(m_conditionAttack1, m_conditionAttack2, m_conditionUltimate);
 
 		if (m_isBot)
 		{
@@ -96,7 +96,7 @@ void Character::updateTexture()
 	}
 	else if (m_velocity.y != 0.f && !m_canJump)
 	{
-		if (m_isAirAttacking)
+		if (m_onAirAttack)
 		{
 			changeCurrentTexture(m_texturesActionName.at("AirAttacking"), m_texturesNamePath.at(m_texturesActionName.at("AirAttacking")), false);
 		}
@@ -122,9 +122,23 @@ void Character::updateTexture()
 		{
 			changeCurrentTexture(m_texturesActionName.at("Ultimate"), m_texturesNamePath.at(m_texturesActionName.at("Ultimate")), false);
 		}
-		else if (!m_isAirAttacking)
+		else if (!m_onAirAttack)
 		{
-			m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
+			if (m_isBot)
+			{
+				m_previousAttackingAnimation == m_entityName + "Attacking1" ? changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false) : changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
+			}
+			else
+			{
+				if (m_onAttack1)
+				{
+					changeCurrentTexture(m_texturesActionName.at("Attacking1"), m_texturesNamePath.at(m_texturesActionName.at("Attacking1")), false);
+				}
+				else if (m_onAttack2)
+				{
+					changeCurrentTexture(m_texturesActionName.at("Attacking2"), m_texturesNamePath.at(m_texturesActionName.at("Attacking2")), false);
+				}
+			}
 		}
 	}
 }

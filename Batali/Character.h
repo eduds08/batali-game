@@ -20,14 +20,13 @@ public:
 	void setConditionRunLeft(bool conditionRunLeft) { m_conditionRunLeft = conditionRunLeft; }
 	void setConditionRunRight(bool conditionRunRight) { m_conditionRunRight = conditionRunRight;}
 	void setConditionJump(bool conditionJump) { m_conditionJump = conditionJump; }
-	void setConditionAttack(bool conditionAttack) { m_conditionAttack = conditionAttack; }
+	void setConditionAttack1(bool conditionAttack1) { m_conditionAttack1 = conditionAttack1; }
+	void setConditionAttack2(bool conditionAttack2) { m_conditionAttack2 = conditionAttack2; }
 	void setConditionRoll(bool conditionRoll) { m_conditionRoll = conditionRoll; }
 
 	void setConditionUltimate(bool conditionUltimate) { m_conditionUltimate = conditionUltimate; }
 
 protected:
-	bool m_isBot{};
-
 	// PLAYER ATTRIBUTES:
 	int m_playerNumber{};
 
@@ -43,7 +42,8 @@ protected:
 	bool m_conditionRunRight{ false };
 	bool m_conditionJump{ false };
 
-	bool m_conditionAttack{ false };
+	bool m_conditionAttack1{ false };
+	bool m_conditionAttack2{ false };
 
 	bool m_conditionRoll{ false };
 

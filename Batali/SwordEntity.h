@@ -9,7 +9,7 @@ public:
 	virtual ~SwordEntity() = default;
 
 	// Updates the state of m_isAttacking and also calls updateHitbox()
-	void updateAttack(bool attackCondition, bool ultimateCondition);
+	void updateAttack(bool attackCondition1, bool attackCondition2, bool ultimateCondition);
 
 	virtual void updateHitbox() = 0;
 
@@ -24,6 +24,7 @@ public:
 protected:
 	// Useful when entity has more than one attack animation. So it alters between one another
 	std::string m_previousAttackingAnimation{};
+	bool m_isBot{};
 
 	sf::RectangleShape m_attackHitbox{sf::Vector2f{0.f, 0.f}};
 
@@ -31,8 +32,10 @@ protected:
 	float m_hitboxHeight{};
 
 	bool m_isAttacking{ false };
-	bool m_isAirAttacking{ false };
+	bool m_onAirAttack{ false };
 	bool m_onUltimate{ false };
+	bool m_onAttack1{ false };
+	bool m_onAttack2{ false };
 
 	// These attributes store the starting and ending frame of the attack sprite where the hitbox should spawn
 	int m_attack1StartingFrame{};
