@@ -31,13 +31,15 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 		m_onAttack1 = false;
 		m_onAttack2 = false;
 	}
-	else if (ultimateCondition && m_canJump && !m_isAttacking && !m_onRoll)
+	else if (ultimateCondition && m_canJump && !m_isAttacking && !m_onRoll && m_remainingManaToUltimate <= 0)
 	{
 		m_onUltimate = true;
 		m_isAttacking = true;
 		m_onAirAttack = false;
 		m_onAttack1 = false;
 		m_onAttack2 = false;
+
+		m_remainingManaToUltimate = 5;
 	}
 
 	if (m_isAttacking)
