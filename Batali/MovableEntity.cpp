@@ -57,7 +57,7 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	}
 
 	// Only can roll when on ground and not on Hitted animation
-	if (conditionRoll && m_canJump && !getHitted() && !m_onRoll && m_stamina > 0 && m_currentTexture != m_entityName + "Roll")
+	if (conditionRoll && m_canJump && !getHitted() && !m_onRoll && m_stamina > 0 && m_currentTexture != m_entityName + "Roll" && !getIsAttacking())
 	{
 		m_stamina -= 50;
 		m_onRoll = true;
