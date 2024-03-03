@@ -14,8 +14,8 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	m_attack1EndingFrame = 4;
 	m_attack2StartingFrame = 1;
 	m_attack2EndingFrame = 7;
-	m_airAttackingStartingFrame = 12;
-	m_airAttackingEndingFrame = 14;
+	m_airAttackingStartingFrame = 2;
+	m_airAttackingEndingFrame = 5;
 
 	m_ultimateStartingFrame = 4;
 	m_ultimateEndingFrame = 7;
