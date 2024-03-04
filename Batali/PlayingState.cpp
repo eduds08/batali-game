@@ -277,7 +277,8 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	{
 		attackedEntity.setShapePosition(attackingEntity.getShapePosition());
 		attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
-		//attackedEntity.setOnWindHashashinUltimate(true);
+		
+		attackingEntity.setActivateUltimate(true);
 	}
 }
 
