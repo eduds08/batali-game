@@ -71,5 +71,5 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesNamePath.emplace(m_texturesActionName.at("Roll"), "./assets/" + m_entityName + "/_Roll.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("AirAttack"), "./assets/" + m_entityName + "/_AirAttack.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Ultimate"), "./assets/" + m_entityName + "/_Ultimate.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("_HitOnWindHashashinUltimate"), "./assets/" + m_entityName + "/__HitOnWindHashashinUltimate.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("_HitOnWindHashashinUltimate"), "./assets/" + m_entityName + "/_HitOnWindHashashinUltimate.png");
 }

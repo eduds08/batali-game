@@ -49,8 +49,6 @@ bool DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 
 		m_hp -= damage;
 
-		std::cout << "hit\n";
-
 		if (m_remainingManaToUltimate > 0)
 		{
 			--m_remainingManaToUltimate;
