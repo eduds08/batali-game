@@ -58,7 +58,7 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesActionName.emplace("Roll", m_entityName + "Roll");
 	m_texturesActionName.emplace("AirAttack", m_entityName + "AirAttack");
 	m_texturesActionName.emplace("Ultimate", m_entityName + "Ultimate");
-	m_texturesActionName.emplace("HitTemp", m_entityName + "HitTemp");
+	m_texturesActionName.emplace("_HitOnWindHashashinUltimate", m_entityName + "_HitOnWindHashashinUltimate");
 
 	m_texturesNamePath.emplace(m_texturesActionName.at("Death"), "./assets/" + m_entityName + "/_Death.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Hitted"), "./assets/" + m_entityName + "/_Hit.png");
@@ -71,5 +71,5 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesNamePath.emplace(m_texturesActionName.at("Roll"), "./assets/" + m_entityName + "/_Roll.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("AirAttack"), "./assets/" + m_entityName + "/_AirAttack.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Ultimate"), "./assets/" + m_entityName + "/_Ultimate.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("HitTemp"), "./assets/" + m_entityName + "/_HitTemp.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("_HitOnWindHashashinUltimate"), "./assets/" + m_entityName + "/__HitOnWindHashashinUltimate.png");
 }

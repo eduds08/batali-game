@@ -98,7 +98,7 @@ void Character::updateTexture()
 	}
 	else if (m_hitted)
 	{
-		m_onWindHashashinUltimate ? changeCurrentTexture(m_texturesActionName.at("HitTemp"), m_texturesNamePath.at(m_texturesActionName.at("HitTemp")), false) : changeCurrentTexture(m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")), false);
+		m_onWindHashashinUltimate ? changeCurrentTexture(m_texturesActionName.at("_HitOnWindHashashinUltimate"), m_texturesNamePath.at(m_texturesActionName.at("_HitOnWindHashashinUltimate")), false) : changeCurrentTexture(m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")), false);
 	}
 	else if (m_velocity.y != 0.f && !m_canJump)
 	{
