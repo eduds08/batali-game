@@ -236,24 +236,27 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
 	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
 
-	attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
+	bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
 
-	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-	if (attackingEntity.getDamage() != FIRE_KNIGHT_ATTACK_2_DAMAGE && attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+	if (gotHit)
 	{
-		while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
+		// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
+		if (attackingEntity.getDamage() != FIRE_KNIGHT_ATTACK_2_DAMAGE && attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 		{
-			for (auto& ground : m_grounds)
+			while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
 			{
-				updateEntityCollisionWithGrounds(attackedEntity, ground);
+				for (auto& ground : m_grounds)
+				{
+					updateEntityCollisionWithGrounds(attackedEntity, ground);
+				}
+				attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 			}
-			attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 		}
-	}
-	else if (attackingEntity.getDamage() == WIND_HASHASHIN_ULTIMATE_DAMAGE)
-	{
-		attackedEntity.setShapePosition(attackingEntity.getShapePosition());
-		attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
+		else if (attackingEntity.getDamage() == WIND_HASHASHIN_ULTIMATE_DAMAGE)
+		{
+			attackedEntity.setShapePosition(attackingEntity.getShapePosition());
+			attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
+		}
 	}
 }
 
@@ -343,15 +346,18 @@ void PlayingState::updatePlayerInput()
 				{
 					if (m_twoPlayers)
 					{
-						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
+						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
+						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
 
-						player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad1));
-						player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad2));
-						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad3));
+						player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+						player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
 
-						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Numpad4));
+						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+
+						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
+
+						
 					}
 					else
 					{
@@ -361,23 +367,24 @@ void PlayingState::updatePlayerInput()
 
 						player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
 						player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+						
+						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
 
-						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
 					}
 				}
 				else if (player->getPlayerNumber() == 2)
 				{
-					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
-					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
-					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
+					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
 
-					player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-					player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+					player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
+					player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
 
-					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
+					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
 
-					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
 				}
 			}
 		}

@@ -25,6 +25,8 @@ public:
 	void setConditionAttack2(bool conditionAttack2) { m_conditionAttack2 = conditionAttack2; }
 	void setConditionUltimate(bool conditionUltimate) { m_conditionUltimate = conditionUltimate; }
 
+	virtual const bool getOnUltimate() const { return m_onUltimate; }
+
 protected:
 	// Useful when entity has more than one attack animation. So it alters between one another
 	std::string m_previousAttackingAnimation{};

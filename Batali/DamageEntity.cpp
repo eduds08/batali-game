@@ -29,10 +29,10 @@ void DamageEntity::updateDamage()
 	}
 }
 
-void DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damage)
+bool DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damage)
 {
 	// Only executed if not already dead and when not immune (on damageCooldown or onRoll)
-	if (!m_inDamageCooldown && !m_dying && !m_onRoll)
+	if (!m_inDamageCooldown && !m_dying && !m_onRoll && !getOnUltimate())
 	{
 		m_inDamageCooldown = true;
 		m_hitted = true;
@@ -65,7 +65,11 @@ void DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 		
 		m_damageCooldownClock.restart();
 		m_damageCooldown = 0.f;
+
+		return true;
 	}
+
+	return false;
 }
 
 void DamageEntity::knockbackMove(float& deltaTime, float attackDirection)

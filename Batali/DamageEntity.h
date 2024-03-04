@@ -11,8 +11,8 @@ public:
 	// Updates attributes related to being attacked (Checks hitted animation, damage cooldown and knockback)
 	void updateDamage();
 
-	// Updates entity's attributes when it gets attacked
-	void takeDamage(float& deltaTime, float attackDirection, int damage);
+	// Updates entity's attributes when it gets attacked (and returns if attackedEntity got hit or not)
+	bool takeDamage(float& deltaTime, float attackDirection, int damage);
 
 	// Moves the entity after being hit. attackDirection -> direction of the attack (from left or right)
 	void knockbackMove(float& deltaTime, float attackDirection);
@@ -34,6 +34,8 @@ public:
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 
 	virtual void die() = 0;
+
+	virtual const bool getOnUltimate() const = 0;
 protected:
 	sf::Clock m_damageCooldownClock{};
 	float m_damageCooldown{};
