@@ -8,6 +8,8 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	// DEBUG
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
+	m_ultimateActivateHitbox.setFillColor(sf::Color{0, 0, 255, 50});
+	m_ultimateActivateHitbox.setOutlineThickness(1.f);
 
 	// Initialize starting/ending attackings' frames
 	m_attack1StartingFrame = 0;
@@ -73,10 +75,23 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 
 void WindHashashin::updateHitbox()
 {
-	if ((m_currentTexture == m_entityName + "Attack1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
-		(m_currentTexture == m_entityName + "Attack2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
-		(m_currentTexture == m_entityName + "Ultimate" && m_frameCount > m_ultimateStartingFrame && m_frameCount < m_ultimateEndingFrame) ||
-		(m_currentTexture == m_entityName + "AirAttack" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
+	if ((m_currentTexture == m_entityName + "Ultimate" && m_frameCount > m_ultimateStartingFrame && m_frameCount < m_ultimateEndingFrame))
+	{
+		m_ultimateActivateHitbox.setSize(sf::Vector2f{m_hitboxWidthUltimate, m_hitboxHeight});
+		m_ultimateActivateHitbox.setOrigin(sf::Vector2f{m_hitboxWidthUltimate, m_hitboxHeight} / 2.f);
+		m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * m_ultimateActivateHitbox.getSize().x / 2.f, 0.f));
+	}
+	else if (m_currentTexture == m_entityName + "Ultimate" && (m_frameCount == 11 || m_frameCount == 17 || m_frameCount == 19))
+	{
+		m_attackHitbox.setSize(getShapeSize());
+		m_attackHitbox.setOrigin(m_attackHitbox.getSize() / 2.f);
+		m_attackHitbox.setPosition(getShapePosition());
+		m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+	}
+	else if ((m_currentTexture == m_entityName + "Attack1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
+			(m_currentTexture == m_entityName + "Attack2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
+			(m_currentTexture == m_entityName + "AirAttack" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
 		m_attackHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
@@ -85,5 +100,7 @@ void WindHashashin::updateHitbox()
 	{
 		m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
 		m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+		m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
 	}
 }

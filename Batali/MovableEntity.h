@@ -31,6 +31,8 @@ public:
 	virtual const bool getIsAttacking() const = 0;
 	virtual void setKnockbackVelocity(float knockbackVelocity) = 0;
 
+	virtual const bool getOnUltimate() const = 0;
+
 	const int& getStamina() const { return m_stamina; }
 
 protected:

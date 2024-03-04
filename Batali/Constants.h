@@ -42,22 +42,21 @@ namespace constants
 	constexpr float FIRE_KNIGHT_SHAPE_WIDTH{ 20.f };
 	constexpr float FIRE_KNIGHT_SHAPE_HEIGHT{ 40.f };
 
-	constexpr float FIRE_KNIGHT_SPEED{ 230.f };
-	constexpr float FIRE_KNIGHT_JUMP_HEIGHT{ 80.f };
+	constexpr float FIRE_KNIGHT_SPEED{ 220.f };
+	constexpr float FIRE_KNIGHT_JUMP_HEIGHT{ 85.f };
 	 
 	constexpr int FIRE_KNIGHT_HP{ 1250 };
 
 	constexpr float FIRE_KNIGHT_ATTACK_1_WIDTH{ 65.f };
 	constexpr float FIRE_KNIGHT_ATTACK_2_WIDTH{ 130.f };
 	constexpr float FIRE_KNIGHT_AIR_ATTACK_WIDTH{ 90.f };
+	constexpr float FIRE_KNIGHT_ULTIMATE_WIDTH{ 100.f };
 	constexpr float FIRE_KNIGHT_ATTACK_HEIGHT{ 20.f };
 
-	constexpr int FIRE_KNIGHT_ATTACK_1_DAMAGE{100};
-	constexpr int FIRE_KNIGHT_ATTACK_2_DAMAGE{80};
-	constexpr int FIRE_KNIGHT_AIR_ATTACK_DAMAGE{70};
-
-	constexpr float FIRE_KNIGHT_ULTIMATE_WIDTH{ 100.f };
-	constexpr int FIRE_KNIGHT_ULTIMATE_DAMAGE{ 130 };
+	constexpr int FIRE_KNIGHT_ATTACK_1_DAMAGE{ 95 };
+	constexpr int FIRE_KNIGHT_ATTACK_2_DAMAGE{ 80 };
+	constexpr int FIRE_KNIGHT_AIR_ATTACK_DAMAGE{ 75 };
+	constexpr int FIRE_KNIGHT_ULTIMATE_DAMAGE{ 115 };
 
 	/* WIND HASHASHIN CONSTANTS: */
 
@@ -67,22 +66,21 @@ namespace constants
 	constexpr float WIND_HASHASHIN_SHAPE_WIDTH{ 20.f };
 	constexpr float WIND_HASHASHIN_SHAPE_HEIGHT{ 40.f };
 
-	constexpr float WIND_HASHASHIN_SPEED{ 240.f };
-	constexpr float WIND_HASHASHIN_JUMP_HEIGHT{ 80.f };
+	constexpr float WIND_HASHASHIN_SPEED{ 260.f };
+	constexpr float WIND_HASHASHIN_JUMP_HEIGHT{ 100.f };
 
 	constexpr int WIND_HASHASHIN_HP{ 1000 };
 
-	constexpr float WIND_HASHASHIN_ATTACK_1_WIDTH{ 30.f };
+	constexpr float WIND_HASHASHIN_ATTACK_1_WIDTH{ 40.f };
 	constexpr float WIND_HASHASHIN_ATTACK_2_WIDTH{ 50.f };
 	constexpr float WIND_HASHASHIN_AIR_ATTACK_WIDTH{ 53.f };
+	constexpr float WIND_HASHASHIN_ULTIMATE_WIDTH{ 80.f };
 	constexpr float WIND_HASHASHIN_ATTACK_HEIGHT{ 20.f };
 
-	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{90};
-	constexpr int WIND_HASHASHIN_ATTACK_2_DAMAGE{75};
-	constexpr int WIND_HASHASHIN_AIR_ATTACK_DAMAGE{65};
-
-	constexpr float WIND_HASHASHIN_ULTIMATE_WIDTH{ 80.f };
-	constexpr int WIND_HASHASHIN_ULTIMATE_DAMAGE{ 200 };
+	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{ 100 };
+	constexpr int WIND_HASHASHIN_ATTACK_2_DAMAGE{ 85 };
+	constexpr int WIND_HASHASHIN_AIR_ATTACK_DAMAGE{ 90 };
+	constexpr int WIND_HASHASHIN_ULTIMATE_DAMAGE{ 45 };
 
 	/* BOT CONSTANTS: */
 
@@ -93,6 +91,8 @@ namespace constants
 
 	constexpr float TIME_BETWEEN_ENEMY_ATTACKS{ 1.f };
 	constexpr float COOLDOWN_IMMUNE_TIME{ 0.6f };
+
+	constexpr float COOLDOWN_IMMUNE_WIND_HASHASHIN_ULTIMATE_TIME{ 0.1f };
 
 	/* STATE CONSTANTS: */
 

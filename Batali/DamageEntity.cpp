@@ -23,9 +23,19 @@ void DamageEntity::updateDamage()
 
 	// While on damageCooldown, the entity is immune to attacks. Useful to make the entity being hit only once per attack
 	m_damageCooldown = m_damageCooldownClock.getElapsedTime().asSeconds();
-	if (m_damageCooldown > COOLDOWN_IMMUNE_TIME)
+	if (!m_onWindHashashinUltimate)
 	{
-		m_inDamageCooldown = false;
+		if (m_damageCooldown > COOLDOWN_IMMUNE_TIME)
+		{
+			m_inDamageCooldown = false;
+		}
+	}
+	else
+	{
+		if (m_damageCooldown > COOLDOWN_IMMUNE_WIND_HASHASHIN_ULTIMATE_TIME)
+		{
+			m_inDamageCooldown = false;
+		}
 	}
 }
 
@@ -38,6 +48,8 @@ bool DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 		m_hitted = true;
 
 		m_hp -= damage;
+
+		std::cout << "hit\n";
 
 		if (m_remainingManaToUltimate > 0)
 		{

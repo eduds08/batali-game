@@ -27,12 +27,16 @@ public:
 
 	virtual const bool getOnUltimate() const { return m_onUltimate; }
 
+	const sf::RectangleShape& getUltimateActivateHitbox() const { return m_ultimateActivateHitbox; }
+
 protected:
 	// Useful when entity has more than one attack animation. So it alters between one another
 	std::string m_previousAttackingAnimation{};
 	bool m_isBot{};
 
 	sf::RectangleShape m_attackHitbox{sf::Vector2f{0.f, 0.f}};
+
+	sf::RectangleShape m_ultimateActivateHitbox{sf::Vector2f{0.f, 0.f}};
 
 	float m_hitboxWidth{};
 	float m_hitboxHeight{};

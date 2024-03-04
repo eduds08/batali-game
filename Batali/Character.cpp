@@ -19,6 +19,8 @@ void Character::update(float& deltaTime)
 {
 	updateDeath();
 
+	m_remainingManaToUltimate = 0;
+
 	// Only called if hp > 0
 	if (!m_dying)
 	{
@@ -56,8 +58,11 @@ void Character::update(float& deltaTime)
 		}
 		else if (m_currentTexture == m_entityName + "Ultimate")
 		{
-			m_hitboxWidth = m_hitboxWidthUltimate;
-			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+			if (m_entityName != "wind_hashashin")
+			{
+				m_hitboxWidth = m_hitboxWidthUltimate;
+				m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
+			}
 			m_damage = m_ultimateDamage;
 		}
 
@@ -93,7 +98,7 @@ void Character::updateTexture()
 	}
 	else if (m_hitted)
 	{
-		changeCurrentTexture(m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")), false);
+		m_onWindHashashinUltimate ? changeCurrentTexture(m_texturesActionName.at("HitTemp"), m_texturesNamePath.at(m_texturesActionName.at("HitTemp")), false) : changeCurrentTexture(m_texturesActionName.at("Hitted"), m_texturesNamePath.at(m_texturesActionName.at("Hitted")), false);
 	}
 	else if (m_velocity.y != 0.f && !m_canJump)
 	{

@@ -87,6 +87,8 @@ void SwordEntity::die()
 	m_dead = true;
 	m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
 	m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+	m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+	m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
 	m_velocity.x = 0.f;
 	m_velocity.y = 0.f;
 }

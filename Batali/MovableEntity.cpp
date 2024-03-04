@@ -41,12 +41,12 @@ void MovableEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	m_isRunning = true;
 
 	// Only runs when not on roll
-	if (conditionRunLeft && !m_onRoll)
+	if (conditionRunLeft && !m_onRoll && !getOnUltimate())
 	{
 		m_facingRight = -1;
 		m_velocity.x -= m_speed;
 	}
-	else if (conditionRunRight && !m_onRoll)
+	else if (conditionRunRight && !m_onRoll && !getOnUltimate())
 	{
 		m_facingRight = 1;
 		m_velocity.x += m_speed;

@@ -135,6 +135,7 @@ void PlayingState::render()
 		for (auto& player : m_players)
 		{
 			m_window.draw(player->getAttackHitbox());
+			m_window.draw(player->getUltimateActivateHitbox());
 		}
 
 	for (auto& ground : m_grounds)
@@ -200,6 +201,16 @@ void PlayingState::updateCollision()
 		{
 			handleEntityAttacked(*(m_players[1]), *(m_players[0]));
 		}
+
+		if (m_players[1]->getShape().getGlobalBounds().intersects((m_players[0]->getUltimateActivateHitbox().getGlobalBounds())) && !m_players[1]->isDying())
+		{
+			handleEntityAttacked(*(m_players[0]), *(m_players[1]), true);
+		}
+
+		if (m_players[0]->getShape().getGlobalBounds().intersects((m_players[1]->getUltimateActivateHitbox().getGlobalBounds())) && !m_players[0]->isDying())
+		{
+			handleEntityAttacked(*(m_players[1]), *(m_players[0]), true);
+		}
 	}
 
 	// Checks if the an entity was attacked by another entity
@@ -231,18 +242,27 @@ void PlayingState::updateEntityCollisionWithGrounds(MovableEntity& entity, Groun
 	}
 }
 
-void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity)
+void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity, bool isUltimateActivate)
 {
 	// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
 	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
 
-	bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
-
-	if (gotHit)
+	if (attackingEntity.getDamage() == WIND_HASHASHIN_ULTIMATE_DAMAGE)
 	{
-		// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-		if (attackingEntity.getDamage() != FIRE_KNIGHT_ATTACK_2_DAMAGE && attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+		attackedEntity.setOnWindHashashinUltimate(true);
+	}
+	else
+	{
+		attackedEntity.setOnWindHashashinUltimate(false);
+	}
+
+	if (!isUltimateActivate)
+	{
+		bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
+
+		if (gotHit && attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 		{
+			// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
 			while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
 			{
 				for (auto& ground : m_grounds)
@@ -252,11 +272,12 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 				attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 			}
 		}
-		else if (attackingEntity.getDamage() == WIND_HASHASHIN_ULTIMATE_DAMAGE)
-		{
-			attackedEntity.setShapePosition(attackingEntity.getShapePosition());
-			attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
-		}
+	}
+	else
+	{
+		attackedEntity.setShapePosition(attackingEntity.getShapePosition());
+		attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
+		//attackedEntity.setOnWindHashashinUltimate(true);
 	}
 }
 
@@ -356,8 +377,6 @@ void PlayingState::updatePlayerInput()
 						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
 
 						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
-
-						
 					}
 					else
 					{

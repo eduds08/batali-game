@@ -35,10 +35,13 @@ public:
 
 	virtual void die() = 0;
 
-	virtual const bool getOnUltimate() const = 0;
+	void setOnWindHashashinUltimate(bool onWindHashashinUltimate) { m_onWindHashashinUltimate = onWindHashashinUltimate; }
+	bool getOnWindHashashinUltimate() { return m_onWindHashashinUltimate; }
 protected:
 	sf::Clock m_damageCooldownClock{};
 	float m_damageCooldown{};
+
+	bool m_onWindHashashinUltimate{ false };
 
 	bool m_dead{ false };
 	bool m_dying{ false };
