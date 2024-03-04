@@ -19,8 +19,6 @@ void Character::update(float& deltaTime)
 {
 	updateDeath();
 
-	m_remainingManaToUltimate = 0;
-
 	// Only called if hp > 0
 	if (!m_dying)
 	{
