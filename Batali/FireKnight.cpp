@@ -3,22 +3,9 @@
 FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: Character{ playerNumber, isBot, player }
 {
-	m_hitboxHeight = FIRE_KNIGHT_ATTACK_HEIGHT;
-
 	// DEBUG
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
-
-	// Initialize starting/ending attackings' frames
-	m_attack1StartingFrame = 4;
-	m_attack1EndingFrame = 7;
-	m_attack2StartingFrame = 1;
-	m_attack2EndingFrame = 7;
-	m_airAttackingStartingFrame = 3;
-	m_airAttackingEndingFrame = 5;
-
-	m_ultimateStartingFrame = 4;
-	m_ultimateEndingFrame = 7;
 
 	m_entityName = "fire_knight";
 	initTexturesMap();
@@ -59,38 +46,89 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 	{
 		m_speed = FIRE_KNIGHT_SPEED;
 	}
-
-	m_hitboxWidthAttack1 = FIRE_KNIGHT_ATTACK_1_WIDTH;
-	m_hitboxWidthAttack2 = FIRE_KNIGHT_ATTACK_2_WIDTH;
-	m_hitboxWidthAirAttack = FIRE_KNIGHT_AIR_ATTACK_WIDTH;
-	m_hitboxWidthUltimate = FIRE_KNIGHT_ULTIMATE_WIDTH;
-
-	m_attack1Damage = FIRE_KNIGHT_ATTACK_1_DAMAGE;
-	m_attack2Damage = FIRE_KNIGHT_ATTACK_2_DAMAGE;
-	m_airAttackDamage = FIRE_KNIGHT_AIR_ATTACK_DAMAGE;
-	m_ultimateDamage = FIRE_KNIGHT_ULTIMATE_DAMAGE;
 }
 
 void FireKnight::updateHitbox()
 {
-	if ((m_currentTexture == m_entityName + "Attack1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
-		(m_currentTexture == m_entityName + "Attack2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
-		(m_currentTexture == m_entityName + "Ultimate" && m_frameCount > m_ultimateStartingFrame && m_frameCount < m_ultimateEndingFrame) ||
-		(m_currentTexture == m_entityName + "AirAttack" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
+	m_hitboxWidth = 0.f;
+	m_hitboxHeight = 0.f;
+
+	m_hitboxPosition = sf::Vector2f{ -100.f, -100.f };
+
+	if (m_currentTexture == m_entityName + "Attack1")
 	{
-		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
-		if (m_currentTexture == m_entityName + "Attack2")
+		m_hitboxPosition = getShapePosition();
+
+		if (m_frameCount >= FIRE_KNIGHT_ATTACK_1_STARTING_FRAME && m_frameCount <= FIRE_KNIGHT_ATTACK_1_ENDING_FRAME)
 		{
-			m_attackHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * 10.f / 2.f, 0.f));
+			m_hitboxWidth = FIRE_KNIGHT_ATTACK_1_WIDTH;
+			m_hitboxHeight = FIRE_KNIGHT_ATTACK_1_HEIGHT;
+			
+			m_damage = FIRE_KNIGHT_ATTACK_1_DAMAGE;
 		}
-		else
+	}
+	else if (m_currentTexture == m_entityName + "Attack2")
+	{
+		m_hitboxPosition = getShapePosition();
+
+		if (m_frameCount >= FIRE_KNIGHT_ATTACK_2_PT_1_STARTING_FRAME && m_frameCount <= FIRE_KNIGHT_ATTACK_2_PT_1_ENDING_FRAME)
 		{
-			m_attackHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
+			m_hitboxWidth = FIRE_KNIGHT_ATTACK_2_PT_1_WIDTH;
+			m_hitboxHeight = FIRE_KNIGHT_ATTACK_2_PT_1_HEIGHT;
+
+			m_hitboxPosition = getShapePosition() - sf::Vector2f{m_hitboxWidth * m_facingRight, 0.f};
+		}
+		else if (m_frameCount >= FIRE_KNIGHT_ATTACK_2_PT_2_STARTING_FRAME && m_frameCount <= FIRE_KNIGHT_ATTACK_2_PT_2_ENDING_FRAME)
+		{
+			m_hitboxWidth = FIRE_KNIGHT_ATTACK_2_PT_2_WIDTH;
+			m_hitboxHeight = FIRE_KNIGHT_ATTACK_2_PT_2_HEIGHT;
+		}
+		else if (m_frameCount >= FIRE_KNIGHT_ATTACK_2_PT_3_STARTING_FRAME && m_frameCount <= FIRE_KNIGHT_ATTACK_2_PT_3_ENDING_FRAME)
+		{
+			m_hitboxWidth = FIRE_KNIGHT_ATTACK_2_PT_3_WIDTH;
+			m_hitboxHeight = FIRE_KNIGHT_ATTACK_2_PT_3_HEIGHT;
+
+			m_hitboxPosition = getShapePosition() - sf::Vector2f{m_hitboxWidth * m_facingRight, 0.f};
+		}
+		else if (m_frameCount >= FIRE_KNIGHT_ATTACK_2_PT_4_STARTING_FRAME && m_frameCount <= FIRE_KNIGHT_ATTACK_2_PT_4_ENDING_FRAME)
+		{
+			m_hitboxWidth = FIRE_KNIGHT_ATTACK_2_PT_4_WIDTH;
+			m_hitboxHeight = FIRE_KNIGHT_ATTACK_2_PT_4_HEIGHT;
+		}
+
+		m_damage = FIRE_KNIGHT_ATTACK_2_DAMAGE;
+	}
+	else if (m_currentTexture == m_entityName + "AirAttack")
+	{
+		m_hitboxPosition = getShapePosition();
+
+		if (m_frameCount >= FIRE_KNIGHT_AIR_ATTACK_STARTING_FRAME && m_frameCount <= FIRE_KNIGHT_AIR_ATTACK_ENDING_FRAME)
+		{
+			m_hitboxWidth = FIRE_KNIGHT_AIR_ATTACK_WIDTH;
+			m_hitboxHeight = FIRE_KNIGHT_AIR_ATTACK_HEIGHT;
+
+			m_damage = FIRE_KNIGHT_AIR_ATTACK_DAMAGE;
+		}
+	}
+	else if (m_currentTexture == m_entityName + "Ultimate")
+	{
+		m_hitboxPosition = getShapePosition();
+
+		if (m_frameCount >= FIRE_KNIGHT_ULTIMATE_STARTING_FRAME && m_frameCount <= FIRE_KNIGHT_ULTIMATE_ENDING_FRAME)
+		{
+			m_hitboxWidth = FIRE_KNIGHT_ULTIMATE_WIDTH;
+			m_hitboxHeight = FIRE_KNIGHT_ULTIMATE_HEIGHT;
+
+			m_damage = FIRE_KNIGHT_ULTIMATE_DAMAGE;
 		}
 	}
 	else
 	{
-		m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-		m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+		m_damage = 0;
 	}
+
+	m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
+	m_attackHitbox.setOrigin(sf::Vector2f{0.f, m_hitboxHeight / 2.f});
+	m_attackHitbox.setScale(m_facingRight, 1.f);
+	m_attackHitbox.setPosition(m_hitboxPosition);
 }

@@ -66,7 +66,7 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 				m_activateUltimate = false;
 			}
 
-			if (m_currentTexture == "wind_hashashinUltimate" && m_frameCount > m_ultimateEndingFrame && !m_activateUltimate)
+			if (m_currentTexture == "wind_hashashinUltimate" && m_frameCount > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
 			{
 				m_onUltimate = false;
 				m_isAttacking = false;
@@ -93,6 +93,15 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 	}
 
 	updateHitbox();
+
+	if (m_isBot)
+	{
+		if (m_isAttacking)
+		{
+			m_timeBetweenAttacksClock.restart();
+			m_timeBetweenAttacks = 0.f;
+		}
+	}
 }
 
 void SwordEntity::die()

@@ -36,44 +36,7 @@ void Character::update(float& deltaTime)
 
 		updateMovement(m_conditionRunLeft, m_conditionRunRight, m_conditionJump, deltaTime, m_conditionRoll);
 
-		if (m_currentTexture == m_entityName + "Attack1")
-		{
-			m_hitboxWidth = m_hitboxWidthAttack1;
-			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
-			m_damage = m_attack1Damage;
-		}
-		else if (m_currentTexture == m_entityName + "Attack2")
-		{
-			m_hitboxWidth = m_hitboxWidthAttack2;
-			m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
-			m_damage = m_attack2Damage;
-		}
-		else if (m_currentTexture == m_entityName + "AirAttack")
-		{
-			m_hitboxWidth = m_hitboxWidthAirAttack;
-			m_entityName == "fire_knight" ? m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight * 3 } / 2.f) : m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
-			m_damage = m_airAttackDamage;
-		}
-		else if (m_currentTexture == m_entityName + "Ultimate")
-		{
-			if (m_entityName != "wind_hashashin")
-			{
-				m_hitboxWidth = m_hitboxWidthUltimate;
-				m_attackHitbox.setOrigin(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight } / 2.f);
-			}
-			m_damage = m_ultimateDamage;
-		}
-
 		updateAttack(m_conditionAttack1, m_conditionAttack2, m_conditionUltimate);
-
-		if (m_isBot)
-		{
-			if (m_isAttacking)
-			{
-				m_timeBetweenAttacksClock.restart();
-				m_timeBetweenAttacks = 0.f;
-			}
-		}
 
 		updateDamage();
 

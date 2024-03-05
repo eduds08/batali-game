@@ -41,6 +41,8 @@ protected:
 	sf::RectangleShape m_ultimateActivateHitbox{sf::Vector2f{0.f, 0.f}};
 	bool m_activateUltimate{ false };
 
+	sf::Vector2f m_hitboxPosition{};
+
 	float m_hitboxWidth{};
 	float m_hitboxHeight{};
 
@@ -50,16 +52,6 @@ protected:
 	bool m_onAttack1{ false };
 	bool m_onAttack2{ false };
 
-	float m_hitboxWidthAttack1{};
-	float m_hitboxWidthAttack2{};
-	float m_hitboxWidthAirAttack{};
-	float m_hitboxWidthUltimate{};
-
-	int m_attack1Damage{};
-	int m_attack2Damage{};
-	int m_airAttackDamage{};
-	int m_ultimateDamage{};
-
 	// Timer used to create a interval between the bot's attacks
 	sf::Clock m_timeBetweenAttacksClock{};
 	float m_timeBetweenAttacks{};
@@ -67,16 +59,6 @@ protected:
 	bool m_conditionAttack1{ false };
 	bool m_conditionAttack2{ false };
 	bool m_conditionUltimate{ false };
-
-	// These attributes store the starting and ending frame of the attack sprite where the hitbox should spawn
-	int m_attack1StartingFrame{};
-	int m_attack1EndingFrame{};
-	int m_attack2StartingFrame{};
-	int m_attack2EndingFrame{};
-	int m_airAttackingStartingFrame{};
-	int m_airAttackingEndingFrame{};
-	int m_ultimateStartingFrame{};
-	int m_ultimateEndingFrame{};
 
 	int m_damage{};
 };

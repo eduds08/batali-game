@@ -3,24 +3,11 @@
 WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: Character{ playerNumber, isBot, player }
 {
-	m_hitboxHeight = WIND_HASHASHIN_ATTACK_HEIGHT;
-
 	// DEBUG
 	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
 	m_attackHitbox.setOutlineThickness(1.f);
 	m_ultimateActivateHitbox.setFillColor(sf::Color{0, 0, 255, 50});
 	m_ultimateActivateHitbox.setOutlineThickness(1.f);
-
-	// Initialize starting/ending attackings' frames
-	m_attack1StartingFrame = 0;
-	m_attack1EndingFrame = 4;
-	m_attack2StartingFrame = 1;
-	m_attack2EndingFrame = 7;
-	m_airAttackingStartingFrame = 2;
-	m_airAttackingEndingFrame = 5;
-
-	m_ultimateStartingFrame = 4;
-	m_ultimateEndingFrame = 7;
 
 	m_entityName = "wind_hashashin";
 	initTexturesMap();
@@ -61,46 +48,93 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber, bool 
 	{
 		m_speed = WIND_HASHASHIN_SPEED;
 	}
-
-	m_hitboxWidthAttack1 = WIND_HASHASHIN_ATTACK_1_WIDTH;
-	m_hitboxWidthAttack2 = WIND_HASHASHIN_ATTACK_2_WIDTH;
-	m_hitboxWidthAirAttack = WIND_HASHASHIN_AIR_ATTACK_WIDTH;
-	m_hitboxWidthUltimate = WIND_HASHASHIN_ULTIMATE_WIDTH;
-
-	m_attack1Damage = WIND_HASHASHIN_ATTACK_1_DAMAGE;
-	m_attack2Damage = WIND_HASHASHIN_ATTACK_2_DAMAGE;
-	m_airAttackDamage = WIND_HASHASHIN_AIR_ATTACK_DAMAGE;
-	m_ultimateDamage = WIND_HASHASHIN_ULTIMATE_DAMAGE;
 }
 
 void WindHashashin::updateHitbox()
 {
-	if ((m_currentTexture == m_entityName + "Ultimate" && m_frameCount > m_ultimateStartingFrame && m_frameCount < m_ultimateEndingFrame))
+	m_hitboxWidth = 0.f;
+	m_hitboxHeight = 0.f;
+
+	m_hitboxPosition = sf::Vector2f{ -100.f, -100.f };
+
+	m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+	m_ultimateActivateHitbox.setPosition(-100.f, -100.f);
+
+	if (m_currentTexture == m_entityName + "Attack1")
 	{
-		m_ultimateActivateHitbox.setSize(sf::Vector2f{m_hitboxWidthUltimate, m_hitboxHeight});
-		m_ultimateActivateHitbox.setOrigin(sf::Vector2f{m_hitboxWidthUltimate, m_hitboxHeight} / 2.f);
-		m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * m_ultimateActivateHitbox.getSize().x / 2.f, 0.f));
+		m_hitboxPosition = getShapePosition();
+
+		if (m_frameCount > WIND_HASHASHIN_ATTACK_1_PT_1_STARTING_FRAME && m_frameCount < WIND_HASHASHIN_ATTACK_1_PT_1_ENDING_FRAME)
+		{
+			m_hitboxWidth = WIND_HASHASHIN_ATTACK_1_PT_1_WIDTH;
+			m_hitboxHeight = WIND_HASHASHIN_ATTACK_1_PT_1_HEIGHT;
+		}
+		else if (m_frameCount > WIND_HASHASHIN_ATTACK_1_PT_2_STARTING_FRAME && m_frameCount < WIND_HASHASHIN_ATTACK_1_PT_2_ENDING_FRAME)
+		{
+			m_hitboxWidth = WIND_HASHASHIN_ATTACK_1_PT_2_WIDTH;
+			m_hitboxHeight = WIND_HASHASHIN_ATTACK_1_PT_2_HEIGHT;
+		}
+
+		m_damage = WIND_HASHASHIN_ATTACK_1_DAMAGE;
 	}
-	else if (m_currentTexture == m_entityName + "Ultimate" && (m_frameCount == 11 || m_frameCount == 17 || m_frameCount == 19))
+	else if (m_currentTexture == m_entityName + "Attack2")
 	{
-		m_attackHitbox.setSize(getShapeSize());
-		m_attackHitbox.setOrigin(m_attackHitbox.getSize() / 2.f);
-		m_attackHitbox.setPosition(getShapePosition());
-		m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-		m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+		m_hitboxPosition = getShapePosition();
+
+		if (m_frameCount > WIND_HASHASHIN_ATTACK_2_STARTING_FRAME && m_frameCount < WIND_HASHASHIN_ATTACK_2_ENDING_FRAME)
+		{
+			m_hitboxWidth = WIND_HASHASHIN_ATTACK_2_WIDTH;
+			m_hitboxHeight = WIND_HASHASHIN_ATTACK_2_HEIGHT;
+
+			m_damage = WIND_HASHASHIN_ATTACK_2_DAMAGE;
+		}
 	}
-	else if ((m_currentTexture == m_entityName + "Attack1" && m_frameCount > m_attack1StartingFrame && m_frameCount < m_attack1EndingFrame) ||
-			(m_currentTexture == m_entityName + "Attack2" && m_frameCount > m_attack2StartingFrame && m_frameCount < m_attack2EndingFrame) ||
-			(m_currentTexture == m_entityName + "AirAttack" && m_frameCount > m_airAttackingStartingFrame && m_frameCount < m_airAttackingEndingFrame))
+	else if (m_currentTexture == m_entityName + "AirAttack")
 	{
-		m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
-		m_attackHitbox.setPosition(getShapePosition() + sf::Vector2f(m_facingRight * m_attackHitbox.getSize().x / 2.f, 0.f));
+		m_hitboxPosition = getShapePosition();
+
+		if (m_frameCount > WIND_HASHASHIN_AIR_ATTACK_STARTING_FRAME && m_frameCount < WIND_HASHASHIN_AIR_ATTACK_ENDING_FRAME)
+		{
+			m_hitboxWidth = WIND_HASHASHIN_AIR_ATTACK_WIDTH;
+			m_hitboxHeight = WIND_HASHASHIN_AIR_ATTACK_HEIGHT;
+
+			m_damage = WIND_HASHASHIN_AIR_ATTACK_DAMAGE;
+		}
+	}
+	else if (m_currentTexture == m_entityName + "Ultimate")
+	{
+		if (m_frameCount > WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME && m_frameCount < WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME)
+		{
+			m_hitboxWidth = 0.f;
+			m_hitboxHeight = 0.f;
+
+			m_hitboxPosition = sf::Vector2f{ -100.f, -100.f };
+
+			m_ultimateActivateHitbox.setSize(sf::Vector2f{WIND_HASHASHIN_ACTIVATE_ULTIMATE_WIDTH, WIND_HASHASHIN_ACTIVATE_ULTIMATE_HEIGHT});
+			m_ultimateActivateHitbox.setOrigin(0.f, WIND_HASHASHIN_ACTIVATE_ULTIMATE_HEIGHT / 2.f);
+			m_ultimateActivateHitbox.setScale(m_facingRight, 1.f);
+			m_ultimateActivateHitbox.setPosition(getShapePosition());
+		}
+		else if (m_frameCount == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME)
+		{
+			m_hitboxWidth = getShapeSize().x;
+			m_hitboxHeight = getShapeSize().y;
+
+			m_hitboxPosition = getShapePosition();
+
+			m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+			m_ultimateActivateHitbox.setPosition(-100.f, -100.f);
+		}
+
+		m_damage = WIND_HASHASHIN_ULTIMATE_DAMAGE;
 	}
 	else
 	{
-		m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-		m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
-		m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-		m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+		m_damage = 0;
 	}
+
+	m_attackHitbox.setSize(sf::Vector2f{ m_hitboxWidth, m_hitboxHeight });
+	m_attackHitbox.setOrigin(0.f, m_hitboxHeight / 2.f);
+	m_attackHitbox.setScale(m_facingRight, 1.f);
+	m_attackHitbox.setPosition(m_hitboxPosition);
 }
