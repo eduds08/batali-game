@@ -3,25 +3,25 @@
 FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shared_ptr<Character> player)
 	: Character{ playerNumber, isBot, player }
 {
-	// DEBUG
-	m_attackHitbox.setFillColor(sf::Color{255, 0, 0, 50});
-	m_attackHitbox.setOutlineThickness(1.f);
-
 	m_entityName = "fire_knight";
+
 	initTexturesMap();
 
 	// Initialize sprite
 	m_spriteWidth = FIRE_KNIGHT_SPRITE_WIDTH;
 	m_spriteHeight = FIRE_KNIGHT_SPRITE_HEIGHT;
-	changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true);
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
+	changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true);
+	
 	// Initialize shape
 	m_shape.setSize(sf::Vector2f{ FIRE_KNIGHT_SHAPE_WIDTH, FIRE_KNIGHT_SHAPE_HEIGHT});
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
 
 	// DEBUG
+	m_attackHitbox.setFillColor(sf::Color{ 255, 0, 0, 50 });
+	m_attackHitbox.setOutlineThickness(1.f);
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
@@ -31,16 +31,8 @@ FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber, bool isBot,
 
 	if (m_isBot)
 	{
-		// Generates a random seed
-		std::random_device rd;
-		// Mersenne Twister random number generator
-		std::mt19937 gen(rd());
-		// Generates uniform distributed random number in a specific interval
-		std::uniform_real_distribution<> distribution1(MIN_ENEMY_SPEED, MAX_ENEMY_SPEED);
-		std::uniform_real_distribution<> distribution2(MIN_ENEMY_DISTANCE_FROM_PLAYER, MAX_ENEMY_DISTANCE_FROM_PLAYER);
-
-		m_speed = static_cast<float>(distribution1(gen));
-		m_distanceFromPlayer = static_cast<float>(distribution2(gen));
+		m_speed = ENEMY_SPEED;
+		m_distanceFromPlayer = ENEMY_DISTANCE_FROM_PLAYER;
 	}
 	else
 	{
