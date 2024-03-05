@@ -10,54 +10,50 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
-		m_players.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
 		characterStatus1.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
 	}
 	else
 	{
-		m_players.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
 		characterStatus1.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
 	}
 
-	characterStatus1.m_healthBar.setEntityStatus(&m_players[0]->getHp());
-	characterStatus1.m_staminaBar.setEntityStatus(&m_players[0]->getStamina());
-	characterStatus1.m_manaBar.setEntityStatus(&m_players[0]->getRemainingManaToUltimate());
+	characterStatus1.m_healthBar.setEntityStatus(&m_characters[0]->getHp());
+	characterStatus1.m_staminaBar.setEntityStatus(&m_characters[0]->getStamina());
+	characterStatus1.m_manaBar.setEntityStatus(&m_characters[0]->getRemainingManaToUltimate());
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
 	{
 		if (secondCharacter == "fire_knight")
 		{
-			m_players.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 		else
 		{
-			m_players.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
-
-		characterStatus2.m_healthBar.setEntityStatus(&m_players[1]->getHp());
-		characterStatus2.m_staminaBar.setEntityStatus(&m_players[1]->getStamina());
-		characterStatus2.m_manaBar.setEntityStatus(&m_players[1]->getRemainingManaToUltimate());
 	}
 	else
 	{
 		if (secondCharacter == "fire_knight")
 		{
-			m_bots.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_players[0]));
+			m_characters.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
 			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
 		else
 		{
-			m_bots.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_players[0]));
+			m_characters.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
 			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
 		}
-
-		characterStatus2.m_healthBar.setEntityStatus(&m_bots[0]->getHp());
-		characterStatus2.m_staminaBar.setEntityStatus(&m_bots[0]->getStamina());
-		characterStatus2.m_manaBar.setEntityStatus(&m_bots[0]->getRemainingManaToUltimate());
 	}
+
+	characterStatus2.m_healthBar.setEntityStatus(&m_characters[1]->getHp());
+	characterStatus2.m_staminaBar.setEntityStatus(&m_characters[1]->getStamina());
+	characterStatus2.m_manaBar.setEntityStatus(&m_characters[1]->getRemainingManaToUltimate());
 
 	// Initialize map
 	loadAndCreateMap("./map/map.txt");
@@ -97,14 +93,9 @@ void PlayingState::update()
 		characterStatus1.update();
 		characterStatus2.update();
 
-		for (auto& player : m_players)
+		for (auto& character : m_characters)
 		{
-			player->update(m_deltaTime);
-		}
-
-		for (auto& bot : m_bots)
-		{
-			bot->update(m_deltaTime);
+			character->update(m_deltaTime);
 		}
 
 		updateView();
@@ -115,28 +106,16 @@ void PlayingState::update()
 
 void PlayingState::render()
 {
-	for (auto& player : m_players)
+	for (auto& character : m_characters)
 	{
 		if (m_debugMode)
-			m_window.draw(player->getShape());
-		m_window.draw(player->getSprite());
-	}
-
-	for (auto& bot : m_bots)
-	{
-		if (m_debugMode)
-			m_window.draw(bot->getShape());
-		m_window.draw(bot->getSprite());
-		if (m_debugMode)
-			m_window.draw(bot->getAttackHitbox());
-	}
-
-	if (m_debugMode)
-		for (auto& player : m_players)
 		{
-			m_window.draw(player->getAttackHitbox());
-			m_window.draw(player->getUltimateActivateHitbox());
+			m_window.draw(character->getShape());
+			m_window.draw(character->getAttackHitbox());
+			m_window.draw(character->getUltimateActivateHitbox());
 		}
+		m_window.draw(character->getSprite());
+	}
 
 	for (auto& ground : m_grounds)
 	{
@@ -164,76 +143,47 @@ void PlayingState::updateCollision()
 	// We reset isCollidingHorizontally to false for all entities, so when isColliding() is called, if the entity collides in the x-direction, it will be true.
 	// If doesn't collide, it remains false.
 
-	for (auto& player : m_players)
+	for (auto& character : m_characters)
 	{
-		player->setIsCollidingHorizontally(false);
-	}
-	
-	for (auto& bot : m_bots)
-	{
-		bot->setIsCollidingHorizontally(false);
+		character->setIsCollidingHorizontally(false);
 	}
 
 	// Entities' collision with tiles
 	for (auto& ground : m_grounds)
 	{
 		// Player's collision
-		for (auto& player : m_players)
+		for (auto& character : m_characters)
 		{
-			updateEntityCollisionWithGrounds(*player, ground);
-		}
-
-		// Bots' collision
-		for (auto& bot : m_bots)
-		{
-			updateEntityCollisionWithGrounds(*bot, ground);
+			updateEntityCollisionWithGrounds(*character, ground);
 		}
 	}
 
-	if (m_twoPlayers)
-	{
-		if (m_players[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_players[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+
+		if (m_characters[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_characters[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 		{
-			m_players[0]->setOnWindHashashinUltimate(false);
-			m_players[1]->setOnWindHashashinUltimate(false);
+			m_characters[0]->setOnWindHashashinUltimate(false);
+			m_characters[1]->setOnWindHashashinUltimate(false);
 		}
 
-		if (m_players[1]->getShape().getGlobalBounds().intersects((m_players[0]->getAttackHitbox().getGlobalBounds())) && !m_players[1]->isDying())
+		if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getAttackHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
 		{
-			handleEntityAttacked(*(m_players[0]), *(m_players[1]));
+			handleEntityAttacked(*(m_characters[0]), *(m_characters[1]));
 		}
 
-		if (m_players[0]->getShape().getGlobalBounds().intersects((m_players[1]->getAttackHitbox().getGlobalBounds())) && !m_players[0]->isDying())
+		if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getAttackHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
 		{
-			handleEntityAttacked(*(m_players[1]), *(m_players[0]));
+			handleEntityAttacked(*(m_characters[1]), *(m_characters[0]));
 		}
 
-		if (m_players[1]->getShape().getGlobalBounds().intersects((m_players[0]->getUltimateActivateHitbox().getGlobalBounds())) && !m_players[1]->isDying())
+		if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
 		{
-			handleEntityAttacked(*(m_players[0]), *(m_players[1]), true);
+			handleEntityAttacked(*(m_characters[0]), *(m_characters[1]), true);
 		}
 
-		if (m_players[0]->getShape().getGlobalBounds().intersects((m_players[1]->getUltimateActivateHitbox().getGlobalBounds())) && !m_players[0]->isDying())
+		if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
 		{
-			handleEntityAttacked(*(m_players[1]), *(m_players[0]), true);
+			handleEntityAttacked(*(m_characters[1]), *(m_characters[0]), true);
 		}
-	}
-
-	// Checks if the an entity was attacked by another entity
-	for (auto& bot : m_bots)
-	{
-		// Bot attacked by player
-		if (bot->getShape().getGlobalBounds().intersects((m_players[0]->getAttackHitbox().getGlobalBounds())) && !bot->isDying())
-		{
-			handleEntityAttacked(*(m_players[0]), *(bot));
-		}
-
-		// Player attacked by an bot
-		if (m_players[0]->getShape().getGlobalBounds().intersects((bot->getAttackHitbox().getGlobalBounds())) && !m_players[0]->isDying())
-		{
-			handleEntityAttacked(*(bot), *(m_players[0]));
-		}
-	}
 }
 
 void PlayingState::updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground)
@@ -345,19 +295,11 @@ void PlayingState::updateTexturesAndAnimations()
 			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
 			std::this_thread::sleep_for(std::chrono::milliseconds(75));
 
-			for (auto& player : m_players)
+			for (auto& character : m_characters)
 			{
-				if (!player->isDead())
+				if (!character->isDead())
 				{
-					player->updateAnimation();
-				}
-			}
-
-			for (auto& bot : m_bots)
-			{
-				if (!bot->isDead())
-				{
-					bot->updateAnimation();
+					character->updateAnimation();
 				}
 			}
 		}
@@ -370,49 +312,49 @@ void PlayingState::updatePlayerInput()
 	{
 		if (!m_onPause)
 		{
-			for (auto& player : m_players)
+			for (auto& character : m_characters)
 			{
-				if (player->getPlayerNumber() == 1)
+				if (character->getPlayerNumber() == 1)
 				{
 					if (m_twoPlayers)
 					{
-						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
-						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
-						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
+						character->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
+						character->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
+						character->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
 
-						player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-						player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+						character->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+						character->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
 
-						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+						character->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
 
-						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
+						character->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
 					}
 					else
 					{
-						player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-						player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-						player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+						character->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+						character->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+						character->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
 
-						player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
-						player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-						
-						player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+						character->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
+						character->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
 
-						player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+						character->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+
+						character->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
 					}
 				}
-				else if (player->getPlayerNumber() == 2)
+				else if (character->getPlayerNumber() == 2)
 				{
-					player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-					player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-					player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+					character->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+					character->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+					character->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
 
-					player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
-					player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
+					character->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
+					character->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
 
-					player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
+					character->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
 
-					player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
+					character->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
 				}
 			}
 		}

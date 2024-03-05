@@ -41,8 +41,7 @@ public:
 	void updatePlayerInput();
 
 private:
-	std::vector<std::shared_ptr<Character>> m_players{};
-	std::vector<std::unique_ptr<Character>> m_bots{};
+	std::vector<std::shared_ptr<Character>> m_characters{};
 
 	std::vector<Ground> m_grounds{};
 
