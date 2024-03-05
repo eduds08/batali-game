@@ -50,19 +50,19 @@ namespace constants
 	constexpr float FIRE_KNIGHT_ATTACK_1_WIDTH{ 65.f };
 	constexpr float FIRE_KNIGHT_ATTACK_1_HEIGHT{ 20.f };
 
-	constexpr float FIRE_KNIGHT_ATTACK_2_PT_1_WIDTH{ 130.f };
+	constexpr float FIRE_KNIGHT_ATTACK_2_PT_1_WIDTH{ 50.f };
 	constexpr float FIRE_KNIGHT_ATTACK_2_PT_1_HEIGHT{ 20.f };
 
-	constexpr float FIRE_KNIGHT_ATTACK_2_PT_2_WIDTH{ 130.f };
+	constexpr float FIRE_KNIGHT_ATTACK_2_PT_2_WIDTH{ 70.f };
 	constexpr float FIRE_KNIGHT_ATTACK_2_PT_2_HEIGHT{ 20.f };
 
-	constexpr float FIRE_KNIGHT_ATTACK_2_PT_3_WIDTH{ 130.f };
+	constexpr float FIRE_KNIGHT_ATTACK_2_PT_3_WIDTH{ 60.f };
 	constexpr float FIRE_KNIGHT_ATTACK_2_PT_3_HEIGHT{ 20.f };
 
-	constexpr float FIRE_KNIGHT_ATTACK_2_PT_4_WIDTH{ 130.f };
+	constexpr float FIRE_KNIGHT_ATTACK_2_PT_4_WIDTH{ 70.f };
 	constexpr float FIRE_KNIGHT_ATTACK_2_PT_4_HEIGHT{ 20.f };
 
-	constexpr float FIRE_KNIGHT_AIR_ATTACK_WIDTH{ 90.f };
+	constexpr float FIRE_KNIGHT_AIR_ATTACK_WIDTH{ 95.f };
 	constexpr float FIRE_KNIGHT_AIR_ATTACK_HEIGHT{ 20.f };
 
 	constexpr float FIRE_KNIGHT_ULTIMATE_WIDTH{ 100.f };
@@ -86,10 +86,10 @@ namespace constants
 
 	constexpr int WIND_HASHASHIN_HP{ 1000 };
 
-	constexpr float WIND_HASHASHIN_ATTACK_1_PT_1_WIDTH{ 20.f };
+	constexpr float WIND_HASHASHIN_ATTACK_1_PT_1_WIDTH{ 38.f };
 	constexpr float WIND_HASHASHIN_ATTACK_1_PT_1_HEIGHT{ 20.f };
 
-	constexpr float WIND_HASHASHIN_ATTACK_1_PT_2_WIDTH{ 20.f };
+	constexpr float WIND_HASHASHIN_ATTACK_1_PT_2_WIDTH{ 28.f };
 	constexpr float WIND_HASHASHIN_ATTACK_1_PT_2_HEIGHT{ 20.f };
 
 	constexpr float WIND_HASHASHIN_ATTACK_2_WIDTH{ 50.f };
@@ -113,13 +113,13 @@ namespace constants
 	constexpr int FIRE_KNIGHT_ATTACK_1_STARTING_FRAME{ 5 };
 	constexpr int FIRE_KNIGHT_ATTACK_1_ENDING_FRAME{ 7 };
 
-	constexpr int FIRE_KNIGHT_ATTACK_2_PT_1_STARTING_FRAME{ 1 };
+	constexpr int FIRE_KNIGHT_ATTACK_2_PT_1_STARTING_FRAME{ 2 };
 	constexpr int FIRE_KNIGHT_ATTACK_2_PT_1_ENDING_FRAME{ 2 };
-	constexpr int FIRE_KNIGHT_ATTACK_2_PT_2_STARTING_FRAME{ 3 };
-	constexpr int FIRE_KNIGHT_ATTACK_2_PT_2_ENDING_FRAME{ 3 };
-	constexpr int FIRE_KNIGHT_ATTACK_2_PT_3_STARTING_FRAME{ 4 };
-	constexpr int FIRE_KNIGHT_ATTACK_2_PT_3_ENDING_FRAME{ 4 };
-	constexpr int FIRE_KNIGHT_ATTACK_2_PT_4_STARTING_FRAME{ 5 };
+	constexpr int FIRE_KNIGHT_ATTACK_2_PT_2_STARTING_FRAME{ 4 };
+	constexpr int FIRE_KNIGHT_ATTACK_2_PT_2_ENDING_FRAME{ 4 };
+	constexpr int FIRE_KNIGHT_ATTACK_2_PT_3_STARTING_FRAME{ 5 };
+	constexpr int FIRE_KNIGHT_ATTACK_2_PT_3_ENDING_FRAME{ 5 };
+	constexpr int FIRE_KNIGHT_ATTACK_2_PT_4_STARTING_FRAME{ 6 };
 	constexpr int FIRE_KNIGHT_ATTACK_2_PT_4_ENDING_FRAME{ 6 };
 
 	constexpr int FIRE_KNIGHT_AIR_ATTACK_STARTING_FRAME{ 4 };
@@ -130,10 +130,10 @@ namespace constants
 
 	/* WIND_HASHASHIN FRAMES */
 
-	constexpr int WIND_HASHASHIN_ATTACK_1_PT_1_STARTING_FRAME{ 1 };
-	constexpr int WIND_HASHASHIN_ATTACK_1_PT_1_ENDING_FRAME{ 7 };
-	constexpr int WIND_HASHASHIN_ATTACK_1_PT_2_STARTING_FRAME{ 1 };
-	constexpr int WIND_HASHASHIN_ATTACK_1_PT_2_ENDING_FRAME{ 7 };
+	constexpr int WIND_HASHASHIN_ATTACK_1_PT_1_STARTING_FRAME{ 0 };
+	constexpr int WIND_HASHASHIN_ATTACK_1_PT_1_ENDING_FRAME{ 1 };
+	constexpr int WIND_HASHASHIN_ATTACK_1_PT_2_STARTING_FRAME{ 3 };
+	constexpr int WIND_HASHASHIN_ATTACK_1_PT_2_ENDING_FRAME{ 3 };
 
 	constexpr int WIND_HASHASHIN_ATTACK_2_STARTING_FRAME{ 1 };
 	constexpr int WIND_HASHASHIN_ATTACK_2_ENDING_FRAME{ 7 };
@@ -141,7 +141,7 @@ namespace constants
 	constexpr int WIND_HASHASHIN_AIR_ATTACK_STARTING_FRAME{ 2 };
 	constexpr int WIND_HASHASHIN_AIR_ATTACK_ENDING_FRAME{ 5 };
 
-	constexpr int WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME{ 4 };
+	constexpr int WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME{ 5 };
 	constexpr int WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME{ 7 };
 
 	constexpr int WIND_HASHASHIN_ULTIMATE_FIRST_FRAME{ 11 };
