@@ -33,10 +33,14 @@ public:
 
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 
-	virtual void die() = 0;
+	// Sets m_dead to true and "zeroes" some attributes
+	void die();
 
 	void setOnWindHashashinUltimate(bool onWindHashashinUltimate) { m_onWindHashashinUltimate = onWindHashashinUltimate; }
 	bool getOnWindHashashinUltimate() { return m_onWindHashashinUltimate; }
+
+	virtual void resetAttackHitbox() = 0;
+	virtual void resetUltimateHitbox() = 0;
 protected:
 	sf::Clock m_damageCooldownClock{};
 	float m_damageCooldown{};

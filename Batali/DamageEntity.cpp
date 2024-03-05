@@ -116,3 +116,12 @@ void DamageEntity::updateGravityWhenDying(float& deltaTime)
 		move(deltaTime);
 	}
 }
+
+void DamageEntity::die()
+{
+	m_dead = true;
+	resetAttackHitbox();
+	resetUltimateHitbox();
+	m_velocity.x = 0.f;
+	m_velocity.y = 0.f;
+}

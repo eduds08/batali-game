@@ -13,9 +13,6 @@ public:
 
 	virtual void updateHitbox() = 0;
 
-	// Sets m_dead to true and "zeroes" some attributes
-	virtual void die();
-
 	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
 	virtual const bool getIsAttacking() const { return m_isAttacking; }
 
@@ -30,6 +27,15 @@ public:
 	const sf::RectangleShape& getUltimateActivateHitbox() const { return m_ultimateActivateHitbox; }
 
 	void setActivateUltimate(bool activateUltimate) { m_activateUltimate = activateUltimate; }
+
+	virtual void resetAttackHitbox() {
+		m_attackHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_attackHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+	}
+	virtual void resetUltimateHitbox() {
+		m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
+	}
 
 protected:
 	// Useful when entity has more than one attack animation. So it alters between one another
