@@ -95,6 +95,8 @@ void WindHashashin::updateHitbox()
 	}
 	else if (m_currentTexture == m_entityName + "Ultimate")
 	{
+		m_damage = WIND_HASHASHIN_ULTIMATE_DAMAGE;
+
 		if (m_frameCount >= WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME && m_frameCount <= WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_animationEnd)
 		{
 			m_hitboxWidth = 0.f;
@@ -102,10 +104,10 @@ void WindHashashin::updateHitbox()
 
 			m_hitboxPosition = sf::Vector2f{ -100.f, -100.f };
 
-			m_ultimateActivateHitbox.setSize(sf::Vector2f{WIND_HASHASHIN_ACTIVATE_ULTIMATE_WIDTH, WIND_HASHASHIN_ACTIVATE_ULTIMATE_HEIGHT});
-			m_ultimateActivateHitbox.setOrigin(0.f, WIND_HASHASHIN_ACTIVATE_ULTIMATE_HEIGHT / 2.f);
+			m_ultimateActivateHitbox.setSize(getShapeSize());
+			m_ultimateActivateHitbox.setOrigin(getShapeSize() / 2.f);
 			m_ultimateActivateHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
-			m_ultimateActivateHitbox.setPosition(getShapePosition());
+			m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f{getShapeSize().x * 2 * (m_frameCount - 5) * m_facingRight, 0.f});
 		}
 		else if ((m_frameCount == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && !m_animationEnd)
 		{
@@ -116,9 +118,13 @@ void WindHashashin::updateHitbox()
 
 			m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
 			m_ultimateActivateHitbox.setPosition(-100.f, -100.f);
-		}
 
-		m_damage = WIND_HASHASHIN_ULTIMATE_DAMAGE;
+			m_damage = WIND_HASHASHIN_ULTIMATE_DAMAGE;
+		}
+		else if (m_frameCount > WIND_HASHASHIN_ULTIMATE_THIRD_FRAME && !m_animationEnd)
+		{
+			m_damage = 0;
+		}
 	}
 	else
 	{

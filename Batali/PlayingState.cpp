@@ -192,6 +192,12 @@ void PlayingState::updateCollision()
 
 	if (m_twoPlayers)
 	{
+		if (m_players[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_players[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+		{
+			m_players[0]->setOnWindHashashinUltimate(false);
+			m_players[1]->setOnWindHashashinUltimate(false);
+		}
+
 		if (m_players[1]->getShape().getGlobalBounds().intersects((m_players[0]->getAttackHitbox().getGlobalBounds())) && !m_players[1]->isDying())
 		{
 			handleEntityAttacked(*(m_players[0]), *(m_players[1]));
@@ -277,7 +283,9 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	{
 		attackedEntity.setShapePosition(attackingEntity.getShapePosition());
 		attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
-		
+
+		attackedEntity.setVelocity(sf::Vector2f{ 0.f, 0.f });
+
 		attackingEntity.setActivateUltimate(true);
 	}
 }

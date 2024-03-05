@@ -34,8 +34,8 @@ protected:
 	std::unordered_map<std::string, std::string> m_texturesActionName{};
 	std::unordered_map<std::string, std::string> m_texturesNamePath{};
 
-	// Useful to identify if the entity is a fireKnight or windHashashin
-	std::string m_entityName;
+	// Useful to identify which character the entity is
+	std::string m_entityName{};
 
 	// Useful for animation that are played onde per execution (eg.: roll, attack, hitted, die)
 	bool m_loopAnimation{ false };

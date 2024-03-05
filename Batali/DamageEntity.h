@@ -37,7 +37,7 @@ public:
 	void die();
 
 	void setOnWindHashashinUltimate(bool onWindHashashinUltimate) { m_onWindHashashinUltimate = onWindHashashinUltimate; }
-	bool getOnWindHashashinUltimate() { return m_onWindHashashinUltimate; }
+	virtual const bool getOnWindHashashinUltimate() const { return m_onWindHashashinUltimate; }
 
 	virtual void resetAttackHitbox() = 0;
 	virtual void resetUltimateHitbox() = 0;

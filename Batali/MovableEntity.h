@@ -18,23 +18,25 @@ public:
 	// Updates velocity components of the entity according to some conditions
 	void updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll=false);
 
+	// Movable entity flip
 	void flipSprite() { m_sprite.setScale(static_cast<float>(m_facingRight), 1.f); }
 
 	const bool getOnRoll() const { return m_onRoll; }
+
+	const int& getStamina() const { return m_stamina; }
 
 	void setConditionRunLeft(bool conditionRunLeft) { m_conditionRunLeft = conditionRunLeft; }
 	void setConditionRunRight(bool conditionRunRight) { m_conditionRunRight = conditionRunRight; }
 	void setConditionJump(bool conditionJump) { m_conditionJump = conditionJump; }
 	void setConditionRoll(bool conditionRoll) { m_conditionRoll = conditionRoll; }
 
+	void setVelocity(sf::Vector2f velocity) { m_velocity = velocity; }
+
 	virtual const bool getHitted() const = 0;
 	virtual const bool getIsAttacking() const = 0;
 	virtual void setKnockbackVelocity(float knockbackVelocity) = 0;
-
 	virtual const bool getOnUltimate() const = 0;
-
-	const int& getStamina() const { return m_stamina; }
-
+	virtual const bool getOnWindHashashinUltimate() const = 0;
 protected:
 	sf::Vector2f m_velocity{};
 

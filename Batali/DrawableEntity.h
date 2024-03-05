@@ -16,6 +16,8 @@ public:
 
 	void setScale(float scale) { m_sprite.setScale(scale, scale); }
 	void setOrigin(float originX, float originY) { m_sprite.setOrigin(originX, originY); }
+
+	// Drawable entity flip
 	void flipSprite(float scale = 1.f) { m_sprite.setScale(-scale, scale); }
 
 	void setTexture(const std::string& textureName, const std::string& texturePath);

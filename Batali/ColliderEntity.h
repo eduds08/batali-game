@@ -24,7 +24,7 @@ public:
 	const sf::Vector2f& getShapePosition() const { return m_shape.getPosition(); }
 
 	void setIsCollidingHorizontally(bool isCollildingHorizontally) { m_isCollidingHorizontally = isCollildingHorizontally; }
-	bool getIsCollidingHorizontally() { return m_isCollidingHorizontally; }
+	const bool getIsCollidingHorizontally() const { return m_isCollidingHorizontally; }
 
 	float m_rightLimit{};
 	float m_leftLimit{};
