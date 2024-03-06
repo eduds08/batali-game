@@ -10,18 +10,17 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	// Initialize View
 	m_view = m_window.getDefaultView();
 	m_view.zoom(0.4f);
-	m_window.setView(m_view);
 
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
 		m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
-		characterStatus1.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[0].get());
+		m_characterStatus.emplace_back(CharacterStatusUI{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[0].get() });
 	}
 	else
 	{
 		m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
-		characterStatus1.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[0].get());
+		m_characterStatus.emplace_back(CharacterStatusUI{ "windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[0].get() });
 	}
 
 	// Initialize Player 2 or Enemy
@@ -30,12 +29,12 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true);
+			m_characterStatus.emplace_back(CharacterStatusUI{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true });
 		}
 		else
 		{
 			m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true);
+			m_characterStatus.emplace_back(CharacterStatusUI{ "windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true });
 		}
 	}
 	else
@@ -43,12 +42,12 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true);
+			m_characterStatus.emplace_back(CharacterStatusUI{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true });
 		}
 		else
 		{
 			m_characters.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true);
+			m_characterStatus.emplace_back(CharacterStatusUI{ "windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true });
 		}
 	}
 
@@ -82,8 +81,10 @@ void PlayingState::update()
 	{
 		updateCollision();
 
-		characterStatus1.update();
-		characterStatus2.update();
+		for (auto& characterStatus : m_characterStatus)
+		{
+			characterStatus.update();
+		}
 
 		for (auto& character : m_characters)
 		{
@@ -119,8 +120,10 @@ void PlayingState::render()
 		}
 	}
 
-	characterStatus1.render(m_window);
-	characterStatus2.render(m_window);
+	for (auto& characterStatus : m_characterStatus)
+	{
+		characterStatus.render(m_window);
+	}
 }
 
 void PlayingState::updateCollision()
@@ -143,32 +146,31 @@ void PlayingState::updateCollision()
 		}
 	}
 
+	if (m_characters[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_characters[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+	{
+		m_characters[0]->setOnWindHashashinUltimate(false);
+		m_characters[1]->setOnWindHashashinUltimate(false);
+	}
 
-		if (m_characters[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_characters[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
-		{
-			m_characters[0]->setOnWindHashashinUltimate(false);
-			m_characters[1]->setOnWindHashashinUltimate(false);
-		}
+	if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getAttackHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
+	{
+		handleEntityAttacked(*(m_characters[0]), *(m_characters[1]));
+	}
 
-		if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getAttackHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
-		{
-			handleEntityAttacked(*(m_characters[0]), *(m_characters[1]));
-		}
+	if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getAttackHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
+	{
+		handleEntityAttacked(*(m_characters[1]), *(m_characters[0]));
+	}
 
-		if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getAttackHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
-		{
-			handleEntityAttacked(*(m_characters[1]), *(m_characters[0]));
-		}
+	if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
+	{
+		handleEntityAttacked(*(m_characters[0]), *(m_characters[1]), true);
+	}
 
-		if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
-		{
-			handleEntityAttacked(*(m_characters[0]), *(m_characters[1]), true);
-		}
-
-		if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
-		{
-			handleEntityAttacked(*(m_characters[1]), *(m_characters[0]), true);
-		}
+	if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
+	{
+		handleEntityAttacked(*(m_characters[1]), *(m_characters[0]), true);
+	}
 }
 
 void PlayingState::updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground)
@@ -231,8 +233,8 @@ void PlayingState::updateView()
 	m_view.setCenter(m_characters[0]->getShapePosition());
 	m_window.setView(m_view);
 
-	characterStatus1.updatePosition(m_view.getCenter(), m_view.getSize());
-	characterStatus2.updatePosition(m_view.getCenter(), m_view.getSize(), true);
+	m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
+	m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;

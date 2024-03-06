@@ -42,7 +42,7 @@ public:
 
 private:
 	std::vector<std::shared_ptr<Character>> m_characters{};
-
+	std::vector<CharacterStatusUI> m_characterStatus{};
 	std::vector<Ground> m_grounds{};
 
 	std::thread animationThread;
@@ -59,9 +59,6 @@ private:
 	bool m_onPause{ false };
 
 	bool m_twoPlayers{};
-
-	CharacterStatusUI characterStatus1{};
-	CharacterStatusUI characterStatus2{};
 
 	bool m_debugMode{ false };
 };

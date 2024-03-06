@@ -18,8 +18,8 @@ public:
 
 	void render(sf::RenderWindow& window);
 
+private:
 	StatusBarUI m_healthBar{};
 	StatusBarUI m_staminaBar{};
 	StatusBarUI m_manaBar{};
-private:
 };
