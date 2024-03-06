@@ -26,10 +26,10 @@ public:
 	void setIsCollidingHorizontally(bool isCollildingHorizontally) { m_isCollidingHorizontally = isCollildingHorizontally; }
 	const bool getIsCollidingHorizontally() const { return m_isCollidingHorizontally; }
 
-	float m_rightLimit{};
-	float m_leftLimit{};
-	float m_topLimit{};
-	float m_bottomLimit{};
+	float m_rightShapeLimit{};
+	float m_leftShapeLimit{};
+	float m_topShapeLimit{};
+	float m_bottomShapeLimit{};
 
 protected:
 	sf::RectangleShape m_shape{};

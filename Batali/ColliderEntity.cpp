@@ -61,9 +61,9 @@ void ColliderEntity::updateLimits()
 	// Limit is set to 5 tiles in each direction (top, right, bottom left) from the center of entity's shape
 	int tilesAmount = 5;
 
-	m_rightLimit = m_shape.getPosition().x + tilesAmount * TILE_SIZE_FLOAT;
-	m_leftLimit = m_shape.getPosition().x - tilesAmount * TILE_SIZE_FLOAT;
+	m_rightShapeLimit = m_shape.getPosition().x + tilesAmount * TILE_SIZE_FLOAT;
+	m_leftShapeLimit = m_shape.getPosition().x - tilesAmount * TILE_SIZE_FLOAT;
 
-	m_topLimit = m_shape.getPosition().y - tilesAmount * TILE_SIZE_FLOAT;
-	m_bottomLimit = m_shape.getPosition().y + tilesAmount * TILE_SIZE_FLOAT;
+	m_topShapeLimit = m_shape.getPosition().y - tilesAmount * TILE_SIZE_FLOAT;
+	m_bottomShapeLimit = m_shape.getPosition().y + tilesAmount * TILE_SIZE_FLOAT;
 }

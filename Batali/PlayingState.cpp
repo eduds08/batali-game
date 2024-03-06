@@ -175,8 +175,8 @@ void PlayingState::updateCollision()
 
 void PlayingState::updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground)
 {
-	if (ground.getSprite().getPosition().x <= entity.m_rightLimit && ground.getSprite().getPosition().x >= entity.m_leftLimit
-		&& ground.getSprite().getPosition().y >= entity.m_topLimit && ground.getSprite().getPosition().y <= entity.m_bottomLimit)
+	if (ground.getSprite().getPosition().x <= entity.m_rightShapeLimit && ground.getSprite().getPosition().x >= entity.m_leftShapeLimit
+		&& ground.getSprite().getPosition().y >= entity.m_topShapeLimit && ground.getSprite().getPosition().y <= entity.m_bottomShapeLimit)
 	{
 		if (entity.isCollidingWith(ground.getSprite()))
 		{
