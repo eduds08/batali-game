@@ -1,15 +1,14 @@
 #include "StatusBarUI.h"
 
-StatusBarUI::StatusBarUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size)
+StatusBarUI::StatusBarUI(const std::string& textureName, const std::string& texturePath, sf::Vector2i size)
 	: UI{}
 {
-	init(textureName, texturePath, position, size);
+	init(textureName, texturePath, size);
 }
 
-void StatusBarUI::init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Vector2i size)
+void StatusBarUI::init(const std::string& textureName, const std::string& texturePath, sf::Vector2i size)
 {
 	setTexture(textureName, texturePath);
-	setSpritePosition(position);
 
 	m_spriteWidth = size.x;
 	m_spriteHeight = size.y;

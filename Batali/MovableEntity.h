@@ -23,7 +23,7 @@ public:
 
 	const bool getOnRoll() const { return m_onRoll; }
 
-	const int& getStamina() const { return m_stamina; }
+	const int* getStamina() const { return &m_stamina; }
 
 	void setConditionRunLeft(bool conditionRunLeft) { m_conditionRunLeft = conditionRunLeft; }
 	void setConditionRunRight(bool conditionRunRight) { m_conditionRunRight = conditionRunRight; }

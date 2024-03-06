@@ -2,20 +2,24 @@
 
 #include "UI.h"
 #include "StatusBarUI.h"
+#include "Character.h"
 
 class CharacterStatusUI : public UI
 {
 public:
-	CharacterStatusUI(const std::string& textureName = "", const std::string& texturePath = "", sf::Vector2f position = sf::Vector2f{0.f, 0.f}, bool onRight = true);
+	CharacterStatusUI(const std::string& textureName = "", const std::string& texturePath = "", Character* character = nullptr, bool onRight = false);
 	virtual ~CharacterStatusUI() = default;
 
-	void init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, bool onRight = true);
+	void init(const std::string& textureName, const std::string& texturePath, Character* character = nullptr, bool onRight = false);
 
 	void update();
+
+	void updatePosition(sf::Vector2f viewCenter, sf::Vector2f viewSize, bool onRight = false);
+
+	void render(sf::RenderWindow& window);
 
 	StatusBarUI m_healthBar{};
 	StatusBarUI m_staminaBar{};
 	StatusBarUI m_manaBar{};
 private:
-	
 };

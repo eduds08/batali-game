@@ -7,21 +7,22 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 {
 	m_currentState = PLAYING_STATE;
 
+	// Initialize View
+	m_view = m_window.getDefaultView();
+	m_view.zoom(0.4f);
+	m_window.setView(m_view);
+
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
 		m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
-		characterStatus1.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
+		characterStatus1.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[0].get());
 	}
 	else
 	{
 		m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
-		characterStatus1.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() - m_view.getSize() / 2.f);
+		characterStatus1.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[0].get());
 	}
-
-	characterStatus1.m_healthBar.setEntityStatus(&m_characters[0]->getHp());
-	characterStatus1.m_staminaBar.setEntityStatus(&m_characters[0]->getStamina());
-	characterStatus1.m_manaBar.setEntityStatus(&m_characters[0]->getRemainingManaToUltimate());
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -29,12 +30,12 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
+			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true);
 		}
 		else
 		{
 			m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
+			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true);
 		}
 	}
 	else
@@ -42,18 +43,14 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
+			characterStatus2.init("fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true);
 		}
 		else
 		{
 			m_characters.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f }, false);
+			characterStatus2.init("windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true);
 		}
 	}
-
-	characterStatus2.m_healthBar.setEntityStatus(&m_characters[1]->getHp());
-	characterStatus2.m_staminaBar.setEntityStatus(&m_characters[1]->getStamina());
-	characterStatus2.m_manaBar.setEntityStatus(&m_characters[1]->getRemainingManaToUltimate());
 
 	// Initialize map
 	loadAndCreateMap("./map/map.txt");
@@ -61,11 +58,6 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	// Initialize Threads
 	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
 	playerInputThread = std::thread(&PlayingState::updatePlayerInput, this);
-
-	// Initialize View
-	m_view = m_window.getDefaultView();
-	m_view.zoom(0.5f);
-	m_window.setView(m_view);
 }
 
 PlayingState::~PlayingState()
@@ -127,15 +119,8 @@ void PlayingState::render()
 		}
 	}
 
-	m_window.draw(characterStatus1.getSprite());
-	m_window.draw(characterStatus1.m_healthBar.getSprite());
-	m_window.draw(characterStatus1.m_staminaBar.getSprite());
-	m_window.draw(characterStatus1.m_manaBar.getSprite());
-
-	m_window.draw(characterStatus2.getSprite());
-	m_window.draw(characterStatus2.m_healthBar.getSprite());
-	m_window.draw(characterStatus2.m_staminaBar.getSprite());
-	m_window.draw(characterStatus2.m_manaBar.getSprite());
+	characterStatus1.render(m_window);
+	characterStatus2.render(m_window);
 }
 
 void PlayingState::updateCollision()
@@ -242,14 +227,12 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 void PlayingState::updateView()
 {
-	m_view.setCenter((TILES_AMOUNT_PER_ROW / 2.f) * TILE_SIZE_FLOAT, (TILES_AMOUNT_PER_COL / 2.f) * TILE_SIZE_FLOAT);
+	//m_view.setCenter((TILES_AMOUNT_PER_ROW / 2.f) * TILE_SIZE_FLOAT, (TILES_AMOUNT_PER_COL / 2.f) * TILE_SIZE_FLOAT);
+	m_view.setCenter(m_characters[0]->getShapePosition());
 	m_window.setView(m_view);
 
-	characterStatus2.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f });
-
-	characterStatus2.m_healthBar.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, 0.f });
-	characterStatus2.m_staminaBar.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, -1.f * HEALTH_BAR_HEIGHT });
-	characterStatus2.m_manaBar.setSpritePosition(m_view.getCenter() + sf::Vector2f{ (m_view.getSize().x / 2.f), -m_view.getSize().y / 2.f } - sf::Vector2f{ CHARACTER_LOGO_STATUS_WIDTH, -1.f * (HEALTH_BAR_HEIGHT + STAMINA_BAR_HEIGHT)});
+	characterStatus1.updatePosition(m_view.getCenter(), m_view.getSize());
+	characterStatus2.updatePosition(m_view.getCenter(), m_view.getSize(), true);
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;

@@ -4,8 +4,8 @@
 
 namespace constants
 {
-	constexpr int TILE_SIZE_INT{ 16 };
-	constexpr float TILE_SIZE_FLOAT{ 16.f };
+	constexpr int TILE_SIZE_INT{ 32 };
+	constexpr float TILE_SIZE_FLOAT{ 32.f };
 	constexpr int TILES_AMOUNT_PER_ROW{ 60 };
 	constexpr int TILES_AMOUNT_PER_COL{ 34 };
 

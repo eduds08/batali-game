@@ -17,8 +17,6 @@ Character::Character(int playerNumber, bool isBot, std::shared_ptr<Character> pl
 
 void Character::update(float& deltaTime)
 {
-	m_remainingManaToUltimate = 0;
-
 	updateDeath();
 
 	// Only called if hp > 0

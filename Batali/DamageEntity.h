@@ -27,9 +27,9 @@ public:
 	const bool isDead() const { return m_dead; }
 	const bool isDying() const { return m_dying; }
 
-	const int& getHp() const { return m_hp; }
+	const int* getHp() const { return &m_hp; }
 
-	const int& getRemainingManaToUltimate() const { return m_remainingManaToUltimate; }
+	const int* getRemainingManaToUltimate() const { return &m_remainingManaToUltimate; }
 
 	virtual void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 

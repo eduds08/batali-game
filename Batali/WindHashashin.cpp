@@ -107,7 +107,7 @@ void WindHashashin::updateHitbox()
 			m_ultimateActivateHitbox.setSize(getShapeSize());
 			m_ultimateActivateHitbox.setOrigin(getShapeSize() / 2.f);
 			m_ultimateActivateHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
-			m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f{getShapeSize().x * 2 * (m_frameCount - 5) * m_facingRight, 0.f});
+			m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f{getShapeSize().x * 2 * (m_frameCount - WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME) * m_facingRight, 0.f});
 		}
 		else if ((m_frameCount == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && !m_animationEnd)
 		{
