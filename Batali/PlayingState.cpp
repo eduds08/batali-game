@@ -152,24 +152,22 @@ void PlayingState::updateCollision()
 		m_characters[1]->setOnWindHashashinUltimate(false);
 	}
 
-	if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getAttackHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
+	for (auto& attackedCharacter : m_characters)
 	{
-		handleEntityAttacked(*(m_characters[0]), *(m_characters[1]));
-	}
-
-	if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getAttackHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
-	{
-		handleEntityAttacked(*(m_characters[1]), *(m_characters[0]));
-	}
-
-	if (m_characters[1]->getShape().getGlobalBounds().intersects((m_characters[0]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[1]->isDying())
-	{
-		handleEntityAttacked(*(m_characters[0]), *(m_characters[1]), true);
-	}
-
-	if (m_characters[0]->getShape().getGlobalBounds().intersects((m_characters[1]->getUltimateActivateHitbox().getGlobalBounds())) && !m_characters[0]->isDying())
-	{
-		handleEntityAttacked(*(m_characters[1]), *(m_characters[0]), true);
+		for (auto& attackingCharacter : m_characters)
+		{
+			if (attackedCharacter != attackingCharacter)
+			{
+				if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getAttackHitbox().getGlobalBounds()) && !attackedCharacter->isDying())
+				{
+					handleEntityAttacked(*attackingCharacter, *attackedCharacter);
+				}
+				if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getUltimateActivateHitbox().getGlobalBounds()) && !attackedCharacter->isDying())
+				{
+					handleEntityAttacked(*attackingCharacter, *attackedCharacter, true);
+				}
+			}
+		}
 	}
 }
 

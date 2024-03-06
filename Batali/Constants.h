@@ -79,7 +79,7 @@ namespace constants
 	constexpr int WIND_HASHASHIN_SPRITE_HEIGHT{ 127 };
 
 	constexpr float WIND_HASHASHIN_SHAPE_WIDTH{ 20.f };
-	constexpr float WIND_HASHASHIN_SHAPE_HEIGHT{ 40.f };
+	constexpr float WIND_HASHASHIN_SHAPE_HEIGHT{ 35.f };
 
 	constexpr float WIND_HASHASHIN_SPEED{ 260.f };
 	constexpr float WIND_HASHASHIN_JUMP_HEIGHT{ 100.f };
