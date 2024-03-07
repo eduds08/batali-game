@@ -15,13 +15,13 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	if (firstCharacter == "fire_knight")
 	{
 		m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
-		m_characterStatus.emplace_back(CharacterStatusUI{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[0].get() });
 	}
 	else
 	{
 		m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
-		m_characterStatus.emplace_back(CharacterStatusUI{ "windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[0].get() });
 	}
+
+	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -29,12 +29,10 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			m_characterStatus.emplace_back(CharacterStatusUI{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true });
 		}
 		else
 		{
 			m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			m_characterStatus.emplace_back(CharacterStatusUI{ "windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true });
 		}
 	}
 	else
@@ -42,14 +40,14 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			m_characterStatus.emplace_back(CharacterStatusUI{ "fireKnightLogo", "./assets/fireKnightLogo.png", m_characters[1].get(), true });
 		}
 		else
 		{
 			m_characters.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			m_characterStatus.emplace_back(CharacterStatusUI{ "windHashashinLogo", "./assets/windHashashinLogo.png", m_characters[1].get(), true });
 		}
 	}
+
+	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
 	// Initialize map
 	loadAndCreateMap("./map/map.txt");

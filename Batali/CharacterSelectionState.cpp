@@ -10,9 +10,51 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	m_view = m_window.getDefaultView();
 	m_window.setView(m_view);
 
+	pixelTeste.setFillColor(sf::Color::Red);
+	pixelTeste.setPosition(m_view.getCenter() + sf::Vector2f{0.f, 400.f});
+
 	// Initialize small portraits
-	m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() - sf::Vector2f{50.f, -400.f}, false });
-	m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ "windHashashinPortrait", "./assets/portrait_wind_hashashin.png", m_view.getCenter() + sf::Vector2f{50.f, 400.f}, false });
+	int auxPos = 0;
+	if (m_totalCharactersAmount % 2 == 0)
+	{
+		for (int i = 0; i <= static_cast<int>(m_totalCharactersAmount / 2.f); ++i)
+		{
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{-64.f * ((m_totalCharactersAmount / 2.f) - i), 400.f}, false });
+			if (auxPos + 1 < m_totalCharactersAmount)
+			{
+				++auxPos;
+			}
+		}
+
+		for (int i = 1; 2 * i < m_totalCharactersAmount; ++i)
+		{
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{64.f * i, 400.f}, false });
+			if (auxPos + 1 < m_totalCharactersAmount)
+			{
+				++auxPos;
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < m_totalCharactersAmount; i += 2)
+		{
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{-64.f * ((m_totalCharactersAmount - i) / 2.f), 400.f}, false });
+			if (auxPos + 1 < m_totalCharactersAmount)
+			{
+				++auxPos;
+			}
+		}
+
+		for (int i = m_totalCharactersAmount - 1; i > 0; i -= 2)
+		{
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{64.f * ((m_totalCharactersAmount - i) / 2.f), 400.f}, false });
+			if (auxPos + 1 < m_totalCharactersAmount)
+			{
+				++auxPos;
+			}
+		}
+	}
 
 	// Initialize PlayerTurn for Player 1
 	m_playerTurn.setOrigin(m_playerTurn.getLocalBounds().width / 2.f, m_playerTurn.getLocalBounds().height / 2.f);
@@ -43,8 +85,8 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 	m_buttonsBackground.setSpritePosition(m_view.getCenter() + sf::Vector2f{ 0.f, 300.f });
 
-	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ -250.f, 0.f } , true, sf::Color{179, 245, 188} });
-	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ "fireKnightPortrait", "./assets/portrait_fire_knight.png", m_view.getCenter() + sf::Vector2f{ 250.f, 0.f } , true, sf::Color{250, 145, 137} });
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png", m_view.getCenter() + sf::Vector2f{ -250.f, 0.f } , true, sf::Color{179, 245, 188} });
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png", m_view.getCenter() + sf::Vector2f{ 250.f, 0.f } , true, sf::Color{250, 145, 137} });
 }
 
 void CharacterSelectionState::update()
@@ -53,11 +95,11 @@ void CharacterSelectionState::update()
 	{
 		if (m_onHoverCharacterButton == 0)
 		{
-			m_bigCharacterPortraits[m_playerChoice - 1].setTexture("fireKnightPortrait", "./assets/portrait_fire_knight.png");
+			m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png");
 		}
 		else if (m_onHoverCharacterButton == 1)
 		{
-			m_bigCharacterPortraits[m_playerChoice - 1].setTexture("windHashashinPortrait", "./assets/portrait_wind_hashashin.png");
+			m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[1] + "Portrait", "./assets/" + m_charactersNames[1] + "/portrait.png");
 		}
 
 		updateCharacterSelectionButtons();
@@ -99,6 +141,8 @@ void CharacterSelectionState::render()
 		m_window.draw(m_buttonsBackground.getSprite());
 		renderButtons();
 	}
+
+	m_window.draw(pixelTeste);
 }
 
 void CharacterSelectionState::updateCharacterSelectionButtons()
@@ -140,12 +184,12 @@ void CharacterSelectionState::selectCharacter()
 	// Select fireKnight
 	if (m_onHoverCharacterButton == 0)
 	{
-		m_chosenCharacters.emplace_back("fire_knight");
+		m_chosenCharacters.emplace_back(m_charactersNames[0]);
 	}
 	// Select windHashashin
 	else if (m_onHoverCharacterButton == 1)
 	{
-		m_chosenCharacters.emplace_back("wind_hashashin");
+		m_chosenCharacters.emplace_back(m_charactersNames[1]);
 	}
 
 	// Updates the display to indicates that Player 2 (or Enemy) is selecting character
