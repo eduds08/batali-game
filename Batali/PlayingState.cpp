@@ -53,16 +53,16 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	loadAndCreateMap("./map/map.txt");
 
 	// Initialize Threads
-	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
-	player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
-	player2InputThread = std::thread(&PlayingState::updatePlayer2Input, this);
+	m_animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
+	m_player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
+	m_player2InputThread = std::thread(&PlayingState::updatePlayer2Input, this);
 }
 
 PlayingState::~PlayingState()
 {
-	animationThread.join();
-	player1InputThread.join();
-	player2InputThread.join();
+	m_animationThread.join();
+	m_player1InputThread.join();
+	m_player2InputThread.join();
 }
 
 void PlayingState::update()

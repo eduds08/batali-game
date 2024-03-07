@@ -46,10 +46,10 @@ private:
 	std::vector<CharacterStatusUI> m_characterStatus{};
 	std::vector<Ground> m_grounds{};
 
-	std::thread animationThread;
+	std::thread m_animationThread;
 
-	std::thread player1InputThread;
-	std::thread player2InputThread;
+	std::thread m_player1InputThread;
+	std::thread m_player2InputThread;
 
 	float m_rightViewLimit{};
 	float m_leftViewLimit{};
