@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ButtonAuxState.h"
-#include "CharacterPortraitUI.h"
+#include "BigCharacterPortraitUI.h"
+#include "SmallCharacterPortraitUI.h"
 #include "ButtonUI.h"
 #include "BackgroundUI.h"
 
@@ -24,8 +25,8 @@ public:
 	std::string getChosenGamemode() { return m_chosenGamemode; }
 
 private:
-	std::vector<CharacterPortraitUI> m_bigCharacterPortraits{};
-	std::vector<CharacterPortraitUI> m_smallCharacterPortraits{};
+	std::vector<BigCharacterPortraitUI> m_bigCharacterPortraits{};
+	std::vector<SmallCharacterPortraitUI> m_smallCharacterPortraits{};
 
 	std::vector<std::string> m_charactersNames{"fire_knight", "wind_hashashin"};
 	int m_totalCharactersAmount{};

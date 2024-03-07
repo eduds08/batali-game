@@ -90,6 +90,12 @@
     <ClCompile Include="AnimatedEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
+    <ClCompile Include="BigCharacterPortraitUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallCharacterPortraitUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundUI.h">
@@ -163,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="AnimatedEntity.h">
       <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="BigCharacterPortraitUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallCharacterPortraitUI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

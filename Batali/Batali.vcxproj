@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedEntity.cpp" />
     <ClCompile Include="BackgroundUI.cpp" />
+    <ClCompile Include="BigCharacterPortraitUI.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
     <ClCompile Include="PlayingState.cpp" />
+    <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
     <ClCompile Include="StatusBarUI.cpp" />
     <ClCompile Include="SwordEntity.cpp" />
@@ -161,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.h" />
     <ClInclude Include="BackgroundUI.h" />
+    <ClInclude Include="BigCharacterPortraitUI.h" />
     <ClInclude Include="ButtonAuxState.h" />
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Character.h" />
@@ -177,6 +180,7 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MovableEntity.h" />
     <ClInclude Include="PlayingState.h" />
+    <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
     <ClInclude Include="StatusBarUI.h" />
     <ClInclude Include="SwordEntity.h" />

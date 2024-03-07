@@ -5,13 +5,10 @@
 class CharacterPortraitUI : public UI
 {
 public:
-	CharacterPortraitUI(const std::string& textureName = "", const std::string& texturePath = "", sf::Vector2f position = sf::Vector2f{0.f, 0.f}, bool isBig = false, sf::Color borderColor = sf::Color::White);
+	CharacterPortraitUI();
 	virtual ~CharacterPortraitUI() = default;
 
-	void init(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, bool isBig = false, sf::Color borderColor = sf::Color::White);
-
-	// Outline border
+	void render(sf::RenderWindow& window);
+protected:
 	sf::RectangleShape m_portraitBorder{};
-
-	void update(bool onHover, sf::Color color);
 };
