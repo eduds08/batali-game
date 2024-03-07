@@ -6,7 +6,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 {
 	m_currentState = CHARACTER_SELECTION_STATE;
 
-	m_totalCharactersAmount = m_charactersNames.size();
+	m_totalCharactersAmount = static_cast<int>(m_charactersNames.size());
 
 	// Initialize view
 	m_view = m_window.getDefaultView();
@@ -57,8 +57,17 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 	// Initialize PlayerTurn for Player 1
 	//m_playerTurn.setOrigin(m_playerTurn.getLocalBounds().width / 2.f, m_playerTurn.getLocalBounds().height / 2.f);
-	m_playerTurn.setFillColor(sf::Color{179, 245, 188});
+	m_playerTurn.setFillColor(PLAYER_1_COLOR);
 	m_playerTurn.setPosition(m_smallCharacterPortraits[0].getSpritePosition() + sf::Vector2f{-170.f, 0.f});
+
+	// Initialize "play" and "back" buttons
+	initButton("Play", m_view.getCenter() + sf::Vector2f{ -130.f, 300.f }, m_chosenGamemode == "singleplayer" ? CHARACTER_SELECTION_TO_SINGLEPLAYER : CHARACTER_SELECTION_TO_MULTIPLAYER);
+	initButton("Back", m_view.getCenter() + sf::Vector2f{ 130.f, 300.f }, CHARACTER_SELECTION_RESET);
+
+	m_buttonsBackground.setSpritePosition(m_view.getCenter() + sf::Vector2f{ 0.f, 300.f });
+
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png", m_smallCharacterPortraits.front().getSpritePosition() + sf::Vector2f{-512.f, -64.f} , true, PLAYER_1_COLOR});
+	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png", m_smallCharacterPortraits.back().getSpritePosition() + sf::Vector2f{512.f, -64.f} , true, PLAYER_2_COLOR});
 
 	// Update text above big portraits
 	for (auto& playerPortraitText : m_playerPortraitsText)
@@ -67,25 +76,16 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 		if (playerPortraitText.getString() == "Player 1")
 		{
-			playerPortraitText.setFillColor(sf::Color{179, 245, 188});
-			playerPortraitText.setPosition(m_view.getCenter() - sf::Vector2f{ 250.f, 180.f });
+			playerPortraitText.setFillColor(PLAYER_1_COLOR);
+			playerPortraitText.setPosition(m_bigCharacterPortraits.front().getSpritePosition() - sf::Vector2f{ 0.f, m_bigCharacterPortraits.front().getSpriteSize().y * 3.f + playerPortraitText.getCharacterSize() / 2.f });
 		}
 		else
 		{
 			playerPortraitText.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
-			playerPortraitText.setFillColor(sf::Color{250, 145, 137});
-			playerPortraitText.setPosition(m_view.getCenter() + sf::Vector2f{ 250.f, -180.f });
+			playerPortraitText.setFillColor(PLAYER_2_COLOR);
+			playerPortraitText.setPosition(m_bigCharacterPortraits.back().getSpritePosition() - sf::Vector2f{ 0.f, m_bigCharacterPortraits.back().getSpriteSize().y * 3.f + playerPortraitText.getCharacterSize() / 2.f });
 		}
 	}
-
-	// Initialize "play" and "back" buttons
-	initButton("Play", m_view.getCenter() + sf::Vector2f{ -130.f, 300.f }, m_chosenGamemode == "singleplayer" ? CHARACTER_SELECTION_TO_SINGLEPLAYER : CHARACTER_SELECTION_TO_MULTIPLAYER);
-	initButton("Back", m_view.getCenter() + sf::Vector2f{ 130.f, 300.f }, CHARACTER_SELECTION_RESET);
-
-	m_buttonsBackground.setSpritePosition(m_view.getCenter() + sf::Vector2f{ 0.f, 300.f });
-
-	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png", m_view.getCenter() + sf::Vector2f{ -250.f, 0.f } , true, sf::Color{179, 245, 188} });
-	m_bigCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png", m_view.getCenter() + sf::Vector2f{ 250.f, 0.f } , true, sf::Color{250, 145, 137} });
 }
 
 void CharacterSelectionState::update()
@@ -164,7 +164,7 @@ void CharacterSelectionState::updateCharacterSelectionButtons()
 	// Upate the visual design of the characterPortrait (according to its state -> onHover OR not onHover)
 	for (size_t i = 0; i < m_smallCharacterPortraits.size(); ++i)
 	{
-		m_smallCharacterPortraits[i].update(i == m_onHoverCharacterButton, m_playerChoice == 1 ? sf::Color{179, 245, 188} : sf::Color{ 250, 145, 137 });
+		m_smallCharacterPortraits[i].update(i == m_onHoverCharacterButton, m_playerChoice == 1 ? PLAYER_1_COLOR : PLAYER_2_COLOR);
 	}
 
 	// Select character
@@ -193,7 +193,7 @@ void CharacterSelectionState::selectCharacter()
 	if (m_playerChoice == 1)
 	{
 		m_playerTurn.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
-		m_playerTurn.setFillColor(sf::Color{250, 145, 137});
+		m_playerTurn.setFillColor(PLAYER_2_COLOR);
 		m_playerTurn.setPosition(m_smallCharacterPortraits[0].getSpritePosition() + sf::Vector2f{-170.f, 0.f});
 	}
 

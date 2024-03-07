@@ -28,7 +28,6 @@ private:
 	std::vector<CharacterPortraitUI> m_smallCharacterPortraits{};
 
 	std::vector<std::string> m_charactersNames{"fire_knight", "wind_hashashin"};
-
 	int m_totalCharactersAmount{};
 
 	BackgroundUI m_background{ "menuBackground", "./assets/menuBackground.png", m_window.getDefaultView().getSize() / 2.f, sf::Vector2i{576, 324}, 4.f };

@@ -34,6 +34,9 @@ namespace constants
 	constexpr int MANA_BAR_WIDTH{ 120 };
 	constexpr int MANA_BAR_HEIGHT{ 36 };
 
+	const sf::Color PLAYER_1_COLOR{179, 245, 188};
+	const sf::Color PLAYER_2_COLOR{250, 145, 137};
+
 	/* FIRE KNIGHT CONSTANTS: */
 
 	constexpr int FIRE_KNIGHT_SPRITE_WIDTH{ 288 };
