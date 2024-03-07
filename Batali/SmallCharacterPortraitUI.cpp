@@ -1,6 +1,6 @@
 #include "SmallCharacterPortraitUI.h"
 
-SmallCharacterPortraitUI::SmallCharacterPortraitUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position, sf::Color borderColor)
+SmallCharacterPortraitUI::SmallCharacterPortraitUI(const std::string& textureName, const std::string& texturePath, sf::Vector2f position)
 	: CharacterPortraitUI{}
 {
 	setTexture(textureName, texturePath);
@@ -13,7 +13,6 @@ SmallCharacterPortraitUI::SmallCharacterPortraitUI(const std::string& textureNam
 	m_portraitBorder = sf::RectangleShape{ sf::Vector2f{static_cast<float>(m_spriteWidth), static_cast<float>(m_spriteHeight)} };
 
 	m_portraitBorder.setOutlineThickness(1.f);
-	m_portraitBorder.setOutlineColor(borderColor);
 
 	m_portraitBorder.setPosition(m_sprite.getPosition());
 	m_portraitBorder.setFillColor(sf::Color::Black);
