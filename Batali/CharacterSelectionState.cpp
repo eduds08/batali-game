@@ -6,12 +6,11 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 {
 	m_currentState = CHARACTER_SELECTION_STATE;
 
+	m_totalCharactersAmount = m_charactersNames.size();
+
 	// Initialize view
 	m_view = m_window.getDefaultView();
 	m_window.setView(m_view);
-
-	pixelTeste.setFillColor(sf::Color::Red);
-	pixelTeste.setPosition(m_view.getCenter() + sf::Vector2f{0.f, 400.f});
 
 	// Initialize small portraits
 	int auxPos = 0;
@@ -141,8 +140,6 @@ void CharacterSelectionState::render()
 		m_window.draw(m_buttonsBackground.getSprite());
 		renderButtons();
 	}
-
-	m_window.draw(pixelTeste);
 }
 
 void CharacterSelectionState::updateCharacterSelectionButtons()

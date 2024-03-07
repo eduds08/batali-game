@@ -23,15 +23,13 @@ public:
 
 	std::string getChosenGamemode() { return m_chosenGamemode; }
 
-	sf::RectangleShape pixelTeste{sf::Vector2f{1.f, 100.f}};
-
 private:
 	std::vector<CharacterPortraitUI> m_bigCharacterPortraits{};
 	std::vector<CharacterPortraitUI> m_smallCharacterPortraits{};
 
 	std::vector<std::string> m_charactersNames{"fire_knight", "wind_hashashin"};
 
-	const int m_totalCharactersAmount{ 2 };
+	int m_totalCharactersAmount{};
 
 	BackgroundUI m_background{ "menuBackground", "./assets/menuBackground.png", m_window.getDefaultView().getSize() / 2.f, sf::Vector2i{576, 324}, 4.f };
 	BackgroundUI m_buttonsBackground{ "characterSelectionButtonsBackground", "./assets/characterSelectionButtonsBackground.png", m_view.getCenter(), sf::Vector2i{600, 228} };
