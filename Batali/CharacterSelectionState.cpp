@@ -18,7 +18,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	{
 		for (int i = 0; i <= static_cast<int>(m_totalCharactersAmount / 2.f); ++i)
 		{
-			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{-64.f * ((m_totalCharactersAmount / 2.f) - i), 400.f}, false });
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{-static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * ((m_totalCharactersAmount / 2.f) - i), 400.f}, false });
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
@@ -27,7 +27,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 		for (int i = 1; 2 * i < m_totalCharactersAmount; ++i)
 		{
-			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{64.f * i, 400.f}, false });
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{static_cast<float>(CHARACTER_PORTRAIT_WIDTH)* i, 400.f}, false });
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
@@ -38,7 +38,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	{
 		for (int i = 0; i < m_totalCharactersAmount; i += 2)
 		{
-			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{-64.f * ((m_totalCharactersAmount - i) / 2.f), 400.f}, false });
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{-static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * ((m_totalCharactersAmount - i) / 2.f), 400.f}, false });
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
@@ -47,7 +47,7 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 
 		for (int i = m_totalCharactersAmount - 1; i > 0; i -= 2)
 		{
-			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{64.f * ((m_totalCharactersAmount - i) / 2.f), 400.f}, false });
+			m_smallCharacterPortraits.emplace_back(CharacterPortraitUI{ m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png", m_view.getCenter() + sf::Vector2f{static_cast<float>(CHARACTER_PORTRAIT_WIDTH)* ((m_totalCharactersAmount - i) / 2.f), 400.f}, false });
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
