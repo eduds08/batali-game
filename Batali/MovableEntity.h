@@ -33,10 +33,9 @@ public:
 	void setVelocity(sf::Vector2f velocity) { m_velocity = velocity; }
 
 	virtual const bool getHitted() const = 0;
-	virtual const bool getIsAttacking() const = 0;
 	virtual void setKnockbackVelocity(float knockbackVelocity) = 0;
-	virtual const bool getOnUltimate() const = 0;
 	virtual const bool getOnWindHashashinUltimate() const = 0;
+	virtual const std::string& getAttackMode() const = 0;
 protected:
 	sf::Vector2f m_velocity{};
 

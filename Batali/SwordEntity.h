@@ -14,7 +14,6 @@ public:
 	virtual void updateHitbox() = 0;
 
 	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
-	virtual const bool getIsAttacking() const { return m_isAttacking; }
 
 	const int getDamage() const { return m_damage; }
 
@@ -22,7 +21,7 @@ public:
 	void setConditionAttack2(bool conditionAttack2) { m_conditionAttack2 = conditionAttack2; }
 	void setConditionUltimate(bool conditionUltimate) { m_conditionUltimate = conditionUltimate; }
 
-	virtual const bool getOnUltimate() const { return m_onUltimate; }
+	virtual const std::string& getAttackMode() const { return m_attackMode; }
 
 	const sf::RectangleShape& getUltimateActivateHitbox() const { return m_ultimateActivateHitbox; }
 
@@ -52,11 +51,7 @@ protected:
 	float m_hitboxWidth{};
 	float m_hitboxHeight{};
 
-	bool m_isAttacking{ false };
-	bool m_onAirAttack{ false };
-	bool m_onUltimate{ false };
-	bool m_onAttack1{ false };
-	bool m_onAttack2{ false };
+	std::string m_attackMode{"off"};
 
 	// Timer used to create a interval between the bot's attacks
 	sf::Clock m_timeBetweenAttacksClock{};

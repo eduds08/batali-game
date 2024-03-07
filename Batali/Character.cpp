@@ -63,7 +63,7 @@ void Character::updateTexture()
 	}
 	else if (m_velocity.y != 0.f && !m_canJump)
 	{
-		if (m_onAirAttack)
+		if (m_attackMode == "onAirAttack")
 		{
 			changeCurrentTexture(m_texturesActionName.at("AirAttack"), m_texturesNamePath.at(m_texturesActionName.at("AirAttack")), false);
 		}
@@ -72,7 +72,7 @@ void Character::updateTexture()
 			m_velocity.y > 0.f ? changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true) : changeCurrentTexture(m_texturesActionName.at("Jumping"), m_texturesNamePath.at(m_texturesActionName.at("Jumping")), true);;
 		}
 	}
-	else if (!m_isAttacking)
+	else if (m_attackMode == "off")
 	{
 		if (m_onRoll)
 		{
@@ -83,13 +83,13 @@ void Character::updateTexture()
 			m_isRunning ? changeCurrentTexture(m_texturesActionName.at("Running"), m_texturesNamePath.at(m_texturesActionName.at("Running")), true) : changeCurrentTexture(m_texturesActionName.at("Idle"), m_texturesNamePath.at(m_texturesActionName.at("Idle")), true);
 		}
 	}
-	else if (m_isAttacking)
+	else if (m_attackMode != "off")
 	{
-		if (m_onUltimate)
+		if (m_attackMode == "onUltimate")
 		{
 			changeCurrentTexture(m_texturesActionName.at("Ultimate"), m_texturesNamePath.at(m_texturesActionName.at("Ultimate")), false);
 		}
-		else if (!m_onAirAttack)
+		else if (m_attackMode != "onAirAttack")
 		{
 			if (m_isBot)
 			{
@@ -97,11 +97,11 @@ void Character::updateTexture()
 			}
 			else
 			{
-				if (m_onAttack1)
+				if (m_attackMode == "onAttack1")
 				{
 					changeCurrentTexture(m_texturesActionName.at("Attack1"), m_texturesNamePath.at(m_texturesActionName.at("Attack1")), false);
 				}
-				else if (m_onAttack2)
+				else if (m_attackMode == "onAttack2")
 				{
 					changeCurrentTexture(m_texturesActionName.at("Attack2"), m_texturesNamePath.at(m_texturesActionName.at("Attack2")), false);
 				}
