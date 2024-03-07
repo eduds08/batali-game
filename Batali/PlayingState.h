@@ -38,7 +38,8 @@ public:
 	bool getOnPause() { return m_onPause; }
 
 	// Thread method to capture player's inputs
-	void updatePlayerInput();
+	void updatePlayer1Input();
+	void updatePlayer2Input();
 
 private:
 	std::vector<std::shared_ptr<Character>> m_characters{};
@@ -47,7 +48,8 @@ private:
 
 	std::thread animationThread;
 
-	std::thread playerInputThread;
+	std::thread player1InputThread;
+	std::thread player2InputThread;
 
 	float m_rightViewLimit{};
 	float m_leftViewLimit{};

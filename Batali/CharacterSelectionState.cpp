@@ -56,9 +56,9 @@ CharacterSelectionState::CharacterSelectionState(sf::RenderWindow& window, const
 	}
 
 	// Initialize PlayerTurn for Player 1
-	m_playerTurn.setOrigin(m_playerTurn.getLocalBounds().width / 2.f, m_playerTurn.getLocalBounds().height / 2.f);
+	//m_playerTurn.setOrigin(m_playerTurn.getLocalBounds().width / 2.f, m_playerTurn.getLocalBounds().height / 2.f);
 	m_playerTurn.setFillColor(sf::Color{179, 245, 188});
-	m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ 170.f, -400.f });
+	m_playerTurn.setPosition(m_smallCharacterPortraits[0].getSpritePosition() + sf::Vector2f{-170.f, 0.f});
 
 	// Update text above big portraits
 	for (auto& playerPortraitText : m_playerPortraitsText)
@@ -194,7 +194,7 @@ void CharacterSelectionState::selectCharacter()
 	{
 		m_playerTurn.setString(m_chosenGamemode == "singleplayer" ? "Enemy:" : "Player 2:");
 		m_playerTurn.setFillColor(sf::Color{250, 145, 137});
-		m_playerTurn.setPosition(m_view.getCenter() - sf::Vector2f{ m_chosenGamemode == "singleplayer" ? 140.f : 170.f, -400.f });
+		m_playerTurn.setPosition(m_smallCharacterPortraits[0].getSpritePosition() + sf::Vector2f{-170.f, 0.f});
 	}
 
 	++m_playerChoice;

@@ -54,13 +54,15 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 
 	// Initialize Threads
 	animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
-	playerInputThread = std::thread(&PlayingState::updatePlayerInput, this);
+	player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
+	player2InputThread = std::thread(&PlayingState::updatePlayer2Input, this);
 }
 
 PlayingState::~PlayingState()
 {
 	animationThread.join();
-	playerInputThread.join();
+	player1InputThread.join();
+	player2InputThread.join();
 }
 
 void PlayingState::update()
@@ -287,57 +289,58 @@ void PlayingState::updateTexturesAndAnimations()
 	}
 }
 
-void PlayingState::updatePlayerInput()
+void PlayingState::updatePlayer1Input()
 {
 	while (m_currentState == PLAYING_STATE)
 	{
 		if (!m_onPause)
 		{
-			for (auto& character : m_characters)
+			if (m_twoPlayers)
 			{
-				if (character->getPlayerNumber() == 1)
-				{
-					if (m_twoPlayers)
-					{
-						character->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
-						character->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
-						character->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
+				m_characters[0]->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
+				m_characters[0]->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
+				m_characters[0]->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
 
-						character->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-						character->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+				m_characters[0]->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+				m_characters[0]->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
 
-						character->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+				m_characters[0]->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
 
-						character->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
-					}
-					else
-					{
-						character->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-						character->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-						character->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
-
-						character->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
-						character->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-
-						character->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
-
-						character->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
-					}
-				}
-				else if (character->getPlayerNumber() == 2)
-				{
-					character->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-					character->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-					character->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
-
-					character->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
-					character->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
-
-					character->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
-
-					character->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
-				}
+				m_characters[0]->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
 			}
+			else
+			{
+				m_characters[0]->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+				m_characters[0]->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+				m_characters[0]->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+
+				m_characters[0]->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
+				m_characters[0]->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+
+				m_characters[0]->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+
+				m_characters[0]->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+			}
+		}
+	}
+}
+
+void PlayingState::updatePlayer2Input()
+{
+	while (m_currentState == PLAYING_STATE)
+	{
+		if (!m_onPause)
+		{
+			m_characters[1]->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+			m_characters[1]->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+			m_characters[1]->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+
+			m_characters[1]->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
+			m_characters[1]->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
+
+			m_characters[1]->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
+
+			m_characters[1]->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
 		}
 	}
 }
