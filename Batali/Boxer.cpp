@@ -40,6 +40,15 @@ Boxer::Boxer(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shar
 	}
 }
 
+Boxer::~Boxer()
+{
+	if (m_ultimateProjectile != nullptr)
+	{
+		delete m_ultimateProjectile;
+		m_ultimateProjectile = nullptr;
+	}
+}
+
 void Boxer::updateHitbox()
 {
 	m_hitboxWidth = 0.f;
@@ -94,6 +103,9 @@ void Boxer::updateHitbox()
 
 			m_damage = BOXER_ULTIMATE_DAMAGE;
 		}
+
+		if (m_ultimateProjectile == nullptr)
+			launchUltimate();
 	}
 	else
 	{
@@ -104,4 +116,12 @@ void Boxer::updateHitbox()
 	m_attackHitbox.setOrigin(0.f, m_hitboxHeight / 2.f);
 	m_attackHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
 	m_attackHitbox.setPosition(m_hitboxPosition);
+}
+
+void Boxer::launchUltimate()
+{
+	if (m_ultimateProjectile == nullptr)
+	{
+		m_ultimateProjectile = new Projectile(getShapePosition());
+	}
 }

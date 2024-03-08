@@ -153,6 +153,7 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
     <ClCompile Include="PlayingState.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
     <ClCompile Include="StatusBarUI.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MovableEntity.h" />
     <ClInclude Include="PlayingState.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
     <ClInclude Include="StatusBarUI.h" />

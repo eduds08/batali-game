@@ -132,6 +132,11 @@ void PlayingState::render()
 		}
 	}
 
+	if (dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectile != nullptr)
+	{
+		m_window.draw(dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectile->getSprite());
+	}
+
 	for (auto& characterStatus : m_characterStatus)
 	{
 		characterStatus.render(m_window);
@@ -295,6 +300,14 @@ void PlayingState::updateTexturesAndAnimations()
 				if (!character->isDead())
 				{
 					character->updateAnimation();
+
+					if (character->getPlayerNumber() == 1)
+					{
+						if (dynamic_cast<Boxer&>(*character).m_ultimateProjectile != nullptr)
+						{
+							dynamic_cast<Boxer&>(*character).m_ultimateProjectile->updateAnimation();
+						}
+					}
 				}
 			}
 		}
