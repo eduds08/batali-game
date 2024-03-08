@@ -107,7 +107,37 @@ namespace constants
 	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{ 100 };
 	constexpr int WIND_HASHASHIN_ATTACK_2_DAMAGE{ 85 };
 	constexpr int WIND_HASHASHIN_AIR_ATTACK_DAMAGE{ 90 };
-	constexpr int WIND_HASHASHIN_ULTIMATE_DAMAGE{ 45 };
+	constexpr int WIND_HASHASHIN_ULTIMATE_DAMAGE{ 60 };
+
+	/* BOXER CONSTANTS: */
+
+	constexpr int BOXER_SPRITE_WIDTH{ 288 };
+	constexpr int BOXER_SPRITE_HEIGHT{ 127 };
+
+	constexpr float BOXER_SHAPE_WIDTH{ 20.f };
+	constexpr float BOXER_SHAPE_HEIGHT{ 35.f };
+
+	constexpr float BOXER_SPEED{ 260.f };
+	constexpr float BOXER_JUMP_HEIGHT{ 100.f };
+
+	constexpr int BOXER_HP{ 1000 };
+
+	constexpr float BOXER_ATTACK_1_WIDTH{ 38.f };
+	constexpr float BOXER_ATTACK_1_HEIGHT{ 20.f };
+
+	constexpr float BOXER_ATTACK_2_WIDTH{ 50.f };
+	constexpr float BOXER_ATTACK_2_HEIGHT{ 20.f };
+
+	constexpr float BOXER_AIR_ATTACK_WIDTH{ 53.f };
+	constexpr float BOXER_AIR_ATTACK_HEIGHT{ 20.f };
+
+	constexpr float BOXER_ULTIMATE_WIDTH{ 80.f };
+	constexpr float BOXER_ULTIMATE_HEIGHT{ 20.f };
+
+	constexpr int BOXER_ATTACK_1_DAMAGE{ 100 };
+	constexpr int BOXER_ATTACK_2_DAMAGE{ 85 };
+	constexpr int BOXER_AIR_ATTACK_DAMAGE{ 90 };
+	constexpr int BOXER_ULTIMATE_DAMAGE{ 45 };
 
 	/* ATTACK HITBOX FRAMES */
 
@@ -150,6 +180,20 @@ namespace constants
 	constexpr int WIND_HASHASHIN_ULTIMATE_FIRST_FRAME{ 11 };
 	constexpr int WIND_HASHASHIN_ULTIMATE_SECOND_FRAME{ 17 };
 	constexpr int WIND_HASHASHIN_ULTIMATE_THIRD_FRAME{ 19 };
+
+	/* BOXER FRAMES */
+
+	constexpr int BOXER_ATTACK_1_STARTING_FRAME{ 0 };
+	constexpr int BOXER_ATTACK_1_ENDING_FRAME{ 1 };
+
+	constexpr int BOXER_ATTACK_2_STARTING_FRAME{ 1 };
+	constexpr int BOXER_ATTACK_2_ENDING_FRAME{ 7 };
+
+	constexpr int BOXER_AIR_ATTACK_STARTING_FRAME{ 2 };
+	constexpr int BOXER_AIR_ATTACK_ENDING_FRAME{ 5 };
+
+	constexpr int BOXER_ULTIMATE_STARTING_FRAME{ 5 };
+	constexpr int BOXER_ULTIMATE_ENDING_FRAME{ 7 };
 
 	/* BOT CONSTANTS: */
 

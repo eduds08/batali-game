@@ -176,16 +176,18 @@ void CharacterSelectionState::updateCharacterSelectionButtons()
 
 void CharacterSelectionState::selectCharacter()
 {
-	// Select fireKnight
-	if (m_onHoverCharacterButton == 0)
-	{
-		m_chosenCharacters.emplace_back(m_charactersNames[0]);
-	}
-	// Select windHashashin
-	else if (m_onHoverCharacterButton == 1)
-	{
-		m_chosenCharacters.emplace_back(m_charactersNames[1]);
-	}
+	//// Select fireKnight
+	//if (m_onHoverCharacterButton == 0)
+	//{
+	//	m_chosenCharacters.emplace_back(m_charactersNames[0]);
+	//}
+	//// Select windHashashin
+	//else if (m_onHoverCharacterButton == 1)
+	//{
+	//	m_chosenCharacters.emplace_back(m_charactersNames[1]);
+	//}
+
+	m_chosenCharacters.emplace_back(m_charactersNames[m_onHoverCharacterButton]);
 
 	// Updates the display to indicates that Player 2 (or Enemy) is selecting character
 	if (m_playerChoice == 1)

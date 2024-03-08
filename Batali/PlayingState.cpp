@@ -16,9 +16,13 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	{
 		m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
 	}
-	else
+	else if (firstCharacter == "wind_hashashin")
 	{
 		m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
+	}
+	else if (firstCharacter == "boxer")
+	{
+		m_characters.emplace_back(std::make_shared<Boxer>(LEFT_CHARACTER_FIRST_POSITION));
 	}
 
 	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
@@ -30,9 +34,13 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		{
 			m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 		}
-		else
+		else if (firstCharacter == "wind_hashashin")
 		{
 			m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+		}
+		else if (firstCharacter == "boxer")
+		{
+			m_characters.emplace_back(std::make_shared<Boxer>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 		}
 	}
 	else
@@ -41,9 +49,13 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		{
 			m_characters.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
 		}
-		else
+		else if (firstCharacter == "wind_hashashin")
 		{
 			m_characters.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
+		}
+		else if (firstCharacter == "boxer")
+		{
+			m_characters.emplace_back(std::make_shared<Boxer>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
 		}
 	}
 

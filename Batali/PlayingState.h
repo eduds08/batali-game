@@ -7,6 +7,7 @@
 #include "WindHashashin.h"
 #include "FireKnight.h"
 #include <memory>
+#include "Boxer.h"
 #include "CharacterStatusUI.h"
 
 class PlayingState : public StateContext
