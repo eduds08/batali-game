@@ -122,16 +122,16 @@ namespace constants
 
 	constexpr int BOXER_HP{ 1000 };
 
-	constexpr float BOXER_ATTACK_1_WIDTH{ 38.f };
+	constexpr float BOXER_ATTACK_1_WIDTH{ 20.f };
 	constexpr float BOXER_ATTACK_1_HEIGHT{ 20.f };
 
-	constexpr float BOXER_ATTACK_2_WIDTH{ 50.f };
+	constexpr float BOXER_ATTACK_2_WIDTH{ 20.f };
 	constexpr float BOXER_ATTACK_2_HEIGHT{ 20.f };
 
-	constexpr float BOXER_AIR_ATTACK_WIDTH{ 53.f };
+	constexpr float BOXER_AIR_ATTACK_WIDTH{ 20.f };
 	constexpr float BOXER_AIR_ATTACK_HEIGHT{ 20.f };
 
-	constexpr float BOXER_ULTIMATE_WIDTH{ 80.f };
+	constexpr float BOXER_ULTIMATE_WIDTH{ 25.f };
 	constexpr float BOXER_ULTIMATE_HEIGHT{ 20.f };
 
 	constexpr int BOXER_ATTACK_1_DAMAGE{ 100 };
@@ -192,8 +192,8 @@ namespace constants
 	constexpr int BOXER_AIR_ATTACK_STARTING_FRAME{ 2 };
 	constexpr int BOXER_AIR_ATTACK_ENDING_FRAME{ 5 };
 
-	constexpr int BOXER_ULTIMATE_STARTING_FRAME{ 5 };
-	constexpr int BOXER_ULTIMATE_ENDING_FRAME{ 7 };
+	constexpr int BOXER_ULTIMATE_PT_1_FRAME{ 9 };
+	constexpr int BOXER_ULTIMATE_PT_2_FRAME{ 13 };
 
 	/* BOT CONSTANTS: */
 

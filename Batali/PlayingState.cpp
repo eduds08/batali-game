@@ -101,6 +101,14 @@ void PlayingState::update()
 		for (auto& character : m_characters)
 		{
 			character->update(m_deltaTime);
+
+			if (character->getPlayerNumber() == 1)
+			{
+				for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*character).m_ultimateProjectiles)
+				{
+					ultimateProjectile->update(m_deltaTime);
+				}
+			}
 		}
 
 		updateView();
@@ -132,9 +140,9 @@ void PlayingState::render()
 		}
 	}
 
-	if (dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectile != nullptr)
+	for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectiles)
 	{
-		m_window.draw(dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectile->getSprite());
+		m_window.draw(ultimateProjectile->getSprite());
 	}
 
 	for (auto& characterStatus : m_characterStatus)
@@ -303,9 +311,9 @@ void PlayingState::updateTexturesAndAnimations()
 
 					if (character->getPlayerNumber() == 1)
 					{
-						if (dynamic_cast<Boxer&>(*character).m_ultimateProjectile != nullptr)
+						for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*character).m_ultimateProjectiles)
 						{
-							dynamic_cast<Boxer&>(*character).m_ultimateProjectile->updateAnimation();
+							ultimateProjectile->updateAnimation();
 						}
 					}
 				}

@@ -40,15 +40,6 @@ Boxer::Boxer(sf::Vector2f firstPosition, int playerNumber, bool isBot, std::shar
 	}
 }
 
-Boxer::~Boxer()
-{
-	if (m_ultimateProjectile != nullptr)
-	{
-		delete m_ultimateProjectile;
-		m_ultimateProjectile = nullptr;
-	}
-}
-
 void Boxer::updateHitbox()
 {
 	m_hitboxWidth = 0.f;
@@ -96,16 +87,26 @@ void Boxer::updateHitbox()
 	{
 		m_hitboxPosition = getShapePosition();
 
-		if (m_frameCount >= BOXER_ULTIMATE_STARTING_FRAME && m_frameCount <= BOXER_ULTIMATE_ENDING_FRAME && !m_animationEnd)
+		if (m_frameCount == BOXER_ULTIMATE_PT_1_FRAME && !m_animationEnd)
 		{
 			m_hitboxWidth = BOXER_ULTIMATE_WIDTH;
 			m_hitboxHeight = BOXER_ULTIMATE_HEIGHT;
 
 			m_damage = BOXER_ULTIMATE_DAMAGE;
-		}
 
-		if (m_ultimateProjectile == nullptr)
-			launchUltimate();
+			if (m_ultimateProjectiles.size() == 0)
+				launchUltimate();
+		}
+		else if (m_frameCount == BOXER_ULTIMATE_PT_2_FRAME && !m_animationEnd)
+		{
+			m_hitboxWidth = BOXER_ULTIMATE_WIDTH;
+			m_hitboxHeight = BOXER_ULTIMATE_HEIGHT;
+
+			m_damage = BOXER_ULTIMATE_DAMAGE;
+
+			if (m_ultimateProjectiles.size() == 1)
+				launchUltimate();
+		}
 	}
 	else
 	{
@@ -120,8 +121,5 @@ void Boxer::updateHitbox()
 
 void Boxer::launchUltimate()
 {
-	if (m_ultimateProjectile == nullptr)
-	{
-		m_ultimateProjectile = new Projectile(getShapePosition());
-	}
+	m_ultimateProjectiles.emplace_back(std::make_shared<Projectile>(getShapePosition(), m_facingRight));
 }
