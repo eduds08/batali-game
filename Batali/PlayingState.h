@@ -22,7 +22,7 @@ public:
 	void updateCollision();
 
 	// Checks the collision of entity with the tiles that are inside its imaginary view.
-	void updateEntityCollisionWithGrounds(MovableEntity& entity, Ground& ground);
+	void updateEntityCollisionWithGrounds(WalkingEntity& entity, Ground& ground);
 
 	// Calls takeDamage and also knockbackMove for the attacked entity
 	void handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity, bool isUltimateActivate = false);

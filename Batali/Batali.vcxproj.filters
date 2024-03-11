@@ -102,6 +102,12 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicalEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkingEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundUI.h">
@@ -187,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkingEntity.h">
+      <Filter>ENTITY</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "MovableEntity.h"
+#include "WalkingEntity.h"
 
-class DamageEntity : public MovableEntity
+class DamageEntity : public WalkingEntity
 {
 public:
 	DamageEntity();

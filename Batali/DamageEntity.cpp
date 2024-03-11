@@ -1,7 +1,7 @@
 #include "DamageEntity.h"
 
 DamageEntity::DamageEntity()
-	: MovableEntity{}
+	: WalkingEntity{}
 {
 }
 

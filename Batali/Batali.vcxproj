@@ -152,6 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
+    <ClCompile Include="PhysicalEntity.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="SwordEntity.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="WalkingEntity.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +184,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MovableEntity.h" />
+    <ClInclude Include="PhysicalEntity.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
@@ -190,6 +193,7 @@
     <ClInclude Include="SwordEntity.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="WalkingEntity.h" />
     <ClInclude Include="WindHashashin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

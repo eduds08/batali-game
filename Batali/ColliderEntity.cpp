@@ -1,5 +1,10 @@
 #include "ColliderEntity.h"
 
+ColliderEntity::ColliderEntity()
+	: MovableEntity{}
+{
+}
+
 bool ColliderEntity::isCollidingWith(const sf::Sprite& other)
 {
 	float otherHalfSizeX = other.getTexture()->getSize().x / 2.f;
@@ -54,16 +59,4 @@ bool ColliderEntity::isCollidingWith(const sf::Sprite& other)
 	}
 
 	return false;
-}
-
-void ColliderEntity::updateLimits()
-{
-	// Limit is set to 5 tiles in each direction (top, right, bottom left) from the center of entity's shape
-	int tilesAmount = 5;
-
-	m_rightShapeLimit = m_shape.getPosition().x + tilesAmount * TILE_SIZE_FLOAT;
-	m_leftShapeLimit = m_shape.getPosition().x - tilesAmount * TILE_SIZE_FLOAT;
-
-	m_topShapeLimit = m_shape.getPosition().y - tilesAmount * TILE_SIZE_FLOAT;
-	m_bottomShapeLimit = m_shape.getPosition().y + tilesAmount * TILE_SIZE_FLOAT;
 }
