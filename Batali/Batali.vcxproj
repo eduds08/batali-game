@@ -139,14 +139,12 @@
     <ClCompile Include="Boxer.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="CharacterPortraitUI.cpp" />
     <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="ColliderEntity.cpp" />
     <ClCompile Include="DamageEntity.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
-    <ClCompile Include="EnemyBot.cpp" />
     <ClCompile Include="FireKnight.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />

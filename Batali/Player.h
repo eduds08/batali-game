@@ -7,7 +7,7 @@ class Player : public T
 {
 public:
 	Player(sf::Vector2f firstPosition, int playerNumber=1);
-	virtual ~Player() = default;
+	~Player();
 
 	// Main character's update
 	void update(float& deltaTime);
@@ -19,7 +19,7 @@ public:
 
 	const int getPlayerNumber() const { return m_playerNumber; }
 
-protected:
+private:
 	int m_playerNumber{ 1 };
 };
 
@@ -34,6 +34,11 @@ inline Player<T>::Player(sf::Vector2f firstPosition, int playerNumber)
 		this->m_facingRight = -1;
 		this->flipSprite();
 	}
+}
+
+template<class T>
+inline Player<T>::~Player()
+{
 }
 
 template<class T>

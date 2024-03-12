@@ -51,21 +51,21 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	}
 	else
 	{
-		/*if (secondCharacter == "fire_knight")
+		if (secondCharacter == "fire_knight")
 		{
-			m_characters.emplace_back(std::make_unique<Player<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[1].get()), true });
+			m_characters.emplace_back(std::make_unique<EnemyBot<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
+			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[1].get()), true });
 		}
 		else if (secondCharacter == "wind_hashashin")
 		{
-			m_characters.emplace_back(std::make_unique<Player<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()), true });
+			m_characters.emplace_back(std::make_unique<EnemyBot<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
+			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()), true });
 		}
 		else if (secondCharacter == "boxer")
 		{
-			m_characters.emplace_back(std::make_shared<Player<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-			m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
-		}*/
+			m_characters.emplace_back(std::make_shared<EnemyBot<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
+			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
+		}
 	}
 
 	//m_characterStatus.emplace_back(CharacterStatusUI<Boxer>{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
