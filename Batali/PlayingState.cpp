@@ -15,20 +15,17 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	if (firstCharacter == "fire_knight")
 	{
 		m_characters.emplace_back(std::make_shared<Player<FireKnight>>(LEFT_CHARACTER_FIRST_POSITION));
-		//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[0].get()) });
 	}
 	else if (firstCharacter == "wind_hashashin")
 	{
 		m_characters.emplace_back(std::make_shared<Player<WindHashashin>>(LEFT_CHARACTER_FIRST_POSITION));
-		//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[0].get()) });
 	}
 	else if (firstCharacter == "boxer")
 	{
 		m_characters.emplace_back(std::make_shared<Player<Boxer>>(LEFT_CHARACTER_FIRST_POSITION));
-		//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[0].get()) });
 	}
 
-	//m_characterStatus.emplace_back(CharacterStatusUI<Boxer>{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
+	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -36,17 +33,14 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_shared<Player<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[1].get()), true });
 		}
 		else if (secondCharacter == "wind_hashashin")
 		{
 			m_characters.emplace_back(std::make_shared<Player<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()), true });
 		}
 		else if (secondCharacter == "boxer")
 		{
 			m_characters.emplace_back(std::make_shared<Player<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
 		}
 	}
 	else
@@ -54,21 +48,18 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		if (secondCharacter == "fire_knight")
 		{
 			m_characters.emplace_back(std::make_unique<EnemyBot<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
-			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[1].get()), true });
 		}
 		else if (secondCharacter == "wind_hashashin")
 		{
 			m_characters.emplace_back(std::make_unique<EnemyBot<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
-			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()), true });
 		}
 		else if (secondCharacter == "boxer")
 		{
 			m_characters.emplace_back(std::make_shared<EnemyBot<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
-			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
 		}
 	}
 
-	//m_characterStatus.emplace_back(CharacterStatusUI<Boxer>{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
+	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
 	// Initialize map
 	loadAndCreateMap("./map/map.txt");
@@ -102,10 +93,10 @@ void PlayingState::update()
 	{
 		updateCollision();
 
-		/*for (auto& characterStatus : m_characterStatus)
+		for (auto& characterStatus : m_characterStatus)
 		{
 			characterStatus.update();
-		}*/
+		}
 
 		for (auto& character : m_characters)
 		{
@@ -154,10 +145,10 @@ void PlayingState::render()
 		m_window.draw(ultimateProjectile->getSprite());
 	}*/
 
-	/*for (auto& characterStatus : m_characterStatus)
+	for (auto& characterStatus : m_characterStatus)
 	{
 		characterStatus.render(m_window);
-	}*/
+	}
 }
 
 void PlayingState::updateCollision()
@@ -265,8 +256,8 @@ void PlayingState::updateView()
 	m_view.setCenter(m_characters[0]->getShapePosition());
 	m_window.setView(m_view);
 
-	//m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
-	//m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
+	m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
+	m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;

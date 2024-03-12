@@ -39,7 +39,6 @@ public:
 	// Defined inside each entity's class
 	virtual void updateAttackHitbox() = 0;
 	virtual void update(float& deltaTime) = 0;
-	virtual const int getPlayerNumber() const = 0;
 
 protected:
 	sf::RectangleShape m_attackHitbox{sf::Vector2f{0.f, 0.f}};

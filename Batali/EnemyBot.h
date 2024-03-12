@@ -13,8 +13,6 @@ public:
 	// Changes the current texture based upon the entity's current activity (jumping, running, attacking, etc...). Called inside updateAnimation()
 	void updateTexture();
 
-	const int getPlayerNumber() const { return 0; }
-
 private:
 	// Alters attacks between one another
 	std::string m_previousAttackingAnimation{};
