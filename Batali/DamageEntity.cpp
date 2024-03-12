@@ -98,25 +98,6 @@ void DamageEntity::knockbackMove(float& deltaTime, float attackDirection)
 	m_sprite.setPosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (m_spriteHeight - getShapeSize().y) / 2.f });
 }
 
-void DamageEntity::updateDeath()
-{
-	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	if (m_currentTexture == m_texturesActionName.at("Death") && !m_dead && m_animationEnd)
-	{
-		die();
-	}
-}
-
-void DamageEntity::updateGravityWhenDying(float& deltaTime)
-{
-	if (m_dying)
-	{
-		m_velocity.x = 0.f;
-		m_velocity.y += GRAVITY * deltaTime;
-		move(deltaTime);
-	}
-}
-
 void DamageEntity::die()
 {
 	m_dead = true;

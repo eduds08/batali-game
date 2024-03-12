@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Character.h"
+#include "SwordEntity.h"
 
-class WindHashashin : public Character
+class WindHashashin : public SwordEntity
 {
 public:
-	WindHashashin(sf::Vector2f firstPosition, int playerNumber = 1, bool isBot = false, std::shared_ptr<Character> player = nullptr);
+	WindHashashin(sf::Vector2f firstPosition);
 	virtual ~WindHashashin() = default;
 
-	virtual void updateHitbox();
+	virtual void updateAttackHitbox();
 private:
 
 };

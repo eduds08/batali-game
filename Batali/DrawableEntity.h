@@ -11,20 +11,23 @@ public:
 	DrawableEntity();
 	virtual ~DrawableEntity() = default;
 
-	const sf::Vector2f getSpritePosition() const { return m_sprite.getPosition(); }
+	// Sets sprite's texture
+	void setTexture(const std::string& textureName, const std::string& texturePath);
 
 	// DrawableEntity flip
 	void flipSprite(float scale = 1.f) { m_sprite.setScale(-scale, scale); }
 
-	void setTexture(const std::string& textureName, const std::string& texturePath);
+	/* Setters */
+
+	void setSpritePosition(sf::Vector2f position) { m_sprite.setPosition(position); }
+	void setScale(float scale) { m_sprite.setScale(scale, scale); }
+	void setOrigin(float originX, float originY) { m_sprite.setOrigin(originX, originY); }
+
+	/* Getters */
 
 	const sf::Sprite& getSprite() const { return m_sprite; }
 	const sf::Vector2f getSpriteSize() const { return sf::Vector2f{static_cast<float>(m_spriteWidth), static_cast<float>(m_spriteHeight)}; }
-
-	void setSpritePosition(sf::Vector2f position) { m_sprite.setPosition(position); }
-
-	void setScale(float scale) { m_sprite.setScale(scale, scale); }
-	void setOrigin(float originX, float originY) { m_sprite.setOrigin(originX, originY); }
+	const sf::Vector2f getSpritePosition() const { return m_sprite.getPosition(); }
 
 protected:
 	// Singleton Pattern

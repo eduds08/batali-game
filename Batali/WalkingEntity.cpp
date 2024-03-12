@@ -7,7 +7,7 @@ WalkingEntity::WalkingEntity()
 
 void WalkingEntity::handleCollision()
 {
-	// Sets y-velocity to 0 if entity collides in bottom or top
+	// Sets m_velocity.y to 0 if entity collides in bottom or top
 	if (m_collisionDirection.y != 0.f)
 	{
 		m_velocity.y = 0.f;

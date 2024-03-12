@@ -8,6 +8,7 @@ namespace constants
 	constexpr float TILE_SIZE_FLOAT{ 32.f };
 	constexpr int TILES_AMOUNT_PER_ROW{ 60 };
 	constexpr int TILES_AMOUNT_PER_COL{ 34 };
+	constexpr int TILES_PHYSICAL_ENTITY_LIMIT { 5 };
 
 	constexpr float GRAVITY{ 981.f };
 
@@ -33,6 +34,8 @@ namespace constants
 
 	constexpr int MANA_BAR_WIDTH{ 120 };
 	constexpr int MANA_BAR_HEIGHT{ 36 };
+
+	
 
 	const sf::Color PLAYER_1_COLOR{179, 245, 188};
 	const sf::Color PLAYER_2_COLOR{250, 145, 137};

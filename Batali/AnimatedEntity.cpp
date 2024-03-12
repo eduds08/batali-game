@@ -28,11 +28,14 @@ void AnimatedEntity::changeCurrentTexture(const std::string& textureName, const 
 
 void AnimatedEntity::animateSprite()
 {
+	// Sets next frame if animationEnd = false
 	if (!m_animationEnd)
 	{
 		m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * m_frameCount, 0, m_spriteWidth, m_spriteHeight });
 		++m_frameCount;
 	}
+
+	// If all frames were played, restarts the animation if loop=true or indicates that animationEnd=true otherwise
 	if (m_frameCount == m_currentAnimationFramesAmount)
 	{
 		m_frameCount = 0;

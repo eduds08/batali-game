@@ -84,7 +84,7 @@
     <ClCompile Include="ColliderEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedEntity.cpp">
@@ -96,9 +96,6 @@
     <ClCompile Include="SmallCharacterPortraitUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Boxer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -106,6 +103,15 @@
       <Filter>ENTITY</Filter>
     </ClCompile>
     <ClCompile Include="WalkingEntity.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="Boxer.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBot.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,7 +182,7 @@
     <ClInclude Include="ColliderEntity.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
+    <ClInclude Include="Player.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedEntity.h">
@@ -188,9 +194,6 @@
     <ClInclude Include="SmallCharacterPortraitUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Boxer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -198,6 +201,15 @@
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="WalkingEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="Boxer.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBot.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileEntity.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
   </ItemGroup>

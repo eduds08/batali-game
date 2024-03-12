@@ -139,13 +139,14 @@
     <ClCompile Include="Boxer.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
-    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="CharacterPortraitUI.cpp" />
     <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="ColliderEntity.cpp" />
     <ClCompile Include="DamageEntity.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
+    <ClCompile Include="EnemyBot.cpp" />
     <ClCompile Include="FireKnight.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="PhysicalEntity.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ProjectileEntity.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
     <ClCompile Include="StatusBarUI.cpp" />
@@ -171,7 +173,7 @@
     <ClInclude Include="Boxer.h" />
     <ClInclude Include="ButtonAuxState.h" />
     <ClInclude Include="ButtonUI.h" />
-    <ClInclude Include="Character.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
     <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterStatusUI.h" />
@@ -179,6 +181,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="DamageEntity.h" />
     <ClInclude Include="DrawableEntity.h" />
+    <ClInclude Include="EnemyBot.h" />
     <ClInclude Include="FireKnight.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="PhysicalEntity.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ProjectileEntity.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
     <ClInclude Include="StatusBarUI.h" />

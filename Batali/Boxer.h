@@ -1,16 +1,14 @@
 #pragma once
 
-#include "Character.h"
-#include "Projectile.h"
-#include <memory>
+#include "ProjectileEntity.h"
 
-class Boxer : public Character
+class Boxer : public ProjectileEntity
 {
 public:
-	Boxer(sf::Vector2f firstPosition, int playerNumber = 1, bool isBot = false, std::shared_ptr<Character> player = nullptr);
+	Boxer(sf::Vector2f firstPosition);
 	virtual ~Boxer() = default;
 
-	virtual void updateHitbox();
+	virtual void updateAttackHitbox();
 
 	void launchUltimate();
 

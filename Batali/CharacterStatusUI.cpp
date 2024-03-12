@@ -1,12 +1,14 @@
 #include "CharacterStatusUI.h"
 
-CharacterStatusUI::CharacterStatusUI(const std::string& textureName, const std::string& texturePath, Character* character, bool onRight)
+template <class T>
+CharacterStatusUI::CharacterStatusUI(const std::string& textureName, const std::string& texturePath, Player<T>* character, bool onRight)
 	: UI{}
 {
 	init(textureName, texturePath, character, onRight);
 }
 
-void CharacterStatusUI::init(const std::string& textureName, const std::string& texturePath, Character* character, bool onRight)
+template <class T>
+void CharacterStatusUI::init(const std::string& textureName, const std::string& texturePath, Player<T>* character, bool onRight)
 {
 	setTexture(textureName, texturePath);
 

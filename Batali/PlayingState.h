@@ -9,6 +9,7 @@
 #include <memory>
 #include "Boxer.h"
 #include "CharacterStatusUI.h"
+#include "EnemyBot.h"
 
 class PlayingState : public StateContext
 {
@@ -43,8 +44,9 @@ public:
 	void updatePlayer2Input();
 
 private:
-	std::vector<std::shared_ptr<Character>> m_characters{};
-	std::vector<CharacterStatusUI> m_characterStatus{};
+	
+	std::vector<std::shared_ptr<SwordEntity>> m_characters{};
+	//std::vector<CharacterStatusUI> m_characterStatus{};
 	std::vector<Ground> m_grounds{};
 
 	std::thread m_animationThread;

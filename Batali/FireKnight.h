@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Character.h"
+#include "SwordEntity.h"
 
-class FireKnight : public Character
+class FireKnight : public SwordEntity
 {
 public:
-	FireKnight(sf::Vector2f firstPosition, int playerNumber = 1, bool isBot = false, std::shared_ptr<Character> player = nullptr);
+	FireKnight(sf::Vector2f firstPosition);
 	virtual ~FireKnight() = default;
 
-	virtual void updateHitbox();
+	virtual void updateAttackHitbox();
 private:
 
 };

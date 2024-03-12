@@ -14,52 +14,61 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
-		m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<Player<FireKnight>>(LEFT_CHARACTER_FIRST_POSITION));
+		//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[0].get()) });
 	}
 	else if (firstCharacter == "wind_hashashin")
 	{
-		m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<Player<WindHashashin>>(LEFT_CHARACTER_FIRST_POSITION));
+		//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[0].get()) });
 	}
 	else if (firstCharacter == "boxer")
 	{
-		m_characters.emplace_back(std::make_shared<Boxer>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<Player<Boxer>>(LEFT_CHARACTER_FIRST_POSITION));
+		//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[0].get()) });
 	}
 
-	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
+	//m_characterStatus.emplace_back(CharacterStatusUI<Boxer>{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
 	{
 		if (secondCharacter == "fire_knight")
 		{
-			m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			m_characters.emplace_back(std::make_shared<Player<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[1].get()), true });
 		}
-		else if (firstCharacter == "wind_hashashin")
+		else if (secondCharacter == "wind_hashashin")
 		{
-			m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			m_characters.emplace_back(std::make_shared<Player<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()), true });
 		}
-		else if (firstCharacter == "boxer")
+		else if (secondCharacter == "boxer")
 		{
-			m_characters.emplace_back(std::make_shared<Boxer>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			m_characters.emplace_back(std::make_shared<Player<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+			//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
 		}
 	}
 	else
 	{
-		if (secondCharacter == "fire_knight")
+		/*if (secondCharacter == "fire_knight")
 		{
-			m_characters.emplace_back(std::make_unique<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
+			m_characters.emplace_back(std::make_unique<Player<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
+			m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<FireKnight>*>(m_characters[1].get()), true });
 		}
-		else if (firstCharacter == "wind_hashashin")
+		else if (secondCharacter == "wind_hashashin")
 		{
-			m_characters.emplace_back(std::make_unique<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
+			m_characters.emplace_back(std::make_unique<Player<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
+			m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()), true });
 		}
-		else if (firstCharacter == "boxer")
+		else if (secondCharacter == "boxer")
 		{
-			m_characters.emplace_back(std::make_shared<Boxer>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
-		}
+			m_characters.emplace_back(std::make_shared<Player<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, 0, true, m_characters[0]));
+			m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
+		}*/
 	}
 
-	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
+	//m_characterStatus.emplace_back(CharacterStatusUI<Boxer>{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", dynamic_cast<Player<Boxer>*>(m_characters[1].get()), true });
 
 	// Initialize map
 	loadAndCreateMap("./map/map.txt");
@@ -93,22 +102,22 @@ void PlayingState::update()
 	{
 		updateCollision();
 
-		for (auto& characterStatus : m_characterStatus)
+		/*for (auto& characterStatus : m_characterStatus)
 		{
 			characterStatus.update();
-		}
+		}*/
 
 		for (auto& character : m_characters)
 		{
 			character->update(m_deltaTime);
 
-			if (character->getPlayerNumber() == 1)
+			/*if (character->getPlayerNumber() == 1)
 			{
 				for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*character).m_ultimateProjectiles)
 				{
 					ultimateProjectile->update(m_deltaTime);
 				}
-			}
+			}*/
 		}
 
 		updateView();
@@ -140,15 +149,15 @@ void PlayingState::render()
 		}
 	}
 
-	for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectiles)
+	/*for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectiles)
 	{
 		m_window.draw(ultimateProjectile->getSprite());
-	}
+	}*/
 
-	for (auto& characterStatus : m_characterStatus)
+	/*for (auto& characterStatus : m_characterStatus)
 	{
 		characterStatus.render(m_window);
-	}
+	}*/
 }
 
 void PlayingState::updateCollision()
@@ -183,11 +192,11 @@ void PlayingState::updateCollision()
 		{
 			if (attackedCharacter != attackingCharacter)
 			{
-				if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getAttackHitbox().getGlobalBounds()) && !attackedCharacter->isDying())
+				if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getAttackHitbox().getGlobalBounds()) && !attackedCharacter->getDying())
 				{
 					handleEntityAttacked(*attackingCharacter, *attackedCharacter);
 				}
-				if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getUltimateActivateHitbox().getGlobalBounds()) && !attackedCharacter->isDying())
+				if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getUltimateActivateHitbox().getGlobalBounds()) && !attackedCharacter->getDying())
 				{
 					handleEntityAttacked(*attackingCharacter, *attackedCharacter, true);
 				}
@@ -198,8 +207,8 @@ void PlayingState::updateCollision()
 
 void PlayingState::updateEntityCollisionWithGrounds(WalkingEntity& entity, Ground& ground)
 {
-	if (ground.getSprite().getPosition().x <= entity.m_rightShapeLimit && ground.getSprite().getPosition().x >= entity.m_leftShapeLimit
-		&& ground.getSprite().getPosition().y >= entity.m_topShapeLimit && ground.getSprite().getPosition().y <= entity.m_bottomShapeLimit)
+	if (ground.getSprite().getPosition().x <= entity.getShapeLimits()[1] && ground.getSprite().getPosition().x >= entity.getShapeLimits()[3]
+		&& ground.getSprite().getPosition().y >= entity.getShapeLimits()[0] && ground.getSprite().getPosition().y <= entity.getShapeLimits()[2])
 	{
 		if (entity.isCollidingWith(ground.getSprite()))
 		{
@@ -256,8 +265,8 @@ void PlayingState::updateView()
 	m_view.setCenter(m_characters[0]->getShapePosition());
 	m_window.setView(m_view);
 
-	m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
-	m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
+	//m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
+	//m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;
@@ -305,17 +314,17 @@ void PlayingState::updateTexturesAndAnimations()
 
 			for (auto& character : m_characters)
 			{
-				if (!character->isDead())
+				if (!character->getDead())
 				{
 					character->updateAnimation();
 
-					if (character->getPlayerNumber() == 1)
+					/*if (character->getPlayerNumber() == 1)
 					{
 						for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*character).m_ultimateProjectiles)
 						{
 							ultimateProjectile->updateAnimation();
 						}
-					}
+					}*/
 				}
 			}
 		}
