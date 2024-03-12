@@ -32,16 +32,6 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition)
 	m_hp = WIND_HASHASHIN_HP;
 
 	m_speed = WIND_HASHASHIN_SPEED;
-
-	/*if (m_isBot)
-	{
-		m_speed = ENEMY_SPEED;
-		m_distanceFromPlayer = ENEMY_DISTANCE_FROM_PLAYER;
-	}
-	else
-	{
-		m_speed = WIND_HASHASHIN_SPEED;
-	}*/
 }
 
 void WindHashashin::updateAttackHitbox()

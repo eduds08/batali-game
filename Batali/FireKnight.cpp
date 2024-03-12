@@ -30,16 +30,6 @@ FireKnight::FireKnight(sf::Vector2f firstPosition)
 	m_hp = FIRE_KNIGHT_HP;
 
 	m_speed = FIRE_KNIGHT_SPEED;
-
-	/*if (m_isBot)
-	{
-		m_speed = ENEMY_SPEED;
-		m_distanceFromPlayer = ENEMY_DISTANCE_FROM_PLAYER;
-	}
-	else
-	{
-		m_speed = FIRE_KNIGHT_SPEED;
-	}*/
 }
 
 void FireKnight::updateAttackHitbox()

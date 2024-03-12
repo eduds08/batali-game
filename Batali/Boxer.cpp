@@ -30,16 +30,6 @@ Boxer::Boxer(sf::Vector2f firstPosition)
 	m_hp = BOXER_HP;
 
 	m_speed = BOXER_SPEED;
-
-	/*if (m_isBot)
-	{
-		m_speed = ENEMY_SPEED;
-		m_distanceFromPlayer = ENEMY_DISTANCE_FROM_PLAYER;
-	}
-	else
-	{
-		m_speed = BOXER_SPEED;
-	}*/
 }
 
 void Boxer::updateAttackHitbox()

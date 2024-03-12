@@ -34,6 +34,8 @@ inline EnemyBot<T>::EnemyBot(sf::Vector2f firstPosition, const sf::Vector2f& pla
 {
 	this->m_facingRight = -1;
 	this->flipSprite();
+
+	this->m_speed = ENEMY_SPEED;
 }
 
 template<class T>
