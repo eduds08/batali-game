@@ -101,7 +101,13 @@ void WindHashashin::updateAttackHitbox()
 			m_ultimateActivateHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
 			m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f{getShapeSize().x * 2 * (m_frameCount - WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME) * m_facingRight, 0.f});
 		}
-		else if ((m_frameCount == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && !m_animationEnd)
+		else if (m_frameCount > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
+		{
+			m_attackMode = "off";
+
+			m_activateUltimate = false;
+		}
+		else if ((m_frameCount == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && !m_animationEnd && m_activateUltimate)
 		{
 			m_attackHitboxWidth = getShapeSize().x;
 			m_attackHitboxHeight = getShapeSize().y;

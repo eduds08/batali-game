@@ -47,12 +47,12 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 				m_activateUltimate = false;
 			}
 
-			if (m_currentTexture == "wind_hashashinUltimate" && m_frameCount > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
+			/*if (m_currentTexture == "wind_hashashinUltimate" && m_frameCount > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
 			{
 				m_attackMode = "off";
 
 				m_activateUltimate = false;
-			}
+			}*/
 		}
 		else
 		{
