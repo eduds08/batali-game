@@ -36,6 +36,11 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition)
 
 void WindHashashin::updateAttackHitbox()
 {
+	if (m_attackMode == "off")
+	{
+		m_activateUltimate = false;
+	}
+
 	m_attackHitboxWidth = 0.f;
 	m_attackHitboxHeight = 0.f;
 

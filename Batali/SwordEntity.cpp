@@ -37,22 +37,10 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 			// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
 			if (((m_currentTexture == m_entityName + "Attack1" || m_currentTexture == m_entityName + "Attack2" || m_currentTexture == m_entityName + "Ultimate") && m_animationEnd) || m_inDamageCooldown == true)
 			{
-				/*if (m_isBot && m_inDamageCooldown == false)
-				{
-					m_previousAttackingAnimation = m_currentTexture;
-				}*/
-
 				m_attackMode = "off";
 
-				m_activateUltimate = false;
+				//m_activateUltimate = false;
 			}
-
-			/*if (m_currentTexture == "wind_hashashinUltimate" && m_frameCount > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
-			{
-				m_attackMode = "off";
-
-				m_activateUltimate = false;
-			}*/
 		}
 		else
 		{
@@ -66,13 +54,4 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 	}
 
 	updateAttackHitbox();
-
-	/*if (m_isBot)
-	{
-		if (m_attackMode != "off")
-		{
-			m_timeBetweenAttacksClock.restart();
-			m_timeBetweenAttacks = 0.f;
-		}
-	}*/
 }

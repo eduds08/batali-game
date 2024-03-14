@@ -14,13 +14,6 @@ public:
 	// Updates MovableEntity's m_velocity. Called before move()
 	void updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll = false);
 
-	/* Setters */
-
-	void setConditionRunLeft(bool conditionRunLeft) { m_conditionRunLeft = conditionRunLeft; }
-	void setConditionRunRight(bool conditionRunRight) { m_conditionRunRight = conditionRunRight; }
-	void setConditionJump(bool conditionJump) { m_conditionJump = conditionJump; }
-	void setConditionRoll(bool conditionRoll) { m_conditionRoll = conditionRoll; }
-
 	/* Getters */
 
 	const bool getOnRoll() const { return m_onRoll; }

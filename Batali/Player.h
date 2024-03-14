@@ -15,6 +15,16 @@ public:
 	// Changes the current texture based upon the entity's current activity (jumping, running, attacking, etc...). Called inside updateAnimation()
 	void updateTexture();
 
+	/* Setters */
+
+	void setConditionRunLeft(bool conditionRunLeft) { this->m_conditionRunLeft = conditionRunLeft; }
+	void setConditionRunRight(bool conditionRunRight) { this->m_conditionRunRight = conditionRunRight; }
+	void setConditionJump(bool conditionJump) { this->m_conditionJump = conditionJump; }
+	void setConditionRoll(bool conditionRoll) { this->m_conditionRoll = conditionRoll; }
+	void setConditionAttack1(bool conditionAttack1) { this->m_conditionAttack1 = conditionAttack1; }
+	void setConditionAttack2(bool conditionAttack2) { this->m_conditionAttack2 = conditionAttack2; }
+	void setConditionUltimate(bool conditionUltimate) { this->m_conditionUltimate = conditionUltimate; }
+
 	/* Getters */
 
 	const int getPlayerNumber() const { return m_playerNumber; }
@@ -55,18 +65,6 @@ inline void Player<T>::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!this->m_dying)
 	{
-		/*if (m_isBot)
-		{
-			m_conditionRunLeft = m_player->getShapePosition().x < getShapePosition().x - m_distanceFromPlayer;
-			m_conditionRunRight = m_player->getShapePosition().x > getShapePosition().x + m_distanceFromPlayer;
-			m_conditionJump = (((m_player->getShapePosition().y - m_player->getShapeSize().y / 2.f) < (getShapePosition().y - getShapeSize().y / 2.f)) && m_isCollidingHorizontally);
-
-			m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-			m_conditionAttack1 = (m_velocity.x == 0.f && m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS);
-
-			m_conditionRoll = false;
-		}*/
-
 		this->updateMovement(this->m_conditionRunLeft, this->m_conditionRunRight, this->m_conditionJump, deltaTime, this->m_conditionRoll);
 
 		this->updateAttack(this->m_conditionAttack1, this->m_conditionAttack2, this->m_conditionUltimate);
@@ -132,12 +130,6 @@ inline void Player<T>::updateTexture()
 		}
 		else if (this->m_attackMode != "onAirAttack")
 		{
-			/*if (this->m_isBot)
-			{
-				this->m_previousAttackingAnimation == this->m_entityName + "Attack1" ? changeCurrentTexture(this->m_texturesActionName.at("Attack2"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack2")), false) : changeCurrentTexture(this->m_texturesActionName.at("Attack1"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack1")), false);
-			}*/
-			//else
-			//{
 			if (this->m_attackMode == "onAttack1")
 			{
 				this->changeCurrentTexture(this->m_texturesActionName.at("Attack1"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack1")), false);
@@ -146,7 +138,6 @@ inline void Player<T>::updateTexture()
 			{
 				this->changeCurrentTexture(this->m_texturesActionName.at("Attack2"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack2")), false);
 			}
-			//}
 		}
 	}
 }
