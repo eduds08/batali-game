@@ -9,7 +9,9 @@ public:
 	virtual ~ColliderEntity() = default;
 
 	// Returns true if colliding with other, false if not. Also set the collision directions (if is colliding in the right, left, bottom or top)
-	bool isCollidingWith(const sf::Sprite& other);
+	bool isCollidingWith(const sf::Sprite& other, bool move=true);
+
+	bool isCollidingWith(const sf::RectangleShape& other, bool move = true);
 
 	/* Setters */
 

@@ -8,7 +8,7 @@ public:
 	WindHashashin(sf::Vector2f firstPosition);
 	virtual ~WindHashashin() = default;
 
-	virtual void updateAttackHitbox();
+	void updateAttackHitbox();
 
 	void resetUltimateHitbox()
 	{

@@ -17,13 +17,7 @@ public:
 
 	/* Setters */
 
-	void setConditionRunLeft(bool conditionRunLeft) { this->m_conditionRunLeft = conditionRunLeft; }
-	void setConditionRunRight(bool conditionRunRight) { this->m_conditionRunRight = conditionRunRight; }
-	void setConditionJump(bool conditionJump) { this->m_conditionJump = conditionJump; }
-	void setConditionRoll(bool conditionRoll) { this->m_conditionRoll = conditionRoll; }
-	void setConditionAttack1(bool conditionAttack1) { this->m_conditionAttack1 = conditionAttack1; }
-	void setConditionAttack2(bool conditionAttack2) { this->m_conditionAttack2 = conditionAttack2; }
-	void setConditionUltimate(bool conditionUltimate) { this->m_conditionUltimate = conditionUltimate; }
+	
 
 	/* Getters */
 

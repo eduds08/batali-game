@@ -8,7 +8,7 @@ public:
 	FireKnight(sf::Vector2f firstPosition);
 	virtual ~FireKnight() = default;
 
-	virtual void updateAttackHitbox();
+	void updateAttackHitbox();
 private:
 
 };
