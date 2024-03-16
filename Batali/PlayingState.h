@@ -27,7 +27,7 @@ public:
 	void updateEntityCollisionWithGrounds(WalkingEntity& entity, Ground& ground);
 
 	// Calls takeDamage and also knockbackMove for the attacked entity
-	void handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity, bool isUltimateActivate = false);
+	void handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity, bool isUltimateActivate);
 
 	void updateView();
 

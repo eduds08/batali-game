@@ -1,6 +1,12 @@
 #pragma once
 
 #include "WalkingEntity.h"
+#include "Ground.h"
+#include <functional>
+
+
+class WindHashashin;
+class SwordEntity;
 
 class DamageEntity : public WalkingEntity
 {
@@ -19,6 +25,8 @@ public:
 
 	// Sets m_dead to true and "zeroes" some attributes
 	void die();
+
+	bool isCollidingWithAttack(SwordEntity& attackingEntity, bool& isUltimateActivate);
 
 	/* Setters */
 

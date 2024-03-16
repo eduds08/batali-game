@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AnimatedEntity.h"
-
+// VAI SER COLLIDER ENTITY
 class Projectile : public AnimatedEntity
 {
 public:

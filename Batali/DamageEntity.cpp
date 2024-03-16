@@ -1,4 +1,6 @@
 #include "DamageEntity.h"
+#include "SwordEntity.h"
+#include "WindHashashin.h"
 
 DamageEntity::DamageEntity()
 	: WalkingEntity{}
@@ -105,4 +107,23 @@ void DamageEntity::die()
 	//resetUltimateHitbox();
 	m_velocity.x = 0.f;
 	m_velocity.y = 0.f;
+}
+
+bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isUltimateActivate)
+{
+	if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()) && !m_dying)
+	{
+		return true;
+	}
+
+	if (dynamic_cast<WindHashashin*>(&attackingEntity) != nullptr)
+	{
+		if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()) && !m_dying)
+		{
+			isUltimateActivate = true;
+			return true;
+		}
+	}
+
+	return false;
 }

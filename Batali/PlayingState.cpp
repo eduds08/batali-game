@@ -130,7 +130,11 @@ void PlayingState::render()
 		{
 			m_window.draw(character->getShape());
 			m_window.draw(character->getAttackHitbox());
-			//m_window.draw(character->getUltimateActivateHitbox());
+
+			if (dynamic_cast<WindHashashin*>(character.get()) != nullptr)
+			{
+				m_window.draw(dynamic_cast<WindHashashin*>(character.get())->getUltimateActivateHitbox());
+			}
 		}
 		m_window.draw(character->getSprite());
 	}
@@ -188,10 +192,17 @@ void PlayingState::updateCollision()
 		{
 			if (attackedCharacter != attackingCharacter)
 			{
-				if (attackedCharacter->isCollidingWith(attackingCharacter->getAttackHitbox(), false) && !attackedCharacter->getDying())
+				bool isUltimateActivate = false;
+
+				if (attackedCharacter->isCollidingWithAttack(*attackingCharacter, isUltimateActivate))
+				{
+					handleEntityAttacked(*attackingCharacter, *attackedCharacter, isUltimateActivate);
+				}
+
+				/*if (attackedCharacter->isCollidingWith(attackingCharacter->getAttackHitbox(), false) && !attackedCharacter->getDying())
 				{
 					handleEntityAttacked(*attackingCharacter, *attackedCharacter);
-				}
+				}*/
 				/*if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getAttackHitbox().getGlobalBounds()) && !attackedCharacter->getDying())
 				{
 					handleEntityAttacked(*attackingCharacter, *attackedCharacter);
@@ -255,6 +266,10 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 
 		attackedEntity.setVelocity(sf::Vector2f{ 0.f, 0.f });
 
+		if (dynamic_cast<WindHashashin*>(&attackingEntity) != nullptr)
+		{
+			dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
+		}
 		//attackingEntity.setActivateUltimate(true);
 	}
 }
