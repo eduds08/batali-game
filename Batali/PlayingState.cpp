@@ -270,7 +270,6 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 		{
 			dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
 		}
-		//attackingEntity.setActivateUltimate(true);
 	}
 }
 

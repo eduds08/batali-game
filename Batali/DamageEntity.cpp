@@ -104,7 +104,6 @@ void DamageEntity::die()
 {
 	m_dead = true;
 	resetAttackHitbox();
-	//resetUltimateHitbox();
 	m_velocity.x = 0.f;
 	m_velocity.y = 0.f;
 }
@@ -122,6 +121,17 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 		{
 			isUltimateActivate = true;
 			return true;
+		}
+	}
+
+	if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
+	{
+		for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->m_ultimateProjectiles)
+		{
+			if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
+			{
+				return true;
+			}
 		}
 	}
 

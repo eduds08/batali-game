@@ -1,13 +1,22 @@
 #include "Projectile.h"
 
 Projectile::Projectile(sf::Vector2f firstPosition, float direction)
-	: AnimatedEntity{}
+	: ColliderEntity{}
 {
-	m_spriteWidth = 25;
-	m_spriteHeight = 20;
+	m_spriteWidth = 30;
+	m_spriteHeight = 30;
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
 	m_sprite.setScale(direction, 1.f);
+
+	// Initialize shape
+	m_shape.setSize(sf::Vector2f{ 15, 15 });
+	m_shape.setOrigin(m_shape.getSize() / 2.f);
+	m_shape.setPosition(firstPosition.x, firstPosition.y);
+
+	// DEBUG
+	m_shape.setOutlineColor(sf::Color::Red);
+	m_shape.setOutlineThickness(1.f);
 
 	changeCurrentTexture("boxerUltimateProjectile", "./assets/boxer/_Projectile.png", true);
 

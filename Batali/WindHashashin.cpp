@@ -46,8 +46,7 @@ void WindHashashin::updateAttackHitbox()
 
 	m_attackHitboxPosition = sf::Vector2f{ -100.f, -100.f };
 
-	m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-	m_ultimateActivateHitbox.setPosition(-100.f, -100.f);
+	resetUltimateHitbox();
 
 	if (m_currentTexture == m_entityName + "Attack1")
 	{
@@ -119,8 +118,7 @@ void WindHashashin::updateAttackHitbox()
 
 			m_attackHitboxPosition = getShapePosition();
 
-			m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
-			m_ultimateActivateHitbox.setPosition(-100.f, -100.f);
+			resetUltimateHitbox();
 
 			m_damage = WIND_HASHASHIN_ULTIMATE_DAMAGE;
 		}

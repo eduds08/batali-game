@@ -1,8 +1,8 @@
 #pragma once
 
-#include "AnimatedEntity.h"
-// VAI SER COLLIDER ENTITY
-class Projectile : public AnimatedEntity
+#include "ColliderEntity.h"
+
+class Projectile : public ColliderEntity
 {
 public:
 	Projectile(sf::Vector2f firstPosition, float direction);

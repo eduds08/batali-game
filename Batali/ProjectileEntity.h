@@ -10,6 +10,7 @@ public:
 	ProjectileEntity();
 	virtual ~ProjectileEntity() = default;
 
+	std::vector<std::shared_ptr<Projectile>> m_ultimateProjectiles{};
 protected:
 
 };

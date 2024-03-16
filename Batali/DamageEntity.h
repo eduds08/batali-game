@@ -3,6 +3,7 @@
 #include "WalkingEntity.h"
 #include "Ground.h"
 #include <functional>
+#include "ProjectileEntity.h"
 
 
 class WindHashashin;
@@ -45,7 +46,6 @@ public:
 	/* Pure Virtual Methods */
 
 	virtual void resetAttackHitbox() = 0;
-	//virtual void resetUltimateHitbox() = 0;
 
 protected:
 	// When m_inDamageCooldown is true, the entity is immune to attacks

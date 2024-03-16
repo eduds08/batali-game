@@ -12,8 +12,6 @@ public:
 
 	void launchUltimate();
 
-	std::vector<std::shared_ptr<Projectile>> m_ultimateProjectiles{};
-
 private:
 	
 };
