@@ -46,6 +46,22 @@ inline EnemyBot<T>::~EnemyBot()
 template<class T>
 inline void EnemyBot<T>::update(float& deltaTime)
 {
+	/*if (!this->m_dying)
+	{
+		this->m_conditionRunLeft = this->m_playerShapePosition.x < this->getShapePosition().x - this->m_distanceFromPlayer;
+		this->m_conditionRunRight = this->m_playerShapePosition.x > this->getShapePosition().x + this->m_distanceFromPlayer;
+		this->m_conditionJump = (((this->m_playerShapePosition.y - this->m_playerShapeSize.y / 2.f) < (this->getShapePosition().y - this->getShapeSize().y / 2.f)) && this->m_isCollidingHorizontally);
+
+		this->m_timeBetweenAttacks = this->m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
+		this->m_conditionAttack1 = (this->m_velocity.x == 0.f && this->m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS);
+
+		this->m_conditionRoll = false;
+	}
+
+	this->updateCharacter(deltaTime);*/
+
+
+
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
 	if (this->m_currentTexture == this->m_texturesActionName.at("Death") && !this->m_dead && this->m_animationEnd)
 	{
@@ -69,6 +85,9 @@ inline void EnemyBot<T>::update(float& deltaTime)
 		this->updateMovement(this->m_conditionRunLeft, this->m_conditionRunRight, this->m_conditionJump, deltaTime, this->m_conditionRoll);
 
 		this->updateAttack(this->m_conditionAttack1, this->m_conditionAttack2, this->m_conditionUltimate);
+		
+		if ((this->m_currentTexture == this->m_entityName + "Attack1" || this->m_currentTexture == this->m_entityName + "Attack2") && this->m_animationEnd)
+			this->m_previousAttackingAnimation = this->m_currentTexture;
 
 		if (this->m_attackMode != "off")
 		{

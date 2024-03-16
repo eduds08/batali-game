@@ -7,7 +7,7 @@ ProjectileEntity::ProjectileEntity()
 
 void ProjectileEntity::launchProjectile()
 {
-	m_projectiles.emplace_back(std::make_shared<Projectile>(getShapePosition(), static_cast<float>(m_facingRight)));
+	m_projectiles.emplace_back(std::make_shared<Projectile>(getShapePosition() + sf::Vector2f{0.f, -7.f}, static_cast<float>(m_facingRight)));
 }
 
 void ProjectileEntity::updateProjectileEntity(float& deltaTime)

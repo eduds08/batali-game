@@ -38,7 +38,6 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 			if (((m_currentTexture == m_entityName + "Attack1" || m_currentTexture == m_entityName + "Attack2" || m_currentTexture == m_entityName + "Ultimate") && m_animationEnd) || m_inDamageCooldown == true)
 			{
 				m_attackMode = "off";
-
 				//m_activateUltimate = false;
 			}
 		}

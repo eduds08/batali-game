@@ -49,40 +49,6 @@ template<class T>
 inline void Player<T>::update(float& deltaTime)
 {
 	this->updateCharacter(deltaTime);
-
-	//// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	//if (this->m_currentTexture == this->m_texturesActionName.at("Death") && !this->m_dead && this->m_animationEnd)
-	//{
-	//	this->die();
-	//}
-
-	//this->m_remainingManaToUltimate = 0;
-
-	//// Only called if hp > 0
-	//if (!this->m_dying)
-	//{
-	//	this->updateMovement(this->m_conditionRunLeft, this->m_conditionRunRight, this->m_conditionJump, deltaTime, this->m_conditionRoll);
-
-	//	this->updateAttack(this->m_conditionAttack1, this->m_conditionAttack2, this->m_conditionUltimate);
-
-	//	this->updateDamage();
-
-	//	this->move(deltaTime);
-	//}
-
-	//// Entity is dying (still playing dying animation)
-	//if (!this->m_dead)
-	//{
-	//	// If the entity is dying (not dead yet), it doesn't move anymore, so we call this method to move it in y-direction and avoids it floating in the air after death
-	//	if (this->m_dying)
-	//	{
-	//		this->m_velocity.x = 0.f;
-	//		this->m_velocity.y += GRAVITY * deltaTime;
-	//		this->move(deltaTime);
-	//	}
-
-	//	this->updateLimits();
-	//}
 }
 
 template<class T>
