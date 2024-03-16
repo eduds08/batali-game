@@ -60,7 +60,7 @@ inline void Player<T>::updateTexture()
 	}
 	else if (this->m_hitted)
 	{
-		this->m_onFreeze ? this->changeCurrentTexture(this->m_texturesActionName.at("_HitOnWindHashashinUltimate"), this->m_texturesNamePath.at(this->m_texturesActionName.at("_HitOnWindHashashinUltimate")), false) : this->changeCurrentTexture(this->m_texturesActionName.at("Hitted"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Hitted")), false);
+		this->m_onFastHit ? this->changeCurrentTexture(this->m_texturesActionName.at("_HitOnWindHashashinUltimate"), this->m_texturesNamePath.at(this->m_texturesActionName.at("_HitOnWindHashashinUltimate")), false) : this->changeCurrentTexture(this->m_texturesActionName.at("Hitted"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Hitted")), false);
 	}
 	else if (this->m_velocity.y != 0.f && !this->m_canJump)
 	{

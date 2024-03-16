@@ -52,6 +52,8 @@ bool DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 
 		m_hp -= damage;
 
+		std::cout << "hit\n";
+
 		if (m_remainingManaToUltimate > 0)
 		{
 			--m_remainingManaToUltimate;
@@ -113,6 +115,7 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 {
 	if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()) && !m_dying)
 	{
+		m_onFastHit = false;
 		return true;
 	}
 
@@ -143,6 +146,7 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 			if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
 			{
 				ultimateProjectile->m_collided = true;
+				m_onFastHit = true;
 
 				return true;
 			}

@@ -43,9 +43,14 @@ void Projectile::update(float& deltaTime)
 		setVelocity(sf::Vector2f{ 300.f * m_sprite.getScale().x, 0.f });
 		move(deltaTime);
 	}
-
-	if (m_collided && m_animationEnd)
+	else
 	{
-		m_vanished = true;
+		m_shape.setSize(sf::Vector2f{ 0.f, 0.f });
+		m_shape.setPosition(-100.f, -100.f);
+
+		if (m_animationEnd)
+		{
+			m_vanished = true;
+		}
 	}
 }
