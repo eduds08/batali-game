@@ -44,9 +44,6 @@ public:
 	void updatePlayer1Input();
 	void updatePlayer2Input();
 
-	/*void updatePlayer1Input();
-	void updatePlayer2Input()*/
-
 private:
 	
 	std::vector<std::shared_ptr<SwordEntity>> m_characters{};
