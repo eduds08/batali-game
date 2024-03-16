@@ -137,3 +137,8 @@ void WindHashashin::updateAttackHitbox()
 	m_attackHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
 	m_attackHitbox.setPosition(m_attackHitboxPosition);
 }
+
+void WindHashashin::updateCharacter(float& deltaTime)
+{
+	updateSwordEntity(deltaTime);
+}

@@ -20,7 +20,9 @@ public:
 	{
 		m_ultimateActivateHitbox.setSize(sf::Vector2f{ 0.f, 0.f });
 		m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
-	}
+	}*/
+
+	void updateSwordEntity(float& deltaTime);
 
 	/* Getters */
 
@@ -33,13 +35,9 @@ public:
 	virtual void updateAttackHitbox() = 0;
 	virtual void update(float& deltaTime) = 0;
 
-	void setConditionRunLeft(bool conditionRunLeft) { this->m_conditionRunLeft = conditionRunLeft; }
-	void setConditionRunRight(bool conditionRunRight) { this->m_conditionRunRight = conditionRunRight; }
-	void setConditionJump(bool conditionJump) { this->m_conditionJump = conditionJump; }
-	void setConditionRoll(bool conditionRoll) { this->m_conditionRoll = conditionRoll; }
-	void setConditionAttack1(bool conditionAttack1) { this->m_conditionAttack1 = conditionAttack1; }
-	void setConditionAttack2(bool conditionAttack2) { this->m_conditionAttack2 = conditionAttack2; }
-	void setConditionUltimate(bool conditionUltimate) { this->m_conditionUltimate = conditionUltimate; }
+	void setConditionAttack1(bool conditionAttack1) { m_conditionAttack1 = conditionAttack1; }
+	void setConditionAttack2(bool conditionAttack2) { m_conditionAttack2 = conditionAttack2; }
+	void setConditionUltimate(bool conditionUltimate) { m_conditionUltimate = conditionUltimate; }
 
 protected:
 	sf::RectangleShape m_attackHitbox{sf::Vector2f{0.f, 0.f}};

@@ -1,5 +1,6 @@
 #include "DamageEntity.h"
 #include "SwordEntity.h"
+#include "ProjectileEntity.h"
 #include "WindHashashin.h"
 
 DamageEntity::DamageEntity()
@@ -126,10 +127,11 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 
 	if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
 	{
-		for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->m_ultimateProjectiles)
+		for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->m_projectiles)
 		{
 			if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
 			{
+				ultimateProjectile->m_collided = true;
 				return true;
 			}
 		}

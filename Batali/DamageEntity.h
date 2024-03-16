@@ -3,7 +3,7 @@
 #include "WalkingEntity.h"
 #include "Ground.h"
 #include <functional>
-#include "ProjectileEntity.h"
+
 
 
 class WindHashashin;

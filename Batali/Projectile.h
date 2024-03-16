@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ColliderEntity.h"
+#include "MovableEntity.h"
 
-class Projectile : public ColliderEntity
+class Projectile : public MovableEntity
 {
 public:
 	Projectile(sf::Vector2f firstPosition, float direction);
@@ -11,7 +11,10 @@ public:
 	void updateTexture();
 
 	void update(float& deltaTime);
-private:
+
 	bool m_collided{ false };
+	bool m_vanished{ false };
+private:
+	
 
 };

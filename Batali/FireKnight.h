@@ -9,6 +9,9 @@ public:
 	virtual ~FireKnight() = default;
 
 	void updateAttackHitbox();
+
+	void updateCharacter(float& deltaTime);
+
 private:
 
 };

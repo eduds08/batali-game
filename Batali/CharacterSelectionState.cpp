@@ -100,6 +100,10 @@ void CharacterSelectionState::update()
 		{
 			m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[1] + "Portrait", "./assets/" + m_charactersNames[1] + "/portrait.png");
 		}
+		else if (m_onHoverCharacterButton == 2)
+		{
+			m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[2] + "Portrait", "./assets/" + m_charactersNames[2] + "/portrait.png");
+		}
 
 		updateCharacterSelectionButtons();
 	}

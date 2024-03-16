@@ -9,8 +9,12 @@ class ProjectileEntity : public SwordEntity
 public:
 	ProjectileEntity();
 	virtual ~ProjectileEntity() = default;
+	
+	void launchProjectile();
+	std::vector<std::shared_ptr<Projectile>> m_projectiles{};
 
-	std::vector<std::shared_ptr<Projectile>> m_ultimateProjectiles{};
+	void updateProjectileEntity(float& deltaTime);
+	
 protected:
 
 };

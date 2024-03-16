@@ -10,7 +10,7 @@ public:
 
 	void updateAttackHitbox();
 
-	void launchUltimate();
+	void updateCharacter(float& deltaTime);
 
 private:
 	

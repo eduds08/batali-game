@@ -106,14 +106,6 @@ void PlayingState::update()
 		for (auto& character : m_characters)
 		{
 			character->update(m_deltaTime);
-
-			/*if (character->getPlayerNumber() == 1)
-			{
-				for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*character).m_ultimateProjectiles)
-				{
-					ultimateProjectile->update(m_deltaTime);
-				}
-			}*/
 		}
 
 		updateView();
@@ -137,6 +129,18 @@ void PlayingState::render()
 			}
 		}
 		m_window.draw(character->getSprite());
+
+		if (dynamic_cast<Boxer*>(character.get()) != nullptr)
+		{
+			for (auto& projectile : dynamic_cast<Boxer*>(character.get())->m_projectiles)
+			{
+				if (m_debugMode)
+				{
+					m_window.draw(projectile->getShape());
+				}
+				m_window.draw(projectile->getSprite());
+			}
+		}
 	}
 
 	for (auto& ground : m_grounds)
@@ -148,11 +152,6 @@ void PlayingState::render()
 			m_window.draw(ground.getSprite());
 		}
 	}
-
-	/*for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*m_characters[0]).m_ultimateProjectiles)
-	{
-		m_window.draw(ultimateProjectile->getSprite());
-	}*/
 
 	for (auto& characterStatus : m_characterStatus)
 	{
@@ -198,19 +197,6 @@ void PlayingState::updateCollision()
 				{
 					handleEntityAttacked(*attackingCharacter, *attackedCharacter, isUltimateActivate);
 				}
-
-				/*if (attackedCharacter->isCollidingWith(attackingCharacter->getAttackHitbox(), false) && !attackedCharacter->getDying())
-				{
-					handleEntityAttacked(*attackingCharacter, *attackedCharacter);
-				}*/
-				/*if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getAttackHitbox().getGlobalBounds()) && !attackedCharacter->getDying())
-				{
-					handleEntityAttacked(*attackingCharacter, *attackedCharacter);
-				}
-				if (attackedCharacter->getShape().getGlobalBounds().intersects(attackingCharacter->getUltimateActivateHitbox().getGlobalBounds()) && !attackedCharacter->getDying())
-				{
-					handleEntityAttacked(*attackingCharacter, *attackedCharacter, true);
-				}*/
 			}
 		}
 	}
@@ -332,13 +318,13 @@ void PlayingState::updateTexturesAndAnimations()
 				{
 					character->updateAnimation();
 
-					/*if (character->getPlayerNumber() == 1)
+					if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 					{
-						for (auto& ultimateProjectile : dynamic_cast<Boxer&>(*character).m_ultimateProjectiles)
+						for (auto& projectile : dynamic_cast<Boxer*>(character.get())->m_projectiles)
 						{
-							ultimateProjectile->updateAnimation();
+							projectile->updateAnimation();
 						}
-					}*/
+					}
 				}
 			}
 		}

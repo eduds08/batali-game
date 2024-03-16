@@ -1,7 +1,7 @@
 #include "Projectile.h"
 
 Projectile::Projectile(sf::Vector2f firstPosition, float direction)
-	: ColliderEntity{}
+	: MovableEntity{}
 {
 	m_spriteWidth = 30;
 	m_spriteHeight = 30;
@@ -15,6 +15,7 @@ Projectile::Projectile(sf::Vector2f firstPosition, float direction)
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
 
 	// DEBUG
+	m_shape.setFillColor(sf::Color{ 255, 0, 0, 50 });
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
@@ -27,7 +28,7 @@ void Projectile::updateTexture()
 {
 	if (m_collided)
 	{
-		// change texture to explode (loop = false)
+		changeCurrentTexture("boxerUltimateProjectileExplosion", "./assets/boxer/_Explosion.png", false);
 	}
 	else
 	{
@@ -37,5 +38,14 @@ void Projectile::updateTexture()
 
 void Projectile::update(float& deltaTime)
 {
-	m_sprite.move(sf::Vector2f{300.f * m_sprite.getScale().x * deltaTime, 0.f});
+	if (!m_collided)
+	{
+		setVelocity(sf::Vector2f{ 300.f * m_sprite.getScale().x, 0.f });
+		move(deltaTime);
+	}
+
+	if (m_collided && m_animationEnd)
+	{
+		m_vanished = true;
+	}
 }
