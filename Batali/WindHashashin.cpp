@@ -32,6 +32,7 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition)
 	m_hp = WIND_HASHASHIN_HP;
 
 	m_speed = WIND_HASHASHIN_SPEED;
+	m_rollSpeed = WIND_HASHASHIN_ROLL_SPEED;
 }
 
 void WindHashashin::updateAttackHitbox()

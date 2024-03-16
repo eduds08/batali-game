@@ -35,8 +35,6 @@ namespace constants
 	constexpr int MANA_BAR_WIDTH{ 120 };
 	constexpr int MANA_BAR_HEIGHT{ 36 };
 
-	
-
 	const sf::Color PLAYER_1_COLOR{179, 245, 188};
 	const sf::Color PLAYER_2_COLOR{250, 145, 137};
 
@@ -51,6 +49,8 @@ namespace constants
 	constexpr float FIRE_KNIGHT_SPEED{ 220.f };
 	constexpr float FIRE_KNIGHT_JUMP_HEIGHT{ 85.f };
 	 
+	constexpr float FIRE_KNIGHT_ROLL_SPEED{ 220.f };
+
 	constexpr int FIRE_KNIGHT_HP{ 1250 };
 
 	constexpr float FIRE_KNIGHT_ATTACK_1_WIDTH{ 65.f };
@@ -90,6 +90,8 @@ namespace constants
 	constexpr float WIND_HASHASHIN_SPEED{ 260.f };
 	constexpr float WIND_HASHASHIN_JUMP_HEIGHT{ 100.f };
 
+	constexpr float WIND_HASHASHIN_ROLL_SPEED{ 260.f };
+
 	constexpr int WIND_HASHASHIN_HP{ 1000 };
 
 	constexpr float WIND_HASHASHIN_ATTACK_1_PT_1_WIDTH{ 38.f };
@@ -122,6 +124,8 @@ namespace constants
 
 	constexpr float BOXER_SPEED{ 260.f };
 	constexpr float BOXER_JUMP_HEIGHT{ 100.f };
+
+	constexpr float BOXER_ROLL_SPEED{ 145.f };
 
 	constexpr int BOXER_HP{ 1000 };
 
@@ -206,7 +210,7 @@ namespace constants
 	constexpr float TIME_BETWEEN_ENEMY_ATTACKS{ 1.f };
 	constexpr float COOLDOWN_IMMUNE_TIME{ 0.6f };
 
-	constexpr float COOLDOWN_IMMUNE_WIND_HASHASHIN_ULTIMATE_TIME{ 0.1f };
+	constexpr float COOLDOWN_IMMUNE_FAST_TIME{ 0.1f };
 
 	/* STATE CONSTANTS: */
 

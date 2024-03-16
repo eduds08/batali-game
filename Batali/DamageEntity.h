@@ -31,12 +31,12 @@ public:
 
 	/* Setters */
 
-	void setOnWindHashashinUltimate(bool onWindHashashinUltimate) { m_onWindHashashinUltimate = onWindHashashinUltimate; }
+	void setOnFreeze(bool onFreeze) { m_onFreeze = onFreeze; }
 	void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 
 	/* Getters */
 
-	const bool getOnWindHashashinUltimate() const { return m_onWindHashashinUltimate; }
+	const bool getOnFreeze() const { return m_onFreeze; }
 	const bool getHitted() const { return m_hitted; }
 	const bool getDead() const { return m_dead; }
 	const bool getDying() const { return m_dying; }
@@ -53,7 +53,11 @@ protected:
 	sf::Clock m_damageCooldownClock{};
 	float m_damageCooldown{};
 
-	bool m_onWindHashashinUltimate{ false };
+	// This attribute is useful to identify if entity can do action (move, attack, etc...) or not. For example, Wind Hashashin's ultimate makes the entity freeze.
+	bool m_onFreeze{ false };
+
+	// When this attribute is True, the entity damage cooldown timer is smaller, so it can be hit many times quickly (like on hashashin's ultimate that hits three times real quick)
+	bool m_onFastHit{ false };
 
 	bool m_dead{ false };
 	bool m_dying{ false };

@@ -34,12 +34,12 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	m_isRunning = true;
 
 	// Only runs when not on roll
-	if (conditionRunLeft && !m_onRoll && getAttackMode() != "onUltimate" && !getOnWindHashashinUltimate())
+	if (conditionRunLeft && !m_onRoll && getAttackMode() != "onUltimate" && !getOnFreeze())
 	{
 		m_facingRight = -1;
 		m_velocity.x -= m_speed;
 	}
-	else if (conditionRunRight && !m_onRoll && getAttackMode() != "onUltimate" && !getOnWindHashashinUltimate())
+	else if (conditionRunRight && !m_onRoll && getAttackMode() != "onUltimate" && !getOnFreeze())
 	{
 		m_facingRight = 1;
 		m_velocity.x += m_speed;
@@ -50,7 +50,7 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	}
 
 	// Only can roll when on ground and not on Hitted animation
-	if (conditionRoll && m_canJump && !getHitted() && !m_onRoll && m_stamina > 0 && m_currentTexture != m_entityName + "Roll" && getAttackMode() == "off" && !getOnWindHashashinUltimate())
+	if (conditionRoll && m_canJump && !getHitted() && !m_onRoll && m_stamina > 0 && m_currentTexture != m_entityName + "Roll" && getAttackMode() == "off" && !getOnFreeze())
 	{
 		m_stamina -= 50;
 		m_onRoll = true;
@@ -58,7 +58,7 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 
 	if (m_onRoll)
 	{
-		m_velocity.x += (m_facingRight * m_speed);
+		m_velocity.x += (m_facingRight * m_rollSpeed);
 	}
 
 	// End onRoll animation
@@ -69,7 +69,7 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 
 	flipSprite();
 
-	if (conditionJump && m_canJump && getAttackMode() == "off" && !m_onRoll && !getOnWindHashashinUltimate())
+	if (conditionJump && m_canJump && getAttackMode() == "off" && !m_onRoll && !getOnFreeze())
 	{
 		m_canJump = false;
 		m_velocity.y = -1 * sqrt(2.f * GRAVITY * m_jumpHeight);

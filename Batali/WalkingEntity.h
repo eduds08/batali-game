@@ -28,7 +28,7 @@ public:
 
 	virtual const bool getHitted() const = 0;
 	virtual void setKnockbackVelocity(float knockbackVelocity) = 0;
-	virtual const bool getOnWindHashashinUltimate() const = 0;
+	virtual const bool getOnFreeze() const = 0;
 	virtual const std::string& getAttackMode() const = 0;
 
 protected:
@@ -40,6 +40,8 @@ protected:
 	bool m_canJump{ false };
 	bool m_isRunning{ false };
 	bool m_onRoll{ false };
+
+	float m_rollSpeed{};
 
 	float m_jumpHeight{};
 

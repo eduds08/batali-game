@@ -30,6 +30,7 @@ Boxer::Boxer(sf::Vector2f firstPosition)
 	m_hp = BOXER_HP;
 
 	m_speed = BOXER_SPEED;
+	m_rollSpeed = BOXER_ROLL_SPEED;
 }
 
 void Boxer::updateAttackHitbox()

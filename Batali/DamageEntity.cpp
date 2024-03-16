@@ -26,7 +26,7 @@ void DamageEntity::updateDamage()
 
 	// While on damageCooldown, the entity is immune to attacks. Useful to make the entity being hit only once per attack
 	m_damageCooldown = m_damageCooldownClock.getElapsedTime().asSeconds();
-	if (!m_onWindHashashinUltimate)
+	if (!m_onFastHit)
 	{
 		if (m_damageCooldown > COOLDOWN_IMMUNE_TIME)
 		{
@@ -35,7 +35,7 @@ void DamageEntity::updateDamage()
 	}
 	else
 	{
-		if (m_damageCooldown > COOLDOWN_IMMUNE_WIND_HASHASHIN_ULTIMATE_TIME)
+		if (m_damageCooldown > COOLDOWN_IMMUNE_FAST_TIME)
 		{
 			m_inDamageCooldown = false;
 		}
@@ -116,15 +116,26 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 		return true;
 	}
 
+	// Was attacked by Wind Hashashin's ultimate activate
 	if (dynamic_cast<WindHashashin*>(&attackingEntity) != nullptr)
 	{
 		if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()) && !m_dying)
 		{
 			isUltimateActivate = true;
+			m_onFreeze = true;
+			m_onFastHit = true;
+			dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
+			
+			setShapePosition(attackingEntity.getShapePosition());
+			setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
+
+			setVelocity(sf::Vector2f{ 0.f, 0.f });
+
 			return true;
 		}
 	}
 
+	// Was attacked by projectiles
 	if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
 	{
 		for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->m_projectiles)
@@ -132,6 +143,7 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 			if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
 			{
 				ultimateProjectile->m_collided = true;
+
 				return true;
 			}
 		}

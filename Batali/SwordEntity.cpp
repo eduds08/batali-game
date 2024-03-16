@@ -7,19 +7,19 @@ SwordEntity::SwordEntity()
 
 void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, bool ultimateCondition)
 {
-	if (attackCondition1 && m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onWindHashashinUltimate)
+	if (attackCondition1 && m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
 	{
 		m_attackMode = "onAttack1";
 	}
-	else if (attackCondition2 && m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onWindHashashinUltimate)
+	else if (attackCondition2 && m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
 	{
 		m_attackMode = "onAttack2";
 	}
-	else if ((attackCondition1 || attackCondition2) && !m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onWindHashashinUltimate)
+	else if ((attackCondition1 || attackCondition2) && !m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
 	{
 		m_attackMode = "onAirAttack";
 	}
-	else if (ultimateCondition && m_canJump && m_attackMode == "off" && !m_onRoll && m_remainingManaToUltimate <= 0 && !m_onWindHashashinUltimate)
+	else if (ultimateCondition && m_canJump && m_attackMode == "off" && !m_onRoll && m_remainingManaToUltimate <= 0 && !m_onFreeze)
 	{
 		m_attackMode = "onUltimate";
 

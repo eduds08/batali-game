@@ -30,6 +30,7 @@ FireKnight::FireKnight(sf::Vector2f firstPosition)
 	m_hp = FIRE_KNIGHT_HP;
 
 	m_speed = FIRE_KNIGHT_SPEED;
+	m_rollSpeed = FIRE_KNIGHT_ROLL_SPEED;
 }
 
 void FireKnight::updateAttackHitbox()

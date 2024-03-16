@@ -181,8 +181,8 @@ void PlayingState::updateCollision()
 
 	if (m_characters[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_characters[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 	{
-		m_characters[0]->setOnWindHashashinUltimate(false);
-		m_characters[1]->setOnWindHashashinUltimate(false);
+		m_characters[0]->setOnFreeze(false);
+		m_characters[1]->setOnFreeze(false);
 	}
 
 	for (auto& attackedCharacter : m_characters)
@@ -219,15 +219,6 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 	// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
 	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
 
-	if (attackingEntity.getDamage() == WIND_HASHASHIN_ULTIMATE_DAMAGE)
-	{
-		attackedEntity.setOnWindHashashinUltimate(true);
-	}
-	else
-	{
-		attackedEntity.setOnWindHashashinUltimate(false);
-	}
-
 	if (!isUltimateActivate)
 	{
 		bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
@@ -243,18 +234,6 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 				}
 				attackedEntity.knockbackMove(m_deltaTime, attackDirection);
 			}
-		}
-	}
-	else
-	{
-		attackedEntity.setShapePosition(attackingEntity.getShapePosition());
-		attackedEntity.setSpritePosition(sf::Vector2f{ attackedEntity.getShapePosition().x, attackedEntity.getShapePosition().y - (attackedEntity.getSpriteSize().y - attackedEntity.getShapeSize().y) / 2.f });
-
-		attackedEntity.setVelocity(sf::Vector2f{ 0.f, 0.f });
-
-		if (dynamic_cast<WindHashashin*>(&attackingEntity) != nullptr)
-		{
-			dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
 		}
 	}
 }
