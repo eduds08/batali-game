@@ -22,7 +22,7 @@ Projectile::Projectile(sf::Vector2f firstPosition, float direction, const std::s
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
-	changeCurrentTexture("boxerUltimateProjectile", "./assets/boxer/_Projectile.png", true);
+	changeCurrentTexture(m_entityName + "Projectile", "./assets/" + m_entityName + "/_Projectile.png", true);
 
 	setSpritePosition(firstPosition);
 }
@@ -31,11 +31,11 @@ void Projectile::updateTexture()
 {
 	if (m_collided)
 	{
-		changeCurrentTexture("boxerUltimateProjectileExplosion", "./assets/boxer/_Explosion.png", false);
+		changeCurrentTexture(m_entityName + "Collision", "./assets/" + m_entityName + "/_Collision.png", false);
 	}
 	else
 	{
-		changeCurrentTexture("boxerUltimateProjectile", "./assets/boxer/_Projectile.png", true);
+		changeCurrentTexture(m_entityName + "Projectile", "./assets/" + m_entityName + "/_Projectile.png", true);
 	}
 }
 
@@ -51,7 +51,7 @@ void Projectile::update(float& deltaTime)
 		m_shape.setSize(sf::Vector2f{ 0.f, 0.f });
 		m_shape.setPosition(-100.f, -100.f);
 
-		if (m_currentTexture == "boxerUltimateProjectileExplosion" && m_animationEnd)
+		if (m_currentTexture == m_entityName + "Collision" && m_animationEnd)
 		{
 			m_vanished = true;
 		}

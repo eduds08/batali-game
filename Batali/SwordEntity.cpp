@@ -7,25 +7,28 @@ SwordEntity::SwordEntity()
 
 void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, bool ultimateCondition)
 {
-	if (m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
+	if (m_attackMode == "off" && !m_onRoll && !m_onFreeze)
 	{
 		if (m_canJump)
 		{
-			if (attackCondition1)
+			if (!ultimateCondition)
 			{
-				m_attackMode = "onAttack1";
+				if (attackCondition1)
+				{
+					m_attackMode = "onAttack1";
+				}
+				else if (attackCondition2)
+				{
+					m_attackMode = "onAttack2";
+				}
 			}
-			else if (attackCondition2)
-			{
-				m_attackMode = "onAttack2";
-			}
-			else if (ultimateCondition && m_remainingManaToUltimate <= 0)
+			else if (m_remainingManaToUltimate <= 0)
 			{
 				m_attackMode = "onUltimate";
 				m_remainingManaToUltimate = 5;
 			}
 		}
-		else if ((attackCondition1 || attackCondition2))
+		else if ((attackCondition1 || attackCondition2) && !ultimateCondition)
 		{
 			m_attackMode = "onAirAttack";
 		}

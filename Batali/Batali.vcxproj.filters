@@ -84,9 +84,6 @@
     <ClCompile Include="ColliderEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
     <ClCompile Include="AnimatedEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
@@ -94,9 +91,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SmallCharacterPortraitUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PhysicalEntity.cpp">
@@ -108,10 +102,10 @@
     <ClCompile Include="Boxer.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBot.cpp">
+    <ClCompile Include="ProjectileEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectileEntity.cpp">
+    <ClCompile Include="Projectile.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,9 +188,6 @@
     <ClInclude Include="SmallCharacterPortraitUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicalEntity.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
@@ -210,6 +201,9 @@
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="ProjectileEntity.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
   </ItemGroup>
