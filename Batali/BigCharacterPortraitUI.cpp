@@ -10,9 +10,9 @@ BigCharacterPortraitUI::BigCharacterPortraitUI(const std::string& textureName, c
 	m_spriteWidth = CHARACTER_PORTRAIT_WIDTH;
 	m_spriteHeight = CHARACTER_PORTRAIT_HEIGHT;
 
-	setOrigin(m_spriteWidth / 2.f, m_spriteHeight / 2.f);
+	m_sprite.setOrigin(m_spriteWidth / 2.f, m_spriteHeight / 2.f);
 
-	setScale(spriteScale);
+	m_sprite.setScale(spriteScale, spriteScale);
 
 	setSpritePosition(position);
 

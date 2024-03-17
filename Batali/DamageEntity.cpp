@@ -1,7 +1,6 @@
 #include "DamageEntity.h"
-#include "SwordEntity.h"
-#include "ProjectileEntity.h"
 #include "WindHashashin.h"
+#include "ProjectileEntity.h"
 
 DamageEntity::DamageEntity()
 	: WalkingEntity{}
@@ -40,7 +39,7 @@ bool DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 
 		m_hp -= damage;
 
-		std::cout << "hit\n";
+		std::cout << "hit\n---\n";
 
 		if (m_remainingManaToUltimate > 0)
 		{
@@ -98,42 +97,45 @@ void DamageEntity::die()
 
 bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isUltimateActivate)
 {
-	if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()) && !m_dying)
+	if (!m_dying)
 	{
-		m_onFastHit = false;
-		return true;
-	}
-
-	// Was attacked by Wind Hashashin's ultimate activate
-	if (dynamic_cast<WindHashashin*>(&attackingEntity) != nullptr)
-	{
-		if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()) && !m_dying)
+		if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()))
 		{
-			isUltimateActivate = true;
-			m_onFreeze = true;
-			m_onFastHit = true;
-			dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
-			
-			setShapePosition(attackingEntity.getShapePosition());
-			setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
-
-			setVelocity(sf::Vector2f{ 0.f, 0.f });
-
+			m_onFastHit = false;
 			return true;
 		}
-	}
 
-	// Was attacked by projectiles
-	if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
-	{
-		for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->m_projectiles)
+		// Was attacked by Wind Hashashin's ultimate activate
+		if (dynamic_cast<WindHashashin*>(&attackingEntity) != nullptr)
 		{
-			if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
+			if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
 			{
-				ultimateProjectile->m_collided = true;
+				isUltimateActivate = true;
+				m_onFreeze = true;
 				m_onFastHit = true;
+				dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
+
+				setShapePosition(attackingEntity.getShapePosition());
+				setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
+
+				setVelocity(sf::Vector2f{ 0.f, 0.f });
 
 				return true;
+			}
+		}
+
+		// Was attacked by projectiles
+		if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
+		{
+			for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->getProjectiles())
+			{
+				if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
+				{
+					ultimateProjectile->setCollided(true);
+					m_onFastHit = true;
+
+					return true;
+				}
 			}
 		}
 	}

@@ -38,6 +38,8 @@ namespace constants
 	const sf::Color PLAYER_1_COLOR{179, 245, 188};
 	const sf::Color PLAYER_2_COLOR{250, 145, 137};
 
+	constexpr int TOTAL_STAMINA{ 100 };
+
 	/* FIRE KNIGHT CONSTANTS: */
 
 	constexpr int FIRE_KNIGHT_SPRITE_WIDTH{ 288 };
@@ -145,6 +147,8 @@ namespace constants
 	constexpr int BOXER_ATTACK_2_DAMAGE{ 85 };
 	constexpr int BOXER_AIR_ATTACK_DAMAGE{ 90 };
 	constexpr int BOXER_ULTIMATE_DAMAGE{ 45 };
+
+	const sf::Vector2f BOXER_PROJECTILE_OFFSET_POSITION{ 0.f, -7.f };
 
 	/* ATTACK HITBOX FRAMES */
 

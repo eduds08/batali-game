@@ -10,8 +10,6 @@ public:
 
 	void updateAttackHitbox();
 
-	void updateCharacter(float& deltaTime);
-
 protected:
 	
 };

@@ -1,10 +1,13 @@
 #include "Projectile.h"
 
-Projectile::Projectile(sf::Vector2f firstPosition, float direction)
+Projectile::Projectile(sf::Vector2f firstPosition, float direction, const std::string& entityName)
 	: MovableEntity{}
 {
+	m_entityName = entityName;
+
 	m_spriteWidth = 30;
 	m_spriteHeight = 30;
+
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
 	m_sprite.setScale(direction, 1.f);
@@ -48,7 +51,7 @@ void Projectile::update(float& deltaTime)
 		m_shape.setSize(sf::Vector2f{ 0.f, 0.f });
 		m_shape.setPosition(-100.f, -100.f);
 
-		if (m_animationEnd)
+		if (m_currentTexture == "boxerUltimateProjectileExplosion" && m_animationEnd)
 		{
 			m_vanished = true;
 		}

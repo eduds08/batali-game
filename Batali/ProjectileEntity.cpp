@@ -5,9 +5,19 @@ ProjectileEntity::ProjectileEntity()
 {
 }
 
-void ProjectileEntity::launchProjectile()
+void ProjectileEntity::update(float& deltaTime)
 {
-	m_projectiles.emplace_back(std::make_shared<Projectile>(getShapePosition() + sf::Vector2f{0.f, -7.f}, static_cast<float>(m_facingRight)));
+	if (!m_dying)
+	{
+		updateProjectileEntity(deltaTime);
+	}
+
+	SwordEntity::update(deltaTime);
+}
+
+void ProjectileEntity::launchProjectile(const sf::Vector2f& offsetPosition, const std::string& projectileEntityName)
+{
+	m_projectiles.emplace_back(std::make_shared<Projectile>(getShapePosition() + offsetPosition, static_cast<float>(m_facingRight), projectileEntityName));
 }
 
 void ProjectileEntity::updateProjectileEntity(float& deltaTime)
@@ -18,7 +28,7 @@ void ProjectileEntity::updateProjectileEntity(float& deltaTime)
 	{
 		(*it)->update(deltaTime);
 
-		if ((*it)->m_collided && (*it)->m_vanished)
+		if ((*it)->getVanished())
 		{
 			collidedProjectiles.emplace_back(it);
 		}
@@ -28,6 +38,4 @@ void ProjectileEntity::updateProjectileEntity(float& deltaTime)
 	{
 		m_projectiles.erase(collidedProjectiles[i]);
 	}
-
-	updateSwordEntity(deltaTime);
 }

@@ -44,6 +44,9 @@ public:
 	void updatePlayer1Input();
 	void updatePlayer2Input();
 
+	template<class T>
+	void setPlayerInput(Player<T>* player);
+
 private:
 	
 	std::vector<std::shared_ptr<SwordEntity>> m_characters{};
@@ -69,49 +72,49 @@ private:
 	bool m_debugMode{ false };
 };
 
-//template<class T>
-//inline void PlayingState::setPlayerInput(Player<T>* player)
-//{
-//	if (player->getPlayerNumber() == 1)
-//	{
-//		if (m_twoPlayers)
-//		{
-//			player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
-//			player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
-//			player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
-//
-//			player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-//			player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
-//
-//			player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
-//
-//			player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
-//		}
-//		else
-//		{
-//			player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-//			player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-//			player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
-//
-//			player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
-//			player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-//
-//			player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
-//
-//			player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
-//		}
-//	}
-//	else if (player->getPlayerNumber() == 2)
-//	{
-//		player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-//		player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-//		player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
-//
-//		player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
-//		player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
-//
-//		player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
-//
-//		player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
-//	}
-//}
+template<class T>
+inline void PlayingState::setPlayerInput(Player<T>* player)
+{
+	if (player->getPlayerNumber() == 1)
+	{
+		if (m_twoPlayers)
+		{
+			player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
+			player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
+			player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
+
+			player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+			player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+
+			player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+
+			player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
+		}
+		else
+		{
+			player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+			player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+			player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+
+			player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
+			player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
+
+			player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
+
+			player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+		}
+	}
+	else if (player->getPlayerNumber() == 2)
+	{
+		player->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
+		player->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
+		player->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
+
+		player->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
+		player->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
+
+		player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
+
+		player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
+	}
+}

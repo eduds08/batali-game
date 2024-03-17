@@ -17,9 +17,9 @@ void ButtonUI::init(const std::string& textureName, const std::string& texturePa
 
 	m_sprite.setTextureRect(sf::IntRect{ 0, 0, m_spriteWidth, m_spriteHeight });
 
-	setOrigin(m_spriteWidth / 2.f, m_spriteHeight / 2.f);
+	m_sprite.setOrigin(m_spriteWidth / 2.f, m_spriteHeight / 2.f);
 
-	setScale(5.f);
+	m_sprite.setScale(5.f, 5.f);
 
 	setSpritePosition(position);
 }

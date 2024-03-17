@@ -9,15 +9,18 @@ public:
 	Player(sf::Vector2f firstPosition, int playerNumber=1);
 	~Player();
 
-	// Main character's update
-	void update(float& deltaTime);
-
 	// Changes the current texture based upon the entity's current activity (jumping, running, attacking, etc...). Called inside updateAnimation()
 	void updateTexture();
 
 	/* Setters */
 
-	
+	void setConditionRunLeft(bool conditionRunLeft) { this->m_conditionRunLeft = conditionRunLeft; }
+	void setConditionRunRight(bool conditionRunRight) { this->m_conditionRunRight = conditionRunRight; }
+	void setConditionJump(bool conditionJump) { this->m_conditionJump = conditionJump; }
+	void setConditionRoll(bool conditionRoll) { this->m_conditionRoll = conditionRoll; }
+	void setConditionAttack1(bool conditionAttack1) { this->m_conditionAttack1 = conditionAttack1; }
+	void setConditionAttack2(bool conditionAttack2) { this->m_conditionAttack2 = conditionAttack2; }
+	void setConditionUltimate(bool conditionUltimate) { this->m_conditionUltimate = conditionUltimate; }
 
 	/* Getters */
 
@@ -43,12 +46,6 @@ inline Player<T>::Player(sf::Vector2f firstPosition, int playerNumber)
 template<class T>
 inline Player<T>::~Player()
 {
-}
-
-template<class T>
-inline void Player<T>::update(float& deltaTime)
-{
-	this->updateCharacter(deltaTime);
 }
 
 template<class T>

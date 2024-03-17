@@ -20,6 +20,7 @@ public:
 	
 protected:
 	sf::Vector2f m_velocity{};
+
 	float m_speed{};
 
 	int m_facingRight{ 1 };

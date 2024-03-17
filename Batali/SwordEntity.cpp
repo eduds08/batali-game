@@ -7,23 +7,28 @@ SwordEntity::SwordEntity()
 
 void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, bool ultimateCondition)
 {
-	if (attackCondition1 && m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
+	if (m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
 	{
-		m_attackMode = "onAttack1";
-	}
-	else if (attackCondition2 && m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
-	{
-		m_attackMode = "onAttack2";
-	}
-	else if ((attackCondition1 || attackCondition2) && !m_canJump && m_attackMode == "off" && !m_onRoll && !ultimateCondition && !m_onFreeze)
-	{
-		m_attackMode = "onAirAttack";
-	}
-	else if (ultimateCondition && m_canJump && m_attackMode == "off" && !m_onRoll && m_remainingManaToUltimate <= 0 && !m_onFreeze)
-	{
-		m_attackMode = "onUltimate";
-
-		m_remainingManaToUltimate = 5;
+		if (m_canJump)
+		{
+			if (attackCondition1)
+			{
+				m_attackMode = "onAttack1";
+			}
+			else if (attackCondition2)
+			{
+				m_attackMode = "onAttack2";
+			}
+			else if (ultimateCondition && m_remainingManaToUltimate <= 0)
+			{
+				m_attackMode = "onUltimate";
+				m_remainingManaToUltimate = 5;
+			}
+		}
+		else if ((attackCondition1 || attackCondition2))
+		{
+			m_attackMode = "onAirAttack";
+		}
 	}
 
 	if (m_attackMode != "off")
@@ -35,17 +40,16 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 			m_velocity.y = 0.f;
 
 			// Stop the attack when attack animation ends (and also stores the current animation as the previous one so the next attack uses the other attacking animation) or when entity gets hitted
-			if (((m_currentTexture == m_entityName + "Attack1" || m_currentTexture == m_entityName + "Attack2" || m_currentTexture == m_entityName + "Ultimate") && m_animationEnd) || m_inDamageCooldown == true)
+			if (((m_currentTexture == m_entityName + "Attack1" || m_currentTexture == m_entityName + "Attack2" || m_currentTexture == m_entityName + "Ultimate") && m_animationEnd) || m_inDamageCooldown)
 			{
 				m_attackMode = "off";
-				//m_activateUltimate = false;
 			}
 		}
 		else
 		{
 			m_velocity.x = 0.f;
 
-			if ((m_currentTexture == m_entityName + "AirAttack" && m_animationEnd) || m_inDamageCooldown == true || (m_canJump && m_currentTexture == m_entityName + "Falling"))
+			if ((m_currentTexture == m_entityName + "AirAttack" && m_animationEnd) || m_inDamageCooldown || (m_canJump && m_currentTexture == m_entityName + "Falling"))
 			{
 				m_attackMode = "off";
 			}
@@ -55,7 +59,7 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 	updateAttackHitbox();
 }
 
-void SwordEntity::updateSwordEntity(float& deltaTime)
+void SwordEntity::update(float& deltaTime)
 {
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
 	if (this->m_currentTexture == this->m_texturesActionName.at("Death") && !this->m_dead && this->m_animationEnd)

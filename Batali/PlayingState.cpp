@@ -132,7 +132,7 @@ void PlayingState::render()
 
 		if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 		{
-			for (auto& projectile : dynamic_cast<Boxer*>(character.get())->m_projectiles)
+			for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
 			{
 				if (m_debugMode)
 				{
@@ -299,7 +299,7 @@ void PlayingState::updateTexturesAndAnimations()
 
 					if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 					{
-						for (auto& projectile : dynamic_cast<Boxer*>(character.get())->m_projectiles)
+						for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
 						{
 							projectile->updateAnimation();
 						}
@@ -316,31 +316,17 @@ void PlayingState::updatePlayer1Input()
 	{
 		if (!m_onPause)
 		{
-			if (m_twoPlayers)
+			if (dynamic_cast<FireKnight*>(m_characters[0].get()) != nullptr)
 			{
-				m_characters[0]->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A));
-				m_characters[0]->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D));
-				m_characters[0]->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W));
-
-				m_characters[0]->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-				m_characters[0]->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
-
-				m_characters[0]->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
-
-				m_characters[0]->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B));
+				setPlayerInput<FireKnight>(dynamic_cast<Player<FireKnight>*>(m_characters[0].get()));
 			}
-			else
+			else if (dynamic_cast<WindHashashin*>(m_characters[0].get()) != nullptr)
 			{
-				m_characters[0]->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-				m_characters[0]->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-				m_characters[0]->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
-
-				m_characters[0]->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z));
-				m_characters[0]->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X));
-
-				m_characters[0]->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C));
-
-				m_characters[0]->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V));
+				setPlayerInput<WindHashashin>(dynamic_cast<Player<WindHashashin>*>(m_characters[0].get()));
+			}
+			else if (dynamic_cast<Boxer*>(m_characters[0].get()) != nullptr)
+			{
+				setPlayerInput<Boxer>(dynamic_cast<Player<Boxer>*>(m_characters[0].get()));
 			}
 		}
 	}
@@ -352,16 +338,18 @@ void PlayingState::updatePlayer2Input()
 	{
 		if (!m_onPause)
 		{
-			m_characters[1]->setConditionRunLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left));
-			m_characters[1]->setConditionRunRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right));
-			m_characters[1]->setConditionJump(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up));
-
-			m_characters[1]->setConditionAttack1(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I));
-			m_characters[1]->setConditionAttack2(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O));
-
-			m_characters[1]->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
-
-			m_characters[1]->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
+			if (dynamic_cast<FireKnight*>(m_characters[1].get()) != nullptr)
+			{
+				setPlayerInput<FireKnight>(dynamic_cast<Player<FireKnight>*>(m_characters[1].get()));
+			}
+			else if (dynamic_cast<WindHashashin*>(m_characters[1].get()) != nullptr)
+			{
+				setPlayerInput<WindHashashin>(dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()));
+			}
+			else if (dynamic_cast<Boxer*>(m_characters[1].get()) != nullptr)
+			{
+				setPlayerInput<Boxer>(dynamic_cast<Player<Boxer>*>(m_characters[1].get()));
+			}
 		}
 	}
 }

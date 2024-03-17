@@ -25,46 +25,51 @@ void WalkingEntity::handleCollision()
 
 void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll)
 {
-	if (m_stamina == 100)
+	if (m_stamina == TOTAL_STAMINA)
 	{
 		m_staminaRecoverClock.restart();
 	}
 
 	m_velocity.x = 0.f;
-	m_isRunning = true;
+	m_isRunning = false;
 
-	// Only runs when not on roll
-	if (conditionRunLeft && !m_onRoll && getAttackMode() != "onUltimate" && !getOnFreeze())
+	// Only runs when not on roll, not attacking and not freeze
+	if (!m_onRoll && getAttackMode() == "off" && !getOnFreeze())
 	{
-		m_facingRight = -1;
-		m_velocity.x -= m_speed;
-	}
-	else if (conditionRunRight && !m_onRoll && getAttackMode() != "onUltimate" && !getOnFreeze())
-	{
-		m_facingRight = 1;
-		m_velocity.x += m_speed;
-	}
-	else
-	{
-		m_isRunning = false;
-	}
+		if (conditionRunLeft)
+		{
+			m_facingRight = -1;
+			m_velocity.x -= m_speed;
+			m_isRunning = true;
+		}
+		else if (conditionRunRight)
+		{
+			m_facingRight = 1;
+			m_velocity.x += m_speed;
+			m_isRunning = true;
+		}
 
-	// Only can roll when on ground and not on Hitted animation
-	if (conditionRoll && m_canJump && !getHitted() && !m_onRoll && m_stamina > 0 && m_currentTexture != m_entityName + "Roll" && getAttackMode() == "off" && !getOnFreeze())
-	{
-		m_stamina -= 50;
-		m_onRoll = true;
+		// Only can roll when on ground and not on Hitted animation and has Staminas
+		if (m_canJump && m_stamina > 0 && !getHitted() && m_currentTexture != m_entityName + "Roll")
+		{
+			if (conditionRoll)
+			{
+				m_stamina -= TOTAL_STAMINA / 2;
+				m_staminaRecoverClock.restart();
+				m_onRoll = true;
+			}
+		}
 	}
 
 	if (m_onRoll)
 	{
 		m_velocity.x += (m_facingRight * m_rollSpeed);
-	}
 
-	// End onRoll animation
-	if (m_onRoll && m_animationEnd && m_currentTexture == m_entityName + "Roll")
-	{
-		m_onRoll = false;
+		// End onRoll animation if m_animationEnd = true
+		if (m_currentTexture == m_entityName + "Roll" && m_animationEnd)
+		{
+			m_onRoll = false;
+		}
 	}
 
 	flipSprite();
@@ -86,9 +91,9 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 	m_staminaRecoverTime = m_staminaRecoverClock.getElapsedTime().asSeconds();
 	if (m_staminaRecoverTime > 2.f)
 	{
-		if (m_stamina < 100)
+		if (m_stamina < TOTAL_STAMINA)
 		{
-			m_stamina += 50;
+			m_stamina += TOTAL_STAMINA / 2;
 		}
 		m_staminaRecoverClock.restart();
 	}

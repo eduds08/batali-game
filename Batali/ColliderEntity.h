@@ -8,7 +8,7 @@ public:
 	ColliderEntity();
 	virtual ~ColliderEntity() = default;
 
-	// Returns true if colliding with other, false if not. Also set the collision directions (if is colliding in the right, left, bottom or top)
+	// Returns true if colliding with other, false if not. Also set the collision directions (if is colliding on the right, left, bottom or top)
 	bool isCollidingWith(const sf::Sprite& other);
 
 	/* Setters */

@@ -138,7 +138,7 @@ void Game::update()
 
 void Game::render()
 {
-	m_window.clear();
+	m_window.clear(sf::Color{ 119, 221, 119 });
 	if (m_stateContext)
 	{
 		m_stateContext->render();

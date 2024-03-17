@@ -1,12 +1,7 @@
 #pragma once
 
 #include "WalkingEntity.h"
-#include "Ground.h"
-#include <functional>
 
-
-
-class WindHashashin;
 class SwordEntity;
 
 class DamageEntity : public WalkingEntity
