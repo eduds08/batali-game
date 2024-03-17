@@ -137,6 +137,7 @@
     <ClCompile Include="BackgroundUI.cpp" />
     <ClCompile Include="BigCharacterPortraitUI.cpp" />
     <ClCompile Include="Boxer.cpp" />
+    <ClCompile Include="BoxerUltimateProjectile.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="CharacterPortraitUI.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="BackgroundUI.h" />
     <ClInclude Include="BigCharacterPortraitUI.h" />
     <ClInclude Include="Boxer.h" />
+    <ClInclude Include="BoxerUltimateProjectile.h" />
     <ClInclude Include="ButtonAuxState.h" />
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Player.h" />

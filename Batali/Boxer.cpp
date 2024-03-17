@@ -88,7 +88,7 @@ void Boxer::updateAttackHitbox()
 			m_damage = BOXER_ULTIMATE_DAMAGE;
 
 			if (m_projectiles.size() == 0)
-				launchProjectile(BOXER_PROJECTILE_OFFSET_POSITION, "boxer_ultimate_projectile");
+				launchProjectile();
 		}
 		else if (m_frameCount == BOXER_ULTIMATE_PT_2_FRAME && !m_animationEnd)
 		{
@@ -98,7 +98,7 @@ void Boxer::updateAttackHitbox()
 			m_damage = BOXER_ULTIMATE_DAMAGE;
 
 			if (m_projectiles.size() == 1)
-				launchProjectile(BOXER_PROJECTILE_OFFSET_POSITION, "boxer_ultimate_projectile");
+				launchProjectile();
 		}
 	}
 	else
@@ -110,4 +110,9 @@ void Boxer::updateAttackHitbox()
 	m_attackHitbox.setOrigin(0.f, m_attackHitboxHeight / 2.f);
 	m_attackHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
 	m_attackHitbox.setPosition(m_attackHitboxPosition);
+}
+
+void Boxer::launchProjectile()
+{
+	m_projectiles.emplace_back(std::make_shared<BoxerUltimateProjectile>(getShapePosition() + BOXER_PROJECTILE_OFFSET_POSITION, m_facingRight));
 }

@@ -15,11 +15,6 @@ void ProjectileEntity::update(float& deltaTime)
 	SwordEntity::update(deltaTime);
 }
 
-void ProjectileEntity::launchProjectile(const sf::Vector2f& offsetPosition, const std::string& projectileEntityName)
-{
-	m_projectiles.emplace_back(std::make_shared<Projectile>(getShapePosition() + offsetPosition, static_cast<float>(m_facingRight), projectileEntityName));
-}
-
 void ProjectileEntity::updateProjectileEntity(float& deltaTime)
 {
 	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> collidedProjectiles{};

@@ -13,7 +13,7 @@ public:
 	virtual void update(float& deltaTime);
 	
 	// Instantiate a projectile and pushes it into m_projectiles vector
-	void launchProjectile(const sf::Vector2f& offsetPosition, const std::string& projectileEntityName);
+	virtual void launchProjectile() = 0;
 	
 	// Update projectiles and checks if those needs to be deleted
 	void updateProjectileEntity(float& deltaTime);

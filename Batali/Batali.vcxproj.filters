@@ -108,6 +108,9 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
+    <ClCompile Include="BoxerUltimateProjectile.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundUI.h">
@@ -204,6 +207,9 @@
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxerUltimateProjectile.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
   </ItemGroup>

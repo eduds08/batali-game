@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ProjectileEntity.h"
+#include "BoxerUltimateProjectile.h"
 
 class Boxer : public ProjectileEntity
 {
@@ -9,6 +10,9 @@ public:
 	virtual ~Boxer() = default;
 
 	void updateAttackHitbox();
+
+	// Instantiate a projectile and pushes it into m_projectiles vector
+	void launchProjectile();
 
 protected:
 	
