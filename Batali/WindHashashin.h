@@ -26,7 +26,7 @@ public:
 
 	const sf::RectangleShape& getUltimateActivateHitbox() const { return m_ultimateActivateHitbox; }
 
-private:
+protected:
 	sf::RectangleShape m_ultimateActivateHitbox{ sf::Vector2f{0.f, 0.f} };
 	bool m_activateUltimate{ false };
 };

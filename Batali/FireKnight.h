@@ -12,6 +12,6 @@ public:
 
 	void updateCharacter(float& deltaTime);
 
-private:
+protected:
 
 };

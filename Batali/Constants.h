@@ -208,9 +208,6 @@ namespace constants
 	constexpr float ENEMY_DISTANCE_FROM_PLAYER{ 35.f };
 
 	constexpr float TIME_BETWEEN_ENEMY_ATTACKS{ 1.f };
-	constexpr float COOLDOWN_IMMUNE_TIME{ 0.6f };
-
-	constexpr float COOLDOWN_IMMUNE_FAST_TIME{ 0.1f };
 
 	/* STATE CONSTANTS: */
 

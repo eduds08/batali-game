@@ -50,8 +50,6 @@ public:
 protected:
 	// When m_inDamageCooldown is true, the entity is immune to attacks
 	bool m_inDamageCooldown{ false };
-	sf::Clock m_damageCooldownClock{};
-	float m_damageCooldown{};
 
 	// This attribute is useful to identify if entity can do action (move, attack, etc...) or not. For example, Wind Hashashin's ultimate makes the entity freeze.
 	bool m_onFreeze{ false };

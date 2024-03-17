@@ -24,28 +24,16 @@ void DamageEntity::updateDamage()
 		}
 	}
 
-	// While on damageCooldown, the entity is immune to attacks. Useful to make the entity being hit only once per attack
-	m_damageCooldown = m_damageCooldownClock.getElapsedTime().asSeconds();
-	if (!m_onFastHit)
+	if (m_currentTexture != m_entityName + "Hitted")
 	{
-		if (m_damageCooldown > COOLDOWN_IMMUNE_TIME)
-		{
-			m_inDamageCooldown = false;
-		}
-	}
-	else
-	{
-		if (m_damageCooldown > COOLDOWN_IMMUNE_FAST_TIME)
-		{
-			m_inDamageCooldown = false;
-		}
+		m_inDamageCooldown = false;
 	}
 }
 
 bool DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damage)
 {
 	// Only executed if not already dead and when not immune (on damageCooldown or onRoll)
-	if (!m_inDamageCooldown && !m_dying && !m_onRoll && getAttackMode() != "onUltimate")
+	if (!m_inDamageCooldown && !m_hitted && !m_dying && !m_onRoll && getAttackMode() != "onUltimate")
 	{
 		m_inDamageCooldown = true;
 		m_hitted = true;
@@ -77,9 +65,6 @@ bool DamageEntity::takeDamage(float& deltaTime, float attackDirection, int damag
 				flipSprite();
 			}
 		}
-		
-		m_damageCooldownClock.restart();
-		m_damageCooldown = 0.f;
 
 		return true;
 	}
