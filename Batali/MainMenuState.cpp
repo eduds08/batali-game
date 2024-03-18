@@ -5,9 +5,9 @@ MainMenuState::MainMenuState(sf::RenderWindow& window)
 {
 	m_currentState = MAIN_MENU_STATE;
 
-	initButton("Singleplayer", sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + static_cast<int>(m_buttons.size()) * 100.f }, MENU_TO_SINGLEPLAYER);
-	initButton("Multiplayer", sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + static_cast<int>(m_buttons.size()) * 100.f }, MENU_TO_MULTIPLAYER);
-	initButton("Exit", sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + static_cast<int>(m_buttons.size()) * 100.f }, EXIT_GAME);
+	initTextButton("Singleplayer", sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + static_cast<int>(m_buttons.size()) * 100.f }, MENU_TO_SINGLEPLAYER);
+	initTextButton("Multiplayer", sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + static_cast<int>(m_buttons.size()) * 100.f }, MENU_TO_MULTIPLAYER);
+	initTextButton("Exit", sf::Vector2f{ m_window.getDefaultView().getSize().x / 2.f, m_window.getDefaultView().getSize().y / 2.f + static_cast<int>(m_buttons.size()) * 100.f }, EXIT_GAME);
 
 	m_window.setView(m_window.getDefaultView());
 

@@ -3,8 +3,8 @@
 #include "ButtonAuxState.h"
 #include "BigCharacterPortraitUI.h"
 #include "SmallCharacterPortraitUI.h"
-#include "ButtonUI.h"
 #include "BackgroundUI.h"
+#include "ImageButtonUI.h"
 
 class CharacterSelectionState : public ButtonAuxState
 {
@@ -14,6 +14,8 @@ public:
 
 	virtual void update();
 	virtual void render();
+
+	void initSmallPortraits();
 
 	// Same logic of updateButtons()
 	void updateCharacterSelectionButtons();
@@ -26,9 +28,13 @@ public:
 
 private:
 	std::vector<BigCharacterPortraitUI> m_bigCharacterPortraits{};
-	std::vector<SmallCharacterPortraitUI> m_smallCharacterPortraits{};
+	//std::vector<SmallCharacterPortraitUI> m_smallCharacterPortraits{};
+
+	std::vector<ImageButtonUI> m_smallCp{};
 
 	std::vector<std::string> m_charactersNames{"fire_knight", "wind_hashashin", "boxer"};
+
+	// Amount of playable characters
 	int m_totalCharactersAmount{};
 
 	BackgroundUI m_background{ "menuBackground", "./assets/menuBackground.png", m_window.getDefaultView().getSize() / 2.f, sf::Vector2i{576, 324}, 4.f };

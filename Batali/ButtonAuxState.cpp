@@ -5,9 +5,9 @@ ButtonAuxState::ButtonAuxState(sf::RenderWindow& window)
 {
 }
 
-void ButtonAuxState::initButton(const std::string& text, sf::Vector2f position, const std::string& stateRelated)
+void ButtonAuxState::initTextButton(const std::string& text, sf::Vector2f position, const std::string& stateRelated)
 {
-	m_buttons.emplace_back(ButtonUI{ position, stateRelated, text, &m_font });
+	m_buttons.emplace_back(std::make_shared<TextButtonUI>(TextButtonUI{ position, stateRelated, text, &m_font }));
 }
 
 void ButtonAuxState::updateButtons(bool isUpDown)
@@ -35,13 +35,16 @@ void ButtonAuxState::updateButtons(bool isUpDown)
 	// Upate the visual design of the buttons (according to its state -> onHover OR not onHover)
 	for (size_t i = 0; i < m_buttons.size(); ++i)
 	{
-		m_buttons[i].update(i == m_onHoverButton);
+		m_buttons[i]->update(i == m_onHoverButton);
 	}
 
 	// Button pressed
 	if (m_pressedKey == sf::Keyboard::Scancode::Enter)
 	{
-		pressButton(m_buttons[m_onHoverButton]);
+		if (dynamic_cast<TextButtonUI*>(m_buttons[m_onHoverButton].get()) != nullptr)
+		{
+			pressTextButton(*dynamic_cast<TextButtonUI*>(m_buttons[m_onHoverButton].get()));
+		}
 	}
 
 	m_pressedKey = sf::Keyboard::Scancode::Unknown;
@@ -51,11 +54,11 @@ void ButtonAuxState::renderButtons()
 {
 	for (const auto& button : m_buttons)
 	{
-		button.render(m_window);
+		button->render(m_window);
 	}
 }
 
-void ButtonAuxState::pressButton(ButtonUI buttonPressed)
+void ButtonAuxState::pressTextButton(TextButtonUI& buttonPressed)
 {
 	m_currentState = buttonPressed.getStateRelated();
 }

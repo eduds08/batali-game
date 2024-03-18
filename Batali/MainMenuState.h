@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ButtonAuxState.h"
-#include "ButtonUI.h"
+#include "TextButtonUI.h"
 #include "BackgroundUI.h"
 
 class MainMenuState : public ButtonAuxState
