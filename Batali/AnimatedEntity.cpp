@@ -50,7 +50,7 @@ void AnimatedEntity::initTexturesMap()
 {
 	// QUICK NOTE: the game folder has to have a folder with the same name of m_entityName (as you can see in the code below).
 
-	m_texturesActionName.emplace("Death", m_entityName + "Death");
+	m_texturesActionName.emplace("Dying", m_entityName + "Dying");
 	m_texturesActionName.emplace("Hitted", m_entityName + "Hitted");
 	m_texturesActionName.emplace("Falling", m_entityName + "Falling");
 	m_texturesActionName.emplace("Jumping", m_entityName + "Jumping");
@@ -61,18 +61,18 @@ void AnimatedEntity::initTexturesMap()
 	m_texturesActionName.emplace("Roll", m_entityName + "Roll");
 	m_texturesActionName.emplace("AirAttack", m_entityName + "AirAttack");
 	m_texturesActionName.emplace("Ultimate", m_entityName + "Ultimate");
-	m_texturesActionName.emplace("_HitOnWindHashashinUltimate", m_entityName + "_HitOnWindHashashinUltimate");
+	m_texturesActionName.emplace("FastHit", m_entityName + "FastHit");
 
-	m_texturesNamePath.emplace(m_texturesActionName.at("Death"), "./assets/" + m_entityName + "/_Death.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("Hitted"), "./assets/" + m_entityName + "/_Hit.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("Falling"), "./assets/" + m_entityName + "/_Fall.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("Jumping"), "./assets/" + m_entityName + "/_Jump.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("Running"), "./assets/" + m_entityName + "/_Run.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Dying"), "./assets/" + m_entityName + "/_Dying.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Hitted"), "./assets/" + m_entityName + "/_Hitted.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Falling"), "./assets/" + m_entityName + "/_Falling.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Jumping"), "./assets/" + m_entityName + "/_Jumping.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("Running"), "./assets/" + m_entityName + "/_Running.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Idle"), "./assets/" + m_entityName + "/_Idle.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Attack1"), "./assets/" + m_entityName + "/_Attack1.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Attack2"), "./assets/" + m_entityName + "/_Attack2.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Roll"), "./assets/" + m_entityName + "/_Roll.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("AirAttack"), "./assets/" + m_entityName + "/_AirAttack.png");
 	m_texturesNamePath.emplace(m_texturesActionName.at("Ultimate"), "./assets/" + m_entityName + "/_Ultimate.png");
-	m_texturesNamePath.emplace(m_texturesActionName.at("_HitOnWindHashashinUltimate"), "./assets/" + m_entityName + "/_HitOnWindHashashinUltimate.png");
+	m_texturesNamePath.emplace(m_texturesActionName.at("FastHit"), "./assets/" + m_entityName + "/_FastHit.png");
 }

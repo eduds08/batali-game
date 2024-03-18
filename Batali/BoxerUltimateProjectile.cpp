@@ -1,7 +1,7 @@
 #include "BoxerUltimateProjectile.h"
 
 BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, int direction)
-	: Projectile{"boxer_ultimate_projectile" }
+	: Projectile{ "boxer_ultimate" }
 {
 	m_spriteWidth = 30;
 	m_spriteHeight = 30;

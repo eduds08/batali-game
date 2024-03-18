@@ -65,7 +65,7 @@ void SwordEntity::updateAttack(bool attackCondition1, bool attackCondition2, boo
 void SwordEntity::update(float& deltaTime)
 {
 	// Only sets dead = true when the dead animation ends, that way we can still call updateAnimation() even if hp <= 0
-	if (this->m_currentTexture == this->m_texturesActionName.at("Death") && !this->m_dead && this->m_animationEnd)
+	if (this->m_currentTexture == this->m_texturesActionName.at("Dying") && !this->m_dead && this->m_animationEnd)
 	{
 		this->die();
 	}
