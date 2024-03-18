@@ -150,6 +150,38 @@ namespace constants
 
 	const sf::Vector2f BOXER_PROJECTILE_OFFSET_POSITION{ 0.f, -7.f };
 
+	/* HOODIE CONSTANTS: */
+
+	constexpr int HOODIE_SPRITE_WIDTH{ 288 };
+	constexpr int HOODIE_SPRITE_HEIGHT{ 127 };
+
+	constexpr float HOODIE_SHAPE_WIDTH{ 20.f };
+	constexpr float HOODIE_SHAPE_HEIGHT{ 40.f };
+
+	constexpr float HOODIE_SPEED{ 220.f };
+	constexpr float HOODIE_JUMP_HEIGHT{ 85.f };
+
+	constexpr float HOODIE_ROLL_SPEED{ 220.f };
+
+	constexpr int HOODIE_HP{ 1250 };
+
+	constexpr float HOODIE_ATTACK_1_WIDTH{ 65.f };
+	constexpr float HOODIE_ATTACK_1_HEIGHT{ 20.f };
+
+	constexpr float HOODIE_ATTACK_2_WIDTH{ 50.f };
+	constexpr float HOODIE_ATTACK_2_HEIGHT{ 20.f };
+
+	constexpr float HOODIE_AIR_ATTACK_WIDTH{ 95.f };
+	constexpr float HOODIE_AIR_ATTACK_HEIGHT{ 20.f };
+
+	constexpr float HOODIE_ULTIMATE_WIDTH{ 100.f };
+	constexpr float HOODIE_ULTIMATE_HEIGHT{ 20.f };
+
+	constexpr int HOODIE_ATTACK_1_DAMAGE{ 95 };
+	constexpr int HOODIE_ATTACK_2_DAMAGE{ 80 };
+	constexpr int HOODIE_AIR_ATTACK_DAMAGE{ 75 };
+	constexpr int HOODIE_ULTIMATE_DAMAGE{ 115 };
+
 	/* ATTACK HITBOX FRAMES */
 
 	/* FIRE_KNIGHT FRAMES */
@@ -205,6 +237,20 @@ namespace constants
 
 	constexpr int BOXER_ULTIMATE_PT_1_FRAME{ 9 };
 	constexpr int BOXER_ULTIMATE_PT_2_FRAME{ 13 };
+
+	/* HOODIE FRAMES */
+
+	constexpr int HOODIE_ATTACK_1_STARTING_FRAME{ 5 };
+	constexpr int HOODIE_ATTACK_1_ENDING_FRAME{ 7 };
+
+	constexpr int HOODIE_ATTACK_2_STARTING_FRAME{ 2 };
+	constexpr int HOODIE_ATTACK_2_ENDING_FRAME{ 2 };
+
+	constexpr int HOODIE_AIR_ATTACK_STARTING_FRAME{ 4 };
+	constexpr int HOODIE_AIR_ATTACK_ENDING_FRAME{ 5 };
+
+	constexpr int HOODIE_ULTIMATE_STARTING_FRAME{ 5 };
+	constexpr int HOODIE_ULTIMATE_ENDING_FRAME{ 7 };
 
 	/* BOT CONSTANTS: */
 

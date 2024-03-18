@@ -111,6 +111,9 @@
     <ClCompile Include="BoxerUltimateProjectile.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
+    <ClCompile Include="Hoodie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundUI.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="BoxerUltimateProjectile.h">
       <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="Hoodie.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

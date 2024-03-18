@@ -66,7 +66,7 @@ void Boxer::updateAttackHitbox()
 	}
 	else if (m_currentTexture == m_entityName + "AirAttack")
 	{
-		m_attackHitboxPosition = getShapePosition() - sf::Vector2f{0.f, 15.f};
+		m_attackHitboxPosition = getShapePosition();
 
 		if (m_frameCount >= BOXER_AIR_ATTACK_STARTING_FRAME && m_frameCount <= BOXER_AIR_ATTACK_ENDING_FRAME && !m_animationEnd)
 		{
