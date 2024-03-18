@@ -36,7 +36,7 @@ inline Player<T>::Player(sf::Vector2f firstPosition, int playerNumber)
 	, m_playerNumber{ playerNumber }
 {
 	// Second player starts facing left
-	if (this->m_playerNumber == 2)
+	if (m_playerNumber == 2)
 	{
 		this->m_facingRight = -1;
 		this->flipSprite();

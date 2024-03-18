@@ -36,6 +36,8 @@ inline EnemyBot<T>::EnemyBot(sf::Vector2f firstPosition, const sf::Vector2f& pla
 	this->flipSprite();
 
 	this->m_speed = ENEMY_SPEED;
+
+	m_previousAttackingAnimation = this->m_entityName + "Attack2";
 }
 
 template<class T>
@@ -49,14 +51,24 @@ inline void EnemyBot<T>::update(float& deltaTime)
 	// Only called if hp > 0
 	if (!this->m_dying)
 	{
-		this->m_conditionRunLeft = this->m_playerShapePosition.x < this->getShapePosition().x - this->m_distanceFromPlayer;
-		this->m_conditionRunRight = this->m_playerShapePosition.x > this->getShapePosition().x + this->m_distanceFromPlayer;
-		this->m_conditionJump = (((this->m_playerShapePosition.y - this->m_playerShapeSize.y / 2.f) < (this->getShapePosition().y - this->getShapeSize().y / 2.f)) && this->m_isCollidingHorizontally);
+		this->m_conditionRunLeft = m_playerShapePosition.x < this->getShapePosition().x - m_distanceFromPlayer;
+		this->m_conditionRunRight = m_playerShapePosition.x > this->getShapePosition().x + m_distanceFromPlayer;
+		this->m_conditionJump = (((m_playerShapePosition.y - m_playerShapeSize.y / 2.f) < (this->getShapePosition().y - this->getShapeSize().y / 2.f)) && this->m_isCollidingHorizontally);
 
-		this->m_timeBetweenAttacks = this->m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
-		this->m_conditionAttack1 = (this->m_velocity.x == 0.f && this->m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS);
+		m_timeBetweenAttacks = m_timeBetweenAttacksClock.getElapsedTime().asSeconds();
+		this->m_conditionAttack1 = (this->m_velocity.x == 0.f && m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS) && m_previousAttackingAnimation == this->m_entityName + "Attack2";
+		this->m_conditionAttack2 = (this->m_velocity.x == 0.f && m_timeBetweenAttacks > TIME_BETWEEN_ENEMY_ATTACKS) && m_previousAttackingAnimation == this->m_entityName + "Attack1";
 
 		this->m_conditionRoll = false;
+	}
+
+	if (this->m_conditionAttack1)
+	{
+		m_previousAttackingAnimation = this->m_entityName + "Attack1";
+	}
+	else if (this->m_conditionAttack2)
+	{
+		m_previousAttackingAnimation = this->m_entityName + "Attack2";
 	}
 
 	T::update(deltaTime);
@@ -109,7 +121,7 @@ inline void EnemyBot<T>::updateTexture()
 		}
 		else if (this->m_attackMode != "onAirAttack")
 		{
-			this->m_previousAttackingAnimation == this->m_entityName + "Attack1" ? this->changeCurrentTexture(this->m_texturesActionName.at("Attack2"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack2")), false) : this->changeCurrentTexture(this->m_texturesActionName.at("Attack1"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack1")), false);
+			m_previousAttackingAnimation == this->m_entityName + "Attack1" ? this->changeCurrentTexture(this->m_texturesActionName.at("Attack2"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack2")), false) : this->changeCurrentTexture(this->m_texturesActionName.at("Attack1"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack1")), false);
 		}
 	}
 }
