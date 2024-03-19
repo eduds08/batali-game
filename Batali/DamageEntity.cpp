@@ -76,14 +76,14 @@ void DamageEntity::knockbackMove(float& deltaTime, float attackDirection)
 	if (attackDirection < 0.f)
 	{
 		// attack coming from left
-		m_shape.move(sf::Vector2f{ m_knockbackVelocity, 0.f } *deltaTime);
-	}
-	else
-	{
+			m_shape.move(sf::Vector2f{ m_knockbackVelocity, 0.f } *deltaTime);
+		}
+		else
+		{
 		// attack coming from right
-		m_shape.move(sf::Vector2f{ m_knockbackVelocity * -1.f, 0.f } *deltaTime);
-	}
-
+			m_shape.move(sf::Vector2f{ m_knockbackVelocity * -1.f, 0.f } *deltaTime);
+		}
+			
 	m_sprite.setPosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (m_spriteHeight - getShapeSize().y) / 2.f });
 }
 
@@ -101,13 +101,13 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 	{
 		if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()))
 		{
-			if (attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+			if (attackingEntity.getEntityName() != "wind_hashashin" && attackingEntity.getAttackMode() != "onUltimate")
 				m_onFastHit = false;
 			return true;
 		}
 
 		// Was attacked by Wind Hashashin's ultimate activate
-		if (dynamic_cast<WindHashashin*>(&attackingEntity) != nullptr)
+		if (attackingEntity.getEntityName() == "wind_hashashin")
 		{
 			if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
 			{

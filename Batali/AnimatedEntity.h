@@ -20,6 +20,8 @@ public:
 	// Called once for each entity in the initialization
 	void initTexturesMap();
 
+	const std::string& getEntityName() const { return m_entityName; }
+
 	// Changes the current texture based upon the entity's current activity (jumping, running, attacking, etc...). Called inside updateAnimation()
 	virtual void updateTexture() = 0;
 

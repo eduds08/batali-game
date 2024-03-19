@@ -316,15 +316,15 @@ void PlayingState::updatePlayer1Input()
 	{
 		if (!m_onPause)
 		{
-			if (dynamic_cast<FireKnight*>(m_characters[0].get()) != nullptr)
+			if (m_characters[0]->getEntityName() == "fire_knight")
 			{
 				setPlayerInput<FireKnight>(dynamic_cast<Player<FireKnight>*>(m_characters[0].get()));
 			}
-			else if (dynamic_cast<WindHashashin*>(m_characters[0].get()) != nullptr)
+			else if (m_characters[0]->getEntityName() == "wind_hashashin")
 			{
 				setPlayerInput<WindHashashin>(dynamic_cast<Player<WindHashashin>*>(m_characters[0].get()));
 			}
-			else if (dynamic_cast<Boxer*>(m_characters[0].get()) != nullptr)
+			else if (m_characters[0]->getEntityName() == "boxer")
 			{
 				setPlayerInput<Boxer>(dynamic_cast<Player<Boxer>*>(m_characters[0].get()));
 			}
@@ -338,15 +338,15 @@ void PlayingState::updatePlayer2Input()
 	{
 		if (!m_onPause)
 		{
-			if (dynamic_cast<FireKnight*>(m_characters[1].get()) != nullptr)
+			if (m_characters[1]->getEntityName() == "fire_knight")
 			{
 				setPlayerInput<FireKnight>(dynamic_cast<Player<FireKnight>*>(m_characters[1].get()));
 			}
-			else if (dynamic_cast<WindHashashin*>(m_characters[1].get()) != nullptr)
+			else if (m_characters[1]->getEntityName() == "wind_hashashin")
 			{
 				setPlayerInput<WindHashashin>(dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()));
 			}
-			else if (dynamic_cast<Boxer*>(m_characters[1].get()) != nullptr)
+			else if (m_characters[1]->getEntityName() == "boxer")
 			{
 				setPlayerInput<Boxer>(dynamic_cast<Player<Boxer>*>(m_characters[1].get()));
 			}
