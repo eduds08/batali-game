@@ -42,7 +42,7 @@ void Boxer::updateAttackHitbox()
 
 	if (m_currentTexture == m_entityName + "Attack1")
 	{
-		m_attackHitboxPosition = getShapePosition();
+		m_attackHitboxPosition = getShapePosition() + sf::Vector2f{0.f, -15.f};
 
 		if (m_frameCount >= BOXER_ATTACK_1_STARTING_FRAME && m_frameCount <= BOXER_ATTACK_1_ENDING_FRAME && !m_animationEnd)
 		{
@@ -54,7 +54,7 @@ void Boxer::updateAttackHitbox()
 	}
 	else if (m_currentTexture == m_entityName + "Attack2")
 	{
-		m_attackHitboxPosition = getShapePosition();
+		m_attackHitboxPosition = getShapePosition() + sf::Vector2f{16.f * m_facingRight, -28.f};
 
 		if (m_frameCount >= BOXER_ATTACK_2_STARTING_FRAME && m_frameCount <= BOXER_ATTACK_2_ENDING_FRAME && !m_animationEnd)
 		{
@@ -66,7 +66,7 @@ void Boxer::updateAttackHitbox()
 	}
 	else if (m_currentTexture == m_entityName + "AirAttack")
 	{
-		m_attackHitboxPosition = getShapePosition();
+		m_attackHitboxPosition = getShapePosition() + sf::Vector2f{0.f, -20.f};
 
 		if (m_frameCount >= BOXER_AIR_ATTACK_STARTING_FRAME && m_frameCount <= BOXER_AIR_ATTACK_ENDING_FRAME && !m_animationEnd)
 		{

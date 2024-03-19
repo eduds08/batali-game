@@ -129,18 +129,18 @@ namespace constants
 	constexpr float BOXER_SPEED{ 260.f };
 	constexpr float BOXER_JUMP_HEIGHT{ 100.f };
 
-	constexpr float BOXER_ROLL_SPEED{ 145.f };
+	constexpr float BOXER_ROLL_SPEED{ 160.f };
 
 	constexpr int BOXER_HP{ 1000 };
 
-	constexpr float BOXER_ATTACK_1_WIDTH{ 20.f };
-	constexpr float BOXER_ATTACK_1_HEIGHT{ 20.f };
+	constexpr float BOXER_ATTACK_1_WIDTH{ 33.f };
+	constexpr float BOXER_ATTACK_1_HEIGHT{ 15.f };
 
-	constexpr float BOXER_ATTACK_2_WIDTH{ 20.f };
-	constexpr float BOXER_ATTACK_2_HEIGHT{ 20.f };
+	constexpr float BOXER_ATTACK_2_WIDTH{ 8.f };
+	constexpr float BOXER_ATTACK_2_HEIGHT{ 10.f };
 
-	constexpr float BOXER_AIR_ATTACK_WIDTH{ 20.f };
-	constexpr float BOXER_AIR_ATTACK_HEIGHT{ 20.f };
+	constexpr float BOXER_AIR_ATTACK_WIDTH{ 30.f };
+	constexpr float BOXER_AIR_ATTACK_HEIGHT{ 25.f };
 
 	constexpr float BOXER_ULTIMATE_WIDTH{ 25.f };
 	constexpr float BOXER_ULTIMATE_HEIGHT{ 20.f };
@@ -228,14 +228,14 @@ namespace constants
 
 	/* BOXER FRAMES */
 
-	constexpr int BOXER_ATTACK_1_STARTING_FRAME{ 0 };
-	constexpr int BOXER_ATTACK_1_ENDING_FRAME{ 1 };
+	constexpr int BOXER_ATTACK_1_STARTING_FRAME{ 4 };
+	constexpr int BOXER_ATTACK_1_ENDING_FRAME{ 5 };
 
-	constexpr int BOXER_ATTACK_2_STARTING_FRAME{ 1 };
+	constexpr int BOXER_ATTACK_2_STARTING_FRAME{ 7 };
 	constexpr int BOXER_ATTACK_2_ENDING_FRAME{ 7 };
 
-	constexpr int BOXER_AIR_ATTACK_STARTING_FRAME{ 2 };
-	constexpr int BOXER_AIR_ATTACK_ENDING_FRAME{ 5 };
+	constexpr int BOXER_AIR_ATTACK_STARTING_FRAME{ 1 };
+	constexpr int BOXER_AIR_ATTACK_ENDING_FRAME{ 4 };
 
 	constexpr int BOXER_ULTIMATE_PT_1_FRAME{ 9 };
 	constexpr int BOXER_ULTIMATE_PT_2_FRAME{ 13 };
