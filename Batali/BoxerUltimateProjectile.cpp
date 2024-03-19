@@ -8,7 +8,7 @@ BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, int
 
 	m_facingRight = direction;
 
-	m_speed = 400.f;
+	m_speed = BOXER_PROJECTILE_SPEED;
 
 	// Initialize sprite
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });

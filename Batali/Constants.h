@@ -154,6 +154,7 @@ namespace constants
 	constexpr int BOXER_ULTIMATE_DAMAGE{ 45 };
 
 	const sf::Vector2f BOXER_PROJECTILE_OFFSET_POSITION{ 0.f, -7.f };
+	constexpr float BOXER_PROJECTILE_SPEED{ 400.f };
 
 	/* HOODIE CONSTANTS: */
 
