@@ -23,7 +23,7 @@ void DamageEntity::updateDamage()
 		}
 	}
 
-	if (m_currentTexture != m_entityName + "Hitted")
+	if (m_currentTexture != m_entityName + "Hitted" && m_currentTexture != m_entityName + "FastHit")
 	{
 		m_inDamageCooldown = false;
 	}
@@ -101,7 +101,8 @@ bool DamageEntity::isCollidingWithAttack(SwordEntity& attackingEntity, bool& isU
 	{
 		if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()))
 		{
-			m_onFastHit = false;
+			if (attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+				m_onFastHit = false;
 			return true;
 		}
 

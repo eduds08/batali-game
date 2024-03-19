@@ -25,8 +25,8 @@ void ImageButtonUI::init(sf::Vector2f position, const std::string& textureName, 
 
 void ImageButtonUI::render(sf::RenderWindow& window) const
 {
-	window.draw(m_buttonBorder);
 	window.draw(m_sprite);
+	window.draw(m_buttonBorder);
 }
 
 void ImageButtonUI::update(bool onHover)
