@@ -10,6 +10,11 @@ void ButtonAuxState::initTextButton(const std::string& text, sf::Vector2f positi
 	m_buttons.emplace_back(std::make_shared<TextButtonUI>(TextButtonUI{ position, stateRelated, text, &m_font }));
 }
 
+void ButtonAuxState::initImageButton(sf::Vector2f position, const std::string& textureName, const std::string& texturePath)
+{
+	m_buttons.emplace_back(std::make_shared<ImageButtonUI>(position, textureName, texturePath));
+}
+
 void ButtonAuxState::updateButtons(bool isUpDown)
 {
 	sf::Keyboard::Scancode aheadKey = isUpDown ? sf::Keyboard::Scancode::Down : sf::Keyboard::Scancode::Right;
@@ -45,6 +50,10 @@ void ButtonAuxState::updateButtons(bool isUpDown)
 		{
 			pressTextButton(*dynamic_cast<TextButtonUI*>(m_buttons[m_onHoverButton].get()));
 		}
+		else if (dynamic_cast<ImageButtonUI*>(m_buttons[m_onHoverButton].get()) != nullptr)
+		{
+			pressImageButton();
+		}
 	}
 
 	m_pressedKey = sf::Keyboard::Scancode::Unknown;
@@ -56,9 +65,4 @@ void ButtonAuxState::renderButtons()
 	{
 		button->render(m_window);
 	}
-}
-
-void ButtonAuxState::pressTextButton(TextButtonUI& buttonPressed)
-{
-	m_currentState = buttonPressed.getStateRelated();
 }

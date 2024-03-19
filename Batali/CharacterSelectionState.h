@@ -12,13 +12,10 @@ public:
 	CharacterSelectionState(sf::RenderWindow& window, const std::string& chosenGamemode);
 	virtual ~CharacterSelectionState() = default;
 
-	virtual void update();
-	virtual void render();
+	void update();
+	void render();
 
 	void initSmallPortraits();
-
-	// Same logic of updateButtons()
-	void updateCharacterSelectionButtons();
 
 	void selectCharacter();
 
@@ -26,11 +23,10 @@ public:
 
 	std::string getChosenGamemode() { return m_chosenGamemode; }
 
+	void pressImageButton() { selectCharacter(); }
+
 private:
 	std::vector<BigCharacterPortraitUI> m_bigCharacterPortraits{};
-	//std::vector<SmallCharacterPortraitUI> m_smallCharacterPortraits{};
-
-	std::vector<ImageButtonUI> m_smallCp{};
 
 	std::vector<std::string> m_charactersNames{"fire_knight", "wind_hashashin", "boxer"};
 
@@ -45,8 +41,6 @@ private:
 
 	// Text above the big player portrait
 	std::vector<sf::Text> m_playerPortraitsText{ sf::Text{"Player 1", m_font}, sf::Text{"Player 2", m_font} };
-
-	size_t m_onHoverCharacterButton{ 0 };
 
 	// Player 1 or player 2
 	int m_playerChoice{ 1 };
