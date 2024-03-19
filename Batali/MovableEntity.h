@@ -9,7 +9,7 @@ public:
 	virtual ~MovableEntity() = default;
 
 	// Moves the shape and updates the sprite position to the same place
-	void move(float& deltaTime);
+	void move(float& deltaTime, float offsetPositionY = 0.f);
 
 	// MovableEntity flip based on m_facingRight
 	void flipSprite() { m_sprite.setScale(static_cast<float>(m_facingRight), 1.f); }

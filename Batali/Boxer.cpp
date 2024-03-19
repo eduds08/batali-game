@@ -80,30 +80,25 @@ void Boxer::updateAttackHitbox()
 	{
 		m_attackHitboxPosition = getShapePosition();
 
+		m_damage = BOXER_ULTIMATE_DAMAGE;
+
 		if (m_frameCount == BOXER_ULTIMATE_PT_1_FRAME && !m_animationEnd)
 		{
-			m_attackHitboxWidth = BOXER_ULTIMATE_WIDTH;
-			m_attackHitboxHeight = BOXER_ULTIMATE_HEIGHT;
-
-			m_damage = BOXER_ULTIMATE_DAMAGE;
-
 			if (m_projectiles.size() == 0)
 				launchProjectile();
 		}
 		else if (m_frameCount == BOXER_ULTIMATE_PT_2_FRAME && !m_animationEnd)
 		{
-			m_attackHitboxWidth = BOXER_ULTIMATE_WIDTH;
-			m_attackHitboxHeight = BOXER_ULTIMATE_HEIGHT;
-
-			m_damage = BOXER_ULTIMATE_DAMAGE;
-
 			if (m_projectiles.size() == 1)
 				launchProjectile();
 		}
 	}
 	else
 	{
-		m_damage = 0;
+		if (m_projectiles.size() == 0)
+		{
+			m_damage = 0;
+		}
 	}
 
 	m_attackHitbox.setSize(sf::Vector2f{ m_attackHitboxWidth, m_attackHitboxHeight });

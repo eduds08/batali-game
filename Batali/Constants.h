@@ -142,8 +142,11 @@ namespace constants
 	constexpr float BOXER_AIR_ATTACK_WIDTH{ 30.f };
 	constexpr float BOXER_AIR_ATTACK_HEIGHT{ 25.f };
 
-	constexpr float BOXER_ULTIMATE_WIDTH{ 25.f };
-	constexpr float BOXER_ULTIMATE_HEIGHT{ 20.f };
+	constexpr int BOXER_ULTIMATE_PROJECTILE_SPRITE_WIDTH{ 30 };
+	constexpr int BOXER_ULTIMATE_PROJECTILE_SPRITE_HEIGHT{ 30 };
+
+	constexpr float BOXER_ULTIMATE_PROJECTILE_SHAPE_WIDTH{ 10.f };
+	constexpr float BOXER_ULTIMATE_PROJECTILE_SHAPE_HEIGHT{ 10.f };
 
 	constexpr int BOXER_ATTACK_1_DAMAGE{ 100 };
 	constexpr int BOXER_ATTACK_2_DAMAGE{ 85 };

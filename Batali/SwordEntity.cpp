@@ -81,7 +81,7 @@ void SwordEntity::update(float& deltaTime)
 
 		this->updateDamage();
 
-		this->move(deltaTime);
+		this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
 	}
 
 	// Entity is dying (still playing dying animation)
@@ -92,7 +92,7 @@ void SwordEntity::update(float& deltaTime)
 		{
 			this->m_velocity.x = 0.f;
 			this->m_velocity.y += GRAVITY * deltaTime;
-			this->move(deltaTime);
+			this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
 		}
 
 		this->updateLimits();

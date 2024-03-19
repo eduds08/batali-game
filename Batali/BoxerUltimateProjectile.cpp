@@ -3,8 +3,8 @@
 BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, int direction)
 	: Projectile{ "boxer_ultimate" }
 {
-	m_spriteWidth = 30;
-	m_spriteHeight = 30;
+	m_spriteWidth = BOXER_ULTIMATE_PROJECTILE_SPRITE_WIDTH;
+	m_spriteHeight = BOXER_ULTIMATE_PROJECTILE_SPRITE_HEIGHT;
 
 	m_facingRight = direction;
 
@@ -16,7 +16,7 @@ BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, int
 	setSpritePosition(firstPosition);
 
 	// Initialize shape
-	m_shape.setSize(sf::Vector2f{ 15, 15 });
+	m_shape.setSize(sf::Vector2f{ BOXER_ULTIMATE_PROJECTILE_SHAPE_WIDTH, BOXER_ULTIMATE_PROJECTILE_SHAPE_HEIGHT });
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 	setShapePosition(firstPosition);
 
