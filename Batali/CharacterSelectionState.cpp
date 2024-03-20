@@ -105,42 +105,62 @@ void CharacterSelectionState::initSmallPortraits()
 	// Even amount
 	if (m_totalCharactersAmount % 2 == 0)
 	{
+		float offsetAux = (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f) * (m_totalCharactersAmount - 1);
+
 		for (int i = 0; i <= static_cast<int>(m_totalCharactersAmount / 2.f); ++i)
 		{
-			initImageButton(m_view.getCenter() + sf::Vector2f{ -static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * ((m_totalCharactersAmount / 2.f) - i), 400.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
+			initImageButton(m_view.getCenter() + sf::Vector2f{ -static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * ((m_totalCharactersAmount / 2.f) - i) + (auxPos < static_cast<int>(m_totalCharactersAmount / 2.f) ? -offsetAux : +offsetAux), -m_view.getSize().y / 4.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
+				if (auxPos < static_cast<int>(m_totalCharactersAmount / 2.f))
+					offsetAux -= 2.f * (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f);
+				else if (auxPos > static_cast<int>(m_totalCharactersAmount / 2.f))
+					offsetAux += 2.f * (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f);
 			}
 		}
 
 		for (int i = 1; 2 * i < m_totalCharactersAmount; ++i)
 		{
-			initImageButton(m_view.getCenter() + sf::Vector2f{ static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * i, 400.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
+			initImageButton(m_view.getCenter() + sf::Vector2f{ static_cast<float>(CHARACTER_PORTRAIT_WIDTH)* i + (auxPos < static_cast<int>(m_totalCharactersAmount / 2.f) ? -offsetAux : +offsetAux), -m_view.getSize().y / 4.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
+				if (auxPos < static_cast<int>(m_totalCharactersAmount / 2.f))
+					offsetAux -= 2.f * (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f);
+				else if (auxPos > static_cast<int>(m_totalCharactersAmount / 2.f))
+					offsetAux += 2.f * (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f);
 			}
 		}
 	}
 	// Odd amount
 	else
 	{
+		float offsetAux = (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f) * (static_cast<int>(m_totalCharactersAmount / 2) * 2.f);
+
 		for (int i = 0; i < m_totalCharactersAmount; i += 2)
 		{
-			initImageButton(m_view.getCenter() + sf::Vector2f{ -static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * ((m_totalCharactersAmount - i) / 2.f), 400.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
+			initImageButton(m_view.getCenter() + sf::Vector2f{ -static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * ((m_totalCharactersAmount - i) / 2.f) + (auxPos < static_cast<int>(m_totalCharactersAmount / 2.f) ? -offsetAux : +offsetAux), -m_view.getSize().y / 4.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
+				if (auxPos > static_cast<int>(m_totalCharactersAmount / 2.f))
+					offsetAux += 2.f * (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f);
+				else
+					offsetAux -= 2.f * (CHARACTER_SELECTION_PORTRAIT_OFFSET / 2.f);
 			}
 		}
 
 		for (int i = m_totalCharactersAmount - 1; i > 0; i -= 2)
 		{
-			initImageButton(m_view.getCenter() + sf::Vector2f{ static_cast<float>(CHARACTER_PORTRAIT_WIDTH) * ((m_totalCharactersAmount - i) / 2.f), 400.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
+			initImageButton(m_view.getCenter() + sf::Vector2f{ static_cast<float>(CHARACTER_PORTRAIT_WIDTH)* ((m_totalCharactersAmount - i) / 2.f) + (auxPos < static_cast<int>(m_totalCharactersAmount / 2.f) ? -offsetAux : +offsetAux), -m_view.getSize().y / 4.f }, m_charactersNames[auxPos] + "Portrait", "./assets/" + m_charactersNames[auxPos] + "/portrait.png");
 			if (auxPos + 1 < m_totalCharactersAmount)
 			{
 				++auxPos;
+				if (auxPos > static_cast<int>(m_totalCharactersAmount / 2.f))
+					offsetAux += 2.f * 5.f;
+				else
+					offsetAux -= 2.f * 5.f;
 			}
 		}
 	}

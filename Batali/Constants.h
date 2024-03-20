@@ -42,6 +42,8 @@ namespace constants
 
 	const sf::Vector2f BUTTON_TEXT_ON_HOVER_OFFSET{ 0.f, 2.f };
 
+	constexpr float CHARACTER_SELECTION_PORTRAIT_OFFSET{ 10.f };
+
 	/* FIRE KNIGHT CONSTANTS: */
 
 	constexpr int FIRE_KNIGHT_SPRITE_WIDTH{ 288 };
