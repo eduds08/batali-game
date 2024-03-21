@@ -83,7 +83,7 @@ inline void EnemyBot<T>::update(float& deltaTime)
 template<class T>
 inline void EnemyBot<T>::updateTexture()
 {
-	if (this->m_dying)
+	/*if (this->m_dying)
 	{
 		this->changeCurrentTexture(this->m_texturesActionName.at("Dying"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Dying")), false);
 	}
@@ -123,5 +123,5 @@ inline void EnemyBot<T>::updateTexture()
 		{
 			m_previousAttackingAnimation == this->m_entityName + "Attack1" ? this->changeCurrentTexture(this->m_texturesActionName.at("Attack2"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack2")), false) : this->changeCurrentTexture(this->m_texturesActionName.at("Attack1"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack1")), false);
 		}
-	}
+	}*/
 }

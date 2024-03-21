@@ -24,7 +24,7 @@ public:
 	void updateCollision();
 
 	// Checks the collision of entity with the tiles that are inside its imaginary view.
-	void updateEntityCollisionWithGrounds(WalkingEntity& entity, Ground& ground);
+	void updateEntityCollisionWithGrounds(ColliderEntity& entity, Ground& ground);
 
 	// Calls takeDamage and also knockbackMove for the attacked entity
 	void handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity, bool isUltimateActivate);
@@ -49,7 +49,10 @@ public:
 
 private:
 	
-	std::vector<std::shared_ptr<SwordEntity>> m_characters{};
+	//std::vector<std::shared_ptr<SwordEntity>> m_characters{};
+
+	std::vector<std::shared_ptr<Character>> m_characters{};
+
 	std::vector<CharacterStatusUI> m_characterStatus{};
 	std::vector<Ground> m_grounds{};
 
@@ -75,7 +78,7 @@ private:
 template<class T>
 inline void PlayingState::setPlayerInput(Player<T>* player)
 {
-	if (player->getPlayerNumber() == 1)
+	/*if (player->getPlayerNumber() == 1)
 	{
 		if (m_twoPlayers)
 		{
@@ -116,5 +119,5 @@ inline void PlayingState::setPlayerInput(Player<T>* player)
 		player->setConditionRoll(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J));
 
 		player->setConditionUltimate(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K));
-	}
+	}*/
 }

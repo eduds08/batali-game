@@ -18,9 +18,9 @@ public:
 	void setConditionRunRight(bool conditionRunRight) { this->m_conditionRunRight = conditionRunRight; }
 	void setConditionJump(bool conditionJump) { this->m_conditionJump = conditionJump; }
 	void setConditionRoll(bool conditionRoll) { this->m_conditionRoll = conditionRoll; }
-	void setConditionAttack1(bool conditionAttack1) { this->m_conditionAttack1 = conditionAttack1; }
-	void setConditionAttack2(bool conditionAttack2) { this->m_conditionAttack2 = conditionAttack2; }
-	void setConditionUltimate(bool conditionUltimate) { this->m_conditionUltimate = conditionUltimate; }
+	//void setConditionAttack1(bool conditionAttack1) { this->m_conditionAttack1 = conditionAttack1; }
+	//void setConditionAttack2(bool conditionAttack2) { this->m_conditionAttack2 = conditionAttack2; }
+	//void setConditionUltimate(bool conditionUltimate) { this->m_conditionUltimate = conditionUltimate; }
 
 	/* Getters */
 
@@ -51,7 +51,7 @@ inline Player<T>::~Player()
 template<class T>
 inline void Player<T>::updateTexture()
 {
-	if (this->m_dying)
+	/*if (this->m_dying)
 	{
 		this->changeCurrentTexture(this->m_texturesActionName.at("Dying"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Dying")), false);
 	}
@@ -98,5 +98,5 @@ inline void Player<T>::updateTexture()
 				this->changeCurrentTexture(this->m_texturesActionName.at("Attack2"), this->m_texturesNamePath.at(this->m_texturesActionName.at("Attack2")), false);
 			}
 		}
-	}
+	}*/
 }

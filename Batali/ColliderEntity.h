@@ -19,6 +19,9 @@ public:
 
 	const bool getIsCollidingHorizontally() const { return m_isCollidingHorizontally; }
 
+	// Updates some entity's attributes when isCollidingWith() returns true
+	void handleCollision();
+
 protected:
 	sf::Vector2f m_collisionDirection{};
 

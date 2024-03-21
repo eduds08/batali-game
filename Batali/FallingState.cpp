@@ -6,7 +6,7 @@
 
 void FallingState::enter(Character& character)
 {
-	character.changeCurrentTexture(character.m_texturesActionName.at("Falling"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Falling")), true);
+ 	character.changeCurrentTexture(character.m_texturesActionName.at("Falling"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Falling")), true);
 }
 
 CharacterState* FallingState::handleCondition(Character& character, const std::string& condition)

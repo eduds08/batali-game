@@ -60,3 +60,21 @@ bool ColliderEntity::isCollidingWith(const sf::Sprite& other)
 
 	return false;
 }
+
+void ColliderEntity::handleCollision()
+{
+	// Sets m_velocity.y to 0 if entity collides in bottom or top
+	if (m_collisionDirection.y != 0.f)
+	{
+		m_velocity.y = 0.f;
+	}
+
+	// Sets knockbackVelocity to 0 if entity is pushed against a wall after being attacked
+	/*if (m_isCollidingHorizontally)
+	{
+		setKnockbackVelocity(0.f);
+	}*/
+
+	// Sets canJump to true if entity collides in bottom
+	//m_canJump = m_collisionDirection.y > 0.f;
+}

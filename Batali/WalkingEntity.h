@@ -8,8 +8,7 @@ public:
 	WalkingEntity();
 	virtual ~WalkingEntity() = default;
 
-	// Updates some entity's attributes when isCollidingWith() returns true
-	void handleCollision();
+	
 
 	// Updates MovableEntity's m_velocity. Called before move()
 	void updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll = false);

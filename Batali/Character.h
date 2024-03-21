@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "ColliderEntity.h"
 
 class CharacterState;
@@ -15,7 +14,7 @@ public:
 
 	void update(float& deltaTime);
 
-	CharacterState* m_state{ nullptr };
+	CharacterState* m_state{ };
 
 	friend class RollingState;
 	friend class RunningState;
@@ -24,5 +23,7 @@ public:
 	friend class IdleState;
 
 protected:
+	int m_hp{ 1300 };
 
+	float m_jumpHeight{ 85.f };
 };

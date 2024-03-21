@@ -1,14 +1,14 @@
 #pragma once
 
-#include "SwordEntity.h"
+#include "Character.h"
 
-class Hoodie : public SwordEntity
+class Hoodie : public Character
 {
 public:
 	Hoodie(sf::Vector2f firstPosition);
 	virtual ~Hoodie() = default;
 
-	void updateAttackHitbox();
+	//void updateAttackHitbox();
 
 protected:
 

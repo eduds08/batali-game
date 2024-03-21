@@ -25,7 +25,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		m_characters.emplace_back(std::make_shared<Player<Boxer>>(LEFT_CHARACTER_FIRST_POSITION));
 	}
 
-	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
+	//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -43,7 +43,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 			m_characters.emplace_back(std::make_shared<Player<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 		}
 
-		m_player2InputThread = std::thread(&PlayingState::updatePlayer2Input, this);
+		//m_player2InputThread = std::thread(&PlayingState::updatePlayer2Input, this);
 	}
 	else
 	{
@@ -61,25 +61,25 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		}
 	}
 
-	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
+	//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
 	// Initialize map
 	loadAndCreateMap("./map/map.txt");
 
 	// Initialize Threads
 	m_animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
-	m_player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
+	//m_player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
 }
 
 PlayingState::~PlayingState()
 {
 	m_animationThread.join();
-	m_player1InputThread.join();
+	//m_player1InputThread.join();
 
-	if (m_twoPlayers)
-	{
-		m_player2InputThread.join();
-	}
+	//if (m_twoPlayers)
+	//{
+	//	m_player2InputThread.join();
+	//}
 }
 
 void PlayingState::update()
@@ -121,7 +121,7 @@ void PlayingState::render()
 		if (m_debugMode)
 		{
 			m_window.draw(character->getShape());
-			m_window.draw(character->getAttackHitbox());
+			//m_window.draw(character->getAttackHitbox());
 
 			if (dynamic_cast<WindHashashin*>(character.get()) != nullptr)
 			{
@@ -130,7 +130,7 @@ void PlayingState::render()
 		}
 		m_window.draw(character->getSprite());
 
-		if (dynamic_cast<Boxer*>(character.get()) != nullptr)
+		/*if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 		{
 			for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
 			{
@@ -140,7 +140,7 @@ void PlayingState::render()
 				}
 				m_window.draw(projectile->getSprite());
 			}
-		}
+		}*/
 	}
 
 	for (auto& ground : m_grounds)
@@ -179,7 +179,7 @@ void PlayingState::updateCollision()
 		}
 	}
 
-	if (m_characters[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_characters[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+	/*if (m_characters[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_characters[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 	{
 		m_characters[0]->setOnFreeze(false);
 		m_characters[1]->setOnFreeze(false);
@@ -199,10 +199,10 @@ void PlayingState::updateCollision()
 				}
 			}
 		}
-	}
+	}*/
 }
 
-void PlayingState::updateEntityCollisionWithGrounds(WalkingEntity& entity, Ground& ground)
+void PlayingState::updateEntityCollisionWithGrounds(ColliderEntity& entity, Ground& ground)
 {
 	if (ground.getSprite().getPosition().x <= entity.getShapeLimits()[1] && ground.getSprite().getPosition().x >= entity.getShapeLimits()[3]
 		&& ground.getSprite().getPosition().y >= entity.getShapeLimits()[0] && ground.getSprite().getPosition().y <= entity.getShapeLimits()[2])
@@ -244,8 +244,8 @@ void PlayingState::updateView()
 	m_view.setCenter(m_characters[0]->getShapePosition());
 	m_window.setView(m_view);
 
-	m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
-	m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
+	//m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
+	//m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;
@@ -293,18 +293,18 @@ void PlayingState::updateTexturesAndAnimations()
 
 			for (auto& character : m_characters)
 			{
-				if (!character->getDead())
-				{
+				//if (!character->getDead())
+				//{
 					character->updateAnimation();
 
-					if (dynamic_cast<Boxer*>(character.get()) != nullptr)
+					/*if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 					{
 						for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
 						{
 							projectile->updateAnimation();
 						}
 					}
-				}
+				}*/
 			}
 		}
 	}
