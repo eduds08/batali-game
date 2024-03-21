@@ -25,11 +25,18 @@ void Character::update(float& deltaTime)
 {
 	m_state->update(*this, deltaTime);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
-	{
-		handleCondition("JUMP");
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
+	this->updateLimits();
+
+	//handleCondition("");
+
+	/*if (m_collisionDirection.y > 0.f)
+	{*/
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
+		{
+			handleCondition("JUMP");
+		}
+	//}
+	 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
 	{
 		handleCondition("ROLL");
 	}
@@ -38,18 +45,9 @@ void Character::update(float& deltaTime)
 		handleCondition("RUN");
 	}
 
-	/*this->updateMovement(this->m_conditionRunLeft, this->m_conditionRunRight, this->m_conditionJump, deltaTime, this->m_conditionRoll);
+	//m_velocity.x = 0.f;
 
-	this->updateAttack(this->m_conditionAttack1, this->m_conditionAttack2, this->m_conditionUltimate);
-
-	this->updateDamage();*/
-
-	if (m_collisionDirection.y > 0.f)
-	{
-		m_velocity.y = 0.f;
-	}
+	m_velocity.y += GRAVITY * deltaTime;
 
 	this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
-
-	this->updateLimits();
 }

@@ -15,5 +15,7 @@ public:
 	virtual void update(Character& character, float& deltaTime);
 
 private:
-	float m_jumpHeight{};
+	float m_jumpHeight{ 85.f };
+
+	bool m_onFall{ false };
 };

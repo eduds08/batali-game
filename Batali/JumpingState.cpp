@@ -1,6 +1,6 @@
 #include "JumpingState.h"
 
-#include "FallingState.h"
+#include "IdleState.h"
 
 #include "Character.h"
 
@@ -16,9 +16,9 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 	{
 
 	}
-	else if (character.m_velocity.y > 0.f)
+	else if (condition == "IDLE")
 	{
-		return new FallingState{};
+		return new IdleState{};
 	}
 
     return nullptr;
@@ -26,5 +26,27 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 
 void JumpingState::update(Character& character, float& deltaTime)
 {
-	character.m_velocity.y += GRAVITY * deltaTime;
+	if (!m_onFall && character.m_velocity.y > 0.f)
+	{
+		m_onFall = true;
+		//character.handleCondition("FALL");
+	}
+
+	/* FALL: */
+
+	//character.m_velocity.y += GRAVITY * deltaTime;
+
+	if (m_onFall && character.m_currentTexture == character.m_entityName + "Jumping")
+	{
+		character.changeCurrentTexture(character.m_texturesActionName.at("Falling"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Falling")), true);
+	}
+
+	if (m_onFall)
+	{
+		if (character.m_velocity.y == 0.f || character.m_collisionDirection.y <= 0.f)
+		{
+			character.handleCondition("IDLE");
+		}
+			
+	}
 }

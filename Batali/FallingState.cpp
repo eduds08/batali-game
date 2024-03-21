@@ -11,7 +11,7 @@ void FallingState::enter(Character& character)
 
 CharacterState* FallingState::handleCondition(Character& character, const std::string& condition)
 {
-	if (character.m_collisionDirection.y >= 0.f)
+	if (condition == "IDLE")
 	{
 		return new IdleState{};
 	}
@@ -22,4 +22,9 @@ CharacterState* FallingState::handleCondition(Character& character, const std::s
 void FallingState::update(Character& character, float& deltaTime)
 {
 	character.m_velocity.y += GRAVITY * deltaTime;
+
+	if (character.m_collisionDirection.y > 0.f)
+	{
+		character.handleCondition("IDLE");
+	}
 }
