@@ -16,6 +16,9 @@
     <Filter Include="ENTITY">
       <UniqueIdentifier>{730e9c71-ba96-4042-b945-3047dbd9fe64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="STATE PATTERN">
+      <UniqueIdentifier>{3b2ba0f2-62cd-4be9-8bd2-24cade39b2aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundUI.cpp">
@@ -113,6 +116,36 @@
     </ClCompile>
     <ClCompile Include="Hoodie.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageButtonUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextButtonUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterState.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="RunningState.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="RollingState.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="OnUltimateState.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpingState.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingState.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>STATE PATTERN</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +250,36 @@
     </ClInclude>
     <ClInclude Include="Hoodie.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageButtonUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextButtonUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterState.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningState.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingState.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpingState.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="OnUltimateState.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="RollingState.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>STATE PATTERN</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

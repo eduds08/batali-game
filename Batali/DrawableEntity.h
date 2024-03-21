@@ -3,6 +3,8 @@
 #include "TextureManager.h"
 #include "Constants.h"
 
+#include "CharacterState.h"
+
 using namespace constants;
 
 class DrawableEntity
@@ -26,6 +28,8 @@ public:
 	const sf::Sprite& getSprite() const { return m_sprite; }
 	const sf::Vector2f getSpriteSize() const { return sf::Vector2f{static_cast<float>(m_spriteWidth), static_cast<float>(m_spriteHeight)}; }
 	const sf::Vector2f getSpritePosition() const { return m_sprite.getPosition(); }
+
+	
 
 protected:
 	// Singleton Pattern

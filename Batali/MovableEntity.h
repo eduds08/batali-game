@@ -18,6 +18,8 @@ public:
 
 	void setVelocity(sf::Vector2f velocity) { m_velocity = velocity; }
 	
+	friend class RunningState;
+
 protected:
 	sf::Vector2f m_velocity{};
 
