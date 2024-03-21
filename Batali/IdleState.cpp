@@ -5,6 +5,13 @@
 #include "OnUltimateState.h"
 #include "RunningState.h"
 
+#include "Character.h"
+
+void IdleState::enter(Character& character)
+{
+	character.changeCurrentTexture(character.m_texturesActionName.at("Idle"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Idle")), true);
+}
+
 CharacterState* IdleState::handleCondition(Character& character, const std::string& condition)
 {
 	if (condition == "JUMP")
@@ -31,6 +38,6 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
     return nullptr;
 }
 
-void IdleState::update(Character& character)
+void IdleState::update(Character& character, float& deltaTime)
 {
 }

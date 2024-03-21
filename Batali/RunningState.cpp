@@ -3,12 +3,18 @@
 #include "JumpingState.h"
 #include "RollingState.h"
 #include "OnUltimateState.h"
+#include "IdleState.h"
 
 #include "Character.h"
 
 RunningState::RunningState()
 {
 
+}
+
+void RunningState::enter(Character& character)
+{
+	character.changeCurrentTexture(character.m_texturesActionName.at("Running"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Running")), true);
 }
 
 CharacterState* RunningState::handleCondition(Character& character, const std::string& condition)
@@ -30,11 +36,18 @@ CharacterState* RunningState::handleCondition(Character& character, const std::s
 		return new OnUltimateState{};
 	}
 
+	if (character.m_velocity.x == 0.f)
+	{
+		return new IdleState{};
+	}
+
 	return nullptr;
 }
 
-void RunningState::update(Character& character)
+void RunningState::update(Character& character, float& deltaTime)
 {
+	character.m_velocity.x = 0.f;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
 	{
 		character.m_facingRight = -1;
@@ -48,5 +61,5 @@ void RunningState::update(Character& character)
 
 	character.flipSprite();
 
-	//character.m_velocity.y += GRAVITY * deltaTime;
+	character.m_velocity.y += GRAVITY * deltaTime;
 }

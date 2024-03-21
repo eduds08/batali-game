@@ -13,9 +13,15 @@ public:
 
 	void handleCondition(const std::string& condition);
 
-	void update();
+	void update(float& deltaTime);
 
 	CharacterState* m_state{ nullptr };
+
+	friend class RollingState;
+	friend class RunningState;
+	friend class JumpingState;
+	friend class FallingState;
+	friend class IdleState;
 
 protected:
 

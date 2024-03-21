@@ -16,10 +16,12 @@ void Character::handleCondition(const std::string& condition)
 	{
 		delete m_state;
 		m_state = state;
+
+		m_state->enter(*this);
 	}
 }
 
-void Character::update()
+void Character::update(float& deltaTime)
 {
-	m_state->update(*this);
+	m_state->update(*this, deltaTime);
 }

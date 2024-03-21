@@ -26,6 +26,9 @@ public:
 	virtual const bool getOnFreeze() const = 0;
 	virtual const std::string& getAttackMode() const = 0;
 
+	// Temporary
+	//friend class RollingState;
+
 protected:
 	bool m_conditionRunLeft{ false };
 	bool m_conditionRunRight{ false };

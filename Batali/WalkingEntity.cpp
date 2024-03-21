@@ -25,18 +25,18 @@ void WalkingEntity::handleCollision()
 
 void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight, bool conditionJump, float& deltaTime, bool conditionRoll)
 {
-	if (m_stamina == TOTAL_STAMINA)
+	/*if (m_stamina == TOTAL_STAMINA)
 	{
 		m_staminaRecoverClock.restart();
-	}
+	}*/
 
-	m_velocity.x = 0.f;
-	m_isRunning = false;
+	/*m_velocity.x = 0.f;
+	m_isRunning = false;*/
 
 	// Only runs when not on roll, not attacking and not freeze
-	if (!m_onRoll && getAttackMode() == "off" && !getOnFreeze())
-	{
-		if (conditionRunLeft)
+	/*if (!m_onRoll && getAttackMode() == "off" && !getOnFreeze())
+	{*/
+		/*if (conditionRunLeft)
 		{
 			m_facingRight = -1;
 			m_velocity.x -= m_speed;
@@ -47,10 +47,10 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 			m_facingRight = 1;
 			m_velocity.x += m_speed;
 			m_isRunning = true;
-		}
+		}*/
 
 		// Only can roll when on ground and not on Hitted animation and has Staminas
-		if (m_canJump && m_stamina > 0 && !getHitted() && m_currentTexture != m_entityName + "Roll")
+		/*if (m_canJump && m_stamina > 0 && !getHitted() && m_currentTexture != m_entityName + "Roll")
 		{
 			if (conditionRoll)
 			{
@@ -59,28 +59,28 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 				m_onRoll = true;
 			}
 		}
-	}
+	}*/
 
-	if (m_onRoll)
-	{
-		m_velocity.x += (m_facingRight * m_rollSpeed);
+	//if (m_onRoll)
+	//{
+	//	m_velocity.x += (m_facingRight * m_rollSpeed);
 
-		// End onRoll animation if m_animationEnd = true
-		if (m_currentTexture == m_entityName + "Roll" && m_animationEnd)
-		{
-			m_onRoll = false;
-		}
-	}
+	//	// End onRoll animation if m_animationEnd = true
+	//	if (m_currentTexture == m_entityName + "Roll" && m_animationEnd)
+	//	{
+	//		m_onRoll = false;
+	//	}
+	//}
 
-	flipSprite();
+	//flipSprite();
 
-	if (conditionJump && m_canJump && getAttackMode() == "off" && !m_onRoll && !getOnFreeze())
+	/*if (conditionJump && m_canJump && getAttackMode() == "off" && !m_onRoll && !getOnFreeze())
 	{
 		m_canJump = false;
 		m_velocity.y = -1 * sqrt(2.f * GRAVITY * m_jumpHeight);
-	}
+	}*/
 
-	m_velocity.y += GRAVITY * deltaTime;
+	//m_velocity.y += GRAVITY * deltaTime;
 
 	// If m_hitted is true (hitted sprite set), sets x-velocity to 0 so it can't move
 	if (getHitted())
@@ -88,7 +88,7 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 		m_velocity.x = 0.f;
 	}
 
-	m_staminaRecoverTime = m_staminaRecoverClock.getElapsedTime().asSeconds();
+	/*m_staminaRecoverTime = m_staminaRecoverClock.getElapsedTime().asSeconds();
 	if (m_staminaRecoverTime > 2.f)
 	{
 		if (m_stamina < TOTAL_STAMINA)
@@ -96,5 +96,5 @@ void WalkingEntity::updateMovement(bool conditionRunLeft, bool conditionRunRight
 			m_stamina += TOTAL_STAMINA / 2;
 		}
 		m_staminaRecoverClock.restart();
-	}
+	}*/
 }
