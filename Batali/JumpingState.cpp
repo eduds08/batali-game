@@ -43,4 +43,19 @@ void JumpingState::update(Character& character, float& deltaTime)
 			character.handleCondition("IDLE");
 		}
 	}
+
+	character.m_velocity.x = 0.f;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+	{
+		character.m_facingRight = -1;
+		character.m_velocity.x -= character.m_speed;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+	{
+		character.m_facingRight = 1;
+		character.m_velocity.x += character.m_speed;
+	}
+
+	character.flipSprite();
 }
