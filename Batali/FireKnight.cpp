@@ -1,14 +1,14 @@
 #include "FireKnight.h"
 
 
-#include "JumpingState.h"
+#include "FallingState.h"
 
 FireKnight::FireKnight(sf::Vector2f firstPosition)
 	: Character{}
 {
 	m_entityName = "fire_knight";
 
-	m_state = new JumpingState{};
+	m_state = new FallingState{};
 
 	
 

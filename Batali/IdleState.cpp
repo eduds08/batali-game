@@ -4,6 +4,7 @@
 #include "RollingState.h"
 #include "OnUltimateState.h"
 #include "RunningState.h"
+#include "FallingState.h"
 
 #include "Character.h"
 
@@ -34,6 +35,10 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
 	{
 		return new RunningState{};
 	}
+	else if (condition == "FALL")
+	{
+		return new FallingState{};
+	}
 
 
     return nullptr;
@@ -41,10 +46,10 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
 
 void IdleState::update(Character& character, float& deltaTime)
 {
-	character.m_velocity.x = 0.f;
+	//character.m_velocity.x = 0.f;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+	/*if (character.m_velocity.y > 0.f && character.m_collisionDirection.y <= 0.f)
 	{
-		character.handleCondition("RUN");
-	}
+		character.handleCondition("FALL");
+	}*/
 }

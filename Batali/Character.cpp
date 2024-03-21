@@ -1,7 +1,8 @@
 #include "Character.h"
 #include "ColliderEntity.h"
 
-
+#include "RollingState.h"
+#include "IdleState.h"
 
 Character::Character()
 	: ColliderEntity{}
@@ -23,20 +24,40 @@ void Character::handleCondition(const std::string& condition)
 
 void Character::update(float& deltaTime)
 {
+	m_velocity.x = 0.f;
+
+	if (dynamic_cast<RollingState*>(m_state) == nullptr && dynamic_cast<IdleState*>(m_state) == nullptr)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+		{
+			m_facingRight = -1;
+			m_velocity.x -= m_speed;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+		{
+			m_facingRight = 1;
+			m_velocity.x += m_speed;
+		}
+
+		flipSprite();
+	}
+
 	m_state->update(*this, deltaTime);
-
-	this->updateLimits();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
-	{
-		handleCondition("JUMP");
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
-	{
-		handleCondition("ROLL");
-	}
 
 	m_velocity.y += GRAVITY * deltaTime;
 
 	this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
+
+	this->updateLimits();
+
+
+	
+
+	/*if (conditionJump && m_canJump && getAttackMode() == "off" && !m_onRoll && !getOnFreeze())
+	{
+		m_canJump = false;
+		m_velocity.y = -1 * sqrt(2.f * GRAVITY * m_jumpHeight);
+	}
+
+	m_velocity.y += GRAVITY * deltaTime;*/
 }

@@ -68,13 +68,13 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 
 	// Initialize Threads
 	m_animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
-	//m_player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
+	m_player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
 }
 
 PlayingState::~PlayingState()
 {
 	m_animationThread.join();
-	//m_player1InputThread.join();
+	m_player1InputThread.join();
 
 	//if (m_twoPlayers)
 	//{
@@ -105,6 +105,23 @@ void PlayingState::update()
 
 		for (auto& character : m_characters)
 		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+			{
+				character->handleCondition("RUN");
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+			{
+				character->handleCondition("RUN");
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
+			{
+				character->handleCondition("JUMP");
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
+			{
+				character->handleCondition("ROLL");
+			}
+
 			character->update(m_deltaTime);
 		}
 
@@ -316,7 +333,7 @@ void PlayingState::updatePlayer1Input()
 	{
 		if (!m_onPause)
 		{
-			if (m_characters[0]->getEntityName() == "fire_knight")
+			/*if (m_characters[0]->getEntityName() == "fire_knight")
 			{
 				setPlayerInput<FireKnight>(dynamic_cast<Player<FireKnight>*>(m_characters[0].get()));
 			}
@@ -327,7 +344,27 @@ void PlayingState::updatePlayer1Input()
 			else if (m_characters[0]->getEntityName() == "boxer")
 			{
 				setPlayerInput<Boxer>(dynamic_cast<Player<Boxer>*>(m_characters[0].get()));
-			}
+			}*/
+
+			/*for (auto& character : m_characters)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+				{
+					character->handleCondition("RUN");
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+				{
+					character->handleCondition("RUN");
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
+				{
+					character->handleCondition("JUMP");
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
+				{
+					character->handleCondition("ROLL");
+				}
+			}*/
 		}
 	}
 }

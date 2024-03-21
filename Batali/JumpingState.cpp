@@ -1,6 +1,7 @@
 #include "JumpingState.h"
 
 #include "IdleState.h"
+#include "FallingState.h"
 
 #include "Character.h"
 
@@ -20,33 +21,19 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 	{
 		return new IdleState{};
 	}
+	else if (condition == "FALL")
+	{
+		return new FallingState{};
+	}
 
     return nullptr;
 }
 
 void JumpingState::update(Character& character, float& deltaTime)
 {
-	if (!m_onFall && character.m_velocity.y > 0.f)
-	{
-		m_onFall = true;
-	}
+	//character.m_velocity.x = 0.f;
 
-	if (m_onFall && character.m_currentTexture == character.m_entityName + "Jumping")
-	{
-		character.changeCurrentTexture(character.m_texturesActionName.at("Falling"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Falling")), true);
-	}
-
-	if (m_onFall)
-	{
-		if (character.m_velocity.y == 0.f || character.m_collisionDirection.y < 0.f)
-		{
-			character.handleCondition("IDLE");
-		}
-	}
-
-	character.m_velocity.x = 0.f;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
 	{
 		character.m_facingRight = -1;
 		character.m_velocity.x -= character.m_speed;
@@ -55,7 +42,12 @@ void JumpingState::update(Character& character, float& deltaTime)
 	{
 		character.m_facingRight = 1;
 		character.m_velocity.x += character.m_speed;
-	}
+	}*/
 
-	character.flipSprite();
+	//character.flipSprite();
+
+	if (character.m_velocity.y > 0.f)
+	{
+		character.handleCondition("FALL");
+	}
 }
