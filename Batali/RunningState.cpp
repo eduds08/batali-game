@@ -35,8 +35,7 @@ CharacterState* RunningState::handleCondition(Character& character, const std::s
 	{
 		return new OnUltimateState{};
 	}
-
-	if (character.m_velocity.x == 0.f)
+	else if (condition == "IDLE")
 	{
 		return new IdleState{};
 	}
@@ -62,4 +61,9 @@ void RunningState::update(Character& character, float& deltaTime)
 	character.flipSprite();
 
 	character.m_velocity.y += GRAVITY * deltaTime;
+
+	if (character.m_velocity.x == 0.f)
+	{
+		character.handleCondition("IDLE");
+	}
 }

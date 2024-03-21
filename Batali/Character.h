@@ -24,6 +24,4 @@ public:
 
 protected:
 	int m_hp{ 1300 };
-
-	float m_jumpHeight{ 85.f };
 };

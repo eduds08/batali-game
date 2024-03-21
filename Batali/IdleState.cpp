@@ -35,9 +35,16 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
 		return new RunningState{};
 	}
 
+
     return nullptr;
 }
 
 void IdleState::update(Character& character, float& deltaTime)
 {
+	character.m_velocity.x = 0.f;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+	{
+		character.handleCondition("RUN");
+	}
 }

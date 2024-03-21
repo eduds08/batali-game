@@ -27,25 +27,14 @@ void Character::update(float& deltaTime)
 
 	this->updateLimits();
 
-	//handleCondition("");
-
-	/*if (m_collisionDirection.y > 0.f)
-	{*/
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
-		{
-			handleCondition("JUMP");
-		}
-	//}
-	 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
+	{
+		handleCondition("JUMP");
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
 	{
 		handleCondition("ROLL");
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-	{
-		handleCondition("RUN");
-	}
-
-	//m_velocity.x = 0.f;
 
 	m_velocity.y += GRAVITY * deltaTime;
 
