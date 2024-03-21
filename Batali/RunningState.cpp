@@ -50,21 +50,6 @@ CharacterState* RunningState::handleCondition(Character& character, const std::s
 
 void RunningState::update(Character& character, float& deltaTime)
 {
-	//character.m_velocity.x = 0.f;
-
-	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-	{
-		character.m_facingRight = -1;
-		character.m_velocity.x -= character.m_speed;
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
-	{
-		character.m_facingRight = 1;
-		character.m_velocity.x += character.m_speed;
-	}*/
-
-	//character.flipSprite();
-
 	character.m_velocity.y += GRAVITY * deltaTime;
 
 	if (character.m_velocity.x == 0.f)

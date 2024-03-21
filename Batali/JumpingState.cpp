@@ -31,23 +31,12 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 
 void JumpingState::update(Character& character, float& deltaTime)
 {
-	//character.m_velocity.x = 0.f;
-
-	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-	{
-		character.m_facingRight = -1;
-		character.m_velocity.x -= character.m_speed;
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
-	{
-		character.m_facingRight = 1;
-		character.m_velocity.x += character.m_speed;
-	}*/
-
-	//character.flipSprite();
-
 	if (character.m_velocity.y > 0.f)
 	{
 		character.handleCondition("FALL");
+	}
+	if (character.m_collisionDirection.y > 0.f && character.m_velocity.y == 0.f)
+	{
+		character.handleCondition("IDLE");
 	}
 }

@@ -49,15 +49,4 @@ void Character::update(float& deltaTime)
 	this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
 
 	this->updateLimits();
-
-
-	
-
-	/*if (conditionJump && m_canJump && getAttackMode() == "off" && !m_onRoll && !getOnFreeze())
-	{
-		m_canJump = false;
-		m_velocity.y = -1 * sqrt(2.f * GRAVITY * m_jumpHeight);
-	}
-
-	m_velocity.y += GRAVITY * deltaTime;*/
 }
