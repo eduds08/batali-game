@@ -22,7 +22,7 @@ void RollingState::update(Character& character, float& deltaTime)
 {
 	character.m_velocity.x += (character.m_facingRight * m_rollSpeed);
 
-	if (character.m_currentTexture == character.m_entityName + "Roll" && character.m_animationEnd)
+	if (character.m_animationEnd)
 	{
 		character.handleCondition("IDLE");
 	}

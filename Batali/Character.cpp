@@ -3,6 +3,7 @@
 
 #include "RollingState.h"
 #include "IdleState.h"
+#include "AttackingState.h"
 
 Character::Character()
 	: ColliderEntity{}
@@ -48,6 +49,8 @@ void Character::update(float& deltaTime)
 
 
 	//updateAttack
+
+	//updateAttackHitbox
 	
 	//updateDamage
 

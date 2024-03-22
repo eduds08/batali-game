@@ -37,6 +37,8 @@ CharacterState* AttackingState::handleCondition(Character& character, const std:
 
 void AttackingState::update(Character& character, float& deltaTime)
 {
+	character.m_velocity.x = 0.f;
+
 	if (character.m_animationEnd)
 	{
 		character.handleCondition("IDLE");
