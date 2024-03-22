@@ -24,6 +24,7 @@ void RollingState::update(Character& character, float& deltaTime)
 
 	if (character.m_animationEnd)
 	{
-		character.handleCondition("IDLE");
+		//character.handleCondition("IDLE");
+		character.setState(new IdleState{});
 	}
 }

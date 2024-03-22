@@ -8,11 +8,13 @@ class Character : public ColliderEntity
 {
 public:
 	Character();
-	virtual ~Character() {}
+	virtual ~Character();
 
 	void handleCondition(const std::string& condition);
 
 	void update(float& deltaTime);
+	
+	void setState(CharacterState* state);
 
 	CharacterState* m_state{ };
 

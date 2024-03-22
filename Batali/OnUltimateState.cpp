@@ -23,10 +23,11 @@ void OnUltimateState::update(Character& character, float& deltaTime)
 {
 	character.m_velocity.x = 0.f;
 
+	character.updateAttackHitbox();
+
 	if (character.m_animationEnd)
 	{
-		character.handleCondition("IDLE");
+		//character.handleCondition("IDLE");
+		character.setState(new IdleState{});
 	}
-
-	character.updateAttackHitbox();
 }

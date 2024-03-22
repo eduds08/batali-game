@@ -60,6 +60,7 @@ void RunningState::update(Character& character, float& deltaTime)
 
 	if (character.m_velocity.x == 0.f)
 	{
-		character.handleCondition("IDLE");
+		//character.handleCondition("IDLE");
+		character.setState(new IdleState{});
 	}
 }

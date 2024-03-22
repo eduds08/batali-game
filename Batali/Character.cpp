@@ -13,6 +13,15 @@ Character::Character()
 {
 }
 
+Character::~Character()
+{
+	if (m_state)
+	{
+		delete m_state;
+		m_state = nullptr;
+	}
+}
+
 void Character::handleCondition(const std::string& condition)
 {
 	CharacterState* state = m_state->handleCondition(*this, condition);
@@ -76,6 +85,16 @@ void Character::update(float& deltaTime)
 		m_inDamageCooldown = false;
 	}*/
 
+}
+
+void Character::setState(CharacterState* state)
+{
+	if (state != nullptr)
+	{
+		delete m_state;
+		m_state = state;
+		m_state->enter(*this);
+	}
 }
 
 bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate)

@@ -27,6 +27,7 @@ void FallingState::update(Character& character, float& deltaTime)
 {
 	if (character.m_velocity.y == 0.f || character.m_collisionDirection.y < 0.f)
 	{
-		character.handleCondition("IDLE");
+		//character.handleCondition("IDLE");
+		character.setState(new IdleState{});
 	}
 }
