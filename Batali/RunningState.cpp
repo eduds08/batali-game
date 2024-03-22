@@ -5,6 +5,7 @@
 #include "OnUltimateState.h"
 #include "IdleState.h"
 #include "FallingState.h"
+#include "AttackingState.h"
 
 #include "Character.h"
 
@@ -30,7 +31,7 @@ CharacterState* RunningState::handleCondition(Character& character, const std::s
 	}
 	else if (condition == "ATTACK_1" || condition == "ATTACK_2")
 	{
-
+		return new AttackingState{ condition };
 	}
 	else if (condition == "ULTIMATE")
 	{

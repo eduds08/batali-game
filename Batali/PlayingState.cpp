@@ -121,6 +121,18 @@ void PlayingState::update()
 			{
 				character->handleCondition("ROLL");
 			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X))
+			{
+				character->handleCondition("ATTACK_1");
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C))
+			{
+				character->handleCondition("ATTACK_2");
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V))
+			{
+				character->handleCondition("ULTIMATE");
+			}
 
 			character->update(m_deltaTime);
 		}

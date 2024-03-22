@@ -21,6 +21,7 @@ public:
 	friend class JumpingState;
 	friend class FallingState;
 	friend class IdleState;
+	friend class AttackingState;
 
 protected:
 	int m_hp{ 1300 };

@@ -46,7 +46,15 @@ void Character::update(float& deltaTime)
 
 	m_velocity.y += GRAVITY * deltaTime;
 
+
+	//updateAttack
+	
+	//updateDamage
+
+
 	this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
+
+
 
 	this->updateLimits();
 }

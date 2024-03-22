@@ -2,6 +2,7 @@
 
 #include "IdleState.h"
 #include "FallingState.h"
+#include "AttackingState.h"
 
 #include "Character.h"
 
@@ -15,7 +16,7 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 {
 	if (condition == "ATTACK_1" || condition == "ATTACK_2")
 	{
-
+		return new AttackingState{ "AIR_ATTACK" };
 	}
 	else if (condition == "IDLE")
 	{
