@@ -212,7 +212,7 @@ void PlayingState::updateCollision()
 	{
 		m_characters[0]->setOnFreeze(false);
 		m_characters[1]->setOnFreeze(false);
-	}
+	}*/
 
 	for (auto& attackedCharacter : m_characters)
 	{
@@ -228,7 +228,7 @@ void PlayingState::updateCollision()
 				}
 			}
 		}
-	}*/
+	}
 }
 
 void PlayingState::updateEntityCollisionWithGrounds(ColliderEntity& entity, Ground& ground)
@@ -243,7 +243,7 @@ void PlayingState::updateEntityCollisionWithGrounds(ColliderEntity& entity, Grou
 	}
 }
 
-void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEntity& attackedEntity, bool isUltimateActivate)
+void PlayingState::handleEntityAttacked(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate)
 {
 	// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
 	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
@@ -255,7 +255,7 @@ void PlayingState::handleEntityAttacked(SwordEntity& attackingEntity, DamageEnti
 		if (gotHit && attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 		{
 			// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-			while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() && !attackedEntity.getOnRoll())
+			while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() /*&& !attackedEntity.getOnRoll()*/)
 			{
 				for (auto& ground : m_grounds)
 				{

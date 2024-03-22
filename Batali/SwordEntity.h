@@ -37,11 +37,13 @@ protected:
 	float m_attackHitboxWidth{};
 	float m_attackHitboxHeight{};
 
+	int m_damage{};
+
 	std::string m_attackMode{"off"};
 
 	bool m_conditionAttack1{ false };
 	bool m_conditionAttack2{ false };
 	bool m_conditionUltimate{ false };
 
-	int m_damage{};
+	
 };

@@ -10,6 +10,8 @@ public:
 
 	//void updateAttackHitbox();
 
+	virtual void updateAttackHitbox();
+
 protected:
 
 };

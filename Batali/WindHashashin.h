@@ -16,6 +16,8 @@ public:
 		m_ultimateActivateHitbox.setPosition(sf::Vector2f{ -100.f, -100.f });
 	}
 
+	virtual void updateAttackHitbox();
+
 	/* SETTERS */
 
 	void setActivateUltimate(bool activateUltimate) { m_activateUltimate = activateUltimate; }

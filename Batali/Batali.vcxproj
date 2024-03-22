@@ -148,11 +148,13 @@
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="ColliderEntity.cpp" />
     <ClCompile Include="DamageEntity.cpp" />
+    <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
     <ClCompile Include="FallingState.cpp" />
     <ClCompile Include="FireKnight.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="HittedState.cpp" />
     <ClCompile Include="Hoodie.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="ImageButtonUI.cpp" />
@@ -188,7 +190,9 @@
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterState.h" />
+    <ClInclude Include="DeadState.h" />
     <ClInclude Include="FallingState.h" />
+    <ClInclude Include="HittedState.h" />
     <ClInclude Include="Hoodie.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />

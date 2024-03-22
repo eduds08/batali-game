@@ -9,7 +9,7 @@ public:
 	virtual ~Hoodie() = default;
 
 	//void updateAttackHitbox();
-
+	virtual void updateAttackHitbox();
 protected:
 
 };
