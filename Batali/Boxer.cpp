@@ -1,10 +1,11 @@
 #include "Boxer.h"
+#include "FallingState.h"
 
 Boxer::Boxer(sf::Vector2f firstPosition)
 	: Character{}
 {
 	m_entityName = "boxer";
-
+	m_state = new FallingState{};
 	initTexturesMap();
 
 	// Initialize sprite
@@ -12,7 +13,8 @@ Boxer::Boxer(sf::Vector2f firstPosition)
 	m_spriteHeight = BOXER_SPRITE_HEIGHT;
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 
-	changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true);
+	//changeCurrentTexture(m_texturesActionName.at("Falling"), m_texturesNamePath.at(m_texturesActionName.at("Falling")), true);
+	m_state->enter(*this);
 
 	// Initialize shape
 	m_shape.setSize(sf::Vector2f{ BOXER_SHAPE_WIDTH, BOXER_SHAPE_HEIGHT});
