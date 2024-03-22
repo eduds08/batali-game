@@ -14,4 +14,5 @@ CharacterState* DeadState::handleCondition(Character& character, const std::stri
 
 void DeadState::update(Character& character, float& deltaTime)
 {
+	character.m_velocity.x = 0.f;
 }

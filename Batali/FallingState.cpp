@@ -1,7 +1,7 @@
 #include "FallingState.h"
 
 #include "IdleState.h"
-
+#include "HittedState.h"
 #include "Character.h"
 
 void FallingState::enter(Character& character)
@@ -14,6 +14,10 @@ CharacterState* FallingState::handleCondition(Character& character, const std::s
 	if (condition == "IDLE")
 	{
 		return new IdleState{};
+	}
+	else if (condition == "HITTED")
+	{
+		return new HittedState{};
 	}
 
 	return nullptr;

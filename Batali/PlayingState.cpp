@@ -102,37 +102,37 @@ void PlayingState::update()
 		{
 			characterStatus.update();
 		}
-
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+		{
+			m_characters[0]->handleCondition("RUN");
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+		{
+			m_characters[0]->handleCondition("RUN");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
+		{
+			m_characters[0]->handleCondition("JUMP");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
+		{
+			m_characters[0]->handleCondition("ROLL");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X))
+		{
+			m_characters[0]->handleCondition("ATTACK_1");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C))
+		{
+			m_characters[0]->handleCondition("ATTACK_2");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V))
+		{
+			m_characters[0]->handleCondition("ULTIMATE");
+		}
 		for (auto& character : m_characters)
 		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-			{
-				character->handleCondition("RUN");
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
-			{
-				character->handleCondition("RUN");
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
-			{
-				character->handleCondition("JUMP");
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
-			{
-				character->handleCondition("ROLL");
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X))
-			{
-				character->handleCondition("ATTACK_1");
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C))
-			{
-				character->handleCondition("ATTACK_2");
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V))
-			{
-				character->handleCondition("ULTIMATE");
-			}
+			
 
 			character->update(m_deltaTime);
 		}
@@ -150,7 +150,7 @@ void PlayingState::render()
 		if (m_debugMode)
 		{
 			m_window.draw(character->getShape());
-			//m_window.draw(character->getAttackHitbox());
+			m_window.draw(character->getAttackHitbox());
 
 			if (dynamic_cast<WindHashashin*>(character.get()) != nullptr)
 			{

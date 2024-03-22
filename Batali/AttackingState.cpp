@@ -3,6 +3,7 @@
 #include "IdleState.h"
 
 #include "Character.h"
+#include "HittedState.h"
 
 AttackingState::AttackingState(const std::string& attack)
 {
@@ -30,6 +31,10 @@ CharacterState* AttackingState::handleCondition(Character& character, const std:
 	if (condition == "IDLE")
 	{
 		return new IdleState{};
+	}
+	else if (condition == "HITTED")
+	{
+		return new HittedState{};
 	}
 	
 	return nullptr;

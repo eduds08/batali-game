@@ -2,6 +2,7 @@
 
 #include "IdleState.h"
 #include "FallingState.h"
+#include "HittedState.h"
 #include "AttackingState.h"
 
 #include "Character.h"
@@ -25,6 +26,10 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 	else if (condition == "FALL")
 	{
 		return new FallingState{};
+	}
+	else if (condition == "HITTED")
+	{
+		return new HittedState{};
 	}
 
     return nullptr;
