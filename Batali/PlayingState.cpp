@@ -25,7 +25,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		m_characters.emplace_back(std::make_shared<Player<Boxer>>(LEFT_CHARACTER_FIRST_POSITION));
 	}
 
-	//m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
+	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
 
 	// Initialize Player 2 or Enemy
 	if (m_twoPlayers)
@@ -61,7 +61,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		}
 	}
 
-	//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
+	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
 	// Initialize map
 	loadAndCreateMap("./map/map.txt");
@@ -273,8 +273,8 @@ void PlayingState::updateView()
 	m_view.setCenter(m_characters[0]->getShapePosition());
 	m_window.setView(m_view);
 
-	//m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
-	//m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
+	m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
+	m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
 
 	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;

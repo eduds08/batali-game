@@ -23,8 +23,8 @@ WindHashashin::WindHashashin(sf::Vector2f firstPosition)
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
 
 	// DEBUG
-	//m_attackHitbox.setFillColor(sf::Color{ 255, 0, 0, 50 });
-	//m_attackHitbox.setOutlineThickness(1.f);
+	m_attackHitbox.setFillColor(sf::Color{ 255, 0, 0, 50 });
+	m_attackHitbox.setOutlineThickness(1.f);
 	m_ultimateActivateHitbox.setFillColor(sf::Color{ 0, 0, 255, 50 });
 	m_ultimateActivateHitbox.setOutlineThickness(1.f);
 	m_shape.setOutlineColor(sf::Color::Red);

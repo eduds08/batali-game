@@ -29,6 +29,9 @@ public:
 	// Moves the entity after being hit. attackDirection -> direction of the attack (from left or right)
 	void knockbackMove(float& deltaTime, float attackDirection);
 
+	const int* getHp() const { return &m_hp; }
+	const int* getRemainingManaToUltimate() const { return &m_remainingManaToUltimate; }
+	const int* getStamina() const { return &m_stamina; }
 	friend class RollingState;
 	friend class RunningState;
 	friend class JumpingState;
@@ -46,10 +49,12 @@ protected:
 	sf::Vector2f m_attackHitboxPosition{};
 
 	float m_knockbackVelocity{ KNOCKBACK_SPEED };
-
+	int m_remainingManaToUltimate{ 5 };
 	float m_attackHitboxWidth{};
 	float m_attackHitboxHeight{};
-
+	sf::Clock m_staminaRecoverClock{};
+	int m_stamina{ 100 };
+	float m_staminaRecoverTime{};
 	int m_damage{};
 
 	int m_hp{ 1300 };

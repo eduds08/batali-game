@@ -28,28 +28,39 @@ void Character::handleCondition(const std::string& condition)
 
 void Character::update(float& deltaTime)
 {
-	m_velocity.x = 0.f;
-
-	if (dynamic_cast<RollingState*>(m_state) == nullptr && dynamic_cast<IdleState*>(m_state) == nullptr)
+	if (dynamic_cast<DeadState*>(m_state) == nullptr)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-		{
-			m_facingRight = -1;
-			m_velocity.x -= m_speed;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
-		{
-			m_facingRight = 1;
-			m_velocity.x += m_speed;
-		}
+		m_velocity.x = 0.f;
 
-		flipSprite();
+		if (dynamic_cast<RollingState*>(m_state) == nullptr && dynamic_cast<IdleState*>(m_state) == nullptr)
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+			{
+				m_facingRight = -1;
+				m_velocity.x -= m_speed;
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+			{
+				m_facingRight = 1;
+				m_velocity.x += m_speed;
+			}
+
+			flipSprite();
+		}
 	}
+	
 
 	m_state->update(*this, deltaTime);
 
-	m_velocity.y += GRAVITY * deltaTime;
+	if (dynamic_cast<DeadState*>(m_state) == nullptr)
+	{
+		m_velocity.y += GRAVITY * deltaTime;
 
+		this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
+
+
+		this->updateLimits();
+	}
 
 	//updateAttack - Implemented
 
@@ -65,11 +76,6 @@ void Character::update(float& deltaTime)
 		m_inDamageCooldown = false;
 	}*/
 
-
-	this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
-
-
-	this->updateLimits();
 }
 
 bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate)

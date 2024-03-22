@@ -2,15 +2,15 @@
 
 #include "UI.h"
 #include "StatusBarUI.h"
-#include "SwordEntity.h"
+#include "Character.h"
 
 class CharacterStatusUI : public UI
 {
 public:
-	CharacterStatusUI(const std::string& textureName = "", const std::string& texturePath = "", SwordEntity* character = nullptr, bool onRight = false);
+	CharacterStatusUI(const std::string& textureName = "", const std::string& texturePath = "", Character* character = nullptr, bool onRight = false);
 	virtual ~CharacterStatusUI() = default;
 
-	void init(const std::string& textureName, const std::string& texturePath, SwordEntity* character = nullptr, bool onRight = false);
+	void init(const std::string& textureName, const std::string& texturePath, Character* character = nullptr, bool onRight = false);
 
 	void update();
 
