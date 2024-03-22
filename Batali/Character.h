@@ -16,6 +16,8 @@ public:
 
 	CharacterState* m_state{ };
 
+	virtual void updateAttackHitbox() = 0;
+
 	friend class RollingState;
 	friend class RunningState;
 	friend class JumpingState;

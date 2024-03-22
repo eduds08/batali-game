@@ -27,4 +27,6 @@ void OnUltimateState::update(Character& character, float& deltaTime)
 	{
 		character.handleCondition("IDLE");
 	}
+
+	character.updateAttackHitbox();
 }
