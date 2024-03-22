@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedEntity.cpp" />
+    <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="BackgroundUI.cpp" />
     <ClCompile Include="BigCharacterPortraitUI.cpp" />
     <ClCompile Include="Boxer.cpp" />
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.h" />
+    <ClInclude Include="AttackingState.h" />
     <ClInclude Include="BackgroundUI.h" />
     <ClInclude Include="BigCharacterPortraitUI.h" />
     <ClInclude Include="Boxer.h" />
