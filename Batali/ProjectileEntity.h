@@ -1,10 +1,10 @@
 #pragma once
 
-#include "SwordEntity.h"
+#include "Character.h"
 #include "Projectile.h"
 #include <memory>
 
-class ProjectileEntity : public SwordEntity
+class ProjectileEntity : public Character
 {
 public:
 	ProjectileEntity();

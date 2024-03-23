@@ -45,7 +45,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 
 		//m_player2InputThread = std::thread(&PlayingState::updatePlayer2Input, this);
 	}
-	else
+	/*else
 	{
 		if (secondCharacter == "fire_knight")
 		{
@@ -59,7 +59,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 		{
 			m_characters.emplace_back(std::make_shared<EnemyBot<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
 		}
-	}
+	}*/
 
 	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
@@ -159,7 +159,7 @@ void PlayingState::render()
 		}
 		m_window.draw(character->getSprite());
 
-		/*if (dynamic_cast<Boxer*>(character.get()) != nullptr)
+		if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 		{
 			for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
 			{
@@ -169,7 +169,7 @@ void PlayingState::render()
 				}
 				m_window.draw(projectile->getSprite());
 			}
-		}*/
+		}
 	}
 
 	for (auto& ground : m_grounds)
@@ -326,14 +326,14 @@ void PlayingState::updateTexturesAndAnimations()
 				//{
 					character->updateAnimation();
 
-					/*if (dynamic_cast<Boxer*>(character.get()) != nullptr)
+					if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 					{
 						for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
 						{
 							projectile->updateAnimation();
 						}
 					}
-				}*/
+				//}
 			}
 		}
 	}

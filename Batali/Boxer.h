@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Character.h"
-//#include "BoxerUltimateProjectile.h"
+#include "ProjectileEntity.h"
+#include "BoxerUltimateProjectile.h"
 
-class Boxer : public Character
+class Boxer : public ProjectileEntity
 {
 public:
 	Boxer(sf::Vector2f firstPosition);
@@ -14,7 +14,7 @@ public:
 	virtual void updateAttackHitbox();
 
 	// Instantiate a projectile and pushes it into m_projectiles vector
-	//void launchProjectile();
+	void launchProjectile();
 
 protected:
 	

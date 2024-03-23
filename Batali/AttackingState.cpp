@@ -4,6 +4,8 @@
 
 #include "Character.h"
 #include "HittedState.h"
+#include "JumpingState.h"
+#include "FallingState.h"
 
 AttackingState::AttackingState(const std::string& attack)
 {
@@ -46,7 +48,15 @@ void AttackingState::update(Character& character, float& deltaTime)
 
 	if (character.m_animationEnd)
 	{
-		character.handleCondition("IDLE");
+		if (m_attack != "AirAttack")
+		{
+			//character.handleCondition("IDLE");
+			character.setState(new IdleState{});
+		}
+		else
+		{
+			character.setState(new FallingState{});
+		}
 	}
 
 	character.updateAttackHitbox();

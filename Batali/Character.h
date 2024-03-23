@@ -12,11 +12,13 @@ public:
 
 	void handleCondition(const std::string& condition);
 
-	void update(float& deltaTime);
+	virtual void update(float& deltaTime);
 	
 	void setState(CharacterState* state);
 
 	CharacterState* m_state{ };
+
+	//CharacterState* m_projectilesState{ nullptr };
 
 	virtual void updateAttackHitbox() = 0;
 

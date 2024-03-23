@@ -34,11 +34,13 @@ void HittedState::update(Character& character, float& deltaTime)
 	{
 		if (character.m_hp <= 0)
 		{
-			character.handleCondition("DEAD");
+			//character.handleCondition("DEAD");
+			character.setState(new DeadState{});
 		}
 		else
 		{
-			character.handleCondition("IDLE");
+			//character.handleCondition("IDLE");
+			character.setState(new IdleState{});
 		}
 	}
 }

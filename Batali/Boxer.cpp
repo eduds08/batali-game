@@ -2,7 +2,7 @@
 #include "FallingState.h"
 
 Boxer::Boxer(sf::Vector2f firstPosition)
-	: Character{}
+	: ProjectileEntity{}
 {
 	m_entityName = "boxer";
 	m_state = new FallingState{};
@@ -84,7 +84,7 @@ void Boxer::updateAttackHitbox()
 
 		m_damage = BOXER_ULTIMATE_DAMAGE;
 
-		/*if (m_frameCount == BOXER_ULTIMATE_PT_1_FRAME && !m_animationEnd)
+		if (m_frameCount == BOXER_ULTIMATE_PT_1_FRAME && !m_animationEnd)
 		{
 			if (m_projectiles.size() == 0)
 				launchProjectile();
@@ -93,15 +93,15 @@ void Boxer::updateAttackHitbox()
 		{
 			if (m_projectiles.size() == 1)
 				launchProjectile();
-		}*/
+		}
 	}
-	/*else
+	else
 	{
 		if (m_projectiles.size() == 0)
 		{
 			m_damage = 0;
 		}
-	}*/
+	}
 
 	m_attackHitbox.setSize(sf::Vector2f{ m_attackHitboxWidth, m_attackHitboxHeight });
 	m_attackHitbox.setOrigin(0.f, m_attackHitboxHeight / 2.f);
@@ -109,7 +109,7 @@ void Boxer::updateAttackHitbox()
 	m_attackHitbox.setPosition(m_attackHitboxPosition);
 }
 
-//void Boxer::launchProjectile()
-//{
-//	m_projectiles.emplace_back(std::make_shared<BoxerUltimateProjectile>(getShapePosition() + BOXER_PROJECTILE_OFFSET_POSITION, m_facingRight));
-//}
+void Boxer::launchProjectile()
+{
+	m_projectiles.emplace_back(std::make_shared<BoxerUltimateProjectile>(getShapePosition() + BOXER_PROJECTILE_OFFSET_POSITION, m_facingRight));
+}

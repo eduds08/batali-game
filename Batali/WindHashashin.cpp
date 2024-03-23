@@ -3,6 +3,7 @@
 #include "AttackingState.h"
 #include "OnUltimateState.h"
 #include "FallingState.h"
+#include "IdleState.h"
 
 WindHashashin::WindHashashin(sf::Vector2f firstPosition)
 	: Character{}
@@ -120,6 +121,8 @@ void WindHashashin::updateAttackHitbox()
 			//m_attackMode = "off";
 
 			m_activateUltimate = false;
+
+			setState(new IdleState{});
 		}
 		else if ((m_frameCount == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || m_frameCount == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && !m_animationEnd && m_activateUltimate)
 		{

@@ -7,6 +7,8 @@
 #include "DeadState.h"
 #include "HittedState.h"
 
+#include "ProjectileEntity.h"
+#include "WindHashashin.h"
 
 Character::Character()
 	: ColliderEntity{}
@@ -108,39 +110,39 @@ bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltima
 			return true;
 		}
 
-		// Was attacked by Wind Hashashin's ultimate activate
-		//if (attackingEntity.getEntityName() == "wind_hashashin")
-		//{
-		//	if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
-		//	{
-		//		isUltimateActivate = true;
-		//		m_onFreeze = true;
-		//		m_onFastHit = true;
-		//		dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
+		//Was attacked by Wind Hashashin's ultimate activate
+		if (attackingEntity.getEntityName() == "wind_hashashin")
+		{
+			if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
+			{
+				isUltimateActivate = true;
+				//m_onFreeze = true;
+				//m_onFastHit = true;
+				dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
 
-		//		setShapePosition(attackingEntity.getShapePosition());
-		//		setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
+				setShapePosition(attackingEntity.getShapePosition());
+				setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
 
-		//		setVelocity(sf::Vector2f{ 0.f, 0.f });
+				setVelocity(sf::Vector2f{ 0.f, 0.f });
 
-		//		return true;
-		//	}
-		//}
+				return true;
+			}
+		}
 
-		//// Was attacked by projectiles
-		//if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
-		//{
-		//	for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->getProjectiles())
-		//	{
-		//		if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
-		//		{
-		//			ultimateProjectile->setCollided(true);
-		//			m_onFastHit = true;
+		// Was attacked by projectiles
+		if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
+		{
+			for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->getProjectiles())
+			{
+				if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
+				{
+					ultimateProjectile->setCollided(true);
+					//m_onFastHit = true;
 
-		//			return true;
-		//		}
-		//	}
-		//}
+					return true;
+				}
+			}
+		}
 	}
 
 	return false;

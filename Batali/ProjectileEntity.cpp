@@ -1,18 +1,20 @@
 #include "ProjectileEntity.h"
 
+#include "DeadState.h"
+
 ProjectileEntity::ProjectileEntity()
-	: SwordEntity{}
+	: Character{}
 {
 }
 
 void ProjectileEntity::update(float& deltaTime)
 {
-	if (!m_dying)
+	if (dynamic_cast<DeadState*>(m_state) == nullptr)
 	{
 		updateProjectileEntity(deltaTime);
 	}
 
-	SwordEntity::update(deltaTime);
+	Character::update(deltaTime);
 }
 
 void ProjectileEntity::updateProjectileEntity(float& deltaTime)
