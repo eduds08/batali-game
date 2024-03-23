@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Character.h"
+#include  "AttackHitbox.h"
 
 class FireKnight : public Character
 {
@@ -13,5 +14,6 @@ public:
 	virtual void updateAttackHitbox();
 
 protected:
+	AttackHitbox m_attackHitbox{};
 
 };
