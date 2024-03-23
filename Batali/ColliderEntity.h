@@ -22,9 +22,13 @@ public:
 	// Updates some entity's attributes when isCollidingWith() returns true
 	void handleCollision();
 
+	void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
+
 protected:
 	sf::Vector2f m_collisionDirection{};
 
 	// Useful to make the entity stops when it is pushed against a wall after being knockbacked
 	bool m_isCollidingHorizontally{ false };
+
+	float m_knockbackVelocity{ KNOCKBACK_SPEED };
 };

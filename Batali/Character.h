@@ -34,6 +34,9 @@ public:
 	const int* getHp() const { return &m_hp; }
 	const int* getRemainingManaToUltimate() const { return &m_remainingManaToUltimate; }
 	const int* getStamina() const { return &m_stamina; }
+
+	virtual const int getPlayerNumber() const { return -1; }
+
 	friend class RollingState;
 	friend class RunningState;
 	friend class JumpingState;
@@ -50,7 +53,7 @@ protected:
 
 	sf::Vector2f m_attackHitboxPosition{};
 
-	float m_knockbackVelocity{ KNOCKBACK_SPEED };
+	
 	int m_remainingManaToUltimate{ 5 };
 	float m_attackHitboxWidth{};
 	float m_attackHitboxHeight{};

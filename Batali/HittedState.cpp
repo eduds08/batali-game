@@ -28,6 +28,8 @@ void HittedState::update(Character& character, float& deltaTime)
 {
 	// lógica para não tomar dano (ou fora daqui)
 
+	//character.m_knockbackVelocity = KNOCKBACK_SPEED;
+
 	if (character.m_animationEnd)
 	{
 		if (character.m_hp <= 0)
@@ -39,6 +41,4 @@ void HittedState::update(Character& character, float& deltaTime)
 			character.handleCondition("IDLE");
 		}
 	}
-
-
 }

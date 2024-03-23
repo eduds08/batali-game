@@ -17,7 +17,10 @@ public:
 	void setTexture(const std::string& textureName, const std::string& texturePath);
 
 	// DrawableEntity flip
-	void flipSprite(float scale = 1.f) { m_sprite.setScale(-scale, scale); }
+	void flipSprite(float scale = 1.f) 
+	{ 
+		m_sprite.setScale(-scale, scale); 
+	}
 
 	/* Setters */
 

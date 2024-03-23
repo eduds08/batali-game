@@ -43,18 +43,18 @@ void Character::update(float& deltaTime)
 
 		if (dynamic_cast<RollingState*>(m_state) == nullptr && dynamic_cast<IdleState*>(m_state) == nullptr)
 		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left) && getPlayerNumber() == 1)
 			{
 				m_facingRight = -1;
 				m_velocity.x -= m_speed;
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right) && getPlayerNumber() == 1)
 			{
 				m_facingRight = 1;
 				m_velocity.x += m_speed;
 			}
 
-			flipSprite();
+			MovableEntity::flipSprite();
 		}
 	}
 	
@@ -78,7 +78,7 @@ void Character::update(float& deltaTime)
 	//updateDamage - Half Implemented. Nesse to implement the commented code below:
 
 
-	//m_knockbackVelocity = KNOCKBACK_SPEED;
+	m_knockbackVelocity = KNOCKBACK_SPEED;
 
 	/*if (m_currentTexture != m_entityName + "Hitted" && m_currentTexture != m_entityName + "FastHit")
 	{
@@ -169,7 +169,7 @@ bool Character::takeDamage(float& deltaTime, float attackDirection, int damage)
 			if (m_facingRight == 1)
 			{
 				m_facingRight = -1;
-				flipSprite();
+				MovableEntity::flipSprite();
 			}
 		}
 		else
@@ -178,7 +178,7 @@ bool Character::takeDamage(float& deltaTime, float attackDirection, int damage)
 			if (m_facingRight == -1)
 			{
 				m_facingRight = 1;
-				flipSprite();
+				MovableEntity::flipSprite();
 			}
 		}
 

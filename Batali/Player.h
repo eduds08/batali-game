@@ -24,7 +24,7 @@ public:
 
 	/* Getters */
 
-	const int getPlayerNumber() const { return m_playerNumber; }
+	virtual const int getPlayerNumber() const { return m_playerNumber; }
 
 private:
 	int m_playerNumber{ 1 };
