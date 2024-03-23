@@ -16,11 +16,7 @@ public:
 
 	/* Setters */
 
-	void setVelocity(sf::Vector2f velocity) { m_velocity = velocity; }
-	
-	
-
-	
+	void setVelocity(const sf::Vector2f& velocity) { m_velocity = velocity; }
 
 protected:
 	sf::Vector2f m_velocity{};

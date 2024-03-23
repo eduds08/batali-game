@@ -1,8 +1,7 @@
 #pragma once
 
 #include "ColliderEntity.h"
-
-class CharacterState;
+#include "CharacterState.h"
 
 class Character : public ColliderEntity
 {
@@ -16,16 +15,12 @@ public:
 	
 	void setState(CharacterState* state);
 
-	CharacterState* m_state{ };
-
-	//CharacterState* m_projectilesState{ nullptr };
-
 	virtual void updateAttackHitbox() = 0;
 
 	bool isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate);
 
-	const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
-	const int getDamage() const { return m_damage; }
+	/*const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
+	const int getDamage() const { return m_damage; }*/
 
 	// Updates entity's attributes when it gets attacked (and returns if attackedEntity got hit or not)
 	bool takeDamage(float& deltaTime, float attackDirection, int damage);
@@ -35,7 +30,7 @@ public:
 
 	const int* getHp() const { return &m_hp; }
 	const int* getRemainingManaToUltimate() const { return &m_remainingManaToUltimate; }
-	const int* getStamina() const { return &m_stamina; }
+	//const int* getStamina() const { return &m_stamina; }
 
 	virtual const int getPlayerNumber() const { return -1; }
 
@@ -50,19 +45,20 @@ public:
 	friend class DeadState;
 
 protected:
+	CharacterState* m_state{ nullptr };
 
-	sf::RectangleShape m_attackHitbox{ sf::Vector2f{0.f, 0.f} };
-
+	/*sf::RectangleShape m_attackHitbox{ sf::Vector2f{0.f, 0.f} };
 	sf::Vector2f m_attackHitboxPosition{};
-
-	
-	int m_remainingManaToUltimate{ 5 };
 	float m_attackHitboxWidth{};
 	float m_attackHitboxHeight{};
-	sf::Clock m_staminaRecoverClock{};
+	int m_damage{};*/
+	
+	int m_remainingManaToUltimate{ 5 };
+	
+	/*sf::Clock m_staminaRecoverClock{};
 	int m_stamina{ 100 };
-	float m_staminaRecoverTime{};
-	int m_damage{};
+	float m_staminaRecoverTime{};*/
+	
 
 	int m_hp{ 1300 };
 };

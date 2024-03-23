@@ -13,7 +13,7 @@ public:
 
 	/* Setters */
 
-	void setShapePosition(sf::Vector2f position) { m_shape.setPosition(position); }
+	void setShapePosition(const sf::Vector2f& position) { m_shape.setPosition(position); }
 
 	/* Getters */
 

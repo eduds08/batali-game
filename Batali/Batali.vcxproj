@@ -147,7 +147,6 @@
     <ClCompile Include="CharacterState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="ColliderEntity.cpp" />
-    <ClCompile Include="DamageEntity.cpp" />
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
     <ClCompile Include="FallingState.cpp" />
@@ -172,11 +171,9 @@
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
     <ClCompile Include="StatusBarUI.cpp" />
-    <ClCompile Include="SwordEntity.cpp" />
     <ClCompile Include="TextButtonUI.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UI.cpp" />
-    <ClCompile Include="WalkingEntity.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,7 +201,6 @@
     <ClInclude Include="CharacterStatusUI.h" />
     <ClInclude Include="ColliderEntity.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="DamageEntity.h" />
     <ClInclude Include="DrawableEntity.h" />
     <ClInclude Include="EnemyBot.h" />
     <ClInclude Include="FireKnight.h" />
@@ -221,11 +217,9 @@
     <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
     <ClInclude Include="StatusBarUI.h" />
-    <ClInclude Include="SwordEntity.h" />
     <ClInclude Include="TextButtonUI.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UI.h" />
-    <ClInclude Include="WalkingEntity.h" />
     <ClInclude Include="WindHashashin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -22,9 +22,6 @@ public:
 
 	const std::string& getEntityName() const { return m_entityName; }
 
-	// Changes the current texture based upon the entity's current activity (jumping, running, attacking, etc...). Called inside updateAnimation()
-	virtual void updateTexture() = 0;
-
 protected:
 	// Name of the current texture set in the entity
 	std::string m_currentTexture{};

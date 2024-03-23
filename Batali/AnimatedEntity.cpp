@@ -7,7 +7,6 @@ AnimatedEntity::AnimatedEntity()
 
 void AnimatedEntity::updateAnimation()
 {
-	updateTexture();
 	animateSprite();
 }
 

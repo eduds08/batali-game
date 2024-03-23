@@ -11,18 +11,17 @@ public:
 	// Returns true if colliding with other, false if not. Also set the collision directions (if is colliding on the right, left, bottom or top)
 	bool isCollidingWith(const sf::Sprite& other);
 
+	// Updates some entity's attributes when isCollidingWith() returns true
+	void handleCollision();
+
 	/* Setters */
 
 	void setIsCollidingHorizontally(bool isCollildingHorizontally) { m_isCollidingHorizontally = isCollildingHorizontally; }
+	void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 
 	/* Getters */
 
 	const bool getIsCollidingHorizontally() const { return m_isCollidingHorizontally; }
-
-	// Updates some entity's attributes when isCollidingWith() returns true
-	void handleCollision();
-
-	void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 
 protected:
 	sf::Vector2f m_collisionDirection{};

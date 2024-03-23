@@ -16,4 +16,12 @@ public:
 
 private:
 	std::string m_attack{};
+
+	sf::RectangleShape m_attackHitbox{ sf::Vector2f{0.f, 0.f} };
+	sf::Vector2f m_attackHitboxPosition{};
+
+	float m_attackHitboxWidth{};
+	float m_attackHitboxHeight{};
+
+	int m_damage{};
 };

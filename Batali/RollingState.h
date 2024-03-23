@@ -15,8 +15,9 @@ public:
 	virtual void update(Character& character, float& deltaTime);
 
 private:
-	// Stamina and maybe rollSpeed. This state will be friend of character and stamina will be a character
-	// attribute instead of WalkingEntity
+	sf::Clock m_staminaRecoverClock{};
+	int m_stamina{ 100 };
+	float m_staminaRecoverTime{};
 
 	float m_rollSpeed{ 220.f };
 };

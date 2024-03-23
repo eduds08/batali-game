@@ -74,7 +74,4 @@ void ColliderEntity::handleCollision()
 	{
 		setKnockbackVelocity(0.f);
 	}
-
-	// Sets canJump to true if entity collides in bottom
-	//m_canJump = m_collisionDirection.y > 0.f;
 }

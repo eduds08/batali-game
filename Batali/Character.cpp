@@ -1,11 +1,4 @@
 #include "Character.h"
-#include "ColliderEntity.h"
-
-#include "RollingState.h"
-#include "IdleState.h"
-#include "AttackingState.h"
-#include "DeadState.h"
-#include "HittedState.h"
 
 #include "ProjectileEntity.h"
 #include "WindHashashin.h"
@@ -39,8 +32,8 @@ void Character::handleCondition(const std::string& condition)
 
 void Character::update(float& deltaTime)
 {
-	if (dynamic_cast<DeadState*>(m_state) == nullptr)
-	{
+	//if (dynamic_cast<DeadState*>(m_state) == nullptr)
+	//{
 		m_velocity.x = 0.f;
 
 		if (dynamic_cast<RollingState*>(m_state) == nullptr && dynamic_cast<IdleState*>(m_state) == nullptr)
@@ -58,7 +51,7 @@ void Character::update(float& deltaTime)
 
 			MovableEntity::flipSprite();
 		}
-	}
+	//}
 	
 
 	m_state->update(*this, deltaTime);
@@ -73,19 +66,8 @@ void Character::update(float& deltaTime)
 		this->updateLimits();
 	}
 
-	//updateAttack - Implemented
-
-	//updateAttackHitbox - Implemented
-	
-	//updateDamage - Half Implemented. Nesse to implement the commented code below:
-
 
 	m_knockbackVelocity = KNOCKBACK_SPEED;
-
-	/*if (m_currentTexture != m_entityName + "Hitted" && m_currentTexture != m_entityName + "FastHit")
-	{
-		m_inDamageCooldown = false;
-	}*/
 
 }
 
@@ -105,8 +87,6 @@ bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltima
 	{
 		if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()))
 		{
-			/*if (attackingEntity.getEntityName() != "wind_hashashin" && attackingEntity.getAttackMode() != "onUltimate")
-				m_onFastHit = false;*/
 			return true;
 		}
 
@@ -116,8 +96,6 @@ bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltima
 			if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
 			{
 				isUltimateActivate = true;
-				//m_onFreeze = true;
-				//m_onFastHit = true;
 				dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
 
 				setShapePosition(attackingEntity.getShapePosition());
@@ -137,7 +115,6 @@ bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltima
 				if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
 				{
 					ultimateProjectile->setCollided(true);
-					//m_onFastHit = true;
 
 					return true;
 				}
@@ -153,9 +130,6 @@ bool Character::takeDamage(float& deltaTime, float attackDirection, int damage)
 	// Only executed if not already dead and when not immune (on damageCooldown or onRoll)
 	if (dynamic_cast<DeadState*>(m_state) == nullptr && dynamic_cast<HittedState*>(m_state) == nullptr)
 	{
-		//m_inDamageCooldown = true;
-		//m_hitted = true;
-
 		m_hp -= damage;
 
 		std::cout << "hit\n---\n";
