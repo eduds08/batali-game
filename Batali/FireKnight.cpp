@@ -43,14 +43,14 @@ FireKnight::FireKnight(sf::Vector2f firstPosition)
 	//m_rollSpeed = FIRE_KNIGHT_ROLL_SPEED;
 }
 
-void FireKnight::updateAttackHitbox()
+void FireKnight::updateAttackHitbox(AttackHitbox& m_attackHitbox)
 {
 	/*m_attackHitboxWidth = 0.f;
 	m_attackHitboxHeight = 0.f;
 
 	m_attackHitboxPosition = sf::Vector2f{ -100.f, -100.f };*/
 
-	m_attackHitbox.reset();
+	//m_attackHitbox.reset();
 
 	if (m_currentTexture == m_entityName + "Attack1")
 	{

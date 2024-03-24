@@ -33,9 +33,9 @@ Hoodie::Hoodie(sf::Vector2f firstPosition)
 	//m_rollSpeed = HOODIE_ROLL_SPEED;
 }
 
-void Hoodie::updateAttackHitbox()
+void Hoodie::updateAttackHitbox(AttackHitbox& m_attackHitbox)
 {
-	m_attackHitboxWidth = 0.f;
+	/*m_attackHitboxWidth = 0.f;
 	m_attackHitboxHeight = 0.f;
 
 	m_attackHitboxPosition = sf::Vector2f{ -100.f, -100.f };
@@ -98,5 +98,5 @@ void Hoodie::updateAttackHitbox()
 	m_attackHitbox.setSize(sf::Vector2f{ m_attackHitboxWidth, m_attackHitboxHeight });
 	m_attackHitbox.setOrigin(0.f, m_attackHitboxHeight / 2.f);
 	m_attackHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
-	m_attackHitbox.setPosition(m_attackHitboxPosition);
+	m_attackHitbox.setPosition(m_attackHitboxPosition);*/
 }

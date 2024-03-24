@@ -17,7 +17,11 @@ public:
 
 	void setShapeScale(float scaleX, float scaleY) { m_shape.setScale(scaleX, scaleY); }
 
+	const int getDamage() const { return m_damage; }
+
 	const sf::Vector2f& getShapeSize() const { return m_shape.getSize(); }
+
+	const sf::RectangleShape& getShape() const { return m_shape;  }
 
 	void reset();
 

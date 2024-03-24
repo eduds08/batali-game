@@ -150,14 +150,15 @@ void PlayingState::render()
 		if (m_debugMode)
 		{
 			m_window.draw(character->getShape());
-			m_window.draw(character->getAttackHitbox());
+			//m_window.draw(character->getAttackHitbox().getShape());
 
 			if (dynamic_cast<WindHashashin*>(character.get()) != nullptr)
 			{
 				m_window.draw(dynamic_cast<WindHashashin*>(character.get())->getUltimateActivateHitbox());
 			}
 		}
-		m_window.draw(character->getSprite());
+		//m_window.draw(character->getSprite());
+		character->render(m_window);
 
 		if (dynamic_cast<Boxer*>(character.get()) != nullptr)
 		{
@@ -250,20 +251,20 @@ void PlayingState::handleEntityAttacked(Character& attackingEntity, Character& a
 
 	if (!isUltimateActivate)
 	{
-		bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getDamage());
+		//bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getAttackHitbox().getDamage());
 
-		if (gotHit && attackingEntity.getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
-		{
-			// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-			while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() /*&& !attackedEntity.getOnRoll()*/)
-			{
-				for (auto& ground : m_grounds)
-				{
-					updateEntityCollisionWithGrounds(attackedEntity, ground);
-				}
-				attackedEntity.knockbackMove(m_deltaTime, attackDirection);
-			}
-		}
+		//if (gotHit && attackingEntity.getAttackHitbox().getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+		//{
+		//	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
+		//	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() /*&& !attackedEntity.getOnRoll()*/)
+		//	{
+		//		for (auto& ground : m_grounds)
+		//		{
+		//			updateEntityCollisionWithGrounds(attackedEntity, ground);
+		//		}
+		//		attackedEntity.knockbackMove(m_deltaTime, attackDirection);
+		//	}
+		//}
 	}
 }
 

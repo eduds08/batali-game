@@ -2,6 +2,8 @@
 
 #include "ColliderEntity.h"
 #include "CharacterState.h"
+#include "AttackHitbox.h"
+#include "AttackingState.h"
 
 class Character : public ColliderEntity
 {
@@ -15,12 +17,28 @@ public:
 	
 	void setState(CharacterState* state);
 
-	virtual void updateAttackHitbox() = 0;
+	virtual void updateAttackHitbox(AttackHitbox& m_attackHitbox) = 0;
 
 	bool isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate);
 
-	/*const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox; }
-	const int getDamage() const { return m_damage; }*/
+
+	void render(sf::RenderWindow& window)
+	{
+		window.draw(m_sprite);
+		if (m_state != nullptr)
+		{
+			if (dynamic_cast<AttackingState*>(m_state) != nullptr)
+			{
+				window.draw(dynamic_cast<AttackingState*>(m_state)->teste.getShape());
+			}
+		}
+		
+	}
+
+	//const AttackHitbox& getAttackHitbox() const { return m_attackHitbox; }
+
+	//const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox.getShape(); }
+	/*const int getDamage() const { return m_damage; }*/
 
 	// Updates entity's attributes when it gets attacked (and returns if attackedEntity got hit or not)
 	bool takeDamage(float& deltaTime, float attackDirection, int damage);
@@ -47,11 +65,7 @@ public:
 protected:
 	CharacterState* m_state{ nullptr };
 
-	/*sf::RectangleShape m_attackHitbox{ sf::Vector2f{0.f, 0.f} };
-	sf::Vector2f m_attackHitboxPosition{};
-	float m_attackHitboxWidth{};
-	float m_attackHitboxHeight{};
-	int m_damage{};*/
+	//AttackHitbox m_attackHitbox{};
 	
 	int m_remainingManaToUltimate{ 5 };
 	

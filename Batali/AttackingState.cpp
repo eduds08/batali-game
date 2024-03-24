@@ -59,5 +59,7 @@ void AttackingState::update(Character& character, float& deltaTime)
 		}
 	}
 
-	character.updateAttackHitbox();
+
+
+	character.updateAttackHitbox(teste);
 }

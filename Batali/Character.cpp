@@ -3,6 +3,11 @@
 #include "ProjectileEntity.h"
 #include "WindHashashin.h"
 
+#include "DeadState.h"
+#include "IdleState.h"
+#include "RollingState.h"
+#include "HittedState.h"
+
 Character::Character()
 	: ColliderEntity{}
 {
@@ -85,10 +90,10 @@ bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltima
 {
 	if (dynamic_cast<DeadState*>(m_state) == nullptr)
 	{
-		if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()))
+		/*if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getShape().getGlobalBounds()))
 		{
 			return true;
-		}
+		}*/
 
 		//Was attacked by Wind Hashashin's ultimate activate
 		if (attackingEntity.getEntityName() == "wind_hashashin")
