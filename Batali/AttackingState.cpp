@@ -7,6 +7,8 @@
 #include "JumpingState.h"
 #include "FallingState.h"
 
+#include "WindHashashin.h"
+
 AttackingState::AttackingState(const std::string& attack)
 {
 	if (attack == "ATTACK_1")
@@ -70,7 +72,7 @@ void AttackingState::update(Character& character, float& deltaTime)
 	
 }
 
-void AttackingState::isCollidingWithEntity(Character& attackedCharacter)
+void AttackingState::isCollidingWithEntity(Character& thisCharacter, Character& attackedCharacter)
 {
 	/*if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getShape().getGlobalBounds()))
 	{
@@ -80,7 +82,23 @@ void AttackingState::isCollidingWithEntity(Character& attackedCharacter)
 	if (teste->getShape().getGlobalBounds().intersects(attackedCharacter.getShape().getGlobalBounds()))
 	{
 		if (dynamic_cast<HittedState*>(attackedCharacter.getCharacterState()) == nullptr)
-			attackedCharacter.setState(new HittedState{});
+		{
+			if (!teste->getIsUltimateActivate())
+			{
+				attackedCharacter.setState(new HittedState{});
+			}
+			else
+			{
+				dynamic_cast<WindHashashin*>(&thisCharacter)->setActivateUltimate(true);
+
+				attackedCharacter.setShapePosition(thisCharacter.getShapePosition());
+				attackedCharacter.setSpritePosition(sf::Vector2f{ thisCharacter.getShapePosition().x, thisCharacter.getShapePosition().y - (thisCharacter.getSpriteSize().y - thisCharacter.getShapeSize().y) / 2.f });
+
+				attackedCharacter.setVelocity(sf::Vector2f{ 0.f, 0.f });
+
+				attackedCharacter.setState(new HittedState{});
+			}
+		}
 		//return true;
 	}
 

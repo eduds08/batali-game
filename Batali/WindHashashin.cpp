@@ -52,6 +52,8 @@ void WindHashashin::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 		resetUltimateHitbox();
 	}
 
+	m_attackHitbox->setIsUltimateActivate(false);
+
 	if (m_currentTexture == m_entityName + "Attack1")
 	{
 		//m_attackHitboxPosition = getShapePosition();
@@ -119,12 +121,17 @@ void WindHashashin::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 
 			m_attackHitboxPosition = sf::Vector2f{ -100.f, -100.f };*/
 
-			m_attackHitbox->reset();
+			m_attackHitbox->setShapeSize(getShapeSize());
+			m_attackHitbox->setShapeOrigin(0.f, m_attackHitbox->getShapeSize().y / 2.f);
+			m_attackHitbox->setShapeScale(static_cast<float>(m_facingRight), 1.f);
+			m_attackHitbox->setShapePosition(getShapePosition() + sf::Vector2f{getShapeSize().x * 2 * (m_frameCount - WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME) * m_facingRight, 0.f});
 
-			m_ultimateActivateHitbox.setSize(getShapeSize());
+			m_attackHitbox->setIsUltimateActivate(true);
+
+			/*m_ultimateActivateHitbox.setSize(getShapeSize());
 			m_ultimateActivateHitbox.setOrigin(getShapeSize() / 2.f);
 			m_ultimateActivateHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
-			m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f{getShapeSize().x * 2 * (m_frameCount - WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME) * m_facingRight, 0.f});
+			m_ultimateActivateHitbox.setPosition(getShapePosition() + sf::Vector2f{getShapeSize().x * 2 * (m_frameCount - WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME) * m_facingRight, 0.f});*/
 		}
 		else if (m_frameCount > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
 		{

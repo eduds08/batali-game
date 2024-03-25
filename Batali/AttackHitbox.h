@@ -27,8 +27,13 @@ public:
 
 	void setDamage(int damage) { m_damage = damage; }
 
+	void setIsUltimateActivate(bool isUltimateActivate) { m_isUltimateActivate = isUltimateActivate; }
+	const bool getIsUltimateActivate() const { return m_isUltimateActivate; }
+
 private:
 	sf::RectangleShape m_shape{ sf::Vector2f{0.f, 0.f} };
 
 	int m_damage{};
+
+	bool m_isUltimateActivate{ false };
 };

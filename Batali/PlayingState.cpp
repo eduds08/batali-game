@@ -227,7 +227,7 @@ void PlayingState::updateCollision()
 				{
 					AttackingState* temp = dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState());
 
-					temp->isCollidingWithEntity(*attackedCharacter);
+					temp->isCollidingWithEntity(*attackingCharacter, *attackedCharacter);
 				}
 
 				/*if (attackedCharacter->isCollidingWithAttack(*attackingCharacter, isUltimateActivate))

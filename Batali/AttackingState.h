@@ -23,7 +23,7 @@ public:
 
 	virtual void update(Character& character, float& deltaTime);
 
-	void isCollidingWithEntity(Character& attackedCharacter);
+	void isCollidingWithEntity(Character& thisCharacter, Character& attackedCharacter);
 
 	AttackHitbox* teste{ nullptr };
 
