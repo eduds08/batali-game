@@ -94,7 +94,7 @@ void Game::update()
 		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[1];
 
 		delete m_stateContext;
-		m_stateContext = new PlayingState(m_window, m_deltaTime, false, firstCharacter, secondCharacter);
+		m_stateContext = new PlayingState(m_window, m_deltaTime, firstCharacter, secondCharacter);
 	}
 
 	if (m_stateContext->getCurrentState() == CHARACTER_SELECTION_TO_MULTIPLAYER)
@@ -103,7 +103,7 @@ void Game::update()
 		std::string secondCharacter = dynamic_cast<CharacterSelectionState*>(m_stateContext)->m_chosenCharacters[1];
 
 		delete m_stateContext;
-		m_stateContext = new PlayingState(m_window, m_deltaTime, true, firstCharacter, secondCharacter);
+		m_stateContext = new PlayingState(m_window, m_deltaTime, firstCharacter, secondCharacter);
 	}
 
 	if (m_stateContext->getCurrentState() == CHARACTER_SELECTION_STATE)

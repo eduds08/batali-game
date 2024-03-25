@@ -8,7 +8,7 @@
 class Character : public ColliderEntity
 {
 public:
-	Character();
+	Character(int playerNumber = 1);
 	virtual ~Character();
 
 	void handleCondition(const std::string& condition);
@@ -24,19 +24,21 @@ public:
 		window.draw(m_sprite);
 		if (m_state != nullptr)
 		{
-			if (dynamic_cast<AttackingState*>(m_state) != nullptr && dynamic_cast<AttackingState*>(m_state)->m_attackHitbox != nullptr)
+			if (dynamic_cast<AttackingState*>(m_state) != nullptr)
 			{
-				window.draw(dynamic_cast<AttackingState*>(m_state)->m_attackHitbox->getShape());
+				if (dynamic_cast<AttackingState*>(m_state)->m_attackHitbox != nullptr)
+				{
+					window.draw(dynamic_cast<AttackingState*>(m_state)->m_attackHitbox->getShape());
+				}
 			}
 		}
-		
 	}
 
 	//const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox.getShape(); }
 	/*const int getDamage() const { return m_damage; }*/
 
 	// Updates entity's attributes when it gets attacked (and returns if attackedEntity got hit or not)
-	//bool takeDamage(float& deltaTime, float attackDirection, int damage);
+	bool takeDamage(float attackDirection, int damage);
 
 	// Moves the entity after being hit. attackDirection -> direction of the attack (from left or right)
 	void knockbackMove(float& deltaTime, float attackDirection);
@@ -45,7 +47,7 @@ public:
 	const int* getRemainingManaToUltimate() const { return &m_remainingManaToUltimate; }
 	//const int* getStamina() const { return &m_stamina; }
 
-	virtual const int getPlayerNumber() const { return -1; }
+	const int getPlayerNumber() const { return m_playerNumber; }
 
 	//virtual const sf::RectangleShape& getAttackHitbox() const = 0;
 
@@ -71,6 +73,6 @@ protected:
 	int m_stamina{ 100 };
 	float m_staminaRecoverTime{};*/
 	
-
+	int m_playerNumber{ 1 };
 	int m_hp{ 1300 };
 };

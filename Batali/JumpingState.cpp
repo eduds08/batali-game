@@ -37,14 +37,14 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 
 void JumpingState::update(Character& character, float& deltaTime)
 {
+	updateHorizontalMovement(character);
+
 	if (character.m_velocity.y > 0.f)
 	{
-		//character.handleCondition("FALL");
 		character.setState(new FallingState{});
 	}
 	else if (character.m_collisionDirection.y > 0.f && character.m_velocity.y == 0.f)
 	{
-		//character.handleCondition("IDLE");
 		character.setState(new IdleState{});
 	}
 }

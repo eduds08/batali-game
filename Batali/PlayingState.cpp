@@ -1,9 +1,8 @@
 #include "PlayingState.h"
 
-PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoPlayers, const std::string& firstCharacter, const std::string& secondCharacter)
+PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
-	, m_twoPlayers{ twoPlayers }
 {
 	m_currentState = PLAYING_STATE;
 
@@ -14,52 +13,31 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
-		m_characters.emplace_back(std::make_shared<Player<FireKnight>>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
 	}
 	else if (firstCharacter == "wind_hashashin")
 	{
-		m_characters.emplace_back(std::make_shared<Player<WindHashashin>>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
 	}
 	else if (firstCharacter == "boxer")
 	{
-		m_characters.emplace_back(std::make_shared<Player<Boxer>>(LEFT_CHARACTER_FIRST_POSITION));
+		m_characters.emplace_back(std::make_shared<Boxer>(LEFT_CHARACTER_FIRST_POSITION));
 	}
 
 	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
 
-	// Initialize Player 2 or Enemy
-	if (m_twoPlayers)
+	if (secondCharacter == "fire_knight")
 	{
-		if (secondCharacter == "fire_knight")
-		{
-			m_characters.emplace_back(std::make_shared<Player<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-		}
-		else if (secondCharacter == "wind_hashashin")
-		{
-			m_characters.emplace_back(std::make_shared<Player<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-		}
-		else if (secondCharacter == "boxer")
-		{
-			m_characters.emplace_back(std::make_shared<Player<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, 2));
-		}
-
-		//m_player2InputThread = std::thread(&PlayingState::updatePlayer2Input, this);
+		m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
 	}
-	/*else
+	else if (secondCharacter == "wind_hashashin")
 	{
-		if (secondCharacter == "fire_knight")
-		{
-			m_characters.emplace_back(std::make_unique<EnemyBot<FireKnight>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
-		}
-		else if (secondCharacter == "wind_hashashin")
-		{
-			m_characters.emplace_back(std::make_unique<EnemyBot<WindHashashin>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
-		}
-		else if (secondCharacter == "boxer")
-		{
-			m_characters.emplace_back(std::make_shared<EnemyBot<Boxer>>(RIGHT_CHARACTER_FIRST_POSITION, m_characters[0]->getShapePosition(), m_characters[0]->getShapeSize()));
-		}
-	}*/
+		m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+	}
+	else if (secondCharacter == "boxer")
+	{
+		m_characters.emplace_back(std::make_shared<Boxer>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+	}
 
 	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
@@ -68,18 +46,11 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, bool twoP
 
 	// Initialize Threads
 	m_animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
-	m_player1InputThread = std::thread(&PlayingState::updatePlayer1Input, this);
 }
 
 PlayingState::~PlayingState()
 {
 	m_animationThread.join();
-	m_player1InputThread.join();
-
-	//if (m_twoPlayers)
-	//{
-	//	m_player2InputThread.join();
-	//}
 }
 
 void PlayingState::update()
@@ -102,38 +73,12 @@ void PlayingState::update()
 		{
 			characterStatus.update();
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-		{
-			m_characters[0]->handleCondition("RUN");
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
-		{
-			m_characters[0]->handleCondition("RUN");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
-		{
-			m_characters[0]->handleCondition("JUMP");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
-		{
-			m_characters[0]->handleCondition("ROLL");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X))
-		{
-			m_characters[0]->handleCondition("ATTACK_1");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C))
-		{
-			m_characters[0]->handleCondition("ATTACK_2");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V))
-		{
-			m_characters[0]->handleCondition("ULTIMATE");
-		}
+
+		updatePlayer1Input();
+		updatePlayer2Input();
+
 		for (auto& character : m_characters)
 		{
-			
-
 			character->update(m_deltaTime);
 		}
 
@@ -150,14 +95,13 @@ void PlayingState::render()
 		if (m_debugMode)
 		{
 			m_window.draw(character->getShape());
-			//m_window.draw(character->getAttackHitbox().getShape());
 
 			if (dynamic_cast<WindHashashin*>(character.get()) != nullptr)
 			{
 				m_window.draw(dynamic_cast<WindHashashin*>(character.get())->getUltimateActivateHitbox());
 			}
 		}
-		//m_window.draw(character->getSprite());
+
 		character->render(m_window);
 
 		if (dynamic_cast<Boxer*>(character.get()) != nullptr)
@@ -216,7 +160,10 @@ void PlayingState::updateCollision()
 			{
 				if (dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState()) != nullptr)
 				{
-					dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState())->handleAttack(*attackingCharacter, *attackedCharacter);
+					if (dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState())->checkAttack(*attackingCharacter, *attackedCharacter))
+					{
+						handleEntityAttacked(*attackingCharacter, *attackedCharacter, dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState())->m_attackHitbox->getIsUltimateActivate());
+					}
 				}
 			}
 		}
@@ -242,26 +189,25 @@ void PlayingState::handleEntityAttacked(Character& attackingEntity, Character& a
 
 	if (!isUltimateActivate)
 	{
-		//bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getAttackHitbox().getDamage());
+		bool gotHit = attackedEntity.takeDamage(attackDirection, dynamic_cast<AttackingState*>(attackingEntity.getCharacterState())->m_attackHitbox->getDamage());
 
-		//if (gotHit && attackingEntity.getAttackHitbox().getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
-		//{
-		//	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-		//	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() /*&& !attackedEntity.getOnRoll()*/)
-		//	{
-		//		for (auto& ground : m_grounds)
-		//		{
-		//			updateEntityCollisionWithGrounds(attackedEntity, ground);
-		//		}
-		//		attackedEntity.knockbackMove(m_deltaTime, attackDirection);
-		//	}
-		//}
+		if (gotHit && dynamic_cast<AttackingState*>(attackingEntity.getCharacterState())->m_attackHitbox->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+		{
+			// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
+			while (attackedEntity.getShape().getGlobalBounds().intersects((dynamic_cast<AttackingState*>(attackingEntity.getCharacterState())->m_attackHitbox->getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally())
+			{
+				for (auto& ground : m_grounds)
+				{
+					updateEntityCollisionWithGrounds(attackedEntity, ground);
+				}
+				attackedEntity.knockbackMove(m_deltaTime, attackDirection);
+			}
+		}
 	}
 }
 
 void PlayingState::updateView()
 {
-	//m_view.setCenter((TILES_AMOUNT_PER_ROW / 2.f) * TILE_SIZE_FLOAT, (TILES_AMOUNT_PER_COL / 2.f) * TILE_SIZE_FLOAT);
 	m_view.setCenter(m_characters[0]->getShapePosition());
 	m_window.setView(m_view);
 
@@ -310,22 +256,19 @@ void PlayingState::updateTexturesAndAnimations()
 		if (!m_onPause)
 		{
 			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
-			std::this_thread::sleep_for(std::chrono::milliseconds(65));
+			std::this_thread::sleep_for(std::chrono::milliseconds(75));
 
 			for (auto& character : m_characters)
 			{
-				//if (!character->getDead())
-				//{
-					character->updateAnimation();
+				character->updateAnimation();
 
-					if (dynamic_cast<Boxer*>(character.get()) != nullptr)
+				if (dynamic_cast<Boxer*>(character.get()) != nullptr)
+				{
+					for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
 					{
-						for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
-						{
-							projectile->updateAnimation();
-						}
+						projectile->updateAnimation();
 					}
-				//}
+				}
 			}
 		}
 	}
@@ -333,64 +276,104 @@ void PlayingState::updateTexturesAndAnimations()
 
 void PlayingState::updatePlayer1Input()
 {
-	while (m_currentState == PLAYING_STATE)
+	if (!m_onPause)
 	{
-		if (!m_onPause)
+		if (m_characters[0]->getEntityName() == "fire_knight")
 		{
-			/*if (m_characters[0]->getEntityName() == "fire_knight")
-			{
-				setPlayerInput<FireKnight>(dynamic_cast<Player<FireKnight>*>(m_characters[0].get()));
-			}
-			else if (m_characters[0]->getEntityName() == "wind_hashashin")
-			{
-				setPlayerInput<WindHashashin>(dynamic_cast<Player<WindHashashin>*>(m_characters[0].get()));
-			}
-			else if (m_characters[0]->getEntityName() == "boxer")
-			{
-				setPlayerInput<Boxer>(dynamic_cast<Player<Boxer>*>(m_characters[0].get()));
-			}*/
-
-			/*for (auto& character : m_characters)
-			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-				{
-					character->handleCondition("RUN");
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
-				{
-					character->handleCondition("RUN");
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space))
-				{
-					character->handleCondition("JUMP");
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Z))
-				{
-					character->handleCondition("ROLL");
-				}
-			}*/
+			setPlayerInput(dynamic_cast<FireKnight*>(m_characters[0].get()));
+		}
+		else if (m_characters[0]->getEntityName() == "wind_hashashin")
+		{
+			setPlayerInput(dynamic_cast<WindHashashin*>(m_characters[0].get()));
+		}
+		else if (m_characters[0]->getEntityName() == "boxer")
+		{
+			setPlayerInput(dynamic_cast<Boxer*>(m_characters[0].get()));
 		}
 	}
 }
 
 void PlayingState::updatePlayer2Input()
 {
-	while (m_currentState == PLAYING_STATE)
+	if (!m_onPause)
 	{
-		if (!m_onPause)
+		if (m_characters[1]->getEntityName() == "fire_knight")
 		{
-			if (m_characters[1]->getEntityName() == "fire_knight")
-			{
-				setPlayerInput<FireKnight>(dynamic_cast<Player<FireKnight>*>(m_characters[1].get()));
-			}
-			else if (m_characters[1]->getEntityName() == "wind_hashashin")
-			{
-				setPlayerInput<WindHashashin>(dynamic_cast<Player<WindHashashin>*>(m_characters[1].get()));
-			}
-			else if (m_characters[1]->getEntityName() == "boxer")
-			{
-				setPlayerInput<Boxer>(dynamic_cast<Player<Boxer>*>(m_characters[1].get()));
-			}
+			setPlayerInput(dynamic_cast<FireKnight*>(m_characters[1].get()));
+		}
+		else if (m_characters[1]->getEntityName() == "wind_hashashin")
+		{
+			setPlayerInput(dynamic_cast<WindHashashin*>(m_characters[1].get()));
+		}
+		else if (m_characters[1]->getEntityName() == "boxer")
+		{
+			setPlayerInput(dynamic_cast<Boxer*>(m_characters[1].get()));
+		}
+	}
+}
+
+void PlayingState::setPlayerInput(Character* character)
+{
+	if (character->getPlayerNumber() == 1)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
+		{
+			character->handleCondition("RUN");
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
+		{
+			character->handleCondition("RUN");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
+		{
+			character->handleCondition("JUMP");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V))
+		{
+			character->handleCondition("ROLL");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X))
+		{
+			character->handleCondition("ATTACK_1");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C))
+		{
+			character->handleCondition("ATTACK_2");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B))
+		{
+			character->handleCondition("ULTIMATE");
+		}
+	}
+	else if (character->getPlayerNumber() == 2)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
+		{
+			character->handleCondition("RUN");
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
+		{
+			character->handleCondition("RUN");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up))
+		{
+			character->handleCondition("JUMP");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J))
+		{
+			character->handleCondition("ROLL");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I))
+		{
+			character->handleCondition("ATTACK_1");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O))
+		{
+			character->handleCondition("ATTACK_2");
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K))
+		{
+			character->handleCondition("ULTIMATE");
 		}
 	}
 }

@@ -6,7 +6,7 @@
 class FireKnight : public Character
 {
 public:
-	FireKnight(sf::Vector2f firstPosition);
+	FireKnight(sf::Vector2f firstPosition, int playerNumber = 1);
 	virtual ~FireKnight() = default;
 
 	//void updateAttackHitbox();

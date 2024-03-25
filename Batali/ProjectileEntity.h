@@ -7,7 +7,7 @@
 class ProjectileEntity : public Character
 {
 public:
-	ProjectileEntity();
+	ProjectileEntity(int playerNumber = 1);
 	virtual ~ProjectileEntity() = default;
 
 	virtual void update(float& deltaTime);

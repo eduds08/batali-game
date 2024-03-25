@@ -1,7 +1,7 @@
 #include "Hoodie.h"
 
-Hoodie::Hoodie(sf::Vector2f firstPosition)
-	: Character{}
+Hoodie::Hoodie(sf::Vector2f firstPosition, int playerNumber)
+	: Character{ playerNumber }
 {
 	m_entityName = "hoodie";
 

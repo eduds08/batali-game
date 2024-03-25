@@ -11,7 +11,6 @@
 
 RunningState::RunningState()
 {
-
 }
 
 void RunningState::enter(Character& character)
@@ -29,11 +28,7 @@ CharacterState* RunningState::handleCondition(Character& character, const std::s
 	{
 		return new RollingState{};
 	}
-	else if (condition == "ATTACK_1" || condition == "ATTACK_2")
-	{
-		return new AttackingState{ condition };
-	}
-	else if (condition == "ULTIMATE")
+	else if (condition == "ATTACK_1" || condition == "ATTACK_2" || condition == "ULTIMATE")
 	{
 		return new AttackingState{ condition };
 	}
@@ -57,9 +52,10 @@ void RunningState::update(Character& character, float& deltaTime)
 {
 	character.m_velocity.y += GRAVITY * deltaTime;
 
+	updateHorizontalMovement(character);
+
 	if (character.m_velocity.x == 0.f)
 	{
-		//character.handleCondition("IDLE");
 		character.setState(new IdleState{});
 	}
 }

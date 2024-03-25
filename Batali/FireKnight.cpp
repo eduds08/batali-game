@@ -3,8 +3,8 @@
 
 #include "FallingState.h"
 
-FireKnight::FireKnight(sf::Vector2f firstPosition)
-	: Character{}
+FireKnight::FireKnight(sf::Vector2f firstPosition, int playerNumber)
+	: Character{ playerNumber }
 {
 	m_entityName = "fire_knight";
 

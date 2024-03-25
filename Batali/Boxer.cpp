@@ -1,8 +1,8 @@
 #include "Boxer.h"
 #include "FallingState.h"
 
-Boxer::Boxer(sf::Vector2f firstPosition)
-	: ProjectileEntity{}
+Boxer::Boxer(sf::Vector2f firstPosition, int playerNumber)
+	: ProjectileEntity{ playerNumber }
 {
 	m_entityName = "boxer";
 	m_state = new FallingState{};

@@ -16,7 +16,7 @@ public:
 
 	virtual void update(Character& character, float& deltaTime);
 
-	void handleAttack(Character& thisCharacter, Character& otherCharacter);
+	bool checkAttack(Character& thisCharacter, Character& otherCharacter);
 
 	AttackHitbox* m_attackHitbox{ nullptr };
 

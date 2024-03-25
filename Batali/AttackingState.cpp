@@ -80,7 +80,7 @@ void AttackingState::update(Character& character, float& deltaTime)
 	}
 }
 
-void AttackingState::handleAttack(Character& thisCharacter, Character& otherCharacter)
+bool AttackingState::checkAttack(Character& thisCharacter, Character& otherCharacter)
 {
 	if (m_attackHitbox->getShape().getGlobalBounds().intersects(otherCharacter.getShape().getGlobalBounds()))
 	{
@@ -88,7 +88,8 @@ void AttackingState::handleAttack(Character& thisCharacter, Character& otherChar
 		{
 			if (!m_attackHitbox->getIsUltimateActivate())
 			{
-				otherCharacter.setState(new HittedState{});
+				//otherCharacter.setState(new HittedState{});
+				return true;
 			}
 			else
 			{
@@ -100,6 +101,8 @@ void AttackingState::handleAttack(Character& thisCharacter, Character& otherChar
 					otherCharacter.setSpritePosition(sf::Vector2f{ thisCharacter.getShapePosition().x, thisCharacter.getShapePosition().y - (thisCharacter.getSpriteSize().y - thisCharacter.getShapeSize().y) / 2.f });
 
 					otherCharacter.setVelocity(sf::Vector2f{ 0.f, 0.f });
+
+					return true;
 				}
 			}
 		}
@@ -114,9 +117,33 @@ void AttackingState::handleAttack(Character& thisCharacter, Character& otherChar
 				if (ultimateProjectile->getShape().getGlobalBounds().intersects(otherCharacter.getShape().getGlobalBounds()))
 				{
 					ultimateProjectile->setCollided(true);
-					otherCharacter.setState(new HittedState{});
+					//otherCharacter.setState(new HittedState{});
+					return true;
 				}
 			}
 		}
 	}
+
+	return false;
 }
+
+// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
+//float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
+
+//if (!isUltimateActivate)
+//{
+	//bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getAttackHitbox().getDamage());
+
+	//if (gotHit && attackingEntity.getAttackHitbox().getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+	//{
+	//	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
+	//	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() /*&& !attackedEntity.getOnRoll()*/)
+	//	{
+	//		for (auto& ground : m_grounds)
+	//		{
+	//			updateEntityCollisionWithGrounds(attackedEntity, ground);
+	//		}
+	//		attackedEntity.knockbackMove(m_deltaTime, attackDirection);
+	//	}
+	//}
+//}

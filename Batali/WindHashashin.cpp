@@ -4,8 +4,8 @@
 #include "FallingState.h"
 #include "IdleState.h"
 
-WindHashashin::WindHashashin(sf::Vector2f firstPosition)
-	: Character{}
+WindHashashin::WindHashashin(sf::Vector2f firstPosition, int playerNumber)
+	: Character{ playerNumber }
 {
 	m_entityName = "wind_hashashin";
 	m_state = new FallingState{};

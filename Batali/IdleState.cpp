@@ -24,11 +24,7 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
 	{
 		return new RollingState{};
 	}
-	else if (condition == "ATTACK_1" || condition == "ATTACK_2")
-	{
-		return new AttackingState{ condition };
-	}
-	else if (condition == "ULTIMATE")
+	else if (condition == "ATTACK_1" || condition == "ATTACK_2" || condition == "ULTIMATE")
 	{
 		return new AttackingState{ condition };
 	}
@@ -51,5 +47,4 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
 
 void IdleState::update(Character& character, float& deltaTime)
 {
-
 }

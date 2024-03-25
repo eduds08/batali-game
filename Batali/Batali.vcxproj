@@ -195,14 +195,12 @@
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />
     <ClInclude Include="JumpingState.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
     <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterStatusUI.h" />
     <ClInclude Include="ColliderEntity.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="DrawableEntity.h" />
-    <ClInclude Include="EnemyBot.h" />
     <ClInclude Include="FireKnight.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />

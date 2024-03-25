@@ -2,8 +2,8 @@
 
 #include "DeadState.h"
 
-ProjectileEntity::ProjectileEntity()
-	: Character{}
+ProjectileEntity::ProjectileEntity(int playerNumber)
+	: Character{ playerNumber }
 {
 }
 

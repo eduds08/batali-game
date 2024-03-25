@@ -15,4 +15,8 @@ public:
 	virtual CharacterState* handleCondition(Character& character, const std::string& condition) = 0;
 
 	virtual void update(Character& character, float& deltaTime) = 0;
+
+	void updateHorizontalMovement(Character& character);
+
+protected:
 };

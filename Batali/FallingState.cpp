@@ -25,9 +25,10 @@ CharacterState* FallingState::handleCondition(Character& character, const std::s
 
 void FallingState::update(Character& character, float& deltaTime)
 {
+	updateHorizontalMovement(character);
+
 	if (character.m_velocity.y == 0.f || character.m_collisionDirection.y < 0.f)
 	{
-		//character.handleCondition("IDLE");
 		character.setState(new IdleState{});
 	}
 }

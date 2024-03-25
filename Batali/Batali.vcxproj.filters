@@ -63,9 +63,6 @@
     <ClCompile Include="RollingState.cpp">
       <Filter>STATE PATTERN</Filter>
     </ClCompile>
-    <ClCompile Include="OnUltimateState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
     <ClCompile Include="JumpingState.cpp">
       <Filter>STATE PATTERN</Filter>
     </ClCompile>
@@ -144,6 +141,7 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>OTHERS</Filter>
     </ClCompile>
+    <ClCompile Include="AttackHitbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -164,9 +162,6 @@
     <ClInclude Include="ColliderEntity.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
     <ClInclude Include="AnimatedEntity.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
@@ -174,9 +169,6 @@
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="Boxer.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBot.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="ProjectileEntity.h">
@@ -201,9 +193,6 @@
       <Filter>STATE PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="JumpingState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="OnUltimateState.h">
       <Filter>STATE PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="RollingState.h">
@@ -278,5 +267,6 @@
     <ClInclude Include="TextureManager.h">
       <Filter>OTHERS</Filter>
     </ClInclude>
+    <ClInclude Include="AttackHitbox.h" />
   </ItemGroup>
 </Project>

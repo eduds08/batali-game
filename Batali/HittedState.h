@@ -5,7 +5,7 @@
 class HittedState : public CharacterState
 {
 public:
-	HittedState() {}
+	HittedState();
 	virtual ~HittedState() = default;
 
 	virtual void enter(Character& character);
@@ -13,4 +13,6 @@ public:
 	virtual CharacterState* handleCondition(Character& character, const std::string& condition);
 
 	virtual void update(Character& character, float& deltaTime);
+
+private:
 };

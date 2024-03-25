@@ -6,7 +6,7 @@
 class Boxer : public ProjectileEntity
 {
 public:
-	Boxer(sf::Vector2f firstPosition);
+	Boxer(sf::Vector2f firstPosition, int playerNumber = 1);
 	virtual ~Boxer() = default;
 
 	//void updateAttackHitbox();
