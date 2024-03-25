@@ -53,7 +53,6 @@ void FireKnight::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 	//if (dynamic_cast<AttackingState*>(m_state) != nullptr)
 	//{
 
-	mutexTeste.lock();
 	if (m_attackHitbox != nullptr)
 	{
 		m_attackHitbox->reset();
@@ -165,7 +164,6 @@ void FireKnight::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 		m_attackHitbox->setShapeOrigin(0.f, m_attackHitbox->getShapeSize().y / 2.f);
 		m_attackHitbox->setShapeScale(static_cast<float>(m_facingRight), 1.f);
 	}
-	mutexTeste.unlock();
 	//m_attackHitbox.setSize(sf::Vector2f{ m_attackHitboxWidth, m_attackHitboxHeight });
 	//m_attackHitbox.setOrigin(0.f, m_attackHitboxHeight / 2.f);
 	//m_attackHitbox.setScale(static_cast<float>(m_facingRight), 1.f);

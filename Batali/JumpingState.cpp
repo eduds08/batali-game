@@ -42,7 +42,7 @@ void JumpingState::update(Character& character, float& deltaTime)
 		//character.handleCondition("FALL");
 		character.setState(new FallingState{});
 	}
-	if (character.m_collisionDirection.y > 0.f && character.m_velocity.y == 0.f)
+	else if (character.m_collisionDirection.y > 0.f && character.m_velocity.y == 0.f)
 	{
 		//character.handleCondition("IDLE");
 		character.setState(new IdleState{});

@@ -215,18 +215,25 @@ void PlayingState::updateCollision()
 		m_characters[1]->setOnFreeze(false);
 	}*/
 
-	for (auto& attackedCharacter : m_characters)
+	for (auto& attackingCharacter : m_characters)
 	{
-		for (auto& attackingCharacter : m_characters)
+		for (auto& attackedCharacter : m_characters)
 		{
 			if (attackedCharacter != attackingCharacter)
 			{
 				bool isUltimateActivate = false;
 
-				if (attackedCharacter->isCollidingWithAttack(*attackingCharacter, isUltimateActivate))
+				if (dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState()) != nullptr)
+				{
+					AttackingState* temp = dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState());
+
+					temp->isCollidingWithEntity(*attackedCharacter);
+				}
+
+				/*if (attackedCharacter->isCollidingWithAttack(*attackingCharacter, isUltimateActivate))
 				{
 					handleEntityAttacked(*attackingCharacter, *attackedCharacter, isUltimateActivate);
-				}
+				}*/
 			}
 		}
 	}

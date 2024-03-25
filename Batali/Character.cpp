@@ -86,89 +86,89 @@ void Character::setState(CharacterState* state)
 	}
 }
 
-bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate)
-{
-	if (dynamic_cast<DeadState*>(m_state) == nullptr)
-	{
-		/*if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getShape().getGlobalBounds()))
-		{
-			return true;
-		}*/
-
-		//Was attacked by Wind Hashashin's ultimate activate
-		if (attackingEntity.getEntityName() == "wind_hashashin")
-		{
-			if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
-			{
-				isUltimateActivate = true;
-				dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
-
-				setShapePosition(attackingEntity.getShapePosition());
-				setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
-
-				setVelocity(sf::Vector2f{ 0.f, 0.f });
-
-				return true;
-			}
-		}
-
-		// Was attacked by projectiles
-		if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
-		{
-			for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->getProjectiles())
-			{
-				if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
-				{
-					ultimateProjectile->setCollided(true);
-
-					return true;
-				}
-			}
-		}
-	}
-
-	return false;
-}
-
-bool Character::takeDamage(float& deltaTime, float attackDirection, int damage)
-{
-	// Only executed if not already dead and when not immune (on damageCooldown or onRoll)
-	if (dynamic_cast<DeadState*>(m_state) == nullptr && dynamic_cast<HittedState*>(m_state) == nullptr)
-	{
-		m_hp -= damage;
-
-		std::cout << "hit\n---\n";
-
-		/*if (m_remainingManaToUltimate > 0)
-		{
-			--m_remainingManaToUltimate;
-		}*/
-
-		if (attackDirection < 0.f)
-		{
-			// attack coming from left
-			if (m_facingRight == 1)
-			{
-				m_facingRight = -1;
-				MovableEntity::flipSprite();
-			}
-		}
-		else
-		{
-			// attack coming from right
-			if (m_facingRight == -1)
-			{
-				m_facingRight = 1;
-				MovableEntity::flipSprite();
-			}
-		}
-
-		handleCondition("HITTED");
-		return true;
-	}
-
-	return false;
-}
+//bool Character::isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate)
+//{
+//	if (dynamic_cast<DeadState*>(m_state) == nullptr)
+//	{
+//		/*if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getShape().getGlobalBounds()))
+//		{
+//			return true;
+//		}*/
+//
+//		//Was attacked by Wind Hashashin's ultimate activate
+//		if (attackingEntity.getEntityName() == "wind_hashashin")
+//		{
+//			if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
+//			{
+//				isUltimateActivate = true;
+//				dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
+//
+//				setShapePosition(attackingEntity.getShapePosition());
+//				setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
+//
+//				setVelocity(sf::Vector2f{ 0.f, 0.f });
+//
+//				return true;
+//			}
+//		}
+//
+//		// Was attacked by projectiles
+//		if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
+//		{
+//			for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->getProjectiles())
+//			{
+//				if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
+//				{
+//					ultimateProjectile->setCollided(true);
+//
+//					return true;
+//				}
+//			}
+//		}
+//	}
+//
+//	return false;
+//}
+//
+//bool Character::takeDamage(float& deltaTime, float attackDirection, int damage)
+//{
+//	// Only executed if not already dead and when not immune (on damageCooldown or onRoll)
+//	if (dynamic_cast<DeadState*>(m_state) == nullptr && dynamic_cast<HittedState*>(m_state) == nullptr)
+//	{
+//		m_hp -= damage;
+//
+//		std::cout << "hit\n---\n";
+//
+//		/*if (m_remainingManaToUltimate > 0)
+//		{
+//			--m_remainingManaToUltimate;
+//		}*/
+//
+//		if (attackDirection < 0.f)
+//		{
+//			// attack coming from left
+//			if (m_facingRight == 1)
+//			{
+//				m_facingRight = -1;
+//				MovableEntity::flipSprite();
+//			}
+//		}
+//		else
+//		{
+//			// attack coming from right
+//			if (m_facingRight == -1)
+//			{
+//				m_facingRight = 1;
+//				MovableEntity::flipSprite();
+//			}
+//		}
+//
+//		handleCondition("HITTED");
+//		return true;
+//	}
+//
+//	return false;
+//}
 
 void Character::knockbackMove(float& deltaTime, float attackDirection)
 {

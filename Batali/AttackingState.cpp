@@ -69,3 +69,51 @@ void AttackingState::update(Character& character, float& deltaTime)
 
 	
 }
+
+void AttackingState::isCollidingWithEntity(Character& attackedCharacter)
+{
+	/*if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getShape().getGlobalBounds()))
+	{
+		return true;
+	}*/
+
+	if (teste->getShape().getGlobalBounds().intersects(attackedCharacter.getShape().getGlobalBounds()))
+	{
+		if (dynamic_cast<HittedState*>(attackedCharacter.getCharacterState()) == nullptr)
+			attackedCharacter.setState(new HittedState{});
+		//return true;
+	}
+
+	//Was attacked by Wind Hashashin's ultimate activate
+	//if (attackingEntity.getEntityName() == "wind_hashashin")
+	//{
+	//	if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
+	//	{
+	//		isUltimateActivate = true;
+	//		dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
+
+	//		setShapePosition(attackingEntity.getShapePosition());
+	//		setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
+
+	//		setVelocity(sf::Vector2f{ 0.f, 0.f });
+
+	//		return true;
+	//	}
+	//}
+
+	//// Was attacked by projectiles
+	//if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
+	//{
+	//	for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->getProjectiles())
+	//	{
+	//		if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
+	//		{
+	//			ultimateProjectile->setCollided(true);
+
+	//			return true;
+	//		}
+	//	}
+	//}
+
+	//return false;
+}

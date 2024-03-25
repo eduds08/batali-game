@@ -162,7 +162,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MovableEntity.cpp" />
-    <ClCompile Include="OnUltimateState.cpp" />
     <ClCompile Include="PhysicalEntity.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -196,7 +195,6 @@
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />
     <ClInclude Include="JumpingState.h" />
-    <ClInclude Include="OnUltimateState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
     <ClInclude Include="CharacterSelectionState.h" />

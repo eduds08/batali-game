@@ -19,7 +19,20 @@ public:
 
 	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox) = 0;
 
-	bool isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate);
+	virtual const sf::RectangleShape* getAttackHitbox() const
+	{
+		if (dynamic_cast<AttackingState*>(m_state) != nullptr)
+		{
+			if (dynamic_cast<AttackingState*>(m_state)->teste != nullptr)
+			{
+				return &(dynamic_cast<AttackingState*>(m_state)->teste->getShape());
+			}
+		}
+
+		return nullptr;
+	}
+
+	//bool isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate);
 
 
 	void render(sf::RenderWindow& window)
@@ -41,7 +54,7 @@ public:
 	/*const int getDamage() const { return m_damage; }*/
 
 	// Updates entity's attributes when it gets attacked (and returns if attackedEntity got hit or not)
-	bool takeDamage(float& deltaTime, float attackDirection, int damage);
+	//bool takeDamage(float& deltaTime, float attackDirection, int damage);
 
 	// Moves the entity after being hit. attackDirection -> direction of the attack (from left or right)
 	void knockbackMove(float& deltaTime, float attackDirection);
@@ -52,13 +65,16 @@ public:
 
 	virtual const int getPlayerNumber() const { return -1; }
 
+	//virtual const sf::RectangleShape& getAttackHitbox() const = 0;
+
+	CharacterState* getCharacterState() const { return m_state; }
+
 	friend class RollingState;
 	friend class RunningState;
 	friend class JumpingState;
 	friend class FallingState;
 	friend class IdleState;
 	friend class AttackingState;
-	friend class OnUltimateState;
 	friend class HittedState;
 	friend class DeadState;
 
