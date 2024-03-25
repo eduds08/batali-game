@@ -8,14 +8,7 @@ class AttackingState : public CharacterState
 {
 public:
 	AttackingState(const std::string& attack);
-	virtual ~AttackingState()
-	{
-		if (teste)
-		{
-			delete teste;
-			teste = nullptr;
-		}
-	}
+	virtual ~AttackingState();
 
 	virtual void enter(Character& character);
 
@@ -23,11 +16,10 @@ public:
 
 	virtual void update(Character& character, float& deltaTime);
 
-	void isCollidingWithEntity(Character& thisCharacter, Character& attackedCharacter);
+	void handleAttack(Character& thisCharacter, Character& otherCharacter);
 
-	AttackHitbox* teste{ nullptr };
+	AttackHitbox* m_attackHitbox{ nullptr };
 
 private:
 	std::string m_attack{};
-
 };

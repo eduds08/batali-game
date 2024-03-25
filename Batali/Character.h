@@ -19,36 +19,18 @@ public:
 
 	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox) = 0;
 
-	virtual const sf::RectangleShape* getAttackHitbox() const
-	{
-		if (dynamic_cast<AttackingState*>(m_state) != nullptr)
-		{
-			if (dynamic_cast<AttackingState*>(m_state)->teste != nullptr)
-			{
-				return &(dynamic_cast<AttackingState*>(m_state)->teste->getShape());
-			}
-		}
-
-		return nullptr;
-	}
-
-	//bool isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate);
-
-
 	void render(sf::RenderWindow& window)
 	{
 		window.draw(m_sprite);
 		if (m_state != nullptr)
 		{
-			if (dynamic_cast<AttackingState*>(m_state) != nullptr && dynamic_cast<AttackingState*>(m_state)->teste != nullptr)
+			if (dynamic_cast<AttackingState*>(m_state) != nullptr && dynamic_cast<AttackingState*>(m_state)->m_attackHitbox != nullptr)
 			{
-				window.draw(dynamic_cast<AttackingState*>(m_state)->teste->getShape());
+				window.draw(dynamic_cast<AttackingState*>(m_state)->m_attackHitbox->getShape());
 			}
 		}
 		
 	}
-
-	//const AttackHitbox& getAttackHitbox() const { return m_attackHitbox; }
 
 	//const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox.getShape(); }
 	/*const int getDamage() const { return m_damage; }*/

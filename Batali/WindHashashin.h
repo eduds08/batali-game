@@ -18,23 +18,6 @@ public:
 
 	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox);
 
-	virtual const sf::RectangleShape* getAttackHitbox() const
-	{
-		if (dynamic_cast<AttackingState*>(m_state) != nullptr)
-		{
-			if (dynamic_cast<AttackingState*>(m_state)->teste != nullptr && dynamic_cast<AttackingState*>(m_state)->teste->getShapeSize() != sf::Vector2f{0.f, 0.f})
-			{
-				return &(dynamic_cast<AttackingState*>(m_state)->teste->getShape());
-			}
-			else if (m_ultimateActivateHitbox.getSize() != sf::Vector2f{0.f, 0.f})
-			{
-				return &m_ultimateActivateHitbox;
-			}
-		}
-
-		return nullptr;
-	}
-
 	/* SETTERS */
 
 	void setActivateUltimate(bool activateUltimate) { m_activateUltimate = activateUltimate; }

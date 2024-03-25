@@ -7,6 +7,8 @@
 #include "JumpingState.h"
 #include "FallingState.h"
 
+#include "ProjectileEntity.h"
+
 #include "WindHashashin.h"
 
 AttackingState::AttackingState(const std::string& attack)
@@ -28,7 +30,16 @@ AttackingState::AttackingState(const std::string& attack)
 		m_attack = "Ultimate";
 	}
 
-	teste = new AttackHitbox();
+	m_attackHitbox = new AttackHitbox();
+}
+
+AttackingState::~AttackingState()
+{
+	if (m_attackHitbox)
+	{
+		delete m_attackHitbox;
+		m_attackHitbox = nullptr;
+	}
 }
 
 void AttackingState::enter(Character& character)
@@ -46,7 +57,7 @@ CharacterState* AttackingState::handleCondition(Character& character, const std:
 	{
 		return new HittedState{};
 	}
-	
+
 	return nullptr;
 }
 
@@ -54,13 +65,12 @@ void AttackingState::update(Character& character, float& deltaTime)
 {
 	character.m_velocity.x = 0.f;
 
-	character.updateAttackHitbox(teste);
+	character.updateAttackHitbox(m_attackHitbox);
 
 	if (character.m_animationEnd)
 	{
 		if (m_attack != "AirAttack")
 		{
-			//character.handleCondition("IDLE");
 			character.setState(new IdleState{});
 		}
 		else
@@ -68,70 +78,45 @@ void AttackingState::update(Character& character, float& deltaTime)
 			character.setState(new FallingState{});
 		}
 	}
-
-	
 }
 
-void AttackingState::isCollidingWithEntity(Character& thisCharacter, Character& attackedCharacter)
+void AttackingState::handleAttack(Character& thisCharacter, Character& otherCharacter)
 {
-	/*if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getShape().getGlobalBounds()))
+	if (m_attackHitbox->getShape().getGlobalBounds().intersects(otherCharacter.getShape().getGlobalBounds()))
 	{
-		return true;
-	}*/
-
-	if (teste->getShape().getGlobalBounds().intersects(attackedCharacter.getShape().getGlobalBounds()))
-	{
-		if (dynamic_cast<HittedState*>(attackedCharacter.getCharacterState()) == nullptr)
+		if (dynamic_cast<HittedState*>(otherCharacter.getCharacterState()) == nullptr)
 		{
-			if (!teste->getIsUltimateActivate())
+			if (!m_attackHitbox->getIsUltimateActivate())
 			{
-				attackedCharacter.setState(new HittedState{});
+				otherCharacter.setState(new HittedState{});
 			}
 			else
 			{
-				dynamic_cast<WindHashashin*>(&thisCharacter)->setActivateUltimate(true);
+				if (thisCharacter.getEntityName() == "wind_hashashin")
+				{
+					dynamic_cast<WindHashashin*>(&thisCharacter)->setActivateUltimate(true);
 
-				attackedCharacter.setShapePosition(thisCharacter.getShapePosition());
-				attackedCharacter.setSpritePosition(sf::Vector2f{ thisCharacter.getShapePosition().x, thisCharacter.getShapePosition().y - (thisCharacter.getSpriteSize().y - thisCharacter.getShapeSize().y) / 2.f });
+					otherCharacter.setShapePosition(thisCharacter.getShapePosition());
+					otherCharacter.setSpritePosition(sf::Vector2f{ thisCharacter.getShapePosition().x, thisCharacter.getShapePosition().y - (thisCharacter.getSpriteSize().y - thisCharacter.getShapeSize().y) / 2.f });
 
-				attackedCharacter.setVelocity(sf::Vector2f{ 0.f, 0.f });
-
-				attackedCharacter.setState(new HittedState{});
+					otherCharacter.setVelocity(sf::Vector2f{ 0.f, 0.f });
+				}
 			}
 		}
-		//return true;
 	}
-
-	//Was attacked by Wind Hashashin's ultimate activate
-	//if (attackingEntity.getEntityName() == "wind_hashashin")
-	//{
-	//	if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
-	//	{
-	//		isUltimateActivate = true;
-	//		dynamic_cast<WindHashashin*>(&attackingEntity)->setActivateUltimate(true);
-
-	//		setShapePosition(attackingEntity.getShapePosition());
-	//		setSpritePosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (getSpriteSize().y - getShapeSize().y) / 2.f });
-
-	//		setVelocity(sf::Vector2f{ 0.f, 0.f });
-
-	//		return true;
-	//	}
-	//}
-
-	//// Was attacked by projectiles
-	//if (dynamic_cast<ProjectileEntity*>(&attackingEntity) != nullptr)
-	//{
-	//	for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&attackingEntity)->getProjectiles())
-	//	{
-	//		if (m_shape.getGlobalBounds().intersects(ultimateProjectile->getShape().getGlobalBounds()))
-	//		{
-	//			ultimateProjectile->setCollided(true);
-
-	//			return true;
-	//		}
-	//	}
-	//}
-
-	//return false;
+	else
+	{
+		// Was attacked by projectiles
+		if (dynamic_cast<ProjectileEntity*>(&thisCharacter) != nullptr)
+		{
+			for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&thisCharacter)->getProjectiles())
+			{
+				if (ultimateProjectile->getShape().getGlobalBounds().intersects(otherCharacter.getShape().getGlobalBounds()))
+				{
+					ultimateProjectile->setCollided(true);
+					otherCharacter.setState(new HittedState{});
+				}
+			}
+		}
+	}
 }

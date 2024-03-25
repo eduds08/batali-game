@@ -193,7 +193,6 @@ void PlayingState::updateCollision()
 {
 	// We reset isCollidingHorizontally to false for all entities, so when isColliding() is called, if the entity collides in the x-direction, it will be true.
 	// If doesn't collide, it remains false.
-
 	for (auto& character : m_characters)
 	{
 		character->setIsCollidingHorizontally(false);
@@ -209,31 +208,16 @@ void PlayingState::updateCollision()
 		}
 	}
 
-	/*if (m_characters[0]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE && m_characters[1]->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
-	{
-		m_characters[0]->setOnFreeze(false);
-		m_characters[1]->setOnFreeze(false);
-	}*/
-
 	for (auto& attackingCharacter : m_characters)
 	{
 		for (auto& attackedCharacter : m_characters)
 		{
 			if (attackedCharacter != attackingCharacter)
 			{
-				bool isUltimateActivate = false;
-
 				if (dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState()) != nullptr)
 				{
-					AttackingState* temp = dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState());
-
-					temp->isCollidingWithEntity(*attackingCharacter, *attackedCharacter);
+					dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState())->handleAttack(*attackingCharacter, *attackedCharacter);
 				}
-
-				/*if (attackedCharacter->isCollidingWithAttack(*attackingCharacter, isUltimateActivate))
-				{
-					handleEntityAttacked(*attackingCharacter, *attackedCharacter, isUltimateActivate);
-				}*/
 			}
 		}
 	}
