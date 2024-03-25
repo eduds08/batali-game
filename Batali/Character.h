@@ -17,7 +17,7 @@ public:
 	
 	void setState(CharacterState* state);
 
-	virtual void updateAttackHitbox(AttackHitbox& m_attackHitbox) = 0;
+	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox) = 0;
 
 	bool isCollidingWithAttack(Character& attackingEntity, bool& isUltimateActivate);
 
@@ -27,9 +27,9 @@ public:
 		window.draw(m_sprite);
 		if (m_state != nullptr)
 		{
-			if (dynamic_cast<AttackingState*>(m_state) != nullptr)
+			if (dynamic_cast<AttackingState*>(m_state) != nullptr && dynamic_cast<AttackingState*>(m_state)->teste != nullptr)
 			{
-				window.draw(dynamic_cast<AttackingState*>(m_state)->teste.getShape());
+				window.draw(dynamic_cast<AttackingState*>(m_state)->teste->getShape());
 			}
 		}
 		

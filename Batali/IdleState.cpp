@@ -31,7 +31,7 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
 	}
 	else if (condition == "ULTIMATE")
 	{
-		return new OnUltimateState{};
+		return new AttackingState{ condition };
 	}
 	else if (condition == "RUN")
 	{

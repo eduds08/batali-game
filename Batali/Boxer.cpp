@@ -35,61 +35,78 @@ Boxer::Boxer(sf::Vector2f firstPosition)
 	//m_rollSpeed = BOXER_ROLL_SPEED;
 }
 
-void Boxer::updateAttackHitbox(AttackHitbox& m_attackHitbox)
+void Boxer::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 {
-	/*m_attackHitboxWidth = 0.f;
-	m_attackHitboxHeight = 0.f;
-
-	m_attackHitboxPosition = sf::Vector2f{ -100.f, -100.f };
+	if (dynamic_cast<AttackingState*>(m_state) != nullptr)
+	{
+		m_attackHitbox->reset();
+	}
 
 	if (m_currentTexture == m_entityName + "Attack1")
 	{
-		m_attackHitboxPosition = getShapePosition() + sf::Vector2f{0.f, -15.f};
+		//m_attackHitboxPosition = getShapePosition() + sf::Vector2f{0.f, -15.f};
+		m_attackHitbox->setShapePosition(getShapePosition() + sf::Vector2f{0.f, -15.f});
 
-		if (m_frameCount >= BOXER_ATTACK_1_STARTING_FRAME && m_frameCount <= BOXER_ATTACK_1_ENDING_FRAME && !m_animationEnd)
+		if (m_frameCount >= BOXER_ATTACK_1_STARTING_FRAME && m_frameCount <= BOXER_ATTACK_1_ENDING_FRAME)
 		{
-			m_attackHitboxWidth = BOXER_ATTACK_1_WIDTH;
-			m_attackHitboxHeight = BOXER_ATTACK_1_HEIGHT;
+			//m_attackHitboxWidth = BOXER_ATTACK_1_WIDTH;
+			//m_attackHitboxHeight = BOXER_ATTACK_1_HEIGHT;
 
-			m_damage = BOXER_ATTACK_1_DAMAGE;
+			m_attackHitbox->setShapeSize(BOXER_ATTACK_1_WIDTH, BOXER_ATTACK_1_HEIGHT);
+
+			//m_damage = BOXER_ATTACK_1_DAMAGE;
+
+			m_attackHitbox->setDamage(BOXER_ATTACK_1_DAMAGE);
 		}
 	}
 	else if (m_currentTexture == m_entityName + "Attack2")
 	{
-		m_attackHitboxPosition = getShapePosition() + sf::Vector2f{16.f * m_facingRight, -28.f};
+		//m_attackHitboxPosition = getShapePosition() + sf::Vector2f{16.f * m_facingRight, -28.f};
+		m_attackHitbox->setShapePosition(getShapePosition() + sf::Vector2f{16.f * m_facingRight, -28.f});
 
-		if (m_frameCount >= BOXER_ATTACK_2_STARTING_FRAME && m_frameCount <= BOXER_ATTACK_2_ENDING_FRAME && !m_animationEnd)
+		if (m_frameCount >= BOXER_ATTACK_2_STARTING_FRAME && m_frameCount <= BOXER_ATTACK_2_ENDING_FRAME)
 		{
-			m_attackHitboxWidth = BOXER_ATTACK_2_WIDTH;
-			m_attackHitboxHeight = BOXER_ATTACK_2_HEIGHT;
+			//m_attackHitboxWidth = BOXER_ATTACK_2_WIDTH;
+			//m_attackHitboxHeight = BOXER_ATTACK_2_HEIGHT;
 
-			m_damage = BOXER_ATTACK_2_DAMAGE;
+			m_attackHitbox->setShapeSize(BOXER_ATTACK_2_WIDTH, BOXER_ATTACK_2_HEIGHT);
+
+			//m_damage = BOXER_ATTACK_2_DAMAGE;
+			m_attackHitbox->setDamage(BOXER_ATTACK_2_DAMAGE);
 		}
 	}
 	else if (m_currentTexture == m_entityName + "AirAttack")
 	{
-		m_attackHitboxPosition = getShapePosition() + sf::Vector2f{0.f, -20.f};
+		//m_attackHitboxPosition = getShapePosition() + sf::Vector2f{0.f, -20.f};
+		m_attackHitbox->setShapePosition(getShapePosition() + sf::Vector2f{0.f, -20.f});
 
-		if (m_frameCount >= BOXER_AIR_ATTACK_STARTING_FRAME && m_frameCount <= BOXER_AIR_ATTACK_ENDING_FRAME && !m_animationEnd)
+		if (m_frameCount >= BOXER_AIR_ATTACK_STARTING_FRAME && m_frameCount <= BOXER_AIR_ATTACK_ENDING_FRAME)
 		{
-			m_attackHitboxWidth = BOXER_AIR_ATTACK_WIDTH;
-			m_attackHitboxHeight = BOXER_AIR_ATTACK_HEIGHT;
+			//m_attackHitboxWidth = BOXER_AIR_ATTACK_WIDTH;
+			//m_attackHitboxHeight = BOXER_AIR_ATTACK_HEIGHT;
 
-			m_damage = BOXER_AIR_ATTACK_DAMAGE;
+			m_attackHitbox->setShapeSize(BOXER_AIR_ATTACK_WIDTH, BOXER_AIR_ATTACK_HEIGHT);
+
+			//m_damage = BOXER_AIR_ATTACK_DAMAGE;
+			m_attackHitbox->setDamage(BOXER_AIR_ATTACK_DAMAGE);
 		}
 	}
 	else if (m_currentTexture == m_entityName + "Ultimate")
 	{
-		m_attackHitboxPosition = getShapePosition();
+		//m_attackHitboxPosition = getShapePosition();
 
-		m_damage = BOXER_ULTIMATE_DAMAGE;
+		m_attackHitbox->setShapePosition(getShapePosition());
 
-		if (m_frameCount == BOXER_ULTIMATE_PT_1_FRAME && !m_animationEnd)
+		//m_damage = BOXER_ULTIMATE_DAMAGE;
+
+		m_attackHitbox->setDamage(BOXER_ULTIMATE_DAMAGE);
+
+		if (m_frameCount == BOXER_ULTIMATE_PT_1_FRAME)
 		{
 			if (m_projectiles.size() == 0)
 				launchProjectile();
 		}
-		else if (m_frameCount == BOXER_ULTIMATE_PT_2_FRAME && !m_animationEnd)
+		else if (m_frameCount == BOXER_ULTIMATE_PT_2_FRAME)
 		{
 			if (m_projectiles.size() == 1)
 				launchProjectile();
@@ -99,11 +116,14 @@ void Boxer::updateAttackHitbox(AttackHitbox& m_attackHitbox)
 	{
 		if (m_projectiles.size() == 0)
 		{
-			m_damage = 0;
+			//m_damage = 0;
+			m_attackHitbox->setDamage(0);
 		}
 	}
 
-	m_attackHitbox.setSize(sf::Vector2f{ m_attackHitboxWidth, m_attackHitboxHeight });
+	m_attackHitbox->setShapeOrigin(0.f, m_attackHitbox->getShapeSize().y / 2.f);
+	m_attackHitbox->setShapeScale(static_cast<float>(m_facingRight), 1.f);
+	/*m_attackHitbox.setSize(sf::Vector2f{ m_attackHitboxWidth, m_attackHitboxHeight });
 	m_attackHitbox.setOrigin(0.f, m_attackHitboxHeight / 2.f);
 	m_attackHitbox.setScale(static_cast<float>(m_facingRight), 1.f);
 	m_attackHitbox.setPosition(m_attackHitboxPosition);*/

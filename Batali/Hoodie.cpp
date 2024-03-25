@@ -33,7 +33,7 @@ Hoodie::Hoodie(sf::Vector2f firstPosition)
 	//m_rollSpeed = HOODIE_ROLL_SPEED;
 }
 
-void Hoodie::updateAttackHitbox(AttackHitbox& m_attackHitbox)
+void Hoodie::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 {
 	/*m_attackHitboxWidth = 0.f;
 	m_attackHitboxHeight = 0.f;

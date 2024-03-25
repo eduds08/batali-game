@@ -21,6 +21,12 @@ AttackingState::AttackingState(const std::string& attack)
 	{
 		m_attack = "AirAttack";
 	}
+	if (attack == "ULTIMATE")
+	{
+		m_attack = "Ultimate";
+	}
+
+	teste = new AttackHitbox();
 }
 
 void AttackingState::enter(Character& character)
@@ -34,7 +40,7 @@ CharacterState* AttackingState::handleCondition(Character& character, const std:
 	{
 		return new IdleState{};
 	}
-	else if (condition == "HITTED")
+	else if (condition == "HITTED" && m_attack != "Ultimate")
 	{
 		return new HittedState{};
 	}
@@ -45,6 +51,8 @@ CharacterState* AttackingState::handleCondition(Character& character, const std:
 void AttackingState::update(Character& character, float& deltaTime)
 {
 	character.m_velocity.x = 0.f;
+
+	character.updateAttackHitbox(teste);
 
 	if (character.m_animationEnd)
 	{
@@ -59,7 +67,5 @@ void AttackingState::update(Character& character, float& deltaTime)
 		}
 	}
 
-
-
-	character.updateAttackHitbox(teste);
+	
 }

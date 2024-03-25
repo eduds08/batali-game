@@ -36,7 +36,7 @@ CharacterState* RunningState::handleCondition(Character& character, const std::s
 	}
 	else if (condition == "ULTIMATE")
 	{
-		return new OnUltimateState{};
+		return new AttackingState{ condition };
 	}
 	else if (condition == "IDLE")
 	{

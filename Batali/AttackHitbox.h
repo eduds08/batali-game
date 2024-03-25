@@ -19,7 +19,7 @@ public:
 
 	const int getDamage() const { return m_damage; }
 
-	const sf::Vector2f& getShapeSize() const { return m_shape.getSize(); }
+	const sf::Vector2f getShapeSize() const { return m_shape.getSize(); }
 
 	const sf::RectangleShape& getShape() const { return m_shape;  }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <mutex>
 #include "Character.h"
 //#include  "AttackHitbox.h"
 
@@ -11,8 +12,8 @@ public:
 
 	//void updateAttackHitbox();
 
-	virtual void updateAttackHitbox(AttackHitbox& m_attackHitbox);
+	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox);
 
 protected:
-
+	std::mutex mutexTeste{};
 };

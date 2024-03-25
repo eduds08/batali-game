@@ -11,7 +11,7 @@ public:
 
 	//void updateAttackHitbox();
 
-	virtual void updateAttackHitbox(AttackHitbox& m_attackHitbox);
+	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox);
 
 	// Instantiate a projectile and pushes it into m_projectiles vector
 	void launchProjectile();
