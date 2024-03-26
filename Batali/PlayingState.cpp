@@ -161,7 +161,7 @@ void PlayingState::updateCollision()
 				{
 					if (attackingCharacter->getCharacterState<AttackingState>()->checkAttack(*attackingCharacter, *attackedCharacter))
 					{
-						handleEntityAttacked(*attackingCharacter, *attackedCharacter, attackingCharacter->getCharacterState<AttackingState>()->m_attackHitbox->getIsUltimateActivate());
+						handleKnockbackMove(*attackingCharacter, *attackedCharacter, attackingCharacter->getCharacterState<AttackingState>()->m_attackHitbox->getIsUltimateActivate());
 					}
 				}
 			}
@@ -204,7 +204,7 @@ void PlayingState::updateEntityCollisionWithGrounds(ColliderEntity& entity, Grou
 	}
 }
 
-void PlayingState::handleEntityAttacked(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate)
+void PlayingState::handleKnockbackMove(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate)
 {
 	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
 

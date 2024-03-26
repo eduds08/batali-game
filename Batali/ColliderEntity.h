@@ -14,6 +14,9 @@ public:
 	// Updates some entity's attributes when isCollidingWith() returns true
 	void handleCollision();
 
+	// Moves the entity after being hit. attackDirection -> direction of the attack (from left or right)
+	void knockbackMove(float& deltaTime, float attackDirection);
+
 	/* Setters */
 
 	void setIsCollidingHorizontally(bool isCollildingHorizontally) { m_isCollidingHorizontally = isCollildingHorizontally; }

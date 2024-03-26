@@ -24,8 +24,8 @@ public:
 	// Checks the collision of entity with the tiles that are inside its imaginary view.
 	void updateEntityCollisionWithGrounds(ColliderEntity& entity, Ground& ground);
 
-	// Calls takeDamage and also knockbackMove for the attacked entity
-	void handleEntityAttacked(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate);
+	// Calls knockbackMove for the attacked entity
+	void handleKnockbackMove(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate);
 
 	void updateView();
 

@@ -76,19 +76,3 @@ void Character::setState(CharacterState* state)
 		m_state->enter(*this);
 	}
 }
-
-void Character::knockbackMove(float& deltaTime, float attackDirection)
-{
-	if (attackDirection < 0.f)
-	{
-		// attack coming from left
-		m_shape.move(sf::Vector2f{ m_knockbackVelocity, 0.f } *deltaTime);
-	}
-	else
-	{
-		// attack coming from right
-		m_shape.move(sf::Vector2f{ m_knockbackVelocity * -1.f, 0.f } *deltaTime);
-	}
-
-	m_sprite.setPosition(sf::Vector2f{ getShapePosition().x, getShapePosition().y - (m_spriteHeight - getShapeSize().y) / 2.f });
-}

@@ -34,9 +34,6 @@ public:
 		}
 	}
 
-	// Moves the entity after being hit. attackDirection -> direction of the attack (from left or right)
-	void knockbackMove(float& deltaTime, float attackDirection);
-
 	const int* getHp() const { return &m_hp; }
 
 	const int getPlayerNumber() const { return m_playerNumber; }

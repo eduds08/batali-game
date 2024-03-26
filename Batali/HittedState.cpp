@@ -3,7 +3,6 @@
 #include "IdleState.h"
 #include "DeadState.h"
 #include "ProjectileEntity.h"
-
 #include "Character.h"
 
 HittedState::HittedState(const std::string& hittedMode, Character* attacker)
