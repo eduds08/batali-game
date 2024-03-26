@@ -9,8 +9,6 @@
 class TexturesManager
 {
 public:
-
-
 	// Returns an existing texture from the texturesMap or create and save a new one in the map and then returns it
 	std::shared_ptr<sf::Texture> loadAndGetTexture(const std::string& textureName, const std::string& texturePath);
 

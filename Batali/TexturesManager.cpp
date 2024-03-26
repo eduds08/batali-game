@@ -19,7 +19,7 @@ std::shared_ptr<sf::Texture> TexturesManager::loadAndGetTexture(const std::strin
 	{
 		if (!newTexture->loadFromFile(texturePath))
 		{
-			throw "ERROR LOADING TEXTURE";
+			throw "ERROR LOADING TEXTURE -- " + textureName + " -- " + texturePath + "\n";
 		}
 	}
 	catch (char const* error)
