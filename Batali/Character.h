@@ -34,9 +34,6 @@ public:
 		}
 	}
 
-	//const sf::RectangleShape& getAttackHitbox() const { return m_attackHitbox.getShape(); }
-	/*const int getDamage() const { return m_damage; }*/
-
 	// Updates entity's attributes when it gets attacked (and returns if attackedEntity got hit or not)
 	bool takeDamage(float attackDirection, int damage);
 
@@ -44,12 +41,8 @@ public:
 	void knockbackMove(float& deltaTime, float attackDirection);
 
 	const int* getHp() const { return &m_hp; }
-	const int* getRemainingManaToUltimate() const { return &m_remainingManaToUltimate; }
-	//const int* getStamina() const { return &m_stamina; }
 
 	const int getPlayerNumber() const { return m_playerNumber; }
-
-	//virtual const sf::RectangleShape& getAttackHitbox() const = 0;
 
 	CharacterState* getCharacterState() const { return m_state; }
 
@@ -65,14 +58,6 @@ public:
 protected:
 	CharacterState* m_state{ nullptr };
 
-	//AttackHitbox m_attackHitbox{};
-	
-	int m_remainingManaToUltimate{ 5 };
-	
-	/*sf::Clock m_staminaRecoverClock{};
-	int m_stamina{ 100 };
-	float m_staminaRecoverTime{};*/
-	
 	int m_playerNumber{ 1 };
 	int m_hp{ 1300 };
 };

@@ -74,8 +74,10 @@ void PlayingState::update()
 			characterStatus.update();
 		}
 
-		updatePlayer1Input();
-		updatePlayer2Input();
+		for (auto& character : m_characters)
+		{
+			setPlayerInput(character.get());
+		}
 
 		for (auto& character : m_characters)
 		{
@@ -270,44 +272,6 @@ void PlayingState::updateTexturesAndAnimations()
 					}
 				}
 			}
-		}
-	}
-}
-
-void PlayingState::updatePlayer1Input()
-{
-	if (!m_onPause)
-	{
-		if (m_characters[0]->getEntityName() == "fire_knight")
-		{
-			setPlayerInput(dynamic_cast<FireKnight*>(m_characters[0].get()));
-		}
-		else if (m_characters[0]->getEntityName() == "wind_hashashin")
-		{
-			setPlayerInput(dynamic_cast<WindHashashin*>(m_characters[0].get()));
-		}
-		else if (m_characters[0]->getEntityName() == "boxer")
-		{
-			setPlayerInput(dynamic_cast<Boxer*>(m_characters[0].get()));
-		}
-	}
-}
-
-void PlayingState::updatePlayer2Input()
-{
-	if (!m_onPause)
-	{
-		if (m_characters[1]->getEntityName() == "fire_knight")
-		{
-			setPlayerInput(dynamic_cast<FireKnight*>(m_characters[1].get()));
-		}
-		else if (m_characters[1]->getEntityName() == "wind_hashashin")
-		{
-			setPlayerInput(dynamic_cast<WindHashashin*>(m_characters[1].get()));
-		}
-		else if (m_characters[1]->getEntityName() == "boxer")
-		{
-			setPlayerInput(dynamic_cast<Boxer*>(m_characters[1].get()));
 		}
 	}
 }

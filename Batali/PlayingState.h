@@ -38,10 +38,6 @@ public:
 	void setOnPause(bool onPause) { m_onPause = onPause; }
 	bool getOnPause() { return m_onPause; }
 
-	// Thread method to capture player's inputs
-	void updatePlayer1Input();
-	void updatePlayer2Input();
-
 	void setPlayerInput(Character* character);
 
 private:

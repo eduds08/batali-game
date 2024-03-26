@@ -15,9 +15,5 @@ public:
 	virtual void update(Character& character, float& deltaTime);
 
 private:
-	sf::Clock m_staminaRecoverClock{};
-	int m_stamina{ 100 };
-	float m_staminaRecoverTime{};
-
 	float m_rollSpeed{ 220.f };
 };

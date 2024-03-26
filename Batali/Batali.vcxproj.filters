@@ -141,7 +141,9 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>OTHERS</Filter>
     </ClCompile>
-    <ClCompile Include="AttackHitbox.cpp" />
+    <ClCompile Include="AttackHitbox.cpp">
+      <Filter>OTHERS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -267,6 +269,8 @@
     <ClInclude Include="TextureManager.h">
       <Filter>OTHERS</Filter>
     </ClInclude>
-    <ClInclude Include="AttackHitbox.h" />
+    <ClInclude Include="AttackHitbox.h">
+      <Filter>OTHERS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,6 +20,4 @@ public:
 
 private:
 	StatusBarUI m_healthBar{};
-	StatusBarUI m_staminaBar{};
-	StatusBarUI m_manaBar{};
 };

@@ -88,11 +88,6 @@ bool Character::takeDamage(float attackDirection, int damage)
 
 		std::cout << "hit\n---\n";
 
-		/*if (m_remainingManaToUltimate > 0)
-		{
-			--m_remainingManaToUltimate;
-		}*/
-
 		if (attackDirection < 0.f)
 		{
 			// attack coming from left
