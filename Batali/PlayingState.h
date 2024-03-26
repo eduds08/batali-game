@@ -38,8 +38,6 @@ public:
 	void setOnPause(bool onPause) { m_onPause = onPause; }
 	bool getOnPause() { return m_onPause; }
 
-	void setPlayerInput(Character* character);
-
 private:
 	std::vector<std::shared_ptr<Character>> m_characters{};
 

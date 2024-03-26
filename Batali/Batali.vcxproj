@@ -134,6 +134,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedEntity.cpp" />
+    <ClCompile Include="Attack1Command.cpp" />
+    <ClCompile Include="Attack2Command.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="BackgroundUI.cpp" />
@@ -148,6 +150,7 @@
     <ClCompile Include="CharacterState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="ColliderEntity.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
     <ClCompile Include="FallingState.cpp" />
@@ -158,6 +161,8 @@
     <ClCompile Include="Hoodie.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="ImageButtonUI.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
@@ -166,7 +171,9 @@
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileCharacter.cpp" />
+    <ClCompile Include="RollCommand.cpp" />
     <ClCompile Include="RollingState.cpp" />
+    <ClCompile Include="RunCommand.cpp" />
     <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
@@ -174,10 +181,13 @@
     <ClCompile Include="TextButtonUI.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UltimateCommand.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.h" />
+    <ClInclude Include="Attack1Command.h" />
+    <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="AttackingState.h" />
     <ClInclude Include="BackgroundUI.h" />
@@ -188,12 +198,15 @@
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterState.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="FallingState.h" />
     <ClInclude Include="HittedState.h" />
     <ClInclude Include="Hoodie.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
     <ClInclude Include="CharacterSelectionState.h" />
@@ -210,7 +223,9 @@
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileCharacter.h" />
+    <ClInclude Include="RollCommand.h" />
     <ClInclude Include="RollingState.h" />
+    <ClInclude Include="RunCommand.h" />
     <ClInclude Include="RunningState.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
@@ -218,6 +233,7 @@
     <ClInclude Include="TextButtonUI.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UltimateCommand.h" />
     <ClInclude Include="WindHashashin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

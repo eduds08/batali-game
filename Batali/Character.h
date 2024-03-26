@@ -5,6 +5,8 @@
 #include "AttackHitbox.h"
 #include "AttackingState.h"
 
+#include "InputHandler.h"
+
 class Character : public ColliderEntity
 {
 public:
@@ -44,4 +46,6 @@ protected:
 
 	int m_playerNumber{ 1 };
 	int m_hp{ 1300 };
+
+	InputHandler m_inputHandler{};
 };

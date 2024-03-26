@@ -78,11 +78,6 @@ void PlayingState::update()
 
 		for (auto& character : m_characters)
 		{
-			setPlayerInput(character.get());
-		}
-
-		for (auto& character : m_characters)
-		{
 			character->update(m_deltaTime);
 		}
 
@@ -264,72 +259,6 @@ void PlayingState::updateTexturesAndAnimations()
 			{
 				character->updateAnimation();
 			}
-		}
-	}
-}
-
-void PlayingState::setPlayerInput(Character* character)
-{
-	if (character->getPlayerNumber() == 1)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
-		{
-			character->handleCondition("RUN");
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
-		{
-			character->handleCondition("RUN");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
-		{
-			character->handleCondition("JUMP");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::V))
-		{
-			character->handleCondition("ROLL");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::X))
-		{
-			character->handleCondition("ATTACK_1");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::C))
-		{
-			character->handleCondition("ATTACK_2");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::B))
-		{
-			character->handleCondition("ULTIMATE");
-		}
-	}
-	else if (character->getPlayerNumber() == 2)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Left))
-		{
-			character->handleCondition("RUN");
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Right))
-		{
-			character->handleCondition("RUN");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up))
-		{
-			character->handleCondition("JUMP");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::J))
-		{
-			character->handleCondition("ROLL");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I))
-		{
-			character->handleCondition("ATTACK_1");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O))
-		{
-			character->handleCondition("ATTACK_2");
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::K))
-		{
-			character->handleCondition("ULTIMATE");
 		}
 	}
 }

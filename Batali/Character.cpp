@@ -11,11 +11,28 @@ Character::Character(int playerNumber)
 	: ColliderEntity{}
 	, m_playerNumber{ playerNumber }
 {
-	// Second player starts facing left
-	if (m_playerNumber == 2)
+	if (m_playerNumber == 1)
+	{
+		m_inputHandler.bindRunRightCommand(sf::Keyboard::Scancode::D);
+		m_inputHandler.bindRunLeftCommand(sf::Keyboard::Scancode::A);
+		m_inputHandler.bindJumpCommand(sf::Keyboard::Scancode::W);
+		m_inputHandler.bindAttack1Command(sf::Keyboard::Scancode::X);
+		m_inputHandler.bindAttack2Command(sf::Keyboard::Scancode::C);
+		m_inputHandler.bindRollCommand(sf::Keyboard::Scancode::V);
+		m_inputHandler.bindUltimateCommand(sf::Keyboard::Scancode::B);
+	}
+	else if (m_playerNumber == 2)
 	{
 		m_facingRight = -1;
 		flipSprite();
+
+		m_inputHandler.bindRunRightCommand(sf::Keyboard::Scancode::Right);
+		m_inputHandler.bindRunLeftCommand(sf::Keyboard::Scancode::Left);
+		m_inputHandler.bindJumpCommand(sf::Keyboard::Scancode::Up);
+		m_inputHandler.bindAttack1Command(sf::Keyboard::Scancode::I);
+		m_inputHandler.bindAttack2Command(sf::Keyboard::Scancode::O);
+		m_inputHandler.bindRollCommand(sf::Keyboard::Scancode::J);
+		m_inputHandler.bindUltimateCommand(sf::Keyboard::Scancode::K);
 	}
 }
 
@@ -43,6 +60,8 @@ void Character::handleCondition(const std::string& condition)
 
 void Character::update(float& deltaTime)
 {
+	m_inputHandler.handleInput(*this);
+
 	m_velocity.x = 0.f;
 
 	m_state->update(*this, deltaTime);
