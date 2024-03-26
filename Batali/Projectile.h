@@ -10,7 +10,7 @@ public:
 
 	void update(float& deltaTime);
 
-	void updateTexture();
+	virtual void updateTexture();
 
 	/* SETTERS */
 
@@ -20,9 +20,11 @@ public:
 	
 	const bool getCollided() const { return m_collided; }
 	const bool getVanished() const { return m_vanished; }
+	const int getDamage() const { return m_damage; }
 
 protected:
 	bool m_collided{ false };
 	bool m_vanished{ false };
 
+	int m_damage{};
 };

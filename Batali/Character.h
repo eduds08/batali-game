@@ -34,9 +34,6 @@ public:
 		}
 	}
 
-	// Updates entity's attributes when it gets attacked (and returns if attackedEntity got hit or not)
-	bool takeDamage(float attackDirection, int damage);
-
 	// Moves the entity after being hit. attackDirection -> direction of the attack (from left or right)
 	void knockbackMove(float& deltaTime, float attackDirection);
 
@@ -44,7 +41,7 @@ public:
 
 	const int getPlayerNumber() const { return m_playerNumber; }
 
-	CharacterState* getCharacterState() const { return m_state; }
+	const std::string& getStateName() const { return m_state->getStateName(); }
 
 	friend class RollingState;
 	friend class RunningState;
@@ -54,6 +51,9 @@ public:
 	friend class AttackingState;
 	friend class HittedState;
 	friend class DeadState;
+
+	template <class T>
+	T* getCharacterState() const { return dynamic_cast<T*>(m_state); }
 
 protected:
 	CharacterState* m_state{ nullptr };

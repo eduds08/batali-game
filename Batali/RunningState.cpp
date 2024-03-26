@@ -11,6 +11,7 @@
 
 RunningState::RunningState()
 {
+	m_stateName = "RunningState";
 }
 
 void RunningState::enter(Character& character)
@@ -40,9 +41,9 @@ CharacterState* RunningState::handleCondition(Character& character, const std::s
 	{
 		return new FallingState{};
 	}
-	else if (condition == "HITTED")
+	else if (condition == "HITTED" || condition == "FAST_HITTED")
 	{
-		return new HittedState{};
+		return new HittedState{ condition };
 	}
 
 	return nullptr;

@@ -18,5 +18,8 @@ public:
 
 	void updateHorizontalMovement(Character& character);
 
+	const std::string& getStateName() const { return m_stateName; }
+
 protected:
+	std::string m_stateName{};
 };

@@ -13,6 +13,8 @@
 
 AttackingState::AttackingState(const std::string& attack)
 {
+	m_stateName = "AttackingState";
+
 	if (attack == "ATTACK_1")
 	{
 		m_attack = "Attack1";
@@ -55,7 +57,7 @@ CharacterState* AttackingState::handleCondition(Character& character, const std:
 	}
 	else if (condition == "HITTED" && m_attack != "Ultimate")
 	{
-		return new HittedState{};
+		return new HittedState{ condition };
 	}
 
 	return nullptr;
@@ -84,11 +86,26 @@ bool AttackingState::checkAttack(Character& thisCharacter, Character& otherChara
 {
 	if (m_attackHitbox->getShape().getGlobalBounds().intersects(otherCharacter.getShape().getGlobalBounds()))
 	{
-		if (dynamic_cast<HittedState*>(otherCharacter.getCharacterState()) == nullptr)
+		if (otherCharacter.getStateName() != "HittedState")
 		{
 			if (!m_attackHitbox->getIsUltimateActivate())
 			{
-				//otherCharacter.setState(new HittedState{});
+				if (thisCharacter.getEntityName() != "wind_hashashin")
+				{
+					otherCharacter.setState(new HittedState{ "HITTED", &thisCharacter });
+				}
+				else
+				{
+					if (dynamic_cast<WindHashashin*>(&thisCharacter)->getActivateUltimate())
+					{
+						otherCharacter.setState(new HittedState{ "FAST_HITTED", &thisCharacter });
+					}
+					else
+					{
+						otherCharacter.setState(new HittedState{ "HITTED", &thisCharacter });
+					}
+				}
+				
 				return true;
 			}
 			else
@@ -107,43 +124,6 @@ bool AttackingState::checkAttack(Character& thisCharacter, Character& otherChara
 			}
 		}
 	}
-	else
-	{
-		// Was attacked by projectiles
-		if (dynamic_cast<ProjectileEntity*>(&thisCharacter) != nullptr)
-		{
-			for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(&thisCharacter)->getProjectiles())
-			{
-				if (ultimateProjectile->getShape().getGlobalBounds().intersects(otherCharacter.getShape().getGlobalBounds()))
-				{
-					ultimateProjectile->setCollided(true);
-					//otherCharacter.setState(new HittedState{});
-					return true;
-				}
-			}
-		}
-	}
 
 	return false;
 }
-
-// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
-//float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
-
-//if (!isUltimateActivate)
-//{
-	//bool gotHit = attackedEntity.takeDamage(m_deltaTime, attackDirection, attackingEntity.getAttackHitbox().getDamage());
-
-	//if (gotHit && attackingEntity.getAttackHitbox().getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
-	//{
-	//	// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-	//	while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getAttackHitbox().getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally() /*&& !attackedEntity.getOnRoll()*/)
-	//	{
-	//		for (auto& ground : m_grounds)
-	//		{
-	//			updateEntityCollisionWithGrounds(attackedEntity, ground);
-	//		}
-	//		attackedEntity.knockbackMove(m_deltaTime, attackDirection);
-	//	}
-	//}
-//}

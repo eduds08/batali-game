@@ -5,7 +5,7 @@
 class JumpingState : public CharacterState
 {
 public:
-	JumpingState() {}
+	JumpingState();
 	virtual ~JumpingState() = default;
 
 	virtual void enter(Character& character);

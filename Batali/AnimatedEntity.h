@@ -22,6 +22,8 @@ public:
 
 	const std::string& getEntityName() const { return m_entityName; }
 
+	virtual void updateTexture() {}
+
 protected:
 	// Name of the current texture set in the entity
 	std::string m_currentTexture{};

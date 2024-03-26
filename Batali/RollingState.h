@@ -5,7 +5,7 @@
 class RollingState : public CharacterState
 {
 public:
-	RollingState() {}
+	RollingState();
 	virtual ~RollingState() = default;
 
 	virtual void enter(Character& character);

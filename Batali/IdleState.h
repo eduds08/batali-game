@@ -5,7 +5,7 @@
 class IdleState : public CharacterState
 {
 public:
-	IdleState() {}
+	IdleState();
 	virtual ~IdleState() = default;
 
 	virtual void enter(Character& character);

@@ -10,6 +10,8 @@ BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, int
 
 	m_speed = BOXER_PROJECTILE_SPEED;
 
+	m_damage = BOXER_ULTIMATE_DAMAGE;
+
 	// Initialize sprite
 	m_sprite.setOrigin(sf::Vector2f{ m_spriteWidth / 2.f, m_spriteHeight / 2.f });
 	flipSprite();

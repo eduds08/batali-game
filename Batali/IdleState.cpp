@@ -9,6 +9,11 @@
 
 #include "Character.h"
 
+IdleState::IdleState()
+{
+	m_stateName = "IdleState";
+}
+
 void IdleState::enter(Character& character)
 {
 	character.changeCurrentTexture(character.m_texturesActionName.at("Idle"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Idle")), true);
@@ -36,9 +41,9 @@ CharacterState* IdleState::handleCondition(Character& character, const std::stri
 	{
 		return new FallingState{};
 	}
-	else if (condition == "HITTED")
+	else if (condition == "HITTED" || condition == "FAST_HITTED")
 	{
-		return new HittedState{};
+		return new HittedState{ condition };
 	}
 
 

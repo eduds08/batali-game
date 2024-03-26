@@ -5,7 +5,7 @@
 class DeadState : public CharacterState
 {
 public:
-	DeadState() {}
+	DeadState();
 	virtual ~DeadState() = default;
 
 	virtual void enter(Character& character);

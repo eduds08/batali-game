@@ -3,6 +3,11 @@
 #include "IdleState.h"
 #include "Character.h"
 
+RollingState::RollingState()
+{
+	m_stateName = "RollingState";
+}
+
 void RollingState::enter(Character& character)
 {
 	character.changeCurrentTexture(character.m_texturesActionName.at("Roll"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Roll")), false);

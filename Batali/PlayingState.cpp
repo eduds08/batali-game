@@ -1,5 +1,7 @@
 #include "PlayingState.h"
 
+#include "HittedState.h"
+
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
@@ -97,11 +99,6 @@ void PlayingState::render()
 		if (m_debugMode)
 		{
 			m_window.draw(character->getShape());
-
-			if (dynamic_cast<WindHashashin*>(character.get()) != nullptr)
-			{
-				m_window.draw(dynamic_cast<WindHashashin*>(character.get())->getUltimateActivateHitbox());
-			}
 		}
 
 		character->render(m_window);
@@ -160,11 +157,34 @@ void PlayingState::updateCollision()
 		{
 			if (attackedCharacter != attackingCharacter)
 			{
-				if (dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState()) != nullptr)
+				if (attackingCharacter->getStateName() == "AttackingState")
 				{
-					if (dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState())->checkAttack(*attackingCharacter, *attackedCharacter))
+					if (attackingCharacter->getCharacterState<AttackingState>()->checkAttack(*attackingCharacter, *attackedCharacter))
 					{
-						handleEntityAttacked(*attackingCharacter, *attackedCharacter, dynamic_cast<AttackingState*>(attackingCharacter->getCharacterState())->m_attackHitbox->getIsUltimateActivate());
+						handleEntityAttacked(*attackingCharacter, *attackedCharacter, attackingCharacter->getCharacterState<AttackingState>()->m_attackHitbox->getIsUltimateActivate());
+					}
+				}
+			}
+		}
+	}
+
+	for (auto& attackingCharacter : m_characters)
+	{
+		for (auto& attackedCharacter : m_characters)
+		{
+			if (attackedCharacter != attackingCharacter)
+			{
+				// Was attacked by projectiles
+				if (dynamic_cast<ProjectileEntity*>(attackingCharacter.get()) != nullptr)
+				{
+					for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(attackingCharacter.get())->getProjectiles())
+					{
+						if (ultimateProjectile->getShape().getGlobalBounds().intersects(attackedCharacter->getShape().getGlobalBounds()))
+						{
+							ultimateProjectile->setCollided(true);
+
+							attackedCharacter->setState(new HittedState{ "FAST_HITTED", attackingCharacter.get() });
+						}
 					}
 				}
 			}
@@ -186,17 +206,14 @@ void PlayingState::updateEntityCollisionWithGrounds(ColliderEntity& entity, Grou
 
 void PlayingState::handleEntityAttacked(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate)
 {
-	// If attackDirection is negative, the attack came from the right. Otherwise, it came from left.
 	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
 
 	if (!isUltimateActivate)
 	{
-		bool gotHit = attackedEntity.takeDamage(attackDirection, dynamic_cast<AttackingState*>(attackingEntity.getCharacterState())->m_attackHitbox->getDamage());
-
-		if (gotHit && dynamic_cast<AttackingState*>(attackingEntity.getCharacterState())->m_attackHitbox->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+		if (attackingEntity.getCharacterState<AttackingState>()->m_attackHitbox->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 		{
 			// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-			while (attackedEntity.getShape().getGlobalBounds().intersects((dynamic_cast<AttackingState*>(attackingEntity.getCharacterState())->m_attackHitbox->getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally())
+			while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getCharacterState<AttackingState>()->m_attackHitbox->getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally())
 			{
 				for (auto& ground : m_grounds)
 				{

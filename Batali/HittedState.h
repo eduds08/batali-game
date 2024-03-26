@@ -5,7 +5,7 @@
 class HittedState : public CharacterState
 {
 public:
-	HittedState();
+	HittedState(const std::string& hittedMode, Character* attacker = nullptr);
 	virtual ~HittedState() = default;
 
 	virtual void enter(Character& character);
@@ -15,4 +15,7 @@ public:
 	virtual void update(Character& character, float& deltaTime);
 
 private:
+	std::string m_hittedMode{};
+
+	Character* m_attacker{ nullptr };
 };

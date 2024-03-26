@@ -4,6 +4,11 @@
 #include "HittedState.h"
 #include "Character.h"
 
+FallingState::FallingState()
+{
+	m_stateName = "FallingState";
+}
+
 void FallingState::enter(Character& character)
 {
  	character.changeCurrentTexture(character.m_texturesActionName.at("Falling"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Falling")), true);
@@ -15,9 +20,9 @@ CharacterState* FallingState::handleCondition(Character& character, const std::s
 	{
 		return new IdleState{};
 	}
-	else if (condition == "HITTED")
+	else if (condition == "HITTED" || condition == "FAST_HITTED")
 	{
-		return new HittedState{};
+		return new HittedState{ condition };
 	}
 
 	return nullptr;

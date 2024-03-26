@@ -7,6 +7,11 @@
 
 #include "Character.h"
 
+JumpingState::JumpingState()
+{
+	m_stateName = "JumpingState";
+}
+
 void JumpingState::enter(Character& character)
 {
 	character.changeCurrentTexture(character.m_texturesActionName.at("Jumping"), character.m_texturesNamePath.at(character.m_texturesActionName.at("Jumping")), true);
@@ -27,9 +32,9 @@ CharacterState* JumpingState::handleCondition(Character& character, const std::s
 	{
 		return new FallingState{};
 	}
-	else if (condition == "HITTED")
+	else if (condition == "HITTED" || condition == "FAST_HITTED")
 	{
-		return new HittedState{};
+		return new HittedState{ condition };
 	}
 
     return nullptr;
