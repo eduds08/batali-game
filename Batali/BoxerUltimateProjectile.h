@@ -7,7 +7,4 @@ class BoxerUltimateProjectile : public Projectile
 public:
 	BoxerUltimateProjectile(sf::Vector2f firstPosition, int direction);
 	virtual ~BoxerUltimateProjectile() = default;
-
-private:
-
 };

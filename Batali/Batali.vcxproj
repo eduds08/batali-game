@@ -133,7 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimatedEntity.cpp" />
+    <ClCompile Include="AnimatedActor.cpp" />
     <ClCompile Include="Attack1Command.cpp" />
     <ClCompile Include="Attack2Command.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
@@ -149,10 +149,10 @@
     <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="CharacterState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
-    <ClCompile Include="ColliderEntity.cpp" />
+    <ClCompile Include="ColliderActor.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="DeadState.cpp" />
-    <ClCompile Include="DrawableEntity.cpp" />
+    <ClCompile Include="SpriteActor.cpp" />
     <ClCompile Include="FallingState.cpp" />
     <ClCompile Include="FireKnight.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -166,11 +166,11 @@
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
-    <ClCompile Include="MovableEntity.cpp" />
-    <ClCompile Include="PhysicalEntity.cpp" />
+    <ClCompile Include="MovableActor.cpp" />
+    <ClCompile Include="ShapeActor.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="ProjectileCharacter.cpp" />
+    <ClCompile Include="CharacterWithProjectiles.cpp" />
     <ClCompile Include="RollCommand.cpp" />
     <ClCompile Include="RollingState.cpp" />
     <ClCompile Include="RunCommand.cpp" />
@@ -179,13 +179,13 @@
     <ClCompile Include="StateContext.cpp" />
     <ClCompile Include="StatusBarUI.cpp" />
     <ClCompile Include="TextButtonUI.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="TexturesManager.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UltimateCommand.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimatedEntity.h" />
+    <ClInclude Include="AnimatedActor.h" />
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="AttackHitbox.h" />
@@ -211,18 +211,18 @@
     <ClInclude Include="CharacterPortraitUI.h" />
     <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterStatusUI.h" />
-    <ClInclude Include="ColliderEntity.h" />
+    <ClInclude Include="ColliderActor.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="DrawableEntity.h" />
+    <ClInclude Include="SpriteActor.h" />
     <ClInclude Include="FireKnight.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="MainMenuState.h" />
-    <ClInclude Include="MovableEntity.h" />
-    <ClInclude Include="PhysicalEntity.h" />
+    <ClInclude Include="MovableActor.h" />
+    <ClInclude Include="ShapeActor.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
-    <ClInclude Include="ProjectileCharacter.h" />
+    <ClInclude Include="CharacterWithProjectiles.h" />
     <ClInclude Include="RollCommand.h" />
     <ClInclude Include="RollingState.h" />
     <ClInclude Include="RunCommand.h" />
@@ -231,7 +231,7 @@
     <ClInclude Include="StateContext.h" />
     <ClInclude Include="StatusBarUI.h" />
     <ClInclude Include="TextButtonUI.h" />
-    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="TexturesManager.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UltimateCommand.h" />
     <ClInclude Include="WindHashashin.h" />

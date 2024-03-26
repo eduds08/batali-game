@@ -50,7 +50,7 @@
 //		}*/
 //
 //		// Only can roll when on ground and not on Hitted animation and has Staminas
-//		/*if (m_canJump && m_stamina > 0 && !getHitted() && m_currentTexture != m_entityName + "Roll")
+//		/*if (m_canJump && m_stamina > 0 && !getHitted() && m_currentTexture != m_actorName + "Roll")
 //		{
 //			if (conditionRoll)
 //			{
@@ -66,7 +66,7 @@
 //	//	m_velocity.x += (m_facingRight * m_rollSpeed);
 //
 //	//	// End onRoll animation if m_animationEnd = true
-//	//	if (m_currentTexture == m_entityName + "Roll" && m_animationEnd)
+//	//	if (m_currentTexture == m_actorName + "Roll" && m_animationEnd)
 //	//	{
 //	//		m_onRoll = false;
 //	//	}

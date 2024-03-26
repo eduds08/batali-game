@@ -1,11 +1,11 @@
-#include "ColliderEntity.h"
+#include "ColliderActor.h"
 
-ColliderEntity::ColliderEntity()
-	: MovableEntity{}
+ColliderActor::ColliderActor()
+	: MovableActor{}
 {
 }
 
-bool ColliderEntity::isCollidingWith(const sf::Sprite& other)
+void ColliderActor::updateCollisionWith(const sf::Sprite& other)
 {
 	float otherHalfSizeX = other.getTexture()->getSize().x / 2.f;
 	float otherHalfSizeY = other.getTexture()->getSize().y / 2.f;
@@ -55,28 +55,26 @@ bool ColliderEntity::isCollidingWith(const sf::Sprite& other)
 			m_collisionDirection.x = 0.f;
 		}
 
-		return true;
+		handleCollision();
 	}
-
-	return false;
 }
 
-void ColliderEntity::handleCollision()
+void ColliderActor::handleCollision()
 {
-	// Sets m_velocity.y to 0 if entity collides in bottom or top
+	// Sets m_velocity.y to 0 if actor collides in bottom or top
 	if (m_collisionDirection.y != 0.f)
 	{
 		m_velocity.y = 0.f;
 	}
 
-	// Sets knockbackVelocity to 0 if entity is pushed against a wall after being attacked
+	// Sets knockbackVelocity to 0 if actor is pushed against a wall after being attacked
 	if (m_isCollidingHorizontally)
 	{
 		setKnockbackVelocity(0.f);
 	}
 }
 
-void ColliderEntity::knockbackMove(float& deltaTime, float attackDirection)
+void ColliderActor::knockbackMove(float& deltaTime, float attackDirection)
 {
 	if (attackDirection < 0.f)
 	{

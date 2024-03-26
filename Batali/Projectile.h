@@ -1,11 +1,11 @@
 #pragma once
 
-#include "MovableEntity.h"
+#include "MovableActor.h"
 
-class Projectile : public MovableEntity
+class Projectile : public MovableActor
 {
 public:
-	Projectile(const std::string& entityName);
+	Projectile(const std::string& actorName);
 	virtual ~Projectile() = default;
 
 	void update(float& deltaTime);

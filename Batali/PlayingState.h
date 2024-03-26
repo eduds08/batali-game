@@ -19,41 +19,35 @@ public:
 	virtual void update();
 	virtual void render();
 
-	void updateCollision();
+	void updateCollisions();
 
-	// Checks the collision of entity with the tiles that are inside its imaginary view.
-	void updateEntityCollisionWithGrounds(ColliderEntity& entity, Ground& ground);
+	// Check collision with tiles around the actor's shape
+	void updateActorCollisionWithTiles(ColliderActor& actor, Ground& tile);
 
-	// Calls knockbackMove for the attacked entity
-	void handleKnockbackMove(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate);
+	// Calls knockbackMove for the attacked actor
+	void handleKnockbackMove(Character& attackingActor, Character& attackedActor, bool isUltimateActivate);
 
 	void updateView();
 
 	// Reads a .txt file to generate the tiles
-	void loadAndCreateMap(const std::string& mapFilePath);
+	void loadMap(const std::string& mapFilePath);
 
 	// Thread method to run all animations
 	void updateTexturesAndAnimations();
-
-	void setOnPause(bool onPause) { m_onPause = onPause; }
-	bool getOnPause() { return m_onPause; }
 
 private:
 	std::vector<std::shared_ptr<Character>> m_characters{};
 
 	std::vector<CharacterStatusUI> m_characterStatus{};
-	std::vector<Ground> m_grounds{};
+	std::vector<Ground> m_tiles{};
 
 	std::thread m_animationThread;
 
-	float m_rightViewLimit{};
-	float m_leftViewLimit{};
-	float m_topViewLimit{};
-	float m_bottomViewLimit{};
+	// 0 -> top, 1 -> right, 2 -> bottom, 3 -> left
+	std::vector<float> m_viewLimits{ 0.f, 0.f, 0.f, 0.f };
 
 	float& m_deltaTime;
 
 	bool m_onPause{ false };
-
 	bool m_debugMode{ false };
 };

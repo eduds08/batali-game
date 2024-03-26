@@ -23,7 +23,7 @@
 //		}
 //	}
 //
-//	if (m_currentTexture != m_entityName + "Hitted" && m_currentTexture != m_entityName + "FastHit")
+//	if (m_currentTexture != m_actorName + "Hitted" && m_currentTexture != m_actorName + "FastHit")
 //	{
 //		m_inDamageCooldown = false;
 //	}
@@ -101,13 +101,13 @@
 //	{
 //		if (m_shape.getGlobalBounds().intersects(attackingEntity.getAttackHitbox().getGlobalBounds()))
 //		{
-//			if (attackingEntity.getEntityName() != "wind_hashashin" && attackingEntity.getAttackMode() != "onUltimate")
+//			if (attackingEntity.getActorName() != "wind_hashashin" && attackingEntity.getAttackMode() != "onUltimate")
 //				m_onFastHit = false;
 //			return true;
 //		}
 //
 //		// Was attacked by Wind Hashashin's ultimate activate
-//		if (attackingEntity.getEntityName() == "wind_hashashin")
+//		if (attackingEntity.getActorName() == "wind_hashashin")
 //		{
 //			if (m_shape.getGlobalBounds().intersects(dynamic_cast<WindHashashin*>(&attackingEntity)->getUltimateActivateHitbox().getGlobalBounds()))
 //			{

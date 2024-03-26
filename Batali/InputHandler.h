@@ -89,6 +89,9 @@ public:
 		m_ultimateCommand->button = button;
 	}
 
+	const Command& getRunRightCommand() const { return *m_runRightCommand; }
+	const Command& getRunLeftCommand() const { return *m_runLeftCommand; }
+
 private:
 	Command* m_runRightCommand{ nullptr };
 	Command* m_runLeftCommand{ nullptr };

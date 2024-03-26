@@ -7,7 +7,7 @@
 #include "JumpingState.h"
 #include "FallingState.h"
 
-#include "ProjectileCharacter.h"
+#include "CharacterWithProjectiles.h"
 
 #include "WindHashashin.h"
 
@@ -90,7 +90,7 @@ bool AttackingState::checkAttack(Character& thisCharacter, Character& otherChara
 		{
 			if (!m_attackHitbox->getIsUltimateActivate())
 			{
-				if (thisCharacter.getEntityName() != "wind_hashashin")
+				if (thisCharacter.getActorName() != "wind_hashashin")
 				{
 					otherCharacter.setState(new HittedState{ "HITTED", &thisCharacter });
 				}
@@ -110,7 +110,7 @@ bool AttackingState::checkAttack(Character& thisCharacter, Character& otherChara
 			}
 			else
 			{
-				if (thisCharacter.getEntityName() == "wind_hashashin")
+				if (thisCharacter.getActorName() == "wind_hashashin")
 				{
 					dynamic_cast<WindHashashin*>(&thisCharacter)->setActivateUltimate(true);
 

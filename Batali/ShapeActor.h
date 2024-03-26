@@ -1,14 +1,14 @@
 #pragma once
 
-#include "AnimatedEntity.h"
+#include "AnimatedActor.h"
 
-class PhysicalEntity : public AnimatedEntity
+class ShapeActor : public AnimatedActor
 {
 public:
-	PhysicalEntity();
-	virtual ~PhysicalEntity() = default;
-	
-	// Create an imaginary rectangle around PhysicalEntity. Useful to call isCollidingWith() with less tiles (only the ones inside the imaginary rectangle).
+	ShapeActor();
+	virtual ~ShapeActor() = default;
+
+	// Create an imaginary rectangle around the actor. Useful to call isCollidingWith() with less tiles (only the ones inside the imaginary rectangle).
 	void updateLimits();
 
 	/* Setters */

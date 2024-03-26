@@ -27,5 +27,5 @@ BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, int
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
-	changeCurrentTexture(m_entityName + "Projectile", "./assets/" + m_entityName + "/_Projectile.png", true);
+	changeCurrentTexture(m_actorName + "Projectile", "./assets/" + m_actorName + "/_Projectile.png", true);
 }

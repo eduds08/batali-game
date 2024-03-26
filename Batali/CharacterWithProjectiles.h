@@ -4,11 +4,11 @@
 #include "Projectile.h"
 #include <memory>
 
-class ProjectileCharacter : public Character
+class CharacterWithProjectiles : public Character
 {
 public:
-	ProjectileCharacter(int playerNumber = 1);
-	virtual ~ProjectileCharacter() = default;
+	CharacterWithProjectiles();
+	virtual ~CharacterWithProjectiles() = default;
 
 	virtual void update(float& deltaTime);
 
@@ -16,7 +16,7 @@ public:
 	virtual void launchProjectile() = 0;
 
 	// Update projectiles and checks if those needs to be deleted
-	void updateProjectileCharacter(float& deltaTime);
+	void updateCharacterWithProjectiles(float& deltaTime);
 
 	virtual void render(sf::RenderWindow& window, bool debugMode);
 

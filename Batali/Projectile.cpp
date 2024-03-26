@@ -1,20 +1,20 @@
 #include "Projectile.h"
 
-Projectile::Projectile(const std::string& entityName)
-	: MovableEntity{}
+Projectile::Projectile(const std::string& actorName)
+	: MovableActor{}
 {
-	m_entityName = entityName;
+	m_actorName = actorName;
 }
 
 void Projectile::updateTexture()
 {
 	if (m_collided)
 	{
-		changeCurrentTexture(m_entityName + "Collision", "./assets/" + m_entityName + "/_Collision.png", false);
+		changeCurrentTexture(m_actorName + "Collision", "./assets/" + m_actorName + "/_Collision.png", false);
 	}
 	else
 	{
-		changeCurrentTexture(m_entityName + "Projectile", "./assets/" + m_entityName + "/_Projectile.png", true);
+		changeCurrentTexture(m_actorName + "Projectile", "./assets/" + m_actorName + "/_Projectile.png", true);
 	}
 }
 
@@ -30,7 +30,7 @@ void Projectile::update(float& deltaTime)
 		m_shape.setSize(sf::Vector2f{ 0.f, 0.f });
 		m_shape.setPosition(-100.f, -100.f);
 
-		if (m_currentTexture == m_entityName + "Collision" && m_animationEnd)
+		if (m_currentTexture == m_actorName + "Collision" && m_animationEnd)
 		{
 			m_vanished = true;
 		}

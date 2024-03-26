@@ -25,7 +25,7 @@ void CharacterStatusUI::init(const std::string& textureName, const std::string& 
 
 	if (character != nullptr)
 	{
-		m_healthBar.setEntityStatus(character->getHp());
+		m_healthBar.setActorStatus(character->getHp());
 	}
 }
 

@@ -1,21 +1,16 @@
 #pragma once
 
-#include "ProjectileCharacter.h"
+#include "CharacterWithProjectiles.h"
 #include "BoxerUltimateProjectile.h"
 
-class Boxer : public ProjectileCharacter
+class Boxer : public CharacterWithProjectiles
 {
 public:
-	Boxer(sf::Vector2f firstPosition, int playerNumber = 1);
+	Boxer(sf::Vector2f firstPosition);
 	virtual ~Boxer() = default;
-
-	//void updateAttackHitbox();
 
 	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox);
 
 	// Instantiate a projectile and pushes it into m_projectiles vector
-	void launchProjectile();
-
-protected:
-	
+	virtual void launchProjectile();
 };

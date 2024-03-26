@@ -1,20 +1,20 @@
 #pragma once
 
-#include "TextureManager.h"
+#include "TexturesManager.h"
 #include "Constants.h"
 
 using namespace constants;
 
-class DrawableEntity
+class SpriteActor
 {
 public:
-	DrawableEntity();
-	virtual ~DrawableEntity() = default;
+	SpriteActor();
+	virtual ~SpriteActor() = default;
 
 	// Sets sprite's texture
 	void setTexture(const std::string& textureName, const std::string& texturePath);
 
-	// DrawableEntity flip
+	// SpriteActor flip
 	void flipSprite(float scale = 1.f) { m_sprite.setScale(-scale, scale); }
 
 	/* Setters */
@@ -24,12 +24,12 @@ public:
 	/* Getters */
 
 	const sf::Sprite& getSprite() const { return m_sprite; }
-	const sf::Vector2f getSpriteSize() const { return sf::Vector2f{static_cast<float>(m_spriteWidth), static_cast<float>(m_spriteHeight)}; }
+	const sf::Vector2f getSpriteSize() const { return sf::Vector2f{ static_cast<float>(m_spriteWidth), static_cast<float>(m_spriteHeight) }; }
 	const sf::Vector2f& getSpritePosition() const { return m_sprite.getPosition(); }
 
 protected:
 	// Singleton Pattern
-	TextureManager& m_texturesManager;
+	TexturesManager& m_texturesManager;
 
 	sf::Sprite m_sprite{};
 

@@ -1,9 +1,9 @@
 #include "Hoodie.h"
 
-Hoodie::Hoodie(sf::Vector2f firstPosition, int playerNumber)
-	: Character{ playerNumber }
+Hoodie::Hoodie(sf::Vector2f firstPosition)
+	: Character{}
 {
-	m_entityName = "hoodie";
+	m_actorName = "hoodie";
 
 	initTexturesMap();
 
@@ -40,7 +40,7 @@ void Hoodie::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 
 	m_attackHitboxPosition = sf::Vector2f{ -100.f, -100.f };
 
-	if (m_currentTexture == m_entityName + "Attack1")
+	if (m_currentTexture == m_actorName + "Attack1")
 	{
 		m_attackHitboxPosition = getShapePosition();
 
@@ -52,7 +52,7 @@ void Hoodie::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 			m_damage = HOODIE_ATTACK_1_DAMAGE;
 		}
 	}
-	else if (m_currentTexture == m_entityName + "Attack2")
+	else if (m_currentTexture == m_actorName + "Attack2")
 	{
 		m_attackHitboxPosition = getShapePosition();
 
@@ -66,7 +66,7 @@ void Hoodie::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 
 		m_damage = HOODIE_ATTACK_2_DAMAGE;
 	}
-	else if (m_currentTexture == m_entityName + "AirAttack")
+	else if (m_currentTexture == m_actorName + "AirAttack")
 	{
 		m_attackHitboxPosition = getShapePosition();
 
@@ -78,7 +78,7 @@ void Hoodie::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 			m_damage = HOODIE_AIR_ATTACK_DAMAGE;
 		}
 	}
-	else if (m_currentTexture == m_entityName + "Ultimate")
+	else if (m_currentTexture == m_actorName + "Ultimate")
 	{
 		m_attackHitboxPosition = getShapePosition();
 

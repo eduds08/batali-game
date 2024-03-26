@@ -8,7 +8,7 @@ namespace constants
 	constexpr float TILE_SIZE_FLOAT{ 32.f };
 	constexpr int TILES_AMOUNT_PER_ROW{ 60 };
 	constexpr int TILES_AMOUNT_PER_COL{ 34 };
-	constexpr int TILES_PHYSICAL_ENTITY_LIMIT { 5 };
+	constexpr int TILES_PHYSICAL_ACTOR_LIMIT { 5 };
 
 	constexpr float GRAVITY{ 981.f };
 

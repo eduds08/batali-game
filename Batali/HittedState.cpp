@@ -2,7 +2,7 @@
 
 #include "IdleState.h"
 #include "DeadState.h"
-#include "ProjectileCharacter.h"
+#include "CharacterWithProjectiles.h"
 #include "Character.h"
 
 HittedState::HittedState(const std::string& hittedMode, Character* attacker)
@@ -16,7 +16,7 @@ HittedState::HittedState(const std::string& hittedMode, Character* attacker)
 	}
 	else if (hittedMode == "FAST_HITTED")
 	{
-		m_hittedMode = "FastHit";
+		m_hittedMode = "FastHitted";
 	}
 }
 
@@ -32,10 +32,10 @@ void HittedState::enter(Character& character)
 	}
 	else
 	{
-		if (dynamic_cast<ProjectileCharacter*>(m_attacker) != nullptr)
+		if (dynamic_cast<CharacterWithProjectiles*>(m_attacker) != nullptr)
 		{
-			if (dynamic_cast<ProjectileCharacter*>(m_attacker)->getProjectiles().size() > 0)
-				character.m_hp -= dynamic_cast<ProjectileCharacter*>(m_attacker)->getProjectiles().at(0)->getDamage();
+			if (dynamic_cast<CharacterWithProjectiles*>(m_attacker)->getProjectiles().size() > 0)
+				character.m_hp -= dynamic_cast<CharacterWithProjectiles*>(m_attacker)->getProjectiles().at(0)->getDamage();
 		}
 	}
 

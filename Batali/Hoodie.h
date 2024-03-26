@@ -5,7 +5,7 @@
 class Hoodie : public Character
 {
 public:
-	Hoodie(sf::Vector2f firstPosition, int playerNumber = 1);
+	Hoodie(sf::Vector2f firstPosition);
 	virtual ~Hoodie() = default;
 
 	//void updateAttackHitbox();

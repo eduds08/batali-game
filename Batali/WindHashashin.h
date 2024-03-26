@@ -5,7 +5,7 @@
 class WindHashashin : public Character
 {
 public:
-	WindHashashin(sf::Vector2f firstPosition, int playerNumber = 1);
+	WindHashashin(sf::Vector2f firstPosition);
 	virtual ~WindHashashin() = default;
 
 	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox);

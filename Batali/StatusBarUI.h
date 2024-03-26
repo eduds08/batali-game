@@ -10,16 +10,16 @@ public:
 
 	void init(const std::string& textureName, const std::string& texturePath, sf::Vector2i size);
 
-	// Update the frame of the health bar sprite according to current entity's hp
+	// Update the frame of the health bar sprite according to current actor's hp
 	void update();
 
-	void setEntityStatus(const int* entityStatus);
+	void setActorStatus(const int* actorStatus);
 
 	const std::string& getDirection() { return m_direction; }
 
 private:
-	int m_entityTotalStatusFraction{};
-	const int* m_entityStatus{ nullptr };
+	int m_actorTotalStatusFraction{};
+	const int* m_actorStatus{ nullptr };
 
 	std::string m_direction{};
 };

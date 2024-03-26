@@ -1,10 +1,10 @@
 #include "Boxer.h"
 #include "FallingState.h"
 
-Boxer::Boxer(sf::Vector2f firstPosition, int playerNumber)
-	: ProjectileCharacter{ playerNumber }
+Boxer::Boxer(sf::Vector2f firstPosition)
+	: CharacterWithProjectiles{}
 {
-	m_entityName = "boxer";
+	m_actorName = "boxer";
 	m_state = new FallingState{};
 	initTexturesMap();
 
@@ -40,7 +40,7 @@ void Boxer::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 		m_attackHitbox->reset();
 	}
 
-	if (m_currentTexture == m_entityName + "Attack1")
+	if (m_currentTexture == m_actorName + "Attack1")
 	{
 		m_attackHitbox->setShapePosition(getShapePosition() + sf::Vector2f{0.f, -15.f});
 
@@ -50,7 +50,7 @@ void Boxer::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 			m_attackHitbox->setDamage(BOXER_ATTACK_1_DAMAGE);
 		}
 	}
-	else if (m_currentTexture == m_entityName + "Attack2")
+	else if (m_currentTexture == m_actorName + "Attack2")
 	{
 		m_attackHitbox->setShapePosition(getShapePosition() + sf::Vector2f{16.f * m_facingRight, -28.f});
 
@@ -60,7 +60,7 @@ void Boxer::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 			m_attackHitbox->setDamage(BOXER_ATTACK_2_DAMAGE);
 		}
 	}
-	else if (m_currentTexture == m_entityName + "AirAttack")
+	else if (m_currentTexture == m_actorName + "AirAttack")
 	{
 		m_attackHitbox->setShapePosition(getShapePosition() + sf::Vector2f{0.f, -20.f});
 
@@ -70,7 +70,7 @@ void Boxer::updateAttackHitbox(AttackHitbox* m_attackHitbox)
 			m_attackHitbox->setDamage(BOXER_AIR_ATTACK_DAMAGE);
 		}
 	}
-	else if (m_currentTexture == m_entityName + "Ultimate")
+	else if (m_currentTexture == m_actorName + "Ultimate")
 	{
 		m_attackHitbox->setShapePosition(getShapePosition());
 		m_attackHitbox->setDamage(BOXER_ULTIMATE_DAMAGE);

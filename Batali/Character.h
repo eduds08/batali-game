@@ -1,16 +1,16 @@
 #pragma once
 
-#include "ColliderEntity.h"
+#include "ColliderActor.h"
 #include "CharacterState.h"
 #include "AttackHitbox.h"
 #include "AttackingState.h"
 
 #include "InputHandler.h"
 
-class Character : public ColliderEntity
+class Character : public ColliderActor
 {
 public:
-	Character(int playerNumber = 1);
+	Character();
 	virtual ~Character();
 
 	void handleCondition(const std::string& condition);
@@ -25,9 +25,9 @@ public:
 
 	const int* getHp() const { return &m_hp; }
 
-	const int getPlayerNumber() const { return m_playerNumber; }
-
 	const std::string& getStateName() const { return m_state->getStateName(); }
+
+	const InputHandler& getInputHandler() const { return m_inputHandler; }
 
 	friend class RollingState;
 	friend class RunningState;
@@ -44,7 +44,7 @@ public:
 protected:
 	CharacterState* m_state{ nullptr };
 
-	int m_playerNumber{ 1 };
+	static int m_playerNumber;
 	int m_hp{ 1300 };
 
 	InputHandler m_inputHandler{};

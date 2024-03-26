@@ -1,23 +1,23 @@
-#include "ProjectileCharacter.h"
+#include "CharacterWithProjectiles.h"
 
 #include "DeadState.h"
 
-ProjectileCharacter::ProjectileCharacter(int playerNumber)
-	: Character{ playerNumber }
+CharacterWithProjectiles::CharacterWithProjectiles()
+	: Character{}
 {
 }
 
-void ProjectileCharacter::update(float& deltaTime)
+void CharacterWithProjectiles::update(float& deltaTime)
 {
 	if (dynamic_cast<DeadState*>(m_state) == nullptr)
 	{
-		updateProjectileCharacter(deltaTime);
+		updateCharacterWithProjectiles(deltaTime);
 	}
 
 	Character::update(deltaTime);
 }
 
-void ProjectileCharacter::updateProjectileCharacter(float& deltaTime)
+void CharacterWithProjectiles::updateCharacterWithProjectiles(float& deltaTime)
 {
 	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> collidedProjectiles{};
 
@@ -37,7 +37,7 @@ void ProjectileCharacter::updateProjectileCharacter(float& deltaTime)
 	}
 }
 
-void ProjectileCharacter::render(sf::RenderWindow& window, bool debugMode)
+void CharacterWithProjectiles::render(sf::RenderWindow& window, bool debugMode)
 {
 	Character::render(window, debugMode);
 
@@ -55,9 +55,9 @@ void ProjectileCharacter::render(sf::RenderWindow& window, bool debugMode)
 	}
 }
 
-void ProjectileCharacter::updateAnimation()
+void CharacterWithProjectiles::updateAnimation()
 {
-	AnimatedEntity::updateAnimation();
+	AnimatedActor::updateAnimation();
 
 	if (m_projectiles.size() > 0)
 	{

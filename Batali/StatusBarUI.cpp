@@ -20,7 +20,7 @@ void StatusBarUI::update()
 {
 	for (int i = 0; i <= static_cast<int>(m_sprite.getTexture()->getSize().x / m_spriteWidth) - 1; ++i)
 	{
-		if (*m_entityStatus <= m_entityTotalStatusFraction * i)
+		if (*m_actorStatus <= m_actorTotalStatusFraction * i)
 		{
 			m_sprite.setTextureRect(sf::IntRect{ m_spriteWidth * (static_cast<int>(m_sprite.getTexture()->getSize().x / m_spriteWidth) - 1 - i), 0, m_spriteWidth, m_spriteHeight });
 			break;
@@ -28,8 +28,8 @@ void StatusBarUI::update()
 	}
 }
 
-void StatusBarUI::setEntityStatus(const int* entityStatus)
+void StatusBarUI::setActorStatus(const int* actorStatus)
 {
-	m_entityTotalStatusFraction = static_cast<int>((*entityStatus) / static_cast<float>(static_cast<int>(m_sprite.getTexture()->getSize().x / m_spriteWidth) - 1));
-	m_entityStatus = entityStatus;
+	m_actorTotalStatusFraction = static_cast<int>((*actorStatus) / static_cast<float>(static_cast<int>(m_sprite.getTexture()->getSize().x / m_spriteWidth) - 1));
+	m_actorStatus = actorStatus;
 }

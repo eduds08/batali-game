@@ -1,15 +1,16 @@
 #include "Character.h"
 
-#include "ProjectileCharacter.h"
+#include "CharacterWithProjectiles.h"
 #include "WindHashashin.h"
 #include "DeadState.h"
 #include "IdleState.h"
 #include "RollingState.h"
 #include "HittedState.h"
 
-Character::Character(int playerNumber)
-	: ColliderEntity{}
-	, m_playerNumber{ playerNumber }
+int Character::m_playerNumber{ 1 };
+
+Character::Character()
+	: ColliderActor{}
 {
 	if (m_playerNumber == 1)
 	{
@@ -34,6 +35,8 @@ Character::Character(int playerNumber)
 		m_inputHandler.bindRollCommand(sf::Keyboard::Scancode::J);
 		m_inputHandler.bindUltimateCommand(sf::Keyboard::Scancode::K);
 	}
+
+	++m_playerNumber;
 }
 
 Character::~Character()
@@ -43,6 +46,8 @@ Character::~Character()
 		delete m_state;
 		m_state = nullptr;
 	}
+
+	m_playerNumber = 1;
 }
 
 void Character::handleCondition(const std::string& condition)
@@ -84,7 +89,7 @@ void Character::setState(CharacterState* state)
 	{
 		if (m_state->getStateName() == "AttackingState")
 		{
-			if (m_entityName == "wind_hashashin")
+			if (m_actorName == "wind_hashashin")
 			{
 				dynamic_cast<WindHashashin*>(this)->setActivateUltimate(false);
 			}
@@ -98,8 +103,6 @@ void Character::setState(CharacterState* state)
 
 void Character::render(sf::RenderWindow& window, bool debugMode)
 {
-	window.draw(m_sprite);
-
 	if (debugMode)
 	{
 		window.draw(m_shape);
@@ -108,4 +111,6 @@ void Character::render(sf::RenderWindow& window, bool debugMode)
 			window.draw(dynamic_cast<AttackingState*>(m_state)->m_attackHitbox->getShape());
 		}
 	}
+
+	window.draw(m_sprite);
 }

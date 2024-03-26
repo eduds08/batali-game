@@ -1,31 +1,31 @@
 #pragma once
 
-#include "DrawableEntity.h"
+#include "SpriteActor.h"
 
-class AnimatedEntity : public DrawableEntity
+class AnimatedActor : public SpriteActor
 {
 public:
-	AnimatedEntity();
-	virtual ~AnimatedEntity() = default;
+	AnimatedActor();
+	virtual ~AnimatedActor() = default;
 
 	// Called inside the animationThread. It's here where all animation happens.
 	virtual void updateAnimation();
 
-	// Called when the AnimatedEntity changes its sprite. Eg.: from running sprite to jumping sprite.
+	// Called when the AnimatedActor changes its sprite. Eg.: from running sprite to jumping sprite.
 	void changeCurrentTexture(const std::string& textureName, const std::string& texturePath, bool loopAnimation);
 	
 	// Sets the next frame of the animation and when it hits the last frame, it starts from beginning again (if loop is true, otherwise it sets another texture like Idle).
 	void animateSprite();
 
-	// Called once for each entity in the initialization
+	// Called once for each actor to initialize its textures
 	void initTexturesMap();
 
-	const std::string& getEntityName() const { return m_entityName; }
+	const std::string& getActorName() const { return m_actorName; }
 
 	virtual void updateTexture() {}
 
 protected:
-	// Name of the current texture set in the entity
+	// Name of the current texture set in the actor
 	std::string m_currentTexture{};
 
 	// Amount of frames that the current texture has
@@ -40,8 +40,8 @@ protected:
 	// Name - Path. Eg.: fire_knightJumping - ./assets/fire_knight/_Jumping.png
 	std::unordered_map<std::string, std::string> m_texturesNamePath{};
 
-	// Useful to identify the entity and its assets folder
-	std::string m_entityName{};
+	// Useful to identify the actor and its assets folder
+	std::string m_actorName{};
 
 	// If loopAnimation is false, the animation only plays once per execution (Eg.: roll, attack, hitted, die, etc...)
 	bool m_loopAnimation{ false };

@@ -1,6 +1,6 @@
-#include "TextureManager.h"
+#include "TexturesManager.h"
 
-std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string& textureName, const std::string& texturePath)
+std::shared_ptr<sf::Texture> TexturesManager::loadAndGetTexture(const std::string& textureName, const std::string& texturePath)
 {
 	// Check if the texture was already loaded and inserted on texturesMap. If true, it just returns it without having to load again.
 	for (const auto& texture : texturesMap)
@@ -11,9 +11,11 @@ std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string
 		}
 	}
 
+	std::cout << textureName << "\n";
+
 	// If it wasn't load previously, then it loads and inserts into the map
 	std::shared_ptr<sf::Texture> newTexture{ std::make_shared<sf::Texture>() };
-	try 
+	try
 	{
 		if (!newTexture->loadFromFile(texturePath))
 		{
@@ -24,15 +26,15 @@ std::shared_ptr<sf::Texture> TextureManager::loadAndGetTexture(const std::string
 	{
 		std::cerr << error << '\n';
 	}
-	
+
 
 	texturesMap.emplace(textureName, newTexture);
 
 	return newTexture;
 }
 
-TextureManager& TextureManager::getInstance()
+TexturesManager& TexturesManager::getInstance()
 {
-	static TextureManager* instance = new TextureManager();
+	static TexturesManager* instance = new TexturesManager();
 	return *instance;
 }

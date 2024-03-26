@@ -10,7 +10,6 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 
 	// Initialize View
 	m_view = m_window.getDefaultView();
-	//m_view.zoom(0.4f);
 
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
@@ -26,27 +25,28 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 		m_characters.emplace_back(std::make_shared<Boxer>(LEFT_CHARACTER_FIRST_POSITION));
 	}
 
-	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
-
+	// Initialize Player 2
 	if (secondCharacter == "fire_knight")
 	{
-		m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+		m_characters.emplace_back(std::make_shared<FireKnight>(RIGHT_CHARACTER_FIRST_POSITION));
 	}
 	else if (secondCharacter == "wind_hashashin")
 	{
-		m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+		m_characters.emplace_back(std::make_shared<WindHashashin>(RIGHT_CHARACTER_FIRST_POSITION));
 	}
 	else if (secondCharacter == "boxer")
 	{
-		m_characters.emplace_back(std::make_shared<Boxer>(RIGHT_CHARACTER_FIRST_POSITION, 2));
+		m_characters.emplace_back(std::make_shared<Boxer>(RIGHT_CHARACTER_FIRST_POSITION));
 	}
 
+	// Initialize each player's status
+	m_characterStatus.emplace_back(CharacterStatusUI{ firstCharacter + "Logo", "./assets/" + firstCharacter + "/logo.png", m_characters[0].get() });
 	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
 	// Initialize map
-	loadAndCreateMap("./map/map.txt");
+	loadMap("./map/map.txt");
 
-	// Initialize Threads
+	// Initialize animation thread
 	m_animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
 }
 
@@ -69,7 +69,7 @@ void PlayingState::update()
 	
 	if (!m_onPause)
 	{
-		updateCollision();
+		updateCollisions();
 
 		for (auto& characterStatus : m_characterStatus)
 		{
@@ -94,13 +94,13 @@ void PlayingState::render()
 		character->render(m_window, m_debugMode);
 	}
 
-	for (auto& ground : m_grounds)
+	// Render the tiles inside the view's limits
+	for (auto& tile : m_tiles)
 	{
-		// Only draw the tiles that are inside the view
-		if (ground.getSprite().getPosition().x <= m_rightViewLimit && ground.getSprite().getPosition().x >= m_leftViewLimit
-			&& ground.getSprite().getPosition().y >= m_topViewLimit && ground.getSprite().getPosition().y <= m_bottomViewLimit)
+		if (tile.getSprite().getPosition().x <= m_viewLimits[1] && tile.getSprite().getPosition().x >= m_viewLimits[3]
+			&& tile.getSprite().getPosition().y >= m_viewLimits[0] && tile.getSprite().getPosition().y <= m_viewLimits[2])
 		{
-			m_window.draw(ground.getSprite());
+			m_window.draw(tile.getSprite());
 		}
 	}
 
@@ -110,31 +110,32 @@ void PlayingState::render()
 	}
 }
 
-void PlayingState::updateCollision()
+void PlayingState::updateCollisions()
 {
-	// We reset isCollidingHorizontally to false for all entities, so when isColliding() is called, if the entity collides in the x-direction, it will be true.
+	// We reset isCollidingHorizontally to false for all actors, so when isColliding() is called, if the actor collides in the x-direction, it will be true.
 	// If doesn't collide, it remains false.
 	for (auto& character : m_characters)
 	{
 		character->setIsCollidingHorizontally(false);
 	}
 
-	// Entities' collision with tiles
-	for (auto& ground : m_grounds)
+	// Player's collision with tiles
+	for (auto& tile : m_tiles)
 	{
-		// Player's collision
 		for (auto& character : m_characters)
 		{
-			updateEntityCollisionWithGrounds(*character, ground);
+			updateActorCollisionWithTiles(*character, tile);
 		}
 	}
 
+	// Player's collisions on each other (attack)
 	for (auto& attackingCharacter : m_characters)
 	{
 		for (auto& attackedCharacter : m_characters)
 		{
 			if (attackedCharacter != attackingCharacter)
 			{
+				// Attacked by hitbox
 				if (attackingCharacter->getStateName() == "AttackingState")
 				{
 					if (attackingCharacter->getCharacterState<AttackingState>()->checkAttack(*attackingCharacter, *attackedCharacter))
@@ -142,20 +143,11 @@ void PlayingState::updateCollision()
 						handleKnockbackMove(*attackingCharacter, *attackedCharacter, attackingCharacter->getCharacterState<AttackingState>()->m_attackHitbox->getIsUltimateActivate());
 					}
 				}
-			}
-		}
-	}
 
-	for (auto& attackingCharacter : m_characters)
-	{
-		for (auto& attackedCharacter : m_characters)
-		{
-			if (attackedCharacter != attackingCharacter)
-			{
-				// Was attacked by projectiles
-				if (dynamic_cast<ProjectileCharacter*>(attackingCharacter.get()) != nullptr)
+				// Attacked by projectiles
+				if (dynamic_cast<CharacterWithProjectiles*>(attackingCharacter.get()) != nullptr)
 				{
-					for (auto& ultimateProjectile : dynamic_cast<ProjectileCharacter*>(attackingCharacter.get())->getProjectiles())
+					for (auto& ultimateProjectile : dynamic_cast<CharacterWithProjectiles*>(attackingCharacter.get())->getProjectiles())
 					{
 						if (ultimateProjectile->getShape().getGlobalBounds().intersects(attackedCharacter->getShape().getGlobalBounds()))
 						{
@@ -170,34 +162,31 @@ void PlayingState::updateCollision()
 	}
 }
 
-void PlayingState::updateEntityCollisionWithGrounds(ColliderEntity& entity, Ground& ground)
+void PlayingState::updateActorCollisionWithTiles(ColliderActor& actor, Ground& tile)
 {
-	if (ground.getSprite().getPosition().x <= entity.getShapeLimits()[1] && ground.getSprite().getPosition().x >= entity.getShapeLimits()[3]
-		&& ground.getSprite().getPosition().y >= entity.getShapeLimits()[0] && ground.getSprite().getPosition().y <= entity.getShapeLimits()[2])
+	if (tile.getSprite().getPosition().x <= actor.getShapeLimits()[1] && tile.getSprite().getPosition().x >= actor.getShapeLimits()[3]
+		&& tile.getSprite().getPosition().y >= actor.getShapeLimits()[0] && tile.getSprite().getPosition().y <= actor.getShapeLimits()[2])
 	{
-		if (entity.isCollidingWith(ground.getSprite()))
-		{
-			entity.handleCollision();
-		}
+		actor.updateCollisionWith(tile.getSprite());
 	}
 }
 
-void PlayingState::handleKnockbackMove(Character& attackingEntity, Character& attackedEntity, bool isUltimateActivate)
+void PlayingState::handleKnockbackMove(Character& attackingActor, Character& attackedActor, bool isUltimateActivate)
 {
-	float attackDirection = attackingEntity.getShapePosition().x - attackedEntity.getShapePosition().x;
+	float attackDirection = attackingActor.getShapePosition().x - attackedActor.getShapePosition().x;
 
 	if (!isUltimateActivate)
 	{
-		if (attackingEntity.getCharacterState<AttackingState>()->m_attackHitbox->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
+		if (attackingActor.getCharacterState<AttackingState>()->m_attackHitbox->getDamage() != WIND_HASHASHIN_ULTIMATE_DAMAGE)
 		{
-			// Knockback of the attackedEntity. The attackedEntity will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall. It's not pushed if attacked entity is on roll. 
-			while (attackedEntity.getShape().getGlobalBounds().intersects((attackingEntity.getCharacterState<AttackingState>()->m_attackHitbox->getShape().getGlobalBounds())) && !attackedEntity.getIsCollidingHorizontally())
+			// Knockback of the attackedActor. The attackedActor will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall.
+			while (attackedActor.getShape().getGlobalBounds().intersects((attackingActor.getCharacterState<AttackingState>()->m_attackHitbox->getShape().getGlobalBounds())) && !attackedActor.getIsCollidingHorizontally())
 			{
-				for (auto& ground : m_grounds)
+				for (auto& tile : m_tiles)
 				{
-					updateEntityCollisionWithGrounds(attackedEntity, ground);
+					updateActorCollisionWithTiles(attackedActor, tile);
 				}
-				attackedEntity.knockbackMove(m_deltaTime, attackDirection);
+				attackedActor.knockbackMove(m_deltaTime, attackDirection);
 			}
 		}
 	}
@@ -211,14 +200,14 @@ void PlayingState::updateView()
 	m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());
 	m_characterStatus[1].updatePosition(m_view.getCenter(), m_view.getSize(), true);
 
-	m_rightViewLimit = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
-	m_leftViewLimit = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;
-
-	m_topViewLimit = m_view.getCenter().y - m_view.getSize().y / 2.f - TILE_SIZE_FLOAT;
-	m_bottomViewLimit = m_view.getCenter().y + m_view.getSize().y / 2.f + TILE_SIZE_FLOAT;
+	// 0 -> top, 1 -> right, 2 -> bottom, 3 -> left
+	m_viewLimits[0] = m_view.getCenter().y - m_view.getSize().y / 2.f - TILE_SIZE_FLOAT;
+	m_viewLimits[1] = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
+	m_viewLimits[2] = m_view.getCenter().y + m_view.getSize().y / 2.f + TILE_SIZE_FLOAT;
+	m_viewLimits[3] = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;
 }
 
-void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
+void PlayingState::loadMap(const std::string& mapFilePath)
 {
 	std::fstream mapFile{ mapFilePath, std::ios::in };
 	std::string row{};
@@ -235,7 +224,7 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 			mapFile >> tileId;
 			if (tileId != "0")
 			{
-				m_grounds.emplace_back(Ground{ sf::Vector2f{x* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f, y* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f}, tileId,  "./tiles/" + tileId + ".png" });
+				m_tiles.emplace_back(Ground{ sf::Vector2f{x* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f, y* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f}, tileId,  "./tiles/" + tileId + ".png" });
 			}
 			++x;
 		}
@@ -252,7 +241,7 @@ void PlayingState::updateTexturesAndAnimations()
 	{
 		if (!m_onPause)
 		{
-			// If there isn't a thread sleep or if the milliseconds time is too short, the animation will run so fast that it bugs and doesn't display sprites correctly
+			// This thread's sleep controls the frames/seconds (fps) of the animations
 			std::this_thread::sleep_for(std::chrono::milliseconds(75));
 
 			for (auto& character : m_characters)

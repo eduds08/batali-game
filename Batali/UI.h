@@ -1,8 +1,8 @@
 #pragma once
 
-#include "DrawableEntity.h"
+#include "SpriteActor.h"
 
-class UI : public DrawableEntity
+class UI : public SpriteActor
 {
 public:
 	UI() = default;
