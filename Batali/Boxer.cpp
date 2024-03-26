@@ -2,7 +2,7 @@
 #include "FallingState.h"
 
 Boxer::Boxer(sf::Vector2f firstPosition, int playerNumber)
-	: ProjectileEntity{ playerNumber }
+	: ProjectileCharacter{ playerNumber }
 {
 	m_entityName = "boxer";
 	m_state = new FallingState{};
@@ -22,8 +22,6 @@ Boxer::Boxer(sf::Vector2f firstPosition, int playerNumber)
 	m_shape.setPosition(firstPosition.x, firstPosition.y);
 
 	// DEBUG
-	//m_attackHitbox.setFillColor(sf::Color{ 255, 0, 0, 50 });
-	//m_attackHitbox.setOutlineThickness(1.f);
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 

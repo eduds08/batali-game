@@ -2,7 +2,7 @@
 
 #include "IdleState.h"
 #include "DeadState.h"
-#include "ProjectileEntity.h"
+#include "ProjectileCharacter.h"
 #include "Character.h"
 
 HittedState::HittedState(const std::string& hittedMode, Character* attacker)
@@ -32,10 +32,10 @@ void HittedState::enter(Character& character)
 	}
 	else
 	{
-		if (dynamic_cast<ProjectileEntity*>(m_attacker) != nullptr)
+		if (dynamic_cast<ProjectileCharacter*>(m_attacker) != nullptr)
 		{
-			if (dynamic_cast<ProjectileEntity*>(m_attacker)->getProjectiles().size() > 0)
-				character.m_hp -= dynamic_cast<ProjectileEntity*>(m_attacker)->getProjectiles().at(0)->getDamage();
+			if (dynamic_cast<ProjectileCharacter*>(m_attacker)->getProjectiles().size() > 0)
+				character.m_hp -= dynamic_cast<ProjectileCharacter*>(m_attacker)->getProjectiles().at(0)->getDamage();
 		}
 	}
 

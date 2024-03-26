@@ -4,19 +4,23 @@
 #include "Projectile.h"
 #include <memory>
 
-class ProjectileEntity : public Character
+class ProjectileCharacter : public Character
 {
 public:
-	ProjectileEntity(int playerNumber = 1);
-	virtual ~ProjectileEntity() = default;
+	ProjectileCharacter(int playerNumber = 1);
+	virtual ~ProjectileCharacter() = default;
 
 	virtual void update(float& deltaTime);
-	
+
 	// Instantiate a projectile and pushes it into m_projectiles vector
 	virtual void launchProjectile() = 0;
-	
+
 	// Update projectiles and checks if those needs to be deleted
-	void updateProjectileEntity(float& deltaTime);
+	void updateProjectileCharacter(float& deltaTime);
+
+	virtual void render(sf::RenderWindow& window, bool debugMode);
+
+	virtual void updateAnimation();
 
 	/* GETTERS */
 

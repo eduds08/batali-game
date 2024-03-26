@@ -19,20 +19,7 @@ public:
 
 	virtual void updateAttackHitbox(AttackHitbox* m_attackHitbox) = 0;
 
-	void render(sf::RenderWindow& window)
-	{
-		window.draw(m_sprite);
-		if (m_state != nullptr)
-		{
-			if (dynamic_cast<AttackingState*>(m_state) != nullptr)
-			{
-				if (dynamic_cast<AttackingState*>(m_state)->m_attackHitbox != nullptr)
-				{
-					window.draw(dynamic_cast<AttackingState*>(m_state)->m_attackHitbox->getShape());
-				}
-			}
-		}
-	}
+	virtual void render(sf::RenderWindow& window, bool debugMode);
 
 	const int* getHp() const { return &m_hp; }
 

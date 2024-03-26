@@ -10,7 +10,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 
 	// Initialize View
 	m_view = m_window.getDefaultView();
-	m_view.zoom(0.4f);
+	//m_view.zoom(0.4f);
 
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
@@ -96,24 +96,7 @@ void PlayingState::render()
 {
 	for (auto& character : m_characters)
 	{
-		if (m_debugMode)
-		{
-			m_window.draw(character->getShape());
-		}
-
-		character->render(m_window);
-
-		if (dynamic_cast<Boxer*>(character.get()) != nullptr)
-		{
-			for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
-			{
-				if (m_debugMode)
-				{
-					m_window.draw(projectile->getShape());
-				}
-				m_window.draw(projectile->getSprite());
-			}
-		}
+		character->render(m_window, m_debugMode);
 	}
 
 	for (auto& ground : m_grounds)
@@ -175,9 +158,9 @@ void PlayingState::updateCollision()
 			if (attackedCharacter != attackingCharacter)
 			{
 				// Was attacked by projectiles
-				if (dynamic_cast<ProjectileEntity*>(attackingCharacter.get()) != nullptr)
+				if (dynamic_cast<ProjectileCharacter*>(attackingCharacter.get()) != nullptr)
 				{
-					for (auto& ultimateProjectile : dynamic_cast<ProjectileEntity*>(attackingCharacter.get())->getProjectiles())
+					for (auto& ultimateProjectile : dynamic_cast<ProjectileCharacter*>(attackingCharacter.get())->getProjectiles())
 					{
 						if (ultimateProjectile->getShape().getGlobalBounds().intersects(attackedCharacter->getShape().getGlobalBounds()))
 						{
@@ -257,7 +240,7 @@ void PlayingState::loadAndCreateMap(const std::string& mapFilePath)
 			mapFile >> tileId;
 			if (tileId != "0")
 			{
-				m_grounds.emplace_back(Ground{ sf::Vector2f{x * TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f, y * TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f}, tileId,  "./tiles/" + tileId + ".png"});
+				m_grounds.emplace_back(Ground{ sf::Vector2f{x* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f, y* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f}, tileId,  "./tiles/" + tileId + ".png" });
 			}
 			++x;
 		}
@@ -280,14 +263,6 @@ void PlayingState::updateTexturesAndAnimations()
 			for (auto& character : m_characters)
 			{
 				character->updateAnimation();
-
-				if (dynamic_cast<Boxer*>(character.get()) != nullptr)
-				{
-					for (auto& projectile : dynamic_cast<Boxer*>(character.get())->getProjectiles())
-					{
-						projectile->updateAnimation();
-					}
-				}
 			}
 		}
 	}

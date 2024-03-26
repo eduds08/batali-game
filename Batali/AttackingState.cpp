@@ -7,7 +7,7 @@
 #include "JumpingState.h"
 #include "FallingState.h"
 
-#include "ProjectileEntity.h"
+#include "ProjectileCharacter.h"
 
 #include "WindHashashin.h"
 

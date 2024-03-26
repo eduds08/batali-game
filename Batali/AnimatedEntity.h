@@ -9,7 +9,7 @@ public:
 	virtual ~AnimatedEntity() = default;
 
 	// Called inside the animationThread. It's here where all animation happens.
-	void updateAnimation();
+	virtual void updateAnimation();
 
 	// Called when the AnimatedEntity changes its sprite. Eg.: from running sprite to jumping sprite.
 	void changeCurrentTexture(const std::string& textureName, const std::string& texturePath, bool loopAnimation);

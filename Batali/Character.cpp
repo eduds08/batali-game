@@ -1,6 +1,6 @@
 #include "Character.h"
 
-#include "ProjectileEntity.h"
+#include "ProjectileCharacter.h"
 #include "WindHashashin.h"
 #include "DeadState.h"
 #include "IdleState.h"
@@ -74,5 +74,19 @@ void Character::setState(CharacterState* state)
 		delete m_state;
 		m_state = state;
 		m_state->enter(*this);
+	}
+}
+
+void Character::render(sf::RenderWindow& window, bool debugMode)
+{
+	window.draw(m_sprite);
+
+	if (debugMode)
+	{
+		window.draw(m_shape);
+		if (m_state && m_state->getStateName() == "AttackingState")
+		{
+			window.draw(dynamic_cast<AttackingState*>(m_state)->m_attackHitbox->getShape());
+		}
 	}
 }

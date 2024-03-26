@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ProjectileEntity.h"
+#include "ProjectileCharacter.h"
 #include "BoxerUltimateProjectile.h"
 
-class Boxer : public ProjectileEntity
+class Boxer : public ProjectileCharacter
 {
 public:
 	Boxer(sf::Vector2f firstPosition, int playerNumber = 1);

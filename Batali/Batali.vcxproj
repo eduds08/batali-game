@@ -165,7 +165,7 @@
     <ClCompile Include="PhysicalEntity.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="ProjectileEntity.cpp" />
+    <ClCompile Include="ProjectileCharacter.cpp" />
     <ClCompile Include="RollingState.cpp" />
     <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
@@ -209,7 +209,7 @@
     <ClInclude Include="PhysicalEntity.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
-    <ClInclude Include="ProjectileEntity.h" />
+    <ClInclude Include="ProjectileCharacter.h" />
     <ClInclude Include="RollingState.h" />
     <ClInclude Include="RunningState.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
