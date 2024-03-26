@@ -39,16 +39,7 @@ void ProjectileCharacter::updateProjectileCharacter(float& deltaTime)
 
 void ProjectileCharacter::render(sf::RenderWindow& window, bool debugMode)
 {
-	window.draw(m_sprite);
-
-	if (debugMode)
-	{
-		window.draw(m_shape);
-		if (m_state && m_state->getStateName() == "AttackingState")
-		{
-			window.draw(dynamic_cast<AttackingState*>(m_state)->m_attackHitbox->getShape());
-		}
-	}
+	Character::render(window, debugMode);
 
 	if (m_projectiles.size() > 0)
 	{

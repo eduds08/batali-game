@@ -16,6 +16,9 @@
     <Filter Include="OTHERS">
       <UniqueIdentifier>{0dffb1ae-8fd5-4a91-86ce-4cdb68a5a908}</UniqueIdentifier>
     </Filter>
+    <Filter Include="COMMAND PATTERN">
+      <UniqueIdentifier>{fff56bd8-e5aa-4a30-835b-7fb68405feeb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindHashashin.cpp">
@@ -45,9 +48,6 @@
     <ClCompile Include="Boxer.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectileEntity.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
@@ -70,9 +70,6 @@
       <Filter>STATE PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="FallingState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
       <Filter>STATE PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="AttackingState.cpp">
@@ -144,6 +141,36 @@
     <ClCompile Include="AttackHitbox.cpp">
       <Filter>OTHERS</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectileCharacter.cpp">
+      <Filter>ENTITY</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>STATE PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack1Command.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack2Command.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpCommand.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="RollCommand.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="RunCommand.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="UltimateCommand.cpp">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -173,9 +200,6 @@
     <ClInclude Include="Boxer.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileEntity.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
@@ -198,9 +222,6 @@
       <Filter>STATE PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="RollingState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
       <Filter>STATE PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="AttackingState.h">
@@ -271,6 +292,36 @@
     </ClInclude>
     <ClInclude Include="AttackHitbox.h">
       <Filter>OTHERS</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileCharacter.h">
+      <Filter>ENTITY</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>STATE PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack1Command.h">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack2Command.h">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpCommand.h">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="RollCommand.h">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="RunCommand.h">
+      <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="UltimateCommand.h">
+      <Filter>COMMAND PATTERN</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
