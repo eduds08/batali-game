@@ -13,6 +13,6 @@ void SpriteActor::setTexture(const std::string& textureName, const std::string& 
 	}
 	else
 	{
-		std::cout << "Unable to load the following texture:\nTexture Name: " << textureName << "\nTexture Path: " << texturePath << "\n";
+		std::cout << "Unable to load the following texture (empty string): \"" << textureName << "\" -- \"" << texturePath << "\"\n";
 	}
 }

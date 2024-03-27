@@ -11,8 +11,6 @@ std::shared_ptr<sf::Texture> TexturesManager::loadAndGetTexture(const std::strin
 		}
 	}
 
-	std::cout << textureName << "\n";
-
 	// If it wasn't load previously, then it loads and inserts into the map
 	std::shared_ptr<sf::Texture> newTexture{ std::make_shared<sf::Texture>() };
 	try
