@@ -44,7 +44,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 	m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
 	// Initialize map
-	loadMap("./map/map.txt");
+	m_world.loadTiles("./map/map.txt");
 
 	// Initialize animation thread
 	m_animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
@@ -95,7 +95,7 @@ void PlayingState::render()
 	}
 
 	// Render the tiles inside the view's limits
-	for (auto& tile : m_tiles)
+	for (auto& tile : m_world.m_tiles)
 	{
 		if (tile.getSprite().getPosition().x <= m_viewLimits[1] && tile.getSprite().getPosition().x >= m_viewLimits[3]
 			&& tile.getSprite().getPosition().y >= m_viewLimits[0] && tile.getSprite().getPosition().y <= m_viewLimits[2])
@@ -120,7 +120,7 @@ void PlayingState::updateCollisions()
 	}
 
 	// Player's collision with tiles
-	for (auto& tile : m_tiles)
+	for (auto& tile : m_world.m_tiles)
 	{
 		for (auto& character : m_characters)
 		{
@@ -182,7 +182,7 @@ void PlayingState::handleKnockbackMove(Character& attackingActor, Character& att
 			// Knockback of the attackedActor. The attackedActor will be pushed until it doesn't collide with the hitbox anymore or until it collides with a wall.
 			while (attackedActor.getShape().getGlobalBounds().intersects((attackingActor.getCharacterState<AttackingState>()->m_attackHitbox->getShape().getGlobalBounds())) && !attackedActor.getIsCollidingHorizontally())
 			{
-				for (auto& tile : m_tiles)
+				for (auto& tile : m_world.m_tiles)
 				{
 					updateActorCollisionWithTiles(attackedActor, tile);
 				}
@@ -205,34 +205,6 @@ void PlayingState::updateView()
 	m_viewLimits[1] = m_view.getCenter().x + m_view.getSize().x / 2.f + TILE_SIZE_FLOAT;
 	m_viewLimits[2] = m_view.getCenter().y + m_view.getSize().y / 2.f + TILE_SIZE_FLOAT;
 	m_viewLimits[3] = m_view.getCenter().x - m_view.getSize().x / 2.f - TILE_SIZE_FLOAT;
-}
-
-void PlayingState::loadMap(const std::string& mapFilePath)
-{
-	std::fstream mapFile{ mapFilePath, std::ios::in };
-	std::string row{};
-
-	int x{ 0 };
-	int y{ 0 };
-
-	std::string tileId{};
-
-	while (std::getline(mapFile, row))
-	{
-		for (int i = 0; i < TILES_AMOUNT_PER_ROW; i++)
-		{
-			mapFile >> tileId;
-			if (tileId != "0")
-			{
-				m_tiles.emplace_back(Ground{ sf::Vector2f{x* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f, y* TILE_SIZE_FLOAT + TILE_SIZE_FLOAT / 2.f}, tileId,  "./tiles/" + tileId + ".png" });
-			}
-			++x;
-		}
-		x = 0;
-		++y;
-	}
-
-	mapFile.close();
 }
 
 void PlayingState::updateTexturesAndAnimations()

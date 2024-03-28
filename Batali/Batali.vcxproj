@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedActor.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Attack1Command.cpp" />
     <ClCompile Include="Attack2Command.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
@@ -152,6 +153,9 @@
     <ClCompile Include="ColliderActor.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="DeadState.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDrawingComponent.cpp" />
+    <ClCompile Include="PlayerPhysicsComponent.cpp" />
     <ClCompile Include="SpriteActor.cpp" />
     <ClCompile Include="FallingState.cpp" />
     <ClCompile Include="FireKnight.cpp" />
@@ -177,15 +181,19 @@
     <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
+    <ClCompile Include="StaticTexture.cpp" />
     <ClCompile Include="StatusBarUI.cpp" />
     <ClCompile Include="TextButtonUI.cpp" />
     <ClCompile Include="TexturesManager.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UltimateCommand.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedActor.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="IAnimatingComponent.h" />
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="AttackHitbox.h" />
@@ -198,14 +206,18 @@
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterState.h" />
+    <ClInclude Include="IAnimation.h" />
+    <ClInclude Include="IColliderComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="DeadState.h" />
+    <ClInclude Include="IDrawingComponent.h" />
     <ClInclude Include="FallingState.h" />
     <ClInclude Include="HittedState.h" />
     <ClInclude Include="Hoodie.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="ITexture.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
@@ -213,6 +225,11 @@
     <ClInclude Include="CharacterStatusUI.h" />
     <ClInclude Include="ColliderActor.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="IMovingComponent.h" />
+    <ClInclude Include="IPhysicsComponent.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerDrawingComponent.h" />
+    <ClInclude Include="PlayerPhysicsComponent.h" />
     <ClInclude Include="SpriteActor.h" />
     <ClInclude Include="FireKnight.h" />
     <ClInclude Include="Game.h" />
@@ -229,12 +246,14 @@
     <ClInclude Include="RunningState.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
+    <ClInclude Include="StaticTexture.h" />
     <ClInclude Include="StatusBarUI.h" />
     <ClInclude Include="TextButtonUI.h" />
     <ClInclude Include="TexturesManager.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UltimateCommand.h" />
     <ClInclude Include="WindHashashin.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

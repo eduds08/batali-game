@@ -1,14 +1,14 @@
 #pragma once
 
 #include "StateContext.h"
-#include "Ground.h"
 #include <thread>
-#include <fstream>
 #include "WindHashashin.h"
 #include "FireKnight.h"
 #include <memory>
 #include "Boxer.h"
 #include "CharacterStatusUI.h"
+
+#include "World.h"
 
 class PlayingState : public StateContext
 {
@@ -29,9 +29,6 @@ public:
 
 	void updateView();
 
-	// Reads a .txt file to generate the tiles
-	void loadMap(const std::string& mapFilePath);
-
 	// Thread method to run all animations
 	void updateTexturesAndAnimations();
 
@@ -39,7 +36,8 @@ private:
 	std::vector<std::shared_ptr<Character>> m_characters{};
 
 	std::vector<CharacterStatusUI> m_characterStatus{};
-	std::vector<Ground> m_tiles{};
+
+	World m_world{};
 
 	std::thread m_animationThread;
 
