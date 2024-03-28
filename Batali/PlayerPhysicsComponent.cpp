@@ -24,6 +24,8 @@ void PlayerPhysicsComponent::update(Player& player, World& world, float& deltaTi
 	}
 
 	updateLimits(player);
+
+	m_knockbackVelocity = KNOCKBACK_SPEED;
 }
 
 void PlayerPhysicsComponent::updateCollisionWith(Player& player, const sf::Sprite& other)

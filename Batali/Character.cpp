@@ -65,9 +65,11 @@ void Character::handleCondition(const std::string& condition)
 
 void Character::update(float& deltaTime)
 {
-	m_inputHandler.handleInput(*this);
+	this->updateLimits();
+	
+	m_knockbackVelocity = KNOCKBACK_SPEED;
 
-	m_velocity.x = 0.f;
+	m_inputHandler.handleInput(*this);
 
 	m_state->update(*this, deltaTime);
 
@@ -76,11 +78,9 @@ void Character::update(float& deltaTime)
 		m_velocity.y += GRAVITY * deltaTime;
 
 		this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
-
-		this->updateLimits();
+		
+		m_velocity.x = 0.f;
 	}
-
-	m_knockbackVelocity = KNOCKBACK_SPEED;
 }
 
 void Character::setState(CharacterState* state)
