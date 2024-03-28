@@ -40,9 +40,31 @@ Player::~Player()
 
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
-	
-	m_animatingComponent->update(*this);
 	m_physicsComponent->update(*this, world, deltaTime);
+
+
+	/*
+	
+	m_inputHandler.handleInput(*this);
+
+	m_velocity.x = 0.f;
+
+	m_state->update(*this, deltaTime);
+
+	if (m_state->getStateName() != "DeadState")
+	{
+		m_velocity.y += GRAVITY * deltaTime;
+
+		this->move(deltaTime, -(m_spriteHeight - getShapeSize().y) / 2.f);
+
+		this->updateLimits();
+	}
+
+	m_knockbackVelocity = KNOCKBACK_SPEED;
+
+	*/
+
+	m_animatingComponent->update(*this);
 	m_movingComponent->update(*this, deltaTime);
 	m_colliderComponent->update(*this, deltaTime);
 

@@ -27,6 +27,4 @@ private:
 
 	sf::Sprite m_sprite{};
 	sf::RectangleShape m_shape{};
-
-	sf::Vector2f m_velocity{};
 };

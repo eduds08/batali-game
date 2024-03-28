@@ -1,7 +1,10 @@
 #pragma once
 
 #include "IPhysicsComponent.h"
-#include "Player.h"
+
+#include "Constants.h"
+
+using namespace constants;
 
 class PlayerPhysicsComponent : public IPhysicsComponent
 {

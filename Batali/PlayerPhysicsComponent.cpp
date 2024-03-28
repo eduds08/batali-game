@@ -1,4 +1,5 @@
 #include "PlayerPhysicsComponent.h"
+#include "Player.h"
 
 PlayerPhysicsComponent::PlayerPhysicsComponent()
 {
