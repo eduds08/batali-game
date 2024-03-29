@@ -37,17 +37,17 @@ TexturesManager& TexturesManager::getInstance()
 	return *instance;
 }
 
-AbstractAnimation* TexturesManager::createNewAnimation(const std::string& name, sf::Vector2i frameSize, bool isLooping)
+AbstractAnimation* TexturesManager::createNewAnimation(const std::string& name, sf::Vector2i frameSize, bool isLooping, const std::string& playerName)
 {
 	AbstractAnimation* newAnimation = nullptr;
 
 	if (isLooping)
 	{
-		newAnimation = new LoopingAnimation{ name, frameSize, texturesMap.at(name).get()};
+		newAnimation = new LoopingAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "name").get() };
 	}
 	else
 	{
-		newAnimation = new PlayedOnceAnimation{ name, frameSize, texturesMap.at(name).get() };
+		newAnimation = new PlayedOnceAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "name").get() };
 	}
 
 	return newAnimation;

@@ -14,7 +14,7 @@ void PlayerAnimatingComponent::update(Player& player)
 {
 	//if (rolling)
 	//{
-		m_currentAnimation = m_texturesManager.createNewAnimation("Rolling", { 288, 127 }, false);
+		m_currentAnimation = m_texturesManager.createNewAnimation("Rolling", { 288, 127 }, false, m_playerName);
 		player.getSprite().setTexture(m_currentAnimation->getTexture());
 		player.getSprite().setTextureRect(m_currentAnimation->getCurrentTextureFrame());
 	//}

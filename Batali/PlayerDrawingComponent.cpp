@@ -12,5 +12,5 @@ PlayerDrawingComponent::~PlayerDrawingComponent()
 
 void PlayerDrawingComponent::render(Player& player, sf::RenderWindow& window)
 {
-	//window.draw(player->m_sprite);
+	window.draw(player.getSprite());
 }

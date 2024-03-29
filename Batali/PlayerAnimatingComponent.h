@@ -18,4 +18,6 @@ private:
 
 	AbstractAnimation* m_currentAnimation{ nullptr };
 
+	// Boxer, Hoodie, etc...
+	std::string m_playerName{};
 };

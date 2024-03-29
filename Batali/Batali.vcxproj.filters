@@ -162,7 +162,7 @@
     <ClCompile Include="World.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerPhysicsComponent.cpp">
+    <ClCompile Include="PlayerCollisionComponent.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="PlayerDrawingComponent.cpp">
@@ -200,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="SpriteActor.cpp">
       <Filter>ACTORS</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPhysicsComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,7 +338,7 @@
     <ClInclude Include="World.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerPhysicsComponent.h">
+    <ClInclude Include="PlayerCollisionComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="PlayerDrawingComponent.h">
@@ -344,16 +347,13 @@
     <ClInclude Include="Player.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="IPhysicsComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="IMovingComponent.h">
+    <ClInclude Include="ICollisionComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="IDrawingComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="IColliderComponent.h">
+    <ClInclude Include="IPhysicsComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="IAnimatingComponent.h">
@@ -391,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="ShapeActor.h">
       <Filter>ACTORS</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPhysicsComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
