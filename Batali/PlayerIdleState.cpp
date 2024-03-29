@@ -23,12 +23,10 @@ IPlayerState* PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancod
 	}
 	else if (input == player.RUN_RIGHT_BUTTON)
 	{
-		player.m_facingRight = 1;
 		return new PlayerRunningState();
 	}
 	else if (input == player.RUN_LEFT_BUTTON)
 	{
-		player.m_facingRight = -1;
 		return new PlayerRunningState();
 	}
 

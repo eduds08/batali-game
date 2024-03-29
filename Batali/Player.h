@@ -27,6 +27,8 @@ public:
 
 	void handleInput(sf::Keyboard::Scancode input);
 
+	void setPlayerState(IPlayerState* state);
+
 	sf::Keyboard::Scancode JUMP_BUTTON = sf::Keyboard::Scancode::W;
 	sf::Keyboard::Scancode RUN_LEFT_BUTTON = sf::Keyboard::Scancode::A;
 	sf::Keyboard::Scancode RUN_RIGHT_BUTTON = sf::Keyboard::Scancode::D;

@@ -74,21 +74,6 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_playerState->update(*this);
 
-	//m_state->update(*this, deltaTime);
-
-	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
-	{
-		m_velocity.x -= 200.f;
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
-	{
-		m_velocity.x += 200.f;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
-	{
-		m_velocity.y = -1 * sqrt(2.f * GRAVITY * 90.f);
-	}*/
-
 	m_physicsComponent->update(*this, deltaTime);
 
 	m_animatingComponent->update(*this);
@@ -107,6 +92,17 @@ void Player::handleInput(sf::Keyboard::Scancode input)
 	{
 		delete m_playerState;
 		m_playerState = playerState;
+
+		m_playerState->enter(*this);
+	}
+}
+
+void Player::setPlayerState(IPlayerState* state)
+{
+	if (state != nullptr)
+	{
+		delete m_playerState;
+		m_playerState = state;
 
 		m_playerState->enter(*this);
 	}

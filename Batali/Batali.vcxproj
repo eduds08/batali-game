@@ -157,6 +157,7 @@
     <ClCompile Include="PlayerAnimatingComponent.cpp" />
     <ClCompile Include="PlayerDrawingComponent.cpp" />
     <ClCompile Include="PlayerCollisionComponent.cpp" />
+    <ClCompile Include="PlayerFallingState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerJumpingState.cpp" />
     <ClCompile Include="PlayerPhysicsComponent.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="PlayerAnimatingComponent.h" />
     <ClInclude Include="PlayerDrawingComponent.h" />
     <ClInclude Include="PlayerCollisionComponent.h" />
+    <ClInclude Include="PlayerFallingState.h" />
     <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerJumpingState.h" />
     <ClInclude Include="PlayerPhysicsComponent.h" />

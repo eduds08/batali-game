@@ -207,6 +207,9 @@
     <ClCompile Include="PlayerRunningState.cpp">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerFallingState.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -399,6 +402,9 @@
       <Filter>COMMAND PATTERN 2.0</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRunningState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFallingState.h">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
   </ItemGroup>

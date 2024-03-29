@@ -17,8 +17,6 @@ InputHandler::~InputHandler()
 	}
 
 	m_bindCommands.clear();
-
-	std::cout << "oi\n";
 }
 
 ICommand* InputHandler::handleInput()

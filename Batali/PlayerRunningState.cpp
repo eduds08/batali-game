@@ -19,10 +19,13 @@ IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scan
 
 void PlayerRunningState::update(Player& player)
 {
-	player.getVelocity().x = 200.f * player.m_facingRight;
+	if (player.getVelocity().x == 0.f)
+	{
+		player.setPlayerState(new PlayerIdleState());
+	}
 }
 
 void PlayerRunningState::enter(Player& player)
 {
-
+	player.getVelocity().x = 200.f * player.m_facingRight;
 }
