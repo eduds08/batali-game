@@ -35,6 +35,4 @@ private:
 	sf::RectangleShape m_shape{};
 
 	sf::Vector2f m_velocity{};
-
-	sf::Texture* Tex{ new sf::Texture{} };
 };

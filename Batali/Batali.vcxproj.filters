@@ -28,6 +28,9 @@
     <Filter Include="ACTORS">
       <UniqueIdentifier>{9bd9e405-3c33-47dd-83b8-ba094624fc9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="STATE PATTERN 2.0">
+      <UniqueIdentifier>{64989864-1614-478d-b83a-146be2783987}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindHashashin.cpp">
@@ -203,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="PlayerPhysicsComponent.cpp">
       <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +400,12 @@
     </ClInclude>
     <ClInclude Include="PlayerPhysicsComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlayerState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

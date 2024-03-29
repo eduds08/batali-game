@@ -6,10 +6,14 @@ Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, IColl
 	, m_collisionComponent{ physics }
 	, m_physicsComponent{ collider }
 {
-	Tex->loadFromFile("./assets/fire_knight/_Idle.png");
+	/*Tex->loadFromFile("./assets/fire_knight/_Idle.png");
 
 	m_sprite.setTexture(*Tex);
-	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 288, 127 });
+	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 288, 127 });*/
+
+	m_name = "fire_knight";
+
+	m_animatingComponent->initTextures(*this);
 
 	m_sprite.setOrigin(sf::Vector2f{ 288 / 2.f, 127 / 2.f });
 
@@ -57,7 +61,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_physicsComponent->update(*this, deltaTime);
 
-	//m_animatingComponent->update(*this);
+	m_animatingComponent->update(*this);
 }
 
 void Player::render(sf::RenderWindow& window)

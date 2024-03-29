@@ -158,6 +158,7 @@
     <ClCompile Include="PlayerAnimatingComponent.cpp" />
     <ClCompile Include="PlayerDrawingComponent.cpp" />
     <ClCompile Include="PlayerCollisionComponent.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerPhysicsComponent.cpp" />
     <ClCompile Include="SpriteActor.cpp" />
     <ClCompile Include="FallingState.cpp" />
@@ -232,7 +233,9 @@
     <ClInclude Include="PlayerAnimatingComponent.h" />
     <ClInclude Include="PlayerDrawingComponent.h" />
     <ClInclude Include="PlayerCollisionComponent.h" />
+    <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerPhysicsComponent.h" />
+    <ClInclude Include="IPlayerState.h" />
     <ClInclude Include="SpriteActor.h" />
     <ClInclude Include="FireKnight.h" />
     <ClInclude Include="Game.h" />
