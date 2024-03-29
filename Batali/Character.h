@@ -5,7 +5,7 @@
 #include "AttackHitbox.h"
 #include "AttackingState.h"
 
-#include "InputHandler.h"
+//#include "InputHandler.h"
 
 class Character : public ColliderActor
 {
@@ -27,7 +27,7 @@ public:
 
 	const std::string& getStateName() const { return m_state->getStateName(); }
 
-	const InputHandler& getInputHandler() const { return m_inputHandler; }
+	//const InputHandler& getInputHandler() const { return m_inputHandler; }
 
 	friend class RollingState;
 	friend class RunningState;
@@ -47,5 +47,5 @@ protected:
 	static int m_playerNumber;
 	int m_hp{ 1300 };
 
-	InputHandler m_inputHandler{};
+	//InputHandler m_inputHandler{};
 };

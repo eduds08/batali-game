@@ -1,15 +1,25 @@
 #include "Player.h"
 
+#include "JumpCommand.h"
+#include "RunRightCommand.h"
+#include "RunLeftCommand.h"
+
+
 Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, ICollisionComponent* physics, IPhysicsComponent* collider)
 	: m_drawingComponent{ drawing }
 	, m_animatingComponent{ animating }
 	, m_collisionComponent{ physics }
 	, m_physicsComponent{ collider }
 {
-	/*Tex->loadFromFile("./assets/fire_knight/_Idle.png");
+	m_inputHandler.m_bindCommands.emplace(JUMP_BUTTON, new JumpCommand());
 
-	m_sprite.setTexture(*Tex);
-	m_sprite.setTextureRect(sf::IntRect{ 0, 0, 288, 127 });*/
+	// Mudar new JumpCommand():
+	m_inputHandler.m_bindCommands.emplace(RUN_LEFT_BUTTON, new RunLeftCommand());
+	m_inputHandler.m_bindCommands.emplace(RUN_RIGHT_BUTTON, new RunRightCommand());
+	/*m_inputHandler.m_bindCommands.emplace(ATTACK_1_BUTTON, new JumpCommand());
+	m_inputHandler.m_bindCommands.emplace(ATTACK_2_BUTTON, new JumpCommand());
+	m_inputHandler.m_bindCommands.emplace(ROLL_BUTTON, new JumpCommand());
+	m_inputHandler.m_bindCommands.emplace(ULTIMATE_BUTTON, new JumpCommand());*/
 
 	m_name = "fire_knight";
 
@@ -55,9 +65,29 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
 	m_collisionComponent->update(*this, world, deltaTime);
 
-	//m_inputHandler.handleInput(*this);
+	ICommand* command = m_inputHandler.handleInput();
+
+	if (command)
+	{
+		command->execute(*this);
+	}
+
+	m_playerState->update(*this);
 
 	//m_state->update(*this, deltaTime);
+
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
+	{
+		m_velocity.x -= 200.f;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
+	{
+		m_velocity.x += 200.f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
+	{
+		m_velocity.y = -1 * sqrt(2.f * GRAVITY * 90.f);
+	}*/
 
 	m_physicsComponent->update(*this, deltaTime);
 
@@ -67,4 +97,17 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 void Player::render(sf::RenderWindow& window)
 {
 	m_drawingComponent->render(*this, window);
+}
+
+void Player::handleInput(sf::Keyboard::Scancode input)
+{
+	IPlayerState* playerState = m_playerState->handleInput(*this, input);
+
+	if (playerState != nullptr)
+	{
+		delete m_playerState;
+		m_playerState = playerState;
+
+		m_playerState->enter(*this);
+	}
 }

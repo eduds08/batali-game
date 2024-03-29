@@ -31,6 +31,9 @@
     <Filter Include="STATE PATTERN 2.0">
       <UniqueIdentifier>{64989864-1614-478d-b83a-146be2783987}</UniqueIdentifier>
     </Filter>
+    <Filter Include="COMMAND PATTERN 2.0">
+      <UniqueIdentifier>{c8dacf6c-9a9f-436d-b9c5-8ad58ce144ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindHashashin.cpp">
@@ -138,30 +141,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>STATE PATTERN</Filter>
     </ClCompile>
-    <ClCompile Include="Attack1Command.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="Attack2Command.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpCommand.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="RollCommand.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="RunCommand.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="UltimateCommand.cpp">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
@@ -208,6 +187,24 @@
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpCommand.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpingState.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="RunLeftCommand.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="RunRightCommand.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRunningState.cpp">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClCompile>
   </ItemGroup>
@@ -317,30 +314,6 @@
     <ClInclude Include="Character.h">
       <Filter>STATE PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="Attack1Command.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="Attack2Command.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpCommand.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="RollCommand.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="RunCommand.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="UltimateCommand.h">
-      <Filter>COMMAND PATTERN</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
@@ -405,6 +378,27 @@
       <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
     <ClInclude Include="PlayerIdleState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpCommand.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpingState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="RunRightCommand.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="RunLeftCommand.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRunningState.h">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,8 @@
 #include "JumpCommand.h"
-#include "Character.h"
 
-void JumpCommand::execute(Character& character)
+#include "Player.h"
+
+void JumpCommand::execute(Player& player)
 {
-	character.handleCondition("JUMP");
+	player.handleInput(player.JUMP_BUTTON);
 }

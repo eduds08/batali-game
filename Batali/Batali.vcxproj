@@ -134,8 +134,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedActor.cpp" />
-    <ClCompile Include="Attack1Command.cpp" />
-    <ClCompile Include="Attack2Command.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="BackgroundUI.cpp" />
@@ -150,8 +148,9 @@
     <ClCompile Include="CharacterState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="ColliderActor.cpp" />
-    <ClCompile Include="Command.cpp" />
     <ClCompile Include="DeadState.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="LoopingAnimation.cpp" />
     <ClCompile Include="PlayedOnceAnimation.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -159,7 +158,11 @@
     <ClCompile Include="PlayerDrawingComponent.cpp" />
     <ClCompile Include="PlayerCollisionComponent.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerJumpingState.cpp" />
     <ClCompile Include="PlayerPhysicsComponent.cpp" />
+    <ClCompile Include="PlayerRunningState.cpp" />
+    <ClCompile Include="RunLeftCommand.cpp" />
+    <ClCompile Include="RunRightCommand.cpp" />
     <ClCompile Include="SpriteActor.cpp" />
     <ClCompile Include="FallingState.cpp" />
     <ClCompile Include="FireKnight.cpp" />
@@ -169,8 +172,6 @@
     <ClCompile Include="Hoodie.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="ImageButtonUI.cpp" />
-    <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="JumpingState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
@@ -179,9 +180,7 @@
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="CharacterWithProjectiles.cpp" />
-    <ClCompile Include="RollCommand.cpp" />
     <ClCompile Include="RollingState.cpp" />
-    <ClCompile Include="RunCommand.cpp" />
     <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
@@ -189,15 +188,12 @@
     <ClCompile Include="TextButtonUI.cpp" />
     <ClCompile Include="TexturesManager.cpp" />
     <ClCompile Include="UI.cpp" />
-    <ClCompile Include="UltimateCommand.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedActor.h" />
     <ClInclude Include="IAnimatingComponent.h" />
-    <ClInclude Include="Attack1Command.h" />
-    <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="AttackingState.h" />
     <ClInclude Include="BackgroundUI.h" />
@@ -209,8 +205,9 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterState.h" />
     <ClInclude Include="AbstractAnimation.h" />
+    <ClInclude Include="ICommand.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="IPhysicsComponent.h" />
-    <ClInclude Include="Command.h" />
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="IDrawingComponent.h" />
     <ClInclude Include="FallingState.h" />
@@ -218,7 +215,6 @@
     <ClInclude Include="Hoodie.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />
-    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
@@ -234,8 +230,12 @@
     <ClInclude Include="PlayerDrawingComponent.h" />
     <ClInclude Include="PlayerCollisionComponent.h" />
     <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerJumpingState.h" />
     <ClInclude Include="PlayerPhysicsComponent.h" />
     <ClInclude Include="IPlayerState.h" />
+    <ClInclude Include="PlayerRunningState.h" />
+    <ClInclude Include="RunLeftCommand.h" />
+    <ClInclude Include="RunRightCommand.h" />
     <ClInclude Include="SpriteActor.h" />
     <ClInclude Include="FireKnight.h" />
     <ClInclude Include="Game.h" />
@@ -246,9 +246,7 @@
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="CharacterWithProjectiles.h" />
-    <ClInclude Include="RollCommand.h" />
     <ClInclude Include="RollingState.h" />
-    <ClInclude Include="RunCommand.h" />
     <ClInclude Include="RunningState.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
@@ -256,7 +254,6 @@
     <ClInclude Include="TextButtonUI.h" />
     <ClInclude Include="TexturesManager.h" />
     <ClInclude Include="UI.h" />
-    <ClInclude Include="UltimateCommand.h" />
     <ClInclude Include="WindHashashin.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

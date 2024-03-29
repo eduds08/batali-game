@@ -1,10 +1,12 @@
 #pragma once
 
-#include "Command.h"
+#include "ICommand.h"
 
-class JumpCommand : public Command
+class JumpCommand : public ICommand
 {
 public:
+	JumpCommand() = default;
 	virtual ~JumpCommand() = default;
-	virtual void execute(Character& character);
+
+	virtual void execute(Player& player);
 };

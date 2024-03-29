@@ -3,7 +3,7 @@
 
 void CharacterState::updateHorizontalMovement(Character& character)
 {
-	if (sf::Keyboard::isKeyPressed(character.getInputHandler().getRunLeftCommand().button))
+	/*if (sf::Keyboard::isKeyPressed(character.getInputHandler().getRunLeftCommand().button))
 	{
 		character.m_facingRight = -1;
 		character.m_velocity.x -= character.m_speed;
@@ -12,7 +12,7 @@ void CharacterState::updateHorizontalMovement(Character& character)
 	{
 		character.m_facingRight = 1;
 		character.m_velocity.x += character.m_speed;
-	}
+	}*/
 
 	character.flipSprite();
 }

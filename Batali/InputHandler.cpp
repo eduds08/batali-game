@@ -1,33 +1,35 @@
 #include "InputHandler.h"
 
-void InputHandler::handleInput(Character& character)
+#include <iostream>
+
+InputHandler::InputHandler()
 {
-	if (sf::Keyboard::isKeyPressed(m_runRightCommand->button))
+}
+
+InputHandler::~InputHandler()
+{
+	std::unordered_map<sf::Keyboard::Scancode, ICommand*>::iterator itr = m_bindCommands.begin();
+
+	for (std::unordered_map<sf::Keyboard::Scancode, ICommand*>::iterator itr = m_bindCommands.begin(); itr != m_bindCommands.end(); ++itr)
 	{
-		m_runRightCommand->execute(character);
+		delete itr->second;
+		itr->second = nullptr;
 	}
-	else if (sf::Keyboard::isKeyPressed(m_runLeftCommand->button))
+
+	m_bindCommands.clear();
+
+	std::cout << "oi\n";
+}
+
+ICommand* InputHandler::handleInput()
+{
+	for (const auto& bindCommand : m_bindCommands)
 	{
-		m_runLeftCommand->execute(character);
+		if (sf::Keyboard::isKeyPressed(bindCommand.first))
+		{
+			return bindCommand.second;
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(m_jumpCommand->button))
-	{
-		m_jumpCommand->execute(character);
-	}
-	if (sf::Keyboard::isKeyPressed(m_attack1Command->button))
-	{
-		m_attack1Command->execute(character);
-	}
-	if (sf::Keyboard::isKeyPressed(m_attack2Command->button))
-	{
-		m_attack2Command->execute(character);
-	}
-	if (sf::Keyboard::isKeyPressed(m_rollCommand->button))
-	{
-		m_rollCommand->execute(character);
-	}
-	if (sf::Keyboard::isKeyPressed(m_ultimateCommand->button))
-	{
-		m_ultimateCommand->execute(character);
-	}
+
+	return nullptr;
 }

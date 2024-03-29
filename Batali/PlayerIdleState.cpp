@@ -2,6 +2,9 @@
 
 #include "Player.h"
 
+#include "PlayerJumpingState.h"
+#include "PlayerRunningState.h"
+
 PlayerIdleState::PlayerIdleState()
 {
 
@@ -12,11 +15,21 @@ PlayerIdleState::~PlayerIdleState()
 
 }
 
-Player* PlayerIdleState::handleInput(Player& player, const std::string& input)
+IPlayerState* PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
-	if (input == "RUNNING")
+	if (input == player.JUMP_BUTTON)
 	{
-		// return new PlayerRunningState();
+		return new PlayerJumpingState();
+	}
+	else if (input == player.RUN_RIGHT_BUTTON)
+	{
+		player.m_facingRight = 1;
+		return new PlayerRunningState();
+	}
+	else if (input == player.RUN_LEFT_BUTTON)
+	{
+		player.m_facingRight = -1;
+		return new PlayerRunningState();
 	}
 
 	return nullptr;
