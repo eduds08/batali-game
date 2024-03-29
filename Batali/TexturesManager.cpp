@@ -36,3 +36,19 @@ TexturesManager& TexturesManager::getInstance()
 	static TexturesManager* instance = new TexturesManager();
 	return *instance;
 }
+
+AbstractAnimation* TexturesManager::createNewAnimation(const std::string& name, sf::Vector2i frameSize, bool isLooping)
+{
+	AbstractAnimation* newAnimation = nullptr;
+
+	if (isLooping)
+	{
+		newAnimation = new LoopingAnimation{ name, frameSize, texturesMap.at(name).get()};
+	}
+	else
+	{
+		newAnimation = new PlayedOnceAnimation{ name, frameSize, texturesMap.at(name).get() };
+	}
+
+	return newAnimation;
+}

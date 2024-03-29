@@ -134,7 +134,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedActor.cpp" />
-    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Attack1Command.cpp" />
     <ClCompile Include="Attack2Command.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
@@ -153,7 +152,10 @@
     <ClCompile Include="ColliderActor.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="DeadState.cpp" />
+    <ClCompile Include="LoopingAnimation.cpp" />
+    <ClCompile Include="PlayedOnceAnimation.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAnimatingComponent.cpp" />
     <ClCompile Include="PlayerDrawingComponent.cpp" />
     <ClCompile Include="PlayerPhysicsComponent.cpp" />
     <ClCompile Include="SpriteActor.cpp" />
@@ -181,7 +183,6 @@
     <ClCompile Include="RunningState.cpp" />
     <ClCompile Include="SmallCharacterPortraitUI.cpp" />
     <ClCompile Include="StateContext.cpp" />
-    <ClCompile Include="StaticTexture.cpp" />
     <ClCompile Include="StatusBarUI.cpp" />
     <ClCompile Include="TextButtonUI.cpp" />
     <ClCompile Include="TexturesManager.cpp" />
@@ -192,7 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedActor.h" />
-    <ClInclude Include="Animation.h" />
     <ClInclude Include="IAnimatingComponent.h" />
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
@@ -206,7 +206,7 @@
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterState.h" />
-    <ClInclude Include="IAnimation.h" />
+    <ClInclude Include="AbstractAnimation.h" />
     <ClInclude Include="IColliderComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="DeadState.h" />
@@ -217,7 +217,6 @@
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />
     <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="ITexture.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
@@ -227,7 +226,10 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="IMovingComponent.h" />
     <ClInclude Include="IPhysicsComponent.h" />
+    <ClInclude Include="LoopingAnimation.h" />
+    <ClInclude Include="PlayedOnceAnimation.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAnimatingComponent.h" />
     <ClInclude Include="PlayerDrawingComponent.h" />
     <ClInclude Include="PlayerPhysicsComponent.h" />
     <ClInclude Include="SpriteActor.h" />
@@ -246,7 +248,6 @@
     <ClInclude Include="RunningState.h" />
     <ClInclude Include="SmallCharacterPortraitUI.h" />
     <ClInclude Include="StateContext.h" />
-    <ClInclude Include="StaticTexture.h" />
     <ClInclude Include="StatusBarUI.h" />
     <ClInclude Include="TextButtonUI.h" />
     <ClInclude Include="TexturesManager.h" />

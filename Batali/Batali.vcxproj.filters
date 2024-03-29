@@ -19,30 +19,24 @@
     <Filter Include="COMMAND PATTERN">
       <UniqueIdentifier>{fff56bd8-e5aa-4a30-835b-7fb68405feeb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="COMPONENT PATTERN">
+      <UniqueIdentifier>{fe06d9f5-b84d-4777-90b4-bce9508cd7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NEW ANIMATION MANAGER">
+      <UniqueIdentifier>{f44bf615-6f31-4d8c-a47d-5a371d13c0c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACTORS">
+      <UniqueIdentifier>{9bd9e405-3c33-47dd-83b8-ba094624fc9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindHashashin.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="MovableEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
     <ClCompile Include="FireKnight.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawableEntity.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderEntity.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimatedEntity.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicalEntity.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
     <ClCompile Include="Boxer.cpp">
@@ -135,14 +129,8 @@
     <ClCompile Include="main.cpp">
       <Filter>OTHERS</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>OTHERS</Filter>
-    </ClCompile>
     <ClCompile Include="AttackHitbox.cpp">
       <Filter>OTHERS</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileCharacter.cpp">
-      <Filter>ENTITY</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>STATE PATTERN</Filter>
@@ -171,30 +159,57 @@
     <ClCompile Include="UltimateCommand.cpp">
       <Filter>COMMAND PATTERN</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPhysicsComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDrawingComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAnimatingComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="LoopingAnimation.cpp">
+      <Filter>NEW ANIMATION MANAGER</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayedOnceAnimation.cpp">
+      <Filter>NEW ANIMATION MANAGER</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturesManager.cpp">
+      <Filter>NEW ANIMATION MANAGER</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedActor.cpp">
+      <Filter>ACTORS</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterWithProjectiles.cpp">
+      <Filter>ACTORS</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderActor.cpp">
+      <Filter>ACTORS</Filter>
+    </ClCompile>
+    <ClCompile Include="MovableActor.cpp">
+      <Filter>ACTORS</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeActor.cpp">
+      <Filter>ACTORS</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteActor.cpp">
+      <Filter>ACTORS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="MovableEntity.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="FireKnight.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawableEntity.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderEntity.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedEntity.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicalEntity.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="Boxer.h">
@@ -287,14 +302,8 @@
     <ClInclude Include="Game.h">
       <Filter>OTHERS</Filter>
     </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>OTHERS</Filter>
-    </ClInclude>
     <ClInclude Include="AttackHitbox.h">
       <Filter>OTHERS</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectileCharacter.h">
-      <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>STATE PATTERN</Filter>
@@ -322,6 +331,66 @@
     </ClInclude>
     <ClInclude Include="UltimateCommand.h">
       <Filter>COMMAND PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPhysicsComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDrawingComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IPhysicsComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IMovingComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawingComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IColliderComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimatingComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimatingComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="LoopingAnimation.h">
+      <Filter>NEW ANIMATION MANAGER</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayedOnceAnimation.h">
+      <Filter>NEW ANIMATION MANAGER</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturesManager.h">
+      <Filter>NEW ANIMATION MANAGER</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractAnimation.h">
+      <Filter>NEW ANIMATION MANAGER</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteActor.h">
+      <Filter>ACTORS</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedActor.h">
+      <Filter>ACTORS</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterWithProjectiles.h">
+      <Filter>ACTORS</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderActor.h">
+      <Filter>ACTORS</Filter>
+    </ClInclude>
+    <ClInclude Include="MovableActor.h">
+      <Filter>ACTORS</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeActor.h">
+      <Filter>ACTORS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
