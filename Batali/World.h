@@ -4,6 +4,8 @@
 #include <fstream>
 #include "Ground.h"
 
+class Player;
+
 class World
 {
 public:
@@ -13,4 +15,6 @@ public:
 	void loadTiles(const std::string& path);
 
 	std::vector<Ground> m_tiles{};
+
+	std::vector<Player*> m_players{};
 };

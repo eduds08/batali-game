@@ -31,6 +31,44 @@ std::shared_ptr<sf::Texture> TexturesManager::loadAndGetTexture(const std::strin
 	return newTexture;
 }
 
+bool TexturesManager::loadTexture(const std::string& textureName, const std::string& texturePath)
+{
+	bool isTextureLoaded = false;
+
+	for (const auto& texture : texturesMap)
+	{
+		if (texture.first == textureName)
+		{
+			isTextureLoaded = true;
+			break;
+		}
+	}
+
+	if (!isTextureLoaded)
+	{
+		std::shared_ptr<sf::Texture> newTexture{ std::make_shared<sf::Texture>() };
+		try
+		{
+			if (!newTexture->loadFromFile(texturePath))
+			{
+				throw "ERROR LOADING TEXTURE -- " + textureName + " -- " + texturePath + "\n";
+			}
+		}
+		catch (char const* error)
+		{
+			std::cerr << error << '\n';
+			return false;
+		}
+
+
+		texturesMap.emplace(textureName, newTexture);
+
+		return true;
+	}
+
+	return false;
+}
+
 TexturesManager& TexturesManager::getInstance()
 {
 	static TexturesManager* instance = new TexturesManager();
@@ -43,11 +81,11 @@ AbstractAnimation* TexturesManager::createNewAnimation(const std::string& name, 
 
 	if (isLooping)
 	{
-		newAnimation = new LoopingAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "name").get() };
+		newAnimation = new LoopingAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png").get() };
 	}
 	else
 	{
-		newAnimation = new PlayedOnceAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "name").get() };
+		newAnimation = new PlayedOnceAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png").get() };
 	}
 
 	return newAnimation;

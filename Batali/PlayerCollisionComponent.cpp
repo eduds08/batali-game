@@ -106,3 +106,19 @@ void PlayerCollisionComponent::updateLimits(Player& player)
 	m_shapeLimits[2] = player.getShape().getPosition().y + TILES_PHYSICAL_ACTOR_LIMIT * TILE_SIZE_FLOAT;	// BOTTOM
 	m_shapeLimits[3] = player.getShape().getPosition().x - TILES_PHYSICAL_ACTOR_LIMIT * TILE_SIZE_FLOAT;	// LEFT
 }
+
+void PlayerCollisionComponent::knockbackMove(Player& player, float& deltaTime, float attackDirection)
+{
+	if (attackDirection < 0.f)
+	{
+		// attack coming from left
+		player.getShape().move(sf::Vector2f{ m_knockbackVelocity, 0.f } *deltaTime);
+	}
+	else
+	{
+		// attack coming from right
+		player.getShape().move(sf::Vector2f{ m_knockbackVelocity * -1.f, 0.f } *deltaTime);
+	}
+
+	player.getSprite().setPosition(sf::Vector2f{ player.getShape().getPosition().x, player.getShape().getPosition().y - (player.getSprite().getTextureRect().getSize().y - player.getShape().getSize().y) / 2.f});
+}

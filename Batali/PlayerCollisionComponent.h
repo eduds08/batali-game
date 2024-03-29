@@ -20,6 +20,9 @@ public:
 
 	void updateLimits(Player& player);
 
+	// Moves the actor after being hit. attackDirection -> direction of the attack (from left or right)
+	void knockbackMove(Player& player, float& deltaTime, float attackDirection);
+
 private:
 	sf::Vector2f m_collisionDirection{};
 
@@ -27,8 +30,6 @@ private:
 	bool m_isCollidingHorizontally{ false };
 
 	float m_knockbackVelocity{ KNOCKBACK_SPEED };
-
-	
 
 	// 0 -> top, 1 -> right, 2 -> bottom, 3 -> left
 	std::vector<float> m_shapeLimits{ 0.f, 0.f, 0.f, 0.f };
