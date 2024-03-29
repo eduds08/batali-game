@@ -16,6 +16,7 @@ public:
 
 	void update(sf::RenderWindow& window, World& world, float& deltaTime);
 
+	sf::Sprite& getSprite() { return m_sprite; }
 	sf::RectangleShape& getShape() { return m_shape; }
 
 private:

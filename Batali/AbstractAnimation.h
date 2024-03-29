@@ -18,6 +18,8 @@ public:
 	virtual const sf::Vector2i& getFrameSize() const { return m_frameSize; }
 	virtual const sf::Texture& getTexture() const { return *m_texture; }
 
+	virtual const sf::IntRect& getCurrentTextureFrame() const { return m_currentTextureFrame; }
+
 protected:
 	sf::Texture* m_texture{ nullptr };
 	sf::IntRect m_currentTextureFrame{};
