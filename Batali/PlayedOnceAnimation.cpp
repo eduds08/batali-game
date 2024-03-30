@@ -8,6 +8,7 @@ PlayedOnceAnimation::PlayedOnceAnimation(const std::string& name, const sf::Vect
 	m_animationEnd = false;
 	m_currentTextureFrameIndex = 0;
 	m_totalAmountFrames = static_cast<int>(m_texture->getSize().x) / m_frameSize.x;
+	m_currentTextureFrame = { m_frameSize.x * m_currentTextureFrameIndex, 0, m_frameSize.x, m_frameSize.y };
 }
 
 PlayedOnceAnimation::~PlayedOnceAnimation()

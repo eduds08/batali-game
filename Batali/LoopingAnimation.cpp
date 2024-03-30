@@ -7,6 +7,7 @@ LoopingAnimation::LoopingAnimation(const std::string& name, const sf::Vector2i& 
 	m_name = name;
 	m_currentTextureFrameIndex = 0;
 	m_totalAmountFrames = static_cast<int>(m_texture->getSize().x) / m_frameSize.x;
+	m_currentTextureFrame = { m_frameSize.x * m_currentTextureFrameIndex, 0, m_frameSize.x, m_frameSize.y };
 }
 
 LoopingAnimation::~LoopingAnimation()
