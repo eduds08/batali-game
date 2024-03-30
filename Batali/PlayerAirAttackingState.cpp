@@ -11,6 +11,8 @@ IPlayerState* PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard:
 
 void PlayerAirAttackingState::update(Player& player)
 {
+	// hitbox logic
+
 	if (player.temporarioAnimationEnd)
 	{
 		player.temporarioAnimationEnd = false;

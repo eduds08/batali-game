@@ -16,9 +16,6 @@
     <Filter Include="OTHERS">
       <UniqueIdentifier>{0dffb1ae-8fd5-4a91-86ce-4cdb68a5a908}</UniqueIdentifier>
     </Filter>
-    <Filter Include="COMMAND PATTERN">
-      <UniqueIdentifier>{fff56bd8-e5aa-4a30-835b-7fb68405feeb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="COMPONENT PATTERN">
       <UniqueIdentifier>{fe06d9f5-b84d-4777-90b4-bce9508cd7fc}</UniqueIdentifier>
     </Filter>

@@ -36,10 +36,15 @@ Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, IColl
 	// DEBUG
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
+
+	animationThread = std::thread{ &Player::updateAnimation, this };
 }
 
 Player::~Player()
 {
+	OnthreadTeste = false;
+	animationThread.join();
+
 	if (m_drawingComponent)
 	{
 		delete m_drawingComponent;
@@ -77,7 +82,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_physicsComponent->update(*this, deltaTime);
 
-	m_animatingComponent->update(*this);
+	//m_animatingComponent->update(*this);
 }
 
 void Player::render(sf::RenderWindow& window)
@@ -106,5 +111,14 @@ void Player::setPlayerState(IPlayerState* state)
 		m_playerState = state;
 
 		m_playerState->enter(*this);
+	}
+}
+
+void Player::updateAnimation()
+{
+	while (OnthreadTeste)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(70));
+		m_animatingComponent->update(*this);
 	}
 }

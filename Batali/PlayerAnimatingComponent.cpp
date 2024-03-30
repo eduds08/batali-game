@@ -36,6 +36,8 @@ void PlayerAnimatingComponent::update(Player& player)
 	
 	m_currentAnimation->update();
 
+
+	// Needs reimplementation:
 	if (dynamic_cast<PlayedOnceAnimation*>(m_currentAnimation) != nullptr && dynamic_cast<PlayedOnceAnimation*>(m_currentAnimation)->m_animationEnd)
 	{
 		player.temporarioAnimationEnd = true;

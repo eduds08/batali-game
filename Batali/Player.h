@@ -11,6 +11,9 @@
 
 #include "Constants.h"
 
+#include <thread>
+#include <chrono>
+
 using namespace constants;
 
 class Player
@@ -32,6 +35,9 @@ public:
 	void handleInput(sf::Keyboard::Scancode input, bool release = false);
 
 	void setPlayerState(IPlayerState* state);
+
+	void updateAnimation();
+	bool OnthreadTeste{ true };
 
 	sf::Keyboard::Scancode JUMP_BUTTON = sf::Keyboard::Scancode::W;
 	sf::Keyboard::Scancode RUN_LEFT_BUTTON = sf::Keyboard::Scancode::A;
@@ -61,7 +67,7 @@ private:
 
 	sf::Vector2f m_velocity{};
 
-	
+	std::thread animationThread;
 
 	InputHandler m_inputHandler{};
 	IPlayerState* m_playerState{ new PlayerIdleState() };
