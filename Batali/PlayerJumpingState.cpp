@@ -1,6 +1,8 @@
 #include "PlayerJumpingState.h"
 #include "PlayerFallingState.h"
 
+#include "PlayerAirAttackingState.h"
+
 #include "Player.h"
 
 PlayerJumpingState::PlayerJumpingState()
@@ -13,6 +15,11 @@ PlayerJumpingState::~PlayerJumpingState()
 
 IPlayerState* PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
 {
+	if ((input == player.ATTACK_1_BUTTON || input == player.ATTACK_2_BUTTON) && !release)
+	{
+		return new PlayerAirAttackingState();
+	}
+
 	return nullptr;
 }
 

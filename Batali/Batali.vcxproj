@@ -134,6 +134,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedActor.cpp" />
+    <ClCompile Include="Attack1Command.cpp" />
+    <ClCompile Include="Attack2Command.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="AttackingState.cpp" />
     <ClCompile Include="BackgroundUI.cpp" />
@@ -154,7 +156,11 @@
     <ClCompile Include="LoopingAnimation.cpp" />
     <ClCompile Include="PlayedOnceAnimation.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAirAttackingState.cpp" />
     <ClCompile Include="PlayerAnimatingComponent.cpp" />
+    <ClCompile Include="PlayerAttacking1State.cpp" />
+    <ClCompile Include="PlayerAttacking2State.cpp" />
+    <ClCompile Include="PlayerAttackingState.cpp" />
     <ClCompile Include="PlayerDrawingComponent.cpp" />
     <ClCompile Include="PlayerCollisionComponent.cpp" />
     <ClCompile Include="PlayerFallingState.cpp" />
@@ -193,11 +199,14 @@
     <ClCompile Include="TextButtonUI.cpp" />
     <ClCompile Include="TexturesManager.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UltimateCommand.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedActor.h" />
+    <ClInclude Include="Attack1Command.h" />
+    <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="IAnimatingComponent.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="AttackingState.h" />
@@ -231,7 +240,11 @@
     <ClInclude Include="LoopingAnimation.h" />
     <ClInclude Include="PlayedOnceAnimation.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAirAttackingState.h" />
     <ClInclude Include="PlayerAnimatingComponent.h" />
+    <ClInclude Include="PlayerAttacking1State.h" />
+    <ClInclude Include="PlayerAttacking2State.h" />
+    <ClInclude Include="PlayerAttackingState.h" />
     <ClInclude Include="PlayerDrawingComponent.h" />
     <ClInclude Include="PlayerCollisionComponent.h" />
     <ClInclude Include="PlayerFallingState.h" />
@@ -264,6 +277,7 @@
     <ClInclude Include="TextButtonUI.h" />
     <ClInclude Include="TexturesManager.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UltimateCommand.h" />
     <ClInclude Include="WindHashashin.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

@@ -222,6 +222,27 @@
     <ClCompile Include="PlayerRollingState.cpp">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClCompile>
+    <ClCompile Include="Attack1Command.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack2Command.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="UltimateCommand.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAirAttackingState.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttacking1State.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttacking2State.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackingState.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -429,6 +450,27 @@
       <Filter>COMMAND PATTERN 2.0</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRollingState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="UltimateCommand.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack1Command.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack2Command.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAirAttackingState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttacking1State.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttacking2State.h">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackingState.h">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
   </ItemGroup>

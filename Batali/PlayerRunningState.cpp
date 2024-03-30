@@ -2,6 +2,8 @@
 
 #include "PlayerJumpingState.h"
 #include "PlayerRollingState.h"
+#include "PlayerAttacking1State.h"
+#include "PlayerAttacking2State.h"
 
 #include "Player.h"
 
@@ -28,6 +30,14 @@ IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scan
 	else if (input == player.ROLL_BUTTON && !release)
 	{
 		return new PlayerRollingState();
+	}
+	else if (input == player.ATTACK_1_BUTTON && !release)
+	{
+		return new PlayerAttacking1State();
+	}
+	else if (input == player.ATTACK_2_BUTTON && !release)
+	{
+		return new PlayerAttacking2State();
 	}
 
 	return nullptr;
