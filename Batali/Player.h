@@ -9,6 +9,10 @@
 #include "InputHandler.h"
 #include "PlayerIdleState.h"
 
+#include "Constants.h"
+
+using namespace constants;
+
 class Player
 {
 public:
@@ -39,6 +43,8 @@ public:
 
 	int m_facingRight{ 1 };
 
+	std::string animationName{ IDLE_ANIMATION };
+
 private:
 	IDrawingComponent* m_drawingComponent{ nullptr };
 	IAnimatingComponent* m_animatingComponent{ nullptr };
@@ -51,6 +57,8 @@ private:
 	sf::RectangleShape m_shape{};
 
 	sf::Vector2f m_velocity{};
+
+	
 
 	InputHandler m_inputHandler{};
 	IPlayerState* m_playerState{ new PlayerIdleState() };

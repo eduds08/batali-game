@@ -25,5 +25,6 @@ void PlayerFallingState::update(Player& player)
 
 void PlayerFallingState::enter(Player& player)
 {
+	player.animationName = FALLING_ANIMATION;
 	// Set falling texture
 }

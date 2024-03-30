@@ -2,6 +2,9 @@
 
 #include "Player.h"
 
+#include <chrono>
+#include <thread>
+
 PlayerAnimatingComponent::PlayerAnimatingComponent()
 {
 }
@@ -23,13 +26,13 @@ void PlayerAnimatingComponent::initTextures(Player& player)
 
 void PlayerAnimatingComponent::update(Player& player)
 {
-	if (m_currentAnimation == nullptr)
+	//std::this_thread::sleep_for(std::chrono::milliseconds(60));
+
+	if (m_currentAnimation == nullptr || m_currentAnimation->getName() != player.animationName)
 	{
-		m_currentAnimation = m_texturesManager.createNewAnimation(IDLE_ANIMATION, { 288, 127 }, true, player.getName());
+		m_currentAnimation = m_texturesManager.createNewAnimation(player.animationName, { 288, 127 }, true, player.getName());
 		player.getSprite().setTexture(m_currentAnimation->getTexture());
 	}
-
-	
 
 	player.getSprite().setTextureRect(m_currentAnimation->getCurrentTextureFrame());
 	

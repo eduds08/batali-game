@@ -15,7 +15,7 @@ void PlayerPhysicsComponent::update(Player& player, float& deltaTime)
 	player.getVelocity().y += GRAVITY * deltaTime;
 
 	move(player, deltaTime);
-
+		
 	player.getVelocity().x = 0.f;
 }
 

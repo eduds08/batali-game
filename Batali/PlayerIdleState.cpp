@@ -40,5 +40,6 @@ void PlayerIdleState::update(Player& player)
 
 void PlayerIdleState::enter(Player& player)
 {
+	player.animationName = IDLE_ANIMATION;
 	// set player new animation
 }

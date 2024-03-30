@@ -4,6 +4,20 @@
 
 namespace constants
 {
+	const std::string IDLE_ANIMATION{ "_Idle" };
+	const std::string ROLL_ANIMATION{ "_Roll" };
+	const std::string RUNNING_ANIMATION{ "_Running" };
+	const std::string JUMPING_ANIMATION{ "_Jumping" };
+	const std::string FALLING_ANIMATION{ "_Falling" };
+	const std::string ATTACK_1_ANIMATION{ "_Attack1" };
+	const std::string ATTACK_2_ANIMATION{ "_Attack2" };
+	const std::string AIR_ATTACK_ANIMATION{ "_AirAttack" };
+	const std::string ULTIMATE_ANIMATION{ "_Ultimate" };
+	const std::string HITTED_ANIMATION{ "_Hitted" };
+	const std::string FAST_HITTED_ANIMATION{ "_FastHitted" };
+	const std::string DYING_ANIMATION{ "_Dying" };
+
+
 	constexpr int TILE_SIZE_INT{ 32 };
 	constexpr float TILE_SIZE_FLOAT{ 32.f };
 	constexpr int TILES_AMOUNT_PER_ROW{ 60 };
