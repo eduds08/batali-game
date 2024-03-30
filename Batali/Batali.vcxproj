@@ -169,6 +169,7 @@
     <ClCompile Include="PlayerPhysicsComponent.cpp" />
     <ClCompile Include="PlayerRollingState.cpp" />
     <ClCompile Include="PlayerRunningState.cpp" />
+    <ClCompile Include="PlayerUltimateState.cpp" />
     <ClCompile Include="ReleaseRunLeftCommand.cpp" />
     <ClCompile Include="ReleaseRunRightCommand.cpp" />
     <ClCompile Include="RollCommand.cpp" />
@@ -254,6 +255,7 @@
     <ClInclude Include="IPlayerState.h" />
     <ClInclude Include="PlayerRollingState.h" />
     <ClInclude Include="PlayerRunningState.h" />
+    <ClInclude Include="PlayerUltimateState.h" />
     <ClInclude Include="ReleaseRunLeftCommand.h" />
     <ClInclude Include="ReleaseRunRightCommand.h" />
     <ClInclude Include="RollCommand.h" />

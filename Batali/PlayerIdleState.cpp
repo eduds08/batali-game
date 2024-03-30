@@ -7,6 +7,7 @@
 #include "PlayerRollingState.h"
 #include "PlayerAttacking1State.h"
 #include "PlayerAttacking2State.h"
+#include "PlayerUltimateState.h"
 
 PlayerIdleState::PlayerIdleState()
 {
@@ -43,6 +44,10 @@ IPlayerState* PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancod
 	else if (input == player.ATTACK_2_BUTTON && !release)
 	{
 		return new PlayerAttacking2State();
+	}
+	else if (input == player.ULTIMATE_BUTTON && !release)
+	{
+		return new PlayerUltimateState();
 	}
 
 	return nullptr;

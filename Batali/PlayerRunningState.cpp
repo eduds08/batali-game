@@ -4,6 +4,7 @@
 #include "PlayerRollingState.h"
 #include "PlayerAttacking1State.h"
 #include "PlayerAttacking2State.h"
+#include "PlayerUltimateState.h"
 
 #include "Player.h"
 
@@ -38,6 +39,10 @@ IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scan
 	else if (input == player.ATTACK_2_BUTTON && !release)
 	{
 		return new PlayerAttacking2State();
+	}
+	else if (input == player.ULTIMATE_BUTTON && !release)
+	{
+		return new PlayerUltimateState();
 	}
 
 	return nullptr;
