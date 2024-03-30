@@ -15,17 +15,17 @@ PlayerIdleState::~PlayerIdleState()
 
 }
 
-IPlayerState* PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)
+IPlayerState* PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
 {
-	if (input == player.JUMP_BUTTON)
+	if (input == player.JUMP_BUTTON && !release)
 	{
 		return new PlayerJumpingState();
 	}
-	else if (input == player.RUN_RIGHT_BUTTON)
+	else if (input == player.RUN_RIGHT_BUTTON && !release)
 	{
 		return new PlayerRunningState();
 	}
-	else if (input == player.RUN_LEFT_BUTTON)
+	else if (input == player.RUN_LEFT_BUTTON && !release)
 	{
 		return new PlayerRunningState();
 	}

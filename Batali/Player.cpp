@@ -84,9 +84,9 @@ void Player::render(sf::RenderWindow& window)
 	m_drawingComponent->render(*this, window);
 }
 
-void Player::handleInput(sf::Keyboard::Scancode input)
+void Player::handleInput(sf::Keyboard::Scancode input, bool release)
 {
-	IPlayerState* playerState = m_playerState->handleInput(*this, input);
+	IPlayerState* playerState = m_playerState->handleInput(*this, input, release);
 
 	if (playerState != nullptr)
 	{

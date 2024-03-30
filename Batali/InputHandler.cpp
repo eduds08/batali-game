@@ -17,6 +17,9 @@ InputHandler::~InputHandler()
 	}
 
 	m_bindCommands.clear();
+
+	delete testeLeft;
+	delete testeRight;
 }
 
 ICommand* InputHandler::handleInput()
@@ -27,6 +30,16 @@ ICommand* InputHandler::handleInput()
 		{
 			return bindCommand.second;
 		}
+	}
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
+	{
+		return testeLeft;
+	}
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
+	{
+		return testeRight;
 	}
 
 	return nullptr;

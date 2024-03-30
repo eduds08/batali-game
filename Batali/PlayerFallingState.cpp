@@ -10,7 +10,7 @@ PlayerFallingState::~PlayerFallingState()
 {
 }
 
-IPlayerState* PlayerFallingState::handleInput(Player& player, sf::Keyboard::Scancode input)
+IPlayerState* PlayerFallingState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
 {
 	return nullptr;
 }

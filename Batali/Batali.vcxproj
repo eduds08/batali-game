@@ -162,6 +162,8 @@
     <ClCompile Include="PlayerJumpingState.cpp" />
     <ClCompile Include="PlayerPhysicsComponent.cpp" />
     <ClCompile Include="PlayerRunningState.cpp" />
+    <ClCompile Include="ReleaseRunLeftCommand.cpp" />
+    <ClCompile Include="ReleaseRunRightCommand.cpp" />
     <ClCompile Include="RunLeftCommand.cpp" />
     <ClCompile Include="RunRightCommand.cpp" />
     <ClCompile Include="SpriteActor.cpp" />
@@ -236,6 +238,8 @@
     <ClInclude Include="PlayerPhysicsComponent.h" />
     <ClInclude Include="IPlayerState.h" />
     <ClInclude Include="PlayerRunningState.h" />
+    <ClInclude Include="ReleaseRunLeftCommand.h" />
+    <ClInclude Include="ReleaseRunRightCommand.h" />
     <ClInclude Include="RunLeftCommand.h" />
     <ClInclude Include="RunRightCommand.h" />
     <ClInclude Include="SpriteActor.h" />

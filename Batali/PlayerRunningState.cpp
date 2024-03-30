@@ -12,8 +12,12 @@ PlayerRunningState::~PlayerRunningState()
 
 }
 
-IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scancode input)
+IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
 {
+	if ((input == player.RUN_LEFT_BUTTON || player.RUN_RIGHT_BUTTON) && release)
+	{
+		return new PlayerIdleState();
+	}
 
 	return nullptr;
 }
@@ -21,11 +25,6 @@ IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scan
 void PlayerRunningState::update(Player& player)
 {
 	player.getVelocity().x = 200.f * player.m_facingRight;
-
-	if (!sf::Keyboard::isKeyPressed(player.RUN_LEFT_BUTTON) && !sf::Keyboard::isKeyPressed(player.RUN_RIGHT_BUTTON))
-	{
-		player.setPlayerState(new PlayerIdleState());
-	}
 }
 
 void PlayerRunningState::enter(Player& player)

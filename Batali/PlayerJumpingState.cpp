@@ -11,7 +11,7 @@ PlayerJumpingState::~PlayerJumpingState()
 {
 }
 
-IPlayerState* PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input)
+IPlayerState* PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
 {
 	return nullptr;
 }

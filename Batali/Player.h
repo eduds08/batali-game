@@ -29,7 +29,7 @@ public:
 
 	const std::string& getName() const { return m_name; }
 
-	void handleInput(sf::Keyboard::Scancode input);
+	void handleInput(sf::Keyboard::Scancode input, bool release = false);
 
 	void setPlayerState(IPlayerState* state);
 
