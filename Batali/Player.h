@@ -44,6 +44,9 @@ public:
 	int m_facingRight{ 1 };
 
 	std::string animationName{ IDLE_ANIMATION };
+	bool isLoopingAnimation{ false };
+
+	bool temporarioAnimationEnd{false};
 
 private:
 	IDrawingComponent* m_drawingComponent{ nullptr };

@@ -4,6 +4,7 @@
 
 #include "PlayerJumpingState.h"
 #include "PlayerRunningState.h"
+#include "PlayerRollingState.h"
 
 PlayerIdleState::PlayerIdleState()
 {
@@ -29,6 +30,10 @@ IPlayerState* PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancod
 	{
 		return new PlayerRunningState();
 	}
+	else if (input == player.ROLL_BUTTON && !release)
+	{
+		return new PlayerRollingState();
+	}
 
 	return nullptr;
 }
@@ -41,5 +46,6 @@ void PlayerIdleState::update(Player& player)
 void PlayerIdleState::enter(Player& player)
 {
 	player.animationName = IDLE_ANIMATION;
+	player.isLoopingAnimation = true;
 	// set player new animation
 }

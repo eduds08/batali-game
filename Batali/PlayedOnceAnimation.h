@@ -10,6 +10,6 @@ public:
 
 	virtual void update();
 
-private:
 	bool m_animationEnd{};
+private:
 };

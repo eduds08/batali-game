@@ -29,4 +29,5 @@ void PlayerJumpingState::enter(Player& player)
 	player.getVelocity().y = -1 * sqrt(2.f * GRAVITY * 90.f);
 
 	player.animationName = JUMPING_ANIMATION;
+	player.isLoopingAnimation = true;
 }

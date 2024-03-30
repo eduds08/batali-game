@@ -216,6 +216,12 @@
     <ClCompile Include="ReleaseRunRightCommand.cpp">
       <Filter>COMMAND PATTERN 2.0</Filter>
     </ClCompile>
+    <ClCompile Include="RollCommand.cpp">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRollingState.cpp">
+      <Filter>STATE PATTERN 2.0</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -418,6 +424,12 @@
     </ClInclude>
     <ClInclude Include="ReleaseRunRightCommand.h">
       <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="RollCommand.h">
+      <Filter>COMMAND PATTERN 2.0</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRollingState.h">
+      <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

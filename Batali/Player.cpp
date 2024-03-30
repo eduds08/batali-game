@@ -3,7 +3,7 @@
 #include "JumpCommand.h"
 #include "RunRightCommand.h"
 #include "RunLeftCommand.h"
-
+#include "RollCommand.h"
 
 Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, ICollisionComponent* physics, IPhysicsComponent* collider)
 	: m_drawingComponent{ drawing }
@@ -14,11 +14,12 @@ Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, IColl
 	m_inputHandler.m_bindCommands.emplace(JUMP_BUTTON, new JumpCommand());
 
 	// Mudar new JumpCommand():
+	m_inputHandler.m_bindCommands.emplace(ROLL_BUTTON, new RollCommand());
 	m_inputHandler.m_bindCommands.emplace(RUN_LEFT_BUTTON, new RunLeftCommand());
 	m_inputHandler.m_bindCommands.emplace(RUN_RIGHT_BUTTON, new RunRightCommand());
 	/*m_inputHandler.m_bindCommands.emplace(ATTACK_1_BUTTON, new JumpCommand());
 	m_inputHandler.m_bindCommands.emplace(ATTACK_2_BUTTON, new JumpCommand());
-	m_inputHandler.m_bindCommands.emplace(ROLL_BUTTON, new JumpCommand());
+	
 	m_inputHandler.m_bindCommands.emplace(ULTIMATE_BUTTON, new JumpCommand());*/
 
 	m_name = "fire_knight";
