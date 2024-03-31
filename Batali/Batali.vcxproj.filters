@@ -241,6 +241,9 @@
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="FireKnightState.cpp" />
+    <ClCompile Include="WindHashashinState.cpp" />
+    <ClCompile Include="BoxerState.cpp" />
+    <ClCompile Include="HoodieState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -476,5 +479,8 @@
     </ClInclude>
     <ClInclude Include="IChosenCharacterState.h" />
     <ClInclude Include="FireKnightState.h" />
+    <ClInclude Include="WindHashashinState.h" />
+    <ClInclude Include="BoxerState.h" />
+    <ClInclude Include="HoodieState.h" />
   </ItemGroup>
 </Project>

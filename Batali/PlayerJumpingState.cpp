@@ -40,6 +40,10 @@ void PlayerJumpingState::update(Player& player)
 	{
 		player.setPlayerState(new PlayerFallingState());
 	}
+	else if (player.getVelocity().y == 0.f)
+	{
+		player.setPlayerState(new PlayerIdleState());
+	}
 }
 
 void PlayerJumpingState::enter(Player& player)

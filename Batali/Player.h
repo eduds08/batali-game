@@ -36,7 +36,7 @@ public:
 
 	sf::Vector2f& getVelocity() { return m_velocity; }
 
-	const std::string& getName() const { return m_name; }
+	const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
 
 	void handleInput(sf::Keyboard::Scancode input);
 
@@ -72,10 +72,6 @@ private:
 	IPhysicsComponent* m_physicsComponent{ nullptr };
 	IAnimatingComponent* m_animatingComponent{ nullptr };
 	IDrawingComponent* m_drawingComponent{ nullptr };
-
-
-
-	std::string m_name{};
 
 	sf::Sprite m_sprite{};
 	sf::RectangleShape m_shape{};

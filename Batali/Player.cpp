@@ -22,8 +22,6 @@ Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, IColl
 	m_inputHandler.m_bindCommands.emplace(RUN_LEFT_BUTTON, new RunLeftCommand());
 	m_inputHandler.m_bindCommands.emplace(RUN_RIGHT_BUTTON, new RunRightCommand());
 
-	m_name = "fire_knight";
-
 	m_animatingComponent->initTextures(*this);
 
 	m_sprite.setOrigin(sf::Vector2f{ 288 / 2.f, 127 / 2.f });

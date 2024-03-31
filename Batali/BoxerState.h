@@ -1,22 +1,21 @@
 #pragma once
 
-#include "AttackHitbox.h"
 #include "IChosenCharacterState.h"
 
+#include "AttackHitbox.h"
 #include "Constants.h"
-
 using namespace constants;
 
-class FireKnightState : public IChosenCharacterState
+class BoxerState : public IChosenCharacterState
 {
 public:
-	FireKnightState();
-	virtual ~FireKnightState();
+	BoxerState() = default;
+	virtual ~BoxerState() = default;
 
 	virtual const std::string& getChosenCharacterName() const { return m_name; }
 
 	virtual void updateAttackHitbox(Player& player, AttackHitbox* attackHitbox);
 
 private:
-	std::string m_name{ "fire_knight" };
+	std::string m_name{ "boxer" };
 };

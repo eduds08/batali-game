@@ -141,6 +141,7 @@
     <ClCompile Include="BackgroundUI.cpp" />
     <ClCompile Include="BigCharacterPortraitUI.cpp" />
     <ClCompile Include="Boxer.cpp" />
+    <ClCompile Include="BoxerState.cpp" />
     <ClCompile Include="BoxerUltimateProjectile.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="ColliderActor.cpp" />
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="FireKnightState.cpp" />
+    <ClCompile Include="HoodieState.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="LoopingAnimation.cpp" />
@@ -202,13 +204,16 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UltimateCommand.cpp" />
     <ClCompile Include="WindHashashin.cpp" />
+    <ClCompile Include="WindHashashinState.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedActor.h" />
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
+    <ClInclude Include="BoxerState.h" />
     <ClInclude Include="FireKnightState.h" />
+    <ClInclude Include="HoodieState.h" />
     <ClInclude Include="IAnimatingComponent.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="AttackingState.h" />
@@ -283,6 +288,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="UltimateCommand.h" />
     <ClInclude Include="WindHashashin.h" />
+    <ClInclude Include="WindHashashinState.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
