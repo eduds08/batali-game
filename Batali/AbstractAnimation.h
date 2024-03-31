@@ -20,6 +20,8 @@ public:
 
 	virtual const sf::IntRect& getCurrentTextureFrame() const { return m_currentTextureFrame; }
 
+	virtual bool getAnimationEnd() { return false; }
+
 protected:
 	sf::Texture* m_texture{ nullptr };
 	sf::IntRect m_currentTextureFrame{};

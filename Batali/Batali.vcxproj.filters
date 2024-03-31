@@ -207,12 +207,6 @@
     <ClCompile Include="PlayerFallingState.cpp">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClCompile>
-    <ClCompile Include="ReleaseRunLeftCommand.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClCompile>
-    <ClCompile Include="ReleaseRunRightCommand.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClCompile>
     <ClCompile Include="RollCommand.cpp">
       <Filter>COMMAND PATTERN 2.0</Filter>
     </ClCompile>
@@ -439,12 +433,6 @@
     </ClInclude>
     <ClInclude Include="PlayerFallingState.h">
       <Filter>STATE PATTERN 2.0</Filter>
-    </ClInclude>
-    <ClInclude Include="ReleaseRunLeftCommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClInclude>
-    <ClInclude Include="ReleaseRunRightCommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
     </ClInclude>
     <ClInclude Include="RollCommand.h">
       <Filter>COMMAND PATTERN 2.0</Filter>

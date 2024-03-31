@@ -4,6 +4,5 @@
 
 void PlayerAttacking1State::enter(Player& player)
 {
-	player.animationName = ATTACK_1_ANIMATION;
-	player.isLoopingAnimation = false;
+	player.getAnimatingComponent()->setNewAnimation(player, ATTACK_1_ANIMATION, false);
 }

@@ -10,7 +10,7 @@ PlayerRollingState::~PlayerRollingState()
 {
 }
 
-IPlayerState* PlayerRollingState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
+IPlayerState* PlayerRollingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;
 }
@@ -19,15 +19,15 @@ void PlayerRollingState::update(Player& player)
 {
 	player.getVelocity().x = player.m_facingRight * 230.f;
 
-	if (player.temporarioAnimationEnd)
+	if (player.getAnimatingComponent()->getIsCurrentAnimationEnd())
 	{
-		player.temporarioAnimationEnd = false;
 		player.setPlayerState(new PlayerIdleState());
 	}
 }
 
 void PlayerRollingState::enter(Player& player)
 {
-	player.animationName = ROLL_ANIMATION;
-	player.isLoopingAnimation = false;
+	player.getAnimatingComponent()->setNewAnimation(player, ROLL_ANIMATION, false);
+	//player.animationName = ROLL_ANIMATION;
+	//player.isLoopingAnimation = false;
 }

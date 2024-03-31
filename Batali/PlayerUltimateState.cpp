@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-IPlayerState* PlayerUltimateState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
+IPlayerState* PlayerUltimateState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;
 }
@@ -14,15 +14,13 @@ void PlayerUltimateState::update(Player& player)
 	// immortal logic
 	// hitbox logic
 
-	if (player.temporarioAnimationEnd)
+	if (player.getAnimatingComponent()->getIsCurrentAnimationEnd())
 	{
-		player.temporarioAnimationEnd = false;
 		player.setPlayerState(new PlayerIdleState());
 	}
 }
 
 void PlayerUltimateState::enter(Player& player)
 {
-	player.animationName = ULTIMATE_ANIMATION;
-	player.isLoopingAnimation = false;
+	player.getAnimatingComponent()->setNewAnimation(player, ULTIMATE_ANIMATION, false);
 }

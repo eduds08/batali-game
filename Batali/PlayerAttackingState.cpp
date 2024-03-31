@@ -2,7 +2,7 @@
 
 #include "Player.h"
 
-IPlayerState* PlayerAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
+IPlayerState* PlayerAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
     return nullptr;
 }
@@ -11,9 +11,8 @@ void PlayerAttackingState::update(Player& player)
 {
     // hitbox logic...
 
-	if (player.temporarioAnimationEnd)
+	if (player.getAnimatingComponent()->getIsCurrentAnimationEnd())
 	{
-		player.temporarioAnimationEnd = false;
 		player.setPlayerState(new PlayerIdleState());
 	}
 }

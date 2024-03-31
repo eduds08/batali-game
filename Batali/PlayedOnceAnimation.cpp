@@ -34,6 +34,5 @@ void PlayedOnceAnimation::update()
 	{
 		m_currentTextureFrameIndex = 0;
 		m_animationEnd = true;
-		// Talvez emitir um evento "fim da animação"
 	}
 }

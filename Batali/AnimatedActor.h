@@ -8,7 +8,7 @@ public:
 	AnimatedActor();
 	virtual ~AnimatedActor() = default;
 
-	// Called inside the animationThread. It's here where all animation happens.
+	// Called inside the m_animatingThread. It's here where all animation happens.
 	virtual void updateAnimation();
 
 	// Called when the AnimatedActor changes its sprite. Eg.: from running sprite to jumping sprite.

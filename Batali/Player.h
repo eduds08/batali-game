@@ -7,6 +7,8 @@
 
 #include "World.h"
 #include "InputHandler.h"
+
+#include "PlayerFallingState.h"
 #include "PlayerIdleState.h"
 
 #include "Constants.h"
@@ -32,7 +34,7 @@ public:
 
 	const std::string& getName() const { return m_name; }
 
-	void handleInput(sf::Keyboard::Scancode input, bool release = false);
+	void handleInput(sf::Keyboard::Scancode input);
 
 	void setPlayerState(IPlayerState* state);
 
@@ -49,16 +51,13 @@ public:
 
 	int m_facingRight{ 1 };
 
-	std::string animationName{ IDLE_ANIMATION };
-	bool isLoopingAnimation{ false };
-
-	bool temporarioAnimationEnd{false};
+	IAnimatingComponent* getAnimatingComponent() { return m_animatingComponent; }
 
 private:
-	IDrawingComponent* m_drawingComponent{ nullptr };
-	IAnimatingComponent* m_animatingComponent{ nullptr };
 	ICollisionComponent* m_collisionComponent{ nullptr };
 	IPhysicsComponent* m_physicsComponent{ nullptr };
+	IAnimatingComponent* m_animatingComponent{ nullptr };
+	IDrawingComponent* m_drawingComponent{ nullptr };
 
 	std::string m_name{};
 
@@ -67,8 +66,8 @@ private:
 
 	sf::Vector2f m_velocity{};
 
-	std::thread animationThread;
+	std::thread m_animatingThread;
 
 	InputHandler m_inputHandler{};
-	IPlayerState* m_playerState{ new PlayerIdleState() };
+	IPlayerState* m_playerState{ new PlayerFallingState() };
 };

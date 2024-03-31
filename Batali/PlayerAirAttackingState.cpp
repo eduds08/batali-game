@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-IPlayerState* PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input, bool release)
+IPlayerState* PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;
 }
@@ -13,15 +13,13 @@ void PlayerAirAttackingState::update(Player& player)
 {
 	// hitbox logic
 
-	if (player.temporarioAnimationEnd)
+	if (player.getAnimatingComponent()->getIsCurrentAnimationEnd())
 	{
-		player.temporarioAnimationEnd = false;
 		player.setPlayerState(new PlayerFallingState());
 	}
 }
 
 void PlayerAirAttackingState::enter(Player& player)
 {
-	player.animationName = AIR_ATTACK_ANIMATION;
-	player.isLoopingAnimation = false;
+	player.getAnimatingComponent()->setNewAnimation(player, AIR_ATTACK_ANIMATION, false);
 }

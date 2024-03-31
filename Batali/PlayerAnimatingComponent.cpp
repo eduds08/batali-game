@@ -24,22 +24,16 @@ void PlayerAnimatingComponent::initTextures(Player& player)
 	}
 }
 
+void PlayerAnimatingComponent::setNewAnimation(Player& player, const std::string& name, bool isLooping)
+{
+	m_currentAnimation = m_texturesManager.createNewAnimation(name, { 288, 127 }, isLooping, player.getName());
+	player.getSprite().setTexture(m_currentAnimation->getTexture());
+	player.getSprite().setTextureRect(m_currentAnimation->getCurrentTextureFrame());
+}
+
 void PlayerAnimatingComponent::update(Player& player)
 {
-	if (m_currentAnimation == nullptr || m_currentAnimation->getName() != player.animationName)
-	{
-		m_currentAnimation = m_texturesManager.createNewAnimation(player.animationName, { 288, 127 }, player.isLoopingAnimation, player.getName());
-		player.getSprite().setTexture(m_currentAnimation->getTexture());
-	}
-
-	player.getSprite().setTextureRect(m_currentAnimation->getCurrentTextureFrame());
-	
 	m_currentAnimation->update();
-
-
-	// Needs reimplementation:
-	if (dynamic_cast<PlayedOnceAnimation*>(m_currentAnimation) != nullptr && dynamic_cast<PlayedOnceAnimation*>(m_currentAnimation)->m_animationEnd)
-	{
-		player.temporarioAnimationEnd = true;
-	}
+	
+	player.getSprite().setTextureRect(m_currentAnimation->getCurrentTextureFrame());
 }

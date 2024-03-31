@@ -14,6 +14,8 @@ void PlayerPhysicsComponent::update(Player& player, float& deltaTime)
 {
 	player.getVelocity().y += GRAVITY * deltaTime;
 
+	player.getSprite().setScale(static_cast<float>(player.m_facingRight), 1.f);
+
 	move(player, deltaTime);
 		
 	player.getVelocity().x = 0.f;

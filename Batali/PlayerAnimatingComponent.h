@@ -17,6 +17,10 @@ public:
 
 	void initTextures(Player& player);
 
+	virtual void setNewAnimation(Player& player, const std::string& name, bool isLooping);
+
+	virtual bool getIsCurrentAnimationEnd() { return m_currentAnimation->getAnimationEnd(); }
+
 	virtual void update(Player& player);
 
 private:

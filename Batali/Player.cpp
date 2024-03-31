@@ -37,13 +37,13 @@ Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, IColl
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
-	animationThread = std::thread{ &Player::updateAnimation, this };
+	m_animatingThread = std::thread{ &Player::updateAnimation, this };
 }
 
 Player::~Player()
 {
 	OnthreadTeste = false;
-	animationThread.join();
+	m_animatingThread.join();
 
 	if (m_drawingComponent)
 	{
@@ -90,9 +90,9 @@ void Player::render(sf::RenderWindow& window)
 	m_drawingComponent->render(*this, window);
 }
 
-void Player::handleInput(sf::Keyboard::Scancode input, bool release)
+void Player::handleInput(sf::Keyboard::Scancode input)
 {
-	IPlayerState* playerState = m_playerState->handleInput(*this, input, release);
+	IPlayerState* playerState = m_playerState->handleInput(*this, input);
 
 	if (playerState != nullptr)
 	{
