@@ -20,6 +20,8 @@ public:
 
 	virtual const sf::IntRect& getCurrentTextureFrame() const { return m_currentTextureFrame; }
 
+	virtual const int getCurrentTextureFrameIndex() const { return m_currentTextureFrameIndex; }
+
 	virtual bool getAnimationEnd() { return false; }
 
 protected:

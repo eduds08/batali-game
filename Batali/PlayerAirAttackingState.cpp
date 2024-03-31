@@ -13,7 +13,7 @@ void PlayerAirAttackingState::update(Player& player)
 {
 	// hitbox logic
 
-	if (player.getAnimatingComponent()->getIsCurrentAnimationEnd())
+	if (player.getAnimatingComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
 		player.setPlayerState(new PlayerFallingState());
 	}

@@ -19,7 +19,7 @@ public:
 
 	virtual void setNewAnimation(Player& player, const std::string& name, bool isLooping);
 
-	virtual bool getIsCurrentAnimationEnd() { return m_currentAnimation->getAnimationEnd(); }
+	virtual AbstractAnimation* getCurrentAnimation() { return m_currentAnimation; }
 
 	virtual void update(Player& player);
 

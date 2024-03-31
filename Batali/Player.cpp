@@ -65,6 +65,11 @@ Player::~Player()
 		delete m_physicsComponent;
 		m_physicsComponent = nullptr;
 	}
+	if (m_attackingComponent)
+	{
+		delete m_attackingComponent;
+		m_attackingComponent = nullptr;
+	}
 }
 
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
@@ -81,6 +86,8 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 	m_playerState->update(*this);
 
 	m_physicsComponent->update(*this, deltaTime);
+
+	m_attackingComponent->update(*this, deltaTime);
 
 	//m_animatingComponent->update(*this);
 }

@@ -19,7 +19,7 @@ void PlayerRollingState::update(Player& player)
 {
 	player.getVelocity().x = player.m_facingRight * 230.f;
 
-	if (player.getAnimatingComponent()->getIsCurrentAnimationEnd())
+	if (player.getAnimatingComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
 		player.setPlayerState(new PlayerIdleState());
 	}

@@ -151,6 +151,7 @@
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="ColliderActor.cpp" />
     <ClCompile Include="DeadState.cpp" />
+    <ClCompile Include="FireKnightState.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="LoopingAnimation.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="PlayerAnimatingComponent.cpp" />
     <ClCompile Include="PlayerAttacking1State.cpp" />
     <ClCompile Include="PlayerAttacking2State.cpp" />
+    <ClCompile Include="PlayerAttackingComponent.cpp" />
     <ClCompile Include="PlayerAttackingState.cpp" />
     <ClCompile Include="PlayerDrawingComponent.cpp" />
     <ClCompile Include="PlayerCollisionComponent.cpp" />
@@ -206,6 +208,7 @@
     <ClInclude Include="AnimatedActor.h" />
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
+    <ClInclude Include="FireKnightState.h" />
     <ClInclude Include="IAnimatingComponent.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="AttackingState.h" />
@@ -218,6 +221,8 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterState.h" />
     <ClInclude Include="AbstractAnimation.h" />
+    <ClInclude Include="IAttackingComponent.h" />
+    <ClInclude Include="IChosenCharacterState.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="IPhysicsComponent.h" />
@@ -243,6 +248,7 @@
     <ClInclude Include="PlayerAnimatingComponent.h" />
     <ClInclude Include="PlayerAttacking1State.h" />
     <ClInclude Include="PlayerAttacking2State.h" />
+    <ClInclude Include="PlayerAttackingComponent.h" />
     <ClInclude Include="PlayerAttackingState.h" />
     <ClInclude Include="PlayerDrawingComponent.h" />
     <ClInclude Include="PlayerCollisionComponent.h" />

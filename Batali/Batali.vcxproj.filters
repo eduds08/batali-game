@@ -237,6 +237,10 @@
     <ClCompile Include="PlayerUltimateState.cpp">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerAttackingComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnightState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -464,5 +468,13 @@
     <ClInclude Include="PlayerUltimateState.h">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
+    <ClInclude Include="IAttackingComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackingComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="IChosenCharacterState.h" />
+    <ClInclude Include="FireKnightState.h" />
   </ItemGroup>
 </Project>

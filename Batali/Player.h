@@ -5,6 +5,8 @@
 #include "ICollisionComponent.h"
 #include "IPhysicsComponent.h"
 
+#include "PlayerAttackingComponent.h"
+
 #include "World.h"
 #include "InputHandler.h"
 
@@ -12,6 +14,8 @@
 #include "PlayerIdleState.h"
 
 #include "Constants.h"
+
+#include "FireKnightState.h"
 
 #include <thread>
 #include <chrono>
@@ -53,11 +57,23 @@ public:
 
 	IAnimatingComponent* getAnimatingComponent() { return m_animatingComponent; }
 
+	IChosenCharacterState* getChosenCharacter() { return m_chosenCharacterState; }
+
+
+
+
+	IAttackingComponent* m_attackingComponent{ new PlayerAttackingComponent() };
+
+
+
+
 private:
 	ICollisionComponent* m_collisionComponent{ nullptr };
 	IPhysicsComponent* m_physicsComponent{ nullptr };
 	IAnimatingComponent* m_animatingComponent{ nullptr };
 	IDrawingComponent* m_drawingComponent{ nullptr };
+
+
 
 	std::string m_name{};
 
@@ -69,5 +85,8 @@ private:
 	std::thread m_animatingThread;
 
 	InputHandler m_inputHandler{};
+
 	IPlayerState* m_playerState{ new PlayerFallingState() };
+
+	IChosenCharacterState* m_chosenCharacterState{ new FireKnightState() };
 };
