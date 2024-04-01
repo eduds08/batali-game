@@ -101,6 +101,9 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_attackingComponent->update(*this, world, deltaTime);
 
+	if (m_projectileComponent != nullptr)
+		m_projectileComponent->update(*this, world, deltaTime);
+
 	//m_animatingComponent->update(*this);
 }
 
