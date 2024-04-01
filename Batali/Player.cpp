@@ -8,11 +8,14 @@
 #include "Attack2Command.h"
 #include "UltimateCommand.h"
 
+int Player::idCounter{ 1 };
+
 Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, ICollisionComponent* physics, IPhysicsComponent* collider)
 	: m_drawingComponent{ drawing }
 	, m_animatingComponent{ animating }
 	, m_collisionComponent{ physics }
 	, m_physicsComponent{ collider }
+	, m_playerNumber{ idCounter }
 {
 	m_inputHandler.m_bindCommands.emplace(ATTACK_1_BUTTON, new Attack1Command());
 	m_inputHandler.m_bindCommands.emplace(JUMP_BUTTON, new JumpCommand());
@@ -36,10 +39,14 @@ Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, IColl
 	m_shape.setOutlineThickness(1.f);
 
 	m_animatingThread = std::thread{ &Player::updateAnimation, this };
+
+	++idCounter;
 }
 
 Player::~Player()
 {
+	idCounter = 1;
+
 	OnthreadTeste = false;
 	m_animatingThread.join();
 
@@ -85,7 +92,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_physicsComponent->update(*this, deltaTime);
 
-	m_attackingComponent->update(*this, deltaTime);
+	m_attackingComponent->update(*this, world, deltaTime);
 
 	//m_animatingComponent->update(*this);
 }

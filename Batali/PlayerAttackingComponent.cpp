@@ -13,8 +13,13 @@ PlayerAttackingComponent::~PlayerAttackingComponent()
 	m_attackHitbox = nullptr;
 }
 
-void PlayerAttackingComponent::update(Player& player, float& deltaTime)
+void PlayerAttackingComponent::update(Player& player, World& world, float& deltaTime)
 {
-	//character.updateAttackHitbox(m_attackHitbox);
 	player.getChosenCharacter()->updateAttackHitbox(player, m_attackHitbox);
+
+	for (auto& enemy : world.m_players)
+	{
+		if (enemy->m_playerNumber != player.m_playerNumber)
+			player.getChosenCharacter()->checkIfIsAttacking(player, m_attackHitbox);
+	}
 }

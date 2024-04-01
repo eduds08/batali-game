@@ -77,3 +77,11 @@ void FireKnightState::updateAttackHitbox(Player& player, AttackHitbox* attackHit
 	attackHitbox->setShapeOrigin(0.f, attackHitbox->getShapeSize().y / 2.f);
 	attackHitbox->setShapeScale(static_cast<float>(player.m_facingRight), 1.f);
 }
+
+void FireKnightState::checkIfIsAttacking(Player& enemy, AttackHitbox* attackHitbox)
+{
+	if (attackHitbox->getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
+	{
+		// enemy->takeDamage()
+	}
+}

@@ -171,6 +171,7 @@
     <ClCompile Include="PlayerIdleState.cpp" />
     <ClCompile Include="PlayerJumpingState.cpp" />
     <ClCompile Include="PlayerPhysicsComponent.cpp" />
+    <ClCompile Include="PlayerProjectileComponent.cpp" />
     <ClCompile Include="PlayerRollingState.cpp" />
     <ClCompile Include="PlayerRunningState.cpp" />
     <ClCompile Include="PlayerUltimateState.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="Hoodie.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="ImageButtonUI.h" />
+    <ClInclude Include="IProjectileComponent.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="JumpingState.h" />
     <ClInclude Include="CharacterPortraitUI.h" />
@@ -262,6 +264,7 @@
     <ClInclude Include="PlayerJumpingState.h" />
     <ClInclude Include="PlayerPhysicsComponent.h" />
     <ClInclude Include="IPlayerState.h" />
+    <ClInclude Include="PlayerProjectileComponent.h" />
     <ClInclude Include="PlayerRollingState.h" />
     <ClInclude Include="PlayerRunningState.h" />
     <ClInclude Include="PlayerUltimateState.h" />

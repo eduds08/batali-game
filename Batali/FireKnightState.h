@@ -17,6 +17,8 @@ public:
 
 	virtual void updateAttackHitbox(Player& player, AttackHitbox* attackHitbox);
 
+	virtual void checkIfIsAttacking(Player& enemy, AttackHitbox* attackHitbox);
+
 private:
 	std::string m_name{ "fire_knight" };
 };

@@ -9,7 +9,7 @@ public:
 	PlayerAttackingComponent();
 	virtual ~PlayerAttackingComponent();
 
-	virtual void update(Player& player, float& deltaTime);
+	virtual void update(Player& player, World& world, float& deltaTime);
 
 	virtual const AttackHitbox* getAttackHitbox() const { return m_attackHitbox; }
 

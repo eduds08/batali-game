@@ -60,7 +60,8 @@ public:
 	IChosenCharacterState* getChosenCharacter() { return m_chosenCharacterState; }
 
 
-
+	static int idCounter;
+	const int m_playerNumber;
 
 	IAttackingComponent* m_attackingComponent{ new PlayerAttackingComponent() };
 
