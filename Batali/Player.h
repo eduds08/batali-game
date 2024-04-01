@@ -4,8 +4,8 @@
 #include "IAnimatingComponent.h"
 #include "ICollisionComponent.h"
 #include "IPhysicsComponent.h"
-
-#include "PlayerAttackingComponent.h"
+#include "IAttackingComponent.h"
+#include "IProjectileComponent.h"
 
 #include "World.h"
 #include "InputHandler.h"
@@ -25,7 +25,7 @@ using namespace constants;
 class Player
 {
 public:
-	Player(IDrawingComponent* drawing = nullptr, IAnimatingComponent* animating = nullptr, ICollisionComponent* physics = nullptr, IPhysicsComponent* collider = nullptr);
+	Player(IDrawingComponent* drawing = nullptr, IAnimatingComponent* animating = nullptr, ICollisionComponent* physics = nullptr, IPhysicsComponent* collider = nullptr, IAttackingComponent* attackingComp = nullptr, IProjectileComponent* proj = nullptr);
 	virtual ~Player();
 
 	void update(sf::RenderWindow& window, World& world, float& deltaTime);
@@ -63,8 +63,8 @@ public:
 	static int idCounter;
 	const int m_playerNumber;
 
-	IAttackingComponent* m_attackingComponent{ new PlayerAttackingComponent() };
-
+	IAttackingComponent* m_attackingComponent{ nullptr };
+	IProjectileComponent* m_projectileComponent{ nullptr };
 
 
 

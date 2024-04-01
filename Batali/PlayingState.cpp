@@ -6,12 +6,14 @@
 #include "PlayerAnimatingComponent.h"
 #include "PlayerCollisionComponent.h"
 #include "PlayerPhysicsComponent.h"
+#include "PlayerAttackingComponent.h"
+#include "PlayerProjectileComponent.h"
 
 
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
-	, player{ std::make_shared<Player>(new PlayerDrawingComponent(), new PlayerAnimatingComponent(), new PlayerCollisionComponent(), new PlayerPhysicsComponent())}
+	, player{ std::make_shared<Player>(new PlayerDrawingComponent(), new PlayerAnimatingComponent(), new PlayerCollisionComponent(), new PlayerPhysicsComponent(), new PlayerAttackingComponent())}
 {
 	m_currentState = PLAYING_STATE;
 

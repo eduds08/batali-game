@@ -10,11 +10,13 @@
 
 int Player::idCounter{ 1 };
 
-Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, ICollisionComponent* physics, IPhysicsComponent* collider)
+Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, ICollisionComponent* physics, IPhysicsComponent* collider, IAttackingComponent* attackingComp, IProjectileComponent* proj)
 	: m_drawingComponent{ drawing }
 	, m_animatingComponent{ animating }
 	, m_collisionComponent{ physics }
 	, m_physicsComponent{ collider }
+	, m_attackingComponent{ attackingComp }
+	, m_projectileComponent{ proj }
 	, m_playerNumber{ idCounter }
 {
 	m_inputHandler.m_bindCommands.emplace(ATTACK_1_BUTTON, new Attack1Command());
@@ -74,6 +76,11 @@ Player::~Player()
 	{
 		delete m_attackingComponent;
 		m_attackingComponent = nullptr;
+	}
+	if (m_projectileComponent)
+	{
+		delete m_projectileComponent;
+		m_projectileComponent = nullptr;
 	}
 }
 
