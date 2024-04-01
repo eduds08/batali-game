@@ -43,21 +43,25 @@ void BoxerState::updateAttackHitbox(Player& player, AttackHitbox* attackHitbox)
 
 		if (player.getAnimatingComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == BOXER_ULTIMATE_PT_1_FRAME)
 		{
-			/*if (m_projectiles.size() == 0)
-				launchProjectile();*/
+			if (player.m_projectileComponent->getProjectiles().size() == 0)
+			{
+				player.m_projectileComponent->launchProjectile();
+			}
 		}
 		else if (player.getAnimatingComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == BOXER_ULTIMATE_PT_2_FRAME)
 		{
-			/*if (m_projectiles.size() == 1)
-				launchProjectile();*/
+			if (player.m_projectileComponent->getProjectiles().size() == 1)
+			{
+				player.m_projectileComponent->launchProjectile();
+			}
 		}
 	}
 	else
 	{
-		/*if (m_projectiles.size() == 0)
+		if (player.m_projectileComponent->getProjectiles().size() == 0)
 		{
 			attackHitbox->setDamage(0);
-		}*/
+		}
 	}
 
 	attackHitbox->setShapeOrigin(0.f, attackHitbox->getShapeSize().y / 2.f);

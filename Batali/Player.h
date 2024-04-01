@@ -16,6 +16,8 @@
 #include "Constants.h"
 
 #include "FireKnightState.h"
+#include "WindHashashinState.h"
+#include "BoxerState.h"
 
 #include <thread>
 #include <chrono>
@@ -85,5 +87,5 @@ private:
 
 	IPlayerState* m_playerState{ new PlayerFallingState() };
 
-	IChosenCharacterState* m_chosenCharacterState{ new FireKnightState() };
+	IChosenCharacterState* m_chosenCharacterState{ new WindHashashinState() };
 };

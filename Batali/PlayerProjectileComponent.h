@@ -17,6 +17,8 @@ public:
 
 	// update projectile's animation in animatingComponent (pass this component as reference, maybe idk)
 
+	const std::vector<std::shared_ptr<Projectile>>& getProjectiles() const { return m_projectiles; }
+
 private:
 	std::vector<std::shared_ptr<Projectile>> m_projectiles{};
 
