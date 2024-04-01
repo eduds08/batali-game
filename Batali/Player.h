@@ -87,5 +87,5 @@ private:
 
 	IPlayerState* m_playerState{ new PlayerFallingState() };
 
-	IChosenCharacterState* m_chosenCharacterState{ new WindHashashinState() };
+	IChosenCharacterState* m_chosenCharacterState{ new BoxerState() };
 };

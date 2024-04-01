@@ -16,4 +16,13 @@ void PlayerDrawingComponent::render(Player& player, sf::RenderWindow& window)
 	window.draw(player.getSprite());
 
 	window.draw(player.m_attackingComponent->getAttackHitbox()->getShape());
+
+	if (player.m_projectileComponent != nullptr)
+	{
+		for (auto& projectile : player.m_projectileComponent->getProjectiles())
+		{
+			window.draw(projectile->getShape());
+			window.draw(projectile->getSprite());
+		}
+	}
 }

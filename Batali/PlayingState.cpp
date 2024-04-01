@@ -13,7 +13,7 @@
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
-	, player{ std::make_shared<Player>(new PlayerDrawingComponent(), new PlayerAnimatingComponent(), new PlayerCollisionComponent(), new PlayerPhysicsComponent(), new PlayerAttackingComponent())}
+	, player{ std::make_shared<Player>(new PlayerDrawingComponent(), new PlayerAnimatingComponent(), new PlayerCollisionComponent(), new PlayerPhysicsComponent(), new PlayerAttackingComponent(), new PlayerProjectileComponent())}
 {
 	m_currentState = PLAYING_STATE;
 

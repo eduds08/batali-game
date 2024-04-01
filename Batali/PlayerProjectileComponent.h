@@ -13,7 +13,7 @@ public:
 	virtual void update(Player& player, World& world, float& deltaTime);
 
 	// Instantiate a projectile and pushes it into m_projectiles vector
-	virtual void launchProjectile();
+	virtual void launchProjectile(Player& player);
 
 	// update projectile's animation in animatingComponent (pass this component as reference, maybe idk)
 
