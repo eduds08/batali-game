@@ -31,6 +31,9 @@
     <Filter Include="COMMAND PATTERN 2.0">
       <UniqueIdentifier>{c8dacf6c-9a9f-436d-b9c5-8ad58ce144ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CHOSEN CHARACTER STATE">
+      <UniqueIdentifier>{38264ebb-df67-42de-8a67-fdb3041063a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindHashashin.cpp">
@@ -240,16 +243,36 @@
     <ClCompile Include="PlayerAttackComponent.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
-    <ClCompile Include="FireKnightState.cpp" />
-    <ClCompile Include="WindHashashinState.cpp" />
-    <ClCompile Include="BoxerState.cpp" />
-    <ClCompile Include="HoodieState.cpp" />
-    <ClCompile Include="PlayerLaunchProjectilesComponent.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="ProjectileRenderComponent.cpp" />
-    <ClCompile Include="ProjectilePhysicsComponent.cpp" />
-    <ClCompile Include="ProjectileAnimationComponent.cpp" />
-    <ClCompile Include="ProjectileCollisionComponent.cpp" />
+    <ClCompile Include="PlayerLaunchProjectilesComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileAnimationComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileCollisionComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectilePhysicsComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileRenderComponent.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxerState.cpp">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnightState.cpp">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="HoodieState.cpp">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="WindHashashinState.cpp">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -483,17 +506,41 @@
     <ClInclude Include="PlayerAttackComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="IChosenCharacterState.h" />
-    <ClInclude Include="FireKnightState.h" />
-    <ClInclude Include="WindHashashinState.h" />
-    <ClInclude Include="BoxerState.h" />
-    <ClInclude Include="HoodieState.h" />
-    <ClInclude Include="ILaunchProjectilesComponent.h" />
-    <ClInclude Include="PlayerLaunchProjectilesComponent.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="ProjectileRenderComponent.h" />
-    <ClInclude Include="ProjectilePhysicsComponent.h" />
-    <ClInclude Include="ProjectileAnimationComponent.h" />
-    <ClInclude Include="ProjectileCollisionComponent.h" />
+    <ClInclude Include="ILaunchProjectilesComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerLaunchProjectilesComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileAnimationComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileCollisionComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectilePhysicsComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileRenderComponent.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>COMPONENT PATTERN</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxerState.h">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="FireKnightState.h">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="HoodieState.h">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="IChosenCharacterState.h">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="WindHashashinState.h">
+      <Filter>CHOSEN CHARACTER STATE</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
