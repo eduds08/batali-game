@@ -2,13 +2,16 @@
 
 #include "IPhysicsComponent.h"
 
-class PlayerPhysicsComponent : public IPhysicsComponent
+class ProjectilePhysicsComponent : public IPhysicsComponent
 {
 public:
-	PlayerPhysicsComponent();
-	virtual ~PlayerPhysicsComponent();
+	ProjectilePhysicsComponent() = default;
+	virtual ~ProjectilePhysicsComponent() = default;
 
 	virtual void update(GameObject& gameObject, float& deltaTime);
 
 	virtual void move(GameObject& gameObject, float& deltaTime);
+
+private:
+
 };

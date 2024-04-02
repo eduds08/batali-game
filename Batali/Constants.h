@@ -17,6 +17,11 @@ namespace constants
 	const std::string FAST_HITTED_ANIMATION{ "_FastHitted" };
 	const std::string DYING_ANIMATION{ "_Dying" };
 
+	const std::string PROJECTILE_MOVING_ANIMATION{ "_Moving" };
+	const std::string PROJECTILE_COLLISION_ANIMATION{ "_Collision" };
+
+	const sf::Vector2i PROJECTILE_SIZE{ 30, 30 };
+	const sf::Vector2i PLAYER_SIZE{ 288, 127 };
 
 	constexpr int TILE_SIZE_INT{ 32 };
 	constexpr float TILE_SIZE_FLOAT{ 32.f };

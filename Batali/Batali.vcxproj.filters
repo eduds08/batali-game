@@ -144,13 +144,13 @@
     <ClCompile Include="PlayerCollisionComponent.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerDrawingComponent.cpp">
+    <ClCompile Include="PlayerRenderComponent.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAnimatingComponent.cpp">
+    <ClCompile Include="PlayerAnimationComponent.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="LoopingAnimation.cpp">
@@ -237,13 +237,19 @@
     <ClCompile Include="PlayerUltimateState.cpp">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttackingComponent.cpp">
+    <ClCompile Include="PlayerAttackComponent.cpp">
       <Filter>COMPONENT PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="FireKnightState.cpp" />
     <ClCompile Include="WindHashashinState.cpp" />
     <ClCompile Include="BoxerState.cpp" />
     <ClCompile Include="HoodieState.cpp" />
+    <ClCompile Include="PlayerLaunchProjectilesComponent.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="ProjectileRenderComponent.cpp" />
+    <ClCompile Include="ProjectilePhysicsComponent.cpp" />
+    <ClCompile Include="ProjectileAnimationComponent.cpp" />
+    <ClCompile Include="ProjectileCollisionComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -357,7 +363,7 @@
     <ClInclude Include="PlayerCollisionComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerDrawingComponent.h">
+    <ClInclude Include="PlayerRenderComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -366,16 +372,16 @@
     <ClInclude Include="ICollisionComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="IDrawingComponent.h">
+    <ClInclude Include="IRenderComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="IPhysicsComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="IAnimatingComponent.h">
+    <ClInclude Include="IAnimationComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAnimatingComponent.h">
+    <ClInclude Include="PlayerAnimationComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="LoopingAnimation.h">
@@ -471,10 +477,10 @@
     <ClInclude Include="PlayerUltimateState.h">
       <Filter>STATE PATTERN 2.0</Filter>
     </ClInclude>
-    <ClInclude Include="IAttackingComponent.h">
+    <ClInclude Include="IAttackComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttackingComponent.h">
+    <ClInclude Include="PlayerAttackComponent.h">
       <Filter>COMPONENT PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="IChosenCharacterState.h" />
@@ -482,5 +488,12 @@
     <ClInclude Include="WindHashashinState.h" />
     <ClInclude Include="BoxerState.h" />
     <ClInclude Include="HoodieState.h" />
+    <ClInclude Include="ILaunchProjectilesComponent.h" />
+    <ClInclude Include="PlayerLaunchProjectilesComponent.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ProjectileRenderComponent.h" />
+    <ClInclude Include="ProjectilePhysicsComponent.h" />
+    <ClInclude Include="ProjectileAnimationComponent.h" />
+    <ClInclude Include="ProjectileCollisionComponent.h" />
   </ItemGroup>
 </Project>

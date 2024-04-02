@@ -4,5 +4,5 @@
 
 void RunLeftCommand::execute(Player& player)
 {
-	player.handleInput(player.RUN_LEFT_BUTTON);
+	player.handleInput(player.getKeyBinding("RUN_LEFT_BUTTON"));
 }

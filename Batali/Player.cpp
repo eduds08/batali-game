@@ -1,33 +1,34 @@
 #include "Player.h"
 
-#include "JumpCommand.h"
+#include "IRenderComponent.h"
+#include "ICollisionComponent.h"
+#include "IPhysicsComponent.h"
+#include "IAttackComponent.h"
+#include "ILaunchProjectilesComponent.h"
+#include "IAnimationComponent.h"
+
+#include "IPlayerState.h"
+
 #include "RunRightCommand.h"
 #include "RunLeftCommand.h"
-#include "RollCommand.h"
+#include "JumpCommand.h"
 #include "Attack1Command.h"
 #include "Attack2Command.h"
+#include "RollCommand.h"
 #include "UltimateCommand.h"
 
-int Player::idCounter{ 1 };
-
-Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, ICollisionComponent* physics, IPhysicsComponent* collider, IAttackingComponent* attackingComp, IProjectileComponent* proj)
-	: m_drawingComponent{ drawing }
-	, m_animatingComponent{ animating }
-	, m_collisionComponent{ physics }
-	, m_physicsComponent{ collider }
-	, m_attackingComponent{ attackingComp }
-	, m_projectileComponent{ proj }
-	, m_playerNumber{ idCounter }
+Player::Player(IRenderComponent* renderComponent, ICollisionComponent* collisionComponent, IPhysicsComponent* physicsComponent, IAttackComponent* attackComponent, ILaunchProjectilesComponent* launchProjectilesComponent, IAnimationComponent* animationComponent)
+	: GameObject{}
+	, m_renderComponent{ renderComponent }
+	, m_collisionComponent{ collisionComponent }
+	, m_physicsComponent{ physicsComponent }
+	, m_attackComponent{ attackComponent }
+	, m_launchProjectilesComponent{ launchProjectilesComponent }
+	, m_animationComponent{ animationComponent }
 {
-	m_inputHandler.m_bindCommands.emplace(ATTACK_1_BUTTON, new Attack1Command());
-	m_inputHandler.m_bindCommands.emplace(JUMP_BUTTON, new JumpCommand());
-	m_inputHandler.m_bindCommands.emplace(ROLL_BUTTON, new RollCommand());
-	m_inputHandler.m_bindCommands.emplace(ATTACK_2_BUTTON, new Attack2Command());
-	m_inputHandler.m_bindCommands.emplace(ULTIMATE_BUTTON, new UltimateCommand());
-	m_inputHandler.m_bindCommands.emplace(RUN_LEFT_BUTTON, new RunLeftCommand());
-	m_inputHandler.m_bindCommands.emplace(RUN_RIGHT_BUTTON, new RunRightCommand());
+	initKeyBindings();
 
-	m_animatingComponent->initTextures(*this);
+	m_animationComponent->initTextures(*this);
 
 	m_sprite.setOrigin(sf::Vector2f{ 288 / 2.f, 127 / 2.f });
 
@@ -40,47 +41,48 @@ Player::Player(IDrawingComponent* drawing, IAnimatingComponent* animating, IColl
 	m_shape.setOutlineColor(sf::Color::Red);
 	m_shape.setOutlineThickness(1.f);
 
-	m_animatingThread = std::thread{ &Player::updateAnimation, this };
-
-	++idCounter;
+	m_animationThread = std::thread{ &Player::updateAnimationThread, this };
 }
 
 Player::~Player()
 {
-	idCounter = 1;
+	m_onAnimationThread = false;
+	m_animationThread.join();
 
-	OnthreadTeste = false;
-	m_animatingThread.join();
+	if (m_renderComponent)
+	{
+		delete m_renderComponent;
+		m_renderComponent = nullptr;
+	}
 
-	if (m_drawingComponent)
-	{
-		delete m_drawingComponent;
-		m_drawingComponent = nullptr;
-	}
-	if (m_animatingComponent)
-	{
-		delete m_animatingComponent;
-		m_animatingComponent = nullptr;
-	}
 	if (m_collisionComponent)
 	{
 		delete m_collisionComponent;
 		m_collisionComponent = nullptr;
 	}
+
 	if (m_physicsComponent)
 	{
 		delete m_physicsComponent;
 		m_physicsComponent = nullptr;
 	}
-	if (m_attackingComponent)
+
+	if (m_attackComponent)
 	{
-		delete m_attackingComponent;
-		m_attackingComponent = nullptr;
+		delete m_attackComponent;
+		m_attackComponent = nullptr;
 	}
-	if (m_projectileComponent)
+
+	if (m_launchProjectilesComponent)
 	{
-		delete m_projectileComponent;
-		m_projectileComponent = nullptr;
+		delete m_launchProjectilesComponent;
+		m_launchProjectilesComponent = nullptr;
+	}
+
+	if (m_animationComponent)
+	{
+		delete m_animationComponent;
+		m_animationComponent = nullptr;
 	}
 }
 
@@ -99,17 +101,15 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_physicsComponent->update(*this, deltaTime);
 
-	m_attackingComponent->update(*this, world, deltaTime);
+	m_attackComponent->update(*this, world, deltaTime);
 
-	if (m_projectileComponent != nullptr)
-		m_projectileComponent->update(*this, world, deltaTime);
-
-	//m_animatingComponent->update(*this);
+	if (m_launchProjectilesComponent != nullptr)
+		m_launchProjectilesComponent->update(*this, world, deltaTime);
 }
 
 void Player::render(sf::RenderWindow& window)
 {
-	m_drawingComponent->render(*this, window);
+	m_renderComponent->render(*this, window);
 }
 
 void Player::handleInput(sf::Keyboard::Scancode input)
@@ -136,11 +136,35 @@ void Player::setPlayerState(IPlayerState* state)
 	}
 }
 
-void Player::updateAnimation()
+void Player::updateAnimationThread()
 {
-	while (OnthreadTeste)
+	while (m_onAnimationThread)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(70));
-		m_animatingComponent->update(*this);
+		m_animationComponent->update(*this);
 	}
+}
+
+void Player::initKeyBindings()
+{
+	m_keyBindings.emplace("RUN_LEFT_BUTTON", sf::Keyboard::Scan::A);
+	m_keyBindings.emplace("RUN_RIGHT_BUTTON", sf::Keyboard::Scan::D);
+	m_keyBindings.emplace("JUMP_BUTTON", sf::Keyboard::Scan::W);
+	m_keyBindings.emplace("ATTACK_1_BUTTON", sf::Keyboard::Scan::X);
+	m_keyBindings.emplace("ATTACK_2_BUTTON", sf::Keyboard::Scan::C);
+	m_keyBindings.emplace("ROLL_BUTTON", sf::Keyboard::Scan::V);
+	m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::B);
+
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), new RunLeftCommand());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), new RunRightCommand());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("JUMP_BUTTON"), new JumpCommand());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_1_BUTTON"), new Attack1Command());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_2_BUTTON"), new Attack2Command());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ROLL_BUTTON"), new RollCommand());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), new UltimateCommand());
+}
+
+sf::Keyboard::Scancode Player::getKeyBinding(const std::string& keyBinding)
+{
+	return m_keyBindings.at(keyBinding);
 }

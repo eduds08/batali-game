@@ -12,16 +12,16 @@ public:
 	PlayerCollisionComponent();
 	virtual ~PlayerCollisionComponent();
 
-	virtual void update(Player& player, World& world, float& deltaTime);
+	virtual void update(GameObject& gameObject, World& world, float& deltaTime);
 
-	void updateCollisionWith(Player& player, const sf::Sprite& other);
+	void updateCollisionWith(GameObject& gameObject, const sf::Sprite& other);
 
-	void handleCollision(Player& player);
+	void handleCollision(GameObject& gameObject);
 
-	void updateLimits(Player& player);
+	void updateLimits(GameObject& gameObject);
 
 	// Moves the actor after being hit. attackDirection -> direction of the attack (from left or right)
-	void knockbackMove(Player& player, float& deltaTime, float attackDirection);
+	void knockbackMove(GameObject& gameObject, float& deltaTime, float attackDirection);
 
 private:
 	sf::Vector2f m_collisionDirection{};

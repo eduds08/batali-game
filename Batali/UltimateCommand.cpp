@@ -4,5 +4,5 @@
 
 void UltimateCommand::execute(Player& player)
 {
-	player.handleInput(player.ULTIMATE_BUTTON);
+	player.handleInput(player.getKeyBinding("ULTIMATE_BUTTON"));
 }

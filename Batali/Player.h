@@ -1,91 +1,67 @@
 #pragma once
 
-#include "IDrawingComponent.h"
-#include "IAnimatingComponent.h"
-#include "ICollisionComponent.h"
-#include "IPhysicsComponent.h"
-#include "IAttackingComponent.h"
-#include "IProjectileComponent.h"
-
-#include "World.h"
+#include "GameObject.h"
 #include "InputHandler.h"
 
-#include "PlayerFallingState.h"
-#include "PlayerIdleState.h"
-
-#include "Constants.h"
-
-#include "FireKnightState.h"
-#include "WindHashashinState.h"
-#include "BoxerState.h"
-
+#include <unordered_map>
 #include <thread>
-#include <chrono>
+#include <string>
 
-using namespace constants;
+#include "IChosenCharacterState.h"
 
-class Player
+class IRenderComponent;
+class ICollisionComponent;
+class IPhysicsComponent;
+class IAttackComponent;
+class ILaunchProjectilesComponent;
+class IAnimationComponent;
+
+class IPlayerState;
+
+class Player : public GameObject
 {
 public:
-	Player(IDrawingComponent* drawing = nullptr, IAnimatingComponent* animating = nullptr, ICollisionComponent* physics = nullptr, IPhysicsComponent* collider = nullptr, IAttackingComponent* attackingComp = nullptr, IProjectileComponent* proj = nullptr);
+	Player(IRenderComponent* renderComponent = nullptr, ICollisionComponent* collisionComponent = nullptr, IPhysicsComponent* physicsComponent = nullptr, IAttackComponent* attackComponent = nullptr, ILaunchProjectilesComponent* launchProjectilesComponent = nullptr, IAnimationComponent* animationComponent = nullptr);
 	virtual ~Player();
 
-	void update(sf::RenderWindow& window, World& world, float& deltaTime);
-	void render(sf::RenderWindow& window);
+	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
+	virtual void render(sf::RenderWindow& window);
 
-	sf::Sprite& getSprite() { return m_sprite; }
-	sf::RectangleShape& getShape() { return m_shape; }
-
-	sf::Vector2f& getVelocity() { return m_velocity; }
-
-	const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
+	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
 
 	void handleInput(sf::Keyboard::Scancode input);
 
 	void setPlayerState(IPlayerState* state);
 
-	void updateAnimation();
-	bool OnthreadTeste{ true };
+	void updateAnimationThread();
 
-	sf::Keyboard::Scancode JUMP_BUTTON = sf::Keyboard::Scancode::W;
-	sf::Keyboard::Scancode RUN_LEFT_BUTTON = sf::Keyboard::Scancode::A;
-	sf::Keyboard::Scancode RUN_RIGHT_BUTTON = sf::Keyboard::Scancode::D;
-	sf::Keyboard::Scancode ATTACK_1_BUTTON = sf::Keyboard::Scancode::X;
-	sf::Keyboard::Scancode ATTACK_2_BUTTON = sf::Keyboard::Scancode::C;
-	sf::Keyboard::Scancode ROLL_BUTTON = sf::Keyboard::Scancode::V;
-	sf::Keyboard::Scancode ULTIMATE_BUTTON = sf::Keyboard::Scancode::B;
+	void initKeyBindings();
 
-	int m_facingRight{ 1 };
-
-	IAnimatingComponent* getAnimatingComponent() { return m_animatingComponent; }
+	IAnimationComponent* getAnimationComponent() { return m_animationComponent; }
 
 	IChosenCharacterState* getChosenCharacter() { return m_chosenCharacterState; }
 
+	sf::Keyboard::Scancode getKeyBinding(const std::string& keyBinding) { return m_keyBindings.at(keyBinding); }
 
-	static int idCounter;
-	const int m_playerNumber;
-
-	IAttackingComponent* m_attackingComponent{ nullptr };
-	IProjectileComponent* m_projectileComponent{ nullptr };
-
-
+	IAttackComponent* getAttackComponent() { return m_attackComponent; }
+	ILaunchProjectilesComponent* getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
 
 private:
+	IRenderComponent* m_renderComponent{ nullptr };
 	ICollisionComponent* m_collisionComponent{ nullptr };
 	IPhysicsComponent* m_physicsComponent{ nullptr };
-	IAnimatingComponent* m_animatingComponent{ nullptr };
-	IDrawingComponent* m_drawingComponent{ nullptr };
+	IAttackComponent* m_attackComponent{ nullptr };
+	ILaunchProjectilesComponent* m_launchProjectilesComponent{ nullptr };
+	IAnimationComponent* m_animationComponent{ nullptr };
 
-	sf::Sprite m_sprite{};
-	sf::RectangleShape m_shape{};
+	IPlayerState* m_playerState{ nullptr };
 
-	sf::Vector2f m_velocity{};
+	IChosenCharacterState* m_chosenCharacterState{ nullptr };
 
-	std::thread m_animatingThread;
+	std::thread m_animationThread{};
+	bool m_onAnimationThread{ true };
 
 	InputHandler m_inputHandler{};
 
-	IPlayerState* m_playerState{ new PlayerFallingState() };
-
-	IChosenCharacterState* m_chosenCharacterState{ new BoxerState() };
+	std::unordered_map<std::string, sf::Keyboard::Scancode> m_keyBindings{};
 };

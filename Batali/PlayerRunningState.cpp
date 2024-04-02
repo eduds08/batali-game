@@ -48,13 +48,13 @@ void PlayerRunningState::update(Player& player)
 {
 	if (sf::Keyboard::isKeyPressed(player.RUN_RIGHT_BUTTON))
 	{
-		player.m_facingRight = 1;
-		player.getVelocity().x = 200.f * player.m_facingRight;
+		player.setFacingRight(1);
+		player.getVelocity().x = 200.f * player.getFacingRight();
 	}
 	else if (sf::Keyboard::isKeyPressed(player.RUN_LEFT_BUTTON))
 	{
-		player.m_facingRight = -1;
-		player.getVelocity().x = 200.f * player.m_facingRight;
+		player.setFacingRight(-1);
+		player.getVelocity().x = 200.f * player.getFacingRight();
 	}
 
 	if (player.getVelocity().x == 0.f)

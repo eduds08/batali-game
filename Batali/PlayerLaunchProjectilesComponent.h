@@ -1,19 +1,19 @@
 #pragma once
 
-#include "IProjectileComponent.h"
+#include "ILaunchProjectilesComponent.h"
 
 #include "Projectile.h"
 
-class PlayerProjectileComponent : public IProjectileComponent
+class PlayerLaunchProjectilesComponent : public ILaunchProjectilesComponent
 {
 public:
-	PlayerProjectileComponent() = default;
-	virtual ~PlayerProjectileComponent() = default;
+	PlayerLaunchProjectilesComponent() = default;
+	virtual ~PlayerLaunchProjectilesComponent() = default;
 
-	virtual void update(Player& player, World& world, float& deltaTime);
+	virtual void update(GameObject& gameObject, World& world, float& deltaTime);
 
 	// Instantiate a projectile and pushes it into m_projectiles vector
-	virtual void launchProjectile(Player& player);
+	virtual void launchProjectile(GameObject& gameObject);
 
 	// update projectile's animation in animatingComponent (pass this component as reference, maybe idk)
 

@@ -4,5 +4,5 @@
 
 void RunRightCommand::execute(Player& player)
 {
-	player.handleInput(player.RUN_RIGHT_BUTTON);
+	player.handleInput(player.getKeyBinding("RUN_RIGHT_BUTTON"));
 }

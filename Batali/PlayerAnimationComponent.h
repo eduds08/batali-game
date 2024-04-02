@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IAnimatingComponent.h"
+#include "IAnimationComponent.h"
 
 #include "TexturesManager.h"
 #include "AbstractAnimation.h"
@@ -9,19 +9,19 @@
 
 using namespace constants;
 
-class PlayerAnimatingComponent : public IAnimatingComponent
+class PlayerAnimationComponent : public IAnimationComponent
 {
 public:
-	PlayerAnimatingComponent();
-	virtual ~PlayerAnimatingComponent();
+	PlayerAnimationComponent();
+	virtual ~PlayerAnimationComponent();
 
-	void initTextures(Player& player);
+	void initTextures(GameObject& gameObject);
 
-	virtual void setNewAnimation(Player& player, const std::string& name, bool isLooping);
+	virtual void setNewAnimation(GameObject& gameObject, const std::string& name, bool isLooping);
 
 	virtual AbstractAnimation* getCurrentAnimation() { return m_currentAnimation; }
 
-	virtual void update(Player& player);
+	virtual void update(GameObject& gameObject);
 
 private:
 	TexturesManager& m_texturesManager{ TexturesManager::getInstance() };

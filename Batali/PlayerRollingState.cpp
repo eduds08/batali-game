@@ -17,7 +17,7 @@ IPlayerState* PlayerRollingState::handleInput(Player& player, sf::Keyboard::Scan
 
 void PlayerRollingState::update(Player& player)
 {
-	player.getVelocity().x = player.m_facingRight * 230.f;
+	player.getVelocity().x = player.getFacingRight() * 230.f;
 
 	if (player.getAnimatingComponent()->getCurrentAnimation()->getAnimationEnd())
 	{

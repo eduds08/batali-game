@@ -1,6 +1,6 @@
 #include "PlayerPhysicsComponent.h"
 
-#include "Player.h"
+#include "GameObject.h"
 
 PlayerPhysicsComponent::PlayerPhysicsComponent()
 {
@@ -10,19 +10,21 @@ PlayerPhysicsComponent::~PlayerPhysicsComponent()
 {
 }
 
-void PlayerPhysicsComponent::update(Player& player, float& deltaTime)
+void PlayerPhysicsComponent::update(GameObject& gameObject, float& deltaTime)
 {
-	player.getVelocity().y += GRAVITY * deltaTime;
+	gameObject.setVelocity(gameObject.getVelocity().x, gameObject.getVelocity().y + GRAVITY * deltaTime);
+	//gameObject.getVelocity().y += GRAVITY * deltaTime;
 
-	player.getSprite().setScale(static_cast<float>(player.m_facingRight), 1.f);
+	gameObject.updateFlip();
 
-	move(player, deltaTime);
-		
-	player.getVelocity().x = 0.f;
+	move(gameObject, deltaTime);
+
+	gameObject.setVelocity(0.f, gameObject.getVelocity().y);
+	//gameObject.getVelocity().x = 0.f;
 }
 
-void PlayerPhysicsComponent::move(Player& player, float& deltaTime)
+void PlayerPhysicsComponent::move(GameObject& gameObject, float& deltaTime)
 {
-	player.getShape().move(player.getVelocity() * deltaTime);
-	player.getSprite().setPosition(player.getShape().getPosition() + sf::Vector2f{ 0.f, -(player.getSprite().getTextureRect().getSize().y - player.getShape().getSize().y) / 2.f });
+	gameObject.getShape().move(gameObject.getVelocity() * deltaTime);
+	gameObject.getSprite().setPosition(gameObject.getShape().getPosition() + sf::Vector2f{ 0.f, -(gameObject.getSprite().getTextureRect().getSize().y - gameObject.getShape().getSize().y) / 2.f });
 }
