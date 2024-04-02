@@ -10,7 +10,7 @@ public:
 	PlayerLaunchProjectilesComponent() = default;
 	virtual ~PlayerLaunchProjectilesComponent() = default;
 
-	virtual void update(GameObject& gameObject, World& world, float& deltaTime);
+	virtual void update(GameObject& gameObject, World& world, sf::RenderWindow& window, float& deltaTime);
 
 	// Instantiate a projectile and pushes it into m_projectiles vector
 	virtual void launchProjectile(GameObject& gameObject);

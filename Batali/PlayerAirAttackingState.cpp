@@ -2,6 +2,8 @@
 
 #include "PlayerFallingState.h"
 
+#include "IAnimationComponent.h"
+
 #include "Player.h"
 
 IPlayerState* PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
@@ -13,7 +15,7 @@ void PlayerAirAttackingState::update(Player& player)
 {
 	// hitbox logic
 
-	if (player.getAnimatingComponent()->getCurrentAnimation()->getAnimationEnd())
+	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
 		player.setPlayerState(new PlayerFallingState());
 	}
@@ -21,5 +23,5 @@ void PlayerAirAttackingState::update(Player& player)
 
 void PlayerAirAttackingState::enter(Player& player)
 {
-	player.getAnimatingComponent()->setNewAnimation(player, AIR_ATTACK_ANIMATION, false);
+	player.getAnimationComponent()->setNewAnimation(player, AIR_ATTACK_ANIMATION, false);
 }

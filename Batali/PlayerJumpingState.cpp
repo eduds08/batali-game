@@ -1,6 +1,6 @@
 #include "PlayerJumpingState.h"
 #include "PlayerFallingState.h"
-
+#include "PlayerIdleState.h"
 #include "PlayerAirAttackingState.h"
 
 #include "Player.h"
@@ -15,7 +15,7 @@ PlayerJumpingState::~PlayerJumpingState()
 
 IPlayerState* PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
-	if ((input == player.ATTACK_1_BUTTON || input == player.ATTACK_2_BUTTON))
+	if ((input == player.getKeyBinding("ATTACK_1_BUTTON") || input == player.getKeyBinding("ATTACK_2_BUTTON")))
 	{
 		return new PlayerAirAttackingState();
 	}
@@ -25,12 +25,12 @@ IPlayerState* PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scan
 
 void PlayerJumpingState::update(Player& player)
 {
-	if (sf::Keyboard::isKeyPressed(player.RUN_RIGHT_BUTTON))
+	if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_RIGHT_BUTTON")))
 	{
 		player.setFacingRight(1);
 		player.getVelocity().x = 200.f * player.getFacingRight();
 	}
-	else if (sf::Keyboard::isKeyPressed(player.RUN_LEFT_BUTTON))
+	else if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_LEFT_BUTTON")))
 	{
 		player.setFacingRight(-1);
 		player.getVelocity().x = 200.f * player.getFacingRight();
@@ -50,5 +50,5 @@ void PlayerJumpingState::enter(Player& player)
 {
 	player.getVelocity().y = -1 * sqrt(2.f * GRAVITY * 90.f);
 
-	player.getAnimatingComponent()->setNewAnimation(player, JUMPING_ANIMATION, true);
+	player.getAnimationComponent()->setNewAnimation(player, JUMPING_ANIMATION, true);
 }

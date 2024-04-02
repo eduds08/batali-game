@@ -8,6 +8,8 @@
 #include "PlayerAttacking1State.h"
 #include "PlayerAttacking2State.h"
 #include "PlayerUltimateState.h"
+#include "IAnimationComponent.h"
+#include "Player.h"
 
 PlayerIdleState::PlayerIdleState()
 {
@@ -21,33 +23,33 @@ PlayerIdleState::~PlayerIdleState()
 
 IPlayerState* PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
-	if (input == player.JUMP_BUTTON)
+	if (input == player.getKeyBinding("JUMP_BUTTON"))
 	{
 		return new PlayerJumpingState();
 	}
-	else if (input == player.RUN_RIGHT_BUTTON)
+	else if (input == player.getKeyBinding("RUN_RIGHT_BUTTON"))
 	{
-		player.m_facingRight = 1;
+		player.setFacingRight(1);
 		return new PlayerRunningState();
 	}
-	else if (input == player.RUN_LEFT_BUTTON)
+	else if (input == player.getKeyBinding("RUN_LEFT_BUTTON"))
 	{
-		player.m_facingRight = -1;
+		player.setFacingRight(-1);
 		return new PlayerRunningState();
 	}
-	else if (input == player.ROLL_BUTTON)
+	else if (input == player.getKeyBinding("ROLL_BUTTON"))
 	{
 		return new PlayerRollingState();
 	}
-	else if (input == player.ATTACK_1_BUTTON)
+	else if (input == player.getKeyBinding("ATTACK_1_BUTTON"))
 	{
 		return new PlayerAttacking1State();
 	}
-	else if (input == player.ATTACK_2_BUTTON)
+	else if (input == player.getKeyBinding("ATTACK_2_BUTTON"))
 	{
 		return new PlayerAttacking2State();
 	}
-	else if (input == player.ULTIMATE_BUTTON)
+	else if (input == player.getKeyBinding("ULTIMATE_BUTTON"))
 	{
 		return new PlayerUltimateState();
 	}
@@ -62,5 +64,5 @@ void PlayerIdleState::update(Player& player)
 
 void PlayerIdleState::enter(Player& player)
 {
-	player.getAnimatingComponent()->setNewAnimation(player, IDLE_ANIMATION, true);
+	player.getAnimationComponent()->setNewAnimation(player, IDLE_ANIMATION, true);
 }

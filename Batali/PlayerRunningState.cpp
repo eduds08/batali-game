@@ -5,7 +5,9 @@
 #include "PlayerAttacking1State.h"
 #include "PlayerAttacking2State.h"
 #include "PlayerUltimateState.h"
+#include "PlayerIdleState.h"
 
+#include "IAnimationComponent.h"
 #include "Player.h"
 
 PlayerRunningState::PlayerRunningState()
@@ -20,23 +22,23 @@ PlayerRunningState::~PlayerRunningState()
 
 IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
-	if (input == player.JUMP_BUTTON)
+	if (input == player.getKeyBinding("JUMP_BUTTON"))
 	{
 		return new PlayerJumpingState();
 	}
-	else if (input == player.ROLL_BUTTON)
+	else if (input == player.getKeyBinding("ROLL_BUTTON"))
 	{
 		return new PlayerRollingState();
 	}
-	else if (input == player.ATTACK_1_BUTTON)
+	else if (input == player.getKeyBinding("ATTACK_1_BUTTON"))
 	{
 		return new PlayerAttacking1State();
 	}
-	else if (input == player.ATTACK_2_BUTTON)
+	else if (input == player.getKeyBinding("ATTACK_2_BUTTON"))
 	{
 		return new PlayerAttacking2State();
 	}
-	else if (input == player.ULTIMATE_BUTTON)
+	else if (input == player.getKeyBinding("ULTIMATE_BUTTON"))
 	{
 		return new PlayerUltimateState();
 	}
@@ -46,12 +48,12 @@ IPlayerState* PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scan
 
 void PlayerRunningState::update(Player& player)
 {
-	if (sf::Keyboard::isKeyPressed(player.RUN_RIGHT_BUTTON))
+	if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_RIGHT_BUTTON")))
 	{
 		player.setFacingRight(1);
 		player.getVelocity().x = 200.f * player.getFacingRight();
 	}
-	else if (sf::Keyboard::isKeyPressed(player.RUN_LEFT_BUTTON))
+	else if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_LEFT_BUTTON")))
 	{
 		player.setFacingRight(-1);
 		player.getVelocity().x = 200.f * player.getFacingRight();
@@ -65,5 +67,5 @@ void PlayerRunningState::update(Player& player)
 
 void PlayerRunningState::enter(Player& player)
 {
-	player.getAnimatingComponent()->setNewAnimation(player, RUNNING_ANIMATION, true);
+	player.getAnimationComponent()->setNewAnimation(player, RUNNING_ANIMATION, true);
 }

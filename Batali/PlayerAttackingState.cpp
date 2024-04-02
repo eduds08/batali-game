@@ -1,6 +1,8 @@
 #include "PlayerAttackingState.h"
-
+#include "IAnimationComponent.h"
 #include "Player.h"
+
+#include "PlayerIdleState.h"
 
 IPlayerState* PlayerAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
@@ -11,7 +13,7 @@ void PlayerAttackingState::update(Player& player)
 {
     // hitbox logic...
 
-	if (player.getAnimatingComponent()->getCurrentAnimation()->getAnimationEnd())
+	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
 		player.setPlayerState(new PlayerIdleState());
 	}

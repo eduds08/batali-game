@@ -1,6 +1,7 @@
 #include "PlayerFallingState.h"
-
+#include "IAnimationComponent.h"
 #include "Player.h"
+#include "PlayerIdleState.h"
 
 PlayerFallingState::PlayerFallingState()
 {
@@ -17,12 +18,12 @@ IPlayerState* PlayerFallingState::handleInput(Player& player, sf::Keyboard::Scan
 
 void PlayerFallingState::update(Player& player)
 {
-	if (sf::Keyboard::isKeyPressed(player.RUN_RIGHT_BUTTON))
+	if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_RIGHT_BUTTON")))
 	{
 		player.setFacingRight(1);
 		player.getVelocity().x = 200.f * player.getFacingRight();
 	}
-	else if (sf::Keyboard::isKeyPressed(player.RUN_LEFT_BUTTON))
+	else if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_LEFT_BUTTON")))
 	{
 		player.setFacingRight(-1);
 		player.getVelocity().x = 200.f * player.getFacingRight();
@@ -36,5 +37,5 @@ void PlayerFallingState::update(Player& player)
 
 void PlayerFallingState::enter(Player& player)
 {
-	player.getAnimatingComponent()->setNewAnimation(player, FALLING_ANIMATION, true);
+	player.getAnimationComponent()->setNewAnimation(player, FALLING_ANIMATION, true);
 }

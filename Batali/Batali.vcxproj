@@ -177,6 +177,7 @@
     <ClCompile Include="PlayerRunningState.cpp" />
     <ClCompile Include="PlayerUltimateState.cpp" />
     <ClCompile Include="ProjectileAnimationComponent.cpp" />
+    <ClCompile Include="ProjectileCollisionComponent.cpp" />
     <ClCompile Include="ProjectilePhysicsComponent.cpp" />
     <ClCompile Include="ProjectileRenderComponent.cpp" />
     <ClCompile Include="RollCommand.cpp" />
@@ -274,6 +275,7 @@
     <ClInclude Include="PlayerRunningState.h" />
     <ClInclude Include="PlayerUltimateState.h" />
     <ClInclude Include="ProjectileAnimationComponent.h" />
+    <ClInclude Include="ProjectileCollisionComponent.h" />
     <ClInclude Include="ProjectilePhysicsComponent.h" />
     <ClInclude Include="ProjectileRenderComponent.h" />
     <ClInclude Include="RollCommand.h" />

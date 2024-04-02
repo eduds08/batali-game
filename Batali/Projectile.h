@@ -18,8 +18,6 @@ public:
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
 	virtual void render(sf::RenderWindow& window);
 
-	virtual void updateTexture();
-
 	void updateAnimationThread();
 
 	/* SETTERS */

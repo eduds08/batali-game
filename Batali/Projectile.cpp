@@ -47,18 +47,6 @@ Projectile::~Projectile()
 	}
 }
 
-void Projectile::updateTexture()
-{
-	/*if (m_collided)
-	{
-		changeCurrentTexture(m_actorName + "Collision", "./assets/" + m_actorName + "/_Collision.png", false);
-	}
-	else
-	{
-		changeCurrentTexture(m_actorName + "Projectile", "./assets/" + m_actorName + "/_Projectile.png", true);
-	}*/
-}
-
 void Projectile::updateAnimationThread()
 {
 	while (m_onAnimationThread)
@@ -70,25 +58,23 @@ void Projectile::updateAnimationThread()
 
 void Projectile::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
-	/*if (!m_collided)
-	{
-		setVelocity(sf::Vector2f{ m_speed * m_facingRight, 0.f });
-		move(deltaTime);
-	}
-	else
-	{
-		m_shape.setSize(sf::Vector2f{ 0.f, 0.f });
-		m_shape.setPosition(-100.f, -100.f);
-
-		if (m_currentTexture == m_actorName + "Collision" && m_animationEnd)
-		{
-			m_vanished = true;
-		}
-	}*/
-
 	m_collisionComponent->update(*this, world, deltaTime);
 
 	m_physicsComponent->update(*this, deltaTime);
+
+	if (m_collided && m_animationComponent->getCurrentAnimation()->getAnimationEnd())
+	{
+		m_vanished = true;
+	}
+
+	if (m_collided)
+	{
+		m_animationComponent->setNewAnimation(*this, PROJECTILE_COLLISION_ANIMATION, false);
+	}
+	else
+	{
+		m_animationComponent->setNewAnimation(*this, PROJECTILE_MOVING_ANIMATION, true);
+	}
 }
 
 void Projectile::render(sf::RenderWindow& window)

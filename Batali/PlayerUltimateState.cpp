@@ -14,7 +14,7 @@ void PlayerUltimateState::update(Player& player)
 	// immortal logic
 	// hitbox logic
 
-	if (player.getAnimatingComponent()->getCurrentAnimation()->getAnimationEnd())
+	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
 		player.setPlayerState(new PlayerIdleState());
 	}
@@ -22,5 +22,5 @@ void PlayerUltimateState::update(Player& player)
 
 void PlayerUltimateState::enter(Player& player)
 {
-	player.getAnimatingComponent()->setNewAnimation(player, ULTIMATE_ANIMATION, false);
+	player.getAnimationComponent()->setNewAnimation(player, ULTIMATE_ANIMATION, false);
 }
