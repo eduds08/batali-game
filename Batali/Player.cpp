@@ -117,6 +117,11 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 void Player::render(sf::RenderWindow& window)
 {
 	m_renderComponent->render(*this, window);
+
+	for (auto& proj : m_launchProjectilesComponent->getProjectiles())
+	{
+		proj->render(window);
+	}
 }
 
 void Player::handleInput(sf::Keyboard::Scancode input)

@@ -10,17 +10,32 @@
 #include "ProjectilePhysicsComponent.h"
 #include "ProjectileAnimationComponent.h"
 
-Projectile::Projectile(IRenderComponent* renderComponent, ICollisionComponent* collisionComponent, IPhysicsComponent* physicsComponent, IAnimationComponent* animationComponent)
+Projectile::Projectile(sf::Vector2f position, float direction)
 	: GameObject{}
-	, m_renderComponent{ renderComponent }
-	, m_collisionComponent{ collisionComponent }
-	, m_physicsComponent{ physicsComponent }
-	, m_animationComponent{ animationComponent }
 {
 	m_renderComponent = new ProjectileRenderComponent{};
 	m_collisionComponent = new ProjectileCollisionComponent{};
 	m_physicsComponent = new ProjectilePhysicsComponent{};
 	m_animationComponent = new ProjectileAnimationComponent{};
+
+	m_animationComponent->initTextures(*this);
+
+	
+
+	m_sprite.setOrigin(sf::Vector2f{ 30 / 2.f, 30 / 2.f });
+
+	// Initialize shape
+	m_shape.setSize(sf::Vector2f{ 30.f, 30.f });
+	m_shape.setOrigin(m_shape.getSize() / 2.f);
+
+	m_shape.setPosition(position);
+	m_sprite.setPosition(position);
+
+	// DEBUG
+	m_shape.setOutlineColor(sf::Color::Red);
+	m_shape.setOutlineThickness(1.f);
+
+	m_animationComponent->setNewAnimation(*this, PROJECTILE_MOVING_ANIMATION, true);
 
 	m_animationThread = std::thread{ &Projectile::updateAnimationThread, this };
 }

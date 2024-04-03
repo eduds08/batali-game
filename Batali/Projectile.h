@@ -12,7 +12,7 @@ class IAnimationComponent;
 class Projectile : public GameObject
 {
 public:
-	Projectile(IRenderComponent* renderComponent = nullptr, ICollisionComponent* collisionComponent = nullptr, IPhysicsComponent* physicsComponent = nullptr, IAnimationComponent* animationComponent = nullptr);
+	Projectile(sf::Vector2f position, float direction);
 	virtual ~Projectile();
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
@@ -30,7 +30,9 @@ public:
 	const bool getVanished() const { return m_vanished; }
 	const int getDamage() const { return m_damage; }
 
-	virtual const std::string& getName() const { return "boxer_ultimate"; }
+	virtual const std::string& getName() const { return nomeTeste; }
+
+	std::string nomeTeste{"boxer_ultimate"};
 
 protected:
 	IRenderComponent* m_renderComponent{ nullptr };

@@ -28,5 +28,5 @@ void PlayerLaunchProjectilesComponent::update(GameObject& gameObject, World& wor
 void PlayerLaunchProjectilesComponent::launchProjectile(GameObject& gameObject)
 {
 	std::cout << "launch\n------\n";
-	m_projectiles.emplace_back(std::make_shared<BoxerUltimateProjectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, gameObject.getFacingRight()));
+	m_projectiles.emplace_back(std::make_shared<Projectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, gameObject.getFacingRight()));
 }
