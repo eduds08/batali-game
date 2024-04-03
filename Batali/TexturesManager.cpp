@@ -81,11 +81,11 @@ AbstractAnimation* TexturesManager::createNewAnimation(const std::string& name, 
 
 	if (isLooping)
 	{
-		newAnimation = new LoopingAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png").get() };
+		newAnimation = new LoopingAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png") };
 	}
 	else
 	{
-		newAnimation = new PlayedOnceAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png").get() };
+		newAnimation = new PlayedOnceAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png") };
 	}
 
 	return newAnimation;

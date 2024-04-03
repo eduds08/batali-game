@@ -5,6 +5,11 @@
 #include "Player.h"
 #include "World.h"
 
+PlayerLaunchProjectilesComponent::~PlayerLaunchProjectilesComponent()
+{
+	m_projectiles.clear();
+}
+
 void PlayerLaunchProjectilesComponent::update(GameObject& gameObject, World& world, sf::RenderWindow& window, float& deltaTime)
 {
 	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> collidedProjectiles{};
@@ -27,6 +32,5 @@ void PlayerLaunchProjectilesComponent::update(GameObject& gameObject, World& wor
 
 void PlayerLaunchProjectilesComponent::launchProjectile(GameObject& gameObject)
 {
-	std::cout << "launch\n------\n";
-	m_projectiles.emplace_back(std::make_shared<Projectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, gameObject.getFacingRight()));
+	m_projectiles.emplace_back(std::make_shared<Projectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, static_cast<float>(gameObject.getFacingRight())));
 }

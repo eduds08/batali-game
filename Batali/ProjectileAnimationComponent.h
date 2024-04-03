@@ -13,7 +13,7 @@ class ProjectileAnimationComponent : public IAnimationComponent
 {
 public:
 	ProjectileAnimationComponent() = default;
-	virtual ~ProjectileAnimationComponent() = default;
+	virtual ~ProjectileAnimationComponent();
 
 	virtual void initTextures(GameObject& gameObject);
 

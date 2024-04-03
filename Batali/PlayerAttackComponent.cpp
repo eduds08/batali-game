@@ -9,8 +9,11 @@ PlayerAttackComponent::PlayerAttackComponent()
 
 PlayerAttackComponent::~PlayerAttackComponent()
 {
-	delete m_attackHitbox;
-	m_attackHitbox = nullptr;
+	if (m_attackHitbox)
+	{
+		delete m_attackHitbox;
+		m_attackHitbox = nullptr;
+	}
 }
 
 void PlayerAttackComponent::update(GameObject& gameObject, World& world, float& deltaTime)

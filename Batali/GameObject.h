@@ -25,7 +25,7 @@ public:
 
 	void updateFlip() { m_sprite.setScale(static_cast<float>(m_facingRight), 1.f); }
 
-	int getId() { return m_id; }
+	const int getId() const { return m_id; }
 
 	virtual const std::string& getName() const = 0;
 

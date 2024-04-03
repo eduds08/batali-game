@@ -1,5 +1,18 @@
 #include "World.h"
 
+#include "Player.h"
+
+World::~World()
+{
+	for (std::vector<Player*>::iterator it = m_players.begin(); it != m_players.end(); ++it)
+	{
+		delete *it;
+		*it = nullptr;
+	}
+
+	m_players.clear();
+}
+
 void World::loadTiles(const std::string& path)
 {
 	std::fstream mapFile{ path, std::ios::in };

@@ -10,7 +10,7 @@ class World
 {
 public:
 	World() {}
-	virtual ~World() = default;
+	virtual ~World();
 
 	void loadTiles(const std::string& path);
 

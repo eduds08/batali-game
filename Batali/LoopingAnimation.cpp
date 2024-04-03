@@ -1,6 +1,6 @@
 #include "LoopingAnimation.h"
 
-LoopingAnimation::LoopingAnimation(const std::string& name, const sf::Vector2i& frameSize, sf::Texture* texture)
+LoopingAnimation::LoopingAnimation(const std::string& name, const sf::Vector2i& frameSize, std::shared_ptr<sf::Texture> texture)
 {
 	m_texture = texture;
 	m_frameSize = frameSize;
@@ -12,11 +12,6 @@ LoopingAnimation::LoopingAnimation(const std::string& name, const sf::Vector2i& 
 
 LoopingAnimation::~LoopingAnimation()
 {
-	if (m_texture)
-	{
-		delete m_texture;
-		m_texture = nullptr;
-	}
 }
 
 void LoopingAnimation::update()

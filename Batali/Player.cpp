@@ -91,6 +91,18 @@ Player::~Player()
 		delete m_animationComponent;
 		m_animationComponent = nullptr;
 	}
+
+	if (m_playerState)
+	{
+		delete m_playerState;
+		m_playerState = nullptr;
+	}
+
+	if (m_chosenCharacterState)
+	{
+		delete m_chosenCharacterState;
+		m_chosenCharacterState = nullptr;
+	}
 }
 
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
@@ -118,9 +130,12 @@ void Player::render(sf::RenderWindow& window)
 {
 	m_renderComponent->render(*this, window);
 
-	for (auto& proj : m_launchProjectilesComponent->getProjectiles())
+	if (m_launchProjectilesComponent != nullptr)
 	{
-		proj->render(window);
+		for (const auto& proj : m_launchProjectilesComponent->getProjectiles())
+		{
+			proj->render(window);
+		}
 	}
 }
 

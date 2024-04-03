@@ -1,6 +1,6 @@
 #include "PlayedOnceAnimation.h"
 
-PlayedOnceAnimation::PlayedOnceAnimation(const std::string& name, const sf::Vector2i& frameSize, sf::Texture* texture)
+PlayedOnceAnimation::PlayedOnceAnimation(const std::string& name, const sf::Vector2i& frameSize, std::shared_ptr<sf::Texture> texture)
 {
 	m_texture = texture;
 	m_frameSize = frameSize;
@@ -13,11 +13,6 @@ PlayedOnceAnimation::PlayedOnceAnimation(const std::string& name, const sf::Vect
 
 PlayedOnceAnimation::~PlayedOnceAnimation()
 {
-	if (m_texture)
-	{
-		delete m_texture;
-		m_texture = nullptr;
-	}
 }
 
 void PlayedOnceAnimation::update()
