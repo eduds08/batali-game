@@ -2,18 +2,18 @@
 
 #include "HittedState.h"
 
-#include "PlayerDrawingComponent.h"
-#include "PlayerAnimatingComponent.h"
+#include "PlayerRenderComponent.h"
+#include "PlayerAnimationComponent.h"
 #include "PlayerCollisionComponent.h"
 #include "PlayerPhysicsComponent.h"
-#include "PlayerAttackingComponent.h"
-#include "PlayerProjectileComponent.h"
+#include "PlayerAttackComponent.h"
+#include "PlayerLaunchProjectilesComponent.h"
 
 
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
-	, player{ std::make_shared<Player>(new PlayerDrawingComponent(), new PlayerAnimatingComponent(), new PlayerCollisionComponent(), new PlayerPhysicsComponent(), new PlayerAttackingComponent(), new PlayerProjectileComponent())}
+	, player{ std::make_shared<Player>(new PlayerRenderComponent(), new PlayerCollisionComponent(), new PlayerPhysicsComponent(), new PlayerAttackComponent(), new PlayerLaunchProjectilesComponent(), new PlayerAnimationComponent())}
 {
 	m_currentState = PLAYING_STATE;
 

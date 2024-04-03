@@ -2,6 +2,8 @@
 
 #include "PlayerIdleState.h"
 
+#include "IAnimationComponent.h"
+
 #include "Player.h"
 
 IPlayerState* PlayerUltimateState::handleInput(Player& player, sf::Keyboard::Scancode input)

@@ -3,6 +3,8 @@
 #include "PlayerIdleState.h"
 #include "PlayerAirAttackingState.h"
 
+#include "IAnimationComponent.h"
+
 #include "Player.h"
 
 PlayerJumpingState::PlayerJumpingState()

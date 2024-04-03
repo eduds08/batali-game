@@ -5,6 +5,11 @@
 #include "IPhysicsComponent.h"
 #include "IAnimationComponent.h"
 
+#include "ProjectileRenderComponent.h"
+#include "ProjectileCollisionComponent.h"
+#include "ProjectilePhysicsComponent.h"
+#include "ProjectileAnimationComponent.h"
+
 Projectile::Projectile(IRenderComponent* renderComponent, ICollisionComponent* collisionComponent, IPhysicsComponent* physicsComponent, IAnimationComponent* animationComponent)
 	: GameObject{}
 	, m_renderComponent{ renderComponent }
@@ -12,7 +17,10 @@ Projectile::Projectile(IRenderComponent* renderComponent, ICollisionComponent* c
 	, m_physicsComponent{ physicsComponent }
 	, m_animationComponent{ animationComponent }
 {
-
+	m_renderComponent = new ProjectileRenderComponent{};
+	m_collisionComponent = new ProjectileCollisionComponent{};
+	m_physicsComponent = new ProjectilePhysicsComponent{};
+	m_animationComponent = new ProjectileAnimationComponent{};
 
 	m_animationThread = std::thread{ &Projectile::updateAnimationThread, this };
 }

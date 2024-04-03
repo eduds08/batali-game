@@ -23,7 +23,7 @@ void CharacterWithProjectiles::updateCharacterWithProjectiles(float& deltaTime)
 
 	for (std::vector<std::shared_ptr<Projectile>>::iterator it = m_projectiles.begin(); it != m_projectiles.end(); ++it)
 	{
-		(*it)->update(deltaTime);
+		//(*it)->update(deltaTime);
 
 		if ((*it)->getVanished())
 		{
@@ -63,7 +63,7 @@ void CharacterWithProjectiles::updateAnimation()
 	{
 		for (auto& projectile : m_projectiles)
 		{
-			projectile->updateAnimation();
+			//projectile->updateAnimation();
 		}
 	}
 }

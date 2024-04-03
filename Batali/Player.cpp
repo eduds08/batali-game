@@ -17,6 +17,10 @@
 #include "RollCommand.h"
 #include "UltimateCommand.h"
 
+#include "PlayerFallingState.h"
+
+#include "BoxerState.h"
+
 Player::Player(IRenderComponent* renderComponent, ICollisionComponent* collisionComponent, IPhysicsComponent* physicsComponent, IAttackComponent* attackComponent, ILaunchProjectilesComponent* launchProjectilesComponent, IAnimationComponent* animationComponent)
 	: GameObject{}
 	, m_renderComponent{ renderComponent }
@@ -26,6 +30,9 @@ Player::Player(IRenderComponent* renderComponent, ICollisionComponent* collision
 	, m_launchProjectilesComponent{ launchProjectilesComponent }
 	, m_animationComponent{ animationComponent }
 {
+	m_chosenCharacterState = new BoxerState{};
+	m_playerState = new PlayerFallingState{};
+
 	initKeyBindings();
 
 	m_animationComponent->initTextures(*this);
@@ -104,7 +111,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 	m_attackComponent->update(*this, world, deltaTime);
 
 	if (m_launchProjectilesComponent != nullptr)
-		m_launchProjectilesComponent->update(*this, world, deltaTime);
+		m_launchProjectilesComponent->update(*this, world, window, deltaTime);
 }
 
 void Player::render(sf::RenderWindow& window)
@@ -162,9 +169,4 @@ void Player::initKeyBindings()
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_2_BUTTON"), new Attack2Command());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ROLL_BUTTON"), new RollCommand());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), new UltimateCommand());
-}
-
-sf::Keyboard::Scancode Player::getKeyBinding(const std::string& keyBinding)
-{
-	return m_keyBindings.at(keyBinding);
 }

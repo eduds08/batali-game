@@ -30,7 +30,7 @@ public:
 	const bool getVanished() const { return m_vanished; }
 	const int getDamage() const { return m_damage; }
 
-	virtual const std::string& getName() const { return "temporario"; }
+	virtual const std::string& getName() const { return "boxer_ultimate"; }
 
 protected:
 	IRenderComponent* m_renderComponent{ nullptr };
