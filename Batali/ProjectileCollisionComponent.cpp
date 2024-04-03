@@ -26,6 +26,7 @@ void ProjectileCollisionComponent::update(GameObject& gameObject, World& world, 
 		if (gameObject.getShape().getGlobalBounds().intersects(tile.getSprite().getGlobalBounds()))
 		{
 			projectile->setCollided(true);
+			break;
 		}
 	}
 

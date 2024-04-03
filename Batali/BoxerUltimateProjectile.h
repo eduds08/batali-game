@@ -5,6 +5,6 @@
 class BoxerUltimateProjectile : public Projectile
 {
 public:
-	BoxerUltimateProjectile(sf::Vector2f firstPosition, int direction);
+	BoxerUltimateProjectile(sf::Vector2f firstPosition, float direction);
 	virtual ~BoxerUltimateProjectile() = default;
 };

@@ -83,20 +83,22 @@ void Projectile::update(sf::RenderWindow& window, World& world, float& deltaTime
 {
 	m_collisionComponent->update(*this, world, deltaTime);
 
-	m_physicsComponent->update(*this, deltaTime);
+	if (!m_collided)
+		m_physicsComponent->update(*this, deltaTime);
+	
+
+	if (m_collided && m_animationComponent->getCurrentAnimation()->getName() != PROJECTILE_COLLISION_ANIMATION)
+	{
+		m_animationComponent->setNewAnimation(*this, PROJECTILE_COLLISION_ANIMATION, false);
+	}
+	else if (!m_collided && m_animationComponent->getCurrentAnimation()->getName() != PROJECTILE_MOVING_ANIMATION)
+	{
+		m_animationComponent->setNewAnimation(*this, PROJECTILE_MOVING_ANIMATION, true);
+	}
 
 	if (m_collided && m_animationComponent->getCurrentAnimation()->getAnimationEnd())
 	{
 		m_vanished = true;
-	}
-
-	if (m_collided)
-	{
-		m_animationComponent->setNewAnimation(*this, PROJECTILE_COLLISION_ANIMATION, false);
-	}
-	else
-	{
-		m_animationComponent->setNewAnimation(*this, PROJECTILE_MOVING_ANIMATION, true);
 	}
 }
 

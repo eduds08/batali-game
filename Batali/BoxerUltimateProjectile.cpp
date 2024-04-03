@@ -1,6 +1,6 @@
 #include "BoxerUltimateProjectile.h"
 
-BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, int direction)
+BoxerUltimateProjectile::BoxerUltimateProjectile(sf::Vector2f firstPosition, float direction)
 	: Projectile{ firstPosition, direction }
 {
 	//m_spriteWidth = BOXER_ULTIMATE_PROJECTILE_SPRITE_WIDTH;
