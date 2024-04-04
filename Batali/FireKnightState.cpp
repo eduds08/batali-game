@@ -12,6 +12,16 @@ FireKnightState::~FireKnightState()
 {
 }
 
+void FireKnightState::enter(Player& player)
+{
+	player.setSpriteSize(sf::Vector2i{ FIRE_KNIGHT_SPRITE_WIDTH, FIRE_KNIGHT_SPRITE_HEIGHT });
+	player.getShape().setSize(sf::Vector2f{ FIRE_KNIGHT_SHAPE_WIDTH, FIRE_KNIGHT_SHAPE_HEIGHT });
+
+	player.getSprite().setOrigin(player.getSpriteSize().x / 2.f, player.getSpriteSize().y / 2.f);
+
+	player.getShape().setOrigin(player.getShape().getSize() / 2.f);
+}
+
 void FireKnightState::updateAttackHitbox(Player& player, AttackHitbox* attackHitbox)
 {
 	attackHitbox->reset();

@@ -13,6 +13,8 @@ public:
 	FireKnightState();
 	virtual ~FireKnightState();
 
+	virtual void enter(Player& player);
+
 	virtual const std::string& getChosenCharacterName() const { return m_name; }
 
 	virtual void updateAttackHitbox(Player& player, AttackHitbox* attackHitbox);

@@ -30,27 +30,6 @@ Player::Player(IRenderComponent* renderComponent, ICollisionComponent* collision
 	, m_launchProjectilesComponent{ launchProjectilesComponent }
 	, m_animationComponent{ animationComponent }
 {
-	m_chosenCharacterState = new BoxerState{};
-	m_spriteSize = sf::Vector2i{ 288, 127 };
-
-	m_playerState = new PlayerFallingState{};
-	m_playerState->enter(*this);
-
-	initKeyBindings();
-
-	m_sprite.setOrigin(sf::Vector2f{ 288 / 2.f, 127 / 2.f });
-	m_animationComponent->initTextures(*this);
-
-	// Initialize shape
-	m_shape.setSize(sf::Vector2f{ FIRE_KNIGHT_SHAPE_WIDTH, FIRE_KNIGHT_SHAPE_HEIGHT });
-	m_shape.setOrigin(m_shape.getSize() / 2.f);
-	m_shape.setPosition(LEFT_CHARACTER_FIRST_POSITION);
-
-	// DEBUG
-	m_shape.setOutlineColor(sf::Color::Red);
-	m_shape.setOutlineThickness(1.f);
-
-	m_animationThread = std::thread{ &Player::updateAnimationThread, this };
 }
 
 Player::~Player()
@@ -105,6 +84,27 @@ Player::~Player()
 		delete m_chosenCharacterState;
 		m_chosenCharacterState = nullptr;
 	}
+}
+
+void Player::initChosenCharacter(IChosenCharacterState* chosenCharacterState)
+{
+	m_chosenCharacterState = chosenCharacterState;
+	m_chosenCharacterState->enter(*this);
+
+	m_playerState = new PlayerFallingState{};
+	m_playerState->enter(*this);
+
+	initKeyBindings();
+
+	m_animationComponent->initTextures(*this);
+
+	m_shape.setPosition(LEFT_CHARACTER_FIRST_POSITION);
+
+	// DEBUG
+	m_shape.setOutlineColor(sf::Color::Red);
+	m_shape.setOutlineThickness(1.f);
+
+	m_animationThread = std::thread{ &Player::updateAnimationThread, this };
 }
 
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)

@@ -3,6 +3,16 @@
 #include "Player.h"
 #include "PlayerIdleState.h"
 
+void WindHashashinState::enter(Player& player)
+{
+	player.setSpriteSize(sf::Vector2i{ WIND_HASHASHIN_SPRITE_WIDTH, WIND_HASHASHIN_SPRITE_HEIGHT });
+	player.getShape().setSize(sf::Vector2f{ WIND_HASHASHIN_SHAPE_WIDTH, WIND_HASHASHIN_SHAPE_HEIGHT });
+
+	player.getSprite().setOrigin(player.getSpriteSize().x / 2.f, player.getSpriteSize().y / 2.f);
+
+	player.getShape().setOrigin(player.getShape().getSize() / 2.f);
+}
+
 void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox* attackHitbox)
 {
 	attackHitbox->reset();

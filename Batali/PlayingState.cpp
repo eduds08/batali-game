@@ -7,6 +7,9 @@
 #include "PlayerAttackComponent.h"
 #include "PlayerLaunchProjectilesComponent.h"
 
+#include "BoxerState.h"
+#include "FireKnightState.h"
+#include "WindHashashinState.h"
 
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
@@ -19,18 +22,18 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 	m_view = m_window.getDefaultView();
 
 	// Initialize Player 1
-	//if (firstCharacter == "fire_knight")
-	//{
-	//	m_characters.emplace_back(std::make_shared<FireKnight>(LEFT_CHARACTER_FIRST_POSITION));
-	//}
-	//else if (firstCharacter == "wind_hashashin")
-	//{
-	//	m_characters.emplace_back(std::make_shared<WindHashashin>(LEFT_CHARACTER_FIRST_POSITION));
-	//}
-	//else if (firstCharacter == "boxer")
-	//{
-	//	m_characters.emplace_back(std::make_shared<Boxer>(LEFT_CHARACTER_FIRST_POSITION));
-	//}
+	if (firstCharacter == "fire_knight")
+	{
+		player->initChosenCharacter(new FireKnightState{});
+	}
+	else if (firstCharacter == "wind_hashashin")
+	{
+		player->initChosenCharacter(new WindHashashinState{});
+	}
+	else if (firstCharacter == "boxer")
+	{
+		player->initChosenCharacter(new BoxerState{});
+	}
 
 	//// Initialize Player 2
 	//if (secondCharacter == "fire_knight")

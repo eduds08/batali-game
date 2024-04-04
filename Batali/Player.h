@@ -24,6 +24,8 @@ public:
 	Player(IRenderComponent* renderComponent = nullptr, ICollisionComponent* collisionComponent = nullptr, IPhysicsComponent* physicsComponent = nullptr, IAttackComponent* attackComponent = nullptr, ILaunchProjectilesComponent* launchProjectilesComponent = nullptr, IAnimationComponent* animationComponent = nullptr);
 	virtual ~Player();
 
+	void initChosenCharacter(IChosenCharacterState* chosenCharacterState);
+
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
 	virtual void render(sf::RenderWindow& window);
 
