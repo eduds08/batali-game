@@ -11,7 +11,7 @@ PlayerFallingState::~PlayerFallingState()
 {
 }
 
-IPlayerState* PlayerFallingState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::shared_ptr<IPlayerState> PlayerFallingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;
 }
@@ -31,7 +31,7 @@ void PlayerFallingState::update(Player& player)
 
 	if (player.getVelocity().y == 0.f)
 	{
-		player.setPlayerState(new PlayerIdleState());
+		player.setPlayerState(std::make_shared<PlayerIdleState>());
 	}
 }
 

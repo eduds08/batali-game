@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <thread>
 #include <string>
+#include <memory>
 
 #include "IChosenCharacterState.h"
 
@@ -21,10 +22,10 @@ class IPlayerState;
 class Player : public GameObject
 {
 public:
-	Player(IRenderComponent* renderComponent = nullptr, ICollisionComponent* collisionComponent = nullptr, IPhysicsComponent* physicsComponent = nullptr, IAttackComponent* attackComponent = nullptr, ILaunchProjectilesComponent* launchProjectilesComponent = nullptr, IAnimationComponent* animationComponent = nullptr);
+	Player(std::unique_ptr<IRenderComponent> renderComponent = nullptr, std::unique_ptr<ICollisionComponent> collisionComponent = nullptr, std::unique_ptr<IPhysicsComponent> physicsComponent = nullptr, std::unique_ptr<IAttackComponent> attackComponent = nullptr, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent = nullptr, std::unique_ptr<IAnimationComponent> animationComponent = nullptr);
 	virtual ~Player();
 
-	void initChosenCharacter(IChosenCharacterState* chosenCharacterState);
+	void initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState);
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
 	virtual void render(sf::RenderWindow& window);
@@ -33,32 +34,39 @@ public:
 
 	void handleInput(sf::Keyboard::Scancode input);
 
-	void setPlayerState(IPlayerState* state);
+	void setPlayerState(std::shared_ptr<IPlayerState> state);
 
 	void updateAnimationThread();
 
 	void initKeyBindings();
 
-	IAnimationComponent* getAnimationComponent() { return m_animationComponent; }
+	std::unique_ptr<IAnimationComponent>& getAnimationComponent() { return m_animationComponent; }
 
-	IChosenCharacterState* getChosenCharacter() { return m_chosenCharacterState; }
+	std::unique_ptr<IChosenCharacterState>& getChosenCharacter() { return m_chosenCharacterState; }
 
 	sf::Keyboard::Scancode getKeyBinding(const std::string& keyBinding) { return m_keyBindings.at(keyBinding); }
 
-	IAttackComponent* getAttackComponent() { return m_attackComponent; }
-	ILaunchProjectilesComponent* getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
+	std::unique_ptr<IAttackComponent>& getAttackComponent() { return m_attackComponent; }
+	std::unique_ptr<ILaunchProjectilesComponent>& getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
 
 private:
-	IRenderComponent* m_renderComponent{ nullptr };
+	/*IRenderComponent* m_renderComponent{ nullptr };
 	ICollisionComponent* m_collisionComponent{ nullptr };
 	IPhysicsComponent* m_physicsComponent{ nullptr };
 	IAttackComponent* m_attackComponent{ nullptr };
 	ILaunchProjectilesComponent* m_launchProjectilesComponent{ nullptr };
-	IAnimationComponent* m_animationComponent{ nullptr };
+	IAnimationComponent* m_animationComponent{ nullptr };*/
 
-	IPlayerState* m_playerState{ nullptr };
+	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
+	std::unique_ptr<ICollisionComponent> m_collisionComponent{ nullptr };
+	std::unique_ptr<IPhysicsComponent> m_physicsComponent{ nullptr };
+	std::unique_ptr<IAttackComponent> m_attackComponent{ nullptr };
+	std::unique_ptr<ILaunchProjectilesComponent> m_launchProjectilesComponent{ nullptr };
+	std::unique_ptr<IAnimationComponent> m_animationComponent{ nullptr };
 
-	IChosenCharacterState* m_chosenCharacterState{ nullptr };
+	std::shared_ptr<IPlayerState> m_playerState{ nullptr };
+
+	std::unique_ptr<IChosenCharacterState> m_chosenCharacterState{ nullptr };
 
 	std::thread m_animationThread{};
 	bool m_onAnimationThread{ true };

@@ -6,7 +6,7 @@
 
 #include "Player.h"
 
-IPlayerState* PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::shared_ptr<IPlayerState> PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;
 }
@@ -17,7 +17,7 @@ void PlayerAirAttackingState::update(Player& player)
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
-		player.setPlayerState(new PlayerFallingState());
+		player.setPlayerState(std::make_shared<PlayerFallingState>());
 	}
 }
 

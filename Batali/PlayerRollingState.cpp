@@ -11,7 +11,7 @@ PlayerRollingState::~PlayerRollingState()
 {
 }
 
-IPlayerState* PlayerRollingState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::shared_ptr<IPlayerState> PlayerRollingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;
 }
@@ -22,7 +22,7 @@ void PlayerRollingState::update(Player& player)
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
-		player.setPlayerState(new PlayerIdleState());
+		player.setPlayerState(std::make_shared<PlayerIdleState>());
 	}
 }
 

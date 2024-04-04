@@ -15,11 +15,11 @@ PlayerJumpingState::~PlayerJumpingState()
 {
 }
 
-IPlayerState* PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::shared_ptr<IPlayerState> PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	if ((input == player.getKeyBinding("ATTACK_1_BUTTON") || input == player.getKeyBinding("ATTACK_2_BUTTON")))
 	{
-		return new PlayerAirAttackingState();
+		return std::make_shared<PlayerAirAttackingState>();
 	}
 
 	return nullptr;
@@ -40,11 +40,11 @@ void PlayerJumpingState::update(Player& player)
 
 	if (player.getVelocity().y > 0.f)
 	{
-		player.setPlayerState(new PlayerFallingState());
+		player.setPlayerState(std::make_shared<PlayerFallingState>());
 	}
 	else if (player.getVelocity().y == 0.f)
 	{
-		player.setPlayerState(new PlayerIdleState());
+		player.setPlayerState(std::make_shared<PlayerIdleState>());
 	}
 }
 

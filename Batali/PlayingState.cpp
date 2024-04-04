@@ -14,7 +14,7 @@
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
-	, player{ std::make_shared<Player>(new PlayerRenderComponent(), new PlayerCollisionComponent(), new PlayerPhysicsComponent(), new PlayerAttackComponent(), new PlayerLaunchProjectilesComponent(), new PlayerAnimationComponent())}
+	, player{ std::make_shared<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>())}
 {
 	m_currentState = PLAYING_STATE;
 
@@ -24,15 +24,15 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 	// Initialize Player 1
 	if (firstCharacter == "fire_knight")
 	{
-		player->initChosenCharacter(new FireKnightState{});
+		player->initChosenCharacter(std::make_unique<FireKnightState>());
 	}
 	else if (firstCharacter == "wind_hashashin")
 	{
-		player->initChosenCharacter(new WindHashashinState{});
+		player->initChosenCharacter(std::make_unique<WindHashashinState>());
 	}
 	else if (firstCharacter == "boxer")
 	{
-		player->initChosenCharacter(new BoxerState{});
+		player->initChosenCharacter(std::make_unique<BoxerState>());
 	}
 
 	//// Initialize Player 2

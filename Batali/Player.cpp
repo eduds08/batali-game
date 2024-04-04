@@ -21,14 +21,14 @@
 
 #include "BoxerState.h"
 
-Player::Player(IRenderComponent* renderComponent, ICollisionComponent* collisionComponent, IPhysicsComponent* physicsComponent, IAttackComponent* attackComponent, ILaunchProjectilesComponent* launchProjectilesComponent, IAnimationComponent* animationComponent)
+Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<IAttackComponent> attackComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent, std::unique_ptr<IAnimationComponent> animationComponent)
 	: GameObject{}
-	, m_renderComponent{ renderComponent }
-	, m_collisionComponent{ collisionComponent }
-	, m_physicsComponent{ physicsComponent }
-	, m_attackComponent{ attackComponent }
-	, m_launchProjectilesComponent{ launchProjectilesComponent }
-	, m_animationComponent{ animationComponent }
+	, m_renderComponent{ std::move(renderComponent) }
+	, m_collisionComponent{ std::move(collisionComponent) }
+	, m_physicsComponent{ std::move(physicsComponent) }
+	, m_attackComponent{ std::move(attackComponent) }
+	, m_launchProjectilesComponent{ std::move(launchProjectilesComponent) }
+	, m_animationComponent{ std::move(animationComponent) }
 {
 }
 
@@ -37,7 +37,7 @@ Player::~Player()
 	m_onAnimationThread = false;
 	m_animationThread.join();
 
-	if (m_renderComponent)
+	/*if (m_renderComponent)
 	{
 		delete m_renderComponent;
 		m_renderComponent = nullptr;
@@ -83,15 +83,16 @@ Player::~Player()
 	{
 		delete m_chosenCharacterState;
 		m_chosenCharacterState = nullptr;
-	}
+	}*/
 }
 
-void Player::initChosenCharacter(IChosenCharacterState* chosenCharacterState)
+void Player::initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState)
 {
-	m_chosenCharacterState = chosenCharacterState;
+	m_chosenCharacterState = std::move(chosenCharacterState);
 	m_chosenCharacterState->enter(*this);
 
-	m_playerState = new PlayerFallingState{};
+	//m_playerState = new PlayerFallingState{};
+	m_playerState = std::make_shared<PlayerFallingState>();
 	m_playerState->enter(*this);
 
 	initKeyBindings();
@@ -111,7 +112,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
 	m_collisionComponent->update(*this, world, deltaTime);
 
-	ICommand* command = m_inputHandler.handleInput();
+	std::shared_ptr<ICommand> command = m_inputHandler.handleInput();
 
 	if (command)
 	{
@@ -143,23 +144,23 @@ void Player::render(sf::RenderWindow& window)
 
 void Player::handleInput(sf::Keyboard::Scancode input)
 {
-	IPlayerState* playerState = m_playerState->handleInput(*this, input);
+	std::shared_ptr<IPlayerState> playerState = m_playerState->handleInput(*this, input);
 
 	if (playerState != nullptr)
 	{
-		delete m_playerState;
+		//delete m_playerState;
 		m_playerState = playerState;
 
 		m_playerState->enter(*this);
 	}
 }
 
-void Player::setPlayerState(IPlayerState* state)
+void Player::setPlayerState(std::shared_ptr<IPlayerState> state)
 {
 	if (state != nullptr)
 	{
-		delete m_playerState;
-		m_playerState = state;
+		//delete m_playerState;
+		m_playerState = std::move(state);
 
 		m_playerState->enter(*this);
 	}
@@ -184,11 +185,11 @@ void Player::initKeyBindings()
 	m_keyBindings.emplace("ROLL_BUTTON", sf::Keyboard::Scan::V);
 	m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::B);
 
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("JUMP_BUTTON"), new JumpCommand());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_1_BUTTON"), new Attack1Command());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_2_BUTTON"), new Attack2Command());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ROLL_BUTTON"), new RollCommand());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), new UltimateCommand());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), new RunLeftCommand());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), new RunRightCommand());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("JUMP_BUTTON"), std::make_shared<JumpCommand>());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_1_BUTTON"), std::make_shared<Attack1Command>());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_2_BUTTON"), std::make_shared<Attack2Command>());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ROLL_BUTTON"), std::make_shared<RollCommand>());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), std::make_shared<UltimateCommand>());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), std::make_shared<RunLeftCommand>());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), std::make_shared<RunRightCommand>());
 }

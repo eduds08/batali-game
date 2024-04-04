@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PlayerIdleState.h"
 
+
 void WindHashashinState::enter(Player& player)
 {
 	player.setSpriteSize(sf::Vector2i{ WIND_HASHASHIN_SPRITE_WIDTH, WIND_HASHASHIN_SPRITE_HEIGHT });
@@ -69,7 +70,7 @@ void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox* attack
 		}
 		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
 		{
-			player.setPlayerState(new PlayerIdleState{});
+			player.setPlayerState(std::make_shared<PlayerIdleState>());
 		}
 		else if ((player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && m_activateUltimate)
 		{

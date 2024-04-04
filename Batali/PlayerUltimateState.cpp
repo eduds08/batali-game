@@ -6,7 +6,7 @@
 
 #include "Player.h"
 
-IPlayerState* PlayerUltimateState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::shared_ptr<IPlayerState> PlayerUltimateState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;
 }
@@ -18,7 +18,7 @@ void PlayerUltimateState::update(Player& player)
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
-		player.setPlayerState(new PlayerIdleState());
+		player.setPlayerState(std::make_shared<PlayerIdleState>());
 	}
 }
 
