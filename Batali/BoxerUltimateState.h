@@ -10,8 +10,7 @@ public:
 
 	virtual const std::string& getName() const { return m_name; }
 
-	virtual void setSpriteSize(Projectile& projectile);
-	virtual void setShapeSize(Projectile& projectile);
+	virtual void enter(Projectile& projectile);
 
 private:
 	const std::string m_name{ "boxer_ultimate" };

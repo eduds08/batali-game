@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "ILaunchProjectilesComponent.h"
 
+#include "BoxerUltimateState.h"
+
 void BoxerState::updateAttackHitbox(Player& player, AttackHitbox* attackHitbox)
 {
 	attackHitbox->reset();
@@ -46,14 +48,14 @@ void BoxerState::updateAttackHitbox(Player& player, AttackHitbox* attackHitbox)
 		{
 			if (player.getLaunchProjectilesComponent()->getProjectiles().size() == 0)
 			{
-				player.getLaunchProjectilesComponent()->launchProjectile(player);
+				player.getLaunchProjectilesComponent()->launchProjectile(player, new BoxerUltimateState{});
 			}
 		}
 		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == BOXER_ULTIMATE_PT_2_FRAME)
 		{
 			if (player.getLaunchProjectilesComponent()->getProjectiles().size() == 1)
 			{
-				player.getLaunchProjectilesComponent()->launchProjectile(player);
+				player.getLaunchProjectilesComponent()->launchProjectile(player, new BoxerUltimateState{});
 			}
 		}
 	}

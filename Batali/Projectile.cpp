@@ -14,8 +14,9 @@
 
 #include "BoxerUltimateState.h"
 
-Projectile::Projectile(sf::Vector2f position, float direction)
+Projectile::Projectile(sf::Vector2f position, float direction, IProjectileTypeState* projectileTypeState)
 	: GameObject{}
+	, m_projectileTypeState{ projectileTypeState }
 {
 	m_renderComponent = new ProjectileRenderComponent{};
 	m_collisionComponent = new ProjectileCollisionComponent{};
@@ -25,9 +26,8 @@ Projectile::Projectile(sf::Vector2f position, float direction)
 	m_facingRight = static_cast<int>(direction);
 
 
-	m_projectileTypeState = new BoxerUltimateState{};
-	m_projectileTypeState->setSpriteSize(*this);
-	m_projectileTypeState->setShapeSize(*this);
+	//m_projectileTypeState = new BoxerUltimateState{};
+	m_projectileTypeState->enter(*this);
 
 	m_projectileState = new ProjectileMovingState{};
 	m_projectileState->enter(*this);

@@ -12,7 +12,7 @@ public:
 
 	virtual void update(GameObject& gameObject, World& world, sf::RenderWindow& window, float& deltaTime);
 
-	virtual void launchProjectile(GameObject& gameObject);
+	virtual void launchProjectile(GameObject& gameObject, IProjectileTypeState* projectileTypeState);
 
 	const std::vector<std::shared_ptr<Projectile>>& getProjectiles() const { return m_projectiles; }
 

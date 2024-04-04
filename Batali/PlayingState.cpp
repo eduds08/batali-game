@@ -1,7 +1,5 @@
 #include "PlayingState.h"
 
-#include "HittedState.h"
-
 #include "PlayerRenderComponent.h"
 #include "PlayerAnimationComponent.h"
 #include "PlayerCollisionComponent.h"

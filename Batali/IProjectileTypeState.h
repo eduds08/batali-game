@@ -12,6 +12,5 @@ public:
 
 	virtual const std::string& getName() const = 0;
 
-	virtual void setSpriteSize(Projectile& projectile) = 0;
-	virtual void setShapeSize(Projectile& projectile) = 0;
+	virtual void enter(Projectile& projectile) = 0;
 };

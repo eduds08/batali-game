@@ -10,12 +10,13 @@ class IPhysicsComponent;
 class IAnimationComponent;
 
 class IProjectileState;
-class IProjectileTypeState;
+
+#include "IProjectileTypeState.h"
 
 class Projectile : public GameObject
 {
 public:
-	Projectile(sf::Vector2f position, float direction);
+	Projectile(sf::Vector2f position, float direction, IProjectileTypeState* projectileTypeState);
 	virtual ~Projectile();
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
@@ -33,9 +34,7 @@ public:
 	const bool getVanished() const { return m_vanished; }
 	const int getDamage() const { return m_damage; }
 
-	virtual const std::string& getName() const { return nomeTeste; }
-
-	std::string nomeTeste{"boxer_ultimate"};
+	virtual const std::string& getName() const { return m_projectileTypeState->getName(); }
 
 	IAnimationComponent* getAnimationComponent() { return m_animationComponent; }
 
@@ -43,6 +42,7 @@ public:
 
 	void setVanished(bool vanished) { m_vanished = vanished; }
 
+	void setSpeed(int speed) { m_speed = speed; }
 	const int getSpeed() const { return m_speed; }
 
 protected:
@@ -62,6 +62,6 @@ protected:
 
 	int m_damage{};
 
-	int m_speed{ 300 };
+	int m_speed{};
 
 };

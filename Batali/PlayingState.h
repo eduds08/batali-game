@@ -2,10 +2,7 @@
 
 #include "StateContext.h"
 #include <thread>
-#include "WindHashashin.h"
-#include "FireKnight.h"
 #include <memory>
-#include "Boxer.h"
 #include "CharacterStatusUI.h"
 
 #include "World.h"

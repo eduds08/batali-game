@@ -1,7 +1,5 @@
 #include "PlayerLaunchProjectilesComponent.h"
 
-#include "BoxerUltimateProjectile.h"
-
 #include "Player.h"
 #include "World.h"
 
@@ -30,7 +28,7 @@ void PlayerLaunchProjectilesComponent::update(GameObject& gameObject, World& wor
 	}
 }
 
-void PlayerLaunchProjectilesComponent::launchProjectile(GameObject& gameObject)
+void PlayerLaunchProjectilesComponent::launchProjectile(GameObject& gameObject, IProjectileTypeState* projectileTypeState)
 {
-	m_projectiles.emplace_back(std::make_shared<Projectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, static_cast<float>(gameObject.getFacingRight())));
+	m_projectiles.emplace_back(std::make_shared<Projectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, static_cast<float>(gameObject.getFacingRight()), projectileTypeState));
 }
