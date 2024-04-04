@@ -143,6 +143,7 @@
     <ClCompile Include="Boxer.cpp" />
     <ClCompile Include="BoxerState.cpp" />
     <ClCompile Include="BoxerUltimateProjectile.cpp" />
+    <ClCompile Include="BoxerUltimateState.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="BoxerState.h" />
+    <ClInclude Include="BoxerUltimateState.h" />
     <ClInclude Include="FireKnightState.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HoodieState.h" />
@@ -242,6 +244,7 @@
     <ClInclude Include="IPhysicsComponent.h" />
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="IProjectileState.h" />
+    <ClInclude Include="IProjectileTypeState.h" />
     <ClInclude Include="IRenderComponent.h" />
     <ClInclude Include="FallingState.h" />
     <ClInclude Include="HittedState.h" />

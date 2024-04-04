@@ -31,14 +31,15 @@ Player::Player(IRenderComponent* renderComponent, ICollisionComponent* collision
 	, m_animationComponent{ animationComponent }
 {
 	m_chosenCharacterState = new BoxerState{};
+	m_spriteSize = sf::Vector2i{ 288, 127 };
+
 	m_playerState = new PlayerFallingState{};
 	m_playerState->enter(*this);
 
 	initKeyBindings();
 
-	m_animationComponent->initTextures(*this);
-
 	m_sprite.setOrigin(sf::Vector2f{ 288 / 2.f, 127 / 2.f });
+	m_animationComponent->initTextures(*this);
 
 	// Initialize shape
 	m_shape.setSize(sf::Vector2f{ FIRE_KNIGHT_SHAPE_WIDTH, FIRE_KNIGHT_SHAPE_HEIGHT });

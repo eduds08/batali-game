@@ -24,7 +24,7 @@ void ProjectileAnimationComponent::initTextures(GameObject& gameObject)
 
 void ProjectileAnimationComponent::setNewAnimation(GameObject& gameObject, const std::string& name, bool isLooping)
 {
-	m_currentAnimation = m_texturesManager.createNewAnimation(name, PROJECTILE_SIZE, isLooping, gameObject.getName());
+	m_currentAnimation = m_texturesManager.createNewAnimation(name, gameObject.getSpriteSize(), isLooping, gameObject.getName());
 	gameObject.getSprite().setTexture(*m_currentAnimation->getTexture());
 	gameObject.getSprite().setTextureRect(m_currentAnimation->getCurrentTextureFrame());
 }

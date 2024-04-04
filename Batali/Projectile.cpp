@@ -12,6 +12,8 @@
 
 #include "ProjectileMovingState.h"
 
+#include "BoxerUltimateState.h"
+
 Projectile::Projectile(sf::Vector2f position, float direction)
 	: GameObject{}
 {
@@ -22,15 +24,20 @@ Projectile::Projectile(sf::Vector2f position, float direction)
 
 	m_facingRight = static_cast<int>(direction);
 
+
+	m_projectileTypeState = new BoxerUltimateState{};
+	m_projectileTypeState->setSpriteSize(*this);
+	m_projectileTypeState->setShapeSize(*this);
+
 	m_projectileState = new ProjectileMovingState{};
 	m_projectileState->enter(*this);
 
 	m_animationComponent->initTextures(*this);
 
 	m_sprite.setOrigin(sf::Vector2f{ 30 / 2.f, 30 / 2.f });
-
+	
 	// Initialize shape
-	m_shape.setSize(sf::Vector2f{ 30.f, 30.f });
+	//m_shape.setSize(sf::Vector2f{ 30.f, 30.f });
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 
 	m_shape.setPosition(position);
@@ -78,6 +85,12 @@ Projectile::~Projectile()
 	{
 		delete m_projectileState;
 		m_projectileState = nullptr;
+	}
+
+	if (m_projectileTypeState)
+	{
+		delete m_projectileTypeState;
+		m_projectileTypeState = nullptr;
 	}
 }
 

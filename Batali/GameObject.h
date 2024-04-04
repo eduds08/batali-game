@@ -27,11 +27,16 @@ public:
 
 	const int getId() const { return m_id; }
 
+	virtual void setSpriteSize(const sf::Vector2i& size) { m_spriteSize = size; }
+	virtual const sf::Vector2i& getSpriteSize() const { return m_spriteSize; }
+
 	virtual const std::string& getName() const = 0;
 
 protected:
 	sf::Sprite m_sprite{};
 	sf::RectangleShape m_shape{};
+
+	sf::Vector2i m_spriteSize{};
 
 	sf::Vector2f m_velocity{};
 

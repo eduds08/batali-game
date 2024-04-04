@@ -10,6 +10,7 @@ class IPhysicsComponent;
 class IAnimationComponent;
 
 class IProjectileState;
+class IProjectileTypeState;
 
 class Projectile : public GameObject
 {
@@ -51,6 +52,7 @@ protected:
 	IAnimationComponent* m_animationComponent{ nullptr };
 
 	IProjectileState* m_projectileState{ nullptr };
+	IProjectileTypeState* m_projectileTypeState{ nullptr };
 
 	std::thread m_animationThread{};
 	bool m_onAnimationThread{ true };
