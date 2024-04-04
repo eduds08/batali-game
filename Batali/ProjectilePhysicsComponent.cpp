@@ -4,8 +4,6 @@
 
 void ProjectilePhysicsComponent::update(GameObject& gameObject, float& deltaTime)
 {
-	gameObject.setVelocity(300.f * gameObject.getFacingRight(), gameObject.getVelocity().y);
-
 	move(gameObject, deltaTime);
 
 	/*if (!m_collided)

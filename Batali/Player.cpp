@@ -32,6 +32,7 @@ Player::Player(IRenderComponent* renderComponent, ICollisionComponent* collision
 {
 	m_chosenCharacterState = new BoxerState{};
 	m_playerState = new PlayerFallingState{};
+	m_playerState->enter(*this);
 
 	initKeyBindings();
 
@@ -182,11 +183,11 @@ void Player::initKeyBindings()
 	m_keyBindings.emplace("ROLL_BUTTON", sf::Keyboard::Scan::V);
 	m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::B);
 
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), new RunLeftCommand());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), new RunRightCommand());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("JUMP_BUTTON"), new JumpCommand());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_1_BUTTON"), new Attack1Command());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_2_BUTTON"), new Attack2Command());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ROLL_BUTTON"), new RollCommand());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), new UltimateCommand());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), new RunLeftCommand());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), new RunRightCommand());
 }

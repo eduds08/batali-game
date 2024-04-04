@@ -10,6 +10,8 @@
 #include "ProjectilePhysicsComponent.h"
 #include "ProjectileAnimationComponent.h"
 
+#include "ProjectileMovingState.h"
+
 Projectile::Projectile(sf::Vector2f position, float direction)
 	: GameObject{}
 {
@@ -18,9 +20,12 @@ Projectile::Projectile(sf::Vector2f position, float direction)
 	m_physicsComponent = new ProjectilePhysicsComponent{};
 	m_animationComponent = new ProjectileAnimationComponent{};
 
-	m_animationComponent->initTextures(*this);
+	m_facingRight = static_cast<int>(direction);
 
-	
+	m_projectileState = new ProjectileMovingState{};
+	m_projectileState->enter(*this);
+
+	m_animationComponent->initTextures(*this);
 
 	m_sprite.setOrigin(sf::Vector2f{ 30 / 2.f, 30 / 2.f });
 
@@ -68,6 +73,12 @@ Projectile::~Projectile()
 		delete m_animationComponent;
 		m_animationComponent = nullptr;
 	}
+
+	if (m_projectileState)
+	{
+		delete m_projectileState;
+		m_projectileState = nullptr;
+	}
 }
 
 void Projectile::updateAnimationThread()
@@ -79,27 +90,24 @@ void Projectile::updateAnimationThread()
 	}
 }
 
+void Projectile::setProjectileState(IProjectileState* state)
+{
+	if (state != nullptr)
+	{
+		delete m_projectileState;
+		m_projectileState = state;
+
+		m_projectileState->enter(*this);
+	}
+}
+
 void Projectile::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
+	m_projectileState->update(*this);
+
 	m_collisionComponent->update(*this, world, deltaTime);
 
-	if (!m_collided)
-		m_physicsComponent->update(*this, deltaTime);
-	
-
-	if (m_collided && m_animationComponent->getCurrentAnimation()->getName() != PROJECTILE_COLLISION_ANIMATION)
-	{
-		m_animationComponent->setNewAnimation(*this, PROJECTILE_COLLISION_ANIMATION, false);
-	}
-	else if (!m_collided && m_animationComponent->getCurrentAnimation()->getName() != PROJECTILE_MOVING_ANIMATION)
-	{
-		m_animationComponent->setNewAnimation(*this, PROJECTILE_MOVING_ANIMATION, true);
-	}
-
-	if (m_collided && m_animationComponent->getCurrentAnimation()->getAnimationEnd())
-	{
-		m_vanished = true;
-	}
+	m_physicsComponent->update(*this, deltaTime);
 }
 
 void Projectile::render(sf::RenderWindow& window)

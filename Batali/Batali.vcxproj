@@ -177,7 +177,9 @@
     <ClCompile Include="PlayerRunningState.cpp" />
     <ClCompile Include="PlayerUltimateState.cpp" />
     <ClCompile Include="ProjectileAnimationComponent.cpp" />
+    <ClCompile Include="ProjectileCollidedState.cpp" />
     <ClCompile Include="ProjectileCollisionComponent.cpp" />
+    <ClCompile Include="ProjectileMovingState.cpp" />
     <ClCompile Include="ProjectilePhysicsComponent.cpp" />
     <ClCompile Include="ProjectileRenderComponent.cpp" />
     <ClCompile Include="RollCommand.cpp" />
@@ -239,6 +241,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="IPhysicsComponent.h" />
     <ClInclude Include="DeadState.h" />
+    <ClInclude Include="IProjectileState.h" />
     <ClInclude Include="IRenderComponent.h" />
     <ClInclude Include="FallingState.h" />
     <ClInclude Include="HittedState.h" />
@@ -275,7 +278,9 @@
     <ClInclude Include="PlayerRunningState.h" />
     <ClInclude Include="PlayerUltimateState.h" />
     <ClInclude Include="ProjectileAnimationComponent.h" />
+    <ClInclude Include="ProjectileCollidedState.h" />
     <ClInclude Include="ProjectileCollisionComponent.h" />
+    <ClInclude Include="ProjectileMovingState.h" />
     <ClInclude Include="ProjectilePhysicsComponent.h" />
     <ClInclude Include="ProjectileRenderComponent.h" />
     <ClInclude Include="RollCommand.h" />

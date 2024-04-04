@@ -273,6 +273,8 @@
     <ClCompile Include="WindHashashinState.cpp">
       <Filter>CHOSEN CHARACTER STATE</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectileMovingState.cpp" />
+    <ClCompile Include="ProjectileCollidedState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindHashashin.h">
@@ -542,5 +544,8 @@
     <ClInclude Include="WindHashashinState.h">
       <Filter>CHOSEN CHARACTER STATE</Filter>
     </ClInclude>
+    <ClInclude Include="IProjectileState.h" />
+    <ClInclude Include="ProjectileMovingState.h" />
+    <ClInclude Include="ProjectileCollidedState.h" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,8 @@ class ICollisionComponent;
 class IPhysicsComponent;
 class IAnimationComponent;
 
+class IProjectileState;
+
 class Projectile : public GameObject
 {
 public:
@@ -34,11 +36,21 @@ public:
 
 	std::string nomeTeste{"boxer_ultimate"};
 
+	IAnimationComponent* getAnimationComponent() { return m_animationComponent; }
+
+	void setProjectileState(IProjectileState* state);
+
+	void setVanished(bool vanished) { m_vanished = vanished; }
+
+	const int getSpeed() const { return m_speed; }
+
 protected:
 	IRenderComponent* m_renderComponent{ nullptr };
 	ICollisionComponent* m_collisionComponent{ nullptr };
 	IPhysicsComponent* m_physicsComponent{ nullptr };
 	IAnimationComponent* m_animationComponent{ nullptr };
+
+	IProjectileState* m_projectileState{ nullptr };
 
 	std::thread m_animationThread{};
 	bool m_onAnimationThread{ true };
@@ -47,5 +59,7 @@ protected:
 	bool m_vanished{ false };
 
 	int m_damage{};
+
+	int m_speed{ 300 };
 
 };
