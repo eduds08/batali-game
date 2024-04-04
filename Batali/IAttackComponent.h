@@ -11,5 +11,5 @@ public:
 
 	virtual void update(GameObject& gameObject, World& world, float& deltaTime) = 0;
 
-	virtual const AttackHitbox* getAttackHitbox() const = 0;
+	virtual const AttackHitbox& getAttackHitbox() const = 0;
 };

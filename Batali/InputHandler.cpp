@@ -8,14 +8,6 @@ InputHandler::InputHandler()
 
 InputHandler::~InputHandler()
 {
-	/*std::unordered_map<sf::Keyboard::Scancode, std::shared_ptr<ICommand>>::iterator itr = m_bindCommands.begin();
-
-	for (std::unordered_map<sf::Keyboard::Scancode, std::shared_ptr<ICommand>>::iterator itr = m_bindCommands.begin(); itr != m_bindCommands.end(); ++itr)
-	{
-		delete itr->second;
-		itr->second = nullptr;
-	}*/
-
 	m_bindCommands.clear();
 }
 

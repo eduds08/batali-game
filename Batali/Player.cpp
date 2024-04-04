@@ -21,6 +21,8 @@
 
 #include "BoxerState.h"
 
+#include "World.h"
+
 Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<IAttackComponent> attackComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent, std::unique_ptr<IAnimationComponent> animationComponent)
 	: GameObject{}
 	, m_renderComponent{ std::move(renderComponent) }
@@ -37,53 +39,7 @@ Player::~Player()
 	m_onAnimationThread = false;
 	m_animationThread.join();
 
-	/*if (m_renderComponent)
-	{
-		delete m_renderComponent;
-		m_renderComponent = nullptr;
-	}
-
-	if (m_collisionComponent)
-	{
-		delete m_collisionComponent;
-		m_collisionComponent = nullptr;
-	}
-
-	if (m_physicsComponent)
-	{
-		delete m_physicsComponent;
-		m_physicsComponent = nullptr;
-	}
-
-	if (m_attackComponent)
-	{
-		delete m_attackComponent;
-		m_attackComponent = nullptr;
-	}
-
-	if (m_launchProjectilesComponent)
-	{
-		delete m_launchProjectilesComponent;
-		m_launchProjectilesComponent = nullptr;
-	}
-
-	if (m_animationComponent)
-	{
-		delete m_animationComponent;
-		m_animationComponent = nullptr;
-	}
-
-	if (m_playerState)
-	{
-		delete m_playerState;
-		m_playerState = nullptr;
-	}
-
-	if (m_chosenCharacterState)
-	{
-		delete m_chosenCharacterState;
-		m_chosenCharacterState = nullptr;
-	}*/
+	m_keyBindings.clear();
 }
 
 void Player::initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState)
@@ -91,8 +47,7 @@ void Player::initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCh
 	m_chosenCharacterState = std::move(chosenCharacterState);
 	m_chosenCharacterState->enter(*this);
 
-	//m_playerState = new PlayerFallingState{};
-	m_playerState = std::make_shared<PlayerFallingState>();
+	m_playerState = std::make_unique<PlayerFallingState>();
 	m_playerState->enter(*this);
 
 	initKeyBindings();
@@ -144,22 +99,20 @@ void Player::render(sf::RenderWindow& window)
 
 void Player::handleInput(sf::Keyboard::Scancode input)
 {
-	std::shared_ptr<IPlayerState> playerState = m_playerState->handleInput(*this, input);
+	std::unique_ptr<IPlayerState> playerState = m_playerState->handleInput(*this, input);
 
 	if (playerState != nullptr)
 	{
-		//delete m_playerState;
-		m_playerState = playerState;
+		m_playerState = std::move(playerState);
 
 		m_playerState->enter(*this);
 	}
 }
 
-void Player::setPlayerState(std::shared_ptr<IPlayerState> state)
+void Player::setPlayerState(std::unique_ptr<IPlayerState> state)
 {
 	if (state != nullptr)
 	{
-		//delete m_playerState;
 		m_playerState = std::move(state);
 
 		m_playerState->enter(*this);

@@ -10,7 +10,7 @@ void ProjectileMovingState::update(Projectile& projectile)
 
 	if (projectile.getCollided())
 	{
-		projectile.setProjectileState(new ProjectileCollidedState());
+		projectile.setProjectileState(std::make_unique<ProjectileCollidedState>());
 	}
 }
 

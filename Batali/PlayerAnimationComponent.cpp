@@ -8,11 +8,6 @@ PlayerAnimationComponent::PlayerAnimationComponent()
 
 PlayerAnimationComponent::~PlayerAnimationComponent()
 {
-	if (m_currentAnimation)
-	{
-		delete m_currentAnimation;
-		m_currentAnimation = nullptr;
-	}
 }
 
 void PlayerAnimationComponent::initTextures(GameObject& gameObject)

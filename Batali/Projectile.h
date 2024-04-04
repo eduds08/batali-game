@@ -16,7 +16,7 @@ class IProjectileState;
 class Projectile : public GameObject
 {
 public:
-	Projectile(sf::Vector2f position, float direction, IProjectileTypeState* projectileTypeState);
+	Projectile(sf::Vector2f position, float direction, std::unique_ptr<IProjectileTypeState> projectileTypeState);
 	virtual ~Projectile();
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
@@ -36,9 +36,9 @@ public:
 
 	virtual const std::string& getName() const { return m_projectileTypeState->getName(); }
 
-	IAnimationComponent* getAnimationComponent() { return m_animationComponent; }
+	std::unique_ptr<IAnimationComponent>& getAnimationComponent() { return m_animationComponent; }
 
-	void setProjectileState(IProjectileState* state);
+	void setProjectileState(std::unique_ptr<IProjectileState> state);
 
 	void setVanished(bool vanished) { m_vanished = vanished; }
 
@@ -46,13 +46,13 @@ public:
 	const int getSpeed() const { return m_speed; }
 
 protected:
-	IRenderComponent* m_renderComponent{ nullptr };
-	ICollisionComponent* m_collisionComponent{ nullptr };
-	IPhysicsComponent* m_physicsComponent{ nullptr };
-	IAnimationComponent* m_animationComponent{ nullptr };
+	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
+	std::unique_ptr<ICollisionComponent> m_collisionComponent{ nullptr };
+	std::unique_ptr<IPhysicsComponent> m_physicsComponent{ nullptr };
+	std::unique_ptr<IAnimationComponent> m_animationComponent{ nullptr };
 
-	IProjectileState* m_projectileState{ nullptr };
-	IProjectileTypeState* m_projectileTypeState{ nullptr };
+	std::unique_ptr<IProjectileState> m_projectileState{ nullptr };
+	std::unique_ptr<IProjectileTypeState> m_projectileTypeState{ nullptr };
 
 	std::thread m_animationThread{};
 	bool m_onAnimationThread{ true };
@@ -63,5 +63,4 @@ protected:
 	int m_damage{};
 
 	int m_speed{};
-
 };

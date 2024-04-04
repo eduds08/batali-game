@@ -14,22 +14,20 @@
 
 #include "BoxerUltimateState.h"
 
-Projectile::Projectile(sf::Vector2f position, float direction, IProjectileTypeState* projectileTypeState)
+Projectile::Projectile(sf::Vector2f position, float direction, std::unique_ptr<IProjectileTypeState> projectileTypeState)
 	: GameObject{}
-	, m_projectileTypeState{ projectileTypeState }
+	, m_projectileTypeState{ std::move(projectileTypeState) }
 {
-	m_renderComponent = new ProjectileRenderComponent{};
-	m_collisionComponent = new ProjectileCollisionComponent{};
-	m_physicsComponent = new ProjectilePhysicsComponent{};
-	m_animationComponent = new ProjectileAnimationComponent{};
+	m_renderComponent = std::make_unique<ProjectileRenderComponent>();
+	m_collisionComponent = std::make_unique<ProjectileCollisionComponent>();
+	m_physicsComponent = std::make_unique<ProjectilePhysicsComponent>();
+	m_animationComponent = std::make_unique<ProjectileAnimationComponent>();
 
 	m_facingRight = static_cast<int>(direction);
 
-
-	//m_projectileTypeState = new BoxerUltimateState{};
 	m_projectileTypeState->enter(*this);
 
-	m_projectileState = new ProjectileMovingState{};
+	m_projectileState = std::make_unique<ProjectileMovingState>();
 	m_projectileState->enter(*this);
 
 	m_animationComponent->initTextures(*this);
@@ -37,7 +35,6 @@ Projectile::Projectile(sf::Vector2f position, float direction, IProjectileTypeSt
 	m_sprite.setOrigin(sf::Vector2f{ 30 / 2.f, 30 / 2.f });
 	
 	// Initialize shape
-	//m_shape.setSize(sf::Vector2f{ 30.f, 30.f });
 	m_shape.setOrigin(m_shape.getSize() / 2.f);
 
 	m_shape.setPosition(position);
@@ -56,42 +53,6 @@ Projectile::~Projectile()
 {
 	m_onAnimationThread = false;
 	m_animationThread.join();
-
-	if (m_renderComponent)
-	{
-		delete m_renderComponent;
-		m_renderComponent = nullptr;
-	}
-
-	if (m_collisionComponent)
-	{
-		delete m_collisionComponent;
-		m_collisionComponent = nullptr;
-	}
-
-	if (m_physicsComponent)
-	{
-		delete m_physicsComponent;
-		m_physicsComponent = nullptr;
-	}
-
-	if (m_animationComponent)
-	{
-		delete m_animationComponent;
-		m_animationComponent = nullptr;
-	}
-
-	if (m_projectileState)
-	{
-		delete m_projectileState;
-		m_projectileState = nullptr;
-	}
-
-	if (m_projectileTypeState)
-	{
-		delete m_projectileTypeState;
-		m_projectileTypeState = nullptr;
-	}
 }
 
 void Projectile::updateAnimationThread()
@@ -103,12 +64,11 @@ void Projectile::updateAnimationThread()
 	}
 }
 
-void Projectile::setProjectileState(IProjectileState* state)
+void Projectile::setProjectileState(std::unique_ptr<IProjectileState> state)
 {
 	if (state != nullptr)
 	{
-		delete m_projectileState;
-		m_projectileState = state;
+		m_projectileState = std::move(state);
 
 		m_projectileState->enter(*this);
 	}

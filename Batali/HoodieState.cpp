@@ -20,10 +20,10 @@ void HoodieState::enter(Player& player)
 	player.getShape().setOrigin(player.getShape().getSize() / 2.f);*/
 }
 
-void HoodieState::updateAttackHitbox(Player& player, AttackHitbox* attackHitbox)
+void HoodieState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
 {
 }
 
-void HoodieState::checkIfIsAttacking(Player& enemy, AttackHitbox* attackHitbox)
+void HoodieState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitbox)
 {
 }

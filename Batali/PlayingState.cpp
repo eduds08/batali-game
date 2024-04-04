@@ -14,7 +14,7 @@
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
-	, player{ std::make_shared<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>())}
+	, player{ std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>())}
 {
 	m_currentState = PLAYING_STATE;
 

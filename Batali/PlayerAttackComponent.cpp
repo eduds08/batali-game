@@ -2,18 +2,14 @@
 
 #include "Player.h"
 
+#include "World.h"
+
 PlayerAttackComponent::PlayerAttackComponent()
 {
-	m_attackHitbox = new AttackHitbox{};
 }
 
 PlayerAttackComponent::~PlayerAttackComponent()
 {
-	if (m_attackHitbox)
-	{
-		delete m_attackHitbox;
-		m_attackHitbox = nullptr;
-	}
 }
 
 void PlayerAttackComponent::update(GameObject& gameObject, World& world, float& deltaTime)

@@ -34,7 +34,7 @@ public:
 
 	void handleInput(sf::Keyboard::Scancode input);
 
-	void setPlayerState(std::shared_ptr<IPlayerState> state);
+	void setPlayerState(std::unique_ptr<IPlayerState> state);
 
 	void updateAnimationThread();
 
@@ -50,13 +50,6 @@ public:
 	std::unique_ptr<ILaunchProjectilesComponent>& getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
 
 private:
-	/*IRenderComponent* m_renderComponent{ nullptr };
-	ICollisionComponent* m_collisionComponent{ nullptr };
-	IPhysicsComponent* m_physicsComponent{ nullptr };
-	IAttackComponent* m_attackComponent{ nullptr };
-	ILaunchProjectilesComponent* m_launchProjectilesComponent{ nullptr };
-	IAnimationComponent* m_animationComponent{ nullptr };*/
-
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
 	std::unique_ptr<ICollisionComponent> m_collisionComponent{ nullptr };
 	std::unique_ptr<IPhysicsComponent> m_physicsComponent{ nullptr };
@@ -64,9 +57,9 @@ private:
 	std::unique_ptr<ILaunchProjectilesComponent> m_launchProjectilesComponent{ nullptr };
 	std::unique_ptr<IAnimationComponent> m_animationComponent{ nullptr };
 
-	std::shared_ptr<IPlayerState> m_playerState{ nullptr };
-
 	std::unique_ptr<IChosenCharacterState> m_chosenCharacterState{ nullptr };
+
+	std::unique_ptr<IPlayerState> m_playerState{ nullptr };
 
 	std::thread m_animationThread{};
 	bool m_onAnimationThread{ true };

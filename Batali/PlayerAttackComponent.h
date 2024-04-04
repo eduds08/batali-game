@@ -3,6 +3,8 @@
 #include "IAttackComponent.h"
 #include "AttackHitbox.h"
 
+class World;
+
 class PlayerAttackComponent : public IAttackComponent
 {
 public:
@@ -11,9 +13,9 @@ public:
 
 	virtual void update(GameObject& gameObject, World& world, float& deltaTime);
 
-	virtual const AttackHitbox* getAttackHitbox() const { return m_attackHitbox; }
+	virtual const AttackHitbox& getAttackHitbox() const { return m_attackHitbox; }
 
 private:
-	AttackHitbox* m_attackHitbox{ nullptr };
+	AttackHitbox m_attackHitbox{};
 
 };

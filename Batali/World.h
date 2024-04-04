@@ -4,7 +4,7 @@
 #include <fstream>
 #include "Ground.h"
 
-class Player;
+#include "Player.h"
 
 class World
 {
@@ -16,5 +16,5 @@ public:
 
 	std::vector<Ground> m_tiles{};
 
-	std::vector<Player*> m_players{};
+	std::vector<std::unique_ptr<Player>> m_players{};
 };

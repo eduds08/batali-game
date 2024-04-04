@@ -4,11 +4,6 @@
 
 ProjectileAnimationComponent::~ProjectileAnimationComponent()
 {
-	if (m_currentAnimation)
-	{
-		delete m_currentAnimation;
-		m_currentAnimation = nullptr;
-	}
 }
 
 void ProjectileAnimationComponent::initTextures(GameObject& gameObject)

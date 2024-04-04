@@ -20,7 +20,7 @@ public:
 	// Singleton Pattern -> makes sures that only one instance of this class exists in the entire program
 	static TexturesManager& getInstance();
 
-	AbstractAnimation* createNewAnimation(const std::string& name, sf::Vector2i frameSize, bool isLooping, const std::string& playerName);
+	std::unique_ptr<AbstractAnimation> createNewAnimation(const std::string& name, sf::Vector2i frameSize, bool isLooping, const std::string& playerName);
 
 private:
 	std::unordered_map<std::string, std::shared_ptr<sf::Texture>> texturesMap{};

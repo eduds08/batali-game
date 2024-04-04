@@ -1,6 +1,12 @@
 #pragma once
 
-#include "World.h"
+class World;
+#include <SFML/Graphics.hpp>
+#include <string>
+
+#include "Constants.h"
+
+using namespace constants;
 
 class GameObject
 {

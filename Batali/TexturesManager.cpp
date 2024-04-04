@@ -75,17 +75,17 @@ TexturesManager& TexturesManager::getInstance()
 	return *instance;
 }
 
-AbstractAnimation* TexturesManager::createNewAnimation(const std::string& name, sf::Vector2i frameSize, bool isLooping, const std::string& playerName)
+std::unique_ptr<AbstractAnimation> TexturesManager::createNewAnimation(const std::string& name, sf::Vector2i frameSize, bool isLooping, const std::string& playerName)
 {
-	AbstractAnimation* newAnimation = nullptr;
+	std::unique_ptr<AbstractAnimation> newAnimation = nullptr;
 
 	if (isLooping)
 	{
-		newAnimation = new LoopingAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png") };
+		newAnimation = std::make_unique<LoopingAnimation>(name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png"));
 	}
 	else
 	{
-		newAnimation = new PlayedOnceAnimation{ name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png") };
+		newAnimation = std::make_unique<PlayedOnceAnimation>(name, frameSize, loadAndGetTexture(playerName + name, "./assets/" + playerName + "/" + name + ".png"));
 	}
 
 	return newAnimation;

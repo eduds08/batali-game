@@ -1,6 +1,8 @@
 #include "PlayerCollisionComponent.h"
 #include "Player.h"
 
+#include "World.h"
+
 PlayerCollisionComponent::PlayerCollisionComponent()
 {
 }

@@ -21,37 +21,37 @@ PlayerIdleState::~PlayerIdleState()
 
 }
 
-std::shared_ptr<IPlayerState> PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::unique_ptr<IPlayerState> PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	if (input == player.getKeyBinding("JUMP_BUTTON"))
 	{
-		return std::make_shared<PlayerJumpingState>();
+		return std::make_unique<PlayerJumpingState>();
 	}
 	else if (input == player.getKeyBinding("RUN_RIGHT_BUTTON"))
 	{
 		player.setFacingRight(1);
-		return std::make_shared<PlayerRunningState>();
+		return std::make_unique<PlayerRunningState>();
 	}
 	else if (input == player.getKeyBinding("RUN_LEFT_BUTTON"))
 	{
 		player.setFacingRight(-1);
-		return std::make_shared<PlayerRunningState>();
+		return std::make_unique<PlayerRunningState>();
 	}
 	else if (input == player.getKeyBinding("ROLL_BUTTON"))
 	{
-		return std::make_shared<PlayerRollingState>();
+		return std::make_unique<PlayerRollingState>();
 	}
 	else if (input == player.getKeyBinding("ATTACK_1_BUTTON"))
 	{
-		return std::make_shared<PlayerAttacking1State>();
+		return std::make_unique<PlayerAttacking1State>();
 	}
 	else if (input == player.getKeyBinding("ATTACK_2_BUTTON"))
 	{
-		return std::make_shared<PlayerAttacking2State>();
+		return std::make_unique<PlayerAttacking2State>();
 	}
 	else if (input == player.getKeyBinding("ULTIMATE_BUTTON"))
 	{
-		return std::make_shared<PlayerUltimateState>();
+		return std::make_unique<PlayerUltimateState>();
 	}
 
 	return nullptr;

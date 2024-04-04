@@ -4,12 +4,6 @@
 
 World::~World()
 {
-	for (std::vector<Player*>::iterator it = m_players.begin(); it != m_players.end(); ++it)
-	{
-		delete *it;
-		*it = nullptr;
-	}
-
 	m_players.clear();
 }
 

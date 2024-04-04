@@ -19,14 +19,14 @@ public:
 
 	virtual void setNewAnimation(GameObject& gameObject, const std::string& name, bool isLooping);
 
-	virtual AbstractAnimation* getCurrentAnimation() { return m_currentAnimation; }
+	virtual std::unique_ptr<AbstractAnimation>& getCurrentAnimation() { return m_currentAnimation; }
 
 	virtual void update(GameObject& gameObject);
 
 private:
 	TexturesManager& m_texturesManager{ TexturesManager::getInstance() };
 
-	AbstractAnimation* m_currentAnimation{ nullptr };
+	std::unique_ptr<AbstractAnimation> m_currentAnimation{ nullptr };
 
 	std::vector<std::string> m_projectileAnimationNames{ PROJECTILE_MOVING_ANIMATION, PROJECTILE_COLLISION_ANIMATION };
 
