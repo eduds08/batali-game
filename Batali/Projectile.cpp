@@ -14,9 +14,10 @@
 
 #include "BoxerUltimateState.h"
 
-Projectile::Projectile(sf::Vector2f position, float direction, std::unique_ptr<IProjectileTypeState> projectileTypeState)
+Projectile::Projectile(sf::Vector2f position, float direction, std::unique_ptr<IProjectileTypeState> projectileTypeState, const GameObject& launcher)
 	: GameObject{}
 	, m_projectileTypeState{ std::move(projectileTypeState) }
+	, m_launcher{ launcher }
 {
 	m_renderComponent = std::make_unique<ProjectileRenderComponent>();
 	m_collisionComponent = std::make_unique<ProjectileCollisionComponent>();

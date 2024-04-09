@@ -27,5 +27,5 @@ void PlayerLaunchProjectilesComponent::update(GameObject& gameObject, World& wor
 
 void PlayerLaunchProjectilesComponent::launchProjectile(GameObject& gameObject, std::unique_ptr<IProjectileTypeState> projectileTypeState)
 {
-	m_projectiles.emplace_back(std::make_unique<Projectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, static_cast<float>(gameObject.getFacingRight()), std::move(projectileTypeState)));
+	m_projectiles.emplace_back(std::make_unique<Projectile>(gameObject.getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, static_cast<float>(gameObject.getFacingRight()), std::move(projectileTypeState), gameObject));
 }

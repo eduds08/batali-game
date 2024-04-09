@@ -32,7 +32,7 @@ public:
 private:
 	//std::vector<std::shared_ptr<Player>> m_characters{};
 
-	std::unique_ptr<Player> player;
+	//std::unique_ptr<Player> player;
 
 	//std::vector<CharacterStatusUI> m_characterStatus{};
 

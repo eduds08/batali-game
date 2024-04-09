@@ -14,15 +14,17 @@
 PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std::string& firstCharacter, const std::string& secondCharacter)
 	: StateContext{ window }
 	, m_deltaTime{ deltaTime }
-	, player{ std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>())}
+	//, player{ std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>())}
 {
 	m_currentState = PLAYING_STATE;
 
 	// Initialize View
 	m_view = m_window.getDefaultView();
 
+	m_world.init("./map/map.txt", firstCharacter, secondCharacter);
+
 	// Initialize Player 1
-	if (firstCharacter == "fire_knight")
+	/*if (firstCharacter == "fire_knight")
 	{
 		player->initChosenCharacter(std::make_unique<FireKnightState>());
 	}
@@ -33,7 +35,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 	else if (firstCharacter == "boxer")
 	{
 		player->initChosenCharacter(std::make_unique<BoxerState>());
-	}
+	}*/
 
 	//// Initialize Player 2
 	//if (secondCharacter == "fire_knight")
@@ -54,7 +56,8 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 	//m_characterStatus.emplace_back(CharacterStatusUI{ secondCharacter + "Logo", "./assets/" + secondCharacter + "/logo.png", m_characters[1].get(), true });
 
 	// Initialize map
-	m_world.loadTiles("./map/map.txt");
+	//m_world.loadTiles("./map/map.txt");
+	// 
 
 	// Initialize animation thread
 	//m_animationThread = std::thread(&PlayingState::updateTexturesAndAnimations, this);
@@ -91,7 +94,9 @@ void PlayingState::update()
 			character->update(m_deltaTime);
 		}*/
 
-		player->update(m_window, m_world, m_deltaTime);
+		//player->update(m_window, m_world, m_deltaTime);
+
+		m_world.m_players[0]->update(m_window, m_world, m_deltaTime);
 
 		updateView();
 	}
@@ -106,7 +111,8 @@ void PlayingState::render()
 		character->render(m_window, m_debugMode);
 	}*/
 
-	player->render(m_window);
+	//player->render(m_window);
+	m_world.m_players[0]->render(m_window);
 
 	// Render the tiles inside the view's limits
 	for (auto& tile : m_world.m_tiles)
@@ -208,7 +214,7 @@ void PlayingState::render()
 
 void PlayingState::updateView()
 {
-	m_view.setCenter(player->getShape().getPosition());
+	m_view.setCenter(m_world.m_players[0]->getShape().getPosition());
 	m_window.setView(m_view);
 
 	/*m_characterStatus[0].updatePosition(m_view.getCenter(), m_view.getSize());

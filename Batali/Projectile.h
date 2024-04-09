@@ -11,12 +11,14 @@ class IAnimationComponent;
 
 class IProjectileState;
 
+class Player;
+
 #include "IProjectileTypeState.h"
 
 class Projectile : public GameObject
 {
 public:
-	Projectile(sf::Vector2f position, float direction, std::unique_ptr<IProjectileTypeState> projectileTypeState);
+	Projectile(sf::Vector2f position, float direction, std::unique_ptr<IProjectileTypeState> projectileTypeState, const GameObject& launcher);
 	virtual ~Projectile();
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
@@ -45,6 +47,8 @@ public:
 	void setSpeed(int speed) { m_speed = speed; }
 	const int getSpeed() const { return m_speed; }
 
+	const GameObject& getLauncher() const { return m_launcher; }
+
 protected:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
 	std::unique_ptr<ICollisionComponent> m_collisionComponent{ nullptr };
@@ -63,4 +67,6 @@ protected:
 	int m_damage{};
 
 	int m_speed{};
+
+	const GameObject& m_launcher;
 };

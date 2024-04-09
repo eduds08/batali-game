@@ -14,12 +14,14 @@ void ProjectileCollisionComponent::update(GameObject& gameObject, World& world, 
 	// check collision with world entities and tiles
 	for (auto& player : world.m_players)
 	{
-		// logic to diferentiate player who launched the projectile
-		if (gameObject.getShape().getGlobalBounds().intersects(player->getShape().getGlobalBounds()))
+		if (player->getId() != projectile->getLauncher().getId())
 		{
-			projectile->setCollided(true);
+			// logic to diferentiate player who launched the projectile
+			if (gameObject.getShape().getGlobalBounds().intersects(player->getShape().getGlobalBounds()))
+			{
+				projectile->setCollided(true);
+			}
 		}
-
 	}
 
 	for (auto& tile : world.m_tiles)
