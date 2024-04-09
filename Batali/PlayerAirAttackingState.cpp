@@ -1,10 +1,19 @@
 #include "PlayerAirAttackingState.h"
 
 #include "PlayerFallingState.h"
+#include "PlayerHittedState.h"
 
 #include "IAnimationComponent.h"
 
 #include "Player.h"
+
+std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleCondition(Player& player, const std::string& condition)
+{
+	if (condition == "HITTED")
+	{
+		return std::make_unique<PlayerHittedState>();
+	}
+}
 
 std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {

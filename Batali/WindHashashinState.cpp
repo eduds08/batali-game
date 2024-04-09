@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "PlayerIdleState.h"
 
+#include <iostream>
+
 
 void WindHashashinState::enter(Player& player)
 {
@@ -95,10 +97,11 @@ void WindHashashinState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackH
 		if (attackHitbox.getIsUltimateActivate())
 		{
 			// enemy->teleport to wind_hashashin and sets FastHit
+			std::cout << "wind_hashashin ultimate_activate\n";
 		}
 		else
 		{
-			// enemy->takeDamage
+			enemy.handleCondition("HITTED");
 		}
 	}
 }

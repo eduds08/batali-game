@@ -1,6 +1,7 @@
 #include "PlayerRollingState.h"
 #include "PlayerIdleState.h"
 #include "IAnimationComponent.h"
+#include "PlayerHittedState.h"
 #include "Player.h"
 
 PlayerRollingState::PlayerRollingState()
@@ -9,6 +10,11 @@ PlayerRollingState::PlayerRollingState()
 
 PlayerRollingState::~PlayerRollingState()
 {
+}
+
+std::unique_ptr<IPlayerState> PlayerRollingState::handleCondition(Player& player, const std::string& condition)
+{
+	return nullptr;
 }
 
 std::unique_ptr<IPlayerState> PlayerRollingState::handleInput(Player& player, sf::Keyboard::Scancode input)
@@ -29,6 +35,4 @@ void PlayerRollingState::update(Player& player)
 void PlayerRollingState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, ROLL_ANIMATION, false);
-	//player.animationName = ROLL_ANIMATION;
-	//player.isLoopingAnimation = false;
 }

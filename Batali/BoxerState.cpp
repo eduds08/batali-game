@@ -5,6 +5,8 @@
 
 #include "BoxerUltimateState.h"
 
+#include <iostream>
+
 void BoxerState::enter(Player& player)
 {
 	player.setSpriteSize(sf::Vector2i{ BOXER_SPRITE_WIDTH, BOXER_SPRITE_HEIGHT });
@@ -85,6 +87,6 @@ void BoxerState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
-		// enemy->takeDamage()
+		enemy.handleCondition("HITTED");
 	}
 }

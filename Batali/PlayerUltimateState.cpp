@@ -6,6 +6,11 @@
 
 #include "Player.h"
 
+std::unique_ptr<IPlayerState> PlayerUltimateState::handleCondition(Player& player, const std::string& condition)
+{
+	return nullptr;
+}
+
 std::unique_ptr<IPlayerState> PlayerUltimateState::handleInput(Player& player, sf::Keyboard::Scancode input)
 {
 	return nullptr;

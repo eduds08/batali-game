@@ -147,6 +147,7 @@
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="FireKnightState.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="PlayerHittedState.cpp" />
     <ClCompile Include="HoodieState.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="BoxerUltimateState.h" />
     <ClInclude Include="FireKnightState.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="PlayerHittedState.h" />
     <ClInclude Include="HoodieState.h" />
     <ClInclude Include="IAnimationComponent.h" />
     <ClInclude Include="AttackHitbox.h" />

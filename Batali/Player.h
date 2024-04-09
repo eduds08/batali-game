@@ -32,6 +32,7 @@ public:
 
 	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
 
+	void handleCondition(const std::string& condition);
 	void handleInput(sf::Keyboard::Scancode input);
 
 	void setPlayerState(std::unique_ptr<IPlayerState> state);
@@ -48,6 +49,11 @@ public:
 
 	std::unique_ptr<IAttackComponent>& getAttackComponent() { return m_attackComponent; }
 	std::unique_ptr<ILaunchProjectilesComponent>& getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
+
+	void takeDamage();
+
+	/* Damage attributes that will be stored here temporarily */
+	int m_hp{ 1000 };
 
 private:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
@@ -67,4 +73,10 @@ private:
 	InputHandler m_inputHandler{};
 
 	std::unordered_map<std::string, sf::Keyboard::Scancode> m_keyBindings{};
+
+	static int s_playerNumberCounter;
+	const int m_playerNumber;
+
+
+	
 };

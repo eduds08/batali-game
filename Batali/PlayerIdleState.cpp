@@ -10,6 +10,7 @@
 #include "PlayerUltimateState.h"
 #include "IAnimationComponent.h"
 #include "Player.h"
+#include "PlayerHittedState.h"
 
 PlayerIdleState::PlayerIdleState()
 {
@@ -19,6 +20,16 @@ PlayerIdleState::PlayerIdleState()
 PlayerIdleState::~PlayerIdleState()
 {
 
+}
+
+std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, const std::string& condition)
+{
+	if (condition == "HITTED")
+	{
+		return std::make_unique<PlayerHittedState>();
+	}
+
+	return nullptr;
 }
 
 std::unique_ptr<IPlayerState> PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)

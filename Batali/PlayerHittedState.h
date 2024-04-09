@@ -2,11 +2,11 @@
 
 #include "IPlayerState.h"
 
-class PlayerJumpingState : public IPlayerState
+class PlayerHittedState : public IPlayerState
 {
 public:
-	PlayerJumpingState();
-	virtual ~PlayerJumpingState();
+	PlayerHittedState();
+	virtual ~PlayerHittedState() = default;
 
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 

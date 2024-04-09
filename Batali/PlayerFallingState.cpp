@@ -2,6 +2,7 @@
 #include "IAnimationComponent.h"
 #include "Player.h"
 #include "PlayerIdleState.h"
+#include "PlayerHittedState.h"
 
 PlayerFallingState::PlayerFallingState()
 {
@@ -9,6 +10,16 @@ PlayerFallingState::PlayerFallingState()
 
 PlayerFallingState::~PlayerFallingState()
 {
+}
+
+std::unique_ptr<IPlayerState> PlayerFallingState::handleCondition(Player& player, const std::string& condition)
+{
+	if (condition == "HITTED")
+	{
+		return std::make_unique<PlayerHittedState>();
+	}
+
+	return nullptr;
 }
 
 std::unique_ptr<IPlayerState> PlayerFallingState::handleInput(Player& player, sf::Keyboard::Scancode input)

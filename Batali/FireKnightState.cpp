@@ -4,6 +4,8 @@
 
 #include "Player.h"
 
+#include <iostream>
+
 FireKnightState::FireKnightState()
 {
 }
@@ -94,6 +96,6 @@ void FireKnightState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitb
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
-		// enemy->takeDamage()
+		enemy.handleCondition("HITTED");
 	}
 }

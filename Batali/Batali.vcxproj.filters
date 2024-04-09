@@ -36,50 +36,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WindHashashin.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
     <ClCompile Include="Ground.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="FireKnight.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="Boxer.cpp">
       <Filter>ENTITY</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxerUltimateProjectile.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="RunningState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="RollingState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="JumpingState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="IdleState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="FallingState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackingState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="DeadState.cpp">
-      <Filter>STATE PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="HittedState.cpp">
-      <Filter>STATE PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
@@ -126,9 +87,6 @@
     <ClCompile Include="StateContext.cpp">
       <Filter>STATE</Filter>
     </ClCompile>
-    <ClCompile Include="Hoodie.cpp">
-      <Filter>ENTITY</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>OTHERS</Filter>
     </ClCompile>
@@ -137,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="AttackHitbox.cpp">
       <Filter>OTHERS</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>STATE PATTERN</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>COMPONENT PATTERN</Filter>
@@ -164,21 +119,6 @@
     </ClCompile>
     <ClCompile Include="TexturesManager.cpp">
       <Filter>NEW ANIMATION MANAGER</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimatedActor.cpp">
-      <Filter>ACTORS</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterWithProjectiles.cpp">
-      <Filter>ACTORS</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderActor.cpp">
-      <Filter>ACTORS</Filter>
-    </ClCompile>
-    <ClCompile Include="MovableActor.cpp">
-      <Filter>ACTORS</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapeActor.cpp">
-      <Filter>ACTORS</Filter>
     </ClCompile>
     <ClCompile Include="SpriteActor.cpp">
       <Filter>ACTORS</Filter>
@@ -275,52 +215,15 @@
     </ClCompile>
     <ClCompile Include="ProjectileMovingState.cpp" />
     <ClCompile Include="ProjectileCollidedState.cpp" />
+    <ClCompile Include="BoxerUltimateState.cpp" />
+    <ClCompile Include="PlayerHittedState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WindHashashin.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
     <ClInclude Include="Ground.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="FireKnight.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="Boxer.h">
       <Filter>ENTITY</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxerUltimateProjectile.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="RunningState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="FallingState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="IdleState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpingState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="RollingState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackingState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="HittedState.h">
-      <Filter>STATE PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="DeadState.h">
-      <Filter>STATE PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="BackgroundUI.h">
       <Filter>UI</Filter>
@@ -367,9 +270,6 @@
     <ClInclude Include="ButtonAuxState.h">
       <Filter>STATE</Filter>
     </ClInclude>
-    <ClInclude Include="Hoodie.h">
-      <Filter>ENTITY</Filter>
-    </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>OTHERS</Filter>
     </ClInclude>
@@ -378,9 +278,6 @@
     </ClInclude>
     <ClInclude Include="AttackHitbox.h">
       <Filter>OTHERS</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>STATE PATTERN</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>COMPONENT PATTERN</Filter>
@@ -422,21 +319,6 @@
       <Filter>NEW ANIMATION MANAGER</Filter>
     </ClInclude>
     <ClInclude Include="SpriteActor.h">
-      <Filter>ACTORS</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedActor.h">
-      <Filter>ACTORS</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterWithProjectiles.h">
-      <Filter>ACTORS</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderActor.h">
-      <Filter>ACTORS</Filter>
-    </ClInclude>
-    <ClInclude Include="MovableActor.h">
-      <Filter>ACTORS</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapeActor.h">
       <Filter>ACTORS</Filter>
     </ClInclude>
     <ClInclude Include="PlayerPhysicsComponent.h">
@@ -547,5 +429,8 @@
     <ClInclude Include="IProjectileState.h" />
     <ClInclude Include="ProjectileMovingState.h" />
     <ClInclude Include="ProjectileCollidedState.h" />
+    <ClInclude Include="BoxerUltimateState.h" />
+    <ClInclude Include="IProjectileTypeState.h" />
+    <ClInclude Include="PlayerHittedState.h" />
   </ItemGroup>
 </Project>

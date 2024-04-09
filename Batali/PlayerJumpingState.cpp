@@ -2,7 +2,7 @@
 #include "PlayerFallingState.h"
 #include "PlayerIdleState.h"
 #include "PlayerAirAttackingState.h"
-
+#include "PlayerHittedState.h"
 #include "IAnimationComponent.h"
 
 #include "Player.h"
@@ -13,6 +13,16 @@ PlayerJumpingState::PlayerJumpingState()
 
 PlayerJumpingState::~PlayerJumpingState()
 {
+}
+
+std::unique_ptr<IPlayerState> PlayerJumpingState::handleCondition(Player& player, const std::string& condition)
+{
+	if (condition == "HITTED")
+	{
+		return std::make_unique<PlayerHittedState>();
+	}
+
+	return nullptr;
 }
 
 std::unique_ptr<IPlayerState> PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input)

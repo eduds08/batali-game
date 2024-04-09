@@ -23,6 +23,8 @@
 
 #include "World.h"
 
+int Player::s_playerNumberCounter{ 1 };
+
 Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<IAttackComponent> attackComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent, std::unique_ptr<IAnimationComponent> animationComponent)
 	: GameObject{}
 	, m_renderComponent{ std::move(renderComponent) }
@@ -31,7 +33,9 @@ Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_pt
 	, m_attackComponent{ std::move(attackComponent) }
 	, m_launchProjectilesComponent{ std::move(launchProjectilesComponent) }
 	, m_animationComponent{ std::move(animationComponent) }
+	, m_playerNumber{ s_playerNumberCounter }
 {
+	++s_playerNumberCounter;
 }
 
 Player::~Player()
@@ -40,6 +44,8 @@ Player::~Player()
 	m_animationThread.join();
 
 	m_keyBindings.clear();
+
+	--s_playerNumberCounter;
 }
 
 void Player::initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState)
@@ -97,6 +103,18 @@ void Player::render(sf::RenderWindow& window)
 	}
 }
 
+void Player::handleCondition(const std::string& condition)
+{
+	std::unique_ptr<IPlayerState> playerState = m_playerState->handleCondition(*this, condition);
+
+	if (playerState != nullptr)
+	{
+		m_playerState = std::move(playerState);
+
+		m_playerState->enter(*this);
+	}
+}
+
 void Player::handleInput(sf::Keyboard::Scancode input)
 {
 	std::unique_ptr<IPlayerState> playerState = m_playerState->handleInput(*this, input);
@@ -130,7 +148,7 @@ void Player::updateAnimationThread()
 
 void Player::initKeyBindings()
 {
-	if (m_id == 1)
+	if (m_playerNumber == 1)
 	{
 		m_keyBindings.emplace("RUN_LEFT_BUTTON", sf::Keyboard::Scan::A);
 		m_keyBindings.emplace("RUN_RIGHT_BUTTON", sf::Keyboard::Scan::D);
@@ -140,7 +158,7 @@ void Player::initKeyBindings()
 		m_keyBindings.emplace("ROLL_BUTTON", sf::Keyboard::Scan::V);
 		m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::B);
 	}
-	else if (m_id == 2)
+	else if (m_playerNumber == 2)
 	{
 		m_keyBindings.emplace("RUN_LEFT_BUTTON", sf::Keyboard::Scan::Left);
 		m_keyBindings.emplace("RUN_RIGHT_BUTTON", sf::Keyboard::Scan::Right);
@@ -158,4 +176,9 @@ void Player::initKeyBindings()
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), std::make_shared<UltimateCommand>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), std::make_shared<RunLeftCommand>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), std::make_shared<RunRightCommand>());
+}
+
+void Player::takeDamage()
+{
+	std::cout << "took damage\n";
 }
