@@ -95,8 +95,13 @@ void PlayingState::update()
 		}*/
 
 		//player->update(m_window, m_world, m_deltaTime);
+			
+		for (const auto& player : m_world.m_players)
+		{
+			player->update(m_window, m_world, m_deltaTime);
+		}
 
-		m_world.m_players[0]->update(m_window, m_world, m_deltaTime);
+		//m_world.m_players[0]->update(m_window, m_world, m_deltaTime);
 
 		updateView();
 	}
@@ -112,7 +117,11 @@ void PlayingState::render()
 	}*/
 
 	//player->render(m_window);
-	m_world.m_players[0]->render(m_window);
+	for (const auto& player : m_world.m_players)
+	{
+		player->render(m_window);
+	}
+	//m_world.m_players[0]->render(m_window);
 
 	// Render the tiles inside the view's limits
 	for (auto& tile : m_world.m_tiles)

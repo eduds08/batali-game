@@ -37,6 +37,23 @@ void World::init(const std::string& path, const std::string& firstCharacter, con
 		m_players[0]->initChosenCharacter(std::make_unique<BoxerState>());
 	}
 
+	// Initialize Player 2
+	if (secondCharacter == "fire_knight")
+	{
+		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), nullptr, std::make_unique<PlayerAnimationComponent>()));
+		m_players[1]->initChosenCharacter(std::make_unique<FireKnightState>());
+	}
+	else if (secondCharacter == "wind_hashashin")
+	{
+		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), nullptr, std::make_unique<PlayerAnimationComponent>()));
+		m_players[1]->initChosenCharacter(std::make_unique<WindHashashinState>());
+	}
+	else if (secondCharacter == "boxer")
+	{
+		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAttackComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>()));
+		m_players[1]->initChosenCharacter(std::make_unique<BoxerState>());
+	}
+
 	loadTiles(path);
 }
 

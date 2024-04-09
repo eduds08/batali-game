@@ -130,13 +130,26 @@ void Player::updateAnimationThread()
 
 void Player::initKeyBindings()
 {
-	m_keyBindings.emplace("RUN_LEFT_BUTTON", sf::Keyboard::Scan::A);
-	m_keyBindings.emplace("RUN_RIGHT_BUTTON", sf::Keyboard::Scan::D);
-	m_keyBindings.emplace("JUMP_BUTTON", sf::Keyboard::Scan::W);
-	m_keyBindings.emplace("ATTACK_1_BUTTON", sf::Keyboard::Scan::X);
-	m_keyBindings.emplace("ATTACK_2_BUTTON", sf::Keyboard::Scan::C);
-	m_keyBindings.emplace("ROLL_BUTTON", sf::Keyboard::Scan::V);
-	m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::B);
+	if (m_id == 1)
+	{
+		m_keyBindings.emplace("RUN_LEFT_BUTTON", sf::Keyboard::Scan::A);
+		m_keyBindings.emplace("RUN_RIGHT_BUTTON", sf::Keyboard::Scan::D);
+		m_keyBindings.emplace("JUMP_BUTTON", sf::Keyboard::Scan::W);
+		m_keyBindings.emplace("ATTACK_1_BUTTON", sf::Keyboard::Scan::X);
+		m_keyBindings.emplace("ATTACK_2_BUTTON", sf::Keyboard::Scan::C);
+		m_keyBindings.emplace("ROLL_BUTTON", sf::Keyboard::Scan::V);
+		m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::B);
+	}
+	else if (m_id == 2)
+	{
+		m_keyBindings.emplace("RUN_LEFT_BUTTON", sf::Keyboard::Scan::Left);
+		m_keyBindings.emplace("RUN_RIGHT_BUTTON", sf::Keyboard::Scan::Right);
+		m_keyBindings.emplace("JUMP_BUTTON", sf::Keyboard::Scan::Up);
+		m_keyBindings.emplace("ATTACK_1_BUTTON", sf::Keyboard::Scan::I);
+		m_keyBindings.emplace("ATTACK_2_BUTTON", sf::Keyboard::Scan::O);
+		m_keyBindings.emplace("ROLL_BUTTON", sf::Keyboard::Scan::J);
+		m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::K);
+	}
 
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("JUMP_BUTTON"), std::make_shared<JumpCommand>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_1_BUTTON"), std::make_shared<Attack1Command>());
