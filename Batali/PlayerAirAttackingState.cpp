@@ -13,6 +13,8 @@ std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleCondition(Player& p
 	{
 		return std::make_unique<PlayerHittedState>();
 	}
+
+	return nullptr;
 }
 
 std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
