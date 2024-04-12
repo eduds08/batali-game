@@ -1,6 +1,8 @@
 #include "PlayerCollisionComponent.h"
 #include "Player.h"
 
+#include "PlayerAttackComponent.h"
+
 #include "World.h"
 
 PlayerCollisionComponent::PlayerCollisionComponent()
@@ -28,6 +30,19 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 	updateLimits(gameObject);
 
 	m_knockbackVelocity = KNOCKBACK_SPEED;
+
+	for (auto& enemy : world.m_players)
+	{
+		if (enemy->getId() != gameObject.getId())
+		{
+			if (gameObject.getShape().getGlobalBounds().intersects(enemy->getAttackComponent()->getAttackHitbox().getShape().getGlobalBounds()))
+			{
+				std::cout << "tookDamage\n";
+				//takeDamage
+				//knockback
+			}
+		}
+	}
 }
 
 void PlayerCollisionComponent::updateCollisionWith(GameObject& gameObject, const sf::Sprite& other)
