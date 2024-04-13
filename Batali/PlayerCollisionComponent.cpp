@@ -17,6 +17,8 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 {
 	m_isCollidingHorizontally = false;
 
+	m_knockbackVelocity = KNOCKBACK_SPEED;
+
 	// Collision with tiles
 	for (auto& tile : world.m_tiles)
 	{
@@ -29,8 +31,6 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 
 	updateLimits(gameObject);
 
-	m_knockbackVelocity = KNOCKBACK_SPEED;
-
 	Player* player = dynamic_cast<Player*>(&gameObject);
 
 	for (auto& enemy : world.m_players)
@@ -41,10 +41,8 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 			{
 				float attackDirection = enemy->getShape().getPosition().x - player->getShape().getPosition().x;
 
-				player->handleCondition("HITTED");
-				//takeDamage
+				player->handleHitted(*enemy);
 				knockbackMove(gameObject, deltaTime, attackDirection);
-				//knockback
 			}
 		}
 	}

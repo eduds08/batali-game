@@ -103,9 +103,9 @@ void Player::render(sf::RenderWindow& window)
 	}
 }
 
-void Player::handleCondition(const std::string& condition)
+void Player::handleHitted(Player& enemy)
 {
-	std::unique_ptr<IPlayerState> playerState = m_playerState->handleCondition(*this, condition);
+	std::unique_ptr<IPlayerState> playerState = m_playerState->handleHitted(*this, enemy);
 
 	if (playerState != nullptr)
 	{
@@ -178,7 +178,7 @@ void Player::initKeyBindings()
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), std::make_shared<RunRightCommand>());
 }
 
-void Player::takeDamage()
+void Player::takeDamage(Player& enemy)
 {
-	std::cout << "took damage\n";
+	m_hp -= enemy.getAttackComponent()->getAttackHitbox().getDamage();
 }

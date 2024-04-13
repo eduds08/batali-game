@@ -21,14 +21,9 @@ PlayerRunningState::~PlayerRunningState()
 
 }
 
-std::unique_ptr<IPlayerState> PlayerRunningState::handleCondition(Player& player, const std::string& condition)
+std::unique_ptr<IPlayerState> PlayerRunningState::handleHitted(Player& player, Player& enemy)
 {
-	if (condition == "HITTED")
-	{
-		return std::make_unique<PlayerHittedState>();
-	}
-
-	return nullptr;
+	return std::make_unique<PlayerHittedState>(player, enemy);
 }
 
 std::unique_ptr<IPlayerState> PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scancode input)

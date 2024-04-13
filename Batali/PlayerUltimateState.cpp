@@ -4,9 +4,11 @@
 
 #include "IAnimationComponent.h"
 
+#include "PlayerHittedState.h"
+
 #include "Player.h"
 
-std::unique_ptr<IPlayerState> PlayerUltimateState::handleCondition(Player& player, const std::string& condition)
+std::unique_ptr<IPlayerState> PlayerUltimateState::handleHitted(Player& player, Player& enemy)
 {
 	return nullptr;
 }
@@ -18,7 +20,6 @@ std::unique_ptr<IPlayerState> PlayerUltimateState::handleInput(Player& player, s
 
 void PlayerUltimateState::update(Player& player)
 {
-	// immortal logic
 	// hitbox logic
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())

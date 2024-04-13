@@ -4,14 +4,9 @@
 #include "PlayerHittedState.h"
 #include "PlayerIdleState.h"
 
-std::unique_ptr<IPlayerState> PlayerAttackingState::handleCondition(Player& player, const std::string& condition)
+std::unique_ptr<IPlayerState> PlayerAttackingState::handleHitted(Player& player, Player& enemy)
 {
-	if (condition == "HITTED")
-	{
-		return std::make_unique<PlayerHittedState>();
-	}
-
-	return nullptr;
+	return std::make_unique<PlayerHittedState>(player, enemy);
 }
 
 std::unique_ptr<IPlayerState> PlayerAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)

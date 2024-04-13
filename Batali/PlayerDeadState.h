@@ -2,11 +2,15 @@
 
 #include "IPlayerState.h"
 
-class PlayerJumpingState : public IPlayerState
+#include "Constants.h"
+
+using namespace constants;
+
+class PlayerDeadState : public IPlayerState
 {
 public:
-	PlayerJumpingState();
-	virtual ~PlayerJumpingState();
+	PlayerDeadState() = default;
+	virtual ~PlayerDeadState() = default;
 
 	virtual std::unique_ptr<IPlayerState> handleHitted(Player& player, Player& enemy);
 

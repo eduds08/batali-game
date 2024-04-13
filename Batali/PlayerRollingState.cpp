@@ -12,7 +12,7 @@ PlayerRollingState::~PlayerRollingState()
 {
 }
 
-std::unique_ptr<IPlayerState> PlayerRollingState::handleCondition(Player& player, const std::string& condition)
+std::unique_ptr<IPlayerState> PlayerRollingState::handleHitted(Player& player, Player& enemy)
 {
 	return nullptr;
 }

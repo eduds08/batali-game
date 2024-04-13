@@ -96,6 +96,6 @@ void FireKnightState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitb
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
-		enemy.handleCondition("HITTED");
+		//enemy.handleCondition("HITTED");
 	}
 }

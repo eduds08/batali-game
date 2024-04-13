@@ -101,7 +101,7 @@ void WindHashashinState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackH
 		}
 		else
 		{
-			enemy.handleCondition("HITTED");
+			//enemy.handleCondition("HITTED");
 		}
 	}
 }

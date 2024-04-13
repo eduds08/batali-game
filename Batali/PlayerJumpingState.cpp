@@ -15,14 +15,9 @@ PlayerJumpingState::~PlayerJumpingState()
 {
 }
 
-std::unique_ptr<IPlayerState> PlayerJumpingState::handleCondition(Player& player, const std::string& condition)
+std::unique_ptr<IPlayerState> PlayerJumpingState::handleHitted(Player& player, Player& enemy)
 {
-	if (condition == "HITTED")
-	{
-		return std::make_unique<PlayerHittedState>();
-	}
-
-	return nullptr;
+	return std::make_unique<PlayerHittedState>(player, enemy);
 }
 
 std::unique_ptr<IPlayerState> PlayerJumpingState::handleInput(Player& player, sf::Keyboard::Scancode input)

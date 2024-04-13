@@ -32,7 +32,7 @@ public:
 
 	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
 
-	void handleCondition(const std::string& condition);
+	void handleHitted(Player& enemy);
 	void handleInput(sf::Keyboard::Scancode input);
 
 	void setPlayerState(std::unique_ptr<IPlayerState> state);
@@ -50,7 +50,7 @@ public:
 	std::unique_ptr<IAttackComponent>& getAttackComponent() { return m_attackComponent; }
 	std::unique_ptr<ILaunchProjectilesComponent>& getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
 
-	void takeDamage();
+	void takeDamage(Player& enemy);
 
 	/* Damage attributes that will be stored here temporarily */
 	int m_hp{ 1000 };
