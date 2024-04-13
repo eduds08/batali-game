@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-std::unique_ptr<IPlayerState> PlayerDeadState::handleHitted(Player& player, Player& enemy)
+std::unique_ptr<IPlayerState> PlayerDeadState::handleHitted(Player& player, int enemyDamage)
 {
     return nullptr;
 }

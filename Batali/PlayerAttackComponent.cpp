@@ -18,9 +18,9 @@ void PlayerAttackComponent::update(GameObject& gameObject, World& world, float& 
 
 	player->getChosenCharacter()->updateAttackHitbox(*player, m_attackHitbox);
 
-	/*for (auto& enemy : world.m_players)
+	for (auto& enemy : world.m_players)
 	{
 		if (enemy->getId() != player->getId())
 			player->getChosenCharacter()->checkIfIsAttacking(*enemy, m_attackHitbox);
-	}*/
+	}
 }

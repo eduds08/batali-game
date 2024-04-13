@@ -22,9 +22,9 @@ PlayerIdleState::~PlayerIdleState()
 
 }
 
-std::unique_ptr<IPlayerState> PlayerIdleState::handleHitted(Player& player, Player& enemy)
+std::unique_ptr<IPlayerState> PlayerIdleState::handleHitted(Player& player, int enemyDamage)
 {
-	return std::make_unique<PlayerHittedState>(player, enemy);
+	return std::make_unique<PlayerHittedState>(player, enemyDamage);
 }
 
 std::unique_ptr<IPlayerState> PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)

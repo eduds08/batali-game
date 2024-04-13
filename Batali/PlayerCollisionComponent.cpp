@@ -40,8 +40,6 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 			if (gameObject.getShape().getGlobalBounds().intersects(enemy->getAttackComponent()->getAttackHitbox().getShape().getGlobalBounds()))
 			{
 				float attackDirection = enemy->getShape().getPosition().x - player->getShape().getPosition().x;
-
-				player->handleHitted(*enemy);
 				knockbackMove(gameObject, deltaTime, attackDirection);
 			}
 		}

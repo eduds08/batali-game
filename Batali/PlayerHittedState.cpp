@@ -6,12 +6,12 @@
 #include "PlayerDeadState.h"
 #include "Player.h"
 
-PlayerHittedState::PlayerHittedState(Player& player, Player& enemy)
+PlayerHittedState::PlayerHittedState(Player& player, int enemyDamage)
 {
-	player.takeDamage(enemy);
+	player.takeDamage(enemyDamage);
 }
 
-std::unique_ptr<IPlayerState> PlayerHittedState::handleHitted(Player& player, Player& enemy)
+std::unique_ptr<IPlayerState> PlayerHittedState::handleHitted(Player& player, int enemyDamage)
 {
 	return nullptr;
 }

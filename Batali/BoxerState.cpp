@@ -87,6 +87,6 @@ void BoxerState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
-		//enemy.handleCondition("HITTED");
+		enemy.handleHitted(attackHitbox.getDamage());
 	}
 }

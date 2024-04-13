@@ -20,6 +20,7 @@ void ProjectileCollisionComponent::update(GameObject& gameObject, World& world, 
 			if (gameObject.getShape().getGlobalBounds().intersects(player->getShape().getGlobalBounds()))
 			{
 				projectile->setCollided(true);
+				player->handleHitted(projectile->getDamage());
 				// logic to hit the enemy here
 			}
 		}

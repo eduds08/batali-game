@@ -21,9 +21,9 @@ PlayerRunningState::~PlayerRunningState()
 
 }
 
-std::unique_ptr<IPlayerState> PlayerRunningState::handleHitted(Player& player, Player& enemy)
+std::unique_ptr<IPlayerState> PlayerRunningState::handleHitted(Player& player, int enemyDamage)
 {
-	return std::make_unique<PlayerHittedState>(player, enemy);
+	return std::make_unique<PlayerHittedState>(player, enemyDamage);
 }
 
 std::unique_ptr<IPlayerState> PlayerRunningState::handleInput(Player& player, sf::Keyboard::Scancode input)
