@@ -90,7 +90,7 @@ void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox& attack
 	attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
 }
 
-void WindHashashinState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitbox)
+void WindHashashinState::checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
@@ -101,7 +101,9 @@ void WindHashashinState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackH
 		}
 		else
 		{
+			float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
 			enemy.handleHitted(attackHitbox.getDamage());
+			enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
 		}
 	}
 }

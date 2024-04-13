@@ -24,6 +24,6 @@ void HoodieState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
 {
 }
 
-void HoodieState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitbox)
+void HoodieState::checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox& attackHitbox)
 {
 }

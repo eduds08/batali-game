@@ -16,8 +16,8 @@ PlayerCollisionComponent::~PlayerCollisionComponent()
 void PlayerCollisionComponent::update(GameObject& gameObject, World& world, float& deltaTime)
 {
 	m_isCollidingHorizontally = false;
-
-	m_knockbackVelocity = KNOCKBACK_SPEED;
+	
+	//m_knockbackVelocity = KNOCKBACK_SPEED;
 
 	// Collision with tiles
 	for (auto& tile : world.m_tiles)
@@ -31,7 +31,7 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 
 	updateLimits(gameObject);
 
-	Player* player = dynamic_cast<Player*>(&gameObject);
+	/*Player* player = dynamic_cast<Player*>(&gameObject);
 
 	for (auto& enemy : world.m_players)
 	{
@@ -43,7 +43,10 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 				knockbackMove(gameObject, deltaTime, attackDirection);
 			}
 		}
-	}
+	}*/
+	knockbackMove(gameObject, deltaTime);
+
+	dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity = 0.f;
 }
 
 void PlayerCollisionComponent::updateCollisionWith(GameObject& gameObject, const sf::Sprite& other)
@@ -111,7 +114,7 @@ void PlayerCollisionComponent::handleCollision(GameObject& gameObject)
 	// Sets knockbackVelocity to 0 if actor is pushed against a wall after being attacked
 	if (m_isCollidingHorizontally)
 	{
-		m_knockbackVelocity = 0.f;
+		dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity = 0.f;
 	}
 }
 
@@ -125,18 +128,11 @@ void PlayerCollisionComponent::updateLimits(GameObject& gameObject)
 	m_shapeLimits[3] = gameObject.getShape().getPosition().x - TILES_PHYSICAL_ACTOR_LIMIT * TILE_SIZE_FLOAT;	// LEFT
 }
 
-void PlayerCollisionComponent::knockbackMove(GameObject& gameObject, float& deltaTime, float attackDirection)
+void PlayerCollisionComponent::knockbackMove(GameObject& gameObject, float& deltaTime)
 {
-	if (attackDirection < 0.f)
-	{
-		// attack coming from left
-		gameObject.getShape().move(sf::Vector2f{ m_knockbackVelocity, 0.f } *deltaTime);
-	}
-	else
-	{
-		// attack coming from right
-		gameObject.getShape().move(sf::Vector2f{ m_knockbackVelocity * -1.f, 0.f } *deltaTime);
-	}
+	if (dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity != 0.f)
+		std::cout << dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity << "\n";
+	gameObject.getShape().move(sf::Vector2f{ dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity, 0.f } *deltaTime);
 
 	gameObject.getSprite().setPosition(sf::Vector2f{ gameObject.getShape().getPosition().x, gameObject.getShape().getPosition().y - (gameObject.getSprite().getTextureRect().getSize().y - gameObject.getShape().getSize().y) / 2.f});
 }

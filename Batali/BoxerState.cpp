@@ -83,10 +83,12 @@ void BoxerState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
 	attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
 }
 
-void BoxerState::checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitbox)
+void BoxerState::checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
+		float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
 		enemy.handleHitted(attackHitbox.getDamage());
+		enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
 	}
 }

@@ -54,6 +54,7 @@ public:
 
 	/* Damage attributes that will be stored here temporarily */
 	int m_hp{ 1000 };
+	float m_knockbackVelocity{ 0.f };
 
 private:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };

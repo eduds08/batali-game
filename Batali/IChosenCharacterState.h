@@ -15,5 +15,5 @@ public:
 
 	virtual void updateAttackHitbox(Player& player, AttackHitbox& attackHitbox) = 0;
 
-	virtual void checkIfIsAttacking(Player& enemy, AttackHitbox& attackHitbox) = 0;
+	virtual void checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox& attackHitbox) = 0;
 };
