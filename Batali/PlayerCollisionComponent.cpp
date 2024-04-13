@@ -31,14 +31,19 @@ void PlayerCollisionComponent::update(GameObject& gameObject, World& world, floa
 
 	m_knockbackVelocity = KNOCKBACK_SPEED;
 
+	Player* player = dynamic_cast<Player*>(&gameObject);
+
 	for (auto& enemy : world.m_players)
 	{
 		if (enemy->getId() != gameObject.getId())
 		{
 			if (gameObject.getShape().getGlobalBounds().intersects(enemy->getAttackComponent()->getAttackHitbox().getShape().getGlobalBounds()))
 			{
-				std::cout << "tookDamage\n";
+				float attackDirection = enemy->getShape().getPosition().x - player->getShape().getPosition().x;
+
+				player->handleCondition("HITTED");
 				//takeDamage
+				knockbackMove(gameObject, deltaTime, attackDirection);
 				//knockback
 			}
 		}
