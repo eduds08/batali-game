@@ -25,6 +25,11 @@ std::unique_ptr<IPlayerState> PlayerHittedState::handleInput(Player& player, sf:
 
 void PlayerHittedState::update(Player& player)
 {
+	if (m_frozen)
+	{
+		player.setVelocity({ 0.f, 0.f });
+	}
+
 	if (player.m_hp <= 0)
 	{
 		player.setPlayerState(std::make_unique<PlayerDeadState>());
@@ -38,5 +43,6 @@ void PlayerHittedState::update(Player& player)
 
 void PlayerHittedState::enter(Player& player)
 {
-	player.getAnimationComponent()->setNewAnimation(player, HITTED_ANIMATION, false);
+
+	player.getAnimationComponent()->setNewAnimation(player, m_fastHit ? FAST_HITTED_ANIMATION : HITTED_ANIMATION, false);
 }

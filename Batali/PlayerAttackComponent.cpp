@@ -23,4 +23,15 @@ void PlayerAttackComponent::update(GameObject& gameObject, World& world, float& 
 		if (enemy->getId() != player->getId())
 			player->getChosenCharacter()->checkIfIsAttacking(*player, *enemy, m_attackHitbox);
 	}
+
+	knockbackMove(gameObject, deltaTime);
+
+	dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity = 0.f;
+}
+
+void PlayerAttackComponent::knockbackMove(GameObject& gameObject, float& deltaTime)
+{
+	gameObject.getShape().move(sf::Vector2f{ dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity, 0.f } *deltaTime);
+
+	gameObject.getSprite().setPosition(sf::Vector2f{ gameObject.getShape().getPosition().x, gameObject.getShape().getPosition().y - (gameObject.getSprite().getTextureRect().getSize().y - gameObject.getShape().getSize().y) / 2.f });
 }
