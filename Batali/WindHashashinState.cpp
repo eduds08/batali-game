@@ -61,6 +61,8 @@ void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox& attack
 	{
 		attackHitbox.setDamage(WIND_HASHASHIN_ULTIMATE_DAMAGE);
 
+		attackHitbox.setIsUltimateActivate(false);
+
 		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME)
 		{
 			attackHitbox.setShapeSize(player.getShape().getSize());
@@ -85,6 +87,10 @@ void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox& attack
 			attackHitbox.setDamage(0);
 		}
 	}
+	else
+	{
+		m_activateUltimate = false;
+	}
 
 	attackHitbox.setShapeOrigin(0.f, attackHitbox.getShapeSize().y / 2.f);
 	attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
@@ -97,13 +103,18 @@ void WindHashashinState::checkIfIsAttacking(Player& player, Player& enemy, Attac
 		if (attackHitbox.getIsUltimateActivate())
 		{
 			// enemy->teleport to wind_hashashin and sets FastHit
-			std::cout << "wind_hashashin ultimate_activate\n";
+			enemy.getShape().setPosition(player.getShape().getPosition());
+			enemy.getSprite().setPosition(enemy.getShape().getPosition() + sf::Vector2f{ 0.f, -(enemy.getSprite().getTextureRect().getSize().y - enemy.getShape().getSize().y) / 2.f });
+			m_activateUltimate = true;
 		}
 		else
 		{
 			float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
 			enemy.handleHitted(attackHitbox.getDamage());
-			enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
+			if (attackDirection != 0.f)
+			{
+				enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
+			}
 		}
 	}
 }

@@ -103,9 +103,9 @@ void Player::render(sf::RenderWindow& window)
 	}
 }
 
-void Player::handleHitted(int enemyDamage)
+void Player::handleHitted(int enemyDamage, bool fastHit, bool frozen)
 {
-	std::unique_ptr<IPlayerState> playerState = m_playerState->handleHitted(*this, enemyDamage);
+	std::unique_ptr<IPlayerState> playerState = m_playerState->handleHitted(*this, enemyDamage, fastHit, frozen);
 
 	if (playerState != nullptr)
 	{
