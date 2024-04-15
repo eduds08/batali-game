@@ -26,20 +26,20 @@ public:
 	virtual ~Player();
 
 	void initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState);
+	void initKeyBindings();
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
 	virtual void render(sf::RenderWindow& window);
 
-	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
+	void handleHitted(int enemyDamage, float knockbackVelocity);
 
-	void handleHitted(int enemyDamage, float knockbackVelocity, bool fastHit = false, bool frozen = false);
 	void handleInput(sf::Keyboard::Scancode input);
 
 	void setPlayerState(std::unique_ptr<IPlayerState> state);
 
 	void updateAnimationThread();
 
-	void initKeyBindings();
+	void takeDamage(int enemyDamage);
 
 	std::unique_ptr<IAnimationComponent>& getAnimationComponent() { return m_animationComponent; }
 
@@ -48,12 +48,12 @@ public:
 	sf::Keyboard::Scancode getKeyBinding(const std::string& keyBinding) { return m_keyBindings.at(keyBinding); }
 
 	std::unique_ptr<IAttackComponent>& getAttackComponent() { return m_attackComponent; }
+
 	std::unique_ptr<ILaunchProjectilesComponent>& getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
 
-	void takeDamage(int enemyDamage);
+	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
 
-	/* Damage attributes that will be stored here temporarily */
-	int m_hp{ 1000 };
+	int m_hp{ 500 };
 	float m_knockbackVelocity{ 0.f };
 
 private:

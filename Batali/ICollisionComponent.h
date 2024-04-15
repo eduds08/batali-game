@@ -8,5 +8,5 @@ class ICollisionComponent
 public:
 	virtual ~ICollisionComponent() = default;
 
-	virtual void update(GameObject& gameObject, World& world, float& deltaTime) = 0;
+	virtual void update(GameObject& gameObject, World& world) = 0;
 };

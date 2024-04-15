@@ -5,15 +5,7 @@
 
 #include "World.h"
 
-PlayerCollisionComponent::PlayerCollisionComponent()
-{
-}
-
-PlayerCollisionComponent::~PlayerCollisionComponent()
-{
-}
-
-void PlayerCollisionComponent::update(GameObject& gameObject, World& world, float& deltaTime)
+void PlayerCollisionComponent::update(GameObject& gameObject, World& world)
 {
 	m_isCollidingHorizontally = false;
 

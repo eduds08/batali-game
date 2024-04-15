@@ -113,7 +113,7 @@ void WindHashashinState::checkIfIsAttacking(Player& player, Player& enemy, Attac
 
 			float knockbackVelocity = attackDirection != 0.f ? KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)) : 0.f;
 
-			enemy.handleHitted(attackHitbox.getDamage(), knockbackVelocity, m_activateUltimate, m_activateUltimate);
+			enemy.handleHitted(attackHitbox.getDamage(), knockbackVelocity);
 
 			if (enemy.m_knockbackVelocity == 0.f)
 			{

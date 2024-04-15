@@ -12,8 +12,8 @@ using namespace constants;
 class PlayerAnimationComponent : public IAnimationComponent
 {
 public:
-	PlayerAnimationComponent();
-	virtual ~PlayerAnimationComponent();
+	PlayerAnimationComponent() = default;
+	virtual ~PlayerAnimationComponent() = default;
 
 	void initTextures(GameObject& gameObject);
 

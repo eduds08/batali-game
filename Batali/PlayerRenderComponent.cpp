@@ -6,16 +6,6 @@
 
 #include "Player.h"
 
-PlayerRenderComponent::PlayerRenderComponent()
-{
-
-}
-
-PlayerRenderComponent::~PlayerRenderComponent()
-{
-
-}
-
 void PlayerRenderComponent::render(GameObject& gameObject, sf::RenderWindow& window)
 {
 	window.draw(gameObject.getShape());

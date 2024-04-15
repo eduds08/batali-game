@@ -71,7 +71,7 @@ void Player::initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCh
 
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
-	m_collisionComponent->update(*this, world, deltaTime);
+	m_collisionComponent->update(*this, world);
 
 	m_inputHandler.handleInput(*this);
 
@@ -98,16 +98,11 @@ void Player::render(sf::RenderWindow& window)
 	}
 }
 
-void Player::handleHitted(int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
+void Player::handleHitted(int enemyDamage, float knockbackVelocity)
 {
-	std::unique_ptr<IPlayerState> playerState = m_playerState->handleHitted(*this, enemyDamage, knockbackVelocity, fastHit, frozen);
+	std::unique_ptr<IPlayerState> playerState = m_playerState->handleHitted(*this, enemyDamage, knockbackVelocity);
 
-	if (playerState != nullptr)
-	{
-		m_playerState = std::move(playerState);
-
-		m_playerState->enter(*this);
-	}
+	setPlayerState(std::move(playerState));
 }
 
 void Player::handleInput(sf::Keyboard::Scancode input)

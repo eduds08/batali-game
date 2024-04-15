@@ -7,7 +7,7 @@
 
 #include "World.h"
 
-void ProjectileCollisionComponent::update(GameObject& gameObject, World& world, float& deltaTime)
+void ProjectileCollisionComponent::update(GameObject& gameObject, World& world)
 {
 	Projectile* projectile = dynamic_cast<Projectile*>(&gameObject);
 

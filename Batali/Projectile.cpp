@@ -79,7 +79,7 @@ void Projectile::update(sf::RenderWindow& window, World& world, float& deltaTime
 {
 	m_projectileState->update(*this);
 
-	m_collisionComponent->update(*this, world, deltaTime);
+	m_collisionComponent->update(*this, world);
 
 	m_physicsComponent->update(*this, deltaTime);
 }

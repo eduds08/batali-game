@@ -4,15 +4,17 @@
 
 #include "Constants.h"
 
+class Player;
+
 using namespace constants;
 
 class PlayerCollisionComponent : public ICollisionComponent
 {
 public:
-	PlayerCollisionComponent();
-	virtual ~PlayerCollisionComponent();
+	PlayerCollisionComponent() = default;
+	virtual ~PlayerCollisionComponent() = default;
 
-	virtual void update(GameObject& gameObject, World& world, float& deltaTime);
+	virtual void update(GameObject& gameObject, World& world);
 
 	void updateCollisionWith(GameObject& gameObject, const sf::Sprite& other);
 

@@ -2,14 +2,6 @@
 
 #include "Player.h"
 
-PlayerAnimationComponent::PlayerAnimationComponent()
-{
-}
-
-PlayerAnimationComponent::~PlayerAnimationComponent()
-{
-}
-
 void PlayerAnimationComponent::initTextures(GameObject& gameObject)
 {
 	for (auto& playerAnimationName : m_playerAnimationNames)

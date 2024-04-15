@@ -8,5 +8,5 @@ public:
 	ProjectileCollisionComponent() = default;
 	virtual ~ProjectileCollisionComponent() = default;
 
-	virtual void update(GameObject& gameObject, World& world, float& deltaTime);
+	virtual void update(GameObject& gameObject, World& world);
 };

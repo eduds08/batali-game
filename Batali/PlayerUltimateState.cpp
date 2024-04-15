@@ -8,7 +8,7 @@
 
 #include "Player.h"
 
-std::unique_ptr<IPlayerState> PlayerUltimateState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerUltimateState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity)
 {
 	return nullptr;
 }

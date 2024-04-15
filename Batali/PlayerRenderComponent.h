@@ -8,8 +8,8 @@
 class PlayerRenderComponent : public IRenderComponent
 {
 public:
-	PlayerRenderComponent();
-	virtual ~PlayerRenderComponent();
+	PlayerRenderComponent() = default;
+	virtual ~PlayerRenderComponent() = default;
 
 	virtual void render(GameObject& gameObject, sf::RenderWindow& window);
 };

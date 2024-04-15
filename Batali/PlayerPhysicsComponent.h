@@ -5,8 +5,8 @@
 class PlayerPhysicsComponent : public IPhysicsComponent
 {
 public:
-	PlayerPhysicsComponent();
-	virtual ~PlayerPhysicsComponent();
+	PlayerPhysicsComponent() = default;
+	virtual ~PlayerPhysicsComponent() = default;
 
 	virtual void update(GameObject& gameObject, float& deltaTime);
 

@@ -6,16 +6,14 @@
 #include "PlayerDeadState.h"
 #include "Player.h"
 
-PlayerHittedState::PlayerHittedState(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
-	: m_fastHit{ fastHit }
-	, m_frozen{ frozen }
-	, m_knockbackVelocity{ knockbackVelocity }
+PlayerHittedState::PlayerHittedState(Player& player, int enemyDamage, float knockbackVelocity)
+	: m_knockbackVelocity{ knockbackVelocity }
 {
 	player.m_knockbackVelocity = m_knockbackVelocity;
 	player.takeDamage(enemyDamage);
 }
 
-std::unique_ptr<IPlayerState> PlayerHittedState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerHittedState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity)
 {
 	return nullptr;
 }
@@ -27,13 +25,6 @@ std::unique_ptr<IPlayerState> PlayerHittedState::handleInput(Player& player, sf:
 
 void PlayerHittedState::update(Player& player)
 {
-	if (m_frozen)
-	{
-		player.setVelocity({ 0.f, 0.f });
-	}
-
-	//player.m_knockbackVelocity = m_knockbackVelocity;
-
 	if (player.m_hp <= 0)
 	{
 		player.setPlayerState(std::make_unique<PlayerDeadState>());
@@ -47,5 +38,5 @@ void PlayerHittedState::update(Player& player)
 
 void PlayerHittedState::enter(Player& player)
 {
-	player.getAnimationComponent()->setNewAnimation(player, m_fastHit ? FAST_HITTED_ANIMATION : HITTED_ANIMATION, false);
+	player.getAnimationComponent()->setNewAnimation(player, HITTED_ANIMATION, false);
 }

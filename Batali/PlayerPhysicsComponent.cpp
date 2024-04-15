@@ -2,25 +2,19 @@
 
 #include "GameObject.h"
 
-PlayerPhysicsComponent::PlayerPhysicsComponent()
-{
-}
-
-PlayerPhysicsComponent::~PlayerPhysicsComponent()
-{
-}
-
 void PlayerPhysicsComponent::update(GameObject& gameObject, float& deltaTime)
 {
+	// Add gravity
 	gameObject.setVelocity(gameObject.getVelocity().x, gameObject.getVelocity().y + GRAVITY * deltaTime);
-	//gameObject.getVelocity().y += GRAVITY * deltaTime;
 
+	// Flip sprite according to m_facingRight
 	gameObject.updateFlip();
 
+	// Moves shape and sprite
 	move(gameObject, deltaTime);
 
+	// Resets x-velocity to zero
 	gameObject.setVelocity(0.f, gameObject.getVelocity().y);
-	//gameObject.getVelocity().x = 0.f;
 }
 
 void PlayerPhysicsComponent::move(GameObject& gameObject, float& deltaTime)

@@ -4,9 +4,9 @@
 #include "PlayerHittedState.h"
 #include "PlayerIdleState.h"
 
-std::unique_ptr<IPlayerState> PlayerAttackingState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerAttackingState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity)
 {
-	return std::make_unique<PlayerHittedState>(player, enemyDamage, knockbackVelocity, fastHit, frozen);
+	return std::make_unique<PlayerHittedState>(player, enemyDamage, knockbackVelocity);
 }
 
 std::unique_ptr<IPlayerState> PlayerAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
@@ -16,8 +16,6 @@ std::unique_ptr<IPlayerState> PlayerAttackingState::handleInput(Player& player, 
 
 void PlayerAttackingState::update(Player& player)
 {
-    // hitbox logic...
-
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
 		player.setPlayerState(std::make_unique<PlayerIdleState>());
