@@ -24,9 +24,14 @@ void PlayerAttackComponent::update(GameObject& gameObject, World& world, float& 
 			player->getChosenCharacter()->checkIfIsAttacking(*player, *enemy, m_attackHitbox);
 	}
 
+	if (player->m_hp <= 0)
+	{
+		player->m_knockbackVelocity = 0.f;
+	}
+
 	knockbackMove(gameObject, deltaTime);
 
-	dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity = 0.f;
+	player->m_knockbackVelocity = 0.f;
 }
 
 void PlayerAttackComponent::knockbackMove(GameObject& gameObject, float& deltaTime)

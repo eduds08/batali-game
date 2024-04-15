@@ -88,7 +88,10 @@ void BoxerState::checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox&
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
 		float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
-		enemy.handleHitted(attackHitbox.getDamage());
-		enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
+		enemy.handleHitted(attackHitbox.getDamage(), KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
+		if (enemy.m_knockbackVelocity == 0.f)
+		{
+			enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
+		}
 	}
 }

@@ -7,9 +7,9 @@
 
 #include "Player.h"
 
-std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleHitted(Player& player, int enemyDamage, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
 {
-	return std::make_unique<PlayerHittedState>(player, enemyDamage, fastHit, frozen);
+	return std::make_unique<PlayerHittedState>(player, enemyDamage, knockbackVelocity, fastHit, frozen);
 }
 
 std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)

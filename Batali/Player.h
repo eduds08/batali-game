@@ -32,7 +32,7 @@ public:
 
 	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
 
-	void handleHitted(int enemyDamage, bool fastHit = false, bool frozen = false);
+	void handleHitted(int enemyDamage, float knockbackVelocity, bool fastHit = false, bool frozen = false);
 	void handleInput(sf::Keyboard::Scancode input);
 
 	void setPlayerState(std::unique_ptr<IPlayerState> state);

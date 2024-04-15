@@ -6,14 +6,16 @@
 #include "PlayerDeadState.h"
 #include "Player.h"
 
-PlayerHittedState::PlayerHittedState(Player& player, int enemyDamage, bool fastHit, bool frozen)
+PlayerHittedState::PlayerHittedState(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
 	: m_fastHit{ fastHit }
 	, m_frozen{ frozen }
+	, m_knockbackVelocity{ knockbackVelocity }
 {
+	player.m_knockbackVelocity = m_knockbackVelocity;
 	player.takeDamage(enemyDamage);
 }
 
-std::unique_ptr<IPlayerState> PlayerHittedState::handleHitted(Player& player, int enemyDamage, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerHittedState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
 {
 	return nullptr;
 }
@@ -29,6 +31,8 @@ void PlayerHittedState::update(Player& player)
 	{
 		player.setVelocity({ 0.f, 0.f });
 	}
+
+	//player.m_knockbackVelocity = m_knockbackVelocity;
 
 	if (player.m_hp <= 0)
 	{

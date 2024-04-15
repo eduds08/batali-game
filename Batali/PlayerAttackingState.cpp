@@ -4,9 +4,9 @@
 #include "PlayerHittedState.h"
 #include "PlayerIdleState.h"
 
-std::unique_ptr<IPlayerState> PlayerAttackingState::handleHitted(Player& player, int enemyDamage, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerAttackingState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
 {
-	return std::make_unique<PlayerHittedState>(player, enemyDamage, fastHit, frozen);
+	return std::make_unique<PlayerHittedState>(player, enemyDamage, knockbackVelocity, fastHit, frozen);
 }
 
 std::unique_ptr<IPlayerState> PlayerAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)

@@ -8,7 +8,7 @@
 
 #include "Player.h"
 
-std::unique_ptr<IPlayerState> PlayerUltimateState::handleHitted(Player& player, int enemyDamage, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerUltimateState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
 {
 	return nullptr;
 }
@@ -20,7 +20,7 @@ std::unique_ptr<IPlayerState> PlayerUltimateState::handleInput(Player& player, s
 
 void PlayerUltimateState::update(Player& player)
 {
-	// hitbox logic
+	player.m_knockbackVelocity = 0.f;
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{

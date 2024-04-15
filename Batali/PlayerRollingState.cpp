@@ -12,7 +12,7 @@ PlayerRollingState::~PlayerRollingState()
 {
 }
 
-std::unique_ptr<IPlayerState> PlayerRollingState::handleHitted(Player& player, int enemyDamage, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerRollingState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
 {
 	return nullptr;
 }
@@ -25,6 +25,8 @@ std::unique_ptr<IPlayerState> PlayerRollingState::handleInput(Player& player, sf
 void PlayerRollingState::update(Player& player)
 {
 	player.getVelocity().x = player.getFacingRight() * 230.f;
+
+	player.m_knockbackVelocity = 0.f;
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{

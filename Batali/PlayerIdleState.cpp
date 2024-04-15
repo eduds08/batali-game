@@ -22,9 +22,9 @@ PlayerIdleState::~PlayerIdleState()
 
 }
 
-std::unique_ptr<IPlayerState> PlayerIdleState::handleHitted(Player& player, int enemyDamage, bool fastHit, bool frozen)
+std::unique_ptr<IPlayerState> PlayerIdleState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity, bool fastHit, bool frozen)
 {
-	return std::make_unique<PlayerHittedState>(player, enemyDamage, fastHit, frozen);
+	return std::make_unique<PlayerHittedState>(player, enemyDamage, knockbackVelocity, fastHit, frozen);
 }
 
 std::unique_ptr<IPlayerState> PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)
