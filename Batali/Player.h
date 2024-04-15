@@ -77,7 +77,4 @@ private:
 
 	static int s_playerNumberCounter;
 	const int m_playerNumber;
-
-
-	
 };

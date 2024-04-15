@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Player.h"
+
 InputHandler::InputHandler()
 {
 }
@@ -11,15 +13,13 @@ InputHandler::~InputHandler()
 	m_bindCommands.clear();
 }
 
-std::shared_ptr<ICommand> InputHandler::handleInput()
+void InputHandler::handleInput(Player& player)
 {
 	for (const auto& bindCommand : m_bindCommands)
 	{
 		if (sf::Keyboard::isKeyPressed(bindCommand.first))
 		{
-			return bindCommand.second;
+			bindCommand.second->execute(player);
 		}
 	}
-
-	return nullptr;
 }

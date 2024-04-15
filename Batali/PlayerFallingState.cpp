@@ -24,17 +24,6 @@ std::unique_ptr<IPlayerState> PlayerFallingState::handleInput(Player& player, sf
 
 void PlayerFallingState::update(Player& player)
 {
-	if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_RIGHT_BUTTON")))
-	{
-		player.setFacingRight(1);
-		player.getVelocity().x = 200.f * player.getFacingRight();
-	}
-	else if (sf::Keyboard::isKeyPressed(player.getKeyBinding("RUN_LEFT_BUTTON")))
-	{
-		player.setFacingRight(-1);
-		player.getVelocity().x = 200.f * player.getFacingRight();
-	}
-
 	if (player.getVelocity().y == 0.f)
 	{
 		player.setPlayerState(std::make_unique<PlayerIdleState>());

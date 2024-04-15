@@ -73,12 +73,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
 	m_collisionComponent->update(*this, world, deltaTime);
 
-	std::shared_ptr<ICommand> command = m_inputHandler.handleInput();
-
-	if (command)
-	{
-		command->execute(*this);
-	}
+	m_inputHandler.handleInput(*this);
 
 	m_playerState->update(*this);
 
@@ -169,13 +164,13 @@ void Player::initKeyBindings()
 		m_keyBindings.emplace("ULTIMATE_BUTTON", sf::Keyboard::Scan::K);
 	}
 
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), std::make_shared<RunLeftCommand>());
+	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), std::make_shared<RunRightCommand>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("JUMP_BUTTON"), std::make_shared<JumpCommand>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_1_BUTTON"), std::make_shared<Attack1Command>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ATTACK_2_BUTTON"), std::make_shared<Attack2Command>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ROLL_BUTTON"), std::make_shared<RollCommand>());
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), std::make_shared<UltimateCommand>());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_LEFT_BUTTON"), std::make_shared<RunLeftCommand>());
-	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("RUN_RIGHT_BUTTON"), std::make_shared<RunRightCommand>());
 }
 
 void Player::takeDamage(int enemyDamage)

@@ -43,6 +43,5 @@ void PlayerHittedState::update(Player& player)
 
 void PlayerHittedState::enter(Player& player)
 {
-
 	player.getAnimationComponent()->setNewAnimation(player, m_fastHit ? FAST_HITTED_ANIMATION : HITTED_ANIMATION, false);
 }

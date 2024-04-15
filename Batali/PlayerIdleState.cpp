@@ -35,12 +35,10 @@ std::unique_ptr<IPlayerState> PlayerIdleState::handleInput(Player& player, sf::K
 	}
 	else if (input == player.getKeyBinding("RUN_RIGHT_BUTTON"))
 	{
-		player.setFacingRight(1);
 		return std::make_unique<PlayerRunningState>();
 	}
 	else if (input == player.getKeyBinding("RUN_LEFT_BUTTON"))
 	{
-		player.setFacingRight(-1);
 		return std::make_unique<PlayerRunningState>();
 	}
 	else if (input == player.getKeyBinding("ROLL_BUTTON"))
