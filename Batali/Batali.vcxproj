@@ -203,7 +203,6 @@
     <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="BoxerState.h" />
     <ClInclude Include="BoxerUltimateState.h" />
-    <ClInclude Include="CommitTest.h" />
     <ClInclude Include="FireKnightState.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PlayerDeadState.h" />
