@@ -6,6 +6,10 @@
 #include <iostream>
 
 
+void WindHashashinState::update(Player& player, World& world, float& deltaTime)
+{
+}
+
 void WindHashashinState::enter(Player& player)
 {
 	player.setSpriteSize(sf::Vector2i{ WIND_HASHASHIN_SPRITE_WIDTH, WIND_HASHASHIN_SPRITE_HEIGHT });
@@ -96,29 +100,33 @@ void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox& attack
 	attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
 }
 
-void WindHashashinState::checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox& attackHitbox)
+bool WindHashashinState::checkIfIsAttacking(Player& player, Player& enemy, const AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
-		if (attackHitbox.getIsUltimateActivate())
-		{
-			// enemy->teleport to wind_hashashin and sets FastHit
-			enemy.getShape().setPosition(player.getShape().getPosition());
-			enemy.getSprite().setPosition(enemy.getShape().getPosition() + sf::Vector2f{ 0.f, -(enemy.getSprite().getTextureRect().getSize().y - enemy.getShape().getSize().y) / 2.f });
-			m_activateUltimate = true;
-		}
-		else
-		{
-			float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
+		return true;
 
-			float knockbackVelocity = attackDirection != 0.f ? KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)) : 0.f;
+		//if (attackHitbox.getIsUltimateActivate())
+		//{
+		//	// enemy->teleport to wind_hashashin and sets FastHit
+		//	enemy.getShape().setPosition(player.getShape().getPosition());
+		//	enemy.getSprite().setPosition(enemy.getShape().getPosition() + sf::Vector2f{ 0.f, -(enemy.getSprite().getTextureRect().getSize().y - enemy.getShape().getSize().y) / 2.f });
+		//	m_activateUltimate = true;
+		//}
+		//else
+		//{
+		//	float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
 
-			enemy.handleHitted(attackHitbox.getDamage(), knockbackVelocity);
+		//	float knockbackVelocity = attackDirection != 0.f ? KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)) : 0.f;
 
-			if (enemy.m_knockbackVelocity == 0.f)
-			{
-				enemy.m_knockbackVelocity = knockbackVelocity;
-			}
-		}
+		//	enemy.handleHitted(attackHitbox.getDamage(), knockbackVelocity);
+
+		//	if (enemy.m_knockbackVelocity == 0.f)
+		//	{
+		//		enemy.m_knockbackVelocity = knockbackVelocity;
+		//	}
+		//}
 	}
+
+	return false;
 }

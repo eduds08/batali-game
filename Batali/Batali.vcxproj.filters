@@ -1,46 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ENTITY">
-      <UniqueIdentifier>{730e9c71-ba96-4042-b945-3047dbd9fe64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="STATE PATTERN">
-      <UniqueIdentifier>{3b2ba0f2-62cd-4be9-8bd2-24cade39b2aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{ca43e50f-2681-45df-a482-45bf9a2055ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="STATE">
-      <UniqueIdentifier>{0ce70abe-d119-43de-99f2-73c3bddeec7f}</UniqueIdentifier>
     </Filter>
     <Filter Include="OTHERS">
       <UniqueIdentifier>{0dffb1ae-8fd5-4a91-86ce-4cdb68a5a908}</UniqueIdentifier>
     </Filter>
-    <Filter Include="COMPONENT PATTERN">
-      <UniqueIdentifier>{fe06d9f5-b84d-4777-90b4-bce9508cd7fc}</UniqueIdentifier>
+    <Filter Include="Player%27s Components">
+      <UniqueIdentifier>{254fea76-1902-4ae9-9216-77f9eebc0011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NEW ANIMATION MANAGER">
+    <Filter Include="Projectile%27s Components">
+      <UniqueIdentifier>{9fa04363-5ade-4efb-b755-157569a3323a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components%27 Interfaces">
+      <UniqueIdentifier>{90e54458-14bd-46f3-96c2-6dd28861f170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player%27s States">
+      <UniqueIdentifier>{2d92e76a-5763-4565-91a2-edd72eb2962d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projectile%27s States">
+      <UniqueIdentifier>{3ebda217-8414-45ac-ba03-68f927c3bcb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projectile%27s Types">
+      <UniqueIdentifier>{65e295e9-b3a8-4a90-93b7-7cf8d0ca0873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player%27s Chosen Characters">
+      <UniqueIdentifier>{c461c75b-4179-4dcc-adf7-31479e01eb04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{730e9c71-ba96-4042-b945-3047dbd9fe64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game%27s States">
+      <UniqueIdentifier>{0ce70abe-d119-43de-99f2-73c3bddeec7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation%27s Manager">
       <UniqueIdentifier>{f44bf615-6f31-4d8c-a47d-5a371d13c0c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ACTORS">
-      <UniqueIdentifier>{9bd9e405-3c33-47dd-83b8-ba094624fc9f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="STATE PATTERN 2.0">
-      <UniqueIdentifier>{64989864-1614-478d-b83a-146be2783987}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="COMMAND PATTERN 2.0">
+    <Filter Include="Command Pattern">
       <UniqueIdentifier>{c8dacf6c-9a9f-436d-b9c5-8ad58ce144ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CHOSEN CHARACTER STATE">
-      <UniqueIdentifier>{38264ebb-df67-42de-8a67-fdb3041063a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ground.cpp">
-      <Filter>ENTITY</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
-      <Filter>ENTITY</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
@@ -73,19 +79,19 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="ButtonAuxState.cpp">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSelectionState.cpp">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClCompile>
     <ClCompile Include="PlayingState.cpp">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClCompile>
     <ClCompile Include="StateContext.cpp">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>OTHERS</Filter>
@@ -93,137 +99,145 @@
     <ClCompile Include="main.cpp">
       <Filter>OTHERS</Filter>
     </ClCompile>
-    <ClCompile Include="AttackHitbox.cpp">
-      <Filter>OTHERS</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCollisionComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRenderComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerAnimationComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClCompile>
     <ClCompile Include="LoopingAnimation.cpp">
-      <Filter>NEW ANIMATION MANAGER</Filter>
+      <Filter>Animation%27s Manager</Filter>
     </ClCompile>
     <ClCompile Include="PlayedOnceAnimation.cpp">
-      <Filter>NEW ANIMATION MANAGER</Filter>
+      <Filter>Animation%27s Manager</Filter>
     </ClCompile>
     <ClCompile Include="TexturesManager.cpp">
-      <Filter>NEW ANIMATION MANAGER</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteActor.cpp">
-      <Filter>ACTORS</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerPhysicsComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerIdleState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Animation%27s Manager</Filter>
     </ClCompile>
     <ClCompile Include="JumpCommand.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerJumpingState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
     <ClCompile Include="RunLeftCommand.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
     <ClCompile Include="RunRightCommand.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
     <ClCompile Include="InputHandler.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRunningState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerFallingState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
     <ClCompile Include="RollCommand.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRollingState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Attack1Command.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Attack2Command.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
     <ClCompile Include="UltimateCommand.cpp">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAirAttackingState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClCompile Include="BoxerUltimateState.cpp">
+      <Filter>Projectile%27s Types</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttacking1State.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClCompile Include="PlayerDeadState.cpp">
+      <Filter>Player%27s States</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttacking2State.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClCompile Include="PlayerHittedState.cpp">
+      <Filter>Player%27s States</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttackingState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClCompile Include="ProjectileCollidedState.cpp">
+      <Filter>Projectile%27s States</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerUltimateState.cpp">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClCompile Include="ProjectileMovingState.cpp">
+      <Filter>Projectile%27s States</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttackComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
+    <ClCompile Include="PlayerAnimationComponent.cpp">
+      <Filter>Player%27s Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCollisionComponent.cpp">
+      <Filter>Player%27s Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerLaunchProjectilesComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Player%27s Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPhysicsComponent.cpp">
+      <Filter>Player%27s Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRenderComponent.cpp">
+      <Filter>Player%27s Components</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileAnimationComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Projectile%27s Components</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileCollisionComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Projectile%27s Components</Filter>
     </ClCompile>
     <ClCompile Include="ProjectilePhysicsComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Projectile%27s Components</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileRenderComponent.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Projectile%27s Components</Filter>
     </ClCompile>
     <ClCompile Include="BoxerState.cpp">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
     <ClCompile Include="FireKnightState.cpp">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
     <ClCompile Include="HoodieState.cpp">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
     <ClCompile Include="WindHashashinState.cpp">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectileMovingState.cpp" />
-    <ClCompile Include="ProjectileCollidedState.cpp" />
-    <ClCompile Include="BoxerUltimateState.cpp" />
-    <ClCompile Include="PlayerHittedState.cpp" />
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackHitbox.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAirAttackingState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttacking1State.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttacking2State.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackingState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerFallingState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpingState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRollingState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRunningState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUltimateState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteActor.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
-      <Filter>ENTITY</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
-      <Filter>ENTITY</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="BackgroundUI.h">
       <Filter>UI</Filter>
@@ -256,19 +270,19 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="StateContext.h">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClInclude>
     <ClInclude Include="PlayingState.h">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuState.h">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClInclude>
     <ClInclude Include="CharacterSelectionState.h">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClInclude>
     <ClInclude Include="ButtonAuxState.h">
-      <Filter>STATE</Filter>
+      <Filter>Game%27s States</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>OTHERS</Filter>
@@ -276,161 +290,170 @@
     <ClInclude Include="Game.h">
       <Filter>OTHERS</Filter>
     </ClInclude>
-    <ClInclude Include="AttackHitbox.h">
-      <Filter>OTHERS</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerCollisionComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRenderComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="ICollisionComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="IRenderComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="IPhysicsComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="IAnimationComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerAnimationComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
     <ClInclude Include="LoopingAnimation.h">
-      <Filter>NEW ANIMATION MANAGER</Filter>
+      <Filter>Animation%27s Manager</Filter>
     </ClInclude>
     <ClInclude Include="PlayedOnceAnimation.h">
-      <Filter>NEW ANIMATION MANAGER</Filter>
+      <Filter>Animation%27s Manager</Filter>
     </ClInclude>
     <ClInclude Include="TexturesManager.h">
-      <Filter>NEW ANIMATION MANAGER</Filter>
+      <Filter>Animation%27s Manager</Filter>
     </ClInclude>
     <ClInclude Include="AbstractAnimation.h">
-      <Filter>NEW ANIMATION MANAGER</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteActor.h">
-      <Filter>ACTORS</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerPhysicsComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="IPlayerState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerIdleState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Animation%27s Manager</Filter>
     </ClInclude>
     <ClInclude Include="ICommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="JumpCommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerJumpingState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="RunRightCommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="RunLeftCommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="InputHandler.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRunningState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerFallingState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="RollCommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRollingState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="UltimateCommand.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Attack1Command.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Attack2Command.h">
-      <Filter>COMMAND PATTERN 2.0</Filter>
+      <Filter>Command Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAirAttackingState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClInclude Include="BoxerUltimateState.h">
+      <Filter>Projectile%27s Types</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttacking1State.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClInclude Include="IProjectileTypeState.h">
+      <Filter>Projectile%27s Types</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttacking2State.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClInclude Include="PlayerDeadState.h">
+      <Filter>Player%27s States</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttackingState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClInclude Include="PlayerHittedState.h">
+      <Filter>Player%27s States</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerUltimateState.h">
-      <Filter>STATE PATTERN 2.0</Filter>
+    <ClInclude Include="IProjectileState.h">
+      <Filter>Projectile%27s States</Filter>
     </ClInclude>
-    <ClInclude Include="IAttackComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
+    <ClInclude Include="ProjectileCollidedState.h">
+      <Filter>Projectile%27s States</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttackComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
+    <ClInclude Include="ProjectileMovingState.h">
+      <Filter>Projectile%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderComponent.h">
+      <Filter>Components%27 Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimationComponent.h">
+      <Filter>Components%27 Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ICollisionComponent.h">
+      <Filter>Components%27 Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="ILaunchProjectilesComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Components%27 Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IPhysicsComponent.h">
+      <Filter>Components%27 Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimationComponent.h">
+      <Filter>Player%27s Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCollisionComponent.h">
+      <Filter>Player%27s Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerLaunchProjectilesComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Player%27s Components</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileAnimationComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
+    <ClInclude Include="PlayerPhysicsComponent.h">
+      <Filter>Player%27s Components</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectileCollisionComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectilePhysicsComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
+    <ClInclude Include="PlayerRenderComponent.h">
+      <Filter>Player%27s Components</Filter>
     </ClInclude>
     <ClInclude Include="ProjectileRenderComponent.h">
-      <Filter>COMPONENT PATTERN</Filter>
+      <Filter>Projectile%27s Components</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>COMPONENT PATTERN</Filter>
+    <ClInclude Include="ProjectileAnimationComponent.h">
+      <Filter>Projectile%27s Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileCollisionComponent.h">
+      <Filter>Projectile%27s Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectilePhysicsComponent.h">
+      <Filter>Projectile%27s Components</Filter>
     </ClInclude>
     <ClInclude Include="BoxerState.h">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
     <ClInclude Include="FireKnightState.h">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
     <ClInclude Include="HoodieState.h">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
     <ClInclude Include="IChosenCharacterState.h">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
     <ClInclude Include="WindHashashinState.h">
-      <Filter>CHOSEN CHARACTER STATE</Filter>
+      <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
-    <ClInclude Include="IProjectileState.h" />
-    <ClInclude Include="ProjectileMovingState.h" />
-    <ClInclude Include="ProjectileCollidedState.h" />
-    <ClInclude Include="BoxerUltimateState.h" />
-    <ClInclude Include="IProjectileTypeState.h" />
-    <ClInclude Include="PlayerHittedState.h" />
+    <ClInclude Include="GameObject.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackHitbox.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUltimateState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlayerState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAirAttackingState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttacking1State.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttacking2State.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackingState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFallingState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpingState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRollingState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRunningState.h">
+      <Filter>Player%27s States</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteActor.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

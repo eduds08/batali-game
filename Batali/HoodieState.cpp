@@ -10,6 +10,10 @@ HoodieState::~HoodieState()
 {
 }
 
+void HoodieState::update(Player& player, World& world, float& deltaTime)
+{
+}
+
 void HoodieState::enter(Player& player)
 {
 	/*player.setSpriteSize(sf::Vector2i{ BOXER_SPRITE_WIDTH, BOXER_SPRITE_HEIGHT });
@@ -24,6 +28,7 @@ void HoodieState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
 {
 }
 
-void HoodieState::checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox& attackHitbox)
+bool HoodieState::checkIfIsAttacking(Player& player, Player& enemy, const AttackHitbox& attackHitbox)
 {
+	return false;
 }

@@ -159,7 +159,6 @@
     <ClCompile Include="PlayerAnimationComponent.cpp" />
     <ClCompile Include="PlayerAttacking1State.cpp" />
     <ClCompile Include="PlayerAttacking2State.cpp" />
-    <ClCompile Include="PlayerAttackComponent.cpp" />
     <ClCompile Include="PlayerAttackingState.cpp" />
     <ClCompile Include="PlayerRenderComponent.cpp" />
     <ClCompile Include="PlayerCollisionComponent.cpp" />
@@ -215,7 +214,6 @@
     <ClInclude Include="ButtonAuxState.h" />
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="AbstractAnimation.h" />
-    <ClInclude Include="IAttackComponent.h" />
     <ClInclude Include="IChosenCharacterState.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="InputHandler.h" />
@@ -238,7 +236,6 @@
     <ClInclude Include="PlayerAnimationComponent.h" />
     <ClInclude Include="PlayerAttacking1State.h" />
     <ClInclude Include="PlayerAttacking2State.h" />
-    <ClInclude Include="PlayerAttackComponent.h" />
     <ClInclude Include="PlayerAttackingState.h" />
     <ClInclude Include="PlayerRenderComponent.h" />
     <ClInclude Include="PlayerCollisionComponent.h" />

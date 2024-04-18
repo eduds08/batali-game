@@ -7,6 +7,10 @@
 
 #include <iostream>
 
+void BoxerState::update(Player& player, World& world, float& deltaTime)
+{
+}
+
 void BoxerState::enter(Player& player)
 {
 	player.setSpriteSize(sf::Vector2i{ BOXER_SPRITE_WIDTH, BOXER_SPRITE_HEIGHT });
@@ -83,15 +87,19 @@ void BoxerState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
 	attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
 }
 
-void BoxerState::checkIfIsAttacking(Player& player, Player& enemy, AttackHitbox& attackHitbox)
+bool BoxerState::checkIfIsAttacking(Player& player, Player& enemy, const AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
-		float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
+		return true;
+
+		/*float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
 		enemy.handleHitted(attackHitbox.getDamage(), KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
 		if (enemy.m_knockbackVelocity == 0.f)
 		{
 			enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
-		}
+		}*/
 	}
+
+	return false;
 }

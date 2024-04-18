@@ -3,7 +3,6 @@
 #include "IRenderComponent.h"
 #include "ICollisionComponent.h"
 #include "IPhysicsComponent.h"
-#include "IAttackComponent.h"
 #include "ILaunchProjectilesComponent.h"
 #include "IAnimationComponent.h"
 
@@ -25,12 +24,11 @@
 
 int Player::s_playerNumberCounter{ 1 };
 
-Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<IAttackComponent> attackComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent, std::unique_ptr<IAnimationComponent> animationComponent)
+Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent, std::unique_ptr<IAnimationComponent> animationComponent)
 	: GameObject{}
 	, m_renderComponent{ std::move(renderComponent) }
 	, m_collisionComponent{ std::move(collisionComponent) }
 	, m_physicsComponent{ std::move(physicsComponent) }
-	, m_attackComponent{ std::move(attackComponent) }
 	, m_launchProjectilesComponent{ std::move(launchProjectilesComponent) }
 	, m_animationComponent{ std::move(animationComponent) }
 	, m_playerNumber{ s_playerNumberCounter }
@@ -79,7 +77,8 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_physicsComponent->update(*this, deltaTime);
 
-	m_attackComponent->update(*this, world, deltaTime);
+	m_chosenCharacterState->update(*this, world, deltaTime);
+	m_knockbackVelocity = 0.f;
 
 	if (m_launchProjectilesComponent != nullptr)
 		m_launchProjectilesComponent->update(*this, world, window, deltaTime);

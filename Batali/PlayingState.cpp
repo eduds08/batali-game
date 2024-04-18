@@ -4,7 +4,6 @@
 #include "PlayerAnimationComponent.h"
 #include "PlayerCollisionComponent.h"
 #include "PlayerPhysicsComponent.h"
-#include "PlayerAttackComponent.h"
 #include "PlayerLaunchProjectilesComponent.h"
 
 #include "BoxerState.h"
