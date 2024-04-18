@@ -1,8 +1,6 @@
 #include "PlayerCollisionComponent.h"
 #include "Player.h"
 
-#include "PlayerAttackComponent.h"
-
 #include "World.h"
 
 void PlayerCollisionComponent::update(GameObject& gameObject, World& world)

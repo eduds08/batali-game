@@ -4,5 +4,6 @@
 
 void Attack2Command::execute(Player& player)
 {
-	player.handleInput(player.getKeyBinding("ATTACK_2_BUTTON"));
+	//player.handleInput(player.getKeyBinding("ATTACK_2_BUTTON"));
+	player.handleCondition("ATTACK_2_BUTTON");
 }

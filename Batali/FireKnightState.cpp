@@ -31,29 +31,7 @@ void FireKnightState::update(Player& player, World& world, float& deltaTime)
 
 	knockbackMove(player, deltaTime);
 
-	//player->handleKnockback()
-
-	/*
-	updateAttackHitbox(player, m_attackHitbox);
-
-	for (auto& enemy : world.m_players)
-	{
-		if (enemy->getId() != player->getId())
-			if (enemy->getChosenCharacter()->checkIfIsAttacking(*player, *enemy, m_attackHitbox))
-			{
-				enemy->attack(player);
-
-			}
-	}
-
-	if (player->m_hp <= 0)
-	{
-		player->m_knockbackVelocity = 0.f;
-	}
-
-	knockbackMove(gameObject, deltaTime);
-
-	player->m_knockbackVelocity = 0.f;*/
+	player.m_knockbackVelocity = 0.f;
 }
 
 void FireKnightState::enter(Player& player)
@@ -147,7 +125,9 @@ bool FireKnightState::checkIfIsAttacking(Player& player, Player& enemy, const At
 void FireKnightState::attack(Player& player, Player& enemy)
 {
 	float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
-	enemy.handleHitted(m_attackHitbox.getDamage(), KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
+	enemy.m_damageToTake = m_attackHitbox.getDamage();
+	enemy.handleCondition("HITTED");
+	//enemy.handleHitted(m_attackHitbox.getDamage());
 	if (enemy.m_knockbackVelocity == 0.f)
 	{
 		enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));

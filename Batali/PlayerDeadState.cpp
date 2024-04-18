@@ -4,12 +4,7 @@
 
 #include "Player.h"
 
-std::unique_ptr<IPlayerState> PlayerDeadState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity)
-{
-    return nullptr;
-}
-
-std::unique_ptr<IPlayerState> PlayerDeadState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::unique_ptr<IPlayerState> PlayerDeadState::handleCondition(Player& player, const std::string& condition)
 {
     return nullptr;
 }

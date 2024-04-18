@@ -20,7 +20,10 @@ void ProjectileCollisionComponent::update(GameObject& gameObject, World& world)
 			if (gameObject.getShape().getGlobalBounds().intersects(player->getShape().getGlobalBounds()))
 			{
 				projectile->setCollided(true);
-				player->handleHitted(projectile->getDamage(), 0.f);
+				//player->handleHitted(projectile->getDamage());
+				player->m_damageToTake = projectile->getDamage();
+				player->handleCondition("HITTED");
+				player->m_knockbackVelocity = 0.f;
 				// logic to hit the enemy here
 			}
 		}

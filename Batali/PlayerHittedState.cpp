@@ -6,19 +6,12 @@
 #include "PlayerDeadState.h"
 #include "Player.h"
 
-PlayerHittedState::PlayerHittedState(Player& player, int enemyDamage, float knockbackVelocity)
-	: m_knockbackVelocity{ knockbackVelocity }
+PlayerHittedState::PlayerHittedState(Player& player)
 {
-	player.m_knockbackVelocity = m_knockbackVelocity;
-	player.takeDamage(enemyDamage);
+	player.takeDamage(player.m_damageToTake);
 }
 
-std::unique_ptr<IPlayerState> PlayerHittedState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity)
-{
-	return nullptr;
-}
-
-std::unique_ptr<IPlayerState> PlayerHittedState::handleInput(Player& player, sf::Keyboard::Scancode input)
+std::unique_ptr<IPlayerState> PlayerHittedState::handleCondition(Player& player, const std::string& condition)
 {
 	return nullptr;
 }

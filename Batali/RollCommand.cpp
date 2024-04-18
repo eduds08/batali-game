@@ -4,5 +4,6 @@
 
 void RollCommand::execute(Player& player)
 {
-	player.handleInput(player.getKeyBinding("ROLL_BUTTON"));
+	//player.handleInput(player.getKeyBinding("ROLL_BUTTON"));
+	player.handleCondition("ROLL_BUTTON");
 }

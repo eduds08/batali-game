@@ -1,7 +1,5 @@
 #include "PlayerRenderComponent.h"
 
-#include "IAttackComponent.h"
-
 #include "AttackHitbox.h"
 
 #include "Player.h"

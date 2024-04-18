@@ -30,9 +30,7 @@ public:
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
 	virtual void render(sf::RenderWindow& window);
 
-	void handleHitted(int enemyDamage, float knockbackVelocity);
-
-	void handleInput(sf::Keyboard::Scancode input);
+	void handleCondition(const std::string& condition);
 
 	void setPlayerState(std::unique_ptr<IPlayerState> state);
 
@@ -52,6 +50,8 @@ public:
 
 	int m_hp{ 500 };
 	float m_knockbackVelocity{ 0.f };
+
+	int m_damageToTake{}; // weird, I know.
 
 private:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };

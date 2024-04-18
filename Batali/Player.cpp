@@ -78,7 +78,6 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 	m_physicsComponent->update(*this, deltaTime);
 
 	m_chosenCharacterState->update(*this, world, deltaTime);
-	m_knockbackVelocity = 0.f;
 
 	if (m_launchProjectilesComponent != nullptr)
 		m_launchProjectilesComponent->update(*this, world, window, deltaTime);
@@ -97,16 +96,9 @@ void Player::render(sf::RenderWindow& window)
 	}
 }
 
-void Player::handleHitted(int enemyDamage, float knockbackVelocity)
+void Player::handleCondition(const std::string& condition)
 {
-	std::unique_ptr<IPlayerState> playerState = m_playerState->handleHitted(*this, enemyDamage, knockbackVelocity);
-
-	setPlayerState(std::move(playerState));
-}
-
-void Player::handleInput(sf::Keyboard::Scancode input)
-{
-	std::unique_ptr<IPlayerState> playerState = m_playerState->handleInput(*this, input);
+	std::unique_ptr<IPlayerState> playerState = m_playerState->handleCondition(*this, condition);
 
 	if (playerState != nullptr)
 	{

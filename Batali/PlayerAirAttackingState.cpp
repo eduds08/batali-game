@@ -7,13 +7,13 @@
 
 #include "Player.h"
 
-std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity)
+std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleCondition(Player& player, const std::string& condition)
 {
-	return std::make_unique<PlayerHittedState>(player, enemyDamage, knockbackVelocity);
-}
+	if (condition == "HITTED")
+	{
+		return std::make_unique<PlayerHittedState>(player);
+	}
 
-std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleInput(Player& player, sf::Keyboard::Scancode input)
-{
 	return nullptr;
 }
 

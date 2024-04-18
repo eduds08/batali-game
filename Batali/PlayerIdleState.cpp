@@ -22,40 +22,39 @@ PlayerIdleState::~PlayerIdleState()
 
 }
 
-std::unique_ptr<IPlayerState> PlayerIdleState::handleHitted(Player& player, int enemyDamage, float knockbackVelocity)
+std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, const std::string& condition)
 {
-	return std::make_unique<PlayerHittedState>(player, enemyDamage, knockbackVelocity);
-}
-
-std::unique_ptr<IPlayerState> PlayerIdleState::handleInput(Player& player, sf::Keyboard::Scancode input)
-{
-	if (input == player.getKeyBinding("JUMP_BUTTON"))
+	if (condition == "JUMP_BUTTON")
 	{
 		return std::make_unique<PlayerJumpingState>();
 	}
-	else if (input == player.getKeyBinding("RUN_RIGHT_BUTTON"))
+	else if (condition == "RUN_RIGHT_BUTTON")
 	{
 		return std::make_unique<PlayerRunningState>();
 	}
-	else if (input == player.getKeyBinding("RUN_LEFT_BUTTON"))
+	else if (condition == "RUN_LEFT_BUTTON")
 	{
 		return std::make_unique<PlayerRunningState>();
 	}
-	else if (input == player.getKeyBinding("ROLL_BUTTON"))
+	else if (condition == "ROLL_BUTTON")
 	{
 		return std::make_unique<PlayerRollingState>();
 	}
-	else if (input == player.getKeyBinding("ATTACK_1_BUTTON"))
+	else if (condition == "ATTACK_1_BUTTON")
 	{
 		return std::make_unique<PlayerAttacking1State>();
 	}
-	else if (input == player.getKeyBinding("ATTACK_2_BUTTON"))
+	else if (condition == "ATTACK_2_BUTTON")
 	{
 		return std::make_unique<PlayerAttacking2State>();
 	}
-	else if (input == player.getKeyBinding("ULTIMATE_BUTTON"))
+	else if (condition == "ULTIMATE_BUTTON")
 	{
 		return std::make_unique<PlayerUltimateState>();
+	}
+	else if (condition == "HITTED")
+	{
+		return std::make_unique<PlayerHittedState>(player);
 	}
 
 	return nullptr;
