@@ -10,6 +10,8 @@
 #include "FireKnightState.h"
 #include "WindHashashinState.h"
 
+#include "PlayerFactory.h"
+
 #include <memory>
 
 World::~World()
@@ -19,39 +21,10 @@ World::~World()
 
 void World::init(const std::string& path, const std::string& firstCharacter, const std::string& secondCharacter)
 {
-	// Initialize Player 1
-	if (firstCharacter == "fire_knight")
-	{
-		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), nullptr, std::make_unique<PlayerAnimationComponent>()));
-		m_players[0]->initChosenCharacter(std::make_unique<FireKnightState>());
-	}
-	else if (firstCharacter == "wind_hashashin")
-	{
-		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), nullptr, std::make_unique<PlayerAnimationComponent>()));
-		m_players[0]->initChosenCharacter(std::make_unique<WindHashashinState>());
-	}
-	else if (firstCharacter == "boxer")
-	{
-		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>()));
-		m_players[0]->initChosenCharacter(std::make_unique<BoxerState>());
-	}
+	PlayerFactory playerFactory{};
 
-	// Initialize Player 2
-	if (secondCharacter == "fire_knight")
-	{
-		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), nullptr, std::make_unique<PlayerAnimationComponent>()));
-		m_players[1]->initChosenCharacter(std::make_unique<FireKnightState>());
-	}
-	else if (secondCharacter == "wind_hashashin")
-	{
-		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), nullptr, std::make_unique<PlayerAnimationComponent>()));
-		m_players[1]->initChosenCharacter(std::make_unique<WindHashashinState>());
-	}
-	else if (secondCharacter == "boxer")
-	{
-		m_players.emplace_back(std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>(), std::make_unique<PlayerAnimationComponent>()));
-		m_players[1]->initChosenCharacter(std::make_unique<BoxerState>());
-	}
+	m_players.emplace_back(playerFactory.createPlayer(firstCharacter));
+	m_players.emplace_back(playerFactory.createPlayer(secondCharacter));
 
 	loadTiles(path);
 }

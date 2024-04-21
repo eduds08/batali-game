@@ -231,6 +231,7 @@
     <ClCompile Include="SpriteActor.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
@@ -455,5 +456,6 @@
     <ClInclude Include="SpriteActor.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerFactory.h" />
   </ItemGroup>
 </Project>

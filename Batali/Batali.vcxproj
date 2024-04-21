@@ -148,6 +148,7 @@
     <ClCompile Include="FireKnightState.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />
+    <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="PlayerHittedState.cpp" />
     <ClCompile Include="HoodieState.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="FireKnightState.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PlayerDeadState.h" />
+    <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="PlayerHittedState.h" />
     <ClInclude Include="HoodieState.h" />
     <ClInclude Include="IAnimationComponent.h" />

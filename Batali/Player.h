@@ -21,10 +21,12 @@ class IPlayerState;
 class Player : public GameObject
 {
 public:
-	Player(std::unique_ptr<IRenderComponent> renderComponent = nullptr, std::unique_ptr<ICollisionComponent> collisionComponent = nullptr, std::unique_ptr<IPhysicsComponent> physicsComponent = nullptr, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent = nullptr, std::unique_ptr<IAnimationComponent> animationComponent = nullptr);
+	Player(std::unique_ptr<IRenderComponent> renderComponent = nullptr, std::unique_ptr<ICollisionComponent> collisionComponent = nullptr, std::unique_ptr<IPhysicsComponent> physicsComponent = nullptr, std::unique_ptr<IAnimationComponent> animationComponent = nullptr, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent = nullptr);
 	virtual ~Player();
 
-	void initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState);
+	void setChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState);
+
+	void initChosenCharacter();
 	void initKeyBindings();
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);

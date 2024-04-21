@@ -24,13 +24,13 @@
 
 int Player::s_playerNumberCounter{ 1 };
 
-Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent, std::unique_ptr<IAnimationComponent> animationComponent)
+Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<IAnimationComponent> animationComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent)
 	: GameObject{}
 	, m_renderComponent{ std::move(renderComponent) }
 	, m_collisionComponent{ std::move(collisionComponent) }
 	, m_physicsComponent{ std::move(physicsComponent) }
-	, m_launchProjectilesComponent{ std::move(launchProjectilesComponent) }
 	, m_animationComponent{ std::move(animationComponent) }
+	, m_launchProjectilesComponent{ std::move(launchProjectilesComponent) }
 	, m_playerNumber{ s_playerNumberCounter }
 {
 	++s_playerNumberCounter;
@@ -46,9 +46,15 @@ Player::~Player()
 	--s_playerNumberCounter;
 }
 
-void Player::initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState)
+void Player::setChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState)
 {
 	m_chosenCharacterState = std::move(chosenCharacterState);
+	m_chosenCharacterState->enter(*this);
+}
+
+void Player::initChosenCharacter()
+{
+	/*m_chosenCharacterState = std::move(chosenCharacterState);
 	m_chosenCharacterState->enter(*this);
 
 	m_playerState = std::make_unique<PlayerFallingState>();
@@ -56,7 +62,7 @@ void Player::initChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCh
 
 	initKeyBindings();
 
-	m_animationComponent->initTextures(*this);
+	m_animationComponent->initTextures(*this);*/
 
 	m_shape.setPosition(LEFT_CHARACTER_FIRST_POSITION);
 
