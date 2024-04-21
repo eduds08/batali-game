@@ -4,11 +4,27 @@
 #include "ILaunchProjectilesComponent.h"
 
 #include "BoxerUltimateState.h"
-
+#include "World.h"
 #include <iostream>
 
 void BoxerState::update(Player& player, World& world, float& deltaTime)
 {
+	updateAttackHitbox(player, m_attackHitbox);
+
+	for (auto& enemy : world.m_players)
+	{
+		if (enemy->getId() != player.getId())
+		{
+			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, *enemy, enemy->getChosenCharacter()->getAttackHitbox()))
+			{
+				enemy->getChosenCharacter()->attack(*enemy, player);
+			}
+		}
+	}
+
+	knockbackMove(player, deltaTime);
+
+	player.setKnockbackVelocity(0.f);
 }
 
 void BoxerState::enter(Player& player)
@@ -62,22 +78,22 @@ void BoxerState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
 
 		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == BOXER_ULTIMATE_PT_1_FRAME)
 		{
-			if (player.getLaunchProjectilesComponent()->getProjectiles().size() == 0)
+			if (player.getProjectilesSize() == 0)
 			{
-				player.getLaunchProjectilesComponent()->launchProjectile(player, std::make_unique<BoxerUltimateState>());
+				player.launchProjectile(player, std::make_unique<BoxerUltimateState>());
 			}
 		}
 		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == BOXER_ULTIMATE_PT_2_FRAME)
 		{
-			if (player.getLaunchProjectilesComponent()->getProjectiles().size() == 1)
+			if (player.getProjectilesSize() == 1)
 			{
-				player.getLaunchProjectilesComponent()->launchProjectile(player, std::make_unique<BoxerUltimateState>());
+				player.launchProjectile(player, std::make_unique<BoxerUltimateState>());
 			}
 		}
 	}
 	else
 	{
-		if (player.getLaunchProjectilesComponent()->getProjectiles().size() == 0)
+		if (player.getProjectilesSize() == 0)
 		{
 			attackHitbox.setDamage(0);
 		}
@@ -92,14 +108,25 @@ bool BoxerState::checkIfIsAttacking(Player& player, Player& enemy, const AttackH
 	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
 	{
 		return true;
-
-		/*float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
-		enemy.handleHitted(attackHitbox.getDamage(), KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
-		if (enemy.m_knockbackVelocity == 0.f)
-		{
-			enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
-		}*/
 	}
 
 	return false;
+}
+
+void BoxerState::attack(Player& player, Player& enemy)
+{
+	float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
+
+	enemy.setDamageToTake(m_attackHitbox.getDamage());
+
+	enemy.handleCondition("HITTED");
+
+	enemy.setKnockbackVelocity(KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
+}
+
+void BoxerState::knockbackMove(Player& player, float& deltaTime)
+{
+	player.getShape().move(sf::Vector2f{ dynamic_cast<Player*>(&player)->getKnockbackVelocity(), 0.f } *deltaTime);
+
+	player.getSprite().setPosition(sf::Vector2f{ player.getShape().getPosition().x, player.getShape().getPosition().y - (player.getSprite().getTextureRect().getSize().y - player.getShape().getSize().y) / 2.f });
 }

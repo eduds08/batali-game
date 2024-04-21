@@ -8,7 +8,6 @@
 
 PlayerHittedState::PlayerHittedState(Player& player)
 {
-	player.takeDamage(player.m_damageToTake);
 }
 
 std::unique_ptr<IPlayerState> PlayerHittedState::handleCondition(Player& player, const std::string& condition)
@@ -18,7 +17,7 @@ std::unique_ptr<IPlayerState> PlayerHittedState::handleCondition(Player& player,
 
 void PlayerHittedState::update(Player& player)
 {
-	if (player.m_hp <= 0)
+	if (player.getHp() <= 0)
 	{
 		player.setPlayerState(std::make_unique<PlayerDeadState>());
 	}
@@ -32,4 +31,5 @@ void PlayerHittedState::update(Player& player)
 void PlayerHittedState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, HITTED_ANIMATION, false);
+	player.takeDamage();
 }

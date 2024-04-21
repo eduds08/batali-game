@@ -15,7 +15,7 @@ std::unique_ptr<IPlayerState> PlayerUltimateState::handleCondition(Player& playe
 
 void PlayerUltimateState::update(Player& player)
 {
-	player.m_knockbackVelocity = 0.f;
+	player.setKnockbackVelocity(0.f);
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{

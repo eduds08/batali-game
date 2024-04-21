@@ -47,7 +47,7 @@ public:
 	void setSpeed(int speed) { m_speed = speed; }
 	const int getSpeed() const { return m_speed; }
 
-	const GameObject& getLauncher() const { return m_launcher; }
+	const int getLauncherId() const { return m_launcher.getId(); }
 
 protected:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
@@ -64,7 +64,7 @@ protected:
 	bool m_collided{ false };
 	bool m_vanished{ false };
 
-	int m_damage{};
+	int m_damage{ 50 };
 
 	int m_speed{};
 

@@ -3,6 +3,8 @@
 
 #include "World.h"
 
+
+
 void PlayerCollisionComponent::update(GameObject& gameObject, World& world)
 {
 	m_isCollidingHorizontally = false;
@@ -85,7 +87,7 @@ void PlayerCollisionComponent::handleCollision(GameObject& gameObject)
 	// Sets knockbackVelocity to 0 if actor is pushed against a wall after being attacked
 	if (m_isCollidingHorizontally)
 	{
-		dynamic_cast<Player*>(&gameObject)->m_knockbackVelocity = 0.f;
+		dynamic_cast<Player*>(&gameObject)->setKnockbackVelocity(0.f);
 	}
 }
 

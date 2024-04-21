@@ -1,30 +1,22 @@
 #include "ProjectileCollisionComponent.h"
 
-#include "GameObject.h"
-#include "Player.h"
-
 #include "Projectile.h"
-
 #include "World.h"
 
 void ProjectileCollisionComponent::update(GameObject& gameObject, World& world)
 {
 	Projectile* projectile = dynamic_cast<Projectile*>(&gameObject);
 
-	// check collision with world entities and tiles
 	for (auto& player : world.m_players)
 	{
-		// logic to diferentiate player who launched the projectile
-		if (player->getId() != projectile->getLauncher().getId())
+		if (player->getId() != projectile->getLauncherId())
 		{
 			if (gameObject.getShape().getGlobalBounds().intersects(player->getShape().getGlobalBounds()))
 			{
 				projectile->setCollided(true);
-				//player->handleHitted(projectile->getDamage());
-				player->m_damageToTake = projectile->getDamage();
+				player->setDamageToTake(projectile->getDamage());
 				player->handleCondition("HITTED");
-				player->m_knockbackVelocity = 0.f;
-				// logic to hit the enemy here
+				player->setKnockbackVelocity(0.f);
 			}
 		}
 	}
@@ -38,7 +30,4 @@ void ProjectileCollisionComponent::update(GameObject& gameObject, World& world)
 			break;
 		}
 	}
-
-	//if (projectile->getCollided() && animationEnd)
-	// logic to vanish idk
 }

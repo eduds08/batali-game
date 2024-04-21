@@ -11,7 +11,4 @@ public:
 	virtual void update(GameObject& gameObject, float& deltaTime);
 
 	virtual void move(GameObject& gameObject, float& deltaTime);
-
-private:
-
 };

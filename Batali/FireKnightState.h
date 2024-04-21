@@ -13,8 +13,8 @@ using namespace constants;
 class FireKnightState : public IChosenCharacterState
 {
 public:
-	FireKnightState();
-	virtual ~FireKnightState();
+	FireKnightState() = default;
+	virtual ~FireKnightState() = default;
 
 	virtual void update(Player& player, World& world, float& deltaTime);
 

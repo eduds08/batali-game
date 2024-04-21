@@ -24,9 +24,9 @@ public:
 
 	virtual const AttackHitbox& getAttackHitbox() const { return m_attackHitbox; }
 
-	virtual void attack(Player& player, Player& enemy) {}
+	virtual void attack(Player& player, Player& enemy);
 
-	virtual void knockbackMove(Player& player, float& deltaTime) {}
+	virtual void knockbackMove(Player& player, float& deltaTime);
 
 private:
 	std::string m_name{ "boxer" };

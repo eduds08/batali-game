@@ -1,12 +1,9 @@
 #pragma once
 
 #include "ICollisionComponent.h"
-
 #include "Constants.h"
-
-class Player;
-
 using namespace constants;
+class Player;
 
 class PlayerCollisionComponent : public ICollisionComponent
 {

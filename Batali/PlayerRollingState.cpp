@@ -21,7 +21,7 @@ void PlayerRollingState::update(Player& player)
 {
 	player.getVelocity().x = player.getFacingRight() * 230.f;
 
-	player.m_knockbackVelocity = 0.f;
+	player.setKnockbackVelocity(0.f);
 
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{

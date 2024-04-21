@@ -6,14 +6,6 @@
 #include "World.h"
 #include <iostream>
 
-FireKnightState::FireKnightState()
-{
-}
-
-FireKnightState::~FireKnightState()
-{
-}
-
 void FireKnightState::update(Player& player, World& world, float& deltaTime)
 {
 	updateAttackHitbox(player, m_attackHitbox);
@@ -31,7 +23,7 @@ void FireKnightState::update(Player& player, World& world, float& deltaTime)
 
 	knockbackMove(player, deltaTime);
 
-	player.m_knockbackVelocity = 0.f;
+	player.setKnockbackVelocity(0.f);
 }
 
 void FireKnightState::enter(Player& player)
@@ -125,18 +117,17 @@ bool FireKnightState::checkIfIsAttacking(Player& player, Player& enemy, const At
 void FireKnightState::attack(Player& player, Player& enemy)
 {
 	float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
-	enemy.m_damageToTake = m_attackHitbox.getDamage();
+
+	enemy.setDamageToTake(m_attackHitbox.getDamage());
+
 	enemy.handleCondition("HITTED");
-	//enemy.handleHitted(m_attackHitbox.getDamage());
-	if (enemy.m_knockbackVelocity == 0.f)
-	{
-		enemy.m_knockbackVelocity = KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection));
-	}
+
+	enemy.setKnockbackVelocity(KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
 }
 
 void FireKnightState::knockbackMove(Player& player, float& deltaTime)
 {
-	player.getShape().move(sf::Vector2f{ dynamic_cast<Player*>(&player)->m_knockbackVelocity, 0.f } *deltaTime);
+	player.getShape().move(sf::Vector2f{ dynamic_cast<Player*>(&player)->getKnockbackVelocity(), 0.f } *deltaTime);
 
 	player.getSprite().setPosition(sf::Vector2f{ player.getShape().getPosition().x, player.getShape().getPosition().y - (player.getSprite().getTextureRect().getSize().y - player.getShape().getSize().y) / 2.f });
 }

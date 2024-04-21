@@ -9,8 +9,8 @@ using namespace constants;
 class HoodieState : public IChosenCharacterState
 {
 public:
-	HoodieState();
-	virtual ~HoodieState();
+	HoodieState() = default;
+	virtual ~HoodieState() = default;
 
 	virtual void update(Player& player, World& world, float& deltaTime);
 

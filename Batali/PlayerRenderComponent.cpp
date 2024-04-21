@@ -1,7 +1,6 @@
 #include "PlayerRenderComponent.h"
 
 #include "AttackHitbox.h"
-
 #include "Player.h"
 
 void PlayerRenderComponent::render(GameObject& gameObject, sf::RenderWindow& window)

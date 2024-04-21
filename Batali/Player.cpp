@@ -75,9 +75,9 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_playerState->update(*this);
 
-	m_physicsComponent->update(*this, deltaTime);
-
 	m_chosenCharacterState->update(*this, world, deltaTime);
+
+	m_physicsComponent->update(*this, deltaTime);
 
 	if (m_launchProjectilesComponent != nullptr)
 		m_launchProjectilesComponent->update(*this, world, window, deltaTime);
@@ -159,7 +159,17 @@ void Player::initKeyBindings()
 	m_inputHandler.m_bindCommands.emplace(m_keyBindings.at("ULTIMATE_BUTTON"), std::make_shared<UltimateCommand>());
 }
 
-void Player::takeDamage(int enemyDamage)
+void Player::takeDamage()
 {
-	m_hp -= enemyDamage;
+	m_hp -= m_damageToTake;
+}
+
+void Player::launchProjectile(GameObject& gameObject, std::unique_ptr<IProjectileTypeState> projectileTypeState)
+{
+	m_launchProjectilesComponent->launchProjectile(gameObject, std::move(projectileTypeState));
+}
+
+const size_t Player::getProjectilesSize() const
+{
+	return m_launchProjectilesComponent->getProjectiles().size();
 }

@@ -15,7 +15,7 @@ class ICollisionComponent;
 class IPhysicsComponent;
 class ILaunchProjectilesComponent;
 class IAnimationComponent;
-
+class IProjectileTypeState;
 class IPlayerState;
 
 class Player : public GameObject
@@ -36,7 +36,11 @@ public:
 
 	void updateAnimationThread();
 
-	void takeDamage(int enemyDamage);
+	void takeDamage();
+	void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
+	void setDamageToTake(int damageToTake) { m_damageToTake = damageToTake; }
+	const int getHp() const { return m_hp; }
+	const float getKnockbackVelocity() const { return m_knockbackVelocity; }
 
 	std::unique_ptr<IAnimationComponent>& getAnimationComponent() { return m_animationComponent; }
 
@@ -44,14 +48,10 @@ public:
 
 	sf::Keyboard::Scancode getKeyBinding(const std::string& keyBinding) { return m_keyBindings.at(keyBinding); }
 
-	std::unique_ptr<ILaunchProjectilesComponent>& getLaunchProjectilesComponent() { return m_launchProjectilesComponent; }
+	void launchProjectile(GameObject& gameObject, std::unique_ptr<IProjectileTypeState> projectileTypeState);
+	const size_t getProjectilesSize() const;
 
 	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
-
-	int m_hp{ 500 };
-	float m_knockbackVelocity{ 0.f };
-
-	int m_damageToTake{}; // weird, I know.
 
 private:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
@@ -73,4 +73,9 @@ private:
 
 	static int s_playerNumberCounter;
 	const int m_playerNumber;
+
+	int m_hp{ 500 };
+	float m_knockbackVelocity{ 0.f };
+
+	int m_damageToTake{}; // weird, I know.
 };

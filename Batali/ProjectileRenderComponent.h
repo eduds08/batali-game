@@ -8,6 +8,5 @@ public:
 	ProjectileRenderComponent() = default;
 	virtual ~ProjectileRenderComponent() = default;
 
-
 	virtual void render(GameObject& gameObject, sf::RenderWindow& window);
 };

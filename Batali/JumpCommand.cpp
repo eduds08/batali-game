@@ -4,6 +4,5 @@
 
 void JumpCommand::execute(Player& player)
 {
-	//player.handleInput(player.getKeyBinding("JUMP_BUTTON"));
 	player.handleCondition("JUMP_BUTTON");
 }
