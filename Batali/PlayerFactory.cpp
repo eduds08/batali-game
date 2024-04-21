@@ -36,7 +36,7 @@ std::unique_ptr<Player> PlayerFactory::createPlayer(const std::string& character
 		newPlayer->setPlayerState(std::make_unique<PlayerFallingState>());
 		newPlayer->initKeyBindings();
 		newPlayer->getAnimationComponent()->initTextures(*newPlayer);
-		newPlayer->initChosenCharacter();
+		newPlayer->initAnimationThread();
 
 		return std::move(newPlayer);
 	}

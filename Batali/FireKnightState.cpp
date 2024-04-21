@@ -34,6 +34,11 @@ void FireKnightState::enter(Player& player)
 	player.getSprite().setOrigin(player.getSpriteSize().x / 2.f, player.getSpriteSize().y / 2.f);
 
 	player.getShape().setOrigin(player.getShape().getSize() / 2.f);
+
+	player.getShape().setPosition(LEFT_CHARACTER_FIRST_POSITION);
+
+	player.getShape().setOutlineColor(sf::Color::Red);
+	player.getShape().setOutlineThickness(1.f);
 }
 
 void FireKnightState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)

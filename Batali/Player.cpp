@@ -52,27 +52,6 @@ void Player::setChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCha
 	m_chosenCharacterState->enter(*this);
 }
 
-void Player::initChosenCharacter()
-{
-	/*m_chosenCharacterState = std::move(chosenCharacterState);
-	m_chosenCharacterState->enter(*this);
-
-	m_playerState = std::make_unique<PlayerFallingState>();
-	m_playerState->enter(*this);
-
-	initKeyBindings();
-
-	m_animationComponent->initTextures(*this);*/
-
-	m_shape.setPosition(LEFT_CHARACTER_FIRST_POSITION);
-
-	// DEBUG
-	m_shape.setOutlineColor(sf::Color::Red);
-	m_shape.setOutlineThickness(1.f);
-
-	m_animationThread = std::thread{ &Player::updateAnimationThread, this };
-}
-
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
 	m_collisionComponent->update(*this, world);
@@ -122,6 +101,11 @@ void Player::setPlayerState(std::unique_ptr<IPlayerState> state)
 
 		m_playerState->enter(*this);
 	}
+}
+
+void Player::initAnimationThread()
+{
+	m_animationThread = std::thread{ &Player::updateAnimationThread, this };
 }
 
 void Player::updateAnimationThread()

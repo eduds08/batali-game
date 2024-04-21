@@ -26,7 +26,6 @@ public:
 
 	void setChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState);
 
-	void initChosenCharacter();
 	void initKeyBindings();
 
 	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
@@ -36,6 +35,7 @@ public:
 
 	void setPlayerState(std::unique_ptr<IPlayerState> state);
 
+	void initAnimationThread();
 	void updateAnimationThread();
 
 	void takeDamage();
