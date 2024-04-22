@@ -6,16 +6,15 @@
 
 #include <iostream>
 
-
 void WindHashashinState::update(Player& player, World& world, float& deltaTime)
 {
-	updateAttackHitbox(player, m_attackHitbox);
+	updateAttackHitbox(player);
 
 	for (auto& enemy : world.m_players)
 	{
 		if (enemy->getId() != player.getId())
 		{
-			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, *enemy, enemy->getChosenCharacter()->getAttackHitbox()))
+			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, enemy->getChosenCharacter()->getAttackHitbox()))
 			{
 				enemy->getChosenCharacter()->attack(*enemy, player);
 			}
@@ -29,6 +28,11 @@ void WindHashashinState::update(Player& player, World& world, float& deltaTime)
 
 void WindHashashinState::enter(Player& player)
 {
+	player.setHp(WIND_HASHASHIN_HP);
+	player.setSpeed(WIND_HASHASHIN_SPEED);
+	player.setJumpHeight(WIND_HASHASHIN_JUMP_HEIGHT);
+	player.setRollSpeed(WIND_HASHASHIN_ROLL_SPEED);
+
 	player.setSpriteSize(sf::Vector2i{ WIND_HASHASHIN_SPRITE_WIDTH, WIND_HASHASHIN_SPRITE_HEIGHT });
 	player.getShape().setSize(sf::Vector2f{ WIND_HASHASHIN_SHAPE_WIDTH, WIND_HASHASHIN_SHAPE_HEIGHT });
 
@@ -42,73 +46,76 @@ void WindHashashinState::enter(Player& player)
 	player.getShape().setOutlineThickness(1.f);
 }
 
-void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
+void WindHashashinState::updateAttackHitbox(Player& player)
 {
 	m_attackHitbox.reset();
 
+	const std::string& currentAnimationName = player.getAnimationComponent()->getCurrentAnimation()->getName();
+	const int currentAnimationTextureFrameIndex = player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex();
+
 	m_attackHitbox.setIsUltimateActivate(false);
 
-	if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Attack1")
+	if (currentAnimationName == "_Attack1")
 	{
 		m_attackHitbox.setShapePosition(player.getShape().getPosition());
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= WIND_HASHASHIN_ATTACK_1_PT_1_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= WIND_HASHASHIN_ATTACK_1_PT_1_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= WIND_HASHASHIN_ATTACK_1_PT_1_STARTING_FRAME && currentAnimationTextureFrameIndex <= WIND_HASHASHIN_ATTACK_1_PT_1_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(WIND_HASHASHIN_ATTACK_1_PT_1_WIDTH, WIND_HASHASHIN_ATTACK_1_PT_1_HEIGHT);
 		}
-		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= WIND_HASHASHIN_ATTACK_1_PT_2_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= WIND_HASHASHIN_ATTACK_1_PT_2_ENDING_FRAME)
+		else if (currentAnimationTextureFrameIndex >= WIND_HASHASHIN_ATTACK_1_PT_2_STARTING_FRAME && currentAnimationTextureFrameIndex <= WIND_HASHASHIN_ATTACK_1_PT_2_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(WIND_HASHASHIN_ATTACK_1_PT_2_WIDTH, WIND_HASHASHIN_ATTACK_1_PT_2_HEIGHT);
 		}
 
 		m_attackHitbox.setDamage(WIND_HASHASHIN_ATTACK_1_DAMAGE);
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Attack2")
+	else if (currentAnimationName == "_Attack2")
 	{
 		m_attackHitbox.setShapePosition(player.getShape().getPosition());
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= WIND_HASHASHIN_ATTACK_2_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= WIND_HASHASHIN_ATTACK_2_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= WIND_HASHASHIN_ATTACK_2_STARTING_FRAME && currentAnimationTextureFrameIndex <= WIND_HASHASHIN_ATTACK_2_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(WIND_HASHASHIN_ATTACK_2_WIDTH, WIND_HASHASHIN_ATTACK_2_HEIGHT);
 			m_attackHitbox.setDamage(WIND_HASHASHIN_ATTACK_2_DAMAGE);
 		}
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_AirAttack")
+	else if (currentAnimationName == "_AirAttack")
 	{
 		m_attackHitbox.setShapePosition(player.getShape().getPosition());
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= WIND_HASHASHIN_AIR_ATTACK_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= WIND_HASHASHIN_AIR_ATTACK_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= WIND_HASHASHIN_AIR_ATTACK_STARTING_FRAME && currentAnimationTextureFrameIndex <= WIND_HASHASHIN_AIR_ATTACK_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(WIND_HASHASHIN_AIR_ATTACK_WIDTH, WIND_HASHASHIN_AIR_ATTACK_HEIGHT);
 			m_attackHitbox.setDamage(WIND_HASHASHIN_AIR_ATTACK_DAMAGE);
 		}
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Ultimate")
+	else if (currentAnimationName == "_Ultimate")
 	{
 		m_attackHitbox.setDamage(WIND_HASHASHIN_ULTIMATE_DAMAGE);
 
 		m_attackHitbox.setIsUltimateActivate(false);
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME && currentAnimationTextureFrameIndex <= WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(player.getShape().getSize());
 			m_attackHitbox.setShapeOrigin(0.f, m_attackHitbox.getShapeSize().y / 2.f);
 			m_attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
-			m_attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{player.getShape().getSize().x * 2 * (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() - WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME) * static_cast<float>(player.getFacingRight()), 0.f});
+			m_attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{ player.getShape().getSize().x * 2 * (currentAnimationTextureFrameIndex - WIND_HASHASHIN_ACTIVATE_ULTIMATE_STARTING_FRAME) * static_cast<float>(player.getFacingRight()), 0.f });
 
 			m_attackHitbox.setIsUltimateActivate(true);
 		}
-		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
+		else if (currentAnimationTextureFrameIndex > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activateUltimate)
 		{
 			player.setPlayerState(std::make_unique<PlayerIdleState>());
 		}
-		else if ((player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && m_activateUltimate)
+		else if ((currentAnimationTextureFrameIndex == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || currentAnimationTextureFrameIndex == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || currentAnimationTextureFrameIndex == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && m_activateUltimate)
 		{
 			m_attackHitbox.setShapePosition(player.getShape().getPosition());
 			m_attackHitbox.setShapeSize(player.getShape().getSize());
 			m_attackHitbox.setDamage(WIND_HASHASHIN_ULTIMATE_DAMAGE);
 		}
-		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() > WIND_HASHASHIN_ULTIMATE_THIRD_FRAME)
+		else if (currentAnimationTextureFrameIndex > WIND_HASHASHIN_ULTIMATE_THIRD_FRAME)
 		{
 			m_attackHitbox.setDamage(0);
 		}
@@ -122,7 +129,7 @@ void WindHashashinState::updateAttackHitbox(Player& player, AttackHitbox& attack
 	m_attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
 }
 
-bool WindHashashinState::checkIfIsAttacking(Player& player, Player& enemy, const AttackHitbox& attackHitbox)
+bool WindHashashinState::checkIfIsAttacking(Player& player, const AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(player.getShape().getGlobalBounds()))
 	{

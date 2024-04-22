@@ -5,8 +5,8 @@
 class PlayerFallingState : public IPlayerState
 {
 public:
-	PlayerFallingState();
-	virtual ~PlayerFallingState();
+	PlayerFallingState() = default;
+	virtual ~PlayerFallingState() = default;
 	
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 

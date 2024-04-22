@@ -5,12 +5,9 @@
 class PlayerHittedState : public IPlayerState
 {
 public:
-	PlayerHittedState(Player& player);
+	PlayerHittedState() = default;
 	virtual ~PlayerHittedState() = default;
 
-	
-
-	
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 
 	virtual void update(Player& player);

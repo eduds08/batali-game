@@ -8,13 +8,13 @@
 
 void FireKnightState::update(Player& player, World& world, float& deltaTime)
 {
-	updateAttackHitbox(player, m_attackHitbox);
+	updateAttackHitbox(player);
 
 	for (auto& enemy : world.m_players)
 	{
 		if (enemy->getId() != player.getId())
 		{
-			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, *enemy, enemy->getChosenCharacter()->getAttackHitbox()))
+			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, enemy->getChosenCharacter()->getAttackHitbox()))
 			{
 				enemy->getChosenCharacter()->attack(*enemy, player);
 			}
@@ -28,6 +28,11 @@ void FireKnightState::update(Player& player, World& world, float& deltaTime)
 
 void FireKnightState::enter(Player& player)
 {
+	player.setHp(FIRE_KNIGHT_HP);
+	player.setSpeed(FIRE_KNIGHT_SPEED);
+	player.setJumpHeight(FIRE_KNIGHT_JUMP_HEIGHT);
+	player.setRollSpeed(FIRE_KNIGHT_ROLL_SPEED);
+
 	player.setSpriteSize(sf::Vector2i{ FIRE_KNIGHT_SPRITE_WIDTH, FIRE_KNIGHT_SPRITE_HEIGHT });
 	player.getShape().setSize(sf::Vector2f{ FIRE_KNIGHT_SHAPE_WIDTH, FIRE_KNIGHT_SHAPE_HEIGHT });
 
@@ -41,60 +46,63 @@ void FireKnightState::enter(Player& player)
 	player.getShape().setOutlineThickness(1.f);
 }
 
-void FireKnightState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
+void FireKnightState::updateAttackHitbox(Player& player)
 {
 	m_attackHitbox.reset();
 
-	if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Attack1")
+	const std::string& currentAnimationName = player.getAnimationComponent()->getCurrentAnimation()->getName();
+	const int currentAnimationTextureFrameIndex = player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex();
+
+	if (currentAnimationName == "_Attack1")
 	{
 		m_attackHitbox.setShapePosition(player.getShape().getPosition());
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= FIRE_KNIGHT_ATTACK_1_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= FIRE_KNIGHT_ATTACK_1_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= FIRE_KNIGHT_ATTACK_1_STARTING_FRAME && currentAnimationTextureFrameIndex <= FIRE_KNIGHT_ATTACK_1_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(FIRE_KNIGHT_ATTACK_1_WIDTH, FIRE_KNIGHT_ATTACK_1_HEIGHT);
 			m_attackHitbox.setDamage(FIRE_KNIGHT_ATTACK_1_DAMAGE);
 		}
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Attack2")
+	else if (currentAnimationName == "_Attack2")
 	{
 		m_attackHitbox.setShapePosition(player.getShape().getPosition());
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= FIRE_KNIGHT_ATTACK_2_PT_1_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= FIRE_KNIGHT_ATTACK_2_PT_1_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= FIRE_KNIGHT_ATTACK_2_PT_1_STARTING_FRAME && currentAnimationTextureFrameIndex <= FIRE_KNIGHT_ATTACK_2_PT_1_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(FIRE_KNIGHT_ATTACK_2_PT_1_WIDTH, FIRE_KNIGHT_ATTACK_2_PT_1_HEIGHT);
 			m_attackHitbox.setShapePosition(player.getShape().getPosition() - sf::Vector2f{ FIRE_KNIGHT_ATTACK_2_PT_1_WIDTH * static_cast<float>(player.getFacingRight()), 0.f });
 		}
-		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= FIRE_KNIGHT_ATTACK_2_PT_2_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= FIRE_KNIGHT_ATTACK_2_PT_2_ENDING_FRAME)
+		else if (currentAnimationTextureFrameIndex >= FIRE_KNIGHT_ATTACK_2_PT_2_STARTING_FRAME && currentAnimationTextureFrameIndex <= FIRE_KNIGHT_ATTACK_2_PT_2_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(FIRE_KNIGHT_ATTACK_2_PT_2_WIDTH, FIRE_KNIGHT_ATTACK_2_PT_2_HEIGHT);
 		}
-		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= FIRE_KNIGHT_ATTACK_2_PT_3_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= FIRE_KNIGHT_ATTACK_2_PT_3_ENDING_FRAME)
+		else if (currentAnimationTextureFrameIndex >= FIRE_KNIGHT_ATTACK_2_PT_3_STARTING_FRAME && currentAnimationTextureFrameIndex <= FIRE_KNIGHT_ATTACK_2_PT_3_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(FIRE_KNIGHT_ATTACK_2_PT_3_WIDTH, FIRE_KNIGHT_ATTACK_2_PT_3_HEIGHT);
 			m_attackHitbox.setShapePosition(player.getShape().getPosition() - sf::Vector2f{ FIRE_KNIGHT_ATTACK_2_PT_3_WIDTH * static_cast<float>(player.getFacingRight()), 0.f });
 		}
-		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= FIRE_KNIGHT_ATTACK_2_PT_4_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= FIRE_KNIGHT_ATTACK_2_PT_4_ENDING_FRAME)
+		else if (currentAnimationTextureFrameIndex >= FIRE_KNIGHT_ATTACK_2_PT_4_STARTING_FRAME && currentAnimationTextureFrameIndex <= FIRE_KNIGHT_ATTACK_2_PT_4_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(FIRE_KNIGHT_ATTACK_2_PT_4_WIDTH, FIRE_KNIGHT_ATTACK_2_PT_4_HEIGHT);
 		}
 
 		m_attackHitbox.setDamage(FIRE_KNIGHT_ATTACK_2_DAMAGE);
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_AirAttack")
+	else if (currentAnimationName == "_AirAttack")
 	{
 		m_attackHitbox.setShapePosition(player.getShape().getPosition() - sf::Vector2f{ 0.f, 15.f });
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= FIRE_KNIGHT_AIR_ATTACK_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= FIRE_KNIGHT_AIR_ATTACK_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= FIRE_KNIGHT_AIR_ATTACK_STARTING_FRAME && currentAnimationTextureFrameIndex <= FIRE_KNIGHT_AIR_ATTACK_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(FIRE_KNIGHT_AIR_ATTACK_WIDTH, FIRE_KNIGHT_AIR_ATTACK_HEIGHT);
 			m_attackHitbox.setDamage(FIRE_KNIGHT_AIR_ATTACK_DAMAGE);
 		}
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Ultimate")
+	else if (currentAnimationName == "_Ultimate")
 	{
 		m_attackHitbox.setShapePosition(player.getShape().getPosition());
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= FIRE_KNIGHT_ULTIMATE_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= FIRE_KNIGHT_ULTIMATE_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= FIRE_KNIGHT_ULTIMATE_STARTING_FRAME && currentAnimationTextureFrameIndex <= FIRE_KNIGHT_ULTIMATE_ENDING_FRAME)
 		{
 			m_attackHitbox.setShapeSize(FIRE_KNIGHT_ULTIMATE_WIDTH, FIRE_KNIGHT_ULTIMATE_HEIGHT);
 			m_attackHitbox.setDamage(FIRE_KNIGHT_ULTIMATE_DAMAGE);
@@ -109,7 +117,7 @@ void FireKnightState::updateAttackHitbox(Player& player, AttackHitbox& attackHit
 	m_attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
 }
 
-bool FireKnightState::checkIfIsAttacking(Player& player, Player& enemy, const AttackHitbox& attackHitbox)
+bool FireKnightState::checkIfIsAttacking(Player& player, const AttackHitbox& attackHitbox)
 {
 	if (attackHitbox.getShape().getGlobalBounds().intersects(player.getShape().getGlobalBounds()))
 	{

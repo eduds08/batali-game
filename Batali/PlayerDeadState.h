@@ -11,9 +11,6 @@ class PlayerDeadState : public IPlayerState
 public:
 	PlayerDeadState() = default;
 	virtual ~PlayerDeadState() = default;
-
-	
-
 	
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 

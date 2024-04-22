@@ -41,7 +41,19 @@ public:
 	void takeDamage();
 	void setKnockbackVelocity(float knockbackVelocity) { m_knockbackVelocity = knockbackVelocity; }
 	void setDamageToTake(int damageToTake) { m_damageToTake = damageToTake; }
+
+	void setHp(int hp) { m_hp = hp; }
 	const int getHp() const { return m_hp; }
+
+	void setSpeed(float speed) { m_speed = speed; }
+	const float getSpeed() const { return m_speed; }
+
+	void setJumpHeight(float jumpHeight) { m_jumpHeight = jumpHeight; }
+	const float getJumpHeight() const { return m_jumpHeight; }
+
+	void setRollSpeed(float rollSpeed) { m_rollSpeed = rollSpeed; }
+	const float getRollSpeed() const { return m_rollSpeed; }
+
 	const float getKnockbackVelocity() const { return m_knockbackVelocity; }
 
 	std::unique_ptr<IAnimationComponent>& getAnimationComponent() { return m_animationComponent; }
@@ -78,6 +90,10 @@ private:
 
 	int m_hp{ 500 };
 	float m_knockbackVelocity{ 0.f };
+	float m_jumpHeight{};
+	float m_rollSpeed{};
+
+	float m_speed{};
 
 	int m_damageToTake{}; // weird, I know.
 };

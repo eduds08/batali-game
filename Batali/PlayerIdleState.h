@@ -5,11 +5,8 @@
 class PlayerIdleState : public IPlayerState
 {
 public:
-	PlayerIdleState();
-	virtual ~PlayerIdleState();
-
-	
-
+	PlayerIdleState() = default;
+	virtual ~PlayerIdleState() = default;
 	
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 

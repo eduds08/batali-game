@@ -6,10 +6,6 @@
 #include "PlayerDeadState.h"
 #include "Player.h"
 
-PlayerHittedState::PlayerHittedState(Player& player)
-{
-}
-
 std::unique_ptr<IPlayerState> PlayerHittedState::handleCondition(Player& player, const std::string& condition)
 {
 	return nullptr;

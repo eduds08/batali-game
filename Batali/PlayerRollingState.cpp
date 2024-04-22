@@ -4,14 +4,6 @@
 #include "PlayerHittedState.h"
 #include "Player.h"
 
-PlayerRollingState::PlayerRollingState()
-{
-}
-
-PlayerRollingState::~PlayerRollingState()
-{
-}
-
 std::unique_ptr<IPlayerState> PlayerRollingState::handleCondition(Player& player, const std::string& condition)
 {
 	return nullptr;
@@ -19,7 +11,7 @@ std::unique_ptr<IPlayerState> PlayerRollingState::handleCondition(Player& player
 
 void PlayerRollingState::update(Player& player)
 {
-	player.getVelocity().x = player.getFacingRight() * 230.f;
+	player.getVelocity().x = player.getFacingRight() * player.getRollSpeed();
 
 	player.setKnockbackVelocity(0.f);
 

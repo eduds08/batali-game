@@ -11,16 +11,6 @@
 #include "IAnimationComponent.h"
 #include "Player.h"
 
-PlayerRunningState::PlayerRunningState()
-{
-
-}
-
-PlayerRunningState::~PlayerRunningState()
-{
-
-}
-
 std::unique_ptr<IPlayerState> PlayerRunningState::handleCondition(Player& player, const std::string& condition)
 {
 	if (condition == "JUMP_BUTTON")
@@ -46,16 +36,16 @@ std::unique_ptr<IPlayerState> PlayerRunningState::handleCondition(Player& player
 	else if (condition == "RUN_RIGHT_BUTTON")
 	{
 		player.setFacingRight(1);
-		player.getVelocity().x = 200.f * player.getFacingRight();
+		player.getVelocity().x = player.getSpeed() * player.getFacingRight();
 	}
 	else if (condition == "RUN_LEFT_BUTTON")
 	{
 		player.setFacingRight(-1);
-		player.getVelocity().x = 200.f * player.getFacingRight();
+		player.getVelocity().x = player.getSpeed() * player.getFacingRight();
 	}
 	else if (condition == "HITTED")
 	{
-		return std::make_unique<PlayerHittedState>(player);
+		return std::make_unique<PlayerHittedState>();
 	}
 
 	return nullptr;

@@ -5,11 +5,8 @@
 class PlayerRollingState : public IPlayerState
 {
 public:
-	PlayerRollingState();
-	virtual ~PlayerRollingState();
-
-	
-
+	PlayerRollingState() = default;
+	virtual ~PlayerRollingState() = default;
 	
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 

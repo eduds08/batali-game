@@ -7,9 +7,6 @@ class PlayerAttackingState : public IPlayerState
 public:
 	PlayerAttackingState() = default;
 	virtual ~PlayerAttackingState() = default;
-
-	
-
 	
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 

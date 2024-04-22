@@ -11,7 +11,7 @@ std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleCondition(Player& p
 {
 	if (condition == "HITTED")
 	{
-		return std::make_unique<PlayerHittedState>(player);
+		return std::make_unique<PlayerHittedState>();
 	}
 
 	return nullptr;

@@ -12,16 +12,6 @@
 #include "Player.h"
 #include "PlayerHittedState.h"
 
-PlayerIdleState::PlayerIdleState()
-{
-
-}
-
-PlayerIdleState::~PlayerIdleState()
-{
-
-}
-
 std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, const std::string& condition)
 {
 	if (condition == "JUMP_BUTTON")
@@ -54,7 +44,7 @@ std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, c
 	}
 	else if (condition == "HITTED")
 	{
-		return std::make_unique<PlayerHittedState>(player);
+		return std::make_unique<PlayerHittedState>();
 	}
 
 	return nullptr;

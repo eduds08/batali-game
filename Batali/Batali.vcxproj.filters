@@ -180,9 +180,6 @@
     <ClCompile Include="FireKnightState.cpp">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
-    <ClCompile Include="HoodieState.cpp">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClCompile>
     <ClCompile Include="WindHashashinState.cpp">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
@@ -231,7 +228,9 @@
     <ClCompile Include="SpriteActor.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerFactory.cpp" />
+    <ClCompile Include="PlayerFactory.cpp">
+      <Filter>Player%27s Chosen Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
@@ -399,9 +398,6 @@
     <ClInclude Include="FireKnightState.h">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
-    <ClInclude Include="HoodieState.h">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClInclude>
     <ClInclude Include="IChosenCharacterState.h">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
@@ -456,6 +452,8 @@
     <ClInclude Include="SpriteActor.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerFactory.h" />
+    <ClInclude Include="PlayerFactory.h">
+      <Filter>Player%27s Chosen Characters</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

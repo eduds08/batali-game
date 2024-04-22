@@ -4,29 +4,21 @@
 #include "PlayerIdleState.h"
 #include "PlayerHittedState.h"
 
-PlayerFallingState::PlayerFallingState()
-{
-}
-
-PlayerFallingState::~PlayerFallingState()
-{
-}
-
 std::unique_ptr<IPlayerState> PlayerFallingState::handleCondition(Player& player, const std::string& condition)
 {
 	if (condition == "RUN_RIGHT_BUTTON")
 	{
 		player.setFacingRight(1);
-		player.getVelocity().x = 200.f * player.getFacingRight();
+		player.getVelocity().x = player.getSpeed() * player.getFacingRight();
 	}
 	else if (condition == "RUN_LEFT_BUTTON")
 	{
 		player.setFacingRight(-1);
-		player.getVelocity().x = 200.f * player.getFacingRight();
+		player.getVelocity().x = player.getSpeed() * player.getFacingRight();
 	}
 	else if (condition == "HITTED")
 	{
-		return std::make_unique<PlayerHittedState>(player);
+		return std::make_unique<PlayerHittedState>();
 	}
 
 	return nullptr;

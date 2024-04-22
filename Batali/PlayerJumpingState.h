@@ -5,11 +5,8 @@
 class PlayerJumpingState : public IPlayerState
 {
 public:
-	PlayerJumpingState();
-	virtual ~PlayerJumpingState();
-
-	
-
+	PlayerJumpingState() = default;
+	virtual ~PlayerJumpingState() = default;
 	
 	virtual std::unique_ptr<IPlayerState> handleCondition(Player& player, const std::string& condition);
 

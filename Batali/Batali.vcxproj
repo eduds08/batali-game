@@ -150,7 +150,6 @@
     <ClCompile Include="PlayerDeadState.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="PlayerHittedState.cpp" />
-    <ClCompile Include="HoodieState.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="JumpCommand.cpp" />
     <ClCompile Include="LoopingAnimation.cpp" />
@@ -208,7 +207,6 @@
     <ClInclude Include="PlayerDeadState.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="PlayerHittedState.h" />
-    <ClInclude Include="HoodieState.h" />
     <ClInclude Include="IAnimationComponent.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="BackgroundUI.h" />

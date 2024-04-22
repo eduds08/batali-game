@@ -16,9 +16,9 @@ public:
 
 	virtual const std::string& getChosenCharacterName() const = 0;
 
-	virtual void updateAttackHitbox(Player& player, AttackHitbox& attackHitbox) = 0;
+	virtual void updateAttackHitbox(Player& player) = 0;
 
-	virtual bool checkIfIsAttacking(Player& player, Player& enemy, const AttackHitbox& attackHitbox) = 0;
+	virtual bool checkIfIsAttacking(Player& player, const AttackHitbox& attackHitbox) = 0;
 
 	virtual const AttackHitbox& getAttackHitbox() const = 0;
 

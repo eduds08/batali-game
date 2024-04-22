@@ -9,13 +9,13 @@
 
 void BoxerState::update(Player& player, World& world, float& deltaTime)
 {
-	updateAttackHitbox(player, m_attackHitbox);
+	updateAttackHitbox(player);
 
 	for (auto& enemy : world.m_players)
 	{
 		if (enemy->getId() != player.getId())
 		{
-			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, *enemy, enemy->getChosenCharacter()->getAttackHitbox()))
+			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, enemy->getChosenCharacter()->getAttackHitbox()))
 			{
 				enemy->getChosenCharacter()->attack(*enemy, player);
 			}
@@ -29,6 +29,11 @@ void BoxerState::update(Player& player, World& world, float& deltaTime)
 
 void BoxerState::enter(Player& player)
 {
+	player.setHp(BOXER_HP);
+	player.setSpeed(BOXER_SPEED);
+	player.setJumpHeight(BOXER_JUMP_HEIGHT);
+	player.setRollSpeed(BOXER_ROLL_SPEED);
+
 	player.setSpriteSize(sf::Vector2i{ BOXER_SPRITE_WIDTH, BOXER_SPRITE_HEIGHT });
 	player.getShape().setSize(sf::Vector2f{ BOXER_SHAPE_WIDTH, BOXER_SHAPE_HEIGHT });
 
@@ -42,53 +47,56 @@ void BoxerState::enter(Player& player)
 	player.getShape().setOutlineThickness(1.f);
 }
 
-void BoxerState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
+void BoxerState::updateAttackHitbox(Player& player)
 {
-	attackHitbox.reset();
+	m_attackHitbox.reset();
 
-	if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Attack1")
+	const std::string& currentAnimationName = player.getAnimationComponent()->getCurrentAnimation()->getName();
+	const int currentAnimationTextureFrameIndex = player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex();
+
+	if (currentAnimationName == "_Attack1")
 	{
-		attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{0.f, -15.f});
+		m_attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{ 0.f, -15.f });
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= BOXER_ATTACK_1_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= BOXER_ATTACK_1_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= BOXER_ATTACK_1_STARTING_FRAME && currentAnimationTextureFrameIndex <= BOXER_ATTACK_1_ENDING_FRAME)
 		{
-			attackHitbox.setShapeSize(BOXER_ATTACK_1_WIDTH, BOXER_ATTACK_1_HEIGHT);
-			attackHitbox.setDamage(BOXER_ATTACK_1_DAMAGE);
+			m_attackHitbox.setShapeSize(BOXER_ATTACK_1_WIDTH, BOXER_ATTACK_1_HEIGHT);
+			m_attackHitbox.setDamage(BOXER_ATTACK_1_DAMAGE);
 		}
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Attack2")
+	else if (currentAnimationName == "_Attack2")
 	{
-		attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{16.f * static_cast<float>(player.getFacingRight()), -28.f});
+		m_attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{ 16.f * static_cast<float>(player.getFacingRight()), -28.f });
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= BOXER_ATTACK_2_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= BOXER_ATTACK_2_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= BOXER_ATTACK_2_STARTING_FRAME && currentAnimationTextureFrameIndex <= BOXER_ATTACK_2_ENDING_FRAME)
 		{
-			attackHitbox.setShapeSize(BOXER_ATTACK_2_WIDTH, BOXER_ATTACK_2_HEIGHT);
-			attackHitbox.setDamage(BOXER_ATTACK_2_DAMAGE);
+			m_attackHitbox.setShapeSize(BOXER_ATTACK_2_WIDTH, BOXER_ATTACK_2_HEIGHT);
+			m_attackHitbox.setDamage(BOXER_ATTACK_2_DAMAGE);
 		}
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_AirAttack")
+	else if (currentAnimationName == "_AirAttack")
 	{
-		attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{0.f, -20.f});
+		m_attackHitbox.setShapePosition(player.getShape().getPosition() + sf::Vector2f{ 0.f, -20.f });
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() >= BOXER_AIR_ATTACK_STARTING_FRAME && player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() <= BOXER_AIR_ATTACK_ENDING_FRAME)
+		if (currentAnimationTextureFrameIndex >= BOXER_AIR_ATTACK_STARTING_FRAME && currentAnimationTextureFrameIndex <= BOXER_AIR_ATTACK_ENDING_FRAME)
 		{
-			attackHitbox.setShapeSize(BOXER_AIR_ATTACK_WIDTH, BOXER_AIR_ATTACK_HEIGHT);
-			attackHitbox.setDamage(BOXER_AIR_ATTACK_DAMAGE);
+			m_attackHitbox.setShapeSize(BOXER_AIR_ATTACK_WIDTH, BOXER_AIR_ATTACK_HEIGHT);
+			m_attackHitbox.setDamage(BOXER_AIR_ATTACK_DAMAGE);
 		}
 	}
-	else if (player.getAnimationComponent()->getCurrentAnimation()->getName() == "_Ultimate")
+	else if (currentAnimationName == "_Ultimate")
 	{
-		attackHitbox.setShapePosition(player.getShape().getPosition());
-		attackHitbox.setDamage(BOXER_ULTIMATE_DAMAGE);
+		m_attackHitbox.setShapePosition(player.getShape().getPosition());
+		m_attackHitbox.setDamage(BOXER_ULTIMATE_DAMAGE);
 
-		if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == BOXER_ULTIMATE_PT_1_FRAME)
+		if (currentAnimationTextureFrameIndex == BOXER_ULTIMATE_PT_1_FRAME)
 		{
 			if (player.getProjectilesSize() == 0)
 			{
 				player.launchProjectile(player, std::make_unique<BoxerUltimateState>());
 			}
 		}
-		else if (player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex() == BOXER_ULTIMATE_PT_2_FRAME)
+		else if (currentAnimationTextureFrameIndex == BOXER_ULTIMATE_PT_2_FRAME)
 		{
 			if (player.getProjectilesSize() == 1)
 			{
@@ -98,19 +106,20 @@ void BoxerState::updateAttackHitbox(Player& player, AttackHitbox& attackHitbox)
 	}
 	else
 	{
-		if (player.getProjectilesSize() == 0)
+		m_attackHitbox.setDamage(0);
+		/*if (player.getProjectilesSize() == 0)
 		{
-			attackHitbox.setDamage(0);
-		}
+			m_attackHitbox.setDamage(0);
+		}*/
 	}
 
-	attackHitbox.setShapeOrigin(0.f, attackHitbox.getShapeSize().y / 2.f);
-	attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
+	m_attackHitbox.setShapeOrigin(0.f, m_attackHitbox.getShapeSize().y / 2.f);
+	m_attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);
 }
 
-bool BoxerState::checkIfIsAttacking(Player& player, Player& enemy, const AttackHitbox& attackHitbox)
+bool BoxerState::checkIfIsAttacking(Player& player, const AttackHitbox& attackHitbox)
 {
-	if (attackHitbox.getShape().getGlobalBounds().intersects(enemy.getShape().getGlobalBounds()))
+	if (attackHitbox.getShape().getGlobalBounds().intersects(player.getShape().getGlobalBounds()))
 	{
 		return true;
 	}
