@@ -60,6 +60,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_playerState->update(*this);
 
+	//m_playerAttackComponent->update(*this, world, deltaTime);
 	m_chosenCharacterState->update(*this, world, deltaTime);
 
 	m_physicsComponent->update(*this, deltaTime);

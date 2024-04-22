@@ -145,8 +145,10 @@
     <ClCompile Include="CharacterPortraitUI.cpp" />
     <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
+    <ClCompile Include="FireKnightAttackComponent.cpp" />
     <ClCompile Include="FireKnightState.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="PlayerAttackComponent.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="PlayerHittedState.cpp" />
@@ -202,8 +204,10 @@
     <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="BoxerState.h" />
     <ClInclude Include="BoxerUltimateState.h" />
+    <ClInclude Include="FireKnightAttackComponent.h" />
     <ClInclude Include="FireKnightState.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="PlayerAttackComponent.h" />
     <ClInclude Include="PlayerDeadState.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="PlayerHittedState.h" />

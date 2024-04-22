@@ -231,6 +231,8 @@
     <ClCompile Include="PlayerFactory.cpp">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerAttackComponent.cpp" />
+    <ClCompile Include="FireKnightAttackComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
@@ -455,5 +457,7 @@
     <ClInclude Include="PlayerFactory.h">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerAttackComponent.h" />
+    <ClInclude Include="FireKnightAttackComponent.h" />
   </ItemGroup>
 </Project>

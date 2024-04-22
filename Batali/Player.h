@@ -10,6 +10,8 @@
 
 #include "IChosenCharacterState.h"
 
+#include "PlayerAttackComponent.h"
+
 class IRenderComponent;
 class ICollisionComponent;
 class IPhysicsComponent;
@@ -74,6 +76,7 @@ private:
 	std::unique_ptr<ILaunchProjectilesComponent> m_launchProjectilesComponent{ nullptr };
 	std::unique_ptr<IAnimationComponent> m_animationComponent{ nullptr };
 
+	std::unique_ptr< PlayerAttackComponent> m_playerAttackComponent{ nullptr };
 	std::unique_ptr<IChosenCharacterState> m_chosenCharacterState{ nullptr };
 
 	std::unique_ptr<IPlayerState> m_playerState{ nullptr };
@@ -84,6 +87,8 @@ private:
 	InputHandler m_inputHandler{};
 
 	std::unordered_map<std::string, sf::Keyboard::Scancode> m_keyBindings{};
+
+	//std::string name{};
 
 	static int s_playerNumberCounter;
 	const int m_playerNumber;
