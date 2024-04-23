@@ -138,6 +138,7 @@
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="BackgroundUI.cpp" />
     <ClCompile Include="BigCharacterPortraitUI.cpp" />
+    <ClCompile Include="BoxerAttackComponent.cpp" />
     <ClCompile Include="BoxerState.cpp" />
     <ClCompile Include="BoxerUltimateState.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
@@ -197,11 +198,13 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UltimateCommand.cpp" />
     <ClCompile Include="WindHashashinState.cpp" />
+    <ClCompile Include="WindHashasinAttackComponent.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
+    <ClInclude Include="BoxerAttackComponent.h" />
     <ClInclude Include="BoxerState.h" />
     <ClInclude Include="BoxerUltimateState.h" />
     <ClInclude Include="FireKnightAttackComponent.h" />
@@ -275,6 +278,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="UltimateCommand.h" />
     <ClInclude Include="WindHashashinState.h" />
+    <ClInclude Include="WindHashasinAttackComponent.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

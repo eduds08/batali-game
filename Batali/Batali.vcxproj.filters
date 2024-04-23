@@ -233,6 +233,8 @@
     </ClCompile>
     <ClCompile Include="PlayerAttackComponent.cpp" />
     <ClCompile Include="FireKnightAttackComponent.cpp" />
+    <ClCompile Include="WindHashasinAttackComponent.cpp" />
+    <ClCompile Include="BoxerAttackComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
@@ -459,5 +461,7 @@
     </ClInclude>
     <ClInclude Include="PlayerAttackComponent.h" />
     <ClInclude Include="FireKnightAttackComponent.h" />
+    <ClInclude Include="WindHashasinAttackComponent.h" />
+    <ClInclude Include="BoxerAttackComponent.h" />
   </ItemGroup>
 </Project>

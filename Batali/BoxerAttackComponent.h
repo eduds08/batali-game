@@ -2,11 +2,11 @@
 
 #include "PlayerAttackComponent.h"
 
-class FireKnightAttackComponent : public PlayerAttackComponent
+class BoxerAttackComponent : public PlayerAttackComponent
 {
 public:
-	FireKnightAttackComponent() = default;
-	virtual ~FireKnightAttackComponent() = default;
+	BoxerAttackComponent() = default;
+	virtual ~BoxerAttackComponent() = default;
 
 private:
 	virtual void updateAttack1(const int currentPlayerAnimationFrame);

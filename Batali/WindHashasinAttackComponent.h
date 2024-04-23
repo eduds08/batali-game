@@ -2,11 +2,11 @@
 
 #include "PlayerAttackComponent.h"
 
-class FireKnightAttackComponent : public PlayerAttackComponent
+class WindHashasinAttackComponent : public PlayerAttackComponent
 {
 public:
-	FireKnightAttackComponent() = default;
-	virtual ~FireKnightAttackComponent() = default;
+	WindHashasinAttackComponent() = default;
+	virtual ~WindHashasinAttackComponent() = default;
 
 private:
 	virtual void updateAttack1(const int currentPlayerAnimationFrame);
@@ -15,4 +15,6 @@ private:
 	virtual void updateUltimate(const int currentPlayerAnimationFrame);
 
 	virtual void attack(Player& enemy);
+
+	bool m_activeUltimate{ false };
 };
