@@ -1,34 +1,41 @@
 #include "PlayerAttackComponent.h"
 
+#include "IAnimationComponent.h"
+
 #include "Player.h"
 #include "World.h"
 
-void PlayerAttackComponent::update(Player& player, World& world, float& deltaTime)
+void PlayerAttackComponent::update(World& world, float& deltaTime)
 {
-	/*updateAttackHitbox(player);
+	updateAttackHitbox();
 
 	for (auto& enemy : world.m_players)
 	{
-		if (enemy->getId() != player.getId())
+		if (enemy->getId() != m_thisPlayer->getId())
 		{
-			if (enemy->getChosenCharacter()->checkIfIsAttacking(player, enemy->getChosenCharacter()->getAttackHitbox()))
+			if (m_thisPlayer->getAttackComponent()->isBeingAttackedBy(enemy->getAttackComponent()->getAttackHitbox()))
 			{
-				enemy->getChosenCharacter()->attack(*enemy, player);
+				enemy->getAttackComponent()->attack(*m_thisPlayer);
 			}
 		}
 	}
 
-	knockbackMove(player, deltaTime);
+	knockbackMove(deltaTime);
 
-	player.setKnockbackVelocity(0.f);*/
+	m_thisPlayer->setKnockbackVelocity(0.f);
 }
 
-void PlayerAttackComponent::updateAttackHitbox(Player& player)
+void PlayerAttackComponent::enter(Player* player)
 {
-	/*m_attackHitbox.reset();
+	m_thisPlayer = player;
+}
 
-	const std::string& currentPlayerAnimationName = player.getAnimationComponent()->getCurrentAnimation()->getName();
-	const int currentPlayerAnimationFrame = player.getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex();
+void PlayerAttackComponent::updateAttackHitbox()
+{
+	m_attackHitbox.reset();
+
+	const std::string& currentPlayerAnimationName = m_thisPlayer->getAnimationComponent()->getCurrentAnimation()->getName();
+	const int currentPlayerAnimationFrame = m_thisPlayer->getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex();
 
 	if (currentPlayerAnimationName == "_Attack1")
 	{
@@ -52,12 +59,12 @@ void PlayerAttackComponent::updateAttackHitbox(Player& player)
 	}
 
 	m_attackHitbox.setShapeOrigin(0.f, m_attackHitbox.getShapeSize().y / 2.f);
-	m_attackHitbox.setShapeScale(static_cast<float>(player.getFacingRight()), 1.f);*/
+	m_attackHitbox.setShapeScale(static_cast<float>(m_thisPlayer->getFacingRight()), 1.f);
 }
 
-bool PlayerAttackComponent::isBeingAttackedBy(const AttackHitbox& enemyAttackHitbox, Player& thisPlayer)
+bool PlayerAttackComponent::isBeingAttackedBy(const AttackHitbox& enemyAttackHitbox)
 {
-	if (enemyAttackHitbox.getShape().getGlobalBounds().intersects(thisPlayer.getShape().getGlobalBounds()))
+	if (enemyAttackHitbox.getShape().getGlobalBounds().intersects(m_thisPlayer->getShape().getGlobalBounds()))
 	{
 		return true;
 	}
@@ -65,20 +72,8 @@ bool PlayerAttackComponent::isBeingAttackedBy(const AttackHitbox& enemyAttackHit
 	return false;
 }
 
-void PlayerAttackComponent::attack(Player& player, Player& enemy)
+void PlayerAttackComponent::knockbackMove(float& deltaTime)
 {
-	/*float attackDirection = player.getShape().getPosition().x - enemy.getShape().getPosition().x;
-
-	enemy.setDamageToTake(m_attackHitbox.getDamage());
-
-	enemy.handleCondition("HITTED");
-
-	enemy.setKnockbackVelocity(KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));*/
-}
-
-void PlayerAttackComponent::knockbackMove(Player& player, float& deltaTime)
-{
-	/*player.getShape().move(sf::Vector2f{ dynamic_cast<Player*>(&player)->getKnockbackVelocity(), 0.f } *deltaTime);
-
-	player.getSprite().setPosition(sf::Vector2f{ player.getShape().getPosition().x, player.getShape().getPosition().y - (player.getSprite().getTextureRect().getSize().y - player.getShape().getSize().y) / 2.f });*/
+	m_thisPlayer->getShape().move(sf::Vector2f{ m_thisPlayer->getKnockbackVelocity(), 0.f } *deltaTime);
+	m_thisPlayer->getSprite().setPosition(sf::Vector2f{ m_thisPlayer->getShape().getPosition().x, m_thisPlayer->getShape().getPosition().y - (m_thisPlayer->getSprite().getTextureRect().getSize().y - m_thisPlayer->getShape().getSize().y) / 2.f });
 }

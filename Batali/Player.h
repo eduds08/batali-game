@@ -60,6 +60,7 @@ public:
 
 	std::unique_ptr<IAnimationComponent>& getAnimationComponent() { return m_animationComponent; }
 
+	std::unique_ptr<PlayerAttackComponent>& getAttackComponent() { return m_playerAttackComponent; }
 	std::unique_ptr<IChosenCharacterState>& getChosenCharacter() { return m_chosenCharacterState; }
 
 	sf::Keyboard::Scancode getKeyBinding(const std::string& keyBinding) { return m_keyBindings.at(keyBinding); }
@@ -76,7 +77,7 @@ private:
 	std::unique_ptr<ILaunchProjectilesComponent> m_launchProjectilesComponent{ nullptr };
 	std::unique_ptr<IAnimationComponent> m_animationComponent{ nullptr };
 
-	std::unique_ptr< PlayerAttackComponent> m_playerAttackComponent{ nullptr };
+	std::unique_ptr<PlayerAttackComponent> m_playerAttackComponent{ nullptr };
 	std::unique_ptr<IChosenCharacterState> m_chosenCharacterState{ nullptr };
 
 	std::unique_ptr<IPlayerState> m_playerState{ nullptr };
