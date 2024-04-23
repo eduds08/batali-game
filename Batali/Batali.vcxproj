@@ -139,7 +139,6 @@
     <ClCompile Include="BackgroundUI.cpp" />
     <ClCompile Include="BigCharacterPortraitUI.cpp" />
     <ClCompile Include="BoxerAttackComponent.cpp" />
-    <ClCompile Include="BoxerState.cpp" />
     <ClCompile Include="BoxerUltimateState.cpp" />
     <ClCompile Include="ButtonAuxState.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
@@ -147,7 +146,6 @@
     <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="CharacterStatusUI.cpp" />
     <ClCompile Include="FireKnightAttackComponent.cpp" />
-    <ClCompile Include="FireKnightState.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="PlayerAttackComponent.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />
@@ -197,7 +195,6 @@
     <ClCompile Include="TexturesManager.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UltimateCommand.cpp" />
-    <ClCompile Include="WindHashashinState.cpp" />
     <ClCompile Include="WindHashasinAttackComponent.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -205,10 +202,8 @@
     <ClInclude Include="Attack1Command.h" />
     <ClInclude Include="Attack2Command.h" />
     <ClInclude Include="BoxerAttackComponent.h" />
-    <ClInclude Include="BoxerState.h" />
     <ClInclude Include="BoxerUltimateState.h" />
     <ClInclude Include="FireKnightAttackComponent.h" />
-    <ClInclude Include="FireKnightState.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PlayerAttackComponent.h" />
     <ClInclude Include="PlayerDeadState.h" />
@@ -221,7 +216,6 @@
     <ClInclude Include="ButtonAuxState.h" />
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="AbstractAnimation.h" />
-    <ClInclude Include="IChosenCharacterState.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="IPhysicsComponent.h" />
@@ -277,7 +271,6 @@
     <ClInclude Include="TexturesManager.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UltimateCommand.h" />
-    <ClInclude Include="WindHashashinState.h" />
     <ClInclude Include="WindHashasinAttackComponent.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

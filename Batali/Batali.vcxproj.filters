@@ -174,15 +174,6 @@
     <ClCompile Include="ProjectileRenderComponent.cpp">
       <Filter>Projectile%27s Components</Filter>
     </ClCompile>
-    <ClCompile Include="BoxerState.cpp">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="FireKnightState.cpp">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="WindHashashinState.cpp">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -395,18 +386,6 @@
     </ClInclude>
     <ClInclude Include="ProjectilePhysicsComponent.h">
       <Filter>Projectile%27s Components</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxerState.h">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="FireKnightState.h">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="IChosenCharacterState.h">
-      <Filter>Player%27s Chosen Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="WindHashashinState.h">
-      <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Entities</Filter>

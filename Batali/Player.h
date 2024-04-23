@@ -8,8 +8,6 @@
 #include <string>
 #include <memory>
 
-#include "IChosenCharacterState.h"
-
 #include "PlayerAttackComponent.h"
 
 class IRenderComponent;
@@ -26,7 +24,7 @@ public:
 	Player(std::unique_ptr<IRenderComponent> renderComponent = nullptr, std::unique_ptr<ICollisionComponent> collisionComponent = nullptr, std::unique_ptr<IPhysicsComponent> physicsComponent = nullptr, std::unique_ptr<IAnimationComponent> animationComponent = nullptr, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent = nullptr);
 	virtual ~Player();
 
-	void setChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState);
+	void setAttackComponent(std::unique_ptr<PlayerAttackComponent> attackComponent);
 
 	void initKeyBindings();
 
@@ -61,14 +59,14 @@ public:
 	std::unique_ptr<IAnimationComponent>& getAnimationComponent() { return m_animationComponent; }
 
 	std::unique_ptr<PlayerAttackComponent>& getAttackComponent() { return m_playerAttackComponent; }
-	std::unique_ptr<IChosenCharacterState>& getChosenCharacter() { return m_chosenCharacterState; }
 
 	sf::Keyboard::Scancode getKeyBinding(const std::string& keyBinding) { return m_keyBindings.at(keyBinding); }
 
 	void launchProjectile(GameObject& gameObject, std::unique_ptr<IProjectileTypeState> projectileTypeState);
 	const size_t getProjectilesSize() const;
 
-	virtual const std::string& getName() const { return m_chosenCharacterState->getChosenCharacterName(); }
+	void setName(const std::string& name) { m_name = name; }
+	virtual const std::string& getName() const { return m_name; }
 
 private:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
@@ -78,7 +76,6 @@ private:
 	std::unique_ptr<IAnimationComponent> m_animationComponent{ nullptr };
 
 	std::unique_ptr<PlayerAttackComponent> m_playerAttackComponent{ nullptr };
-	std::unique_ptr<IChosenCharacterState> m_chosenCharacterState{ nullptr };
 
 	std::unique_ptr<IPlayerState> m_playerState{ nullptr };
 
@@ -89,7 +86,7 @@ private:
 
 	std::unordered_map<std::string, sf::Keyboard::Scancode> m_keyBindings{};
 
-	//std::string name{};
+	std::string m_name{};
 
 	static int s_playerNumberCounter;
 	const int m_playerNumber;

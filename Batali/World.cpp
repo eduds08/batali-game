@@ -1,18 +1,6 @@
 #include "World.h"
 
-#include "PlayerRenderComponent.h"
-#include "PlayerAnimationComponent.h"
-#include "PlayerCollisionComponent.h"
-#include "PlayerPhysicsComponent.h"
-#include "PlayerLaunchProjectilesComponent.h"
-
-#include "BoxerState.h"
-#include "FireKnightState.h"
-#include "WindHashashinState.h"
-
 #include "PlayerFactory.h"
-
-#include <memory>
 
 World::~World()
 {

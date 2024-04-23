@@ -18,8 +18,6 @@
 
 #include "PlayerFallingState.h"
 
-#include "BoxerState.h"
-
 #include "World.h"
 
 int Player::s_playerNumberCounter{ 1 };
@@ -46,10 +44,10 @@ Player::~Player()
 	--s_playerNumberCounter;
 }
 
-void Player::setChosenCharacter(std::unique_ptr<IChosenCharacterState> chosenCharacterState)
+void Player::setAttackComponent(std::unique_ptr<PlayerAttackComponent> attackComponent)
 {
-	m_chosenCharacterState = std::move(chosenCharacterState);
-	m_chosenCharacterState->enter(*this);
+	m_playerAttackComponent = std::move(attackComponent);
+	m_playerAttackComponent->enter(*this);
 }
 
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
@@ -60,8 +58,7 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 
 	m_playerState->update(*this);
 
-	//m_playerAttackComponent->update(*this, world, deltaTime);
-	m_chosenCharacterState->update(*this, world, deltaTime);
+	m_playerAttackComponent->update(world, deltaTime);
 
 	m_physicsComponent->update(*this, deltaTime);
 
