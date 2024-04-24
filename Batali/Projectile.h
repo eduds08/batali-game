@@ -21,7 +21,7 @@ public:
 	Projectile(sf::Vector2f position, float direction, std::unique_ptr<IProjectileTypeState> projectileTypeState, const GameObject& launcher);
 	virtual ~Projectile();
 
-	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
+	void update(World& world, float& deltaTime);
 	virtual void render(sf::RenderWindow& window);
 
 	void updateAnimationThread();

@@ -14,7 +14,7 @@ public:
 	GameObject();
 	virtual ~GameObject() = default;
 
-	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime) = 0;
+	//virtual void update(sf::RenderWindow& window, World& world, float& deltaTime) = 0;
 	virtual void render(sf::RenderWindow& window) = 0;
 
 	sf::Sprite& getSprite() { return m_sprite; }

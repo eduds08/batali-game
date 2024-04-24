@@ -4,7 +4,6 @@
 #include "PlayerAnimationComponent.h"
 #include "PlayerCollisionComponent.h"
 #include "PlayerPhysicsComponent.h"
-#include "PlayerLaunchProjectilesComponent.h"
 
 #include "BoxerAttackComponent.h"
 #include "WindHashasinAttackComponent.h"
@@ -33,6 +32,14 @@ std::unique_ptr<Player> PlayerFactory::createPlayer(const std::string& character
 
 	if (newPlayer)
 	{
+		newPlayer->getSprite().setOrigin(newPlayer->getSpriteSize().x / 2.f, newPlayer->getSpriteSize().y / 2.f);
+		newPlayer->getShape().setOrigin(newPlayer->getShape().getSize() / 2.f);
+
+		newPlayer->getShape().setPosition(LEFT_CHARACTER_FIRST_POSITION);
+
+		newPlayer->getShape().setOutlineColor(sf::Color::Red);
+		newPlayer->getShape().setOutlineThickness(1.f);
+
 		newPlayer->setName(characterName);
 		newPlayer->setPlayerState(std::make_unique<PlayerFallingState>());
 		newPlayer->initKeyBindings();
@@ -58,14 +65,6 @@ std::unique_ptr<Player> PlayerFactory::createFireKnight()
 	fireKnightPlayer->setSpriteSize(sf::Vector2i{ FIRE_KNIGHT_SPRITE_WIDTH, FIRE_KNIGHT_SPRITE_HEIGHT });
 	fireKnightPlayer->getShape().setSize(sf::Vector2f{ FIRE_KNIGHT_SHAPE_WIDTH, FIRE_KNIGHT_SHAPE_HEIGHT });
 
-	fireKnightPlayer->getSprite().setOrigin(fireKnightPlayer->getSpriteSize().x / 2.f, fireKnightPlayer->getSpriteSize().y / 2.f);
-	fireKnightPlayer->getShape().setOrigin(fireKnightPlayer->getShape().getSize() / 2.f);
-
-	fireKnightPlayer->getShape().setPosition(LEFT_CHARACTER_FIRST_POSITION);
-
-	fireKnightPlayer->getShape().setOutlineColor(sf::Color::Red);
-	fireKnightPlayer->getShape().setOutlineThickness(1.f);
-
     return std::move(fireKnightPlayer);
 }
 
@@ -82,20 +81,12 @@ std::unique_ptr<Player> PlayerFactory::createWindHashashin()
 	windHashashinPlayer->setSpriteSize(sf::Vector2i{ WIND_HASHASHIN_SPRITE_WIDTH, WIND_HASHASHIN_SPRITE_HEIGHT });
 	windHashashinPlayer->getShape().setSize(sf::Vector2f{ WIND_HASHASHIN_SHAPE_WIDTH, WIND_HASHASHIN_SHAPE_HEIGHT });
 
-	windHashashinPlayer->getSprite().setOrigin(windHashashinPlayer->getSpriteSize().x / 2.f, windHashashinPlayer->getSpriteSize().y / 2.f);
-	windHashashinPlayer->getShape().setOrigin(windHashashinPlayer->getShape().getSize() / 2.f);
-
-	windHashashinPlayer->getShape().setPosition(LEFT_CHARACTER_FIRST_POSITION);
-
-	windHashashinPlayer->getShape().setOutlineColor(sf::Color::Red);
-	windHashashinPlayer->getShape().setOutlineThickness(1.f);
-
 	return std::move(windHashashinPlayer);
 }
 
 std::unique_ptr<Player> PlayerFactory::createBoxer()
 {
-	std::unique_ptr<Player> boxerPlayer = std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAnimationComponent>(), std::make_unique<PlayerLaunchProjectilesComponent>());
+	std::unique_ptr<Player> boxerPlayer = std::make_unique<Player>(std::make_unique<PlayerRenderComponent>(), std::make_unique<PlayerCollisionComponent>(), std::make_unique<PlayerPhysicsComponent>(), std::make_unique<PlayerAnimationComponent>());
 	boxerPlayer->setAttackComponent(std::make_unique<BoxerAttackComponent>());
 
 	boxerPlayer->setHp(BOXER_HP);
@@ -105,14 +96,6 @@ std::unique_ptr<Player> PlayerFactory::createBoxer()
 
 	boxerPlayer->setSpriteSize(sf::Vector2i{ BOXER_SPRITE_WIDTH, BOXER_SPRITE_HEIGHT });
 	boxerPlayer->getShape().setSize(sf::Vector2f{ BOXER_SHAPE_WIDTH, BOXER_SHAPE_HEIGHT });
-
-	boxerPlayer->getSprite().setOrigin(boxerPlayer->getSpriteSize().x / 2.f, boxerPlayer->getSpriteSize().y / 2.f);
-	boxerPlayer->getShape().setOrigin(boxerPlayer->getShape().getSize() / 2.f);
-
-	boxerPlayer->getShape().setPosition(LEFT_CHARACTER_FIRST_POSITION);
-
-	boxerPlayer->getShape().setOutlineColor(sf::Color::Red);
-	boxerPlayer->getShape().setOutlineThickness(1.f);
 
 	return std::move(boxerPlayer);
 }

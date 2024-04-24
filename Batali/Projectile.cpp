@@ -75,7 +75,7 @@ void Projectile::setProjectileState(std::unique_ptr<IProjectileState> state)
 	}
 }
 
-void Projectile::update(sf::RenderWindow& window, World& world, float& deltaTime)
+void Projectile::update(World& world, float& deltaTime)
 {
 	m_projectileState->update(*this);
 

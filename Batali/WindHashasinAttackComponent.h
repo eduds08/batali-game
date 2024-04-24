@@ -8,6 +8,8 @@ public:
 	WindHashasinAttackComponent() = default;
 	virtual ~WindHashasinAttackComponent() = default;
 
+	virtual void update(World& world, float& deltaTime);
+
 private:
 	virtual void updateAttack1(const int currentPlayerAnimationFrame);
 	virtual void updateAttack2(const int currentPlayerAnimationFrame);

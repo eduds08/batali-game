@@ -153,9 +153,6 @@
     <ClCompile Include="PlayerCollisionComponent.cpp">
       <Filter>Player%27s Components</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerLaunchProjectilesComponent.cpp">
-      <Filter>Player%27s Components</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerPhysicsComponent.cpp">
       <Filter>Player%27s Components</Filter>
     </ClCompile>
@@ -354,9 +351,6 @@
     <ClInclude Include="ICollisionComponent.h">
       <Filter>Components%27 Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="ILaunchProjectilesComponent.h">
-      <Filter>Components%27 Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="IPhysicsComponent.h">
       <Filter>Components%27 Interfaces</Filter>
     </ClInclude>
@@ -364,9 +358,6 @@
       <Filter>Player%27s Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCollisionComponent.h">
-      <Filter>Player%27s Components</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerLaunchProjectilesComponent.h">
       <Filter>Player%27s Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerPhysicsComponent.h">

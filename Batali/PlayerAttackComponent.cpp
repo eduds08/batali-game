@@ -33,9 +33,6 @@ void PlayerAttackComponent::enter(Player& player)
 void PlayerAttackComponent::updateAttackHitbox()
 {
 	m_attackHitbox.reset();
-	m_attackHitbox.setIsUltimateActivate(false);
-
-	//m_activeUltimate = false 
 
 	const std::string& currentPlayerAnimationName = m_thisPlayer->getAnimationComponent()->getCurrentAnimation()->getName();
 	const int currentPlayerAnimationFrame = m_thisPlayer->getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex();

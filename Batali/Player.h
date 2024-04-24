@@ -13,7 +13,6 @@
 class IRenderComponent;
 class ICollisionComponent;
 class IPhysicsComponent;
-class ILaunchProjectilesComponent;
 class IAnimationComponent;
 class IProjectileTypeState;
 class IPlayerState;
@@ -21,14 +20,14 @@ class IPlayerState;
 class Player : public GameObject
 {
 public:
-	Player(std::unique_ptr<IRenderComponent> renderComponent = nullptr, std::unique_ptr<ICollisionComponent> collisionComponent = nullptr, std::unique_ptr<IPhysicsComponent> physicsComponent = nullptr, std::unique_ptr<IAnimationComponent> animationComponent = nullptr, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent = nullptr);
+	Player(std::unique_ptr<IRenderComponent> renderComponent = nullptr, std::unique_ptr<ICollisionComponent> collisionComponent = nullptr, std::unique_ptr<IPhysicsComponent> physicsComponent = nullptr, std::unique_ptr<IAnimationComponent> animationComponent = nullptr);
 	virtual ~Player();
 
 	void setAttackComponent(std::unique_ptr<PlayerAttackComponent> attackComponent);
 
 	void initKeyBindings();
 
-	virtual void update(sf::RenderWindow& window, World& world, float& deltaTime);
+	void update(sf::RenderWindow& window, World& world, float& deltaTime);
 	virtual void render(sf::RenderWindow& window);
 
 	void handleCondition(const std::string& condition);
@@ -62,9 +61,6 @@ public:
 
 	sf::Keyboard::Scancode getKeyBinding(const std::string& keyBinding) { return m_keyBindings.at(keyBinding); }
 
-	void launchProjectile(GameObject& gameObject, std::unique_ptr<IProjectileTypeState> projectileTypeState);
-	const size_t getProjectilesSize() const;
-
 	void setName(const std::string& name) { m_name = name; }
 	virtual const std::string& getName() const { return m_name; }
 
@@ -72,7 +68,6 @@ private:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
 	std::unique_ptr<ICollisionComponent> m_collisionComponent{ nullptr };
 	std::unique_ptr<IPhysicsComponent> m_physicsComponent{ nullptr };
-	std::unique_ptr<ILaunchProjectilesComponent> m_launchProjectilesComponent{ nullptr };
 	std::unique_ptr<IAnimationComponent> m_animationComponent{ nullptr };
 
 	std::unique_ptr<PlayerAttackComponent> m_playerAttackComponent{ nullptr };

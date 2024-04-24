@@ -3,6 +3,38 @@
 #include "Player.h"
 #include "BoxerUltimateState.h"
 
+void BoxerAttackComponent::update(World& world, float& deltaTime)
+{
+	for (std::vector<std::unique_ptr<Projectile>>::iterator it = m_projectiles.begin(); it != m_projectiles.end();)
+	{
+		(*it)->update(world, deltaTime);
+
+		if ((*it)->getVanished())
+		{
+			it = m_projectiles.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
+	PlayerAttackComponent::update(world, deltaTime);
+}
+
+void BoxerAttackComponent::render(sf::RenderWindow& window)
+{
+	for (const auto& projectile : m_projectiles)
+	{
+		projectile->render(window);
+	}
+}
+
+void BoxerAttackComponent::launchProjectile(std::unique_ptr<IProjectileTypeState> projectileTypeState)
+{
+	m_projectiles.emplace_back(std::make_unique<Projectile>(m_thisPlayer->getShape().getPosition() + BOXER_PROJECTILE_OFFSET_POSITION, static_cast<float>(m_thisPlayer->getFacingRight()), std::move(projectileTypeState), *m_thisPlayer));
+}
+
 void BoxerAttackComponent::updateAttack1(const int currentPlayerAnimationFrame)
 {
 	m_attackHitbox.setShapePosition(m_thisPlayer->getShape().getPosition() + sf::Vector2f{ 0.f, -15.f });
@@ -40,16 +72,16 @@ void BoxerAttackComponent::updateUltimate(const int currentPlayerAnimationFrame)
 {
 	if (currentPlayerAnimationFrame == BOXER_ULTIMATE_PT_1_FRAME)
 	{
-		if (m_thisPlayer->getProjectilesSize() == 0)
+		if (m_projectiles.size() == 0)
 		{
-			m_thisPlayer->launchProjectile(*m_thisPlayer, std::make_unique<BoxerUltimateState>());
+			launchProjectile(std::make_unique<BoxerUltimateState>());
 		}
 	}
 	else if (currentPlayerAnimationFrame == BOXER_ULTIMATE_PT_2_FRAME)
 	{
-		if (m_thisPlayer->getProjectilesSize() == 1)
+		if (m_projectiles.size() == 1)
 		{
-			m_thisPlayer->launchProjectile(*m_thisPlayer, std::make_unique<BoxerUltimateState>());
+			launchProjectile(std::make_unique<BoxerUltimateState>());
 		}
 	}
 }

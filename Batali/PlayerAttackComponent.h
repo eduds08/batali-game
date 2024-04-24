@@ -15,7 +15,9 @@ public:
 	PlayerAttackComponent() = default;
 	virtual ~PlayerAttackComponent() = default;
 
-	void update(World& world, float& deltaTime);
+	virtual void update(World& world, float& deltaTime);
+
+	virtual void render(sf::RenderWindow& window) {}
 
 	void enter(Player& player);
 

@@ -3,7 +3,6 @@
 #include "IRenderComponent.h"
 #include "ICollisionComponent.h"
 #include "IPhysicsComponent.h"
-#include "ILaunchProjectilesComponent.h"
 #include "IAnimationComponent.h"
 
 #include "IPlayerState.h"
@@ -22,13 +21,12 @@
 
 int Player::s_playerNumberCounter{ 1 };
 
-Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<IAnimationComponent> animationComponent, std::unique_ptr<ILaunchProjectilesComponent> launchProjectilesComponent)
+Player::Player(std::unique_ptr<IRenderComponent> renderComponent, std::unique_ptr<ICollisionComponent> collisionComponent, std::unique_ptr<IPhysicsComponent> physicsComponent, std::unique_ptr<IAnimationComponent> animationComponent)
 	: GameObject{}
 	, m_renderComponent{ std::move(renderComponent) }
 	, m_collisionComponent{ std::move(collisionComponent) }
 	, m_physicsComponent{ std::move(physicsComponent) }
 	, m_animationComponent{ std::move(animationComponent) }
-	, m_launchProjectilesComponent{ std::move(launchProjectilesComponent) }
 	, m_playerNumber{ s_playerNumberCounter }
 {
 	++s_playerNumberCounter;
@@ -61,22 +59,11 @@ void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 	m_playerAttackComponent->update(world, deltaTime);
 
 	m_physicsComponent->update(*this, deltaTime);
-
-	if (m_launchProjectilesComponent != nullptr)
-		m_launchProjectilesComponent->update(*this, world, window, deltaTime);
 }
 
 void Player::render(sf::RenderWindow& window)
 {
 	m_renderComponent->render(*this, window);
-
-	if (m_launchProjectilesComponent != nullptr)
-	{
-		for (const auto& proj : m_launchProjectilesComponent->getProjectiles())
-		{
-			proj->render(window);
-		}
-	}
 }
 
 void Player::handleCondition(const std::string& condition)
@@ -150,14 +137,4 @@ void Player::initKeyBindings()
 void Player::takeDamage()
 {
 	m_hp -= m_damageToTake;
-}
-
-void Player::launchProjectile(GameObject& gameObject, std::unique_ptr<IProjectileTypeState> projectileTypeState)
-{
-	m_launchProjectilesComponent->launchProjectile(gameObject, std::move(projectileTypeState));
-}
-
-const size_t Player::getProjectilesSize() const
-{
-	return m_launchProjectilesComponent->getProjectiles().size();
 }
