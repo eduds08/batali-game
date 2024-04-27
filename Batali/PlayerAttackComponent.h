@@ -17,7 +17,7 @@ public:
 
 	virtual void update(World& world, float& deltaTime);
 
-	virtual void render(sf::RenderWindow& window) {}
+	virtual void render(sf::RenderWindow& window);
 
 	void enter(Player& player);
 

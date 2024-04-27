@@ -16,24 +16,9 @@ public:
 	virtual void update();
 	virtual void render();
 
-	//void updateCollisions();
-
-	// Check collision with tiles around the actor's shape
-	//void updateActorCollisionWithTiles(ColliderActor& actor, Ground& tile);
-
-	// Calls knockbackMove for the attacked actor
-	//void handleKnockbackMove(Character& attackingActor, Character& attackedActor, bool isUltimateActivate);
-
 	void updateView();
 
-	// Thread method to run all animations
-	//void updateTexturesAndAnimations();
-
 private:
-	//std::vector<std::shared_ptr<Player>> m_characters{};
-
-	//std::unique_ptr<Player> player;
-
 	//std::vector<CharacterStatusUI> m_characterStatus{};
 
 	World m_world{};

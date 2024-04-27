@@ -9,7 +9,7 @@
 class World
 {
 public:
-	World() {}
+	World() = default;
 	virtual ~World();
 
 	void init(const std::string& path, const std::string& firstCharacter, const std::string& secondCharacter);

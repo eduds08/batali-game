@@ -1,7 +1,6 @@
 #include "PlayerAttackComponent.h"
 
 #include "IAnimationComponent.h"
-
 #include "Player.h"
 #include "World.h"
 
@@ -23,6 +22,11 @@ void PlayerAttackComponent::update(World& world, float& deltaTime)
 	knockbackMove(deltaTime);
 
 	m_thisPlayer->setKnockbackVelocity(0.f);
+}
+
+void PlayerAttackComponent::render(sf::RenderWindow& window)
+{
+	window.draw(m_attackHitbox.getShape());
 }
 
 void PlayerAttackComponent::enter(Player& player)

@@ -10,7 +10,5 @@ void PlayerRenderComponent::render(GameObject& gameObject, sf::RenderWindow& win
 
 	Player* player = dynamic_cast<Player*>(&gameObject);
 
-	window.draw(player->getAttackComponent()->getAttackHitbox().getShape());
-
 	player->getAttackComponent()->render(window);
 }

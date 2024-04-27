@@ -40,6 +40,9 @@
     <Filter Include="Command Pattern">
       <UniqueIdentifier>{c8dacf6c-9a9f-436d-b9c5-8ad58ce144ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AttackComponent">
+      <UniqueIdentifier>{66b32e22-48d9-47f2-84c8-2ee9663c94f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ground.cpp">
@@ -219,10 +222,18 @@
     <ClCompile Include="PlayerFactory.cpp">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttackComponent.cpp" />
-    <ClCompile Include="FireKnightAttackComponent.cpp" />
-    <ClCompile Include="WindHashasinAttackComponent.cpp" />
-    <ClCompile Include="BoxerAttackComponent.cpp" />
+    <ClCompile Include="BoxerAttackComponent.cpp">
+      <Filter>AttackComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="FireKnightAttackComponent.cpp">
+      <Filter>AttackComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackComponent.cpp">
+      <Filter>AttackComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="WindHashasinAttackComponent.cpp">
+      <Filter>AttackComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
@@ -429,9 +440,17 @@
     <ClInclude Include="PlayerFactory.h">
       <Filter>Player%27s Chosen Characters</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttackComponent.h" />
-    <ClInclude Include="FireKnightAttackComponent.h" />
-    <ClInclude Include="WindHashasinAttackComponent.h" />
-    <ClInclude Include="BoxerAttackComponent.h" />
+    <ClInclude Include="BoxerAttackComponent.h">
+      <Filter>AttackComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="FireKnightAttackComponent.h">
+      <Filter>AttackComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackComponent.h">
+      <Filter>AttackComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="WindHashasinAttackComponent.h">
+      <Filter>AttackComponent</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

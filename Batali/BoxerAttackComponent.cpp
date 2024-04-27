@@ -24,6 +24,8 @@ void BoxerAttackComponent::update(World& world, float& deltaTime)
 
 void BoxerAttackComponent::render(sf::RenderWindow& window)
 {
+	window.draw(m_attackHitbox.getShape());
+
 	for (const auto& projectile : m_projectiles)
 	{
 		projectile->render(window);

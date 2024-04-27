@@ -15,7 +15,7 @@ public:
 	PlayerAnimationComponent() = default;
 	virtual ~PlayerAnimationComponent() = default;
 
-	void initTextures(GameObject& gameObject);
+	virtual void initTextures(GameObject& gameObject);
 
 	virtual void setNewAnimation(GameObject& gameObject, const std::string& name, bool isLooping);
 

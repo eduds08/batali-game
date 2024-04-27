@@ -19,8 +19,6 @@ std::unique_ptr<IPlayerState> PlayerAirAttackingState::handleCondition(Player& p
 
 void PlayerAirAttackingState::update(Player& player)
 {
-	// hitbox logic
-
 	if (player.getAnimationComponent()->getCurrentAnimation()->getAnimationEnd())
 	{
 		player.setPlayerState(std::make_unique<PlayerFallingState>());
