@@ -26,4 +26,6 @@ void PlayerUltimateState::update(Player& player)
 void PlayerUltimateState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, ULTIMATE_ANIMATION, false);
+
+	player.m_currentState = "UltimateState";
 }

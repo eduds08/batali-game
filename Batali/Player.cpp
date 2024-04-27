@@ -73,7 +73,6 @@ void Player::handleCondition(const std::string& condition)
 	if (playerState != nullptr)
 	{
 		m_playerState = std::move(playerState);
-
 		m_playerState->enter(*this);
 	}
 }
@@ -83,7 +82,6 @@ void Player::setPlayerState(std::unique_ptr<IPlayerState> state)
 	if (state != nullptr)
 	{
 		m_playerState = std::move(state);
-
 		m_playerState->enter(*this);
 	}
 }

@@ -28,4 +28,6 @@ void PlayerAirAttackingState::update(Player& player)
 void PlayerAirAttackingState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, AIR_ATTACK_ANIMATION, false);
+
+	player.m_currentState = "AirAttackingState";
 }

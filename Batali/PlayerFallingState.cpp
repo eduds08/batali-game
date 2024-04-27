@@ -35,4 +35,6 @@ void PlayerFallingState::update(Player& player)
 void PlayerFallingState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, FALLING_ANIMATION, true);
+
+	player.m_currentState = "FallingState";
 }

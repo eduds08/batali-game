@@ -57,4 +57,6 @@ void PlayerIdleState::update(Player& player)
 void PlayerIdleState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, IDLE_ANIMATION, true);
+
+	player.m_currentState = "IdleState";
 }

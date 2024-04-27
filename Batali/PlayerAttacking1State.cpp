@@ -7,4 +7,6 @@
 void PlayerAttacking1State::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, ATTACK_1_ANIMATION, false);
+
+	player.m_currentState = "Attacking1State";
 }

@@ -24,4 +24,6 @@ void PlayerRollingState::update(Player& player)
 void PlayerRollingState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, ROLL_ANIMATION, false);
+
+	player.m_currentState = "RollingState";
 }

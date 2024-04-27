@@ -76,16 +76,22 @@ void WindHashasinAttackComponent::attack(Player& enemy)
 {
 	if (m_attackHitbox.getIsUltimateActivate())
 	{
-		enemy.getShape().setPosition(m_thisPlayer->getShape().getPosition());
-		enemy.getSprite().setPosition(enemy.getShape().getPosition() + sf::Vector2f{ 0.f, -(enemy.getSprite().getTextureRect().getSize().y - enemy.getShape().getSize().y) / 2.f });
-		m_activeUltimate = true;
+		if (enemy.m_currentState != "RollingState")
+		{
+			enemy.getShape().setPosition(m_thisPlayer->getShape().getPosition());
+			enemy.getSprite().setPosition(enemy.getShape().getPosition() + sf::Vector2f{ 0.f, -(enemy.getSprite().getTextureRect().getSize().y - enemy.getShape().getSize().y) / 2.f });
+			m_activeUltimate = true;
+		}
 	}
 	else
 	{
-		float attackDirection = m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
-		float knockbackVelocity = attackDirection != 0.f ? KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)) : 0.f;
-		enemy.setKnockbackVelocity(knockbackVelocity);
 		enemy.setDamageToTake(m_attackHitbox.getDamage());
 		enemy.handleCondition("HITTED");
+		if (enemy.m_currentState != "RollingState")
+		{
+			float attackDirection = m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
+			float knockbackVelocity = attackDirection != 0.f ? KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)) : 0.f;
+			enemy.setKnockbackVelocity(knockbackVelocity);
+		}
 	}
 }

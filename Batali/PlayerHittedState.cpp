@@ -28,4 +28,6 @@ void PlayerHittedState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, HITTED_ANIMATION, false);
 	player.takeDamage();
+
+	player.m_currentState = "HittedState";
 }

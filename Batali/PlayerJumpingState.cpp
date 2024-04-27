@@ -48,4 +48,6 @@ void PlayerJumpingState::enter(Player& player)
 	player.getVelocity().y = -1 * sqrt(2.f * GRAVITY * player.getJumpHeight());
 
 	player.getAnimationComponent()->setNewAnimation(player, JUMPING_ANIMATION, true);
+
+	player.m_currentState = "JumpingState";
 }

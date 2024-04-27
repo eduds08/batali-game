@@ -34,6 +34,8 @@ public:
 
 	void setPlayerState(std::unique_ptr<IPlayerState> state);
 
+	std::string m_currentState{};
+
 	void initAnimationThread();
 	void updateAnimationThread();
 
@@ -64,6 +66,7 @@ public:
 	void setName(const std::string& name) { m_name = name; }
 	virtual const std::string& getName() const { return m_name; }
 
+
 private:
 	std::unique_ptr<IRenderComponent> m_renderComponent{ nullptr };
 	std::unique_ptr<ICollisionComponent> m_collisionComponent{ nullptr };
@@ -82,6 +85,7 @@ private:
 	std::unordered_map<std::string, sf::Keyboard::Scancode> m_keyBindings{};
 
 	std::string m_name{};
+	
 
 	static int s_playerNumberCounter;
 	const int m_playerNumber;

@@ -90,8 +90,11 @@ void BoxerAttackComponent::updateUltimate(const int currentPlayerAnimationFrame)
 
 void BoxerAttackComponent::attack(Player& enemy)
 {
-	float attackDirection = m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
-	enemy.setKnockbackVelocity(KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
 	enemy.setDamageToTake(m_attackHitbox.getDamage());
 	enemy.handleCondition("HITTED");
+	if (enemy.m_currentState != "RollingState")
+	{
+		float attackDirection = m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
+		enemy.setKnockbackVelocity(KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)));
+	}
 }

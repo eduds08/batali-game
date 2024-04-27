@@ -63,4 +63,6 @@ void PlayerRunningState::enter(Player& player)
 {
 	player.getAnimationComponent()->setNewAnimation(player, RUNNING_ANIMATION, true);
 	player.getVelocity().x = 1.f;
+
+	player.m_currentState = "RunningState";
 }
