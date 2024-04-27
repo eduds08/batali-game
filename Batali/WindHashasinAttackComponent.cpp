@@ -4,40 +4,6 @@
 #include "IAnimationComponent.h"
 #include "Player.h"
 
-void WindHashasinAttackComponent::update(World& world, float& deltaTime)
-{
-	m_attackHitbox.reset();
-	m_attackHitbox.setIsUltimateActivate(false);
-
-	const std::string& currentPlayerAnimationName = m_thisPlayer->getAnimationComponent()->getCurrentAnimation()->getName();
-	const int currentPlayerAnimationFrame = m_thisPlayer->getAnimationComponent()->getCurrentAnimation()->getCurrentTextureFrameIndex();
-
-	if (currentPlayerAnimationName == "_Attack1")
-	{
-		updateAttack1(currentPlayerAnimationFrame);
-	}
-	else if (currentPlayerAnimationName == "_Attack2")
-	{
-		updateAttack2(currentPlayerAnimationFrame);
-	}
-	else if (currentPlayerAnimationName == "_AirAttack")
-	{
-		updateAirAttack(currentPlayerAnimationFrame);
-	}
-	else if (currentPlayerAnimationName == "_Ultimate")
-	{
-		updateUltimate(currentPlayerAnimationFrame);
-	}
-	else
-	{
-		m_attackHitbox.setDamage(0);
-		m_activeUltimate = false;
-	}
-
-	m_attackHitbox.setShapeOrigin(0.f, m_attackHitbox.getShapeSize().y / 2.f);
-	m_attackHitbox.setShapeScale(static_cast<float>(m_thisPlayer->getFacingRight()), 1.f);
-}
-
 void WindHashasinAttackComponent::updateAttack1(const int currentPlayerAnimationFrame)
 {
 	m_attackHitbox.setShapePosition(m_thisPlayer->getShape().getPosition());
@@ -97,6 +63,13 @@ void WindHashasinAttackComponent::updateUltimate(const int currentPlayerAnimatio
 		m_attackHitbox.setShapeSize(m_thisPlayer->getShape().getSize());
 		m_attackHitbox.setDamage(WIND_HASHASHIN_ULTIMATE_DAMAGE);
 	}
+}
+
+void WindHashasinAttackComponent::updateAttackHitbox()
+{
+	m_attackHitbox.setIsUltimateActivate(false);
+	
+	PlayerAttackComponent::updateAttackHitbox();
 }
 
 void WindHashasinAttackComponent::attack(Player& enemy)

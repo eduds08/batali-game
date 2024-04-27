@@ -9,8 +9,8 @@
 #include "PlayerAttacking2State.h"
 #include "PlayerUltimateState.h"
 #include "IAnimationComponent.h"
-#include "Player.h"
 #include "PlayerHittedState.h"
+#include "PlayerFallingState.h"
 
 std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, const std::string& condition)
 {
@@ -52,7 +52,6 @@ std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, c
 
 void PlayerIdleState::update(Player& player)
 {
-
 }
 
 void PlayerIdleState::enter(Player& player)

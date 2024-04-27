@@ -31,7 +31,7 @@ protected:
 
 	virtual void attack(Player& enemy) = 0;
 
-	void updateAttackHitbox();
+	virtual void updateAttackHitbox();
 
 	bool isBeingAttackedBy(const AttackHitbox& enemyAttackHitbox);
 
