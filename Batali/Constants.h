@@ -137,7 +137,7 @@ namespace constants
 	constexpr int WIND_HASHASHIN_ATTACK_1_DAMAGE{ 100 };
 	constexpr int WIND_HASHASHIN_ATTACK_2_DAMAGE{ 85 };
 	constexpr int WIND_HASHASHIN_AIR_ATTACK_DAMAGE{ 90 };
-	constexpr int WIND_HASHASHIN_ULTIMATE_DAMAGE{ 60 };
+	constexpr int WIND_HASHASHIN_ULTIMATE_DAMAGE{ 90 };
 
 	/* BOXER CONSTANTS: */
 

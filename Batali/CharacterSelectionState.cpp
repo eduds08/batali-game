@@ -46,18 +46,7 @@ void CharacterSelectionState::update()
 {
 	if (m_playerChoice == 1 || m_playerChoice == 2)
 	{
-		if (m_onHoverButton == 0)
-		{
-			m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[0] + "Portrait", "./assets/" + m_charactersNames[0] + "/portrait.png");
-		}
-		else if (m_onHoverButton == 1)
-		{
-			m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[1] + "Portrait", "./assets/" + m_charactersNames[1] + "/portrait.png");
-		}
-		else if (m_onHoverButton == 2)
-		{
-			m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[2] + "Portrait", "./assets/" + m_charactersNames[2] + "/portrait.png");
-		}
+		m_bigCharacterPortraits[m_playerChoice - 1].setTexture(m_charactersNames[m_onHoverButton] + "Portrait", "./assets/" + m_charactersNames[m_onHoverButton] + "/portrait.png");
 	}
 	else if (m_playerChoice == 3)
 	{

@@ -234,6 +234,9 @@
     <ClCompile Include="WindHashasinAttackComponent.cpp">
       <Filter>AttackComponent</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerFrozenState.cpp">
+      <Filter>Player%27s States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
@@ -451,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="WindHashasinAttackComponent.h">
       <Filter>AttackComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFrozenState.h">
+      <Filter>Player%27s States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

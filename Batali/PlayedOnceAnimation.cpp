@@ -20,7 +20,7 @@ void PlayedOnceAnimation::update()
 	// Sets next frame if animationEnd = false
 	if (!m_animationEnd)
 	{
-		m_currentTextureFrame = { m_frameSize.x * m_currentTextureFrameIndex, 0, m_frameSize.x, m_frameSize.y };
+		/*m_currentTextureFrame = { m_frameSize.x * m_currentTextureFrameIndex, 0, m_frameSize.x, m_frameSize.y };*/
 		++m_currentTextureFrameIndex;
 	}
 
@@ -29,5 +29,10 @@ void PlayedOnceAnimation::update()
 	{
 		m_currentTextureFrameIndex = 0;
 		m_animationEnd = true;
+	}
+
+	if (!m_animationEnd)
+	{
+		m_currentTextureFrame = { m_frameSize.x * m_currentTextureFrameIndex, 0, m_frameSize.x, m_frameSize.y };
 	}
 }

@@ -9,6 +9,7 @@ PlayingState::PlayingState(sf::RenderWindow& window, float& deltaTime, const std
 
 	// Initialize View
 	m_view = m_window.getDefaultView();
+	m_view.zoom(0.6f);
 
 	m_world.init("./map/map.txt", firstCharacter, secondCharacter);
 

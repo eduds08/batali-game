@@ -11,6 +11,7 @@
 #include "IAnimationComponent.h"
 #include "PlayerHittedState.h"
 #include "PlayerFallingState.h"
+#include "PlayerFrozenState.h"
 
 std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, const std::string& condition)
 {
@@ -45,6 +46,10 @@ std::unique_ptr<IPlayerState> PlayerIdleState::handleCondition(Player& player, c
 	else if (condition == "HITTED")
 	{
 		return std::make_unique<PlayerHittedState>();
+	}
+	else if (condition == "FROZEN")
+	{
+		return std::make_unique<PlayerFrozenState>();
 	}
 
 	return nullptr;

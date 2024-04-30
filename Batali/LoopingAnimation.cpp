@@ -16,11 +16,12 @@ LoopingAnimation::~LoopingAnimation()
 
 void LoopingAnimation::update()
 {
-	m_currentTextureFrame = { m_frameSize.x * m_currentTextureFrameIndex, 0, m_frameSize.x, m_frameSize.y };
 	++m_currentTextureFrameIndex;
 
 	if (m_currentTextureFrameIndex == m_totalAmountFrames)
 	{
 		m_currentTextureFrameIndex = 0;
 	}
+
+	m_currentTextureFrame = { m_frameSize.x * m_currentTextureFrameIndex, 0, m_frameSize.x, m_frameSize.y };
 }

@@ -70,6 +70,17 @@ void WindHashasinAttackComponent::updateAttackHitbox()
 	m_attackHitbox.setIsUltimateActivate(false);
 	
 	PlayerAttackComponent::updateAttackHitbox();
+
+	const std::string& currentPlayerAnimationName = m_thisPlayer->getAnimationComponent()->getCurrentAnimation()->getName();
+
+	if (currentPlayerAnimationName != "_Attack1" && currentPlayerAnimationName != "_Attack2" && currentPlayerAnimationName != "_AirAttack" && currentPlayerAnimationName != "_Ultimate")
+	{
+		if (m_currentPlayerOnUltimate)
+		{
+			m_currentPlayerOnUltimate->handleCondition("IDLE");
+			m_currentPlayerOnUltimate = nullptr;
+		}
+	}
 }
 
 void WindHashasinAttackComponent::attack(Player& enemy)
@@ -78,9 +89,11 @@ void WindHashasinAttackComponent::attack(Player& enemy)
 	{
 		if (enemy.m_currentState != "RollingState")
 		{
+			m_currentPlayerOnUltimate = &enemy;
 			enemy.getShape().setPosition(m_thisPlayer->getShape().getPosition());
 			enemy.getSprite().setPosition(enemy.getShape().getPosition() + sf::Vector2f{ 0.f, -(enemy.getSprite().getTextureRect().getSize().y - enemy.getShape().getSize().y) / 2.f });
 			m_activeUltimate = true;
+			m_currentPlayerOnUltimate->handleCondition("FROZEN");
 		}
 	}
 	else
@@ -89,7 +102,7 @@ void WindHashasinAttackComponent::attack(Player& enemy)
 		enemy.handleCondition("HITTED");
 		if (enemy.m_currentState != "RollingState")
 		{
-			float attackDirection = m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
+			float attackDirection = m_activeUltimate ? 0.f : m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
 			float knockbackVelocity = attackDirection != 0.f ? KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)) : 0.f;
 			enemy.setKnockbackVelocity(knockbackVelocity);
 		}
