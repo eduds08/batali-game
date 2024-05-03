@@ -53,11 +53,11 @@ void WindHashasinAttackComponent::updateUltimate(const int currentPlayerAnimatio
 
 		m_attackHitbox.setIsUltimateActivate(true);
 	}
-	else if (currentPlayerAnimationFrame > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_activeUltimate)
+	else if (currentPlayerAnimationFrame > WIND_HASHASHIN_ACTIVATE_ULTIMATE_ENDING_FRAME && !m_currentPlayerOnUltimate)
 	{
 		m_thisPlayer->setPlayerState(std::make_unique<PlayerIdleState>());
 	}
-	else if ((currentPlayerAnimationFrame == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || currentPlayerAnimationFrame == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || currentPlayerAnimationFrame == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && m_activeUltimate)
+	else if ((currentPlayerAnimationFrame == WIND_HASHASHIN_ULTIMATE_FIRST_FRAME || currentPlayerAnimationFrame == WIND_HASHASHIN_ULTIMATE_SECOND_FRAME || currentPlayerAnimationFrame == WIND_HASHASHIN_ULTIMATE_THIRD_FRAME) && m_currentPlayerOnUltimate)
 	{
 		m_attackHitbox.setShapePosition(m_thisPlayer->getShape().getPosition());
 		m_attackHitbox.setShapeSize(m_thisPlayer->getShape().getSize());
@@ -92,7 +92,6 @@ void WindHashasinAttackComponent::attack(Player& enemy)
 			m_currentPlayerOnUltimate = &enemy;
 			enemy.getShape().setPosition(m_thisPlayer->getShape().getPosition());
 			enemy.getSprite().setPosition(enemy.getShape().getPosition() + sf::Vector2f{ 0.f, -(enemy.getSprite().getTextureRect().getSize().y - enemy.getShape().getSize().y) / 2.f });
-			m_activeUltimate = true;
 			m_currentPlayerOnUltimate->handleCondition("FROZEN");
 		}
 	}
@@ -102,7 +101,7 @@ void WindHashasinAttackComponent::attack(Player& enemy)
 		enemy.handleCondition("HITTED");
 		if (enemy.m_currentState != "RollingState")
 		{
-			float attackDirection = m_activeUltimate ? 0.f : m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
+			float attackDirection = m_currentPlayerOnUltimate ? 0.f : m_thisPlayer->getShape().getPosition().x - enemy.getShape().getPosition().x;
 			float knockbackVelocity = attackDirection != 0.f ? KNOCKBACK_SPEED * (-attackDirection / abs(attackDirection)) : 0.f;
 			enemy.setKnockbackVelocity(knockbackVelocity);
 		}

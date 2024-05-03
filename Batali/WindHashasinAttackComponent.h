@@ -18,7 +18,5 @@ private:
 
 	virtual void attack(Player& enemy);
 
-	bool m_activeUltimate{ false };
-
 	Player* m_currentPlayerOnUltimate{ nullptr };
 };
