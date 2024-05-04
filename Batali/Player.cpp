@@ -50,18 +50,16 @@ void Player::setAttackComponent(std::unique_ptr<PlayerAttackComponent> attackCom
 
 void Player::update(sf::RenderWindow& window, World& world, float& deltaTime)
 {
-	if (m_name == "fire_knight")
-	{
-		std::cout << m_hp << "\n";
-	}
-
 	m_collisionComponent->update(*this, world);
 
 	m_inputHandler.handleInput(*this);
 
 	m_playerState->update(*this);
 
-	m_playerAttackComponent->update(world, deltaTime);
+	if (m_currentState != "DeadState")
+	{
+		m_playerAttackComponent->update(world, deltaTime);
+	}
 
 	m_physicsComponent->update(*this, deltaTime);
 }
