@@ -35,6 +35,7 @@ public:
 	void setPlayerState(std::unique_ptr<IPlayerState> state);
 
 	std::string m_currentState{};
+	bool m_canJump{};
 
 	void initAnimationThread();
 	void updateAnimationThread();

@@ -89,6 +89,8 @@ void PlayerCollisionComponent::handleCollision(GameObject& gameObject)
 	{
 		dynamic_cast<Player*>(&gameObject)->setKnockbackVelocity(0.f);
 	}
+
+	dynamic_cast<Player*>(&gameObject)->m_canJump = m_collisionDirection.y > 0.f;
 }
 
 void PlayerCollisionComponent::updateLimits(GameObject& gameObject)

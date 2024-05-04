@@ -13,7 +13,7 @@
 
 std::unique_ptr<IPlayerState> PlayerRunningState::handleCondition(Player& player, const std::string& condition)
 {
-	if (condition == "JUMP_BUTTON")
+	if (condition == "JUMP_BUTTON" && player.m_canJump)
 	{
 		return std::make_unique<PlayerJumpingState>();
 	}
