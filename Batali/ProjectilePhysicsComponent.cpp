@@ -4,6 +4,8 @@
 
 void ProjectilePhysicsComponent::update(GameObject& gameObject, float& deltaTime)
 {
+	gameObject.updateFlip();
+
 	move(gameObject, deltaTime);
 }
 

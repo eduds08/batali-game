@@ -11,7 +11,7 @@ void ProjectileCollisionComponent::update(GameObject& gameObject, World& world)
 	{
 		if (player->getId() != projectile->getLauncherId())
 		{
-			if (gameObject.getShape().getGlobalBounds().intersects(player->getShape().getGlobalBounds()))
+			if (gameObject.getShape().getGlobalBounds().intersects(player->getShape().getGlobalBounds()) && player->m_currentState != "RollingState")
 			{
 				projectile->setCollided(true);
 				player->setDamageToTake(projectile->getDamage());
